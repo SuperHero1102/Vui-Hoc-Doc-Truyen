@@ -1,0 +1,6 @@
+{
+  "name": "Bé Vui Học Tiếng Anh",
+  "description": "Sân chơi học tiếng Anh qua trò chơi và âm thanh cho trẻ từ 1 tháng đến 5 tuổi với giọng đọc cô giáo miền Bắc ấm áp.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

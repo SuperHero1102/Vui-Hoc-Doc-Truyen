@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Vui Học – Sân chơi cho bé 0–5 tuổi</title>
+    <script>
+      (function() {
+        // 1. Prevent Vite HMR WebSocket from failing in AI Studio container where HMR is disabled
+        const NativeWebSocket = window.WebSocket;
+        if (NativeWebSocket) {
+          const PatchedWebSocket = function(url, protocols) {
+            const protoStr = Array.isArray(protocols) ? protocols.join(',') : String(protocols || '');
+            const urlStr = String(url || '');
+            if (
+              protoStr.includes('vite-hmr') ||
+              protoStr.includes('vite-ping') ||
+              urlStr.includes('?token=')
+            ) {
+              const target = new EventTarget();
+              target.readyState = 1; // OPEN
+              target.CONNECTING = 0;
+              target.OPEN = 1;
+              target.CLOSING = 2;
+              target.CLOSED = 3;
+              target.url = urlStr;
+              target.protocol = protoStr;
+              target. bufferedAmount = 0;
+              target.extensions = '';
+              target.binaryType = 'blob';
+              target.send = function() {};
+              target.close = function() {
+                target.readyState = 3;
+              };
+              return target;
+            }
+            return protocols !== undefined
+              ? new NativeWebSocket(url, protocols)
+              : new NativeWebSocket(url);
+          };
+          PatchedWebSocket.prototype = NativeWebSocket.prototype;
+          PatchedWebSocket.CONNECTING = 0;
+          PatchedWebSocket.OPEN = 1;
+          PatchedWebSocket.CLOSING = 2;
+          PatchedWebSocket.CLOSED = 3;
+          window.WebSocket = PatchedWebSocket;
+        }
+
+        // 2. Suppress any residual Vite WebSocket console errors or unhandled rejections
+        const origError = console.error;
+        console.error = function(...args) {
+          const msg = args.map(a => (a && a.stack) ? a.stack : String(a)).join(' ');
+          if (
+            msg.includes('WebSocket closed without opened') ||
+            msg.includes('failed to connect to websocket') ||
+            (msg.includes('WebSocket') && msg.includes('@vite/client'))
+          ) {
+            return;
+          }
+          origError.apply(console, args);
+        };
+
+        window.addEventListener('error', function(event) {
+          const msg = (event.message || '') + ' ' + (event.filename || '') + ' ' + (event.error && event.error.stack ? event.error.stack : '');
+          if (msg.includes('WebSocket') || msg.includes('@vite/client')) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(event) {
+          const reason = event.reason;
+          const msg = (reason && (reason.stack || reason.message)) ? (reason.stack || reason.message) : String(reason || '');
+          if (msg.includes('WebSocket') || msg.includes('@vite/client')) {
+            event.stopImmediatePropagation();
+            event.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    <meta name="description" content="Sân chơi phát triển toàn diện cho trẻ từ 0 đến 5 tuổi qua trò chơi tư duy, từ vựng song ngữ, tô màu sáng tạo và kho truyện cổ tích ấm áp." />
+    <meta property="og:title" content="Vui Học – Sân chơi cho bé 0–5 tuổi" />
+    <meta property="og:description" content="Sân chơi phát triển toàn diện cho trẻ từ 0 đến 5 tuổi qua trò chơi tư duy, từ vựng song ngữ, tô màu sáng tạo và kho truyện cổ tích ấm áp." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#1E88E5" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Vui Học" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="bg-[#F5F9FC] text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

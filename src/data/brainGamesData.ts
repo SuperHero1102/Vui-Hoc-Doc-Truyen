@@ -1,0 +1,753 @@
+import type { BrainCategorySection, BrainGameItem } from '../types/learning';
+
+export const BRAIN_GAME_SECTIONS: BrainCategorySection[] = [
+  {
+    id: 'thinking',
+    titleVi: 'Tư Duy',
+    subtitleVi: 'Quan sát, ghi nhớ và tư duy',
+    iconEmoji: '🧠',
+    iconBg: '#FCE7F3',
+    games: [
+      {
+        id: 'find-same',
+        category: 'thinking',
+        titleVi: 'Tìm Hình Giống Nhau',
+        titleEn: 'Find the Same',
+        descriptionEn: 'Spot the identical twin picture and learn its English name!',
+        promptVi: 'Bé nhìn kỹ hình mẫu và chạm vào hình giống hệt nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '👀',
+        defaultLevel: 8,
+      },
+      {
+        id: 'odd-one-out',
+        category: 'thinking',
+        titleVi: 'Tìm Vật Khác Biệt',
+        titleEn: 'Odd One Out',
+        descriptionEn: 'Find the one item that is different from all the others!',
+        promptVi: 'Trong các hình dưới đây, có 1 bạn khác biệt! Bé tìm giúp cô nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🔍',
+      },
+      {
+        id: 'memory-flip',
+        category: 'thinking',
+        titleVi: 'Lật Thẻ Trí Nhớ',
+        titleEn: 'Animal Memory',
+        descriptionEn: 'Flip cards and remember where cute friends are hiding!',
+        promptVi: 'Bé hãy lật mở từng cặp thẻ giống nhau nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🃏',
+      },
+      {
+        id: 'big-or-small',
+        category: 'thinking',
+        titleVi: 'To hay Nhỏ',
+        titleEn: 'Big or Small',
+        descriptionEn: 'Compare sizes: which friend is Bigger or Smaller?',
+        promptVi: 'Bé cùng so sánh kích thước to lớn và nhỏ xíu nào!',
+        ageLabel: '2-4 tuổi',
+        emoji: '🐘',
+        defaultLevel: 2,
+      },
+      {
+        id: 'shadow-match',
+        category: 'thinking',
+        titleVi: 'Ghép Bóng Con Vật',
+        titleEn: 'Shadow Match',
+        descriptionEn: 'Connect each cute animal or object with its silhouette shadow!',
+        promptVi: 'Chiếc bóng đen bí ẩn này là của bạn nào nhỉ? Bé chạm chọn đúng nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '👤',
+      },
+      {
+        id: 'pattern-next',
+        category: 'thinking',
+        titleVi: 'Quy Luật Tiếp Theo',
+        titleEn: 'What Comes Next?',
+        descriptionEn: 'Discover the pattern sequence and pick what comes next!',
+        promptVi: 'Đoàn tàu quy luật đang thiếu 1 hình ở dấu chấm hỏi, bé chọn hình tiếp theo nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🔄',
+      },
+      {
+        id: 'bubble-pop',
+        category: 'thinking',
+        titleVi: 'Bé Bấm Nổ Bong Bóng',
+        titleEn: 'Bubble Pop Fun',
+        descriptionEn: 'Pop colorful floating soap bubbles and hear English words!',
+        promptVi: 'Chạm vào những quả bong bóng xà phòng đang bay để nghe từ tiếng Anh nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🫧',
+        defaultLevel: 3,
+      },
+    ],
+  },
+  {
+    id: 'english',
+    titleVi: 'Tiếng Anh',
+    subtitleVi: 'Nghe nói, bảng chữ cái và từ vựng',
+    iconEmoji: '🔤',
+    iconBg: '#DBEAFE',
+    games: [
+      {
+        id: 'alphabet-explorer',
+        category: 'english',
+        titleVi: 'Khám Phá Chữ Cái A-Z',
+        titleEn: 'Alphabet Explorer',
+        descriptionEn: 'Interactive A to Z phonics board with native voice & illustrations!',
+        promptVi: 'Bé chạm vào từng chữ cái từ A đến Z để nghe phát âm Phonics chuẩn nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🔤',
+      },
+      {
+        id: 'listen-animals',
+        category: 'english',
+        titleVi: 'Nghe Tên Con Vật',
+        titleEn: 'Listen: Animals',
+        descriptionEn: 'Listen to the teacher and tap the matching animal friend!',
+        promptVi: 'Bé lắng nghe cô đọc tên tiếng Anh và chạm đúng bạn thú đáng yêu nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🐶',
+        defaultLevel: 7,
+      },
+      {
+        id: 'listen-fruits',
+        category: 'english',
+        titleVi: 'Nghe Tên Hoa Quả',
+        titleEn: 'Listen: Yummy Fruits',
+        descriptionEn: 'Listen and pick the delicious sweet fruit in the basket!',
+        promptVi: 'Cô đang tìm quả gì thế nhỉ? Bé nghe tiếng Anh và chọn đúng quả ngon nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🍎',
+      },
+      {
+        id: 'first-letter-sound',
+        category: 'english',
+        titleVi: 'Âm Đầu Của Từ',
+        titleEn: 'First Letter Sound',
+        descriptionEn: 'Match the word with its starting phonics letter sound!',
+        promptVi: 'Từ tiếng Anh này bắt đầu bằng chữ cái nào? Bé chọn chữ cái đầu tiên nhé!',
+        ageLabel: '4-5 tuổi',
+        emoji: '👂',
+      },
+      {
+        id: 'catch-letter-fish',
+        category: 'english',
+        titleVi: 'Câu Cá Bắt Chữ Cái & Số',
+        titleEn: 'Catch the Letter Fish',
+        descriptionEn: 'Go fishing! Tap the swimming fish carrying the target letter or word!',
+        promptVi: 'Những chú cá mang chữ cái đang bơi kìa! Bé chạm bắt đúng chú cá cô gọi tên nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🎣',
+      },
+    ],
+  },
+  {
+    id: 'numbers',
+    titleVi: 'Con Số',
+    subtitleVi: 'Đếm hình và nhận diện số lượng',
+    iconEmoji: '🔢',
+    iconBg: '#E0E7FF',
+    games: [
+      {
+        id: 'count-feed-bunny',
+        category: 'numbers',
+        titleVi: 'Đếm Hình & Cho Thỏ Ăn',
+        titleEn: 'Count 1 to 5',
+        descriptionEn: 'Count yummy carrots and apples to feed the hungry bunny!',
+        promptVi: 'Bé hãy chạm đếm từng củ cà rốt giòn tan đút cho bạn Thỏ Trắng ăn nhé!',
+        ageLabel: '2-4 tuổi',
+        emoji: '🖐️',
+      },
+      {
+        id: 'find-number',
+        category: 'numbers',
+        titleVi: 'Tìm Chữ Số',
+        titleEn: 'Find the Number',
+        descriptionEn: 'Listen to the English number and tap the matching digit!',
+        promptVi: 'Bé nghe cô đọc số tiếng Anh và chạm vào chữ số đúng nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '3️⃣',
+        defaultLevel: 14,
+      },
+      {
+        id: 'number-to-quantity',
+        category: 'numbers',
+        titleVi: 'Nối Số Với Số Lượng',
+        titleEn: 'Number to Quantity',
+        descriptionEn: 'Count the objects and match them with the right number card!',
+        promptVi: 'Bé đếm xem có bao nhiêu đồ vật trên màn hình rồi chọn con số tương ứng nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🔢',
+      },
+      {
+        id: 'which-has-more',
+        category: 'numbers',
+        titleVi: 'Nhóm Nào Nhiều Hơn?',
+        titleEn: 'Which Has More?',
+        descriptionEn: 'Compare two baskets and pick the side with MORE items!',
+        promptVi: 'Hai khay quà bên dưới, khay nào có số lượng nhiều hơn? Bé chạm chọn nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '⚖️',
+      },
+      {
+        id: 'number-train',
+        category: 'numbers',
+        titleVi: 'Đoàn Tàu Con Số',
+        titleEn: 'Number Train',
+        descriptionEn: 'Complete the missing number on the chugging number train!',
+        promptVi: 'Xình xịch! Đoàn tàu con số đang bị thiếu 1 toa số, bé lắp đúng số vào toa nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🚂',
+      },
+      {
+        id: 'one-more-friend',
+        category: 'numbers',
+        titleVi: 'Thêm Một Bạn Nữa',
+        titleEn: 'One More Friend',
+        descriptionEn: 'Visual addition: what happens when one more friend joins?',
+        promptVi: 'Nếu có thêm 1 bạn nữa chạy tới thì tổng cộng có mấy bạn nhỉ?',
+        ageLabel: '3-5 tuổi',
+        emoji: '🍎',
+      },
+    ],
+  },
+  {
+    id: 'shapes_colors',
+    titleVi: 'Hình & Màu',
+    subtitleVi: 'Phân loại màu sắc và hình khối',
+    iconEmoji: '🔷',
+    iconBg: '#FEF3C7',
+    games: [
+      {
+        id: 'find-color',
+        category: 'shapes_colors',
+        titleVi: 'Tìm Màu Sắc',
+        titleEn: 'Find the Color',
+        descriptionEn: 'Listen to the color in English and tap the matching splash!',
+        promptVi: 'Bé nghe tên màu sắc tiếng Anh và chạm vào sắc màu rực rỡ đó nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🎨',
+      },
+      {
+        id: 'shape-matching',
+        category: 'shapes_colors',
+        titleVi: 'Ghép Hình Khối',
+        titleEn: 'Shape Matching',
+        descriptionEn: 'Match circles, squares, triangles, stars and hearts!',
+        promptVi: 'Bé tìm đúng hình khối giống với khuôn mẫu của cô nhé!',
+        ageLabel: '2-4 tuổi',
+        emoji: '🔺',
+        defaultLevel: 3,
+      },
+      {
+        id: 'sort-by-color',
+        category: 'shapes_colors',
+        titleVi: 'Phân Loại Màu Sắc',
+        titleEn: 'Sort by Color',
+        descriptionEn: 'Put colorful fruits and toys into the matching color basket!',
+        promptVi: 'Bé hãy chọn món đồ có cùng màu với chiếc giỏ trên màn hình nhé!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🧺',
+        defaultLevel: 2,
+      },
+      {
+        id: 'magic-coloring',
+        category: 'shapes_colors',
+        titleVi: 'Bé Tô Màu Sáng Tạo',
+        titleEn: 'Magic Coloring',
+        descriptionEn: 'Color cute animals and fruits with magical rainbow brushes!',
+        promptVi: 'Bé chọn bút màu cầu vồng và chạm tô màu cho bức tranh thật đẹp nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🎨',
+      },
+      {
+        id: 'alphabet-tracing',
+        category: 'shapes_colors',
+        titleVi: 'Bé Tập Vẽ Chữ Tiếng Việt & Anh',
+        titleEn: 'Alphabet Tracing',
+        descriptionEn: 'Trace big letters with your finger and hear phonics sounds!',
+        promptVi: 'Bé dùng ngón tay tô theo nét chữ cái lớn trên bảng nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '✏️',
+      },
+      {
+        id: 'free-drawing',
+        category: 'shapes_colors',
+        titleVi: 'Bé Tập Vẽ Tranh',
+        titleEn: 'Free Drawing Canvas',
+        descriptionEn: 'Draw freely with colorful crayons and cute animal stamps!',
+        promptVi: 'Bảng vẽ tự do! Bé thỏa sức vẽ tranh và đóng dấu sticker ngộ nghĩnh nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🖍️',
+      },
+      {
+        id: 'rainbow-xylophone',
+        category: 'shapes_colors',
+        titleVi: 'Đàn Cầu Vồng Vui Nhộn',
+        titleEn: 'Rainbow Xylophone',
+        descriptionEn: 'Play musical notes on a bright 8-key rainbow xylophone!',
+        promptVi: 'Bé gõ đàn Xylophone 8 phím cầu vồng và đánh theo giai điệu bài hát nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🎹',
+      },
+    ],
+  },
+  {
+    id: 'puzzles',
+    titleVi: 'Ghép Hình',
+    subtitleVi: 'Mảnh ghép và đường đi vui nhộn',
+    iconEmoji: '🧩',
+    iconBg: '#DCFCE7',
+    games: [
+      {
+        id: 'chunky-puzzle',
+        category: 'puzzles',
+        titleVi: 'Ghép Hình Đơn Giản',
+        titleEn: 'Chunky Puzzle',
+        descriptionEn: 'Fit the missing wooden puzzle piece into the board!',
+        promptVi: 'Bảng gỗ đang khuyết 1 mảnh ghép, bé chạm chọn mảnh ghép vừa khít nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🧩',
+      },
+      {
+        id: 'puppy-maze',
+        category: 'puzzles',
+        titleVi: 'Dẫn Đường Cho Chú Chó',
+        titleEn: 'Puppy Path Maze',
+        descriptionEn: 'Tap the stepping stones in order to guide Puppy home!',
+        promptVi: 'Bé chạm lần lượt các bước chân từ 1 đến 5 để dẫn bạn Cún về nhà nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🐾',
+      },
+    ],
+  },
+  {
+    id: 'discovery',
+    titleVi: 'Khám Phá',
+    subtitleVi: 'Động vật, xe cộ và âm thanh',
+    iconEmoji: '🌍',
+    iconBg: '#E0F2FE',
+    games: [
+      {
+        id: 'sunny-farm',
+        category: 'discovery',
+        titleVi: 'Nông Trại Vui Vẻ',
+        titleEn: 'Sunny Farm',
+        descriptionEn: 'Explore the sunny farm, tap animals to hear real sounds!',
+        promptVi: 'Chào mừng bé đến nông trại nắng ấm! Bé chạm vào các con vật để nghe tiếng kêu nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🚜',
+      },
+      {
+        id: 'things-that-go',
+        category: 'discovery',
+        titleVi: 'Phương Tiện Giao Thông',
+        titleEn: 'Things That Go',
+        descriptionEn: 'Cars, fire trucks, airplanes and boats with horn & siren sounds!',
+        promptVi: 'Bíp bíp! Bé khám phá các phương tiện giao thông và tìm đúng chiếc xe nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🚗',
+      },
+      {
+        id: 'world-flags',
+        category: 'discovery',
+        titleVi: 'Khám Phá Quốc Kỳ Các Nước',
+        titleEn: 'Flags of the World',
+        descriptionEn: 'Learn country flags and names in English & Vietnamese!',
+        promptVi: 'Bé chạm vào lá cờ các quốc gia để nghe tên nước bằng tiếng Anh và tiếng Việt nhé!',
+        ageLabel: '2-5 tuổi',
+        emoji: '🚩',
+      },
+      {
+        id: 'find-flag',
+        category: 'discovery',
+        titleVi: 'Tìm Lá Cờ Quốc Gia',
+        titleEn: 'Find the Flag',
+        descriptionEn: 'Listen to the country name and pick its national flag!',
+        promptVi: 'Đố bé tìm đúng lá cờ quốc kỳ của đất nước mà cô vừa gọi tên!',
+        ageLabel: '3-5 tuổi',
+        emoji: '🗺️',
+      },
+    ],
+  },
+];
+
+export const ALL_BRAIN_GAMES: BrainGameItem[] = BRAIN_GAME_SECTIONS.flatMap((s) => s.games);
+
+export interface BigSmallPair {
+  id: string;
+  bigEn: string;
+  bigVi: string;
+  bigEmoji: string;
+  smallEn: string;
+  smallVi: string;
+  smallEmoji: string;
+}
+
+export const BIG_SMALL_PAIRS: BigSmallPair[] = [
+  {
+    id: 'elephant-mouse',
+    bigEn: 'Big Elephant',
+    bigVi: 'Voi khổng lồ',
+    bigEmoji: '🐘',
+    smallEn: 'Small Mouse',
+    smallVi: 'Chuột nhỏ xíu',
+    smallEmoji: '🐭',
+  },
+  {
+    id: 'whale-fish',
+    bigEn: 'Big Whale',
+    bigVi: 'Cá voi to lớn',
+    bigEmoji: '🐋',
+    smallEn: 'Small Fish',
+    smallVi: 'Cá nhỏ xinh',
+    smallEmoji: '🐠',
+  },
+  {
+    id: 'bus-bike',
+    bigEn: 'Big Bus',
+    bigVi: 'Xe buýt to',
+    bigEmoji: '🚌',
+    smallEn: 'Small Bike',
+    smallVi: 'Xe đạp nhỏ',
+    smallEmoji: '🚲',
+  },
+  {
+    id: 'lion-cat',
+    bigEn: 'Big Lion',
+    bigVi: 'Sư tử lớn',
+    bigEmoji: '🦁',
+    smallEn: 'Small Kitten',
+    smallVi: 'Mèo con nhỏ',
+    smallEmoji: '🐱',
+  },
+  {
+    id: 'tree-flower',
+    bigEn: 'Big Tree',
+    bigVi: 'Cây cổ thụ to',
+    bigEmoji: '🌳',
+    smallEn: 'Small Flower',
+    smallVi: 'Bông hoa nhỏ',
+    smallEmoji: '🌸',
+  },
+  {
+    id: 'melon-cherry',
+    bigEn: 'Big Watermelon',
+    bigVi: 'Quả dưa hấu to',
+    bigEmoji: '🍉',
+    smallEn: 'Small Cherry',
+    smallVi: 'Quả anh đào nhỏ',
+    smallEmoji: '🍒',
+  },
+];
+
+export interface ShapeItemData {
+  id: string;
+  en: string;
+  vi: string;
+  emoji: string;
+  colorHex: string;
+  bgTint: string;
+}
+
+export const SHAPES_DATA: ShapeItemData[] = [
+  { id: 'circle', en: 'Circle', vi: 'Hình tròn', emoji: '🔴', colorHex: '#EF4444', bgTint: '#FEE2E2' },
+  { id: 'square', en: 'Square', vi: 'Hình vuông', emoji: '🟦', colorHex: '#3B82F6', bgTint: '#DBEAFE' },
+  { id: 'triangle', en: 'Triangle', vi: 'Hình tam giác', emoji: '🔺', colorHex: '#F97316', bgTint: '#FFEDD5' },
+  { id: 'star', en: 'Star', vi: 'Hình ngôi sao', emoji: '⭐', colorHex: '#EAB308', bgTint: '#FEF9C3' },
+  { id: 'heart', en: 'Heart', vi: 'Hình trái tim', emoji: '❤️', colorHex: '#EC4899', bgTint: '#FCE7F3' },
+  { id: 'diamond', en: 'Diamond', vi: 'Hình thoi', emoji: '🔶', colorHex: '#F59E0B', bgTint: '#FEF3C7' },
+];
+
+export interface ColorSwatchData {
+  id: string;
+  en: string;
+  vi: string;
+  emoji: string;
+  colorHex: string;
+  bgTint: string;
+  sampleItemEn: string;
+  sampleItemVi: string;
+  sampleEmoji: string;
+}
+
+export const COLORS_DATA: ColorSwatchData[] = [
+  {
+    id: 'color-red',
+    en: 'Red',
+    vi: 'Màu đỏ',
+    emoji: '🟥',
+    colorHex: '#EF4444',
+    bgTint: '#FEE2E2',
+    sampleItemEn: 'Red Apple',
+    sampleItemVi: 'Quả táo đỏ',
+    sampleEmoji: '🍎',
+  },
+  {
+    id: 'color-yellow',
+    en: 'Yellow',
+    vi: 'Màu vàng',
+    emoji: '🟨',
+    colorHex: '#EAB308',
+    bgTint: '#FEF9C3',
+    sampleItemEn: 'Yellow Banana',
+    sampleItemVi: 'Quả chuối vàng',
+    sampleEmoji: '🍌',
+  },
+  {
+    id: 'color-blue',
+    en: 'Blue',
+    vi: 'Màu xanh dương',
+    emoji: '🟦',
+    colorHex: '#0284C7',
+    bgTint: '#E0F2FE',
+    sampleItemEn: 'Blue Whale',
+    sampleItemVi: 'Cá voi xanh',
+    sampleEmoji: '🐳',
+  },
+  {
+    id: 'color-green',
+    en: 'Green',
+    vi: 'Màu xanh lá',
+    emoji: '🟩',
+    colorHex: '#16A34A',
+    bgTint: '#DCFCE7',
+    sampleItemEn: 'Green Broccoli',
+    sampleItemVi: 'Súp lơ xanh',
+    sampleEmoji: '🥦',
+  },
+  {
+    id: 'color-orange',
+    en: 'Orange',
+    vi: 'Màu da cam',
+    emoji: '🟧',
+    colorHex: '#F97316',
+    bgTint: '#FFEDD5',
+    sampleItemEn: 'Orange Carrot',
+    sampleItemVi: 'Củ cà rốt cam',
+    sampleEmoji: '🥕',
+  },
+  {
+    id: 'color-pink',
+    en: 'Pink',
+    vi: 'Màu hồng',
+    emoji: '🩷',
+    colorHex: '#EC4899',
+    bgTint: '#FCE7F3',
+    sampleItemEn: 'Pink Peach',
+    sampleItemVi: 'Quả đào hồng',
+    sampleEmoji: '🍑',
+  },
+  {
+    id: 'color-purple',
+    en: 'Purple',
+    vi: 'Màu tím',
+    emoji: '🟪',
+    colorHex: '#8B5CF6',
+    bgTint: '#EDE9FE',
+    sampleItemEn: 'Purple Grapes',
+    sampleItemVi: 'Chùm nho tím',
+    sampleEmoji: '🍇',
+  },
+];
+
+export interface CountryFlagData {
+  id: string;
+  countryEn: string;
+  countryVi: string;
+  flagEmoji: string;
+  greetingOrFactVi: string;
+  colorHex: string;
+}
+
+export const WORLD_FLAGS_DATA: CountryFlagData[] = [
+  {
+    id: 'vn',
+    countryEn: 'Vietnam',
+    countryVi: 'Việt Nam',
+    flagEmoji: '🇻🇳',
+    greetingOrFactVi: 'Cờ đỏ sao vàng 5 cánh rực rỡ của Tổ quốc Việt Nam!',
+    colorHex: '#DC2626',
+  },
+  {
+    id: 'us',
+    countryEn: 'United States',
+    countryVi: 'Hoa Kỳ (Mỹ)',
+    flagEmoji: '🇺🇸',
+    greetingOrFactVi: 'Lá cờ có 50 ngôi sao trắng và các sọc đỏ trắng!',
+    colorHex: '#2563EB',
+  },
+  {
+    id: 'gb',
+    countryEn: 'United Kingdom',
+    countryVi: 'Vương quốc Anh',
+    flagEmoji: '🇬🇧',
+    greetingOrFactVi: 'Đất nước của tháp đồng hồ Big Ben tại Luân Đôn!',
+    colorHex: '#1D4ED8',
+  },
+  {
+    id: 'jp',
+    countryEn: 'Japan',
+    countryVi: 'Nhật Bản',
+    flagEmoji: '🇯🇵',
+    greetingOrFactVi: 'Đất nước Mặt Trời Mọc và hoa anh đào nở rộ!',
+    colorHex: '#E11D48',
+  },
+  {
+    id: 'kr',
+    countryEn: 'South Korea',
+    countryVi: 'Hàn Quốc',
+    flagEmoji: '🇰🇷',
+    greetingOrFactVi: 'Đất nước của món Kimbap và trang phục Hanbok!',
+    colorHex: '#0284C7',
+  },
+  {
+    id: 'fr',
+    countryEn: 'France',
+    countryVi: 'Nước Pháp',
+    flagEmoji: '🇫🇷',
+    greetingOrFactVi: 'Đất nước có tháp Eiffel cao vút ở thủ đô Paris!',
+    colorHex: '#4F46E5',
+  },
+  {
+    id: 'au',
+    countryEn: 'Australia',
+    countryVi: 'Nước Úc',
+    flagEmoji: '🇦🇺',
+    greetingOrFactVi: 'Quê hương của những chú Chuột túi Kangaroo và Gấu Koala!',
+    colorHex: '#0D9488',
+  },
+  {
+    id: 'ca',
+    countryEn: 'Canada',
+    countryVi: 'Canada',
+    flagEmoji: '🇨🇦',
+    greetingOrFactVi: 'Lá cờ có chiếc lá phong đỏ tuyệt đẹp ở chính giữa!',
+    colorHex: '#DC2626',
+  },
+  {
+    id: 'sg',
+    countryEn: 'Singapore',
+    countryVi: 'Singapore',
+    flagEmoji: '🇸🇬',
+    greetingOrFactVi: 'Quốc đảo Sư Tử xanh sạch đẹp với trăng lưỡi liềm và 5 ngôi sao!',
+    colorHex: '#EF4444',
+  },
+  {
+    id: 'de',
+    countryEn: 'Germany',
+    countryVi: 'Nước Đức',
+    flagEmoji: '🇩🇪',
+    greetingOrFactVi: 'Lá cờ 3 sọc ngang Đen - Đỏ - Vàng nổi tiếng ở châu Âu!',
+    colorHex: '#D97706',
+  },
+  {
+    id: 'br',
+    countryEn: 'Brazil',
+    countryVi: 'Brazil',
+    flagEmoji: '🇧🇷',
+    greetingOrFactVi: 'Đất nước của rừng nhiệt đới Amazon xanh mát!',
+    colorHex: '#16A34A',
+  },
+  {
+    id: 'it',
+    countryEn: 'Italy',
+    countryVi: 'Nước Ý',
+    flagEmoji: '🇮🇹',
+    greetingOrFactVi: 'Quê hương của bánh Pizza và mì Ý Spaghetti thơm ngon!',
+    colorHex: '#059669',
+  },
+  {
+    id: 'cn',
+    countryEn: 'China',
+    countryVi: 'Trung Quốc',
+    flagEmoji: '🇨🇳',
+    greetingOrFactVi: 'Đất nước của gấu trúc Panda và Vạn Lý Trường Thành kỳ vĩ!',
+    colorHex: '#DC2626',
+  },
+  {
+    id: 'es',
+    countryEn: 'Spain',
+    countryVi: 'Tây Ban Nha',
+    flagEmoji: '🇪🇸',
+    greetingOrFactVi: 'Xứ sở của điệu nhảy Flamenco sôi động và bóng đá đỉnh cao!',
+    colorHex: '#EA580C',
+  },
+  {
+    id: 'th',
+    countryEn: 'Thailand',
+    countryVi: 'Thái Lan',
+    flagEmoji: '🇹🇭',
+    greetingOrFactVi: 'Xứ sở Chùa Vàng xinh đẹp gần gũi với Việt Nam!',
+    colorHex: '#2563EB',
+  },
+  {
+    id: 'ch',
+    countryEn: 'Switzerland',
+    countryVi: 'Thụy Sĩ',
+    flagEmoji: '🇨🇭',
+    greetingOrFactVi: 'Đất nước của dãy núi Alps tuyết trắng và đồng hồ chính xác!',
+    colorHex: '#E11D48',
+  },
+];
+
+export interface AlphabetPhonicsItem {
+  letter: string;
+  wordEn: string;
+  wordVi: string;
+  emoji: string;
+  colorHex: string;
+}
+
+export const ALPHABET_A_TO_Z: AlphabetPhonicsItem[] = [
+  { letter: 'A', wordEn: 'Apple', wordVi: 'Quả táo', emoji: '🍎', colorHex: '#EF4444' },
+  { letter: 'B', wordEn: 'Bear', wordVi: 'Con gấu', emoji: '🐻', colorHex: '#D97706' },
+  { letter: 'C', wordEn: 'Cat', wordVi: 'Con mèo', emoji: '🐱', colorHex: '#F97316' },
+  { letter: 'D', wordEn: 'Dog', wordVi: 'Con chó', emoji: '🐶', colorHex: '#EA580C' },
+  { letter: 'E', wordEn: 'Elephant', wordVi: 'Con voi', emoji: '🐘', colorHex: '#3B82F6' },
+  { letter: 'F', wordEn: 'Fish', wordVi: 'Con cá', emoji: '🐠', colorHex: '#0284C7' },
+  { letter: 'G', wordEn: 'Giraffe', wordVi: 'Hươu cao cổ', emoji: '🦒', colorHex: '#EAB308' },
+  { letter: 'H', wordEn: 'Horse', wordVi: 'Con ngựa', emoji: '🐴', colorHex: '#9333EA' },
+  { letter: 'I', wordEn: 'Ice Cream', wordVi: 'Kem ốc quế', emoji: '🍦', colorHex: '#EC4899' },
+  { letter: 'J', wordEn: 'Juice', wordVi: 'Nước ép', emoji: '🧃', colorHex: '#F59E0B' },
+  { letter: 'K', wordEn: 'Kite', wordVi: 'Cánh diều', emoji: '🪁', colorHex: '#06B6D4' },
+  { letter: 'L', wordEn: 'Lion', wordVi: 'Sư tử', emoji: '🦁', colorHex: '#D97706' },
+  { letter: 'M', wordEn: 'Monkey', wordVi: 'Con khỉ', emoji: '🐵', colorHex: '#B45309' },
+  { letter: 'N', wordEn: 'Nest', wordVi: 'Tổ chim', emoji: '🪺', colorHex: '#16A34A' },
+  { letter: 'O', wordEn: 'Orange', wordVi: 'Quả cam', emoji: '🍊', colorHex: '#F97316' },
+  { letter: 'P', wordEn: 'Panda', wordVi: 'Gấu trúc', emoji: '🐼', colorHex: '#0F766E' },
+  { letter: 'Q', wordEn: 'Queen', wordVi: 'Nữ hoàng', emoji: '👑', colorHex: '#A855F7' },
+  { letter: 'R', wordEn: 'Rabbit', wordVi: 'Con thỏ', emoji: '🐰', colorHex: '#EC4899' },
+  { letter: 'S', wordEn: 'Sun', wordVi: 'Mặt trời', emoji: '☀️', colorHex: '#EAB308' },
+  { letter: 'T', wordEn: 'Tiger', wordVi: 'Con hổ', emoji: '🐯', colorHex: '#EA580C' },
+  { letter: 'U', wordEn: 'Umbrella', wordVi: 'Chiếc ô', emoji: '☂️', colorHex: '#6366F1' },
+  { letter: 'V', wordEn: 'Violin', wordVi: 'Đàn vĩ cầm', emoji: '🎻', colorHex: '#B45309' },
+  { letter: 'W', wordEn: 'Whale', wordVi: 'Cá voi', emoji: '🐋', colorHex: '#0284C7' },
+  { letter: 'X', wordEn: 'Xylophone', wordVi: 'Đàn mộc cầm', emoji: '🎹', colorHex: '#10B981' },
+  { letter: 'Y', wordEn: 'Yacht', wordVi: 'Du thuyền', emoji: '🛥️', colorHex: '#2563EB' },
+  { letter: 'Z', wordEn: 'Zebra', wordVi: 'Ngựa vằn', emoji: '🦓', colorHex: '#475569' },
+];
+
+export interface XylophoneKeyItem {
+  note: string;
+  solfegeVi: string;
+  colorEn: string;
+  colorVi: string;
+  freq: number;
+  bgHex: string;
+  borderHex: string;
+  heightPct: number;
+}
+
+export const XYLOPHONE_KEYS: XylophoneKeyItem[] = [
+  { note: 'C4', solfegeVi: 'Đô', colorEn: 'Red', colorVi: 'Đỏ', freq: 261.63, bgHex: '#EF4444', borderHex: '#B91C1C', heightPct: 100 },
+  { note: 'D4', solfegeVi: 'Rê', colorEn: 'Orange', colorVi: 'Cam', freq: 293.66, bgHex: '#F97316', borderHex: '#C2410C', heightPct: 94 },
+  { note: 'E4', solfegeVi: 'Mi', colorEn: 'Yellow', colorVi: 'Vàng', freq: 329.63, bgHex: '#EAB308', borderHex: '#A16207', heightPct: 88 },
+  { note: 'F4', solfegeVi: 'Pha', colorEn: 'Green', colorVi: 'Xanh lá', freq: 349.23, bgHex: '#22C55E', borderHex: '#15803D', heightPct: 82 },
+  { note: 'G4', solfegeVi: 'Sol', colorEn: 'Sky Blue', colorVi: 'Xanh da trời', freq: 392.0, bgHex: '#0EA5E9', borderHex: '#0369A1', heightPct: 76 },
+  { note: 'A4', solfegeVi: 'La', colorEn: 'Indigo', colorVi: 'Chàm', freq: 440.0, bgHex: '#6366F1', borderHex: '#4338CA', heightPct: 70 },
+  { note: 'B4', solfegeVi: 'Si', colorEn: 'Purple', colorVi: 'Tím', freq: 493.88, bgHex: '#A855F7', borderHex: '#7E22CE', heightPct: 64 },
+  { note: 'C5', solfegeVi: 'Đô2', colorEn: 'Pink', colorVi: 'Hồng', freq: 523.25, bgHex: '#EC4899', borderHex: '#BE185D', heightPct: 58 },
+];
