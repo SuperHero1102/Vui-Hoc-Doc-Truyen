@@ -33,10 +33,62 @@ function normalizeVietnameseTtsText(rawText: string, lang: 'vi' | 'en'): string 
   return cleaned.trim();
 }
 
+function splitTextIntoTtsChunks(text: string, maxLen = 160): string[] {
+  const clean = text.trim();
+  if (clean.length <= maxLen) return [clean];
+
+  // Split by sentence boundaries (. ! ? \n)
+  const sentences = clean.split(/(?<=[.!?\n])\s+/);
+  const chunks: string[] = [];
+  let current = '';
+
+  for (const sentence of sentences) {
+    if ((current + ' ' + sentence).trim().length <= maxLen) {
+      current = (current + ' ' + sentence).trim();
+    } else {
+      if (current) chunks.push(current);
+      if (sentence.length <= maxLen) {
+        current = sentence;
+      } else {
+        // If a single sentence is longer than maxLen, split by commas or clauses
+        const clauses = sentence.split(/(?<=[,;:])\s+/);
+        let subCurrent = '';
+        for (const clause of clauses) {
+          if ((subCurrent + ' ' + clause).trim().length <= maxLen) {
+            subCurrent = (subCurrent + ' ' + clause).trim();
+          } else {
+            if (subCurrent) chunks.push(subCurrent);
+            if (clause.length <= maxLen) {
+              subCurrent = clause;
+            } else {
+              // Word split fallback
+              const words = clause.split(/\s+/);
+              let wordCurrent = '';
+              for (const w of words) {
+                if ((wordCurrent + ' ' + w).trim().length <= maxLen) {
+                  wordCurrent = (wordCurrent + ' ' + w).trim();
+                } else {
+                  if (wordCurrent) chunks.push(wordCurrent);
+                  wordCurrent = w;
+                }
+              }
+              if (wordCurrent) chunks.push(wordCurrent);
+              subCurrent = '';
+            }
+          }
+        }
+        current = subCurrent;
+      }
+    }
+  }
+  if (current) chunks.push(current);
+  return chunks.filter((c) => c.length > 0);
+}
+
 /**
  * Fetches genuine Vietnamese ('vi') female voice or native English ('en') audio
  * from Google Translate TTS stream on the server side.
- * Using ttsspeed=1 preserves crisp, natural vowel articulation so "Bé" is never slurred into "Bớ".
+ * Splits long paragraphs into chunks and concatenates audio frames so no words are skipped or truncated.
  */
 async function fetchGoogleTranslateTtsBase64(
   text: string,
@@ -46,19 +98,30 @@ async function fetchGoogleTranslateTtsBase64(
 ): Promise<{ audioBase64: string; mimeType: string } | null> {
   try {
     const targetTag = lang === 'en' ? (englishAccent === 'en-GB' ? 'en-gb' : 'en-us') : 'vi';
-    const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${targetTag}&client=tw-ob&ttsspeed=1&q=${encodeURIComponent(
-      text.slice(0, 200)
-    )}`;
-    const response = await fetch(url, {
-      headers: {
-        'User-Agent':
-          'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-      },
-    });
-    if (!response.ok) return null;
-    const arrayBuffer = await response.arrayBuffer();
-    if (arrayBuffer.byteLength < 100) return null;
-    const audioBase64 = Buffer.from(arrayBuffer).toString('base64');
+    const chunks = splitTextIntoTtsChunks(text, 160);
+    if (chunks.length === 0) return null;
+
+    const audioBuffers: Buffer[] = [];
+    for (const chunk of chunks) {
+      const url = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${targetTag}&client=tw-ob&ttsspeed=1&q=${encodeURIComponent(
+        chunk
+      )}`;
+      const response = await fetch(url, {
+        headers: {
+          'User-Agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+        },
+      });
+      if (!response.ok) continue;
+      const arrayBuffer = await response.arrayBuffer();
+      if (arrayBuffer.byteLength > 50) {
+        audioBuffers.push(Buffer.from(arrayBuffer));
+      }
+    }
+
+    if (audioBuffers.length === 0) return null;
+    const combinedBuffer = Buffer.concat(audioBuffers);
+    const audioBase64 = combinedBuffer.toString('base64');
     return { audioBase64, mimeType: 'audio/mpeg' };
   } catch {
     return null;
@@ -111,7 +174,7 @@ async function startServer() {
       }
 
       const targetLang: 'vi' | 'en' = lang === 'en' ? 'en' : 'vi';
-      const trimmedText = normalizeVietnameseTtsText(text, targetLang).slice(0, 400);
+      const trimmedText = normalizeVietnameseTtsText(text, targetLang).slice(0, 2000);
       const allowedVoices = ['Kore', 'Zephyr', 'Puck', 'Charon', 'Fenrir'];
       const selectedVoice = allowedVoices.includes(voiceName) ? voiceName : 'Kore';
       const cacheKey = `v3:${targetLang}:${englishAccent}:${selectedVoice}:${speed}:${trimmedText}`;

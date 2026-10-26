@@ -1,4 +1,4 @@
-import type { ParentSettings, SoundEffectType, SpeechSegment } from '../types/learning';
+import type { ParentSettings, SoundEffectType, SpeechSegment, StorySegmentToSpeak } from '../types/learning';
 
 // Client-side in-memory audio URL cache
 const clientAudioUrlCache = new Map<string, string>();
@@ -88,7 +88,7 @@ export function parseTextToSpeechSegments(rawText: string): SpeechSegment[] {
 function speakSegmentWithBrowserFallback(
   segment: SpeechSegment,
   settings: ParentSettings,
-  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox'
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<void> {
   return new Promise((resolve) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
@@ -101,23 +101,26 @@ function speakSegmentWithBrowserFallback(
     let rateMod = 1.0;
 
     if (voiceStyle === 'wolf') {
-      pitchMod = 0.68;
-      rateMod = 0.85;
+      pitchMod = 0.60;
+      rateMod = 0.82;
+    } else if (voiceStyle === 'bird') {
+      pitchMod = 1.55;
+      rateMod = 1.08;
     } else if (voiceStyle === 'child') {
       pitchMod = 1.35;
       rateMod = 1.02;
     } else if (voiceStyle === 'elder') {
-      pitchMod = 0.82;
+      pitchMod = 0.80;
       rateMod = 0.88;
     } else if (voiceStyle === 'hero') {
       pitchMod = 0.95;
       rateMod = 0.95;
     } else if (voiceStyle === 'gentle') {
       pitchMod = 1.15;
-      rateMod = 0.9;
+      rateMod = 0.92;
     } else if (voiceStyle === 'fox') {
-      pitchMod = 1.22;
-      rateMod = 1.05;
+      pitchMod = 1.25;
+      rateMod = 1.08;
     }
 
     if (segment.lang === 'vi') {
@@ -142,7 +145,7 @@ function speakSegmentWithBrowserFallback(
       utterance.voice = viVoice;
       utterance.volume = Math.max(0.1, Math.min(1, settings.volume));
       const baseRate =
-        settings.voiceSpeed === 'slow' ? 0.92 : settings.voiceSpeed === 'fast' ? 1.05 : 0.98;
+        settings.voiceSpeed === 'slow' ? 0.85 : settings.voiceSpeed === 'fast' ? 1.15 : 0.96;
       utterance.rate = baseRate * rateMod;
       utterance.pitch = pitchMod;
       utterance.onend = () => resolve();
@@ -242,7 +245,8 @@ function playAudioUrl(
   url: string,
   volume: number,
   speed: 'slow' | 'normal' | 'fast',
-  gen: number
+  gen: number,
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<boolean> {
   return new Promise((resolve) => {
     if (gen !== playbackGeneration) {
@@ -251,7 +255,10 @@ function playAudioUrl(
     }
     const audio = new Audio(url);
     audio.volume = Math.max(0.1, Math.min(1, volume));
-    audio.playbackRate = speed === 'slow' ? 0.94 : speed === 'fast' ? 1.06 : 1.0;
+    let baseRate = speed === 'slow' ? 0.85 : speed === 'fast' ? 1.15 : 1.0;
+    if (voiceStyle === 'wolf') baseRate *= 0.88;
+    if (voiceStyle === 'bird') baseRate *= 1.12;
+    audio.playbackRate = baseRate;
     activeAudioElement = audio;
     audio.onended = () => resolve(true);
     audio.onerror = () => resolve(false);
@@ -390,20 +397,30 @@ export async function speakStoryNarration(
     const { url } = prefetched[i] || { url: null };
     let playedOk = false;
 
-    // First attempt: HTMLAudioElement with server/cached TTS (works in background & screen-off!)
-    if (url) {
-      playedOk = await playAudioUrl(url, settings.volume, settings.voiceSpeed, currentGen);
-    }
+    const isCharacterLine = Boolean(
+      settings.characterVoices !== false && seg.voiceStyle && seg.voiceStyle !== 'narrator'
+    );
 
-    // Fallback: Browser speech synthesis (seamless offline)
-    if (!playedOk && currentGen === playbackGeneration) {
-      const effectiveVoiceStyle =
-        settings.characterVoices !== false ? seg.voiceStyle : 'narrator';
+    // If it's a character/animal line, speak directly with character tone and pitch
+    if (isCharacterLine) {
       await speakSegmentWithBrowserFallback(
         { text: sanitizedText, lang: seg.lang },
         settings,
-        effectiveVoiceStyle
+        seg.voiceStyle
       );
+      playedOk = true;
+    } else {
+      // Narrator: Use clean cloud TTS with parental speed setting, fallback to browser narrator
+      if (url) {
+        playedOk = await playAudioUrl(url, settings.volume, settings.voiceSpeed, currentGen, 'narrator');
+      }
+      if (!playedOk && currentGen === playbackGeneration) {
+        await speakSegmentWithBrowserFallback(
+          { text: sanitizedText, lang: seg.lang },
+          settings,
+          'narrator'
+        );
+      }
     }
 
     if (currentGen === playbackGeneration && i < segments.length - 1) {

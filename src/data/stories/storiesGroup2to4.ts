@@ -1,0 +1,1537 @@
+import type { StoryBookItem } from '../../types/learning';
+
+export const STORIES_2_TO_4: StoryBookItem[] = [
+  // =========================================================================
+  // 12. BA CHÚ HEO CON
+  // =========================================================================
+  {
+    id: 'story-ba-chu-heo-con',
+    indexNumber: 12,
+    titleVi: 'Ba Chú Heo Con',
+    titleEn: 'The Three Little Pigs',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐷',
+    coverColor: '#EC4899',
+    summaryVi: 'Ba anh em Heo xây nhà; ngôi nhà gạch vững chãi của Heo Út đã bảo vệ cả ba trước Chó Sói.',
+    summaryEn: 'Three pig brothers build houses; the brick house saves them from the hungry wolf.',
+    moralBadgeVi: 'Kiên trì & Cần cù',
+    moralBadgeEn: 'Hard Work & Patience',
+    moralLessonVi: 'Làm việc gì cũng cần kiên trì, chịu khó và cẩn thận, không làm ẩu để đạt kết quả bền vững!',
+    moralLessonEn: 'Patience and diligent hard work create solid foundations that withstand any storms.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌾',
+        illustrationDesc: 'Heo anh cả dựng nhà bằng rơm vàng, Heo thứ hai dựng nhà bằng que củi',
+        bgGradient: 'from-pink-100 to-amber-100',
+        textVi: 'Ngày xửa ngày xưa, có ba chú heo con đáng yêu từ giã mẹ lên đường xây tổ ấm riêng. Heo anh cả thích thảnh thơi đi ngủ bèn gom một bó rơm khô dựng ngôi nhà rơm trong chớp mắt. Heo thứ hai thích chơi đàn bèn nhặt vài cành củi khô đóng chiếc lều gỗ xập xệ.',
+        textEn: 'Once upon a time, three little pigs set out to build homes of their own. The eldest pig, eager to nap, quickly gathered straw to build a straw house. The second pig, eager to play music, picked fallen twigs to make a wooden shack.',
+        dialogues: [
+          {
+            speaker: 'Heo Anh Cả',
+            speakerEmoji: '🐷',
+            textVi: '"Ủn ỉn... Làm nhà bằng rơm vừa nhanh vừa dễ! Xong rồi, ta tha hồ lăn ra ngủ một giấc thật say! Khò khò..."',
+            textEn: '"Oink oink... Building with straw is so fast! Done, now I can take a long sweet nap! Zzz..."',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Heo Thứ Hai',
+            speakerEmoji: '🐷',
+            textVi: '"Nhà que củi của em cũng xong rồi! Mau ra bãi cỏ chơi đuổi bắt cùng em nào anh cả!"',
+            textEn: '"My twig house is finished too! Come outside and play tag with me on the grass!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🧱',
+        illustrationDesc: 'Heo Út chăm chỉ trộn vôi vữa, xếp từng viên gạch đỏ xây nhà kiên cố',
+        bgGradient: 'from-amber-100 to-rose-100',
+        textVi: 'Chỉ riêng chú Heo Út thông minh hiểu rằng trong rừng có mưa to gió lớn và loài thú dữ. Heo Út không quản mệt nhọc, kiên nhẫn vác từng viên gạch đỏ thắm, trộn từng xô vữa để xây một ngôi nhà gạch vững chãi có cả ống khói xinh xắn.',
+        textEn: 'Only clever Little Pig knew the forest brought heavy rain, wind, and wild beasts. Without complaining, he patiently carried red bricks and mixed cement to build a sturdy brick house with a lovely chimney.',
+        dialogues: [
+          {
+            speaker: 'Heo Út',
+            speakerEmoji: '🐷',
+            textVi: '"Lạch cạch! Phải xây thật cẩn thận từng viên gạch thì ngôi nhà mới kiên cố, không sợ bão tố và thú dữ!"',
+            textEn: '"Clink clank! Stacking bricks carefully makes our home strong against all storms and dangers!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🐺',
+        illustrationDesc: 'Chó Sói xuất hiện hung hăng thổi tung nhà rơm và nhà gỗ',
+        bgGradient: 'from-orange-100 to-slate-100',
+        textVi: 'Một ngày nọ, một con Chó Sói xám từ rừng sâu mò tới. Sói gõ cửa nhà Heo cả rồi hít một hơi thật sâu, thổi "Phùùù!" một cái, nhà rơm bay tan tác! Sói tiếp tục đuổi tới nhà gỗ, thổi "Phùùù!", nhà gỗ cũng gãy đổ tan tành. Hai chú heo hoảng hốt chạy thục mạng sang nhà Heo Út.',
+        textEn: 'One day, a big gray wolf arrived from deep woods. He huffed and puffed, blowing the straw house away instantly! Then he blew down the wooden hut. The two terrified pigs ran as fast as they could to Little Pig’s brick house.',
+        dialogues: [
+          {
+            speaker: 'Chó Sói',
+            speakerEmoji: '🐺',
+            textVi: '"Ồm ồm... Ha ha ha! Mở cửa ra ngay kẻo ta thổi phù một cái là bay nhà các ngươi bây giờ! Hừm!"',
+            textEn: '"Huff and puff... Ha ha ha! Open up or I will blow your house in right now! Grrr!"',
+            voiceStyle: 'wolf',
+          },
+          {
+            speaker: 'Hai Chú Heo Anh',
+            speakerEmoji: '🐷',
+            textVi: '"Hu hu hu! Heo Út ơi cứu anh với! Chó Sói đang đuổi ngay sau lưng bọn anh rồi!"',
+            textEn: '"Boo hoo! Little Pig, please open the door! The big bad wolf is chasing us!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 4,
+        illustrationEmoji: '🏡',
+        illustrationDesc: 'Ngôi nhà gạch của Heo Út đứng vững như pháo đài, Chó Sói ôm mũi bỏ chạy',
+        bgGradient: 'from-emerald-100 to-sky-100',
+        textVi: 'Heo Út vội mở cửa đón hai anh vào rồi đóng chặt then cài. Sói phùng mang trợn má thổi hết hơi nhưng ngôi nhà gạch không hề lay chuyển một viên ngói. Sói định chui qua ống khói nhưng bị luộc cháy mông, hoảng sợ tháo chạy vào rừng sâu. Ba anh em heo ôm nhau reo mừng, từ đó hai người anh chăm chỉ học tính kiên trì của Heo Út.',
+        textEn: 'Little Pig locked the sturdy iron latch. The wolf blew with all his might, but the brick house did not budge. The wolf slid down the chimney, scorched his tail on warm broth, and fled far into the woods. The pigs cheered, learning forever the value of hard work.',
+        dialogues: [
+          {
+            speaker: 'Ba Anh Em Heo',
+            speakerEmoji: '🐷',
+            textVi: '"Hoan hô! Nhà gạch vững vàng đã chiến thắng rồi! Làm việc chăm chỉ và cẩn thận sẽ luôn được bình yên!"',
+            textEn: '"Hooray! The strong brick house kept us safe! Diligence and careful effort always bring true security!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 13. BA CHÚ DÊ GRUFF
+  // =========================================================================
+  {
+    id: 'story-ba-chu-de-gruff',
+    indexNumber: 13,
+    titleVi: 'Ba Chú Dê Gruff',
+    titleEn: 'Three Billy Goats Gruff',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐐',
+    coverColor: '#10B981',
+    summaryVi: 'Ba chú dê thông minh và dũng cảm dùng trí thông minh vượt qua cây cầu có con quỷ lùn chặn đường.',
+    summaryEn: 'Three brave clever goats outsmart a hungry troll under the bridge to reach green hills.',
+    moralBadgeVi: 'Đoàn kết & Mưu trí',
+    moralBadgeEn: 'Courage & Wit',
+    moralLessonVi: 'Bé học cách bình tĩnh, dũng cảm và đoàn kết cùng bạn bè để vượt qua thử thách khó khăn.',
+    moralLessonEn: 'Stay calm, clever, and stand together with friends when facing obstacles.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌉',
+        illustrationDesc: 'Cây cầu gỗ bắc qua con suối chảy xiết dẫn tới đồi cỏ xanh rì',
+        bgGradient: 'from-teal-100 to-emerald-100',
+        textVi: 'Bên kia con suối trong lành có một ngọn đồi cỏ non xanh mướt ngạt hương. Ba anh em nhà Dê Gruff: Dê Nhỏ, Dê Vừa và Dê Lớn đều thèm sang đồi để ăn cỏ béo tốt. Nhưng muốn sang đồi, phải đi qua cây cầu gỗ, nơi dưới gầm cầu có một con quỷ lùn mặt mũi hung tợn chuyên bắt nạt người qua đường.',
+        textEn: 'Across a bubbling creek lay a hillside covered in sweet green grass. The Three Billy Goats Gruff: Little Goat, Middle Goat, and Big Goat yearned to graze there. But under the wooden bridge lived a cranky, ugly troll who bullied passersby.',
+        dialogues: [
+          {
+            speaker: 'Dê Nhỏ',
+            speakerEmoji: '🐐',
+            textVi: '"Lộc cộc, lộc cộc! Em bé nhỏ nhất sẽ đi trước dò đường cho hai anh nhé!"',
+            textEn: '"Trip-trap, trip-trap! I am the smallest, I will lead the way carefully!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '👹',
+        illustrationDesc: 'Quỷ lùn chui ra từ gầm cầu gầm gừ chặn đường Dê Nhỏ',
+        bgGradient: 'from-amber-100 to-slate-100',
+        textVi: 'Dê Nhỏ vừa bước lên cầu: "Lộc cộc, lộc cộc!". Quỷ lùn dưới gầm cầu nhảy xổ ra quát tháo. Dê Nhỏ bình tĩnh đáp: "Tôi gầy nhom thế này, chẳng bõ dính răng đâu! Đằng sau tôi có anh Dê Vừa béo tròn hơn nhiều kìa!". Quỷ lùn nghe vậy bèn đồng ý để Dê Nhỏ qua cầu.',
+        textEn: 'As Little Goat tapped across: "Trip-trap!", the troll popped out snarling. Clever Little Goat replied: "I am only tiny bones! My brother Middle Goat is much plumper!" Tempted by greed, the troll let him pass.',
+        dialogues: [
+          {
+            speaker: 'Quỷ Lùn',
+            speakerEmoji: '👹',
+            textVi: '"Gừ gừ! Đứa nào dám gõ móng lọc cọc trên cầu của ta? Ta sẽ bắt ngươi ăn thịt!"',
+            textEn: '"Grrr! Who is that tripping over my bridge? I am coming up to feast on you!"',
+            voiceStyle: 'wolf',
+          },
+          {
+            speaker: 'Dê Nhỏ',
+            speakerEmoji: '🐐',
+            textVi: '"Be he he! Tha cho em đi, đợi anh Dê Vừa mập mạp đằng sau nhé bác quỷ!"',
+            textEn: '"Baa baa! Please spare me, wait for my chubby brother Middle Goat behind me!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '💥',
+        illustrationDesc: 'Dê Lớn dũng mãnh giơ cặp sừng to khỏe húc quỷ lùn ngã tõm xuống dòng suối',
+        bgGradient: 'from-emerald-100 to-sky-100',
+        textVi: 'Đến lượt Dê Vừa qua cầu cũng khuyên quỷ đợi anh Dê Lớn. Cuối cùng, Dê Lớn bước lên cầu với tiếng bước chân uy dũng: "Rầm rập, rầm rập!". Quỷ lùn vừa nhảy ra, Dê Lớn bèn hạ đôi sừng nhọn hoắt húc một cú trời giáng, quỷ lùn văng tõm xuống lòng suối sâu, trôi mất hút.',
+        textEn: 'Middle Goat crossed safely using the same trick. Finally came Big Billy Goat with heavy steps: "Tramp, tramp!". When the troll jumped out, Big Goat lowered his magnificent horns, charging powerfully and knocking the bully deep into the rushing water.',
+        dialogues: [
+          {
+            speaker: 'Dê Lớn',
+            speakerEmoji: '🐐',
+            textVi: '"Binh! Hãy tránh xa cây cầu và đừng bao giờ bắt nạt người khác nữa!"',
+            textEn: '"Wham! Stay off our bridge and never bully innocent travelers again!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+      {
+        pageIndex: 4,
+        illustrationEmoji: '🌿',
+        illustrationDesc: 'Ba chú dê vui vẻ gặm cỏ non tươi trên ngọn đồi ngập tràn hoa thơm',
+        bgGradient: 'from-emerald-100 to-yellow-100',
+        textVi: 'Ba anh em Dê Gruff đoàn tụ trên ngọn đồi xanh rờn, tha hồ gặm cỏ non tươi ngọt. Nhờ sự bình tĩnh, mưu trí và lòng dũng cảm, cả ba chú dê đã bảo vệ được nhau và sống hạnh phúc chan hòa.',
+        textEn: 'The three billy goats grazed merrily on the lush meadow until their bellies were round and happy. With wit, calm courage, and brotherly unity, they conquered every danger.',
+        dialogues: [
+          {
+            speaker: 'Ba Anh Em Dê',
+            speakerEmoji: '🐐',
+            textVi: '"Be he he! Cỏ ngọt thơm quá! Cùng nhau dũng cảm thì không thử thách nào làm ta chùn bước!"',
+            textEn: '"Baa baa! The sweet grass tastes delicious! Standing together with courage overcomes any obstacle!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 14. CHÚ VỊT CON XẤU XÍ
+  // =========================================================================
+  {
+    id: 'story-chu-vit-con-xau-xi',
+    indexNumber: 14,
+    titleVi: 'Chú Vịt Con Xấu Xí',
+    titleEn: 'The Ugly Duckling',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🦢',
+    coverColor: '#0EA5E9',
+    summaryVi: 'Chú vịt con từng bị trêu chọc vì khác biệt, khi lớn lên đã hóa thành chú thiên nga trắng tuyệt đẹp.',
+    summaryEn: 'A mocked odd duckling grows into a graceful, majestic white swan.',
+    moralBadgeVi: 'Tự tin & Tôn trọng',
+    moralBadgeEn: 'Self-Belief & Respect',
+    moralLessonVi: 'Mỗi bạn nhỏ đều có nét đẹp và tài năng riêng. Bé hãy luôn tự tin vào bản thân và không trêu chọc bạn bè!',
+    moralLessonEn: 'Everyone is uniquely wonderful. Believe in yourself and never tease others for differences!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🥚',
+        illustrationDesc: 'Quả trứng cuối cùng nở ra một chú vịt con có bộ lông màu xám xịt khác lạ',
+        bgGradient: 'from-sky-100 to-amber-100',
+        textVi: 'Trong một trang trại êm đềm ven bờ hồ, vịt mẹ ấp một ổ trứng xinh xắn. Các chú vịt con lần lượt chui ra với bộ lông tơ vàng óng. Nhưng quả trứng to nhất nở muộn nhất lại sinh ra một chú vịt con lông xám tro, thân hình vụng về.',
+        textEn: 'In a peaceful barnyard by the lake, mother duck incubated her nest. Little yellow ducklings popped out adorably. But the biggest egg hatched last, revealing a clumsy gray duckling with large feet.',
+        dialogues: [
+          {
+            speaker: 'Đàn Vịt Con',
+            speakerEmoji: '🐥',
+            textVi: '"Chiếp chiếp! Ôi sao em này trông xấu xí và to bè thế kia! Chẳng giống chúng mình tí nào cả!"',
+            textEn: '"Peep peep! Why is he so gray and awkward? He doesn’t look like the rest of us at all!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Vịt Mẹ',
+            speakerEmoji: '🦆',
+            textVi: '"Quác quác... Các con đừng nói thế! Em tuy khác biệt nhưng bơi lội rất giỏi và ngoan ngoãn mà!"',
+            textEn: '"Quack quack... Do not tease your brother! He may look different, but he paddles gracefully and has a sweet heart!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '❄️',
+        illustrationDesc: 'Vịt con bơi một mình qua mùa đông băng giá, giữ trái tim nhân hậu',
+        bgGradient: 'from-slate-100 to-blue-100',
+        textVi: 'Bị bạn bè xung quanh trêu chọc, vịt con buồn bã bơi ra hồ lớn sống một mình. Suốt mùa đông buốt giá tuyết rơi trắng xóa, chú phải chịu đói rét nhưng vẫn luôn đối xử tử tế, hiền lành với mọi muôn thú trong rừng.',
+        textEn: 'Hurt by unkind words, the little duckling wandered alone to the great lake. Throughout the chilly winter snowfall, he endured bitter winds yet remained gentle, compassionate, and sweet to all woodland creatures.',
+        dialogues: [
+          {
+            speaker: 'Vịt Con Xám',
+            speakerEmoji: '🐣',
+            textVi: '"Híc híc... Dù các bạn chê mình xấu xí, mình vẫn sẽ giữ lòng tốt và bơi lội chăm chỉ mỗi ngày..."',
+            textEn: '"Sniffle... Though they tease my gray feathers, I will remain kind-hearted and paddle on steadily..."',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🦢',
+        illustrationDesc: 'Mùa xuân về, bóng hình dưới nước hiện lên một chú thiên nga trắng muốt lộng lẫy',
+        bgGradient: 'from-cyan-100 to-indigo-100',
+        textVi: 'Mùa xuân ấm áp trở lại, hoa anh đào nở rộ bên hồ. Nhìn xuống làn nước trong veo, chú vịt con sững sờ: Chú không còn là chú vịt xám vụng về nữa, mà đã vươn mình thành một chú Thiên Nga trắng muốt, cao quý với đôi cánh kiêu hãnh tuyệt trần!',
+        textEn: 'Warm spring returned with blooming flowers. Glancing down into the crystal-clear pool, the duckling gasped in wonder: He was no awkward duckling anymore, but had blossomed into a breathtaking, graceful white swan!',
+        dialogues: [
+          {
+            speaker: 'Thiên Nga Xinh Đẹp',
+            speakerEmoji: '🦢',
+            textVi: '"Ôi kỳ diệu quá! Mình là một chú thiên nga! Giờ mình đã hiểu, sự kiên nhẫn và lòng nhân hậu là vẻ đẹp rực rỡ nhất!"',
+            textEn: '"Oh wondrous joy! I am a graceful swan! I see now that inner kindness and patience shine the brightest!"',
+            voiceStyle: 'hero',
+          },
+          {
+            speaker: 'Đàn Thiên Nga Bạn',
+            speakerEmoji: '🦢',
+            textVi: '"Chào bạn thiên nga xinh đẹp nhất hồ nước! Hãy cùng bay lượn trên bầu trời xanh thắm nhé!"',
+            textEn: '"Welcome, most majestic swan on the water! Spread your white wings and soar with us into the azure sky!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 15. RÙA VÀ THỎ
+  // =========================================================================
+  {
+    id: 'story-rua-va-tho',
+    indexNumber: 15,
+    titleVi: 'Rùa Và Thỏ',
+    titleEn: 'The Tortoise and the Hare',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐢',
+    coverColor: '#10B981',
+    summaryVi: 'Cuộc chạy đua giữa Rùa chậm chạp nhưng kiên trì và Thỏ nhanh nhẹn nhưng kiêu ngạo ngủ quên.',
+    summaryEn: 'The famous race where slow and steady Tortoise beats the boastful sleeping Hare.',
+    moralBadgeVi: 'Kiên trì & Khiêm tốn',
+    moralBadgeEn: 'Persistence & Modesty',
+    moralLessonVi: 'Cần cù, kiên nhẫn từng bước một sẽ luôn chiến thắng. Bé không bao giờ được chủ quan, kiêu ngạo!',
+    moralLessonEn: 'Slow and steady wins the race. Never be boastful or look down on others!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🏁',
+        illustrationDesc: 'Thỏ vênh vang cười nhạo chú Rùa cần mẫn đang tập đi trên đường đua',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Một buổi sáng đẹp trời giữa rừng xanh, Thỏ khoe khoang mình chạy nhanh nhất muôn loài. Thấy Rùa đang cặm cụi tập từng bước chân, Thỏ bèn cười nhạo: "Này Rùa chậm như sên, có dám thi chạy vượt đồi với ta không?". Rùa mỉm cười ôn tồn nhận lời.',
+        textEn: 'On a sunny morning in the woods, the Hare bragged about his lightning speed. Seeing the Tortoise plodding diligently along, Hare mocked: "Hey slowpoke, dare to race me to the distant pine tree?". Tortoise quietly accepted the challenge.',
+        dialogues: [
+          {
+            speaker: 'Thỏ Nhanh Nhảu',
+            speakerEmoji: '🐰',
+            textVi: '"Ha ha ha! Rùa mà đòi chạy đua với Thỏ sao? Bác Gấu ơi ra làm trọng tài đi, cháu chấp Rùa nửa đường luôn!"',
+            textEn: '"Ha ha ha! A tortoise racing a hare? Uncle Bear, come judge the race, I will give him a head start!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Rùa Chăm Chỉ',
+            speakerEmoji: '🐢',
+            textVi: '"Chậm mà chắc bạn Thỏ ạ. Chúng mình cùng cố gắng trên đường đua nhé!"',
+            textEn: '"Slow and steady, friend Hare. Let us both give our very best effort!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🌳',
+        illustrationDesc: 'Thỏ nằm ngủ trưa say sưa dưới bóng cây râm mát, Rùa bền bỉ tiến bước',
+        bgGradient: 'from-yellow-100 to-green-100',
+        textVi: 'Tiếng còi vang lên, Thỏ phóng vụt đi như một mũi tên. Đi được một đoạn xa, ngoái lại chẳng thấy bóng dáng Rùa đâu, Thỏ tự phụ nghĩ: "Rùa còn xa lắm, mình nằm dưới gốc cây ngủ một giấc cho mát, khi nào Rùa tới thì nhảy ba bước là về đích!". Thế rồi Thỏ ngáy khò khò.',
+        textEn: 'The whistle blew, and Hare bounded ahead like an arrow. Seeing Tortoise far behind, Hare thought smugly: "He is miles away! I will nap under this leafy tree. When he catches up, three hops will win it!". Hare drifted into deep slumber.',
+        dialogues: [
+          {
+            speaker: 'Thỏ Nhanh Nhảu',
+            speakerEmoji: '🐰',
+            textVi: '"Khò khò... Gió mát quá... Mình cứ chợp mắt một lát, phần thắng chắc chắn thuộc về mình rồi... Khò khò..."',
+            textEn: '"Zzz... The breeze is so cool... I can nap a while, the trophy is already mine... Zzz..."',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🏆',
+        illustrationDesc: 'Rùa kiên trì chạm vạch đích trong tiếng reo hò rộn rã của muôn thú',
+        bgGradient: 'from-emerald-100 to-yellow-100',
+        textVi: 'Trong khi Thỏ ngủ say, Rùa không hề dừng lại nghỉ ngơi. Chú cần mẫn, mồ hôi ướt đẫm nhưng đôi mắt luôn kiên định hướng về đích. Khi Thỏ giật mình tỉnh giấc, Rùa đã bước chân qua vạch đích trong tiếng pháo tay rộn rã của cả khu rừng. Thỏ hổ thẹn gục đầu, học được bài học khiêm tốn đắt giá.',
+        textEn: 'While Hare snoozed, Tortoise kept moving step by step, never pausing. His eyes stayed fixed on the goal. When Hare startled awake, Tortoise was crossing the ribbon amidst roaring forest cheers. Hare bowed his ears in humble shame.',
+        dialogues: [
+          {
+            speaker: 'Bác Gấu Trọng Tài',
+            speakerEmoji: '🐻',
+            textVi: '"Chúc mừng Rùa kiên trì! Chậm mà chắc, không nản lòng bao giờ cũng sẽ về tới đích vinh quang!"',
+            textEn: '"Congratulations steady Tortoise! Diligent perseverance and modesty always claim true victory!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 16. CÁO, THỎ VÀ GÀ TRỐNG
+  // =========================================================================
+  {
+    id: 'story-cao-tho-ga-trong',
+    indexNumber: 16,
+    titleVi: 'Cáo, Thỏ Và Gà Trống',
+    titleEn: 'Fox, Rabbit and Rooster',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🦊',
+    coverColor: '#F97316',
+    summaryVi: 'Cáo cướp nhà của Thỏ, nhưng Gà Trống dũng cảm vác hái đã đòi lại công lý cho bạn Thỏ.',
+    summaryEn: 'Brave rooster with a scythe helps little rabbit take back his home from sneaky fox.',
+    moralBadgeVi: 'Dũng cảm bênh vực bạn',
+    moralBadgeEn: 'Bravery & Justice',
+    moralLessonVi: 'Bé hãy luôn dũng cảm, biết bênh vực và giúp đỡ bạn bè khi bạn gặp khó khăn hay bị bắt nạt!',
+    moralLessonEn: 'Be brave and stand up for friends when they need help!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '❄️',
+        illustrationDesc: 'Nhà băng của Cáo tan thành nước, Cáo chiếm mất ngôi nhà gỗ ấm áp của Thỏ',
+        bgGradient: 'from-orange-100 to-rose-100',
+        textVi: 'Mùa đông, Cáo xây một ngôi nhà bằng băng tuyết lấp lánh, còn Thỏ dựng một ngôi nhà bằng vỏ gỗ ấm cúng. Mùa xuân ấm áp tới, nhà băng của Cáo tan thành nước lênh láng. Cáo sang van xin ngủ nhờ nhà Thỏ, rồi giở trò xấu xa đuổi bạn Thỏ hiền lành ra khỏi nhà.',
+        textEn: 'In winter, Fox made a house of shiny ice, while Rabbit made a cozy wooden hut. In spring, Fox’s ice house melted into puddles. Fox begged to sleep in Rabbit’s house, then wickedly shoved gentle Rabbit out into the rain.',
+        dialogues: [
+          {
+            speaker: 'Thỏ Con',
+            speakerEmoji: '🐰',
+            textVi: '"Hu hu hu... Nhà của mình bị Cáo gian xảo cướp mất rồi, mình biết ngủ ở đâu bây giờ!"',
+            textEn: '"Boo hoo hoo... Sneaky Fox took over my warm home, where can I sleep tonight!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🐕',
+        illustrationDesc: 'Chó Vàng và Gấu Nâu muốn giúp nhưng nghe tiếng Cáo dọa liền sợ hãi quay về',
+        bgGradient: 'from-amber-100 to-slate-100',
+        textVi: 'Chó Vàng và bác Gấu Nâu đi qua thấy Thỏ khóc liền chạy lại đòi nhà hộ. Nhưng từ trong nhà, Cáo gầm gừ đe dọa dữ dội khiến Chó và Gấu sợ hãi quay đầu bỏ chạy. Thỏ ngồi dưới gốc cây bạch dương, nước mắt lã chã rơi.',
+        textEn: 'A dog and big brown Bear tried to help Rabbit reclaim the cottage. But from inside, Fox bellowed fierce threats that frightened them away. Little Rabbit wept softly beneath a birch tree.',
+        dialogues: [
+          {
+            speaker: 'Con Cáo Gian Xảo',
+            speakerEmoji: '🦊',
+            textVi: '"Gừ gừ! Ta mà nhảy ra thì vuốt sắc của ta xé xác hết cả lũ bây giờ! Đi mau!"',
+            textEn: '"Grrr! If I leap out, my sharp claws will tear you to pieces! Scram!"',
+            voiceStyle: 'fox',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🐓',
+        illustrationDesc: 'Gà Trống oai phong vác chiếc hái sáng loáng, cất tiếng gáy vang đòi lại nhà cho Thỏ',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Đúng lúc ấy, chú Gà Trống mặc áo lông đỏ rực, chân đi bốt đỏ, vác chiếc hái sáng loáng trên vai bước tới. Nghe chuyện, Gà Trống dũng cảm cùng Thỏ quay lại ngôi nhà. Gà Trống đập cánh phành phạch, cất tiếng gáy dõng dạc đòi lại lẽ phải.',
+        textEn: 'Just then, brave Rooster appeared wearing bright red plumage and carrying a gleaming scythe over his shoulder. Hearing Rabbit’s plight, Rooster marched right up to the door, flapping his wings with courageous resolve.',
+        dialogues: [
+          {
+            speaker: 'Gà Trống Dũng Cảm',
+            speakerEmoji: '🐓',
+            textVi: '"Cúc cù cu cu! Tôi vác hái trên vai, đi tìm Cáo gian ác! Cáo ở đâu mau cút ngay ra khỏi nhà bạn Thỏ!"',
+            textEn: '"Cock-a-doodle-doo! I carry my gleaming scythe to punish wicked Fox! Fox, surrender and leave Rabbit’s house at once!"',
+            voiceStyle: 'bird',
+          },
+          {
+            speaker: 'Con Cáo Hoảng Sợ',
+            speakerEmoji: '🦊',
+            textVi: '"Ối ối! Tôi đang mặc áo bông... Tôi xin trả nhà, tôi chạy ngay đây!"',
+            textEn: '"Eek eek! I am putting on my coat... I surrender, I am running away right now!"',
+            voiceStyle: 'fox',
+          },
+        ],
+      },
+      {
+        pageIndex: 4,
+        illustrationEmoji: '🏡',
+        illustrationDesc: 'Cáo sợ hãi chạy biến vào rừng sâu, Thỏ và Gà Trống sống vui vẻ bên nhau',
+        bgGradient: 'from-emerald-100 to-sky-100',
+        textVi: 'Cáo sợ chiếc hái sắc bén bèn lao bổ ra cửa, cắm đầu cắm cổ chạy biến vào rừng sâu không dám quay lại nữa. Thỏ con sung sướng lấy lại được ngôi nhà ấm áp, mời bạn Gà Trống dũng cảm ở cùng. Hai bạn sống bên nhau chan hòa tình bạn đẹp.',
+        textEn: 'Terrified by the scythe, Fox scrambled through the window and bolted into the deep forest, never to return. Joyful Rabbit moved back into his cozy home, inviting brave Rooster to share the hearth in warm, lifelong friendship.',
+        dialogues: [
+          {
+            speaker: 'Thỏ Con',
+            speakerEmoji: '🐰',
+            textVi: '"Cảm ơn bạn Gà Trống dũng cảm! Bạn đã mang lại công lý và sưởi ấm trái tim mình!"',
+            textEn: '"Thank you, brave Rooster! Your courage brought justice and restored our peaceful home!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 17. GÀ CON VÀ HẠT THÓC
+  // =========================================================================
+  {
+    id: 'story-ga-con-hat-thoc',
+    indexNumber: 17,
+    titleVi: 'Gà Con Và Hạt Thóc',
+    titleEn: 'Little Chick and the Grain',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐥',
+    coverColor: '#EAB308',
+    summaryVi: 'Gà con chăm chỉ gieo hạt thóc, tưới nước mỗi ngày và gặt hái cánh đồng lúa chín vàng.',
+    summaryEn: 'Little chick patiently plants a single grain and harvests a golden grain feast.',
+    moralBadgeVi: 'Chăm chỉ lao động',
+    moralBadgeEn: 'Patience & Effort',
+    moralLessonVi: 'Bé biết quý trọng thức ăn, hiểu rằng cơm gạo có được là nhờ người nông dân chăm chỉ cày cấy.',
+    moralLessonEn: 'Respect food and appreciate that meals come from farmers’ hard labor.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌾',
+        illustrationDesc: 'Gà con nhặt được một hạt thóc vàng óng ả trên luống đất',
+        bgGradient: 'from-yellow-100 to-amber-100',
+        textVi: 'Một sáng mai lang thang trong vườn, chú Gà Con lông vàng mịn như một nắm bông nhặt được một hạt thóc mẩy tròn vàng óng. Nếu ăn ngay thì chỉ no được một chốc, Gà Con bèn quyết định đem hạt thóc gieo xuống luống đất xốp.',
+        textEn: 'One bright morning while scratching in the garden, fluffy Little Chick found a plump, golden grain of rice. Knowing that eating it immediately would only satisfy for a minute, Chick decided to plant it in fertile soil.',
+        dialogues: [
+          {
+            speaker: 'Gà Con',
+            speakerEmoji: '🐥',
+            textVi: '"Chiếp chiếp! Mình sẽ đào một hố đất nhỏ, gieo hạt thóc xuống và tưới nước chăm chỉ mỗi ngày!"',
+            textEn: '"Chirp chirp! I will dig a cozy bed, plant the golden seed, and water it patiently every day!"',
+            voiceStyle: 'bird',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🌱',
+        illustrationDesc: 'Mầm xanh mọc lên mạnh mẽ dưới sự chăm sóc của Gà con',
+        bgGradient: 'from-emerald-100 to-teal-100',
+        textVi: 'Ngày qua ngày, Gà Con cần mẫn bắt sâu, nhổ cỏ dại và gánh từng giọt nước mát tưới tắm cho luống đất. Hạt thóc nảy mầm xanh biếc, vươn cao thành một nhánh lúa tươi tốt rồi trổ bông trĩu hạt vàng tươi.',
+        textEn: 'Day by day, Little Chick diligently weeded, removed caterpillars, and carried water drops. The grain sprouted into a vibrant green stalk, then blossomed into heavy, fragrant golden tassels.',
+        dialogues: [
+          {
+            speaker: 'Bác Vịt Hàng Xóm',
+            speakerEmoji: '🦆',
+            textVi: '"Cạp cạp! Gà Con chăm chỉ quá! Cần cù lao động thì đất đai sẽ không bao giờ phụ lòng người!"',
+            textEn: '"Quack quack! What a hardworking chick! Diligent care always yields bountiful blessings!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🥣',
+        illustrationDesc: 'Bát cơm trắng dẻo thơm mời cả gia đình và bạn bè cùng thưởng thức',
+        bgGradient: 'from-amber-100 to-rose-100',
+        textVi: 'Đến mùa thu hoạch, từ một hạt thóc nhỏ ban đầu, Gà Con đã gặt được cả một bồ thóc đầy ắp. Gà mẹ cùng Gà Con nấu thành nồi cơm trắng dẻo thơm nức mũi, chia sẻ cho tất cả bạn bè trong xóm cùng ăn no nê.',
+        textEn: 'Harvest time arrived. From a single grain, Chick harvested a basket brimming with rice. Mother hen cooked a fragrant pot of sweet warm rice, generously sharing with all neighbors.',
+        dialogues: [
+          {
+            speaker: 'Gà Con',
+            speakerEmoji: '🐥',
+            textVi: '"Hạt gạo ngọc thực quý giá lắm! Chúng mình hãy biết ơn các bác nông dân và không lãng phí thức ăn nhé!"',
+            textEn: '"Every grain of rice is a precious pearl! Let us always treasure our food and thank hardworking farmers!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 18. CHÚ DÊ ĐEN VÀ CHÚ DÊ TRẮNG
+  // =========================================================================
+  {
+    id: 'story-de-den-de-trang',
+    indexNumber: 18,
+    titleVi: 'Chú Dê Đen Và Chú Dê Trắng',
+    titleEn: 'Black Goat and White Goat',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐐',
+    coverColor: '#64748B',
+    summaryVi: 'Hai chú dê đi qua chiếc cầu hẹp, vì tranh nhau không ai chịu nhường nên cả hai cùng rơi xuống suối.',
+    summaryEn: 'Two stubborn goats refuse to yield on a narrow bridge and tumble into the brook.',
+    moralBadgeVi: 'Nhường nhịn & Khiêm nhường',
+    moralBadgeEn: 'Polite & Yielding',
+    moralLessonVi: 'Trong cuộc sống và khi chơi cùng bạn bè, bé luôn biết nhường nhịn nhau, không tranh giành nhau!',
+    moralLessonEn: 'Always be polite, take turns, and yield gently rather than pushing each other.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🪵',
+        illustrationDesc: 'Cây cầu gỗ đơn độc bắc qua con suối sâu chảy xiết',
+        bgGradient: 'from-slate-100 to-sky-100',
+        textVi: 'Bắc ngang qua con suối sâu chảy xiết cuồn cuộn có một chiếc cầu gỗ độc mộc rất hẹp, chỉ vừa vặn cho một chú dê đi qua. Một hôm, Dê Trắng từ bờ bên này muốn qua suối, còn Dê Đen từ bờ bên kia cũng bước lên cầu cùng lúc.',
+        textEn: 'Across a roaring mountain stream lay a narrow wooden log bridge, just wide enough for one animal at a time. One day, White Goat started crossing from the south, while Black Goat stepped on from the north.',
+        dialogues: [
+          {
+            speaker: 'Dê Trắng',
+            speakerEmoji: '🐐',
+            textVi: '"Be he he! Tôi bước lên trước, anh mau lùi lại cho tôi qua trước đi!"',
+            textEn: '"Baa baa! I reached the bridge first, back up and let me cross!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Dê Đen',
+            speakerEmoji: '🐐',
+            textVi: '"Không đời nào! Tôi cũng đang vội, anh mới phải lùi lại nhường đường cho tôi!"',
+            textEn: '"No way! I am in a hurry too, you back down and yield to me!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '⚡',
+        illustrationDesc: 'Hai chú dê bướng bỉnh húc nhau chan chát giữa cầu',
+        bgGradient: 'from-amber-100 to-red-100',
+        textVi: 'Đến giữa cầu, không ai chịu nhường ai một bước. Cả hai đều nóng nảy, giương cặp sừng nhọn hoắt húc vào nhau chan chát. "Bốp! Bát!". Vì mải húc nhau trên thanh gỗ trơn trượt, cả hai chú dê mất thăng bằng rơi tõm xuống dòng nước lạnh ngắt.',
+        textEn: 'In the middle of the bridge, neither would step back an inch. Stubbornly, both lowered their horns and clashed violently: "Crack! Whack!". Slipping on the narrow wood, both lost their footing and splashed deep into the chilly river.',
+        dialogues: [
+          {
+            speaker: 'Hai Chú Dê',
+            speakerEmoji: '🐐',
+            textVi: '"Ối ối! Cứu với! Nước cuốn trôi rồi! Giá mà mình biết nhường nhịn một chút thì đã không bị rơi xuống nước!"',
+            textEn: '"Help, help! The current is sweeping us away! If only we had taken turns politely, we would both be safe!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🤝',
+        illustrationDesc: 'Bác trâu già cứu hai chú dê lên bờ, cả hai xin lỗi và bắt tay nhường nhịn nhau',
+        bgGradient: 'from-sky-100 to-emerald-100',
+        textVi: 'May nhờ có bác Trâu Già tốt bụng lội ra dòng nước vớt cả hai chú dê ướt như chuột lột lên bờ. Dê Trắng và Dê Đen xấu hổ nhìn nhau, chân thành xin lỗi và hứa từ nay khi đi lại hay chơi trò chơi sẽ luôn biết nhường nhịn bạn bè.',
+        textEn: 'Fortunately, kind old Water Buffalo pulled the drenched, shivering goats to dry land. Blushing in shame, White Goat and Black Goat apologized to each other, promising to always take turns and yield with gentle courtesy.',
+        dialogues: [
+          {
+            speaker: 'Bác Trâu Già',
+            speakerEmoji: '🐃',
+            textVi: '"Một điều nhịn là chín điều lành các cháu ạ! Nhường nhịn nhau không phải là thua, mà là biểu hiện của người có văn minh và lòng tốt!"',
+            textEn: '"Patience and yielding bring sweet peace! Taking turns is not losing, but showing wisdom and noble kindness!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 19. CHÚ THỎ NGOAN
+  // =========================================================================
+  {
+    id: 'story-chu-tho-ngoan',
+    indexNumber: 19,
+    titleVi: 'Chú Thỏ Ngoan',
+    titleEn: 'The Good Little Bunny',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐰',
+    coverColor: '#A855F7',
+    summaryVi: 'Thỏ con nghe lời mẹ dặn không đi xa, biết mở cửa đúng lúc và giúp bác Gấu trú mưa an toàn.',
+    summaryEn: 'Obedient bunny remembers mother’s advice and shelters kind Bear from heavy rain.',
+    moralBadgeVi: 'Vâng lời & Nhân hậu',
+    moralBadgeEn: 'Obedient & Kind',
+    moralLessonVi: 'Bé luôn ghi nhớ lời dặn của cha mẹ, không mở cửa cho người lạ và biết giúp đỡ mọi người.',
+    moralLessonEn: 'Always obey parents, stay safe indoors, and open your heart to help neighbors.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌧️',
+        illustrationDesc: 'Trời đổ cơn mưa rào sấm chớp ầm ầm giữa rừng sâu',
+        bgGradient: 'from-purple-100 to-indigo-100',
+        textVi: 'Buổi chiều, mây đen kéo đến kìn kịt, sấm chớp nổ đoàng đoàng và trời đổ một cơn mưa rào như trút nước. Thỏ con ở nhà một mình ngoan ngoãn ngồi vẽ tranh, ghi nhớ lời mẹ dặn: "Con ở nhà đóng chặt cửa sổ, không đi chơi xa nhé!".',
+        textEn: 'Late afternoon brought dark thunderclouds and pouring rain. Little Bunny stayed cozy indoors drawing pictures, remembering mother’s warm advice: "Keep windows latched, stay safe inside, and never wander out into storms!".',
+        dialogues: [
+          {
+            speaker: 'Thỏ Mẹ',
+            speakerEmoji: '🐰',
+            textVi: '"Thỏ con ngoan ở nhà giữ ấm, mẹ đi hái cà rốt rồi sẽ về sớm với con nhé!"',
+            textEn: '"Stay warm indoors my sweet bunny, mama will gather carrots and return soon!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🐻',
+        illustrationDesc: 'Bác Gấu to lớn ướt sũng run rẩy gõ cửa xin trú mưa',
+        bgGradient: 'from-indigo-100 to-slate-100',
+        textVi: 'Bỗng nhiên ngoài cửa có tiếng gõ: "Cốc cốc cốc!". Tiếng thở dốc của bác Gấu Nâu run rẩy vì ướt lạnh. Thỏ con không vội mở cửa ngay mà nhìn qua khe cửa sổ nhỏ kiểm tra cẩn thận. Nhận ra bác Gấu tốt bụng trong xóm, Thỏ mới kéo then cài.',
+        textEn: 'Suddenly came a knock: "Knock, knock, knock!". Kind Uncle Bear was shivering outside, soaked by the cold rain. Bunny did not open carelessly, but peeked through the safety slot first. Recognizing their kind neighbor, Bunny unlatched the door.',
+        dialogues: [
+          {
+            speaker: 'Bác Gấu Nâu',
+            speakerEmoji: '🐻',
+            textVi: '"Hắt xì! Hắt xì... Thỏ con ơi, cho bác trú mưa nhờ một lát được không? Bác ướt lạnh buốt hết cả người rồi..."',
+            textEn: '"Achoo! Achoo... Little Bunny, could I shelter by your door for a moment? I am freezing in the gale..."',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Thỏ Ngoan',
+            speakerEmoji: '🐰',
+            textVi: '"Cháu mời bác Gấu vào nhà ngay ạ! Cháu lấy khăn bông lau người và đốt lửa sưởi cho bác nhé!"',
+            textEn: '"Please come in quickly, Uncle Bear! I have a dry towel and a warm hearth for you!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🔥',
+        illustrationDesc: 'Bếp lửa bập bùng sưởi ấm căn nhà gỗ, trà hoa cúc nóng thơm lừng',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Thỏ con lấy khăn sạch cho bác Gấu lau khô lông, rồi nhóm bếp lửa bập bùng, mời bác cốc nước gừng ấm. Mưa tạnh, thỏ mẹ về tới nhà, thấy con vừa biết cảnh giác vừa giàu lòng nhân ái bèn ôm chầm lấy Thỏ khen ngợi hết lời.',
+        textEn: 'Bunny handed Uncle Bear a clean towel, rekindled the crackling fireplace, and poured hot ginger tea. When the storm passed and mother returned, she hugged Bunny tightly, praising her child’s wisdom, caution, and compassionate heart.',
+        dialogues: [
+          {
+            speaker: 'Bác Gấu Nâu',
+            speakerEmoji: '🐻',
+            textVi: '"Cảm ơn Thỏ con ngoan ngoãn và tốt bụng! Lòng tốt của cháu làm bác ấm áp suốt cả mùa đông!"',
+            textEn: '"Thank you, obedient and gentle bunny! Your kindness warmed my heart through the chilly rain!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 20. SỰ TÍCH CON MUỖI
+  // =========================================================================
+  {
+    id: 'story-su-tich-con-muoi',
+    indexNumber: 20,
+    titleVi: 'Sự Tích Con Muỗi',
+    titleEn: 'Legend of the Mosquito',
+    ageCategory: '2-4y',
+    genre: 'vietnamese_fairytale',
+    emoji: '🦟',
+    coverColor: '#78716C',
+    summaryVi: 'Cốt truyện dân gian về chàng Ngọc Tâm và Nhan Diệp, bài học răn dạy sâu sắc về sự thủy chung và lòng biết ơn.',
+    summaryEn: 'Classic folklore of Ngoc Tam and Nhan Diep, teaching loyalty, gratitude, and moral integrity.',
+    moralBadgeVi: 'Chung thủy & Biết ơn',
+    moralBadgeEn: 'Gratitude & Loyalty',
+    moralLessonVi: 'Bé học cách trân trọng tình cảm gia đình, luôn biết ơn công lao người yêu thương mình và không tham lam phụ bạc.',
+    moralLessonEn: 'Cherish family love, stay loyal, and never forget the deep kindness of those who sacrifice for you.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🏡',
+        illustrationDesc: 'Chàng Ngọc Tâm hiền lành chăm chỉ cấy cày bên người vợ Nhan Diệp thích xa hoa',
+        bgGradient: 'from-stone-100 to-amber-100',
+        textVi: 'Ngày xưa có chàng nông dân nghèo tên là Ngọc Tâm, bản tính cần cù, hiền lành và thật thà. Chàng cưới người vợ tên là Nhan Diệp. Ngọc Tâm hết lòng yêu thương chăm sóc vợ, nhưng Nhan Diệp lại lười biếng làm lụng, chỉ thích ăn ngon mặc đẹp và mơ mộng cuộc sống giàu sang nhung lụa. Dù vậy, chàng Ngọc Tâm vẫn ân cần khuyên nhủ vợ cùng chăm lo cày cấy ruộng vườn.',
+        textEn: 'Long ago lived a humble farmer named Ngoc Tam, hardworking and kind-hearted. He married Nhan Diep. Ngoc Tam loved her devotedly, but Nhan Diep was vain and indolent, dreaming only of frivolous silks and jewels while disliking farm labor.',
+        dialogues: [
+          {
+            speaker: 'Ngọc Tâm',
+            speakerEmoji: '👨',
+            textVi: '"Nhan Diệp ơi, vợ chồng mình nghèo nhưng chăm chỉ sớm hôm, sống hòa thuận ấm êm dưới mái tranh là hạnh phúc nhất rồi nàng ạ!"',
+            textEn: '"Nhan Diep, dear wife, though poor, working honestly together under our thatched roof is true happiness!"',
+            voiceStyle: 'gentle',
+          },
+          {
+            speaker: 'Nhan Diệp',
+            speakerEmoji: '👩',
+            textVi: '"Em chỉ thích phấn son, áo lụa và ngọc ngà thôi, chứ làm lụng vất vả lấm lem thế này cực thân lắm!"',
+            textEn: '"I desire silk gowns and golden jewels, toiling in dusty muddy fields is too exhausting!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🧙‍♂️',
+        illustrationDesc: 'Tiên ông chỉ đường cho Ngọc Tâm trích ba giọt máu cứu sống người vợ',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Bỗng một ngày kia, Nhan Diệp mắc bạo bệnh rồi đột ngột qua đời. Ngọc Tâm thương tiếc khôn nguôi, không nỡ đem chôn thi hài vợ, bèn bán sạch tài sản, mua một chiếc thuyền con chở quan tài xuôi ngược khắp sông ngòi tìm thầy cứu chữa. Một hôm thuyền cập vào chân núi thơm ngát hoa quả kỳ lạ, Ngọc Tâm gặp một vị Tiên ông râu tóc bạc phơ chống gậy trúc. Thấy Ngọc Tâm khóc lóc thảm thiết xin cứu vợ, Tiên ông thương tình mách bảo: "Muốn cứu sống nàng, con hãy rạch đầu ngón tay, nhỏ ba giọt máu nóng vào người nàng". Ngọc Tâm làm theo lời dặn, tức thì Nhan Diệp bừng tỉnh sống lại, mừng rỡ ôm lấy chàng thề nguyền trọn đời son sắt.',
+        textEn: 'Suddenly, Nhan Diep fell gravely ill and passed away. Overcome with grief, Ngoc Tam could not bear to bury her. He sold all possessions to buy a small boat, carrying her casket down rivers seeking a cure. Reaching a mystical mountain, he met a white-bearded fairy elder who took pity on him and said: "Prick your finger and drop three drops of warm blood onto her". Ngoc Tam complied, and Nhan Diep revived instantly, weeping tears of gratitude.',
+        dialogues: [
+          {
+            speaker: 'Tiên Ông',
+            speakerEmoji: '🧙‍♂️',
+            textVi: '"Tấm lòng son sắt của con thật hiếm có! Ta chỉ cho con cách cứu nàng, nhưng nhớ sống cho trọn đạo nghĩa vợ chồng con nhé!"',
+            textEn: '"Your devotion is rare indeed! I give you the secret to revive her, but cherish virtue and loyalty always!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Nhan Diệp Hồi Sinh',
+            speakerEmoji: '👩',
+            textVi: '"Chàng ơi! Nhờ ba giọt máu của chàng cứu mạng, em thề từ nay sẽ suốt đời chung thủy, không bao giờ quên ơn sâu nghĩa nặng này!"',
+            textEn: '"Dearest husband! You saved me with your own lifeblood. I vow eternal loyalty to you forever!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '⛵',
+        illustrationDesc: 'Chiếc thuyền buôn gấm vóc của phú thương cập bến, Nhan Diệp hoa mắt trốn đi',
+        bgGradient: 'from-amber-100 to-indigo-100',
+        textVi: 'Trên đường chèo thuyền về quê hương, hai vợ chồng ghé vào một bến chợ buôn tấp nập. Ngọc Tâm lên bờ mua thức ăn và gạo muối. Đúng lúc ấy, một chiếc thuyền buôn lộng lẫy chở đầy gấm vóc châu báu của một phú thương giàu có ghé sát mạn thuyền. Thấy Nhan Diệp xinh đẹp, phú thương liền buông lời tán tỉnh và đem vàng ngọc ra dụ dỗ. Bị của cải làm mờ mắt, Nhan Diệp liền quên sạch lời thề với người chồng son sắt, vội vã bước sang thuyền buôn bỏ trốn cùng phú thương.',
+        textEn: 'Sailing homeward, they docked at a busy trading port. While Ngoc Tam went ashore to buy provisions, a magnificent merchant ship laden with silks and pearls moored alongside. Bewitched by luxury and sweet promises, Nhan Diep forgot her sacred vow, boarding the rich merchant’s ship and fleeing.',
+        dialogues: [
+          {
+            speaker: 'Nhan Diệp',
+            speakerEmoji: '👩',
+            textVi: '"Vàng bạc châu báu đẹp quá! Đây mới là cuộc sống nhung lụa mà ta hằng ao ước bấy lâu nay!"',
+            textEn: '"Look at these glittering gems! This is the luxurious life I have always dreamed of!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Phú Thương',
+            speakerEmoji: '💰',
+            textVi: '"Ha ha ha! Người đẹp hãy theo ta, ngọc ngà gấm vóc này ta sẽ ban cho nàng thỏa thích!"',
+            textEn: '"Ha ha ha! Come with me, fair lady, and all this gold and fine silk shall be yours!"',
+            voiceStyle: 'wolf',
+          },
+        ],
+      },
+      {
+        pageIndex: 4,
+        illustrationEmoji: '🦟',
+        illustrationDesc: 'Ngọc Tâm đòi lại ba giọt máu nghĩa tình, Nhan Diệp ngã gục hóa thành con muỗi',
+        bgGradient: 'from-stone-100 to-slate-100',
+        textVi: 'Trở về thấy thuyền vắng bóng vợ, Ngọc Tâm bàng hoàng đau xót. Chàng bỏ công tìm kiếm ròng rã suốt mấy tháng trời, cuối cùng cũng đuổi kịp thuyền buôn. Gặp lại nhau, Nhan Diệp vênh váo bảo đã quen cảnh giàu sang, nhất quyết không quay về căn nhà tranh nghèo khổ nữa. Nhận rõ lòng dạ bội bạc của người vợ, Ngọc Tâm điềm đạm bảo: "Nàng đã cạn tình thì ta không níu kéo, chỉ xin nàng trả lại ta ba giọt máu ta đã cho nàng để cứu sống nàng ngày trước". Nhan Diệp khinh khỉnh rút chiếc trâm cài chích vào đầu ngón tay nặn máu trả. Nhưng ba giọt máu vừa rỏ xuống đất, nàng liền ngã gục tắt thở chết ngay lập tức, rồi hóa thành một con muỗi nhỏ xíu. Từ đó, loài muỗi suốt ngày bay vo ve quanh con người, chích đốt để mong tìm lại ba giọt máu đã đánh mất vì thói vong ân bội nghĩa.',
+        textEn: 'Returning to an empty boat, heartbroken Ngoc Tam searched tirelessly for months until catching up with the merchant ship. Nhan Diep haughtily refused to return to poverty. Realizing her deceit, Ngoc Tam calmly asked: "Return the three drops of blood I gave to save your life". Nhan Diep sneered and pricked her finger. As the three drops fell, she instantly collapsed lifeless and shrank into a tiny mosquito. Ever since, mosquitoes buzz around people, stinging endlessly in vain hopes of recovering the lifeblood lost to betrayal.',
+        dialogues: [
+          {
+            speaker: 'Ngọc Tâm',
+            speakerEmoji: '👨',
+            textVi: '"Nàng đã phụ bạc ân tình thì hãy trả lại ba giọt máu cứu mạng ngày nào cho ta!"',
+            textEn: '"Since you broke your vow, return the three drops of lifeblood I sacrificed to save you!"',
+            voiceStyle: 'hero',
+          },
+          {
+            speaker: 'Con Muỗi',
+            speakerEmoji: '🦟',
+            textVi: '"Vo ve... Vo ve... Tôi hối hận quá rồi! Đừng ai tham lam bội bạc mà đánh mất nghĩa tình son sắt nhé!"',
+            textEn: '"Buzz buzz... Buzz buzz... I bitterly regret my betrayal! Never forsake true love and gratitude for empty wealth!"',
+            voiceStyle: 'bird',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 21. SỰ TÍCH CHIM BÌM BỊP
+  // =========================================================================
+  {
+    id: 'story-su-tich-chim-bim-bip',
+    indexNumber: 21,
+    titleVi: 'Sự Tích Chim Bìm Bịp',
+    titleEn: 'Legend of the Coucal Bird',
+    ageCategory: '2-4y',
+    genre: 'vietnamese_fairytale',
+    emoji: '🐦',
+    coverColor: '#059669',
+    summaryVi: 'Truyền thuyết dân gian về người bạn giữ trọn lời hẹn nơi bến sông hóa thành chim bìm bịp gọi bạn.',
+    summaryEn: 'Folk legend of the faithful friend waiting at the riverside reed bed, transforming into the coucal bird.',
+    moralBadgeVi: 'Giữ trọn lời hứa',
+    moralBadgeEn: 'Faithful to Promises',
+    moralLessonVi: 'Đã hứa điều gì với bố mẹ hay bạn bè thì bé phải cố gắng thực hiện đúng, giữ trọn chữ tín như người bạn hiền!',
+    moralLessonEn: 'When you make a promise, always keep your word faithfully with honor and sincere devotion!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌲',
+        illustrationDesc: 'Hai người bạn thân thiết cùng nhau học nghề bốc thuốc chữa bệnh cứu người',
+        bgGradient: 'from-emerald-100 to-teal-100',
+        textVi: 'Ngày xưa, có hai người bạn nghèo kết nghĩa anh em vô cùng gắn bó, cùng nhau học nghề bốc thuốc nam để cứu chữa bệnh tật cho bà con nghèo trong làng. Một hôm, nghe tin trên ngọn núi thiêng xa xôi có cây thuốc quý có thể trị dứt chứng bệnh hiểm nghèo, hai anh em cùng chèo thuyền vượt ngàn dặm sông nước tìm đến chân núi.',
+        textEn: 'Long ago, two sworn brothers learned herbal medicine to heal poor villagers. Hearing of a rare curative herb atop a remote sacred mountain, they journeyed together in a small boat to the base of the cliffs.',
+        dialogues: [
+          {
+            speaker: 'Người Bạn Lên Núi',
+            speakerEmoji: '👨',
+            textVi: '"Đường lên đỉnh núi vách đá cheo leo nguy hiểm lắm, em hãy ở lại bến sông trông giữ thuyền bè và thuốc men, anh sẽ một mình leo lên vách núi hái cây thuốc quý. Nhớ hẹn nhau đúng ngày trăng tròn anh sẽ trở về nhé!"',
+            textEn: '"The mountain crags are treacherous. Stay by the riverbank guarding our boat and supplies while I climb alone. Promise to meet here on the full moon!"',
+            voiceStyle: 'hero',
+          },
+          {
+            speaker: 'Người Bạn Giữ Thuyền',
+            speakerEmoji: '👨',
+            textVi: '"Anh đi nhớ cẩn thận! Em xin thề dù bão giông hay nắng lửa, em cũng sẽ kiên nhẫn đứng đợi anh nơi bãi sậy này, giữ trọn lời hẹn ước anh em!"',
+            textEn: '"Take good care, brother! Through sun and storm, I will wait right here by the reeds, honoring our promise!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🌊',
+        illustrationDesc: 'Người em kiên nhẫn đứng đợi bên bến sông lau sậy mặc cho bão táp mưa sa',
+        bgGradient: 'from-teal-100 to-indigo-100',
+        textVi: 'Người bạn anh trèo lên núi cao, còn người em ở lại giữ thuyền bên bờ sông lau sậy rì rào. Ngày rằm trăng tròn trôi qua, rồi tháng sau, tháng sau nữa trôi qua vẫn chưa thấy bóng dáng người anh trở về. Lương thực mang theo đã cạn kiệt, gió bấc tràn về buốt giá, nhưng người em quyết không rời bến thuyền một bước vì sợ anh mình quay lại không thấy thuyền sẽ bơ vơ. Chàng hái lá rừng cầm hơi, ngày đêm ngóng trông lên đỉnh núi mây mù.',
+        textEn: 'The elder brother scaled high cliffs while the younger tended the boat among rustling reeds. The full moon passed, then another month, and another, yet the brother did not return. Provisions ran out and winter winds howled, but the faithful youth refused to abandon the shore lest his brother return to find no boat. Surviving on wild roots, he gazed steadily toward the misty peaks.',
+        dialogues: [
+          {
+            speaker: 'Người Giữ Lời Hứa',
+            speakerEmoji: '👨',
+            textVi: '"Gió lạnh quá nhưng anh chưa về, mình nhất định không được rời bến! Đã hứa với anh trai thì phải giữ trọn chữ tín đến cùng!"',
+            textEn: '"The gales are biting, but my brother has not returned yet. I must stand firm and keep our sacred word to the end!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🐦',
+        illustrationDesc: 'Chú chim bìm bịp cất tiếng kêu vang vọng bến sông nhắc nhở giữ trọn chữ tín',
+        bgGradient: 'from-emerald-100 to-amber-100',
+        textVi: 'Chờ đợi ròng rã suốt ngày này qua tháng khác, người em kiệt sức ngã xuống bên bãi cỏ sậy ven sông rồi hóa thành một chú chim có bộ lông nâu ánh đỏ, cánh màu nâu cánh gián. Chú chim nhỏ cứ quanh quẩn nơi bờ bụi lau lách ngập nước, mỗi khi con nước lớn ròng lại cất tiếng kêu thiết tha vang vọng khắp dòng sông: "Bìm bịp... Bìm bịp... Bìm bịp..." như tiếng gọi bạn thiết tha giữ trọn chữ tín ngàn đời.',
+        textEn: 'Waiting faithfully month after month, the exhausted youth collapsed among the tall river reeds and transformed into a coucal bird with reddish-brown plumage and bronze wings. Forever nesting in waterside bushes, whenever tidal waters rise and fall, the bird calls out longingly across the river: "Bim bip... Bim bip... Bim bip...", reminding generations to honor their promises with pure devotion.',
+        dialogues: [
+          {
+            speaker: 'Chim Bìm Bịp',
+            speakerEmoji: '🐦',
+            textVi: '"Bìm bịp... Bìm bịp...! Bìm bịp... Bìm bịp...! Anh ơi mau về, em vẫn giữ trọn lời hẹn ước ngàn năm!"',
+            textEn: '"Bim bip... Bim bip...! Brother, come home! I am still keeping our thousand-year promise!"',
+            voiceStyle: 'bird',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 22. CẬU BÉ VÀ CÂY ĐẬU THẦN
+  // =========================================================================
+  {
+    id: 'story-jack-cay-dau-than',
+    indexNumber: 22,
+    titleVi: 'Cậu Bé Và Cây Đậu Thần',
+    titleEn: 'Jack and the Beanstalk',
+    ageCategory: '2-4y',
+    genre: 'world_fairytale',
+    isNewStar: true,
+    emoji: '🌱',
+    coverColor: '#16A34A',
+    summaryVi: 'Jack trèo lên cây đậu khổng lồ chạm trời xanh, dũng cảm vượt khó giúp đỡ người mẹ già.',
+    summaryEn: 'Jack climbs a magical beanstalk into the clouds, proving bravery and helping his mother.',
+    moralBadgeVi: 'Dũng cảm & Không tham lam',
+    moralBadgeEn: 'Brave & Content',
+    moralLessonVi: 'Bé học lòng dũng cảm, biết thương yêu mẹ và biết đủ, tuyệt đối không tham lam!',
+    moralLessonEn: 'Be brave and loving to family, and never let greed lead you astray.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🫘',
+        illustrationDesc: 'Bà mẹ lo lắng khi Jack đổi con bò lấy năm hạt đậu ngũ sắc',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Hai mẹ con Jack sống trong căn nhà nhỏ nghèo khó. Nhà chỉ còn một con bò sữa già, mẹ bảo Jack dắt ra chợ bán lấy tiền mua lúa mì. Trên đường đi, Jack gặp một ông lão hiền từ đổi cho cậu năm hạt đậu ngũ sắc thần kỳ.',
+        textEn: 'Jack lived with his poor widowed mother in a little cottage. Their only possession was an old cow. On the way to market to sell her for bread, Jack met a mysterious kind elder who offered five magical beans.',
+        dialogues: [
+          {
+            speaker: 'Ông Lão Bí Ẩn',
+            speakerEmoji: '👴',
+            textVi: '"Hạt đậu này có phép màu kỳ diệu đấy cậu bé! Gieo xuống đất, con sẽ thấy điều bất ngờ chạm đến tận trời xanh!"',
+            textEn: '"These beans hold wondrous magic, young lad! Plant them, and they will reach up into the blue heavens!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '☁️',
+        illustrationDesc: 'Cây đậu thần khổng lồ vươn cao tít tắp chạm tới những đám mây bồng bềnh',
+        bgGradient: 'from-emerald-100 to-sky-100',
+        textVi: 'Sáng hôm sau thức dậy, Jack mở cửa sổ ngỡ ngàng: Cây đậu đã lớn vổng lên như một chiếc thang khổng lồ xuyên qua những đám mây trắng. Cậu bé can đảm trèo lên thân cây đậu xanh biếc để khám phá lâu đài trên mây.',
+        textEn: 'Next morning Jack opened his window in utter amazement: The beanstalk had grown into a colossal green ladder piercing through fluffy clouds. Brave Jack climbed up to explore the castle in the sky.',
+        dialogues: [
+          {
+            speaker: 'Cậu Bé Jack',
+            speakerEmoji: '👦',
+            textVi: '"Ôi chao! Cây đậu vươn cao quá! Mình phải leo lên mây xem có điều gì kỳ diệu giúp đỡ mẹ không nào!"',
+            textEn: '"Wow! The beanstalk climbs into the clouds! I will ascend and see what wondrous blessings await!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🪕',
+        illustrationDesc: 'Jack tìm lại cây đàn vàng và con ngỗng đẻ trứng vàng của gia đình',
+        bgGradient: 'from-yellow-100 to-amber-100',
+        textVi: 'Trên lâu đài mây, Jack phát hiện gã khổng lồ đang ngủ say. Bên cạnh là con ngỗng đẻ trứng vàng và cây đàn thần biết tự gảy những giai điệu êm dịu vốn thuộc về cha cậu thuở trước. Jack nhẹ nhàng ôm lấy ngỗng và đàn để trèo xuống.',
+        textEn: 'Inside the sky castle, Jack saw a snoring giant. Beside him rested a golden goose and a magic golden harp that played soothing melodies. Jack gently gathered the treasures to return to his mother.',
+        dialogues: [
+          {
+            speaker: 'Cây Đàn Thần',
+            speakerEmoji: '🪕',
+            textVi: '"Ting ting... Hãy đưa ta về trần gian với người chủ tốt bụng, ta sẽ gảy những khúc ca ấm áp cho muôn nhà!"',
+            textEn: '"Ting ting... Bring me down to the kind family, I will strum sweet songs of joy for all!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 4,
+        illustrationEmoji: '🪓',
+        illustrationDesc: 'Jack nhanh trí vung rìu chặt đứt cây đậu, bảo vệ gia đình ấm êm',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Gã khổng lồ tỉnh giấc đuổi theo sau. Vừa tụt xuống đất, Jack liền cầm rìu chặt đứt gốc đậu thần. Cây đậu đổ sầm, gã khổng lồ không thể xuống quấy rầy nữa. Hai mẹ con Jack sống no ấm, luôn chia sẻ trứng vàng và niềm vui cho bà con lối xóm.',
+        textEn: 'The giant woke and chased him down. Reaching the ground safely, Jack chopped the beanstalk with his axe. The stalk tumbled away. Jack and his mother lived happily, generously sharing their fortune with all neighbors.',
+        dialogues: [
+          {
+            speaker: 'Mẹ Của Jack',
+            speakerEmoji: '👩',
+            textVi: '"Jack con yêu! Con thật dũng cảm và hiếu thảo! Chúng mình đã có cuộc sống ấm no và hãy nhớ luôn giúp đỡ mọi người nhé!"',
+            textEn: '"Jack, my dear brave boy! You saved our home! Let us always remain kind and help those around us!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 23. NÀNG CÔNG CHÚA VÀ HẠT ĐẬU
+  // =========================================================================
+  {
+    id: 'story-cong-chua-hat-dau',
+    indexNumber: 23,
+    titleVi: 'Nàng Công Chúa Và Hạt Đậu',
+    titleEn: 'The Princess and the Pea',
+    ageCategory: '2-4y',
+    genre: 'world_fairytale',
+    isNewStar: true,
+    emoji: '👑',
+    coverColor: '#8B5CF6',
+    summaryVi: 'Câu chuyện nhẹ nhàng về nàng công chúa chân chính với tâm hồn nhạy cảm và tinh tế.',
+    summaryEn: 'Gentle Hans Christian Andersen fairytale about a true princess with a refined heart.',
+    moralBadgeVi: 'Tinh tế & Dịu dàng',
+    moralBadgeEn: 'Gentle & Sincere',
+    moralLessonVi: 'Bé học cách cư xử dịu dàng, lịch sự, lắng nghe và thấu hiểu cảm xúc của mọi người xung quanh.',
+    moralLessonEn: 'Cultivate gentleness, thoughtful sensitivity, and polite manners with all.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌧️',
+        illustrationDesc: 'Nàng thiếu nữ gõ cửa lâu đài hoàng gia giữa đêm mưa gió bão bùng',
+        bgGradient: 'from-purple-100 to-indigo-100',
+        textVi: 'Vào một đêm mưa bão tầm tã, sấm chớp ầm ĩ ngoài cổng thành, có tiếng gõ cửa rụt rè. Nhà vua mở cửa và ngạc nhiên thấy một cô gái trẻ ướt sũng vì mưa gió, tự nhận mình là một nàng công chúa chân chính cần nơi trú chân.',
+        textEn: 'One stormy night with howling winds and pounding rain, a gentle knock sounded at the palace gate. The king opened it to find a soaked young maiden claiming to be a true royal princess seeking shelter.',
+        dialogues: [
+          {
+            speaker: 'Nàng Công Chúa',
+            speakerEmoji: '👑',
+            textVi: '"Dạ kính chào hoàng gia! Con bị lạc trong cơn mưa bão, xin người cho con trú nhờ một đêm ấm áp ạ!"',
+            textEn: '"Greetings royal family! I was caught in the heavy storm, may I please rest under your warm roof tonight?"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🛏️',
+        illustrationDesc: 'Hoàng hậu đặt một hạt đậu nhỏ xíu dưới hai mươi tấm đệm êm lông ngỗng',
+        bgGradient: 'from-purple-100 to-pink-100',
+        textVi: 'Để thử xem cô gái có phải là công chúa thật với tâm hồn nhạy cảm tinh tế hay không, hoàng hậu lặng lẽ đặt một hạt đậu xanh nhỏ xíu dưới đáy giường, rồi xếp chồng lên trên hai mươi tấm nệm bông dày và hai mươi chiếc chăn lông ngỗng êm ái.',
+        textEn: 'To discover if she was a true princess possessing genuine sensitivity, the queen secretly placed a tiny pea on the bedstead, then piled twenty thick mattresses and twenty down feather quilts over it.',
+        dialogues: [
+          {
+            speaker: 'Hoàng Hậu',
+            speakerEmoji: '👸',
+            textVi: '"Chỉ có người có tâm hồn thanh tao, tinh tế tột bậc mới có thể cảm nhận được hạt đậu nhỏ bé này!"',
+            textEn: '"Only a soul of the utmost delicacy and grace could ever feel something so small!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '✨',
+        illustrationDesc: 'Sáng hôm sau nàng công chúa lễ phép chào hỏi và tìm thấy hạnh phúc chân thành',
+        bgGradient: 'from-amber-100 to-purple-100',
+        textVi: 'Sáng hôm sau, khi được hỏi về giấc ngủ, nàng công chúa nhẹ nhàng thưa rằng suốt đêm nàng cảm thấy có vật gì cồm cộm khiến nàng khó chợp mắt. Cả hoàng cung vỡ òa vui sướng vì đã tìm thấy một nàng công chúa đích thực, dịu dàng và tinh tế.',
+        textEn: 'Next morning at breakfast, the maiden politely admitted she hardly slept because something hard under the bedding had disturbed her. The palace rejoiced, recognizing her true royal grace, and celebrated a joyful wedding.',
+        dialogues: [
+          {
+            speaker: 'Chàng Hoàng Tử',
+            speakerEmoji: '🤴',
+            textVi: '"Nàng chính là người con gái chân thành, dịu dàng và tinh tế mà ta luôn tìm kiếm! Hãy cùng xây đắp hạnh phúc nhé!"',
+            textEn: '"You are the kind, gentle, and delicate princess I have dreamed of! Let us share our lives in joy!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 24. CON QUẠ KHÁT NƯỚC
+  // =========================================================================
+  {
+    id: 'story-con-qua-khat-nuoc',
+    indexNumber: 24,
+    titleVi: 'Con Quạ Khát Nước',
+    titleEn: 'The Thirsty Crow',
+    ageCategory: '2-4y',
+    genre: 'aesop_fable',
+    emoji: '🪨',
+    coverColor: '#0284C7',
+    summaryVi: 'Chú quạ thông minh gắp từng viên sỏi thả vào bình nước để nước dâng lên vừa mỏ uống.',
+    summaryEn: 'Clever crow drops pebbles one by one into a pitcher until water rises to drink.',
+    moralBadgeVi: 'Thông minh & Kiên nhẫn',
+    moralBadgeEn: 'Clever & Resourceful',
+    moralLessonVi: 'Khi gặp việc khó, bé không vội khóc nhè mà bình tĩnh suy nghĩ tìm cách giải quyết thông minh!',
+    moralLessonEn: 'When facing problems, stay calm and use creative thinking to find clever solutions!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '☀️',
+        illustrationDesc: 'Trời mùa hè nắng chang chang, chú Quạ mệt mỏi bay tìm nước uống',
+        bgGradient: 'from-amber-100 to-sky-100',
+        textVi: 'Giữa trưa hè nắng nóng như thiêu như đốt, chú Quạ Đen bay lượn khắp cánh đồng tìm nước uống. Cổ họng quạ khô rát, kiệt sức vì khát. Bỗng quạ reo mừng khi nhìn thấy một chiếc bình gốm đặt dưới bóng cây.',
+        textEn: 'On a scorching summer midday, a thirsty black Crow flew across dusty fields searching for water. His throat was parched and dry. Suddenly, he rejoiced upon spotting a clay pitcher under a leafy tree.',
+        dialogues: [
+          {
+            speaker: 'Chú Quạ',
+            speakerEmoji: '🦅',
+            textVi: '"Oa oa! May quá, có bình nước đây rồi! Mình được giải khát rồi!"',
+            textEn: '"Caw caw! Lucky me, a water jug! I can finally quench my thirst!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🏺',
+        illustrationDesc: 'Cổ bình nước cao và hẹp, mực nước ở tận đáy bình sâu',
+        bgGradient: 'from-sky-100 to-blue-100',
+        textVi: 'Thế nhưng khi quạ sà xuống, chú phát hiện mực nước chỉ còn một chút ở tận đáy bình, cổ bình lại quá cao và hẹp khiến mỏ quạ không sao chạm tới được. Quạ cố đẩy đổ bình nhưng bình quá nặng.',
+        textEn: 'However, when Crow landed, he found only a small amount of water resting at the very bottom. The pitcher’s neck was tall and narrow, beyond reach of his beak. He tried tipping it over, but it was far too heavy.',
+        dialogues: [
+          {
+            speaker: 'Chú Quạ',
+            speakerEmoji: '🦅',
+            textVi: '"Làm sao bây giờ nhỉ? Mỏ mình không với tới được... Nhưng mình nhất định không bỏ cuộc, phải bình tĩnh nghĩ cách!"',
+            textEn: '"What should I do? My beak cannot reach... But I will not give up! Staying calm will find a way!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🪨',
+        illustrationDesc: 'Quạ gắp từng viên sỏi nhỏ thả vào bình, nước dâng lên chạm miệng bình',
+        bgGradient: 'from-blue-100 to-emerald-100',
+        textVi: 'Nhìn quanh sân, quạ thấy có rất nhiều viên sỏi nhỏ. Chú nảy ra một sáng kiến tuyệt vời: Dùng mỏ gắp từng viên sỏi thả "Tõm! Tõm!" vào bình. Càng nhiều sỏi rơi xuống, mực nước càng dâng cao dần lên đến tận miệng bình. Quạ vui sướng uống những ngụm nước mát lành ngọt lịm.',
+        textEn: 'Glancing around, Crow noticed small pebbles scattered on the ground. A brilliant idea struck: Picking up pebbles one by one, he dropped them "Plop! Plop!" into the pitcher. Pebble by pebble, the water rose to the brim. Delighted, Crow drank his fill of sweet cool water.',
+        dialogues: [
+          {
+            speaker: 'Chú Quạ Thông Minh',
+            speakerEmoji: '🦅',
+            textVi: '"Ha ha ha! Nước dâng lên rồi! Đúng là có công mài sắt có ngày nên kim, chịu khó suy nghĩ việc khó cũng thành công!"',
+            textEn: '"Ha ha ha! The water has risen! Patience and clever thinking solve every difficult puzzle!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 25. CON CÁO VÀ CHÙM NHO
+  // =========================================================================
+  {
+    id: 'story-cao-va-chum-nho',
+    indexNumber: 25,
+    titleVi: 'Con Cáo Và Chùm Nho',
+    titleEn: 'The Fox and the Grapes',
+    ageCategory: '2-4y',
+    genre: 'aesop_fable',
+    emoji: '🍇',
+    coverColor: '#9333EA',
+    summaryVi: 'Cáo nhảy mãi không tới giàn nho tím mọng bèn chê nho còn xanh để tự an ủi.',
+    summaryEn: 'Unable to reach high sweet grapes, the fox excuses that they must be sour.',
+    moralBadgeVi: 'Thẳng thắn & Cố gắng',
+    moralBadgeEn: 'Honest with Oneself',
+    moralLessonVi: 'Chưa làm được việc gì thì bé phải cố gắng rèn luyện thêm, không nên chê bai hay đổ lỗi cho hoàn cảnh!',
+    moralLessonEn: 'Admit challenges honestly and keep practicing rather than making excuses.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🍇',
+        illustrationDesc: 'Giàn nho trĩu quả tím mọng nước lung linh dưới ánh nắng',
+        bgGradient: 'from-purple-100 to-indigo-100',
+        textVi: 'Vào một ngày mùa thu trời trong gió mát, một chú Cáo đói bụng đi dạo trong vườn cây. Ngước nhìn lên giàn cao, Cáo tròn xoe mắt khi thấy những chùm nho chín mọng tím ngắt, từng quả căng tròn bóng bẩy đọng những giọt sương mai ngọt ngào.',
+        textEn: 'On a crisp autumn afternoon, a hungry Fox strolled into a sunny vineyard. Looking up at the tall wooden trellis, his eyes widened at the luscious purple grape clusters, plump with sweet glistening dew.',
+        dialogues: [
+          {
+            speaker: 'Con Cáo',
+            speakerEmoji: '🦊',
+            textVi: '"Chẹp chẹp! Nho chín mọng thơm lừng thế kia, chắc chắn là ngọt như mật ong! Mình phải chén ngay một bữa no nê mới được!"',
+            textEn: '"Yum yum! Those ripe purple grapes smell delicious like sweet honey! I must have a glorious feast right now!"',
+            voiceStyle: 'fox',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🤸',
+        illustrationDesc: 'Cáo lùi lại lấy đà nhảy hết sức nhưng vẫn không với tới chùm nho',
+        bgGradient: 'from-indigo-100 to-pink-100',
+        textVi: 'Cáo lùi lại vài bước lấy đà rồi nhún chân nhảy phốc lên cao: "Vút!". Nhưng chùm nho treo quá cao, móng vuốt Cáo chỉ quẹt nhẹ vào chiếc lá. Cáo không chịu thua, nhảy lần hai, lần ba, nhảy đến toát cả mồ hôi và thở không ra hơi mà vẫn không hái được quả nào.',
+        textEn: 'Fox stepped back, took a running leap: "Whoosh!". But the grapes hung high, his paws barely brushing a vine leaf. Refusing to yield, he leaped again and again until he was panting and exhausted, unable to pluck a single grape.',
+        dialogues: [
+          {
+            speaker: 'Con Cáo',
+            speakerEmoji: '🦊',
+            textVi: '"Hộc... Hộc... Nhảy cao thêm một chút nữa nào! Ối, trượt mất rồi!"',
+            textEn: '"Pant... Pant... Just a little higher! Oh no, missed again!"',
+            voiceStyle: 'fox',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🦊',
+        illustrationDesc: 'Cáo vểnh mũi quay lưng bỏ đi tự dối lòng',
+        bgGradient: 'from-amber-100 to-purple-100',
+        textVi: 'Biết mình không thể nhảy tới giàn nho, Cáo bèn vểnh mũi lên, xua xua tay tự dối lòng: "Hừm, nho trông đẹp thế thôi chứ chắc còn xanh và chua lè, chẳng bõ nhét kẽ răng!". Nói rồi Cáo lủi thủi bỏ đi. Bé nhớ nhé: Khi chưa làm được việc gì, hãy khiêm tốn rèn luyện chứ đừng tự dối lòng mình!',
+        textEn: 'Knowing he could not reach, Fox turned up his nose and sniffed disdainfully: "Hmph, those grapes look pretty, but I am sure they are sour and unripe anyway!". With that, he slunk away. Remember children: Never make excuses for your shortcomings—keep practicing with honesty!',
+        dialogues: [
+          {
+            speaker: 'Con Cáo Tự Dối Lòng',
+            speakerEmoji: '🦊',
+            textVi: '"Nho còn xanh lắm, ta thèm vào ăn! Ta đi tìm thứ khác đây!"',
+            textEn: '"The grapes are sour anyway, who needs them! I will go find something else!"',
+            voiceStyle: 'fox',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 26. SƯ TỬ VÀ CHUỘT NHẮT
+  // =========================================================================
+  {
+    id: 'story-su-tu-va-chuot-nhat',
+    indexNumber: 26,
+    titleVi: 'Sư Tử Và Chuột Nhắt',
+    titleEn: 'The Lion and the Mouse',
+    ageCategory: '2-4y',
+    genre: 'aesop_fable',
+    emoji: '🦁',
+    coverColor: '#EA580C',
+    summaryVi: 'Sư tử tha mạng cho chú chuột nhỏ, sau này chính chú chuột đã cắn đứt lưới cứu mạng Sư Tử.',
+    summaryEn: 'Mighty lion spares a tiny mouse, who later gnaws ropes to free the trapped king of beasts.',
+    moralBadgeVi: 'Tôn trọng & Đền ơn',
+    moralBadgeEn: 'Respect & Repaying Kindness',
+    moralLessonVi: 'Không bao giờ khinh thường ai vì họ nhỏ bé. Ai cũng có tài năng riêng và ai cũng có lúc cần giúp đỡ!',
+    moralLessonEn: 'No act of kindness is ever wasted. Small friends can prove to be great allies!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🦁',
+        illustrationDesc: 'Sư Tử oai vệ đang say ngủ dưới bóng râm, Chuột Nhắt vô tình chạy qua mũi',
+        bgGradient: 'from-amber-100 to-orange-100',
+        textVi: 'Một buổi trưa mát mẻ, chúa sơn lâm Sư Tử nằm ngủ say dưới gốc cây cổ thụ. Một chú Chuột Nhắt bé xíu mải đuổi theo hạt dẻ vô tình chạy ngang qua sống mũi Sư Tử. Sư Tử giật mình tỉnh giấc, vung móng vuốt khổng lồ chộp gọn chú chuột nhỏ.',
+        textEn: 'One peaceful afternoon, mighty Lion rested beneath a shady tree. A tiny Mouse chasing an acorn accidentally scampered across Lion’s nose. Startled awake, the king of beasts slapped down a huge paw, trapping the tiny creature.',
+        dialogues: [
+          {
+            speaker: 'Sư Tử Chúa Sơn Lâm',
+            speakerEmoji: '🦁',
+            textVi: '"Gầm gừ! Kẻ tí hon nào dám quấy rầy giấc ngủ trưa của ta? Ta sẽ bóp chết ngươi ngay!"',
+            textEn: '"Roar! What tiny insect dares disturb my regal slumber? I shall crush you!"',
+            voiceStyle: 'wolf',
+          },
+          {
+            speaker: 'Chuột Nhắt Bé Bỏng',
+            speakerEmoji: '🐭',
+            textVi: '"Chít chít! Xin ngài chúa sơn lâm tha mạng! Tôi nhỏ bé thế này chẳng bõ ngài ăn một miếng. Nếu ngài tha cho tôi, sau này nhất định tôi sẽ đền đáp ơn ngài!"',
+            textEn: '"Squeak squeak! Great king, please spare my humble life! I am so tiny. If you show mercy, I promise I will repay your kindness one day!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🕸️',
+        illustrationDesc: 'Sư Tử bị vướng vào tấm lưới bẫy thừng chắc nịch của thợ săn',
+        bgGradient: 'from-orange-100 to-slate-100',
+        textVi: 'Sư Tử bật cười lớn trước lời hứa của con chuột nhắt nhưng vì thấy buồn cười nên tốt bụng thả chuột đi. Vài ngày sau, trong lúc đi săn mồi, Sư Tử bất cẩn giẫm phải bẫy của thợ săn, bị một tấm lưới dây thừng dày quấn chặt, không tài nào vùng vẫy thoát ra được. Sư Tử gầm rú tuyệt vọng vang cả khu rừng.',
+        textEn: 'Amused by the thought of a mouse helping a lion, generous Lion chuckled and set him free. Days later, Lion was caught in a hunter’s strong rope net. Bound tightly against a tree, he roared in despair across the jungle.',
+        dialogues: [
+          {
+            speaker: 'Sư Tử Bị Mắc Bẫy',
+            speakerEmoji: '🦁',
+            textVi: '"Gầm... Ai cứu ta với! Ta mắc kẹt trong lưới thừng rồi, thợ săn sắp tới rồi!"',
+            textEn: '"Roar... Help me! I am tangled in these heavy ropes, the hunters will be here soon!"',
+            voiceStyle: 'wolf',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🐭',
+        illustrationDesc: 'Chuột Nhắt dùng hàm răng sắc nhọn cắn đứt từng sợi dây thừng giải cứu Sư Tử',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Nghe tiếng gầm quen thuộc, Chuột Nhắt chạy ngay tới. Nhìn thấy ân nhân mắc nạn, Chuột dùng hàm răng sắc bén của mình cắn "Gặm! Gặm!" đứt từng mắt lưới thừng to. Chẳng mấy chốc chiếc lưới rách toạc, Sư Tử thoát ra an toàn. Sư Tử cảm động cúi đầu cảm ơn chú chuột nhỏ, cả hai trở thành đôi bạn thân thiết.',
+        textEn: 'Hearing the familiar roar, Little Mouse dashed over. Seeing his benefactor trapped, Mouse used his sharp teeth to gnaw "Nibble, chew!" through the thick ropes. Soon the net broke open, setting the mighty beast free. Lion bowed in gratitude, and they remained lifelong friends.',
+        dialogues: [
+          {
+            speaker: 'Chuột Nhắt',
+            speakerEmoji: '🐭',
+            textVi: '"Bác Sư Tử thấy chưa! Chuột nhỏ bé cũng có thể cứu được chúa sơn lâm to lớn đấy nhé!"',
+            textEn: '"See, King Lion! Even a tiny mouse can come to the rescue of a mighty king!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Sư Tử',
+            speakerEmoji: '🦁',
+            textVi: '"Cảm ơn người bạn nhỏ dũng cảm của ta! Ta đã học được rằng không bao giờ được coi thường bất kỳ ai!"',
+            textEn: '"Thank you, brave little friend! I have learned that no act of kindness is ever wasted and no friend is too small!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 27. KIẾN VÀ CHÂU CHẤU
+  // =========================================================================
+  {
+    id: 'story-kien-va-chau-chau',
+    indexNumber: 27,
+    titleVi: 'Kiến Và Châu Chấu',
+    titleEn: 'The Ant and the Grasshopper',
+    ageCategory: '2-4y',
+    genre: 'aesop_fable',
+    emoji: '🐜',
+    coverColor: '#15803D',
+    summaryVi: 'Đàn Kiến chăm chỉ tích trữ lương thực mùa hè, trong khi Châu Chấu chỉ mải chơi ca hát suốt ngày.',
+    summaryEn: 'Ants diligently store grain in summer while Grasshopper spends sunny days merely singing.',
+    moralBadgeVi: 'Cần kiệm & Lo xa',
+    moralBadgeEn: 'Industry & Preparation',
+    moralLessonVi: 'Bé biết chăm chỉ học tập, dọn dẹp đồ dùng ngăn nắp trước khi đi chơi giải trí!',
+    moralLessonEn: 'Work diligently before play, preparing wisely for tomorrow.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🌾',
+        illustrationDesc: 'Mùa hè nắng vàng, đàn Kiến cần mẫn tha từng hạt lúa về tổ',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Suốt những tháng mùa hè trời nắng ráo, đàn Kiến chăm chỉ xếp hàng dài, cõng từng hạt lúa vàng, từng mẩu vụn bánh thơm ngon về cất giữ dưới tổ sâu. Trong khi đó, anh Châu Chấu màu xanh lá cây nằm dài trên ngọn cỏ, gảy đàn vĩ cầm ca hát suốt cả ngày.',
+        textEn: 'Throughout long sunny summer months, diligent Ants marched in line, carrying grains and seeds down into their underground pantry. Meanwhile, cheerful green Grasshopper lounged upon a leaf, strumming his fiddle and singing carefree all day long.',
+        dialogues: [
+          {
+            speaker: 'Châu Chấu Ham Chơi',
+            speakerEmoji: '🦗',
+            textVi: '"Tùng dinh dinh... Này các bạn Kiến ơi, mùa hè nắng đẹp thế này sao không ca hát vui chơi mà lại làm lụng chi cho cực thân!"',
+            textEn: '"Fiddle-dee-dee... Hey little Ants, why sweat working in this gorgeous sunshine? Put down those seeds and sing with me!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Bác Kiến Thợ',
+            speakerEmoji: '🐜',
+            textVi: '"Chúng tôi tích trữ thức ăn cho mùa đông lạnh giá bạn ạ. Bạn cũng nên chuẩn bị lương thực từ bây giờ đi!"',
+            textEn: '"We are storing food for the freezing winter ahead. You should gather provisions too, friend!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '❄️',
+        illustrationDesc: 'Mùa đông bão tuyết tràn về, Châu Chấu đói lả gõ cửa tổ Kiến xin ăn',
+        bgGradient: 'from-slate-100 to-sky-100',
+        textVi: 'Mùa đông lạnh buốt ập đến, gió bấc thổi ào ào và tuyết trắng phủ kín cánh đồng. Chẳng còn lấy một chiếc lá non hay ngọn cỏ nào để ăn, Châu Chấu run rẩy vì đói rét. Chú lết đôi chân lạnh buốt đến gõ cửa tổ ấm của đàn Kiến.',
+        textEn: 'Winter arrived with biting icy winds and heavy snow covering fields. With not a leaf or flower left, shivering Grasshopper had nothing to eat. Trembling with cold and hunger, he knocked weakly at the Ants’ warm doorway.',
+        dialogues: [
+          {
+            speaker: 'Châu Chấu Đói Rét',
+            speakerEmoji: '🦗',
+            textVi: '"Hắt xì... Các bạn Kiến tốt bụng ơi, cho tôi xin vài hạt lúa ăn đỡ đói với, tôi lạnh run người rồi..."',
+            textEn: '"Achoo... Kind Ants, please spare a few grains for a starving fellow, I am freezing..."',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🍲',
+        illustrationDesc: 'Đàn Kiến chia sẻ bát súp ấm cho Châu Chấu, Châu Chấu hứa chăm chỉ lao động',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Đàn Kiến nhân từ mời Châu Chấu vào tổ sưởi ấm bên bếp than hồng và múc cho một bát súp hạt ngô thơm phức. Châu Chấu rưng rưng cảm động, cúi đầu nhận lỗi và hứa từ mùa sau sẽ chăm chỉ lao động tích trữ lương thực, không còn lười biếng ham chơi nữa.',
+        textEn: 'Kind-hearted Ants invited Grasshopper inside to warm by the hearth and served him hot corn porridge. Deeply touched, Grasshopper thanked them and vowed that next summer he would work diligently before play.',
+        dialogues: [
+          {
+            speaker: 'Châu Chấu Hối Hận',
+            speakerEmoji: '🦗',
+            textVi: '"Cảm ơn lòng tốt của đàn Kiến! Tôi đã hiểu rồi: Phải chăm chỉ lao động trước thì mới có cuộc sống ấm no hạnh phúc!"',
+            textEn: '"Thank you, generous Ants! I learned my lesson: Diligent work must come before play to enjoy peace and security!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 28. CẬU BÉ CHĂN CỪU
+  // =========================================================================
+  {
+    id: 'story-cau-be-chan-cuu',
+    indexNumber: 28,
+    titleVi: 'Cậu Bé Chăn Cừu',
+    titleEn: 'The Boy Who Cried Wolf',
+    ageCategory: '2-4y',
+    genre: 'aesop_fable',
+    emoji: '🐑',
+    coverColor: '#F59E0B',
+    summaryVi: 'Cậu bé nói dối có sói để trêu chọc dân làng, đến khi sói thật đến thì không còn ai tin cậu nữa.',
+    summaryEn: 'A shepherd boy lies about a wolf for fun until no one believes him when danger strikes.',
+    moralBadgeVi: 'Tuyệt đối không nói dối',
+    moralBadgeEn: 'Always Speak the Truth',
+    moralLessonVi: 'Bé phải luôn nói thật với bố mẹ và thầy cô. Nói dối sẽ làm mất lòng tin của mọi người!',
+    moralLessonEn: 'Always tell the truth. Honesty builds trust; lies destroy credibility.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🐑',
+        illustrationDesc: 'Cậu bé ngồi chăn cừu trên sườn đồi xanh ngắt, nảy ra trò đùa nói dối',
+        bgGradient: 'from-emerald-100 to-amber-100',
+        textVi: 'Có một cậu bé được giao việc chăn đàn cừu trắng trên sườn đồi ven rừng. Ngồi một mình buồn chán, cậu nảy ra một trò nghịch dại: Cậu leo lên mỏm đá cao, hốt hoảng la toáng lên: "Sói đến! Có chó sói bắt cừu! Cứu tôi với!".',
+        textEn: 'A shepherd boy tended a flock of fluffy white sheep on a hilltop near a forest. Growing bored sitting alone, he decided to play a foolish prank. Standing on a tall rock, he shouted at the top of his lungs: "Wolf! Wolf! A wolf is attacking the sheep! Help!".',
+        dialogues: [
+          {
+            speaker: 'Cậu Bé Chăn Cừu',
+            speakerEmoji: '👦',
+            textVi: '"Sói đến! Mau cứu đàn cừu với bà con ơi! Sói to lắm!"',
+            textEn: '"Wolf! Wolf! Come quick villagers, save the sheep!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🏃‍♂️',
+        illustrationDesc: 'Dân làng vác cuốc xẻng hớt hải chạy lên đồi, cậu bé cười khoái chí',
+        bgGradient: 'from-amber-100 to-rose-100',
+        textVi: 'Nghe tiếng kêu cứu thất thanh, các bác nông dân dưới chân đồi vội vã buông liềm buông cuốc, hổn hển chạy thục mạng lên đồi để đuổi sói cứu cừu. Lên đến nơi, họ chẳng thấy con sói nào mà chỉ thấy cậu bé ôm bụng cười lăn lộn vì đã lừa được mọi người.',
+        textEn: 'Hearing frantic screams, kind villagers dropped pitchforks and hoes, rushing up the hill out of breath to rescue the boy. But when they arrived, there was no wolf at all—only the boy rolling in laughter at having fooled them.',
+        dialogues: [
+          {
+            speaker: 'Bác Nông Dân',
+            speakerEmoji: '👨‍🌾',
+            textVi: '"Cháu không được đem chuyện nguy hiểm ra nói dối trêu đùa như thế! Lời nói dối sẽ làm mất hết lòng tin đấy!"',
+            textEn: '"Never lie about danger for amusement, child! Lies destroy trust and break hearts!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🐺',
+        illustrationDesc: 'Sói thật xuất hiện, cậu bé gào khóc nhưng không ai tin lời kẻ nói dối nữa',
+        bgGradient: 'from-red-100 to-slate-100',
+        textVi: 'Hôm sau, một con Chó Sói hung dữ từ rừng sâu mò ra thật sự! Cậu bé hoảng sợ tột độ, trèo lên cây gào khóc xin cứu giúp. Nhưng dân làng nghĩ cậu lại đùa giỡn như mọi lần nên chẳng ai thèm lên nữa. Đàn cừu sợ hãi chạy tán loạn. Cậu bé ôm mặt khóc nức nở hối hận vì thói dối trá của mình.',
+        textEn: 'The next afternoon, a real fierce wolf slunk out of the shadows! Terrified, the boy scrambled up a tree, screaming in genuine panic. But the villagers thought it was another prank and ignored him. The frightened sheep scattered away. Weeping bitterly, the boy learned that nobody believes a liar even when he speaks the truth.',
+        dialogues: [
+          {
+            speaker: 'Cậu Bé Hối Hận',
+            speakerEmoji: '👦',
+            textVi: '"Hu hu hu... Cháu sai rồi! Cháu hứa từ nay sẽ không bao giờ nói dối một lời nào nữa! Xin mọi người tha thứ cho cháu!"',
+            textEn: '"Boo hoo hoo... I was so wrong! I promise I will never utter another lie as long as I live! Please forgive me!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+    ],
+  },
+
+  // =========================================================================
+  // 29. CON NGỖNG VÀNG
+  // =========================================================================
+  {
+    id: 'story-con-ngong-vang',
+    indexNumber: 29,
+    titleVi: 'Con Ngỗng Vàng',
+    titleEn: 'The Golden Goose',
+    ageCategory: '2-4y',
+    genre: 'world_fairytale',
+    emoji: '🪿',
+    coverColor: '#EAB308',
+    summaryVi: 'Chàng trai nhân hậu chia sẻ mẩu bánh mì cho cụ già và được ban tặng chú ngỗng có bộ lông vàng rực rỡ.',
+    summaryEn: 'Kind boy shares a meal with an elder and is gifted a magical golden goose.',
+    moralBadgeVi: 'Tốt bụng & Nhân hậu',
+    moralBadgeEn: 'Generosity & Kindness',
+    moralLessonVi: 'Lòng tốt và sự sẻ chia chân thành sẽ luôn mang lại niềm vui, may mắn và hạnh phúc cho mọi người!',
+    moralLessonEn: 'Sincere kindness and generosity always bring joy and unexpected blessings.',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🍞',
+        illustrationDesc: 'Chàng Dummling tốt bụng chia sẻ nửa mẩu bánh mì cho ông lão ăn xin trong rừng',
+        bgGradient: 'from-amber-100 to-yellow-100',
+        textVi: 'Chàng trai út Dummling vốn tính tình hiền lành, thật thà nhưng hay bị các anh coi thường. Một hôm vào rừng đốn củi, chàng gặp một ông lão râu tóc bạc phơ đang đói lả. Chàng không ngần ngại bẻ đôi mẩu bánh mì khô và bình nước trong sẻ chia cho cụ già.',
+        textEn: 'Simpleton Dummling was kind and humble, though mocked by his elder brothers. While chopping wood in the forest, he met a weary, hungry old wanderer. Without hesitation, Dummling cheerfully broke his dry bread in half and shared his fresh water.',
+        dialogues: [
+          {
+            speaker: 'Dummling Nhân Hậu',
+            speakerEmoji: '👦',
+            textVi: '"Cụ ơi, cháu chỉ có mẩu bánh mì này thôi, cụ ăn cho đỡ đói và uống ngụm nước suối mát này nhé!"',
+            textEn: '"Elder, I only have this crust of bread, please share it with me and drink this cool water!"',
+            voiceStyle: 'gentle',
+          },
+          {
+            speaker: 'Ông Lão Phép Thuật',
+            speakerEmoji: '🧙‍♂️',
+            textVi: '"Con có trái tim vàng nhân hậu! Hãy đào dưới gốc cây đa kia, phần thưởng xứng đáng đang chờ con!"',
+            textEn: '"You have a heart of pure gold! Dig beneath that ancient tree, a wondrous blessing awaits you!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '✨',
+        illustrationDesc: 'Chú ngỗng có bộ lông bằng vàng rực rỡ lấp lánh như ánh mặt trời',
+        bgGradient: 'from-yellow-100 to-amber-100',
+        textVi: 'Dưới gốc cây, Dummling ngỡ ngàng tìm thấy một chú ngỗng có bộ lông óng ả bằng vàng ròng lấp lánh. Kỳ lạ thay, ai tham lam chạm tay vào lông ngỗng đều bị dính chặt tay vào đó, tạo thành một hàng dài dính liền nhau lảo đảo bước theo chú ngỗng.',
+        textEn: 'Beneath the roots, Dummling uncovered a magical goose with feathers of solid, radiant gold. Strangely, anyone greedy who tried to pluck a feather got stuck fast, forming a hilarious line of villagers stumbling behind the goose.',
+        dialogues: [
+          {
+            speaker: 'Người Tham Lam',
+            speakerEmoji: '🏃',
+            textVi: '"Ôi trời ơi! Tay tôi bị dính chặt vào đuôi ngỗng rồi! Buông ra mau! Buông ra mau!"',
+            textEn: '"Oh dear! My hand is stuck tight to the goose feathers! Let me go! Let me go!"',
+            voiceStyle: 'child',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '👑',
+        illustrationDesc: 'Công chúa buồn rầu bật cười giòn tan trước cảnh tượng vui nhộn, lâu đài tràn ngập niềm vui',
+        bgGradient: 'from-amber-100 to-emerald-100',
+        textVi: 'Dummling dẫn đoàn người dính đuôi nhau đi qua kinh thành. Nàng công chúa vốn u sầu suốt nhiều năm không cười, khi nhìn thấy cảnh tượng ngộ nghĩnh ấy liền bật cười ha hả giòn tan. Nhà vua giữ đúng lời hứa, gả công chúa cho chàng trai thật thà, mở tiệc ăn mừng rộn rã khắp muôn nơi.',
+        textEn: 'Dummling led the comical parade past the royal palace. The princess, who had not smiled in years, burst into delightful, ringing laughter at the sight. The king gladly blessed their marriage, celebrating Dummling’s kind and noble heart.',
+        dialogues: [
+          {
+            speaker: 'Nàng Công Chúa',
+            speakerEmoji: '👸',
+            textVi: '"Ha ha ha! Buồn cười quá đi mất! Lần đầu tiên ta cảm thấy vui vẻ và yêu đời đến thế này!"',
+            textEn: '"Ha ha ha! How wonderfully hilarious! My heart is filled with pure, joyful laughter!"',
+            voiceStyle: 'gentle',
+          },
+          {
+            speaker: 'Nhà Vua',
+            speakerEmoji: '👑',
+            textVi: '"Chàng trai nhân hậu đã mang lại tiếng cười cho vương quốc! Lòng tốt chân chính luôn mang lại hạnh phúc diệu kỳ!"',
+            textEn: '"This kind-hearted youth restored joy to our kingdom! True goodness always bears miraculous happiness!"',
+            voiceStyle: 'elder',
+          },
+        ],
+      },
+    ],
+  },
+];

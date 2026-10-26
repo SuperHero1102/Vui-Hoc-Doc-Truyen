@@ -14,7 +14,7 @@ import {
   Sparkles,
   Volume2,
 } from 'lucide-react';
-import type { ParentSettings, StoryBookItem } from '../types/learning';
+import type { ParentSettings, StoryBookItem, StorySegmentToSpeak } from '../types/learning';
 import {
   playCelebrationChime,
   speakStoryNarration,
@@ -117,12 +117,7 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
   // Build segments to speak for the current page based on parent language settings
   const speechSegments = useMemo(() => {
     if (!currentPage) return [];
-    const list: {
-      text: string;
-      lang: 'vi' | 'en';
-      speaker?: string;
-      voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox';
-    }[] = [];
+    const list: StorySegmentToSpeak[] = [];
 
     // Title intro on first page
     if (currentPageIdx === 0) {
@@ -175,26 +170,26 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
       });
     }
 
-    // Character Dialogues
+    // Character Dialogues: Speak directly in the character's voice for vivid, cute storytelling
     if (currentPage.dialogues && currentPage.dialogues.length > 0) {
       for (const d of currentPage.dialogues) {
         if (userStoryLang === 'en') {
           list.push({
-            text: `${d.speaker} said: "${d.textEn}"`,
+            text: d.textEn,
             lang: 'en',
             speaker: d.speaker,
             voiceStyle: d.voiceStyle || 'child',
           });
         } else if (userStoryLang === 'vi') {
           list.push({
-            text: `${d.speaker} bảo: "${d.textVi}"`,
+            text: d.textVi,
             lang: 'vi',
             speaker: d.speaker,
             voiceStyle: d.voiceStyle || 'child',
           });
         } else {
           list.push({
-            text: `${d.speaker}: "${d.textEn}"`,
+            text: d.textEn,
             lang: 'en',
             speaker: d.speaker,
             voiceStyle: d.voiceStyle || 'child',

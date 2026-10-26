@@ -148,7 +148,7 @@ export interface StoryDialogueSegment {
   speakerEmoji: string;
   textVi: string;
   textEn: string;
-  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox';
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird';
 }
 
 export interface StoryBookPage {
@@ -178,6 +178,13 @@ export interface StoryBookItem {
   moralBadgeVi: string;
   moralBadgeEn: string;
   pages: StoryBookPage[];
+}
+
+export interface StorySegmentToSpeak {
+  text: string;
+  lang: 'vi' | 'en';
+  speaker?: string;
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird';
 }
 
 export interface WordMasteryRecord {
