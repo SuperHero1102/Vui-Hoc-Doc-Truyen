@@ -14,8 +14,8 @@ export default defineConfig(() => {
         includeAssets: ['icon.svg', 'apple-touch-icon.png', 'pwa-192x192.png', 'pwa-512x512.png', 'pwa-maskable-512x512.png'],
         manifest: {
           id: '/',
-          name: 'Vui Học - Đọc Truyện',
-          short_name: 'Vui Học - Đọc Truyện',
+          name: 'VUI HỌC HỌC VUI',
+          short_name: 'VUI HỌC',
           description: 'Sân chơi học tiếng Anh và phát triển tư duy qua trò chơi cho trẻ từ 1 tháng đến 5 tuổi. Hoạt động 100% cả Online & Offline, không cần đăng nhập.',
           theme_color: '#1E88E5',
           background_color: '#F5F9FC',

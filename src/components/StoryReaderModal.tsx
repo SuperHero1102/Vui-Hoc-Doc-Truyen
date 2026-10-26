@@ -16,8 +16,10 @@ import {
 } from 'lucide-react';
 import type { ParentSettings, StoryBookItem, StorySegmentToSpeak } from '../types/learning';
 import {
+  fetchOrGetCachedSegmentUrl,
   playCelebrationChime,
   speakStoryNarration,
+  startBackgroundAudioKeepAlive,
   stopAllAudio,
   stopBackgroundAudioKeepAlive,
 } from '../utils/audioEngine';
@@ -83,19 +85,32 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
     };
   }, []);
 
-  // Configure Media Session API for background / screen-off narration
+  // Continuous background audio keep-alive while isPlaying is active
+  useEffect(() => {
+    if (isPlaying) {
+      startBackgroundAudioKeepAlive();
+    } else {
+      stopBackgroundAudioKeepAlive();
+    }
+    return () => {
+      stopBackgroundAudioKeepAlive();
+    };
+  }, [isPlaying]);
+
+  // Configure Media Session API for background / screen-off narration and lock-screen controls
   useEffect(() => {
     if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: story.titleVi,
-          artist: 'Vui Học - Đọc Truyện',
+          artist: 'VUI HỌC - Bé Nghe Truyện',
           album: `Trang ${currentPageIdx + 1}/${totalPages} · ${story.moralBadgeVi}`,
           artwork: [
             { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
             { src: '/pwa-512x512.png', sizes: '512x512', type: 'image/png' },
           ],
         });
+        navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
 
         navigator.mediaSession.setActionHandler('play', () => setIsPlaying(true));
         navigator.mediaSession.setActionHandler('pause', () => {
@@ -112,7 +127,25 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
         // ignore
       }
     }
-  }, [story, currentPageIdx, totalPages]);
+  }, [story, currentPageIdx, totalPages, isPlaying]);
+
+  // Pre-fetch next page audio in the background for zero-delay instant transition
+  useEffect(() => {
+    if (currentPageIdx < totalPages - 1) {
+      const nextPage = story.pages[currentPageIdx + 1];
+      if (nextPage) {
+        const textsToFetch = [nextPage.textVi];
+        if (nextPage.dialogues) {
+          for (const d of nextPage.dialogues) {
+            textsToFetch.push(d.textVi);
+          }
+        }
+        for (const t of textsToFetch) {
+          fetchOrGetCachedSegmentUrl({ text: t, lang: 'vi' }, settings).catch(() => {});
+        }
+      }
+    }
+  }, [currentPageIdx, story, totalPages, settings]);
 
   // Build segments to speak for the current page based on parent language settings
   const speechSegments = useMemo(() => {
@@ -224,15 +257,19 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
       () => {
         if (!isMounted) return;
         setActiveSpeechIdx(null);
-        // If not last page, advance smoothly to next page after a brief reading pause
+        // Automatically advance to next page to read the entire story from start to finish!
         if (currentPageIdx < totalPages - 1) {
+          // Brief 250ms breath so audio does not cut out when screen is locked/turned off
           window.setTimeout(() => {
             if (isMounted && isPlaying) {
               setCurrentPageIdx((p) => p + 1);
             }
-          }, 1400);
+          }, 250);
         } else {
           // Finished entire story! Show Moral Lesson
+          setIsPlaying(false);
+          stopAllAudio();
+          stopBackgroundAudioKeepAlive();
           playCelebrationChime(settings.volume);
           fireFireworksCelebration();
           setShowMoralModal(true);
@@ -243,7 +280,6 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
     return () => {
       isMounted = false;
       stopAllAudio();
-      stopBackgroundAudioKeepAlive();
     };
   }, [currentPageIdx, isPlaying, speechSegments, totalPages, settings]);
 

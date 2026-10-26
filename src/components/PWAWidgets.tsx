@@ -148,8 +148,8 @@ export const PWAInstallButton: React.FC = () => {
     if (typeof navigator !== 'undefined' && navigator.share) {
       try {
         await navigator.share({
-          title: 'Vui Học – Sân chơi cho bé 0-5 tuổi',
-          text: 'Sân chơi Tiếng Anh & Tư duy cho bé 0-5 tuổi (Dùng ngay không cần đăng nhập, hỗ trợ cả Offline):',
+          title: 'VUI HỌC HỌC VUI – Sân chơi cho bé 0-5 tuổi',
+          text: 'VUI HỌC - Sân chơi Tiếng Anh, Tư duy & Truyện Cổ Tích cho bé 0-5 tuổi (Dùng ngay không cần đăng nhập, hỗ trợ cả Offline):',
           url: shareUrl,
         });
         return;
@@ -193,7 +193,7 @@ export const PWAInstallButton: React.FC = () => {
                 <AppBrandLogo className="w-12 h-12 rounded-2xl shadow-sm" />
                 <div>
                   <h3 id="pwa-guide-title" className="text-base sm:text-lg font-extrabold text-slate-900">
-                    Cài "ABC Vui Học" Ra Màn Hình
+                    Cài "VUI HỌC" Ra Màn Hình
                   </h3>
                   <p className="text-xs font-bold text-emerald-700 flex items-center gap-1">
                     <Sparkles className="w-3.5 h-3.5" />

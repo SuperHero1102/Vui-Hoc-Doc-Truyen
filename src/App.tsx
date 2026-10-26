@@ -525,7 +525,7 @@ export default function App() {
       [
         {
           lang: 'vi',
-          text: `Chào mừng ${name} đến với sân chơi Vui Học - Đọc Truyện!`,
+          text: `Chào mừng ${name} đến với sân chơi VUI HỌC!`,
         },
       ],
       { ...settings, selectedAge: ageId }
@@ -772,8 +772,8 @@ export default function App() {
               className="flex items-center gap-1.5 sm:gap-2 text-left cursor-pointer shrink-0 group"
             >
               <AppBrandLogo className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-xs group-hover:scale-105 transition" />
-              <span className="inline text-base sm:text-lg font-extrabold tracking-tight text-[#1565D8] whitespace-nowrap font-display">
-                Vui Học - Đọc Truyện
+              <span className="inline text-base sm:text-lg font-black tracking-tight text-[#1565D8] whitespace-nowrap font-display">
+                VUI HỌC
               </span>
             </button>
 

@@ -184,7 +184,7 @@ function speakSegmentWithBrowserFallback(
   });
 }
 
-async function fetchOrGetCachedSegmentUrl(
+export async function fetchOrGetCachedSegmentUrl(
   segment: SpeechSegment,
   settings: ParentSettings
 ): Promise<{ url: string | null; fromCache: boolean }> {
@@ -241,6 +241,18 @@ async function fetchOrGetCachedSegmentUrl(
   return { url: null, fromCache: false };
 }
 
+let sharedStoryAudio: HTMLAudioElement | null = null;
+
+function getSharedStoryAudio(): HTMLAudioElement {
+  if (!sharedStoryAudio && typeof window !== 'undefined') {
+    sharedStoryAudio = new Audio();
+    sharedStoryAudio.setAttribute('playsinline', 'true');
+    sharedStoryAudio.setAttribute('webkit-playsinline', 'true');
+    sharedStoryAudio.preload = 'auto';
+  }
+  return sharedStoryAudio!;
+}
+
 function playAudioUrl(
   url: string,
   volume: number,
@@ -253,16 +265,63 @@ function playAudioUrl(
       resolve(false);
       return;
     }
-    const audio = new Audio(url);
+    const audio = getSharedStoryAudio();
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = url;
     audio.volume = Math.max(0.1, Math.min(1, volume));
+
     let baseRate = speed === 'slow' ? 0.85 : speed === 'fast' ? 1.15 : 1.0;
-    if (voiceStyle === 'wolf') baseRate *= 0.88;
-    if (voiceStyle === 'bird') baseRate *= 1.12;
+    let shouldPreservePitch = true;
+
+    if (voiceStyle === 'wolf') {
+      baseRate *= 0.82;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'bird') {
+      baseRate *= 1.25;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'child') {
+      baseRate *= 1.12;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'elder') {
+      baseRate *= 0.88;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'fox') {
+      baseRate *= 1.08;
+      shouldPreservePitch = false;
+    }
+
+    try {
+      (audio as any).preservesPitch = shouldPreservePitch;
+      (audio as any).mozPreservesPitch = shouldPreservePitch;
+      (audio as any).webkitPreservesPitch = shouldPreservePitch;
+    } catch {
+      // ignore
+    }
     audio.playbackRate = baseRate;
     activeAudioElement = audio;
-    audio.onended = () => resolve(true);
-    audio.onerror = () => resolve(false);
-    audio.play().catch(() => resolve(false));
+
+    const cleanup = () => {
+      audio.onended = null;
+      audio.onerror = null;
+    };
+
+    audio.onended = () => {
+      cleanup();
+      resolve(true);
+    };
+    audio.onerror = () => {
+      cleanup();
+      resolve(false);
+    };
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        cleanup();
+        resolve(false);
+      });
+    }
   });
 }
 
@@ -401,26 +460,23 @@ export async function speakStoryNarration(
       settings.characterVoices !== false && seg.voiceStyle && seg.voiceStyle !== 'narrator'
     );
 
-    // If it's a character/animal line, speak directly with character tone and pitch
-    if (isCharacterLine) {
+    // Play via HTMLAudioElement using server TTS with character pitch/rate modulation,
+    // so background audio playback works 100% continuously even when screen is locked/turned off!
+    if (url) {
+      playedOk = await playAudioUrl(
+        url,
+        settings.volume,
+        settings.voiceSpeed,
+        currentGen,
+        isCharacterLine ? seg.voiceStyle : 'narrator'
+      );
+    }
+    if (!playedOk && currentGen === playbackGeneration) {
       await speakSegmentWithBrowserFallback(
         { text: sanitizedText, lang: seg.lang },
         settings,
-        seg.voiceStyle
+        isCharacterLine ? seg.voiceStyle : 'narrator'
       );
-      playedOk = true;
-    } else {
-      // Narrator: Use clean cloud TTS with parental speed setting, fallback to browser narrator
-      if (url) {
-        playedOk = await playAudioUrl(url, settings.volume, settings.voiceSpeed, currentGen, 'narrator');
-      }
-      if (!playedOk && currentGen === playbackGeneration) {
-        await speakSegmentWithBrowserFallback(
-          { text: sanitizedText, lang: seg.lang },
-          settings,
-          'narrator'
-        );
-      }
     }
 
     if (currentGen === playbackGeneration && i < segments.length - 1) {
