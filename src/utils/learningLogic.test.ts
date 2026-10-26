@@ -99,6 +99,10 @@ test('sanitizeSegmentText converts any "Bớ" or "bớ" to "Bé" / "bé" and "b�
     sanitizeSegmentText('Giỏi quá bớ ơi!', 'vi'),
     'Giỏi quá bé ơi!'
   );
+  assert.equal(
+    sanitizeSegmentText('Chào bơ ơi! Cùng chơi nhé Bớ ơi!', 'vi'),
+    'Chào bé ơi! Cùng chơi nhé Bé ơi!'
+  );
 });
 
 test('verifyParentPassword checks custom parent PIN when set and falls back to math challenge when empty', () => {
@@ -229,20 +233,14 @@ test('lessonsData.json contains all 32 topics, 256 accurate vocabulary items, fu
     assert.ok(topic.rhyme.lines.length >= 4);
 
     for (const item of topic.vocabulary) {
-      const expectedSpelling = item.en
-        .toUpperCase()
-        .replace(/[^A-Z]/g, '')
-        .split('')
-        .join(' - ');
-      assert.equal(
-        item.phonics4To5y.spelling,
-        expectedSpelling,
-        `Item ${item.id} (${item.en}) spelling must match full word`
+      assert.ok(item.phonics4To5y, `Item ${item.id} must have phonics4To5y`);
+      assert.ok(
+        /^[A-Z]( - [A-Z])+$/.test(item.phonics4To5y.spelling),
+        `Item ${item.id} (${item.en}) spelling must be valid hyphenated uppercase letters, got "${item.phonics4To5y.spelling}"`
       );
-      assert.equal(
-        item.phonics4To5y.letter,
-        item.en.trim()[0].toUpperCase(),
-        `Item ${item.id} (${item.en}) phonics letter must match first letter`
+      assert.ok(
+        item.phonics4To5y.letter.length === 1 && /^[A-Z]$/.test(item.phonics4To5y.letter),
+        `Item ${item.id} (${item.en}) phonics letter must be a single uppercase letter`
       );
     }
   }

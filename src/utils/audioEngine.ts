@@ -39,8 +39,9 @@ export function stopAllAudio(): void {
 }
 
 export function sanitizeSegmentText(text: string, lang: 'vi' | 'en'): string {
-  let cleaned = text
-    .replace(/(?<![\p{L}])bớ(?![\p{L}])/gu, 'bé')
+  let cleaned = text.normalize('NFC')
+    .replace(/\bb[ớơ]\s+ơi\b/gui, (m) => (m[0] === 'B' ? 'Bé ơi' : 'bé ơi'))
+    .replace(/(?<![\p{L}])bớ(?![\p{L}])/gui, (m) => (m[0] === 'B' ? 'Bé' : 'bé'))
     .replace(/(?<![\p{L}])Bớ(?![\p{L}])/gu, 'Bé')
     .replace(/bé yêu/gi, (m) => (m[0] === 'B' ? 'Bé ơi' : 'bé ơi'));
   if (lang === 'vi') {
@@ -189,7 +190,8 @@ export async function fetchOrGetCachedSegmentUrl(
   settings: ParentSettings
 ): Promise<{ url: string | null; fromCache: boolean }> {
   const accentKey = settings.englishAccent || 'en-US';
-  const cacheKey = `v3:${segment.lang}:${accentKey}:${settings.voicePersona}:${settings.voiceSpeed}:${segment.text.trim()}`;
+  const cleanText = sanitizeSegmentText(segment.text, segment.lang);
+  const cacheKey = `v4:${segment.lang}:${accentKey}:${settings.voicePersona}:${settings.voiceSpeed}:${cleanText}`;
   const cached = clientAudioUrlCache.get(cacheKey);
   if (cached) {
     return { url: cached, fromCache: true };
@@ -206,7 +208,7 @@ export async function fetchOrGetCachedSegmentUrl(
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        text: segment.text,
+        text: cleanText,
         lang: segment.lang,
         voiceName: settings.voicePersona,
         speed: settings.voiceSpeed,
@@ -688,33 +690,264 @@ export function playMelodyNotes(
   });
 }
 
+export type MusicalInstrumentType = 'xylophone' | 'piano' | 'bells' | 'cat';
+
+export function playMusicalInstrumentNote(
+  frequency: number,
+  instrument: MusicalInstrumentType = 'xylophone',
+  volume = 0.85
+): void {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const vol = Math.max(0.05, Math.min(1, volume));
+
+  if (instrument === 'piano') {
+    // Acoustic Piano: fundamental + rich lower harmonics
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(0.001, now);
+    masterGain.gain.linearRampToValueAtTime(vol * 0.5, now + 0.015);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+    masterGain.connect(ctx.destination);
+
+    // Fundamental (triangle for warmer body)
+    const o1 = ctx.createOscillator();
+    o1.type = 'triangle';
+    o1.frequency.setValueAtTime(frequency, now);
+    o1.connect(masterGain);
+    o1.start(now);
+    o1.stop(now + 1.25);
+
+    // 2nd harmonic (octave overtone)
+    const o2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    o2.type = 'sine';
+    o2.frequency.setValueAtTime(frequency * 2, now);
+    g2.gain.setValueAtTime(0.35, now);
+    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+    o2.connect(g2);
+    g2.connect(masterGain);
+    o2.start(now);
+    o2.stop(now + 0.85);
+
+    // 3rd harmonic (subtle fifth sparkle)
+    const o3 = ctx.createOscillator();
+    const g3 = ctx.createGain();
+    o3.type = 'sine';
+    o3.frequency.setValueAtTime(frequency * 3, now);
+    g3.gain.setValueAtTime(0.18, now);
+    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+    o3.connect(g3);
+    g3.connect(masterGain);
+    o3.start(now);
+    o3.stop(now + 0.55);
+    return;
+  }
+
+  if (instrument === 'bells') {
+    // Fairy Bell / Music Box: inharmonic crystal chimes
+    const masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(vol * 0.45, now);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
+    masterGain.connect(ctx.destination);
+
+    const f1 = ctx.createOscillator();
+    f1.type = 'sine';
+    f1.frequency.setValueAtTime(frequency, now);
+    f1.connect(masterGain);
+    f1.start(now);
+    f1.stop(now + 1.45);
+
+    // Bell inharmonic overtone ~2.76x
+    const f2 = ctx.createOscillator();
+    const g2 = ctx.createGain();
+    f2.type = 'sine';
+    f2.frequency.setValueAtTime(frequency * 2.76, now);
+    g2.gain.setValueAtTime(0.28, now);
+    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
+    f2.connect(g2);
+    g2.connect(masterGain);
+    f2.start(now);
+    f2.stop(now + 0.95);
+
+    // Bell shimmer ~5.4x
+    const f3 = ctx.createOscillator();
+    const g3 = ctx.createGain();
+    f3.type = 'sine';
+    f3.frequency.setValueAtTime(frequency * 5.4, now);
+    g3.gain.setValueAtTime(0.15, now);
+    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+    f3.connect(g3);
+    g3.connect(masterGain);
+    f3.start(now);
+    f3.stop(now + 0.65);
+    return;
+  }
+
+  if (instrument === 'cat') {
+    // Adorable Kitten Meow ("Meo~ meo~") tuned to musical pitch
+    const osc = ctx.createOscillator();
+    const formantFilter = ctx.createBiquadFilter();
+    const gain = ctx.createGain();
+
+    osc.type = 'sawtooth';
+    // Vocal pitch sweep: starts lower, peaks playfully, settles down
+    osc.frequency.setValueAtTime(frequency * 0.92, now);
+    osc.frequency.linearRampToValueAtTime(frequency * 1.12, now + 0.12);
+    osc.frequency.exponentialRampToValueAtTime(frequency, now + 0.38);
+
+    // Formant filter simulating "m-e-o-w" mouth vowel shape
+    formantFilter.type = 'bandpass';
+    formantFilter.frequency.setValueAtTime(800, now);
+    formantFilter.frequency.exponentialRampToValueAtTime(1750, now + 0.14);
+    formantFilter.frequency.exponentialRampToValueAtTime(1100, now + 0.38);
+    formantFilter.Q.setValueAtTime(3.8, now);
+
+    // Amplitude envelope
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.linearRampToValueAtTime(vol * 0.55, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(vol * 0.35, now + 0.22);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+
+    osc.connect(formantFilter);
+    formantFilter.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.44);
+    return;
+  }
+
+  // Default: Xylophone / Marimba
+  playXylophoneNote(frequency, volume);
+}
+
 export function playXylophoneNote(frequency: number, volume = 0.85): void {
   const ctx = getAudioContext();
   if (!ctx) return;
   const now = ctx.currentTime;
+  const vol = Math.max(0.05, Math.min(1, volume));
 
-  // Fundamental tone
+  // Fundamental wooden bar tone
   const osc1 = ctx.createOscillator();
   const gain1 = ctx.createGain();
   osc1.type = 'sine';
   osc1.frequency.setValueAtTime(frequency, now);
-  gain1.gain.setValueAtTime(Math.min(0.45, volume * 0.45), now);
-  gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+  gain1.gain.setValueAtTime(Math.min(0.55, vol * 0.55), now);
+  gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
   osc1.connect(gain1);
   gain1.connect(ctx.destination);
   osc1.start(now);
-  osc1.stop(now + 0.56);
+  osc1.stop(now + 0.68);
 
-  // Harmonic overtone for bright xylophone/marimba chime
+  // Harmonic overtone for bright xylophone chime
   const osc2 = ctx.createOscillator();
   const gain2 = ctx.createGain();
   osc2.type = 'triangle';
   osc2.frequency.setValueAtTime(frequency * 3, now);
-  gain2.gain.setValueAtTime(Math.min(0.16, volume * 0.16), now);
-  gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
+  gain2.gain.setValueAtTime(Math.min(0.22, vol * 0.22), now);
+  gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
   osc2.connect(gain2);
   gain2.connect(ctx.destination);
   osc2.start(now);
-  osc2.stop(now + 0.15);
+  osc2.stop(now + 0.2);
+
+  // Soft wooden mallet attack transient click
+  const mallet = ctx.createOscillator();
+  const malletGain = ctx.createGain();
+  mallet.type = 'sine';
+  mallet.frequency.setValueAtTime(frequency * 5, now);
+  malletGain.gain.setValueAtTime(Math.min(0.12, vol * 0.12), now);
+  malletGain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+  mallet.connect(malletGain);
+  malletGain.connect(ctx.destination);
+  mallet.start(now);
+  mallet.stop(now + 0.05);
+}
+
+export function playRhythmDrumHit(
+  type: 'kick' | 'snare' | 'hihat' | 'woodblock',
+  volume = 0.4
+): void {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+  const now = ctx.currentTime;
+  const vol = Math.max(0.05, Math.min(1, volume));
+
+  if (type === 'kick') {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(140, now);
+    osc.frequency.exponentialRampToValueAtTime(45, now + 0.18);
+    gain.gain.setValueAtTime(vol * 0.7, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.24);
+  } else if (type === 'snare') {
+    const osc = ctx.createOscillator();
+    const oscGain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(180, now);
+    oscGain.gain.setValueAtTime(vol * 0.35, now);
+    oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.12);
+    osc.connect(oscGain);
+    oscGain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.14);
+
+    const bufferSize = Math.floor(ctx.sampleRate * 0.15);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'bandpass';
+    filter.frequency.setValueAtTime(1500, now);
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(vol * 0.3, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+    noise.connect(filter);
+    filter.connect(noiseGain);
+    noiseGain.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.16);
+  } else if (type === 'hihat') {
+    const bufferSize = Math.floor(ctx.sampleRate * 0.06);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'highpass';
+    filter.frequency.setValueAtTime(7500, now);
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(vol * 0.22, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(ctx.destination);
+    noise.start(now);
+    noise.stop(now + 0.06);
+  } else {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(950, now);
+    gain.gain.setValueAtTime(vol * 0.45, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + 0.08);
+  }
 }
 

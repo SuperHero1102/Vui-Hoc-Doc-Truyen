@@ -23,8 +23,9 @@ function setCacheEntry(key: string, audioBase64: string, mimeType: string) {
 }
 
 function normalizeVietnameseTtsText(rawText: string, lang: 'vi' | 'en'): string {
-  let cleaned = rawText
-    .replace(/(?<![\p{L}])bớ(?![\p{L}])/gu, 'bé')
+  let cleaned = rawText.normalize('NFC')
+    .replace(/\bb[ớơ]\s+ơi\b/gui, (m) => (m[0] === 'B' ? 'Bé ơi' : 'bé ơi'))
+    .replace(/(?<![\p{L}])bớ(?![\p{L}])/gui, (m) => (m[0] === 'B' ? 'Bé' : 'bé'))
     .replace(/(?<![\p{L}])Bớ(?![\p{L}])/gu, 'Bé')
     .replace(/bé yêu/gi, (m) => (m[0] === 'B' ? 'Bé ơi' : 'bé ơi'));
   if (lang === 'vi') {
@@ -177,7 +178,7 @@ async function startServer() {
       const trimmedText = normalizeVietnameseTtsText(text, targetLang).slice(0, 2000);
       const allowedVoices = ['Kore', 'Zephyr', 'Puck', 'Charon', 'Fenrir'];
       const selectedVoice = allowedVoices.includes(voiceName) ? voiceName : 'Kore';
-      const cacheKey = `v3:${targetLang}:${englishAccent}:${selectedVoice}:${speed}:${trimmedText}`;
+      const cacheKey = `v4:${targetLang}:${englishAccent}:${selectedVoice}:${speed}:${trimmedText}`;
 
       const cached = ttsAudioCache.get(cacheKey);
       if (cached) {
