@@ -15,7 +15,12 @@ import {
   Volume2,
 } from 'lucide-react';
 import type { ParentSettings, StoryBookItem } from '../types/learning';
-import { playCelebrationChime, speakStoryNarration, stopAllAudio } from '../utils/audioEngine';
+import {
+  playCelebrationChime,
+  speakStoryNarration,
+  stopAllAudio,
+  stopBackgroundAudioKeepAlive,
+} from '../utils/audioEngine';
 import { fireFireworksCelebration } from '../utils/confetti';
 
 interface StoryReaderModalProps {
@@ -84,7 +89,7 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
       try {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: story.titleVi,
-          artist: 'Vui Học – Kho Cổ Tích & Đồng Dao',
+          artist: 'Vui Học - Đọc Truyện',
           album: `Trang ${currentPageIdx + 1}/${totalPages} · ${story.moralBadgeVi}`,
           artwork: [
             { src: '/pwa-192x192.png', sizes: '192x192', type: 'image/png' },
@@ -243,6 +248,7 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
     return () => {
       isMounted = false;
       stopAllAudio();
+      stopBackgroundAudioKeepAlive();
     };
   }, [currentPageIdx, isPlaying, speechSegments, totalPages, settings]);
 

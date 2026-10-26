@@ -20,6 +20,7 @@ import {
   Play,
   X,
   BookOpen,
+  Headphones,
 } from 'lucide-react';
 import lessonsJson from './data/lessonsData.json';
 import { ALL_BRAIN_GAMES, BRAIN_GAME_SECTIONS } from './data/brainGamesData';
@@ -82,6 +83,8 @@ const DEFAULT_SETTINGS: ParentSettings = {
   useGeminiTTS: true,
   allowMicrophone: false,
   autoFullscreen: true,
+  storyLanguage: 'bilingual',
+  characterVoices: true,
 };
 
 const INITIAL_PROFILES: ChildProfile[] = [
@@ -135,7 +138,7 @@ const INITIAL_PROFILES: ChildProfile[] = [
   },
 ];
 
-type AppDockTab = 'arcade' | 'worlds' | 'today' | 'sensory' | 'album';
+type AppDockTab = 'arcade' | 'stories' | 'worlds' | 'today' | 'sensory';
 type CategoryFilterId = 'all' | 'nature' | 'food_body' | 'thinking' | 'life';
 type ArcadeFilterId = 'all' | BrainCategoryKey | 'topics';
 
@@ -237,10 +240,19 @@ export default function App() {
   const [hasAttemptedAutoFullscreen, setHasAttemptedAutoFullscreen] = useState<boolean>(false);
   const [selectedStory, setSelectedStory] = useState<StoryBookItem | null>(null);
   const [storyCategoryFilter, setStoryCategoryFilter] = useState<string>('all');
+  const [storySearchQuery, setStorySearchQuery] = useState<string>('');
   const mainScrollRef = useRef<HTMLElement | null>(null);
 
   const filteredStories = useMemo(() => {
+    const q = storySearchQuery.trim().toLowerCase();
     return STORY_BOOKS_DATA.filter((story) => {
+      if (q) {
+        const matchTitle =
+          story.titleVi.toLowerCase().includes(q) ||
+          story.titleEn.toLowerCase().includes(q) ||
+          story.summaryVi.toLowerCase().includes(q);
+        if (!matchTitle) return false;
+      }
       if (storyCategoryFilter === 'all') return true;
       if (storyCategoryFilter === '0-2y') return story.ageCategory === '0-2y';
       if (storyCategoryFilter === '2-4y') return story.ageCategory === '2-4y';
@@ -248,6 +260,8 @@ export default function App() {
       if (storyCategoryFilter === 'star') return Boolean(story.isNewStar);
       if (storyCategoryFilter === 'vn') {
         return (
+          story.genre === 'vietnamese_fairytale' ||
+          story.genre === 'folk_rhyme' ||
           story.id.includes('con-co') ||
           story.id.includes('nu-na') ||
           story.id.includes('dung-dang') ||
@@ -266,6 +280,7 @@ export default function App() {
       }
       if (storyCategoryFilter === 'world') {
         return (
+          story.genre === 'world_fairytale' ||
           story.id.includes('lo-lem') ||
           story.id.includes('quang-khan-do') ||
           story.id.includes('bach-tuyet') ||
@@ -288,6 +303,7 @@ export default function App() {
       }
       if (storyCategoryFilter === 'aesop') {
         return (
+          story.genre === 'aesop_fable' ||
           story.id.includes('qua-khat-nuoc') ||
           story.id.includes('cao-chum-nho') ||
           story.id.includes('su-tu-chuot') ||
@@ -296,7 +312,7 @@ export default function App() {
       }
       return true;
     });
-  }, [storyCategoryFilter]);
+  }, [storyCategoryFilter, storySearchQuery]);
 
   // Auto-reset main viewport scroll position to top when navigating into any game, lesson topic, or settings
   useEffect(() => {
@@ -509,7 +525,7 @@ export default function App() {
       [
         {
           lang: 'vi',
-          text: `Chào mừng ${name} đến với sân chơi Vui Học!`,
+          text: `Chào mừng ${name} đến với sân chơi Vui Học - Đọc Truyện!`,
         },
       ],
       { ...settings, selectedAge: ageId }
@@ -756,8 +772,8 @@ export default function App() {
               className="flex items-center gap-1.5 sm:gap-2 text-left cursor-pointer shrink-0 group"
             >
               <AppBrandLogo className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl shadow-xs group-hover:scale-105 transition" />
-              <span className="hidden md:inline text-base sm:text-lg font-extrabold tracking-tight text-[#1565D8] whitespace-nowrap font-display">
-                Vui Học
+              <span className="inline text-base sm:text-lg font-extrabold tracking-tight text-[#1565D8] whitespace-nowrap font-display">
+                Vui Học - Đọc Truyện
               </span>
             </button>
 
@@ -1377,7 +1393,81 @@ export default function App() {
                     </div>
                   </section>
 
-                  {/* 6. Little-Brain Style Clean Kid-Safe & Offline Ready Footer */}
+                  {/* 6. Kid's Sticker Collection Section at the bottom of the Arcade tab */}
+                  <section className="rounded-3xl bg-gradient-to-br from-amber-50/90 via-orange-50/60 to-yellow-50/80 p-3.5 sm:p-5 border-2 border-amber-200/90 shadow-xs space-y-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-10 h-10 rounded-2xl bg-amber-400 text-amber-950 flex items-center justify-center text-xl shadow-xs">
+                          <Award className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-1.5">
+                            <span>Bộ Sưu Tập Sticker Của Bé</span>
+                            <span className="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                              ★ {progress.stars} Sao
+                            </span>
+                          </h3>
+                          <p className="text-[11px] sm:text-xs text-slate-600">
+                            Đã mở khóa <strong className="text-amber-800">{progress.unlockedStickers.length}</strong> / {allTopics.length} huy hiệu sticker từ các bài học
+                          </p>
+                        </div>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setIsStickerAlbumOpen(true)}
+                        className="min-h-[38px] px-3.5 sm:px-4 py-1.5 rounded-2xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm transition cursor-pointer"
+                      >
+                        <Award className="w-4 h-4" />
+                        <span>Mở Album Toàn Bộ</span>
+                      </button>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className="w-full bg-amber-200/70 h-2.5 rounded-full overflow-hidden">
+                      <div
+                        className="bg-gradient-to-r from-amber-500 to-orange-500 h-full rounded-full transition-all duration-500"
+                        style={{
+                          width: `${Math.min(100, Math.round((progress.unlockedStickers.length / Math.max(1, allTopics.length)) * 100))}%`,
+                        }}
+                      />
+                    </div>
+
+                    {/* Quick sticker preview ribbon */}
+                    <div className="grid grid-cols-4 sm:grid-cols-8 gap-2 pt-1">
+                      {allTopics.slice(0, 8).map((t) => {
+                        const isUnlocked = progress.unlockedStickers.includes(t.rewardSticker.id);
+                        return (
+                          <button
+                            key={t.id}
+                            type="button"
+                            onClick={() => {
+                              if (isUnlocked) {
+                                setIsStickerAlbumOpen(true);
+                              } else {
+                                handleOpenTopic(t);
+                              }
+                            }}
+                            className={`p-2 rounded-2xl flex flex-col items-center justify-center text-center transition cursor-pointer border ${
+                              isUnlocked
+                                ? 'bg-white border-amber-300 shadow-2xs hover:scale-105'
+                                : 'bg-slate-100/70 border-slate-200/60 opacity-60 hover:opacity-90'
+                            }`}
+                            title={isUnlocked ? `Đã mở: ${t.rewardSticker.nameVi}` : `Khám phá để mở: ${t.titleVi}`}
+                          >
+                            <span className="text-2xl sm:text-3xl select-none mb-1">
+                              {isUnlocked ? t.rewardSticker.emoji : '🔒'}
+                            </span>
+                            <span className="text-[10px] font-bold text-slate-700 truncate max-w-full">
+                              {isUnlocked ? t.rewardSticker.nameVi : t.titleVi}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </section>
+
+                  {/* 7. Little-Brain Style Clean Kid-Safe & Offline Ready Footer */}
                   <footer className="pt-3 pb-2 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-500 px-1">
                     <div className="font-bold text-slate-500 flex flex-wrap items-center gap-2">
                       <span>No Ads · 100% Kid Safe</span>
@@ -1395,6 +1485,216 @@ export default function App() {
                     </button>
                   </footer>
                 </div>
+              )}
+
+              {/* DOCK TAB: 53 Curated Fairy Tales, Folk Nursery Rhymes & Aesop Fables */}
+              {activeDockTab === 'stories' && (
+                <section className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4 pb-4">
+                  {/* 1. Header Hero Card with Background Narration & Offline Info */}
+                  <div className="rounded-[28px] bg-gradient-to-r from-purple-700 via-indigo-700 to-sky-700 p-4 sm:p-6 text-white shadow-md border-2 border-purple-400/80 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 sm:gap-4">
+                    <div className="space-y-1 sm:space-y-1.5 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-2xl sm:text-3xl select-none">📚</span>
+                        <h2 className="text-lg sm:text-2xl font-black tracking-tight font-display">
+                          Kho Truyện Cổ Tích & Đồng Dao Cho Bé
+                        </h2>
+                        <span className="bg-amber-400 text-amber-950 text-xs font-black px-2.5 py-0.5 rounded-full shadow-2xs">
+                          {STORY_BOOKS_DATA.length} Truyện
+                        </span>
+                      </div>
+                      <p className="text-xs sm:text-sm text-purple-100 font-medium">
+                        Kho tàng 53 câu chuyện kinh điển chọn lọc cho bé 0-5 tuổi, giọng đọc truyền cảm, bài học đạo đức bổ ích.
+                      </p>
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1 text-[11px] font-bold">
+                        <span className="bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-xl flex items-center gap-1 text-purple-50">
+                          🌙 Nghe khi tắt màn hình (khóa máy vẫn đọc)
+                        </span>
+                        <span className="bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-xl flex items-center gap-1 text-purple-50">
+                          📶 Ổn định cả Online & Offline
+                        </span>
+                        <span className="bg-amber-300 text-slate-900 px-2.5 py-1 rounded-xl flex items-center gap-1 font-black shadow-2xs">
+                          {settings.storyLanguage === 'vi'
+                            ? '🇻🇳 Đang đọc: Tiếng Việt'
+                            : settings.storyLanguage === 'en'
+                            ? '🇬🇧 Đang đọc: Tiếng Anh'
+                            : '🌐 Đang đọc: Song ngữ'}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Quick Story Language Switcher */}
+                    <div className="shrink-0 bg-white/15 backdrop-blur-sm p-1.5 rounded-2xl border border-white/25 flex flex-col gap-1 w-full lg:w-auto">
+                      <span className="text-[10px] font-extrabold text-purple-100 uppercase tracking-wider px-1">
+                        Ngôn ngữ đọc truyện:
+                      </span>
+                      <div className="grid grid-cols-3 gap-1">
+                        {[
+                          { id: 'vi' as const, label: '🇻🇳 Tiếng Việt' },
+                          { id: 'en' as const, label: '🇬🇧 Tiếng Anh' },
+                          { id: 'bilingual' as const, label: '🌐 Song Ngữ' },
+                        ].map((item) => {
+                          const active = (settings.storyLanguage || 'bilingual') === item.id;
+                          return (
+                            <button
+                              key={item.id}
+                              type="button"
+                              onClick={() => {
+                                setSettings((prev) => ({ ...prev, storyLanguage: item.id }));
+                                playCelebrationChime(settings.volume);
+                              }}
+                              className={`min-h-[34px] px-2.5 py-1 rounded-xl text-xs font-black transition cursor-pointer whitespace-nowrap text-center ${
+                                active
+                                  ? 'bg-white text-purple-900 shadow-xs'
+                                  : 'text-white/90 hover:bg-white/10'
+                              }`}
+                            >
+                              {item.label}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 2. Filter Pills & Search */}
+                  <div className="flex flex-wrap items-center justify-between gap-2.5 bg-white/95 px-3 sm:px-4 py-2.5 rounded-2xl border border-slate-200/80 shadow-2xs">
+                    <div className="flex flex-wrap items-center gap-1.5 min-w-0">
+                      {[
+                        { id: 'all', label: `Tất cả (${STORY_BOOKS_DATA.length})` },
+                        { id: 'star', label: `⭐ Mới thêm (${STORY_BOOKS_DATA.filter((s) => s.isNewStar).length})` },
+                        { id: '0-2y', label: '0–2 tuổi: Đồng dao & Nhận biết' },
+                        { id: '2-4y', label: '2–4 tuổi: Loài vật & Cổ tích ngắn' },
+                        { id: 'vn', label: '4–5 tuổi: Cổ tích Việt Nam' },
+                        { id: 'world', label: '4–5 tuổi: Cổ tích Thế giới' },
+                        { id: 'aesop', label: 'Ngụ ngôn Aesop' },
+                      ].map((tab) => {
+                        const active = storyCategoryFilter === tab.id;
+                        return (
+                          <button
+                            key={tab.id}
+                            type="button"
+                            onClick={() => setStoryCategoryFilter(tab.id)}
+                            className={`min-h-[32px] sm:min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold transition cursor-pointer whitespace-nowrap ${
+                              active
+                                ? 'bg-purple-600 text-white shadow-xs'
+                                : 'bg-slate-100 text-slate-700 hover:bg-purple-50'
+                            }`}
+                          >
+                            {tab.label}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Search stories */}
+                    <div className="w-full sm:w-72">
+                      <input
+                        type="text"
+                        value={storySearchQuery}
+                        onChange={(e) => setStorySearchQuery(e.target.value)}
+                        placeholder="Tìm truyện (Tấm Cám, Ba chú heo, Con cò...)"
+                        aria-label="Tìm kiếm truyện cho bé"
+                        className="w-full min-h-[38px] px-3.5 rounded-xl border border-slate-200 bg-slate-50 text-xs font-bold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:bg-white transition"
+                      />
+                    </div>
+                  </div>
+
+                  {/* 3. Grid of Story Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                    {filteredStories.map((story) => (
+                      <div
+                        key={story.id}
+                        className="rounded-3xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md transition overflow-hidden flex flex-col justify-between group"
+                      >
+                        <div className="p-4 sm:p-5 space-y-3">
+                          {/* Top row: Emoji & Badges */}
+                          <div className="flex items-start justify-between gap-2">
+                            <div
+                              className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl shadow-2xs shrink-0 group-hover:scale-105 transition"
+                              style={{ backgroundColor: `${story.coverColor}18` }}
+                            >
+                              {story.emoji}
+                            </div>
+                            <div className="flex flex-col items-end gap-1">
+                              {story.isNewStar && (
+                                <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-0.5 shadow-2xs">
+                                  ⭐ Mới thêm
+                                </span>
+                              )}
+                              <span className="bg-purple-50 text-purple-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
+                                {story.ageCategory === '0-2y'
+                                  ? '0–2 tuổi'
+                                  : story.ageCategory === '2-4y'
+                                  ? '2–4 tuổi'
+                                  : '4–5 tuổi'}
+                              </span>
+                              <span className="bg-sky-50 text-sky-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                {story.moralBadgeVi}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Title & Index */}
+                          <div>
+                            <div className="text-[11px] font-bold text-slate-400">
+                              Truyện số #{story.indexNumber}
+                            </div>
+                            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 line-clamp-1 group-hover:text-purple-600 transition">
+                              {story.titleVi}
+                            </h3>
+                            <p className="text-xs font-semibold text-slate-500 line-clamp-1">
+                              {story.titleEn}
+                            </p>
+                          </div>
+
+                          {/* Summary */}
+                          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                            {story.summaryVi}
+                          </p>
+
+                          {/* Moral Lesson snippet */}
+                          <div className="bg-amber-50/70 p-2.5 rounded-2xl border border-amber-100 text-[11px] text-amber-900 flex items-start gap-1.5">
+                            <span className="shrink-0 text-amber-600">💡</span>
+                            <span className="line-clamp-2">{story.moralLessonVi}</span>
+                          </div>
+                        </div>
+
+                        {/* Action button */}
+                        <div className="p-3 sm:p-4 pt-0">
+                          <button
+                            type="button"
+                            onClick={() => {
+                              stopAllAudio();
+                              setSelectedStory(story);
+                            }}
+                            className="w-full min-h-[42px] px-4 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition cursor-pointer"
+                          >
+                            <Headphones className="w-4 h-4" />
+                            <span>Đọc & Nghe Truyện Ngay</span>
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {filteredStories.length === 0 && (
+                    <div className="p-8 text-center bg-white rounded-3xl border border-slate-200 space-y-2">
+                      <p className="text-base font-bold text-slate-700">
+                        Không tìm thấy truyện nào phù hợp với từ khóa "{storySearchQuery}"
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setStorySearchQuery('');
+                          setStoryCategoryFilter('all');
+                        }}
+                        className="px-4 py-2 rounded-xl bg-purple-100 text-purple-700 font-bold text-xs cursor-pointer"
+                      >
+                        Xem tất cả {STORY_BOOKS_DATA.length} truyện
+                      </button>
+                    </div>
+                  )}
+                </section>
               )}
 
               {/* DOCK TAB 1: 32 Topic Worlds (Paginated 8 per frame so all fit in 1 screen!) */}
@@ -1714,6 +2014,21 @@ export default function App() {
 
             <button
               type="button"
+              onClick={() => setActiveDockTab('stories')}
+              className={`min-h-[46px] sm:min-h-[50px] rounded-2xl flex flex-col items-center justify-center transition cursor-pointer ${
+                activeDockTab === 'stories'
+                  ? 'bg-purple-600 text-white shadow-xs'
+                  : 'text-slate-600 hover:bg-purple-50'
+              }`}
+            >
+              <BookOpen className="w-5 h-5" />
+              <span className="text-[10px] sm:text-[11px] font-extrabold mt-0.5 truncate max-w-full px-1">
+                {STORY_BOOKS_DATA.length} Truyện
+              </span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => setActiveDockTab('worlds')}
               className={`min-h-[46px] sm:min-h-[50px] rounded-2xl flex flex-col items-center justify-center transition cursor-pointer ${
                 activeDockTab === 'worlds'
@@ -1754,17 +2069,6 @@ export default function App() {
               <Baby className="w-5 h-5" />
               <span className="text-[10px] sm:text-[11px] font-extrabold mt-0.5 truncate max-w-full px-1">
                 Giác quan
-              </span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setIsStickerAlbumOpen(true)}
-              className="min-h-[46px] sm:min-h-[50px] rounded-2xl flex flex-col items-center justify-center text-slate-600 hover:bg-amber-50 transition cursor-pointer"
-            >
-              <Award className="w-5 h-5 text-amber-500" />
-              <span className="text-[10px] sm:text-[11px] font-extrabold mt-0.5 tabular-nums truncate max-w-full px-1">
-                Sticker ({progress.unlockedStickers.length})
               </span>
             </button>
           </div>
@@ -1820,6 +2124,16 @@ export default function App() {
           setShowEyeRestModal(false);
         }}
       />
+
+      {/* Interactive Bedtime & Fairytale Story Reader Modal */}
+      {selectedStory && (
+        <StoryReaderModal
+          story={selectedStory}
+          settings={effectiveSettings}
+          onClose={() => setSelectedStory(null)}
+          onSelectAnotherStory={(nextStory) => setSelectedStory(nextStory)}
+        />
+      )}
 
       <OfflineIndicator />
     </div>

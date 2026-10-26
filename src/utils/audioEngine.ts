@@ -322,11 +322,34 @@ export async function speakTeacherVoice(
   return { usedGemini: res.usedServerTts, fromCache: res.fromCache };
 }
 
-export interface StorySegmentToSpeak {
-  text: string;
-  lang: 'vi' | 'en';
-  speaker?: string;
-  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox';
+let backgroundKeepAliveAudio: HTMLAudioElement | null = null;
+
+export function startBackgroundAudioKeepAlive(): void {
+  if (typeof window === 'undefined') return;
+  try {
+    if (!backgroundKeepAliveAudio) {
+      // 1-second inaudible silent wave base64
+      const silentWav =
+        'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEARKwAAIhYAQACABAAAABkYXRhAgAAAAEA';
+      backgroundKeepAliveAudio = new Audio(silentWav);
+      backgroundKeepAliveAudio.loop = true;
+      backgroundKeepAliveAudio.volume = 0.01;
+    }
+    backgroundKeepAliveAudio.play().catch(() => {});
+  } catch {
+    // ignore
+  }
+}
+
+export function stopBackgroundAudioKeepAlive(): void {
+  if (backgroundKeepAliveAudio) {
+    try {
+      backgroundKeepAliveAudio.pause();
+      backgroundKeepAliveAudio.currentTime = 0;
+    } catch {
+      // ignore
+    }
+  }
 }
 
 export async function speakStoryNarration(
@@ -336,6 +359,7 @@ export async function speakStoryNarration(
   onEnd?: () => void
 ): Promise<void> {
   stopAllAudio();
+  startBackgroundAudioKeepAlive();
   const currentGen = playbackGeneration;
 
   if (typeof navigator !== 'undefined' && 'mediaSession' in navigator) {
@@ -346,6 +370,16 @@ export async function speakStoryNarration(
     }
   }
 
+  // Pre-fetch segment audios in parallel (from server TTS or client cache) for gapless playback
+  const prefetched = await Promise.all(
+    segments.map((s) =>
+      fetchOrGetCachedSegmentUrl(
+        { text: sanitizeSegmentText(s.text, s.lang), lang: s.lang },
+        settings
+      )
+    )
+  );
+
   for (let i = 0; i < segments.length; i++) {
     if (currentGen !== playbackGeneration) break;
     onSegmentStart?.(i);
@@ -353,13 +387,24 @@ export async function speakStoryNarration(
     const sanitizedText = sanitizeSegmentText(seg.text, seg.lang);
     if (!sanitizedText) continue;
 
-    const effectiveVoiceStyle =
-      settings.characterVoices !== false ? seg.voiceStyle : 'narrator';
-    await speakSegmentWithBrowserFallback(
-      { text: sanitizedText, lang: seg.lang },
-      settings,
-      effectiveVoiceStyle
-    );
+    const { url } = prefetched[i] || { url: null };
+    let playedOk = false;
+
+    // First attempt: HTMLAudioElement with server/cached TTS (works in background & screen-off!)
+    if (url) {
+      playedOk = await playAudioUrl(url, settings.volume, settings.voiceSpeed, currentGen);
+    }
+
+    // Fallback: Browser speech synthesis (seamless offline)
+    if (!playedOk && currentGen === playbackGeneration) {
+      const effectiveVoiceStyle =
+        settings.characterVoices !== false ? seg.voiceStyle : 'narrator';
+      await speakSegmentWithBrowserFallback(
+        { text: sanitizedText, lang: seg.lang },
+        settings,
+        effectiveVoiceStyle
+      );
+    }
 
     if (currentGen === playbackGeneration && i < segments.length - 1) {
       await new Promise((r) => setTimeout(r, 260));
