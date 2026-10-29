@@ -1051,4 +1051,97 @@ export const STORIES_4_TO_5_PART1: StoryBookItem[] = [
       },
     ],
   },
+  // =========================================================================
+  // 55. CÂY TRE TRĂM ĐỐT
+  // =========================================================================
+  {
+    id: 'story-cay-tre-tram-dot',
+    indexNumber: 55,
+    titleVi: 'Cây Tre Trăm Đốt',
+    titleEn: 'The Hundred-Knot Bamboo',
+    ageCategory: '4-5y',
+    genre: 'vietnamese_fairytale',
+    emoji: '🎋',
+    coverColor: '#16A34A',
+    summaryVi: 'Anh Khoai hiền lành, chăm chỉ làm lụng được Bụt ban câu thần chú "Khắc nhập, khắc xuất" để trừng trị phú ông gian xảo và tìm được hạnh phúc.',
+    summaryEn: 'Hardworking Khoai receives the magical chant "Khac nhap, khac xuat" from Buddha, teaching honesty and virtue.',
+    moralBadgeVi: 'Chăm chỉ & Ở hiền gặp lành',
+    moralBadgeEn: 'Honesty & Diligence',
+    moralLessonVi: 'Ở đời phải luôn giữ chữ tín, chăm chỉ thật thà và không được lừa gạt người khác. Người hiền lành, chịu thương chịu khó luôn được quý nhân phù trợ!',
+    moralLessonEn: 'Always keep your promises and work with honesty and kindness. Diligent, pure-hearted souls will always find wonderful helpers in life!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🪓',
+        illustrationDesc: 'Anh Khoai chăm chỉ cày cấy làm lụng cho phú ông',
+        bgGradient: 'from-emerald-100 to-amber-100',
+        textVi: 'Ngày xưa có một chàng trai cày tên là Khoai, mồ côi cha mẹ từ nhỏ, tính tình hiền lành, thật thà và vô cùng chăm chỉ. Một phú ông giàu có trong làng thấy vậy bèn thuê anh làm lụng quần quật suốt ngày đêm, hứa hẹn: "Con cứ cố công cày cấy cho ta ba năm, ta sẽ gả con gái cưng cho!". Anh Khoai tin lời, dốc hết sức mình làm việc không quản nắng mưa.',
+        textEn: 'Long ago lived an honest, hardworking farmhand named Khoai. Seeing his diligence, a wealthy village landlord hired him, deceitfully promising: "Work hard for three years, and I will gladly give you my beloved daughter in marriage!". Believing him whole-heartedly, Khoai toiled day and night through rain and shine.',
+        dialogues: [
+          {
+            speaker: 'Phú Ông Gian Xảo',
+            speakerEmoji: '👴',
+            textVi: '"Anh Khoai ơi, hãy chăm chỉ cày sâu cuốc bẫm ba năm, sau này cơ ngơi này và con gái ta sẽ thuộc về con!"',
+            textEn: '"Khoai, toil faithfully for three years, and my rich estate and daughter shall be yours!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Anh Khoai Thật Thà',
+            speakerEmoji: '👦',
+            textVi: '"Dạ, con xin ghi lòng tạc dạ, con sẽ cố gắng làm lụng thật tốt không để ông phụ lòng!"',
+            textEn: '"Yes, sir! I will work with all my strength and integrity!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🎋',
+        illustrationDesc: 'Bụt hiện lên trong rừng ban cho anh câu thần chú Khắc nhập khắc xuất',
+        bgGradient: 'from-sky-100 to-emerald-100',
+        textVi: 'Ba năm trôi qua, cơ nghiệp phú ông giàu lên gấp bội. Thế nhưng phú ông bội ước, lén gả con gái cho con trai nhà phú hộ khác. Để lừa anh Khoai đi xa, phú ông bảo: "Muốn cưới con gái ta, con hãy lên rừng đốn cho được một cây tre có đúng một trăm đốt về đây làm sính lễ!". Anh Khoai lên rừng tìm mãi chẳng thấy cây tre nào có một trăm đốt liền ngồi khóc nức nở. Bỗng nhiên, ông Bụt râu tóc bạc phơ hiện lên hiền từ bảo anh đi chặt đủ một trăm đốt tre rời xếp lại và đọc câu thần chú: "Khắc nhập, khắc nhập!". Lập tức, một trăm đốt tre dính liền thành một cây tre dài vút.',
+        textEn: 'After three years, the greedy landlord broke his vow, secretly arranging his daughter’s wedding to a rich merchant. To trick Khoai away, he ordered: "Go into the deep forest and chop down a single bamboo stalk with exactly one hundred knots as wedding gift!". Wandering the jungle in despair, Khoai wept. Suddenly, the benevolent Buddha appeared, instructing him to chop one hundred separate bamboo knots and chant: "Khac nhap, khac nhap!". Instantly, they joined into a tall, majestic bamboo.',
+        dialogues: [
+          {
+            speaker: 'Ông Bụt Hiền Từ',
+            speakerEmoji: '🧙‍♂️',
+            textVi: '"Hỡi con, sao con khóc? Hãy chặt cho ta đủ một trăm đốt tre rồi hô lớn: Khắc nhập, khắc nhập! Muốn rời ra thì hô: Khắc xuất, khắc xuất nhé!"',
+            textEn: '"Why do you weep, my honest child? Cut one hundred bamboo segments and chant: Khac nhap, khac nhap! To release them, chant: Khac xuat, khac xuat!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Anh Khoai',
+            speakerEmoji: '🎋',
+            textVi: '"Khắc nhập, khắc nhập! Ôi thần kỳ quá, các đốt tre đã dính liền vào nhau rồi!"',
+            textEn: '"Khac nhap, khac nhap! Incredible! The bamboo knots have all fused seamlessly together!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🎉',
+        illustrationDesc: 'Anh Khoai về làng trừng phạt kẻ bội ước và làm đám cưới hạnh phúc',
+        bgGradient: 'from-amber-100 to-rose-100',
+        textVi: 'Anh Khoai đọc "Khắc xuất, khắc xuất" rồi gánh một trăm đốt tre về làng. Đến nhà đúng lúc đám cưới của con gái phú ông đang diễn ra, phú ông cười nhạo anh. Anh Khoai bình tĩnh đọc câu thần chú: "Khắc nhập, khắc nhập!". Lập tức một trăm đốt tre dính lại với nhau, hút dính cả phú ông gian xảo vào thân tre. Phú ông sợ hãi khóc lóc van xin tha thứ và cam kết giữ đúng lời hứa. Anh Khoai nhân hậu đọc "Khắc xuất, khắc xuất" giải thoát cho phú ông. Từ đó, anh Khoai cưới được người con gái nết na, sống bên nhau hạnh phúc, muôn người ca ngợi.',
+        textEn: 'Khoai packed the hundred knots home just as the deceitful feast began. When the landlord mocked him, Khoai calmly chanted: "Khac nhap, khac nhap!". The hundred knots fused together and trapped the greedy landlord tight against the stalk. Weeping in terror, the landlord begged for mercy and promised to fulfill his original vow. Generously, Khoai chanted "Khac xuat, khac xuat" to free him. Khoai married the gentle daughter, living happily and revered by all for his honesty.',
+        dialogues: [
+          {
+            speaker: 'Phú Ông Van Lạy',
+            speakerEmoji: '😭',
+            textVi: '"Anh Khoai ơi tha cho ta! Ta biết lỗi rồi, ta xin giữ đúng lời hứa gả con gái cho anh!"',
+            textEn: '"Khoai, please show mercy! I repent my deceit, I swear to honor my promise and welcome you as my son!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Anh Khoai Khoan Dung',
+            speakerEmoji: '❤️',
+            textVi: '"Khắc xuất, khắc xuất! Con xin tha cho ông, từ nay xin ông hãy luôn giữ lời hứa và sống thật thà!"',
+            textEn: '"Khac xuat, khac xuat! I release you, elder. From now on, please always keep your sacred word and live with honesty!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+    ],
+  },
 ];

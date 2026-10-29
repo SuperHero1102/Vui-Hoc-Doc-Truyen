@@ -25,6 +25,7 @@ import {
 import lessonsJson from './data/lessonsData.json';
 import { ALL_BRAIN_GAMES, BRAIN_GAME_SECTIONS } from './data/brainGamesData';
 import { STORY_BOOKS_DATA } from './data/storiesData';
+import { getStoryRealisticPhoto } from './data/storyPhotosData';
 import type {
   AgeGroupId,
   BrainCategoryKey,
@@ -753,7 +754,7 @@ export default function App() {
   return (
     <div
       onClick={handleFirstInteractionFullscreen}
-      className="fixed inset-0 w-screen h-dvh overflow-hidden flex flex-col bg-[#F5F9FC] text-slate-800 select-none"
+      className="fixed inset-0 w-full max-w-full h-dvh overflow-hidden flex flex-col bg-[#F5F9FC] text-slate-800 select-none"
     >
       {/* Commercial Full-Bleed App Top Bar */}
       <header className="shrink-0 bg-white/95 border-b border-slate-200/80 px-2.5 sm:px-5 py-1.5 sm:py-2 z-30 shadow-2xs">
@@ -1076,7 +1077,7 @@ export default function App() {
         ref={mainScrollRef}
         className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden px-2.5 sm:px-5 py-2 sm:py-3"
       >
-        <div className="w-full max-w-6xl mx-auto h-full flex flex-col justify-between">
+        <div className="w-full max-w-6xl mx-auto min-h-full flex flex-col">
           {isParentDashboardOpen ? (
             <ParentDashboard
               settings={effectiveSettings}
@@ -1606,56 +1607,56 @@ export default function App() {
                         key={story.id}
                         className="rounded-3xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md transition overflow-hidden flex flex-col justify-between group"
                       >
-                        <div className="p-4 sm:p-5 space-y-3">
-                          {/* Top row: Emoji & Badges */}
-                          <div className="flex items-start justify-between gap-2">
-                            <div
-                              className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-3xl sm:text-4xl shadow-2xs shrink-0 group-hover:scale-105 transition"
-                              style={{ backgroundColor: `${story.coverColor}18` }}
-                            >
-                              {story.emoji}
+                        <div className="p-3.5 sm:p-4 space-y-2.5">
+                          {/* Story Card Header: Cute compact logo badge + Title & Metadata */}
+                          <div className="flex items-start gap-3">
+                            {/* Cute compact logo badge */}
+                            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-purple-100 via-pink-50 to-amber-100 border-2 border-purple-200/80 flex items-center justify-center text-3xl shadow-2xs shrink-0 select-none group-hover:scale-105 transition-transform">
+                              <span>{story.emoji}</span>
                             </div>
-                            <div className="flex flex-col items-end gap-1">
-                              {story.isNewStar && (
-                                <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-black px-2 py-0.5 rounded-full flex items-center gap-0.5 shadow-2xs">
-                                  ⭐ Mới thêm
-                                </span>
-                              )}
-                              <span className="bg-purple-50 text-purple-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full">
-                                {story.ageCategory === '0-2y'
-                                  ? '0–2 tuổi'
-                                  : story.ageCategory === '2-4y'
-                                  ? '2–4 tuổi'
-                                  : '4–5 tuổi'}
-                              </span>
-                              <span className="bg-sky-50 text-sky-700 text-[10px] font-bold px-2 py-0.5 rounded-full">
-                                {story.moralBadgeVi}
-                              </span>
-                            </div>
-                          </div>
 
-                          {/* Title & Index */}
-                          <div>
-                            <div className="text-[11px] font-bold text-slate-400">
-                              Truyện số #{story.indexNumber}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                                <span className="text-[10px] font-black text-purple-700 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200/60">
+                                  #{story.indexNumber}
+                                </span>
+                                <span className="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md">
+                                  {story.ageCategory === '0-2y'
+                                    ? '0–2 tuổi'
+                                    : story.ageCategory === '2-4y'
+                                    ? '2–4 tuổi'
+                                    : '4–5 tuổi'}
+                                </span>
+                                {story.isNewStar && (
+                                  <span className="bg-amber-400 text-amber-950 font-black text-[10px] px-2 py-0.5 rounded-md shadow-2xs">
+                                    ⭐ Mới
+                                  </span>
+                                )}
+                              </div>
+
+                              <h3 className="text-base sm:text-lg font-black text-slate-900 leading-snug line-clamp-1 group-hover:text-purple-600 transition">
+                                {story.titleVi}
+                              </h3>
+                              <p className="text-xs font-semibold text-slate-500 truncate">
+                                {story.titleEn}
+                              </p>
                             </div>
-                            <h3 className="text-base sm:text-lg font-extrabold text-slate-900 line-clamp-1 group-hover:text-purple-600 transition">
-                              {story.titleVi}
-                            </h3>
-                            <p className="text-xs font-semibold text-slate-500 line-clamp-1">
-                              {story.titleEn}
-                            </p>
                           </div>
 
                           {/* Summary */}
-                          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed pt-0.5">
                             {story.summaryVi}
                           </p>
 
-                          {/* Moral Lesson snippet */}
-                          <div className="bg-amber-50/70 p-2.5 rounded-2xl border border-amber-100 text-[11px] text-amber-900 flex items-start gap-1.5">
-                            <span className="shrink-0 text-amber-600">💡</span>
-                            <span className="line-clamp-2">{story.moralLessonVi}</span>
+                          {/* Moral Lesson badge & Page count */}
+                          <div className="flex items-center justify-between gap-2 flex-wrap text-[11px] pt-1 border-t border-slate-100">
+                            <span className="bg-amber-50 text-amber-900 font-bold px-2.5 py-0.5 rounded-lg border border-amber-200/70 flex items-center gap-1 text-[11px] truncate max-w-[210px]">
+                              <span>💡</span>
+                              <span className="truncate">{story.moralBadgeVi}</span>
+                            </span>
+                            <span className="text-slate-400 font-bold text-[10px]">
+                              {story.pages.length} trang tranh
+                            </span>
                           </div>
                         </div>
 

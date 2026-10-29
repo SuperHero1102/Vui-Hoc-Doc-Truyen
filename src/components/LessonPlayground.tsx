@@ -706,7 +706,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   };
 
   return (
-    <div className="h-full flex flex-col gap-1.5 sm:gap-2.5 min-h-0 overflow-y-auto overflow-x-hidden">
+    <div className="w-full flex flex-col gap-2 sm:gap-3.5 pb-16 shrink-0">
       {/* Compact Native-App Lesson Header + Mode Tabs in a Single Unified Bar */}
       <div
         className={`shrink-0 rounded-2xl sm:rounded-3xl bg-gradient-to-r ${topic.worldTheme.bgGradient} border-2 p-2 sm:p-3.5 shadow-sm`}
@@ -756,7 +756,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
           </div>
         </div>
 
-        {/* Mode Switcher Tabs inside header so cards below fit 100% in viewport */}
+        {/* Mode Switcher Tabs */}
         <div className="mt-1.5 sm:mt-2 grid grid-cols-3 gap-1.5 sm:gap-2 bg-white/90 p-1 rounded-xl sm:rounded-2xl border border-white">
           <button
             type="button"
@@ -806,69 +806,99 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
         </div>
       </div>
 
-      {/* TAB 1: Responsive Non-Overlapping Vocabulary Cards Grid */}
+      {/* TAB 1: High-Definition Flashcard Grid with Smooth Vertical Scrolling */}
       {activeTab === 'learn' && (
-        <section className="flex-1 min-h-0 flex flex-col gap-2 overflow-hidden">
-          <div className="flex-1 overflow-y-auto pr-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 sm:gap-3.5 pb-3">
+        <section className="w-full flex flex-col gap-3.5 sm:gap-5 shrink-0">
+          <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4.5">
             {topic.vocabulary.map((item) => {
               const isPlaying = activeVocabId === item.id;
               return (
-                <button
+                <div
                   key={item.id}
-                  type="button"
+                  role="button"
+                  tabIndex={0}
                   onClick={() => handleVocabCardTap(item)}
-                  className={`rounded-2xl sm:rounded-3xl p-3 border-2 sm:border-3 flex flex-col items-center justify-between text-center transition-all hover:scale-[1.02] active:scale-95 cursor-pointer bg-white shadow-xs hover:shadow-md min-h-[175px] sm:min-h-[195px] overflow-hidden ${
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleVocabCardTap(item);
+                    }
+                  }}
+                  className={`group rounded-3xl border-3 flex flex-col items-stretch text-center transition-all hover:scale-[1.02] active:scale-95 cursor-pointer bg-white shadow-sm hover:shadow-md overflow-hidden min-h-[280px] sm:min-h-[320px] w-full shrink-0 select-none ${
                     isPlaying ? 'animate-bounce-gentle ring-4 ring-sky-300' : ''
                   }`}
                   style={{ borderColor: item.colorHex }}
                 >
-                  <div className="my-1 shrink-0">
+                  {/* Top Hero Image Canvas (High-definition commercial photo or vector artwork) */}
+                  <div
+                    className="w-full h-44 sm:h-52 flex items-center justify-center relative overflow-hidden shrink-0"
+                    style={{ backgroundColor: item.bgTint }}
+                  >
+                    {/* Ambient soft vector lighting & decorative accents */}
+                    <div
+                      className="absolute -top-8 -right-8 w-24 h-24 rounded-full opacity-35 pointer-events-none"
+                      style={{ backgroundColor: item.colorHex }}
+                    />
+                    <div
+                      className="absolute -bottom-8 -left-8 w-20 h-20 rounded-full opacity-25 pointer-events-none"
+                      style={{ backgroundColor: item.colorHex }}
+                    />
+
+                    {/* Realistic Photo or Vector Artwork Filling the Frame */}
                     <PastelIllustration
                       wordId={item.id}
                       emoji={item.emoji}
                       colorHex={item.colorHex}
                       bgTint={item.bgTint}
-                      size="md"
+                      size="hero"
                     />
-                  </div>
 
-                  <div className="w-full min-w-0 space-y-0.5 my-1">
-                    <div className="text-base sm:text-lg font-black text-slate-900 leading-snug break-words">
-                      {item.en}
+                    {/* Sound trigger icon badge with glass backdrop */}
+                    <div className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-md opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                      <Volume2 className="w-4 h-4 text-white drop-shadow-xs" />
                     </div>
-                    <div className="text-xs sm:text-sm font-extrabold text-slate-600 leading-tight">
-                      {item.vi}
+                  </div>
+
+                  {/* Bottom Typography & Educational Details Area */}
+                  <div className="p-3 sm:p-4 flex flex-col items-center justify-between flex-1 gap-1.5 bg-white min-h-[105px] w-full">
+                    <div className="w-full min-w-0">
+                      <div className="text-lg sm:text-2xl font-black text-slate-900 leading-snug break-words tracking-tight">
+                        {item.en}
+                      </div>
+                      <div className="text-xs sm:text-base font-extrabold text-slate-600 leading-tight mt-0.5">
+                        {item.vi}
+                      </div>
+
+                      {ageId === '2-3y' && (
+                        <div className="text-[11px] sm:text-xs font-bold text-emerald-700 truncate mt-1">
+                          "{item.phrase2To3y.en}"
+                        </div>
+                      )}
+                      {ageId === '3-4y' && (
+                        <div className="text-[11px] sm:text-xs font-bold text-purple-700 truncate mt-1">
+                          "{item.sentence3To4y.en}"
+                        </div>
+                      )}
+                      {ageId === '4-5y' && (
+                        <div className="text-[11px] sm:text-xs font-bold text-pink-700 truncate mt-1">
+                          {item.phonics4To5y.spelling}
+                        </div>
+                      )}
                     </div>
 
-                    {ageId === '2-3y' && (
-                      <div className="text-[11px] font-bold text-emerald-700 truncate">
-                        "{item.phrase2To3y.en}"
-                      </div>
-                    )}
-                    {ageId === '3-4y' && (
-                      <div className="text-[11px] font-bold text-purple-700 truncate">
-                        "{item.sentence3To4y.en}"
-                      </div>
-                    )}
-                    {ageId === '4-5y' && (
-                      <div className="text-[11px] font-bold text-pink-700 truncate">
-                        {item.phonics4To5y.spelling}
-                      </div>
-                    )}
+                    <div className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-extrabold text-sky-800 max-w-full bg-sky-50 px-3 py-1 rounded-full border border-sky-200 shadow-2xs">
+                      <span className="truncate">{item.soundLabelVi}</span>
+                    </div>
                   </div>
-
-                  <div className="inline-flex items-center gap-1 text-[11px] font-extrabold text-sky-600 max-w-full bg-sky-50 px-2 py-0.5 rounded-full mt-1">
-                    <Volume2 className="w-3.5 h-3.5 shrink-0" />
-                    <span className="truncate">{item.soundLabelVi}</span>
-                  </div>
-                </button>
+                </div>
               );
             })}
           </div>
 
-          <div className="shrink-0 rounded-xl sm:rounded-2xl bg-amber-50 border border-amber-200 px-3 py-1.5 flex items-center justify-between gap-2">
-            <div className="text-[11px] sm:text-xs text-amber-950 truncate flex-1">
-              <strong>Mẹo cùng con:</strong> {topic.parentRealLifeTipVi}
+          {/* Mẹo cùng con footer */}
+          <div className="w-full rounded-2xl bg-amber-50 border border-amber-200 p-3 sm:p-3.5 flex flex-wrap sm:flex-nowrap items-center justify-between gap-2.5 shadow-2xs mt-1">
+            <div className="text-xs text-amber-950 flex-1 leading-relaxed">
+              <strong>💡 Mẹo cùng con:</strong> {topic.parentRealLifeTipVi}
             </div>
             <button
               type="button"
@@ -876,7 +906,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                 setActiveTab('games');
                 promptCurrentTapQuestion(currentTapTarget);
               }}
-              className="min-h-[32px] sm:min-h-[36px] px-3 sm:px-4 py-1 rounded-xl bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-[11px] sm:text-xs shrink-0 cursor-pointer"
+              className="min-h-[36px] px-4 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-extrabold text-xs shrink-0 shadow-xs cursor-pointer"
             >
               Chơi ngay →
             </button>
@@ -972,7 +1002,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                       emoji={choice.emoji}
                       colorHex={choice.colorHex}
                       bgTint="#FFFFFF"
-                      size="md"
+                      size="lg"
                     />
                     <span className="text-base sm:text-lg font-extrabold text-slate-900 mt-2">
                       {choice.en}

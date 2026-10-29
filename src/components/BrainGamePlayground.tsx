@@ -22,10 +22,12 @@ import {
   ALPHABET_A_TO_Z,
   BIG_SMALL_PAIRS,
   COLORS_DATA,
+  PIANO_BLACK_KEYS,
   RAINBOW_SONGS,
   SHAPES_DATA,
   WORLD_FLAGS_DATA,
   XYLOPHONE_KEYS,
+  type PianoBlackKeyItem,
   type RainbowSongItem,
 } from '../data/brainGamesData';
 import {
@@ -46,6 +48,9 @@ import {
 } from '../utils/audioEngine';
 import { fireFireworksCelebration, fireStarExplosion } from '../utils/confetti';
 import { CountryFlagSvg } from './CountryFlagSvg';
+import { GameCardVisual } from './GameCardVisual';
+import { CharacterPuzzleGame } from './CharacterPuzzleGame';
+import { DressUpMakeoverGame } from './DressUpMakeoverGame';
 
 interface BrainGamePlaygroundProps {
   game: BrainGameItem;
@@ -207,16 +212,20 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   const [selectedAlphaIdx, setSelectedAlphaIdx] = useState(0);
   const [selectedFlagIdx, setSelectedFlagIdx] = useState(0);
 
-  // State for Rainbow Xylophone (Nhạc sĩ nhí: Tập đánh theo bài + Tự do sáng tác + Đa nhạc cụ)
+  // State for Rainbow Xylophone & Grand Piano (Nhạc sĩ nhí: Tập đánh theo bài + Tự do sáng tác + Đa nhạc cụ)
   const [activeNoteIdx, setActiveNoteIdx] = useState<number | null>(null);
+  const [activeBlackKeyId, setActiveBlackKeyId] = useState<string | null>(null);
   const [songStepIdx, setSongStepIdx] = useState(0);
   const [selectedSongId, setSelectedSongId] = useState<string>('butterfly');
   const [xylophoneMode, setXylophoneMode] = useState<'guided' | 'free'>('guided');
+  const [instrumentView, setInstrumentView] = useState<'xylophone' | 'piano'>('xylophone');
   const [musicalInstrument, setMusicalInstrument] = useState<MusicalInstrumentType>('xylophone');
   const [isRhythmPlaying, setIsRhythmPlaying] = useState(false);
   const [isDemoPlaying, setIsDemoPlaying] = useState(false);
   const [freeNoteCount, setFreeNoteCount] = useState(0);
   const [lastPlayedNoteName, setLastPlayedNoteName] = useState<string>('');
+  const [showSongPickerModal, setShowSongPickerModal] = useState(false);
+  const [songCategoryFilter, setSongCategoryFilter] = useState<'all' | 'vietnam' | 'international' | 'folk_animals'>('all');
   const xylophoneDemoTimerRef = useRef<number | null>(null);
   const xylophoneDrumIntervalRef = useRef<number | null>(null);
 
@@ -590,6 +599,35 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
 
   // Render specific interactive game board based on game.id
   const renderGameBody = () => {
+    // 0. NEW COMMERCIAL GAMES: CHARACTER JIGSAW PUZZLE & DRESS UP MAKEOVER
+    if (game.id === 'character-puzzle') {
+      return (
+        <CharacterPuzzleGame
+          settings={settings}
+          onWin={() =>
+            triggerRoundWin(
+              'Character puzzle solved!',
+              'Tuyệt vời! Bé đã ghép xong bức tranh nhân vật thật khéo léo!'
+            )
+          }
+          onGentleRetry={(msgVi, msgEn) => triggerGentleRetry(msgVi, msgEn)}
+        />
+      );
+    }
+    if (game.id === 'dress-up-makeover') {
+      return (
+        <DressUpMakeoverGame
+          settings={settings}
+          onWin={() =>
+            triggerRoundWin(
+              'Fashion star!',
+              'Bé phối đồ và làm đẹp cho bạn nhỏ thật lộng lẫy và đáng yêu!'
+            )
+          }
+        />
+      );
+    }
+
     // 1. FIND THE SAME / SHADOW MATCH / CHUNKY PUZZLE
     if (game.id === 'find-same' || game.id === 'shadow-match' || game.id === 'chunky-puzzle') {
       const pool = concreteVocab;
@@ -620,21 +658,18 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   settings
                 )
               }
-              className="w-28 h-28 sm:w-32 sm:h-32 rounded-3xl bg-white border-2 border-amber-100 shadow-inner flex items-center justify-center text-6xl sm:text-7xl cursor-pointer relative"
+              className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl bg-white border-2 border-amber-200 shadow-inner flex items-center justify-center p-2 cursor-pointer relative group"
             >
-              <span
-                className={
-                  isShadow
-                    ? 'brightness-0 contrast-200 opacity-85 select-none'
-                    : isPuzzle
-                    ? 'opacity-40 scale-90 select-none'
-                    : ''
-                }
-              >
-                {target.emoji}
-              </span>
+              <GameCardVisual
+                itemId={target.id}
+                emoji={target.emoji}
+                en={target.en}
+                vi={target.vi}
+                isSilhouette={isShadow}
+                size="fluid"
+              />
               {isPuzzle && (
-                <span className="absolute inset-0 flex items-center justify-center text-2xl font-black text-amber-600">
+                <span className="absolute inset-0 flex items-center justify-center text-3xl font-black text-amber-600 bg-white/40 backdrop-blur-2xs rounded-3xl">
                   🧩?
                 </span>
               )}
@@ -666,17 +701,23 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                       );
                     }
                   }}
-                  className={`rounded-3xl p-4 bg-white border-2 border-b-4 flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
+                  className={`rounded-3xl p-3.5 bg-white border-2 border-b-4 flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
                     isRight
                       ? 'border-emerald-500 bg-emerald-50 scale-105'
                       : 'border-slate-200 hover:border-amber-300'
                   }`}
                 >
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-[#FFFDF5] border border-amber-100 flex items-center justify-center text-4xl sm:text-5xl">
-                    {opt.emoji}
+                  <div className="w-full h-24 sm:h-28 flex items-center justify-center p-0.5">
+                    <GameCardVisual
+                      itemId={opt.id}
+                      emoji={opt.emoji}
+                      en={opt.en}
+                      vi={opt.vi}
+                      size="fluid"
+                    />
                   </div>
-                  <span className="text-sm font-extrabold text-slate-900">{opt.en}</span>
-                  <span className="text-xs font-semibold text-slate-500">{opt.vi}</span>
+                  <span className="text-sm font-extrabold text-slate-900 truncate max-w-full">{opt.en}</span>
+                  <span className="text-xs font-semibold text-slate-500 truncate max-w-full">{opt.vi}</span>
                 </button>
               );
             })}
@@ -731,14 +772,20 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                       );
                     }
                   }}
-                  className={`rounded-3xl p-5 bg-white border-2 border-b-4 flex flex-col items-center justify-center gap-2 transition-all cursor-pointer active:scale-95 ${
+                  className={`rounded-3xl p-4 bg-white border-2 border-b-4 flex flex-col items-center justify-center gap-1.5 transition-all cursor-pointer active:scale-95 ${
                     isRight
                       ? 'border-emerald-500 bg-emerald-50 scale-105'
                       : 'border-slate-200 hover:border-amber-300'
                   }`}
                 >
-                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-[#FFFDF5] border border-amber-100 flex items-center justify-center text-5xl sm:text-6xl">
-                    {item.emoji}
+                  <div className="w-full h-24 sm:h-32 flex items-center justify-center p-0.5">
+                    <GameCardVisual
+                      itemId={item.id}
+                      emoji={item.emoji}
+                      en={item.en}
+                      vi={item.vi}
+                      size="fluid"
+                    />
                   </div>
                   <span className="text-sm sm:text-base font-extrabold text-slate-900">
                     {item.en}
@@ -821,13 +868,21 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   }`}
                 >
                   {isOpen ? (
-                    <>
-                      <span className="text-4xl sm:text-5xl mb-1">{card.emoji}</span>
-                      <span className="text-xs sm:text-sm font-extrabold text-slate-900">
+                    <div className="w-full flex flex-col items-center justify-center">
+                      <div className="w-full h-16 sm:h-20 flex items-center justify-center p-0.5 mb-1">
+                        <GameCardVisual
+                          itemId={card.id}
+                          emoji={card.emoji}
+                          en={card.en}
+                          vi={card.vi}
+                          size="fluid"
+                        />
+                      </div>
+                      <span className="text-xs sm:text-sm font-extrabold text-slate-900 truncate max-w-full">
                         {card.en}
                       </span>
-                      <span className="text-[11px] text-slate-500 font-semibold">{card.vi}</span>
-                    </>
+                      <span className="text-[11px] text-slate-500 font-semibold truncate max-w-full">{card.vi}</span>
+                    </div>
                   ) : (
                     <>
                       <span className="text-3xl sm:text-4xl">🃏</span>
@@ -912,9 +967,15 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   {it.tag}
                 </span>
                 <div
-                  className={`${it.boxClass} rounded-3xl bg-[#FFFDF5] border border-amber-100 flex items-center justify-center ${it.sizeClass}`}
+                  className={`${it.boxClass} rounded-3xl bg-[#FFFDF5] border border-amber-100 flex items-center justify-center overflow-hidden p-1`}
                 >
-                  {it.emoji}
+                  <GameCardVisual
+                    itemId={it.en.toLowerCase()}
+                    emoji={it.emoji}
+                    en={it.en}
+                    vi={it.vi}
+                    size="fluid"
+                  />
                 </div>
                 <div>
                   <div className="text-base sm:text-lg font-extrabold text-slate-900">{it.en}</div>
@@ -984,7 +1045,15 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                 }}
                 className="rounded-3xl bg-white border-2 border-b-4 border-slate-200 hover:border-amber-400 p-4 flex flex-col items-center gap-1 cursor-pointer active:scale-95"
               >
-                <span className="text-4xl sm:text-5xl">{ch.emoji}</span>
+                <div className="w-full h-16 sm:h-20 flex items-center justify-center p-0.5">
+                  <GameCardVisual
+                    itemId={ch.id}
+                    emoji={ch.emoji}
+                    en={ch.en}
+                    vi={ch.vi}
+                    size="fluid"
+                  />
+                </div>
                 <span className="text-sm font-extrabold text-slate-900">{ch.en}</span>
                 <span className="text-xs text-slate-500 font-semibold">{ch.vi}</span>
               </button>
@@ -1057,7 +1126,19 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                       : 'bg-gradient-to-br from-sky-100/90 via-white to-pink-100/90 border-sky-300 shadow-md hover:scale-105 active:scale-90'
                   }`}
                 >
-                  <span className="text-5xl sm:text-6xl">{popped ? '✨' : b.emoji}</span>
+                  {popped ? (
+                    <span className="text-5xl sm:text-6xl animate-ping">✨</span>
+                  ) : (
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden p-0.5">
+                      <GameCardVisual
+                        itemId={b.id}
+                        emoji={b.emoji}
+                        en={b.en}
+                        vi={b.vi}
+                        size="fluid"
+                      />
+                    </div>
+                  )}
                   <span className="text-sm font-extrabold text-slate-900 mt-1.5">{b.en}</span>
                   <span className="text-xs font-semibold text-sky-700">{b.vi}</span>
                 </button>
@@ -1730,7 +1811,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       );
     }
 
-    // 13. RAINBOW XYLOPHONE (Đàn Cầu Vồng Vui Nhộn — Tập Đánh Bài Hát & Tự Do Sáng Tác Nhạc Sĩ Nhí)
+    // 13. RAINBOW XYLOPHONE & GRAND PIANO (Đàn Cầu Vồng Vui Nhộn & Đàn Piano Cổ Điển — 16 Bài Hát Thiếu Nhi)
     if (game.id === 'rainbow-xylophone') {
       const activeSong =
         RAINBOW_SONGS.find((s) => s.id === selectedSongId) || RAINBOW_SONGS[0];
@@ -1739,8 +1820,8 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       const targetKey = XYLOPHONE_KEYS[targetKeyIdx];
 
       const INSTRUMENTS: { id: MusicalInstrumentType; nameVi: string; emoji: string }[] = [
-        { id: 'xylophone', nameVi: 'Mộc Cầm', emoji: '🪵' },
         { id: 'piano', nameVi: 'Dương Cầm', emoji: '🎹' },
+        { id: 'xylophone', nameVi: 'Mộc Cầm', emoji: '🪵' },
         { id: 'bells', nameVi: 'Chuông Tiên', emoji: '🔔' },
         { id: 'cat', nameVi: 'Mèo Meo', emoji: '🐱' },
       ];
@@ -1807,12 +1888,79 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
         }
       };
 
+      const handleBlackKeyPress = (blackKey: PianoBlackKeyItem, _e: React.MouseEvent) => {
+        if (isDemoPlaying) {
+          stopXylophoneDemo();
+        }
+        playMusicalInstrumentNote(blackKey.freq, musicalInstrument, settings.volume);
+        setActiveBlackKeyId(blackKey.id);
+        setLastPlayedNoteName(blackKey.nameVi);
+        window.setTimeout(() => setActiveBlackKeyId(null), 240);
+
+        if (xylophoneMode === 'free') {
+          setFreeNoteCount((c) => c + 1);
+        }
+      };
+
+      const filteredSongs = RAINBOW_SONGS.filter((s) => {
+        if (songCategoryFilter === 'all') return true;
+        return s.category === songCategoryFilter;
+      });
+
+      const currentSongIdx = RAINBOW_SONGS.findIndex((s) => s.id === activeSong.id);
+      const handlePrevSong = () => {
+        stopXylophoneDemo();
+        const prevIdx = (currentSongIdx - 1 + RAINBOW_SONGS.length) % RAINBOW_SONGS.length;
+        setSelectedSongId(RAINBOW_SONGS[prevIdx].id);
+        setSongStepIdx(0);
+      };
+      const handleNextSong = () => {
+        stopXylophoneDemo();
+        const nextIdx = (currentSongIdx + 1) % RAINBOW_SONGS.length;
+        setSelectedSongId(RAINBOW_SONGS[nextIdx].id);
+        setSongStepIdx(0);
+      };
+
       return (
-        <div className="flex flex-col items-center gap-3 py-1 w-full max-w-3xl mx-auto">
-          {/* Top Control Bar: Chế độ chơi & Nhạc cụ & Nhịp trống */}
-          <div className="w-full bg-gradient-to-r from-amber-50 via-rose-50 to-sky-50 border-2 border-amber-200/80 rounded-2xl p-3 shadow-xs flex flex-col gap-2.5">
-            {/* Row 1: Mode Switch + Drum Beat Toggle */}
+        <div className="flex flex-col items-center gap-3 py-1 w-full max-w-3xl mx-auto select-none">
+          {/* Top Control Bar: Nhạc cụ (Piano vs Cầu Vồng) & Chế độ chơi & Nhịp trống */}
+          <div className="w-full bg-gradient-to-r from-amber-50 via-rose-50 to-sky-50 border-2 border-amber-200/90 rounded-2xl p-3 shadow-xs flex flex-col gap-2.5">
+            {/* Row 1: Instrument Mode Switch (Piano vs Rainbow Xylophone) */}
             <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-1.5 p-1 bg-white rounded-2xl border border-amber-200 shadow-2xs">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setInstrumentView('piano');
+                    setMusicalInstrument('piano');
+                  }}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black cursor-pointer transition flex items-center gap-1.5 ${
+                    instrumentView === 'piano'
+                      ? 'bg-slate-900 text-amber-300 shadow-xs scale-102 ring-2 ring-amber-400'
+                      : 'text-slate-700 hover:text-slate-950'
+                  }`}
+                >
+                  <span className="text-base">🎹</span>
+                  <span>Đàn Piano Cổ Điển</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setInstrumentView('xylophone');
+                    setMusicalInstrument('xylophone');
+                  }}
+                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black cursor-pointer transition flex items-center gap-1.5 ${
+                    instrumentView === 'xylophone'
+                      ? 'bg-gradient-to-r from-red-500 via-amber-500 to-indigo-500 text-white shadow-xs scale-102 ring-2 ring-amber-300'
+                      : 'text-slate-700 hover:text-slate-950'
+                  }`}
+                >
+                  <span className="text-base">🌈</span>
+                  <span>Đàn Gõ Cầu Vồng</span>
+                </button>
+              </div>
+
+              {/* Mode Toggle: Guided vs Free */}
               <div className="inline-flex p-1 bg-white rounded-xl border border-amber-200 shadow-2xs">
                 <button
                   type="button"
@@ -1826,7 +1974,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                       : 'text-slate-600 hover:text-amber-700'
                   }`}
                 >
-                  🎵 Tập Đánh Theo Bài
+                  🎵 Tập Theo Bài
                 </button>
                 <button
                   type="button"
@@ -1840,8 +1988,35 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                       : 'text-slate-600 hover:text-amber-700'
                   }`}
                 >
-                  🎹 Bé Tự Do Đánh Nhạc
+                  ✨ Chơi Tự Do
                 </button>
+              </div>
+            </div>
+
+            {/* Row 2: Sound Timbre Selector & Drum Beat */}
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-amber-100">
+              <div className="flex items-center gap-1.5">
+                <span className="text-[11px] font-bold text-slate-500">Âm Sắc:</span>
+                <div className="flex flex-wrap gap-1">
+                  {INSTRUMENTS.map((ins) => (
+                    <button
+                      key={ins.id}
+                      type="button"
+                      onClick={() => {
+                        setMusicalInstrument(ins.id);
+                        playMusicalInstrumentNote(440, ins.id, settings.volume * 0.8);
+                      }}
+                      className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-extrabold cursor-pointer transition ${
+                        musicalInstrument === ins.id
+                          ? 'bg-indigo-600 text-white shadow-2xs scale-105'
+                          : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
+                      }`}
+                    >
+                      <span>{ins.emoji}</span>
+                      <span>{ins.nameVi}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
 
               {/* Nhịp Trống Vui Nhộn */}
@@ -1859,88 +2034,84 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                 <span>{isRhythmPlaying ? 'Tắt Nhịp Trống' : 'Bật Nhịp Trống Vui'}</span>
               </button>
             </div>
-
-            {/* Row 2: Instrument Selector */}
-            <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-amber-100">
-              <div className="flex items-center gap-1 text-[11px] font-bold text-slate-500">
-                <span>Chọn Nhạc Cụ:</span>
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {INSTRUMENTS.map((ins) => (
-                  <button
-                    key={ins.id}
-                    type="button"
-                    onClick={() => {
-                      setMusicalInstrument(ins.id);
-                      playMusicalInstrumentNote(440, ins.id, settings.volume * 0.8);
-                    }}
-                    className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-extrabold cursor-pointer transition ${
-                      musicalInstrument === ins.id
-                        ? 'bg-indigo-600 text-white shadow-2xs scale-105'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-                    }`}
-                  >
-                    <span>{ins.emoji}</span>
-                    <span>{ins.nameVi}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
-          {/* Guided Mode Song Selector & Karaoke Banner */}
+          {/* Guided Mode: Song Picker Bar & Karaoke Lyrics */}
           {xylophoneMode === 'guided' ? (
             <div className="w-full bg-white border-2 border-indigo-100 rounded-2xl p-3 shadow-xs flex flex-col gap-2.5">
-              {/* Songs List Carousel */}
-              <div className="flex items-center justify-between gap-2">
-                <span className="text-xs font-extrabold text-slate-700 flex items-center gap-1">
-                  <Music className="w-4 h-4 text-indigo-500" />
-                  Chọn Bài Hát Thiếu Nhi:
-                </span>
-                {/* Auto Demo Play Button */}
-                <button
-                  type="button"
-                  onClick={handleToggleDemo}
-                  className={`flex items-center gap-1 px-3 py-1 rounded-xl text-xs font-black cursor-pointer border transition shadow-2xs ${
-                    isDemoPlaying
-                      ? 'bg-emerald-500 text-white border-emerald-600'
-                      : 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
-                  }`}
-                >
-                  {isDemoPlaying ? (
-                    <>
-                      <Pause className="w-3.5 h-3.5" />
-                      <span>Dừng Nghe</span>
-                    </>
-                  ) : (
-                    <>
-                      <Play className="w-3.5 h-3.5 fill-current" />
-                      <span>Nghe Đàn Mẫu</span>
-                    </>
-                  )}
-                </button>
-              </div>
+              {/* Song Header with Modal Launcher */}
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={handlePrevSong}
+                      className="p-1 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 cursor-pointer"
+                      title="Bài trước"
+                    >
+                      ◀
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextSong}
+                      className="p-1 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 cursor-pointer"
+                      title="Bài kế tiếp"
+                    >
+                      ▶
+                    </button>
+                  </div>
 
-              <div className="flex flex-wrap gap-1.5">
-                {RAINBOW_SONGS.map((song) => (
+                  <div className="flex items-center gap-1.5 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-xl">
+                    <span className="text-lg">{activeSong.emoji}</span>
+                    <div>
+                      <div className="text-xs sm:text-sm font-black text-indigo-950 flex items-center gap-1.5">
+                        <span>{activeSong.titleVi}</span>
+                        <span className="text-[10px] font-bold text-indigo-500">
+                          ({activeSong.badgeVi})
+                        </span>
+                      </div>
+                      <div className="text-[10px] text-slate-500 font-semibold truncate max-w-[160px] sm:max-w-none">
+                        {activeSong.titleEn}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  {/* Button to open the full 16-song picker modal */}
                   <button
-                    key={song.id}
                     type="button"
-                    onClick={() => {
-                      stopXylophoneDemo();
-                      setSelectedSongId(song.id);
-                      setSongStepIdx(0);
-                    }}
-                    className={`flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-bold cursor-pointer transition ${
-                      selectedSongId === song.id
-                        ? 'bg-indigo-500 text-white shadow-2xs font-black'
-                        : 'bg-slate-50 text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    onClick={() => setShowSongPickerModal(true)}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black cursor-pointer shadow-2xs transition"
+                  >
+                    <Music className="w-3.5 h-3.5 text-amber-600" />
+                    <span>Kho 16 Bài Hát 🎶</span>
+                    <span className="text-amber-600 text-[10px]">▼</span>
+                  </button>
+
+                  {/* Auto Demo Play Button */}
+                  <button
+                    type="button"
+                    onClick={handleToggleDemo}
+                    className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-black cursor-pointer border transition shadow-2xs ${
+                      isDemoPlaying
+                        ? 'bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-300'
+                        : 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
                     }`}
                   >
-                    <span>{song.emoji}</span>
-                    <span>{song.titleVi}</span>
+                    {isDemoPlaying ? (
+                      <>
+                        <Pause className="w-3.5 h-3.5" />
+                        <span>Dừng Nghe</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>Nghe Mẫu</span>
+                      </>
+                    )}
                   </button>
-                ))}
+                </div>
               </div>
 
               {/* Karaoke Display & Next Note Target Banner */}
@@ -1950,27 +2121,29 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                     Lời Bài Hát (Karaoke):
                   </span>
                   <div className="flex flex-wrap items-center gap-1 mt-0.5">
-                    {activeSong.notes.slice(
-                      Math.max(0, songStepIdx - 2),
-                      Math.min(activeSong.notes.length, songStepIdx + 5)
-                    ).map((n, i) => {
-                      const actualIdx = Math.max(0, songStepIdx - 2) + i;
-                      const isCurrent = actualIdx === songStepIdx;
-                      return (
-                        <span
-                          key={actualIdx}
-                          className={`px-2 py-0.5 rounded-lg text-xs font-extrabold transition-transform ${
-                            isCurrent
-                              ? 'bg-amber-400 text-slate-900 shadow-xs scale-110 font-black animate-bounce ring-2 ring-amber-500'
-                              : actualIdx < songStepIdx
-                              ? 'text-slate-400 line-through'
-                              : 'text-slate-700 bg-white/70'
-                          }`}
-                        >
-                          {n.syllableVi}
-                        </span>
-                      );
-                    })}
+                    {activeSong.notes
+                      .slice(
+                        Math.max(0, songStepIdx - 2),
+                        Math.min(activeSong.notes.length, songStepIdx + 5)
+                      )
+                      .map((n, i) => {
+                        const actualIdx = Math.max(0, songStepIdx - 2) + i;
+                        const isCurrent = actualIdx === songStepIdx;
+                        return (
+                          <span
+                            key={actualIdx}
+                            className={`px-2 py-0.5 rounded-lg text-xs font-extrabold transition-transform ${
+                              isCurrent
+                                ? 'bg-amber-400 text-slate-900 shadow-xs scale-110 font-black animate-bounce ring-2 ring-amber-500'
+                                : actualIdx < songStepIdx
+                                ? 'text-slate-400 line-through'
+                                : 'text-slate-700 bg-white/70'
+                            }`}
+                          >
+                            {n.syllableVi}
+                          </span>
+                        );
+                      })}
                   </div>
                 </div>
 
@@ -2000,7 +2173,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                     Sân Khấu Âm Nhạc Tự Do
                   </h4>
                   <p className="text-[11px] font-semibold text-purple-700">
-                    Bé tự do gõ mọi nốt nhạc để sáng tác bài ca của riêng mình!
+                    Bé tự do gõ mọi nốt đàn {instrumentView === 'piano' ? 'Piano' : 'Cầu Vồng'} để sáng tác bài ca của riêng mình!
                   </p>
                 </div>
               </div>
@@ -2025,75 +2198,336 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
             </div>
           )}
 
-          {/* The Rainbow Xylophone Instrument (8 Colored Keys) */}
-          <div className="w-full grid grid-cols-8 gap-1.5 sm:gap-2.5 items-end h-64 sm:h-72 px-3 py-4 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-3xl border-4 border-amber-200/90 shadow-md">
-            {XYLOPHONE_KEYS.map((k, idx) => {
-              const isGuidedNext = xylophoneMode === 'guided' && idx === targetKeyIdx;
-              const isPressed = activeNoteIdx === idx;
+          {/* INSTRUMENT INTERFACE: PIANO or RAINBOW XYLOPHONE */}
+          {instrumentView === 'piano' ? (
+            /* 🎹 Grand Piano Keyboard (Ivory White Keys + Elevated Ebony Black Keys) */
+            <div className="w-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 p-3 sm:p-5 rounded-3xl border-4 border-slate-700 shadow-2xl relative overflow-hidden">
+              {/* Piano Top Nameplate */}
+              <div className="w-full flex items-center justify-between px-3 py-1.5 mb-2.5 rounded-xl bg-slate-950/70 border border-amber-500/30 text-amber-300">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg">🎹</span>
+                  <span className="text-xs sm:text-sm font-black tracking-widest uppercase">
+                    Grand Piano · Dương Cầm Cổ Điển
+                  </span>
+                </div>
+                <div className="text-[11px] font-bold text-amber-200/80">
+                  {lastPlayedNoteName ? `Đang gõ: ${lastPlayedNoteName}` : 'Chạm phím đàn'}
+                </div>
+              </div>
 
-              return (
-                <button
-                  key={k.note}
-                  type="button"
-                  onClick={(e) => handleKeyPress(idx, e)}
-                  style={{
-                    backgroundColor: k.bgHex,
-                    borderColor: k.borderHex,
-                    height: `${k.heightPct}%`,
-                  }}
-                  className={`w-full rounded-2xl border-b-4 text-white flex flex-col items-center justify-between py-2 px-1 transition-all cursor-pointer select-none shadow-sm relative ${
-                    isPressed
-                      ? 'scale-95 brightness-125 shadow-inner'
-                      : 'hover:scale-[1.03] active:scale-95'
-                  } ${
-                    isGuidedNext
-                      ? 'ring-4 ring-amber-300 ring-offset-2 animate-pulse scale-[1.02]'
-                      : ''
-                  }`}
-                >
-                  {/* Top Mallet Peg */}
-                  <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
+              {/* The Piano Keys Container */}
+              <div className="relative w-full h-56 sm:h-68 rounded-2xl overflow-hidden shadow-inner bg-slate-950 p-1">
+                {/* 8 White Ivory Keys */}
+                <div className="grid grid-cols-8 gap-1 h-full w-full">
+                  {XYLOPHONE_KEYS.map((k, idx) => {
+                    const isGuidedNext = xylophoneMode === 'guided' && idx === targetKeyIdx;
+                    const isPressed = activeNoteIdx === idx;
 
-                  {/* Guided Star or Sparkle Indicator */}
-                  <div className="my-auto flex flex-col items-center justify-center">
-                    {isGuidedNext ? (
-                      <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
-                        ⭐
-                      </span>
-                    ) : (
-                      <span className="text-xs sm:text-sm opacity-50">⚪</span>
-                    )}
+                    return (
+                      <button
+                        key={`piano-white-${k.note}`}
+                        type="button"
+                        onClick={(e) => handleKeyPress(idx, e)}
+                        className={`w-full h-full rounded-b-2xl border-x border-b-6 flex flex-col justify-end pb-3 sm:pb-4 items-center transition-all cursor-pointer select-none relative ${
+                          isPressed
+                            ? 'bg-amber-100 border-b-2 border-slate-400 translate-y-1 shadow-inner'
+                            : 'bg-gradient-to-b from-[#FFFDF5] via-[#FCF9F2] to-[#F3EEE3] border-slate-300 hover:bg-slate-50 shadow-md active:translate-y-1 active:border-b-2'
+                        } ${
+                          isGuidedNext
+                            ? 'ring-4 ring-amber-400 ring-offset-2 ring-offset-slate-900 animate-pulse'
+                            : ''
+                        }`}
+                      >
+                        {/* Guided Target Indicator ⭐ */}
+                        {isGuidedNext && (
+                          <div className="absolute top-28 sm:top-32 flex flex-col items-center">
+                            <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
+                              ⭐
+                            </span>
+                          </div>
+                        )}
 
-                    <div className="text-center mt-1">
-                      <div className="text-sm sm:text-lg font-black leading-none drop-shadow-sm">
-                        {k.solfegeVi}
-                      </div>
-                      <div className="text-[10px] sm:text-xs font-extrabold opacity-90 mt-0.5">
-                        {k.note.replace('4', '').replace('5', '')}
+                        {/* Note Solfege Name & Letter */}
+                        <div className="text-center z-10 pointer-events-none">
+                          <div
+                            className={`text-sm sm:text-lg font-black leading-none ${
+                              isGuidedNext ? 'text-amber-700' : 'text-slate-800'
+                            }`}
+                          >
+                            {k.solfegeVi}
+                          </div>
+                          <div className="text-[10px] sm:text-xs font-extrabold text-slate-500 mt-0.5">
+                            {k.note}
+                          </div>
+                        </div>
+
+                        {/* White Key Accent Bevel */}
+                        <div
+                          className="w-3/4 h-1 rounded-full mt-1.5 opacity-80"
+                          style={{ backgroundColor: k.bgHex }}
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* 5 Elevated Ebony Black Keys */}
+                <div className="absolute top-1 left-1 right-1 h-32 sm:h-40 pointer-events-none">
+                  {PIANO_BLACK_KEYS.map((bk) => {
+                    const isPressed = activeBlackKeyId === bk.id;
+                    return (
+                      <button
+                        key={bk.id}
+                        type="button"
+                        onClick={(e) => handleBlackKeyPress(bk, e)}
+                        style={{
+                          left: `${bk.leftPct}%`,
+                          width: '9.2%',
+                        }}
+                        className={`absolute top-0 h-full rounded-b-xl border-x-2 border-b-6 border-slate-950 flex flex-col justify-end pb-2 items-center pointer-events-auto transition-all cursor-pointer shadow-2xl ${
+                          isPressed
+                            ? 'bg-slate-700 border-b-2 translate-y-1 brightness-150'
+                            : 'bg-gradient-to-b from-[#28292C] via-[#1A1B1E] to-[#0A0A0C] hover:brightness-125 active:translate-y-1 active:border-b-2'
+                        }`}
+                      >
+                        <span className="text-[9px] sm:text-[11px] font-black text-amber-200/90 leading-none drop-shadow-sm">
+                          {bk.nameVi}
+                        </span>
+                        <span className="text-[8px] font-bold text-slate-400 mt-0.5">
+                          {bk.note}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          ) : (
+            /* 🌈 Rainbow Xylophone Instrument (8 Colored Keys with Mallet Pegs) */
+            <div className="w-full grid grid-cols-8 gap-1.5 sm:gap-2.5 items-end h-64 sm:h-72 px-3 py-4 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-3xl border-4 border-amber-200/90 shadow-md">
+              {XYLOPHONE_KEYS.map((k, idx) => {
+                const isGuidedNext = xylophoneMode === 'guided' && idx === targetKeyIdx;
+                const isPressed = activeNoteIdx === idx;
+
+                return (
+                  <button
+                    key={k.note}
+                    type="button"
+                    onClick={(e) => handleKeyPress(idx, e)}
+                    style={{
+                      backgroundColor: k.bgHex,
+                      borderColor: k.borderHex,
+                      height: `${k.heightPct}%`,
+                    }}
+                    className={`w-full rounded-2xl border-b-4 text-white flex flex-col items-center justify-between py-2 px-1 transition-all cursor-pointer select-none shadow-sm relative ${
+                      isPressed
+                        ? 'scale-95 brightness-125 shadow-inner'
+                        : 'hover:scale-[1.03] active:scale-95'
+                    } ${
+                      isGuidedNext
+                        ? 'ring-4 ring-amber-300 ring-offset-2 animate-pulse scale-[1.02]'
+                        : ''
+                    }`}
+                  >
+                    {/* Top Mallet Peg */}
+                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
+
+                    {/* Guided Star or Sparkle Indicator */}
+                    <div className="my-auto flex flex-col items-center justify-center">
+                      {isGuidedNext ? (
+                        <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
+                          ⭐
+                        </span>
+                      ) : (
+                        <span className="text-xs sm:text-sm opacity-50">⚪</span>
+                      )}
+
+                      <div className="text-center mt-1">
+                        <div className="text-sm sm:text-lg font-black leading-none drop-shadow-sm">
+                          {k.solfegeVi}
+                        </div>
+                        <div className="text-[10px] sm:text-xs font-extrabold opacity-90 mt-0.5">
+                          {k.note.replace('4', '').replace('5', '')}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Bottom Mallet Peg */}
-                  <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
-                </button>
-              );
-            })}
-          </div>
+                    {/* Bottom Mallet Peg */}
+                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
+                  </button>
+                );
+              })}
+            </div>
+          )}
 
           {/* Bottom Footnote Guide */}
-          <div className="flex items-center justify-center gap-2 text-[11px] sm:text-xs font-bold text-slate-500">
+          <div className="flex items-center justify-center gap-2 text-[11px] sm:text-xs font-bold text-slate-500 text-center">
             <span>💡 Mẹo nhỏ:</span>
             {xylophoneMode === 'guided' ? (
               <span>
-                Chạm vào phím đàn có ngôi sao <span className="text-amber-500">⭐</span> để đánh đúng từng nốt bài hát!
+                Chạm vào phím đàn có ngôi sao <span className="text-amber-500 font-extrabold">⭐</span> để đánh đúng từng nốt bài hát!
               </span>
             ) : (
               <span>
-                Bé chạm liên tục các phím để tạo thành giai điệu rộn ràng, đổi nhạc cụ hoặc bật nhịp trống đệm nhé!
+                Bé tự do gõ mọi phím {instrumentView === 'piano' ? 'Piano (cả phím trắng & phím đen)' : 'Cầu vồng'} để sáng tác bài ca của riêng mình!
               </span>
             )}
           </div>
+
+          {/* ========================================================================= */}
+          {/* MODAL: KHO NHẠC THIẾU NHI 16 BÀI HÁT CHO BÉ */}
+          {/* ========================================================================= */}
+          {showSongPickerModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
+              <div className="bg-white rounded-3xl border-2 border-amber-300 shadow-2xl max-w-xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+                {/* Modal Header */}
+                <div className="px-5 py-4 border-b border-amber-100 bg-gradient-to-r from-amber-50 via-rose-50 to-indigo-50 flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="text-2xl">🎼</span>
+                    <div>
+                      <h3 className="text-base sm:text-lg font-black text-slate-900">
+                        Kho Bài Hát Thiếu Nhi ({RAINBOW_SONGS.length} Bài)
+                      </h3>
+                      <p className="text-xs font-semibold text-slate-600">
+                        Chọn một bài hát để bé tập đàn hoặc nghe máy tự chơi mẫu nhé!
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowSongPickerModal(false)}
+                    className="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer shadow-2xs"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Category Filter Tabs */}
+                <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-200/80 flex flex-wrap gap-1.5 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setSongCategoryFilter('all')}
+                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                      songCategoryFilter === 'all'
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    }`}
+                  >
+                    Tất Cả ({RAINBOW_SONGS.length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSongCategoryFilter('vietnam')}
+                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                      songCategoryFilter === 'vietnam'
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    }`}
+                  >
+                    🇻🇳 Việt Nam ({RAINBOW_SONGS.filter((s) => s.category === 'vietnam').length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSongCategoryFilter('international')}
+                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                      songCategoryFilter === 'international'
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    }`}
+                  >
+                    🌍 Quốc Tế ({RAINBOW_SONGS.filter((s) => s.category === 'international').length})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setSongCategoryFilter('folk_animals')}
+                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                      songCategoryFilter === 'folk_animals'
+                        ? 'bg-indigo-600 text-white shadow-2xs'
+                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    }`}
+                  >
+                    🐾 Đồng Dao & Thú Cưng ({RAINBOW_SONGS.filter((s) => s.category === 'folk_animals').length})
+                  </button>
+                </div>
+
+                {/* Scrollable Song Cards Grid (Strictly Vertical) */}
+                <div className="p-4 overflow-y-auto space-y-2 flex-1">
+                  {filteredSongs.map((song, sIdx) => {
+                    const isSelected = song.id === selectedSongId;
+                    return (
+                      <button
+                        key={song.id}
+                        type="button"
+                        onClick={() => {
+                          stopXylophoneDemo();
+                          setSelectedSongId(song.id);
+                          setSongStepIdx(0);
+                          setShowSongPickerModal(false);
+                          speakTeacherVoice(
+                            [
+                              { lang: 'vi', text: `Bé đã chọn bài hát: ${song.titleVi}` },
+                              { lang: 'en', text: song.titleEn },
+                            ],
+                            settings
+                          );
+                        }}
+                        className={`w-full text-left p-3 rounded-2xl border-2 transition-all flex items-center justify-between gap-3 cursor-pointer ${
+                          isSelected
+                            ? 'bg-indigo-50/90 border-indigo-500 shadow-sm scale-[1.01]'
+                            : 'bg-white hover:bg-amber-50/60 border-slate-200'
+                        }`}
+                      >
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-11 h-11 rounded-2xl bg-[#FFFDF5] border border-amber-200 flex items-center justify-center text-2xl shrink-0 shadow-2xs">
+                            {song.emoji}
+                          </div>
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs font-black text-slate-400">
+                                #{sIdx + 1}
+                              </span>
+                              <h4 className="text-sm font-black text-slate-900 truncate">
+                                {song.titleVi}
+                              </h4>
+                              {isSelected && (
+                                <span className="bg-indigo-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-2xs">
+                                  Đang chọn ✓
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-xs font-semibold text-slate-500 truncate">
+                              {song.titleEn}
+                            </div>
+                            <div className="text-[11px] font-bold text-amber-700 mt-0.5">
+                              {song.badgeVi} · {song.notes.length} nốt nhạc
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="shrink-0 flex items-center gap-1.5">
+                          <span className="text-xs font-black text-indigo-600 bg-white border border-indigo-200 px-3 py-1.5 rounded-xl shadow-2xs hover:bg-indigo-50">
+                            Chơi Bài Này ▶
+                          </span>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Modal Footer */}
+                <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-xs font-bold text-slate-600">
+                  <span>Tổng cộng: {filteredSongs.length} bài hát</span>
+                  <button
+                    type="button"
+                    onClick={() => setShowSongPickerModal(false)}
+                    className="px-4 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-black cursor-pointer"
+                  >
+                    Đóng
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       );
     }
@@ -2163,30 +2597,33 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
 
       return (
         <div className="flex flex-col items-center gap-2 py-0.5">
-          {/* Top Studio Bar — Single Row Streamlined (Matches User Directive: 1 Dòng Duy Nhất) */}
-          <div className="w-full flex items-center justify-between gap-1.5 bg-slate-50/95 border border-slate-200/90 rounded-2xl px-2.5 py-1.5 shadow-2xs overflow-x-auto">
-            {/* Left: Template Selector Button */}
+          {/* Top Sub-Toolbar in Amber Border Box (Matches User Screenshot image_6be366fd.png) */}
+          <div className="w-full max-w-lg rounded-2xl border-2 border-amber-400 bg-[#FFFDF5] p-1.5 shadow-2xs flex items-center justify-between gap-1.5 flex-wrap">
+            {/* Left: Template Selector Pill */}
             <button
               type="button"
               onClick={() => setShowTemplatePickerModal(true)}
-              className="min-h-[36px] px-3 py-1 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-950 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-2xs shrink-0"
+              className="min-h-[36px] px-3 py-1 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-xs shrink-0 active:scale-95 transition"
             >
               <span>📖</span>
-              <span className="truncate max-w-[140px] sm:max-w-[200px]">
-                {currentTemplate.emoji} {currentTemplate.titleVi}
+              <span className="truncate max-w-[130px] sm:max-w-[180px]">
+                {currentTemplate.titleVi} ...
               </span>
-              <span className="text-amber-600 text-[10px]">▼</span>
+              <span className="text-amber-200 text-xs">▼</span>
             </button>
 
             {/* Mode Switcher: Tự Do vs Theo Số */}
-            <div className="flex items-center bg-slate-200/80 p-0.5 rounded-xl shrink-0">
+            <div className="flex items-center bg-amber-100/80 p-0.5 rounded-xl border border-amber-300/80 shrink-0">
               <button
                 type="button"
-                onClick={() => setColoringMode('free')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-extrabold flex items-center gap-1 cursor-pointer transition ${
+                onClick={() => {
+                  setColoringMode('free');
+                  playSoundEffect('pop', settings.volume);
+                }}
+                className={`px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition ${
                   coloringMode === 'free'
-                    ? 'bg-white text-indigo-700 shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-amber-500 text-white shadow-2xs'
+                    : 'text-amber-950 hover:bg-amber-200/60'
                 }`}
               >
                 <span>🎨</span>
@@ -2194,11 +2631,15 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
               </button>
               <button
                 type="button"
-                onClick={() => setColoringMode('number')}
-                className={`px-2.5 py-1 rounded-lg text-xs font-extrabold flex items-center gap-1 cursor-pointer transition ${
+                onClick={() => {
+                  setColoringMode('number');
+                  setShowSamplePreview(true);
+                  playSoundEffect('pop', settings.volume);
+                }}
+                className={`px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition ${
                   coloringMode === 'number'
-                    ? 'bg-white text-indigo-700 shadow-2xs'
-                    : 'text-slate-600 hover:text-slate-900'
+                    ? 'bg-amber-500 text-white shadow-2xs'
+                    : 'text-amber-950 hover:bg-amber-200/60'
                 }`}
               >
                 <span>🔢</span>
@@ -2206,13 +2647,41 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
               </button>
             </div>
 
-            {/* Right Actions: Undo, Reset */}
+            {/* Right Actions: Eye Toggle, Undo, Reset */}
             <div className="flex items-center gap-1 shrink-0">
+              {/* Eye Button: Toggles mini sample preview in top-right */}
+              <button
+                type="button"
+                onClick={() => {
+                  const next = !showSamplePreview;
+                  setShowSamplePreview(next);
+                  playSoundEffect('pop', settings.volume);
+                  speakTeacherVoice(
+                    [
+                      {
+                        lang: 'vi',
+                        text: next ? 'Cô mở hình mẫu cho bé xem nhé!' : 'Tắt hình mẫu để bé thỏa sức sáng tạo!',
+                      },
+                    ],
+                    settings
+                  );
+                }}
+                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-base cursor-pointer transition ${
+                  showSamplePreview
+                    ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-2xs scale-105'
+                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+                }`}
+                title="Bật / Tắt hình mẫu gợi ý ở góc trên"
+                aria-label="Hình mẫu"
+              >
+                👁️
+              </button>
+
               <button
                 type="button"
                 onClick={handleUndoColoring}
                 disabled={coloringHistory.length === 0}
-                className="w-8 h-8 rounded-xl bg-white hover:bg-slate-100 disabled:opacity-40 border border-slate-200 text-slate-700 text-xs font-extrabold flex items-center justify-center cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-slate-700 text-xs font-black flex items-center justify-center cursor-pointer transition active:scale-95"
                 title="Hoàn tác nét vừa tô"
                 aria-label="Hoàn tác"
               >
@@ -2221,7 +2690,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
               <button
                 type="button"
                 onClick={handleResetColoring}
-                className="w-8 h-8 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 text-xs font-extrabold flex items-center justify-center cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-black flex items-center justify-center cursor-pointer transition active:scale-95"
                 title="Tô lại từ đầu"
                 aria-label="Tô lại"
               >
@@ -2230,39 +2699,41 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
             </div>
           </div>
 
-          {/* Interactive SVG Line-Art Coloring Canvas with Persistent Top-Right Sample Reference */}
-          <div className="relative w-full max-w-2xl rounded-[28px] bg-[#FFFDF9] border-2 border-slate-200 shadow-inner flex flex-col items-center justify-center p-3 sm:p-5">
-            {/* Pinned Top-Right Mini Color Reference Preview (Yêu cầu: thêm hình mẫu ở góc trên bên phải) */}
-            <div
-              className="absolute top-2.5 right-2.5 sm:top-3.5 sm:right-3.5 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-2xl p-1.5 shadow-md flex flex-col items-center select-none"
-              title="Hình mẫu tham khảo tô màu"
-            >
-              <div className="flex items-center gap-1 text-[10px] font-black text-amber-900 uppercase tracking-wider mb-1">
-                <span>🎨</span> Mẫu màu
-              </div>
-              <svg
-                viewBox="0 0 320 320"
-                className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs"
-                aria-label={`Hình mẫu màu gợi ý ${currentTemplate.titleVi}`}
+          {/* Interactive SVG Line-Art Coloring Canvas in Golden Border Box (Matches Image 6be366fd.png) */}
+          <div className="relative w-full max-w-md sm:max-w-lg aspect-[3/4] sm:aspect-auto sm:min-h-[440px] rounded-[32px] border-4 border-amber-400 bg-white shadow-md flex flex-col items-center justify-center p-3 relative overflow-hidden">
+            {/* Top-Right Mini Color Reference Preview: SHOWN ONLY WHEN EYE 👁️ IS CLICKED OR THEO SỐ */}
+            {showSamplePreview && (
+              <div
+                className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-2xl p-1.5 shadow-md flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200"
+                title="Hình mẫu tham khảo tô màu"
               >
-                <rect x="4" y="4" width="312" height="312" rx="24" fill="#FFFFFF" />
-                {currentTemplate.regions.map((reg) => {
-                  const sampleHex =
-                    STUDIO_COLOR_PALETTE.find((c) => c.number === reg.colorNumber)?.hex || '#FDE68A';
-                  return (
-                    <path
-                      key={`sample-mini-${reg.id}`}
-                      d={reg.d}
-                      fill={sampleHex}
-                      stroke="#334155"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  );
-                })}
-              </svg>
-            </div>
+                <div className="flex items-center gap-1 text-[9px] font-black text-amber-900 uppercase tracking-wider mb-0.5">
+                  <span>🎨</span> Mẫu
+                </div>
+                <svg
+                  viewBox="0 0 320 320"
+                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs"
+                  aria-label={`Hình mẫu màu gợi ý ${currentTemplate.titleVi}`}
+                >
+                  <rect x="4" y="4" width="312" height="312" rx="20" fill="#FFFFFF" />
+                  {currentTemplate.regions.map((reg) => {
+                    const sampleHex =
+                      STUDIO_COLOR_PALETTE.find((c) => c.number === reg.colorNumber)?.hex || '#FDE68A';
+                    return (
+                      <path
+                        key={`sample-mini-${reg.id}`}
+                        d={reg.d}
+                        fill={sampleHex}
+                        stroke="#334155"
+                        strokeWidth="3"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    );
+                  })}
+                </svg>
+              </div>
+            )}
 
             <svg
               viewBox="0 0 320 320"
@@ -2397,84 +2868,76 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   );
                 })}
             </svg>
-
-            {/* Progress & Finish Action Bar */}
-            <div className="w-full flex flex-wrap items-center justify-between gap-2 mt-2 pt-2 border-t border-slate-100">
-              <span className="text-xs font-extrabold text-slate-600">
-                Đã tô: <strong className="text-indigo-600">{coloredCount}/{totalRegions}</strong> vùng màu · Đang chọn:{' '}
-                <strong style={{ color: selectedColorItem.hex }}>
-                  #{selectedColorItem.number} {selectedColorItem.nameVi} ({selectedColorItem.nameEn})
-                </strong>
-              </span>
-
-              <button
-                type="button"
-                onClick={(e) => {
-                  if (coloredCount < 3) {
-                    triggerGentleRetry(
-                      `Bé hãy chấm màu tô ít nhất 3 bộ phận trên bức tranh ${currentTemplate.titleVi} trước khi hoàn thành nhé!`,
-                      currentTemplate.titleEn
-                    );
-                    return;
-                  }
-                  triggerRoundWin(
-                    `${currentTemplate.titleEn}! Great job!`,
-                    `Bức tranh ${currentTemplate.titleVi} của bé sáng tạo và đẹp quá!`,
-                    e
-                  );
-                }}
-                className={`px-4 py-1.5 rounded-xl font-extrabold text-xs flex items-center gap-1.5 cursor-pointer transition ${
-                  coloredCount >= 3
-                    ? 'bg-emerald-500 hover:bg-emerald-600 text-white shadow-2xs'
-                    : 'bg-slate-100 text-slate-500'
-                }`}
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                <span>✨ Hoàn thành bức tranh</span>
-              </button>
-            </div>
           </div>
 
-          {/* Bottom 12-Color Studio Palette (Matches Reference Images 3 & 5) */}
-          <div className="w-full bg-slate-50/90 border border-slate-200/90 rounded-2xl px-3 py-2.5 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 shadow-2xs">
-            {STUDIO_COLOR_PALETTE.map((c) => {
-              const isSelected = brushColor === c.hex;
-              return (
-                <button
-                  key={c.id}
-                  type="button"
-                  onClick={() => {
-                    setBrushColor(c.hex);
-                    speakTeacherVoice(
-                      [
-                        { lang: 'en', text: `${c.nameEn}!` },
-                        { lang: 'vi', text: c.nameVi },
-                      ],
-                      settings
-                    );
-                  }}
-                  style={{ backgroundColor: c.hex }}
-                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-sm cursor-pointer transition-transform select-none ${
-                    isSelected
-                      ? 'scale-115 ring-3 ring-slate-900 border-2 border-white shadow-md'
-                      : 'border-2 border-white hover:scale-105 shadow-2xs'
-                  }`}
-                  aria-label={`Màu số ${c.number} ${c.nameVi}`}
-                >
-                  {coloringMode === 'number' && (
-                    <span
-                      className={`drop-shadow-xs ${
-                        c.number === 3 || c.number === 11 || c.number === 12
-                          ? 'text-slate-900'
-                          : 'text-white'
-                      }`}
-                    >
-                      {c.number}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
+          {/* Bottom Bar in Amber Border Box with Color Bubbles & Green "⭐ Xong" Button (Matches User Screenshot image_6be366fd.png) */}
+          <div className="w-full max-w-md sm:max-w-lg rounded-2xl border-2 border-amber-400 bg-[#FFFDF5] p-2 sm:p-2.5 shadow-2xs flex items-center justify-between gap-2">
+            {/* Scrollable / Flexible Row of Color Bubbles */}
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1 px-0.5 no-scrollbar flex-1 min-w-0">
+              {STUDIO_COLOR_PALETTE.map((c) => {
+                const isSelected = brushColor === c.hex;
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onClick={() => {
+                      setBrushColor(c.hex);
+                      speakTeacherVoice(
+                        [
+                          { lang: 'en', text: `${c.nameEn}!` },
+                          { lang: 'vi', text: c.nameVi },
+                        ],
+                        settings
+                      );
+                    }}
+                    style={{ backgroundColor: c.hex }}
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-sm cursor-pointer transition-all select-none shrink-0 ${
+                      isSelected
+                        ? 'ring-4 ring-amber-400 scale-110 border-2 border-white shadow-md'
+                        : 'border-2 border-white hover:scale-105 shadow-2xs opacity-90 hover:opacity-100'
+                    }`}
+                    aria-label={`Màu số ${c.number} ${c.nameVi}`}
+                  >
+                    {coloringMode === 'number' && (
+                      <span
+                        className={`drop-shadow-xs font-black ${
+                          c.number === 3 || c.number === 11 || c.number === 12
+                            ? 'text-slate-900'
+                            : 'text-white'
+                        }`}
+                      >
+                        {c.number}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Green "⭐ Xong" Button on Right (Exact match to screenshot image_6be366fd.png) */}
+            <button
+              type="button"
+              onClick={(e) => {
+                if (coloredCount === 0) {
+                  triggerGentleRetry(
+                    `Bé hãy chọn màu yêu thích rồi chấm tô lên bức tranh ${currentTemplate.titleVi} trước nhé!`,
+                    currentTemplate.titleEn
+                  );
+                  return;
+                }
+                fireFireworksCelebration();
+                triggerRoundWin(
+                  `${currentTemplate.titleEn}! Great job!`,
+                  `Tuyệt vời! Bức tranh ${currentTemplate.titleVi} của bé thật lộng lẫy và rực rỡ!`,
+                  e
+                );
+              }}
+              className="shrink-0 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 shadow-sm active:scale-95 transition cursor-pointer"
+              title="Hoàn thành tô màu và nhận sao thưởng"
+            >
+              <span className="text-amber-300 text-base">⭐</span>
+              <span>Xong</span>
+            </button>
           </div>
 
           {/* Modal: Chọn Tranh Tô Màu Đen Trắng (Matches Reference Image 4) */}
@@ -3163,13 +3626,21 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   );
                 }
               }}
-              className="rounded-3xl bg-white border-2 border-b-4 border-slate-200 hover:border-amber-400 p-4 flex flex-col items-center gap-2 cursor-pointer active:scale-95 transition-all"
+              className="rounded-3xl bg-white border-2 border-b-4 border-slate-200 hover:border-amber-400 p-3 flex flex-col items-center justify-between gap-2 cursor-pointer active:scale-95 transition-all min-h-[160px] sm:min-h-[190px]"
             >
-              <div className="w-20 h-20 rounded-3xl bg-[#FFFDF5] border border-amber-100 flex items-center justify-center text-5xl">
-                {opt.emoji}
+              <div className="w-full h-24 sm:h-32 flex items-center justify-center p-0.5">
+                <GameCardVisual
+                  itemId={opt.id}
+                  emoji={opt.emoji}
+                  en={opt.en}
+                  vi={opt.vi}
+                  size="fluid"
+                />
               </div>
-              <span className="text-base font-extrabold text-slate-900">{opt.en}</span>
-              <span className="text-xs font-semibold text-slate-500">{opt.vi}</span>
+              <div className="text-center w-full">
+                <div className="text-base font-extrabold text-slate-900 truncate max-w-full">{opt.en}</div>
+                <div className="text-xs font-semibold text-slate-500 truncate max-w-full">{opt.vi}</div>
+              </div>
             </button>
           ))}
         </div>

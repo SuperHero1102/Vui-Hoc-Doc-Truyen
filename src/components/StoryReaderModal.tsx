@@ -15,6 +15,7 @@ import {
   Volume2,
 } from 'lucide-react';
 import type { ParentSettings, StoryBookItem, StorySegmentToSpeak } from '../types/learning';
+import { getStoryPhotoInfo, getStoryRealisticPhoto } from '../data/storyPhotosData';
 import {
   fetchOrGetCachedSegmentUrl,
   playCelebrationChime,
@@ -448,17 +449,62 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
               : 'bg-white border-amber-200 text-slate-900'
           }`}
         >
-          {/* Top: Scene Illustration */}
-          <div className="flex flex-col items-center justify-center py-2 shrink-0">
-            <div
-              className={`w-24 h-24 sm:w-32 sm:h-32 rounded-3xl flex items-center justify-center text-5xl sm:text-6xl shadow-inner border-2 border-white/80 bg-gradient-to-br ${currentPage.bgGradient} mb-2`}
-            >
-              <span>{currentPage.illustrationEmoji}</span>
-            </div>
-            <p className="text-xs sm:text-sm font-semibold text-slate-500 italic text-center max-w-md">
-              {currentPage.illustrationDesc}
-            </p>
-          </div>
+          {/* Top: Scene Illustration with Realistic HD Photo and Emoji Badge */}
+          {(() => {
+            const photoInfo = getStoryPhotoInfo(story.id);
+            return (
+              <div className="flex flex-col items-center justify-center py-2 shrink-0 w-full max-w-md mx-auto">
+                <div className="relative w-full min-h-[190px] sm:min-h-[240px] max-h-[280px] sm:max-h-[330px] rounded-3xl overflow-hidden shadow-sm border-2 border-amber-200/90 group bg-slate-900/95 flex items-center justify-center p-2">
+                  {photoInfo.photoUrl ? (
+                    <>
+                      {/* Ambient blurred backdrop for seamless fill */}
+                      <img
+                        src={photoInfo.photoUrl}
+                        alt=""
+                        aria-hidden="true"
+                        className="absolute inset-0 w-full h-full object-cover blur-lg opacity-35 scale-110 pointer-events-none select-none"
+                      />
+                      {/* Crisp centered cover / illustration fully visible */}
+                      <img
+                        src={photoInfo.photoUrl}
+                        alt={story.titleVi}
+                        className="relative z-10 max-h-[175px] sm:max-h-[225px] w-auto max-w-full object-contain rounded-2xl drop-shadow-lg transition-transform duration-500 group-hover:scale-102 select-none"
+                        loading="lazy"
+                        decoding="async"
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).style.display = 'none';
+                        }}
+                      />
+                    </>
+                  ) : (
+                    <div
+                      className={`w-full h-full min-h-[180px] flex items-center justify-center text-6xl bg-gradient-to-br ${currentPage.bgGradient}`}
+                    >
+                      <span>{currentPage.illustrationEmoji}</span>
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none rounded-3xl" />
+                  <div className="absolute bottom-2.5 left-3 right-3 flex items-center justify-between text-white drop-shadow-md z-20">
+                    <div className="flex items-center gap-1.5 bg-black/60 backdrop-blur-xs px-2.5 py-1 rounded-xl text-xs font-bold border border-white/20">
+                      <span>{currentPage.illustrationEmoji}</span>
+                      <span className="truncate max-w-[190px]">{story.titleVi}</span>
+                    </div>
+                    <span className="text-[11px] font-extrabold bg-amber-400 px-2.5 py-1 rounded-lg text-slate-950 shadow-2xs">
+                      Trang {currentPageIdx + 1}/{totalPages}
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-2 text-center max-w-md">
+                  <p className="text-xs sm:text-sm font-bold text-amber-700 dark:text-amber-300">
+                    📸 {photoInfo.captionVi}
+                  </p>
+                  <p className="text-[11px] sm:text-xs font-medium text-slate-500 italic mt-0.5">
+                    {currentPage.illustrationDesc}
+                  </p>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Middle: Highlighted Story Text (Bilingual / Vietnamese / English) */}
           <div className="space-y-3 my-auto py-2">

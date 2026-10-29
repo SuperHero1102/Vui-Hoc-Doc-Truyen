@@ -1534,4 +1534,97 @@ export const STORIES_2_TO_4: StoryBookItem[] = [
       },
     ],
   },
+  // =========================================================================
+  // 54. THẦY BÓI XEM VOI
+  // =========================================================================
+  {
+    id: 'story-thay-boi-xem-voi',
+    indexNumber: 54,
+    titleVi: 'Thầy Bói Xem Voi',
+    titleEn: 'The Five Blind Men and the Elephant',
+    ageCategory: '2-4y',
+    genre: 'animal_fable',
+    emoji: '🐘',
+    coverColor: '#0284C7',
+    summaryVi: 'Năm ông thầy bói cùng sờ một con voi nhưng mỗi người lại tả một kiểu, bài học quý giá về cách lắng nghe và nhìn nhận sự việc toàn diện.',
+    summaryEn: 'Five blind men touch different parts of an elephant and argue endlessly, teaching us to listen and look at the whole picture.',
+    moralBadgeVi: 'Góc nhìn toàn diện & Lắng nghe',
+    moralBadgeEn: 'Perspective & Listening',
+    moralLessonVi: 'Muốn hiểu đúng sự việc, bé hãy quan sát toàn diện và lắng nghe mọi người xung quanh, đừng vội vàng phán xét khi chỉ mới biết một phần nhỏ nhé!',
+    moralLessonEn: 'To truly understand anything, we must listen to others and see the whole picture, rather than judging only from a single part!',
+    pages: [
+      {
+        pageIndex: 1,
+        illustrationEmoji: '🐘',
+        illustrationDesc: 'Năm ông thầy bói rủ nhau ra đầu làng sờ voi đi qua',
+        bgGradient: 'from-sky-100 to-indigo-100',
+        textVi: 'Nhân buổi ế hàng, năm ông thầy bói mù ngồi tán gẫu với nhau. Nghe người ta kháo nhau có voi đi ngang qua làng, cả năm thầy bèn chung tiền biếu người quản tượng xin cho voi dừng lại để cùng sờ xem hình thù con voi nó tròn méo ra sao. Thầy thì sờ vòi, thầy thì sờ ngà, thầy sờ tai, thầy sờ chân, còn thầy thì sờ đuôi voi.',
+        textEn: 'On a quiet afternoon, five blind men gathered at the village gate. Hearing an elephant was passing by, they pooled their coins and asked the mahout to stop so they could touch and discover what an elephant truly looked like. Each man stepped forward and reached out to touch a different part.',
+        dialogues: [
+          {
+            speaker: 'Năm Thầy Bói',
+            speakerEmoji: '👓',
+            textVi: '"Bấy lâu nay chỉ nghe người ta khen con voi to lớn, hôm nay chúng ta nhất định phải sờ tận tay xem con voi tròn méo thế nào!"',
+            textEn: '"For so long we have only heard of elephants; today we shall touch with our own hands to know its true shape!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Người Quản Tượng',
+            speakerEmoji: '👳',
+            textVi: '"Các thầy cứ thong thả sờ nhé, chú voi của tôi ngoan và hiền lắm!"',
+            textEn: '"Take your time, wise elders, my gentle elephant is very friendly and patient!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+      {
+        pageIndex: 2,
+        illustrationEmoji: '🗣️',
+        illustrationDesc: 'Mỗi thầy sờ một bộ phận và quả quyết con voi đúng như mình tưởng tượng',
+        bgGradient: 'from-amber-100 to-rose-100',
+        textVi: 'Sờ xong, các thầy ngồi lại tranh luận sôi nổi. Thầy sờ vòi bảo: "Tưởng con voi thế nào, hóa ra nó sun sun như con đỉa!". Thầy sờ ngà cãi ngay: "Không phải! Nó chần chẫn như cái đòn càn!". Thầy sờ tai gạt đi: "Đâu có, nó bè bè như cái quạt thóc!". Thầy sờ chân cãi: "Ai bảo, nó sừng sững như cái cột đình!". Thầy sờ đuôi la lớn: "Các thầy đều sai hết, nó tua tủa như cái chổi sể cùn!".',
+        textEn: 'Afterward, the five men debated passionately. The one who touched the trunk said: "An elephant is squiggly like a big leech!". The one who touched the tusk argued: "No, it is smooth and hard like a heavy pestle!". The ear-toucher shook his head: "Nonsense, it is wide and flat like a winnowing fan!". The leg-toucher insisted: "You are all blind, it is tall like a temple pillar!". And the tail-toucher shouted: "It is simply bristly like an old broom!".',
+        dialogues: [
+          {
+            speaker: 'Thầy Sờ Vòi',
+            speakerEmoji: '🐘',
+            textVi: '"Tưởng voi thế nào, hóa ra nó sun sun như con đỉa!"',
+            textEn: '"I thought an elephant was grand, but it is just bendy like a big leech!"',
+            voiceStyle: 'child',
+          },
+          {
+            speaker: 'Thầy Sờ Chân',
+            speakerEmoji: '🏛️',
+            textVi: '"Sai bét! Nó sừng sững như cái cột đình đứng uy nghiêm!"',
+            textEn: '"Completely wrong! It stands tall and mighty like a temple pillar!"',
+            voiceStyle: 'hero',
+          },
+        ],
+      },
+      {
+        pageIndex: 3,
+        illustrationEmoji: '🤝',
+        illustrationDesc: 'Người quản tượng mỉm cười giải thích con voi gồm tất cả các bộ phận hợp lại',
+        bgGradient: 'from-emerald-100 to-sky-100',
+        textVi: 'Năm thầy ai cũng cho là mình đúng nhất, không ai chịu nhường ai nên cãi nhau to. Thấy vậy, người quản tượng cười hiền hậu bước tới giải thích: "Các thầy ai cũng nói đúng một phần, nhưng con voi có cả vòi sun sun, ngà cứng, tai như quạt, chân như cột đình và đuôi như chổi sể. Tất cả các bộ phận hợp lại mới thành một con voi hoàn chỉnh!". Năm thầy nghe xong đều gật gù vỡ lẽ, hiểu ra bài học sâu sắc về việc nhìn nhận sự việc.',
+        textEn: 'Each believed only himself and none would concede. Smiling kindly, the mahout explained: "Each of you is right about the piece you touched, but an elephant has a trunk, tusks, ears, strong legs, and a tail. Only when all parts come together do you see the whole majestic creature!". The five elders nodded thoughtfully, learning a timeless lesson on seeing the whole picture.',
+        dialogues: [
+          {
+            speaker: 'Bác Quản Tượng',
+            speakerEmoji: '🐘',
+            textVi: '"Muốn biết cả con voi, các thầy phải ghép từng phần lại với nhau! Nhìn nhận cuộc sống cũng vậy, đừng phiến diện các thầy nhé!"',
+            textEn: '"To see the true elephant, you must combine all parts together! Life is the same—never judge from only a single fragment!"',
+            voiceStyle: 'elder',
+          },
+          {
+            speaker: 'Các Thầy Bói',
+            speakerEmoji: '💡',
+            textVi: '"À thì ra là thế! Cảm ơn bác đã giúp chúng tôi hiểu ra bài học quý giá này!"',
+            textEn: '"Ah, so that is the truth! Thank you for giving us such wise and thoughtful eyes!"',
+            voiceStyle: 'gentle',
+          },
+        ],
+      },
+    ],
+  },
 ];
