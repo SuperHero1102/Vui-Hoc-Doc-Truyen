@@ -22,13 +22,8 @@ import {
   ALPHABET_A_TO_Z,
   BIG_SMALL_PAIRS,
   COLORS_DATA,
-  PIANO_BLACK_KEYS,
-  RAINBOW_SONGS,
   SHAPES_DATA,
   WORLD_FLAGS_DATA,
-  XYLOPHONE_KEYS,
-  type PianoBlackKeyItem,
-  type RainbowSongItem,
 } from '../data/brainGamesData';
 import {
   COLORING_BOOK_TEMPLATES,
@@ -38,13 +33,9 @@ import {
 import {
   playCelebrationChime,
   playGentleEncourageTone,
-  playMusicalInstrumentNote,
-  playRhythmDrumHit,
   playSoundEffect,
-  playXylophoneNote,
   speakTeacherVoice,
   stopAllAudio,
-  type MusicalInstrumentType,
 } from '../utils/audioEngine';
 import { fireFireworksCelebration, fireStarExplosion } from '../utils/confetti';
 import { CountryFlagSvg } from './CountryFlagSvg';
@@ -52,6 +43,7 @@ import { GameCardVisual } from './GameCardVisual';
 import { CharacterPuzzleGame } from './CharacterPuzzleGame';
 import { DressUpMakeoverGame } from './DressUpMakeoverGame';
 import { MagicColoringGame } from './MagicColoringGame';
+import { RainbowXylophoneGame } from './RainbowXylophoneGame';
 
 interface BrainGamePlaygroundProps {
   game: BrainGameItem;
@@ -213,22 +205,6 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   const [selectedAlphaIdx, setSelectedAlphaIdx] = useState(0);
   const [selectedFlagIdx, setSelectedFlagIdx] = useState(0);
 
-  // State for Rainbow Xylophone & Grand Piano (Nhạc sĩ nhí: Tập đánh theo bài + Tự do sáng tác + Đa nhạc cụ)
-  const [activeNoteIdx, setActiveNoteIdx] = useState<number | null>(null);
-  const [activeBlackKeyId, setActiveBlackKeyId] = useState<string | null>(null);
-  const [songStepIdx, setSongStepIdx] = useState(0);
-  const [selectedSongId, setSelectedSongId] = useState<string>('butterfly');
-  const [xylophoneMode, setXylophoneMode] = useState<'guided' | 'free'>('guided');
-  const [instrumentView, setInstrumentView] = useState<'xylophone' | 'piano'>('xylophone');
-  const [musicalInstrument, setMusicalInstrument] = useState<MusicalInstrumentType>('xylophone');
-  const [isRhythmPlaying, setIsRhythmPlaying] = useState(false);
-  const [isDemoPlaying, setIsDemoPlaying] = useState(false);
-  const [freeNoteCount, setFreeNoteCount] = useState(0);
-  const [lastPlayedNoteName, setLastPlayedNoteName] = useState<string>('');
-  const [showSongPickerModal, setShowSongPickerModal] = useState(false);
-  const [songCategoryFilter, setSongCategoryFilter] = useState<'all' | 'vietnam' | 'international' | 'folk_animals'>('all');
-  const xylophoneDemoTimerRef = useRef<number | null>(null);
-  const xylophoneDrumIntervalRef = useRef<number | null>(null);
 
 
   // State for Drawing / Coloring / Tracing Studio
@@ -264,7 +240,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
 
   // Completes a single round; ONLY celebrates and finishes level when round === totalRounds (3/3)
   const triggerRoundWin = useCallback(
-    (enSpeech: string, viPraise: string, e?: React.MouseEvent) => {
+    async (enSpeech: string, viPraise: string, e?: React.MouseEvent) => {
       if (isAdvancingRef.current) return;
       isAdvancingRef.current = true;
 
@@ -283,32 +259,37 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       if (round < totalRounds) {
         const roundMsg = `${viPraise} Bé qua màn ${round}/${totalRounds} rồi, mình sang màn ${round + 1} nhé!`;
         setFeedbackVi(roundMsg);
-        speakTeacherVoice(
+
+        // Chờ cô giáo đọc trọn vẹn lời chúc mừng và hướng dẫn trước khi chuyển sang màn mới
+        const speechPromise = speakTeacherVoice(
           [
             { lang: 'en', text: enSpeech },
             { lang: 'vi', text: `${viPraise} Mình sang màn tiếp theo nhé!` },
           ],
           settings
         );
+        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3600));
 
-        window.setTimeout(() => {
-          setSelectedRightId(null);
-          setFedCount(0);
-          setMazeStep(1);
-          setPoppedIds({});
-          setColoredZones({});
-          setColoringHistory([]);
-          setActiveStrokeIdx(0);
-          setActiveStrokePoints([]);
-          setDrawnDistance(0);
-          setSongStepIdx(0);
-          isAdvancingRef.current = false;
-          setRound((r) => r + 1);
-        }, 1250);
+        await Promise.race([speechPromise, safetyTimeoutPromise]);
+
+        // Dọn sạch hoàn toàn âm thanh màn cũ trước khi sang màn mới
+        stopAllAudio();
+        setSelectedRightId(null);
+        setFedCount(0);
+        setMazeStep(1);
+        setPoppedIds({});
+        setColoredZones({});
+        setColoringHistory([]);
+        setActiveStrokeIdx(0);
+        setActiveStrokePoints([]);
+        setDrawnDistance(0);
+        isAdvancingRef.current = false;
+        setRound((r) => r + 1);
       } else {
         const finalMsg = `${viPraise} Chúc mừng bé ơi! Bé đã hoàn thành xuất sắc cả ${totalRounds} màn chơi!`;
         setFeedbackVi(finalMsg);
-        speakTeacherVoice(
+
+        const speechPromise = speakTeacherVoice(
           [
             { lang: 'en', text: `${enSpeech} Wonderful job!` },
             {
@@ -318,14 +299,16 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
           ],
           settings
         );
+        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3800));
 
-        window.setTimeout(() => {
-          setSelectedRightId(null);
-          isAdvancingRef.current = false;
-          fireFireworksCelebration();
-          setShowVictoryModal(true);
-          onLevelComplete(game, 3);
-        }, 1300);
+        await Promise.race([speechPromise, safetyTimeoutPromise]);
+
+        stopAllAudio();
+        setSelectedRightId(null);
+        isAdvancingRef.current = false;
+        fireFireworksCelebration();
+        setShowVictoryModal(true);
+        onLevelComplete(game, 3);
       }
     },
     [round, totalRounds, settings, game, onLevelComplete]
@@ -334,6 +317,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   // Gentle retry with warm encouragement "Cố lên nào bé ơi!" and strict language separation
   const triggerGentleRetry = useCallback(
     (hintVi: string, targetEn: string) => {
+      if (isAdvancingRef.current) return;
       playGentleEncourageTone(settings.volume);
       const fullHintVi = hintVi.startsWith('Cố lên nào bé ơi')
         ? hintVi
@@ -369,7 +353,6 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
     setActiveStrokeIdx(0);
     setActiveStrokePoints([]);
     setDrawnDistance(0);
-    setSongStepIdx(0);
     isAdvancingRef.current = false;
 
     if (game.id === 'alphabet-tracing') {
@@ -415,53 +398,8 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
     );
     return () => {
       stopAllAudio();
-      if (xylophoneDemoTimerRef.current) {
-        window.clearTimeout(xylophoneDemoTimerRef.current);
-        xylophoneDemoTimerRef.current = null;
-      }
-      if (xylophoneDrumIntervalRef.current) {
-        window.clearInterval(xylophoneDrumIntervalRef.current);
-        xylophoneDrumIntervalRef.current = null;
-      }
     };
   }, [game.id]);
-
-  // Rhythm drum beat loop for Rainbow Xylophone
-  useEffect(() => {
-    if (!isRhythmPlaying) {
-      if (xylophoneDrumIntervalRef.current) {
-        window.clearInterval(xylophoneDrumIntervalRef.current);
-        xylophoneDrumIntervalRef.current = null;
-      }
-      return;
-    }
-
-    let beat = 0;
-    xylophoneDrumIntervalRef.current = window.setInterval(() => {
-      const step = beat % 4;
-      if (step === 0) playRhythmDrumHit('kick', settings.volume * 0.45);
-      else if (step === 1) playRhythmDrumHit('hihat', settings.volume * 0.22);
-      else if (step === 2) playRhythmDrumHit('snare', settings.volume * 0.38);
-      else if (step === 3) playRhythmDrumHit('woodblock', settings.volume * 0.3);
-      beat += 1;
-    }, 320);
-
-    return () => {
-      if (xylophoneDrumIntervalRef.current) {
-        window.clearInterval(xylophoneDrumIntervalRef.current);
-        xylophoneDrumIntervalRef.current = null;
-      }
-    };
-  }, [isRhythmPlaying, settings.volume]);
-
-  // Stop demo playback helper
-  const stopXylophoneDemo = useCallback(() => {
-    setIsDemoPlaying(false);
-    if (xylophoneDemoTimerRef.current) {
-      window.clearTimeout(xylophoneDemoTimerRef.current);
-      xylophoneDemoTimerRef.current = null;
-    }
-  }, []);
 
 
   // Setup drawing canvas for free-drawing
@@ -689,7 +627,9 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                 <button
                   key={opt.id}
                   type="button"
+                  disabled={isAdvancingRef.current}
                   onClick={(e) => {
+                    if (isAdvancingRef.current) return;
                     if (opt.id === target.id) {
                       setSelectedRightId(opt.id);
                       triggerRoundWin(
@@ -1816,722 +1756,17 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
 
     // 13. RAINBOW XYLOPHONE & GRAND PIANO (Đàn Cầu Vồng Vui Nhộn & Đàn Piano Cổ Điển — 16 Bài Hát Thiếu Nhi)
     if (game.id === 'rainbow-xylophone') {
-      const activeSong =
-        RAINBOW_SONGS.find((s) => s.id === selectedSongId) || RAINBOW_SONGS[0];
-      const targetNote = activeSong.notes[songStepIdx % activeSong.notes.length];
-      const targetKeyIdx = targetNote?.keyIdx ?? 0;
-      const targetKey = XYLOPHONE_KEYS[targetKeyIdx];
-
-      const INSTRUMENTS: { id: MusicalInstrumentType; nameVi: string; emoji: string }[] = [
-        { id: 'piano', nameVi: 'Dương Cầm', emoji: '🎹' },
-        { id: 'xylophone', nameVi: 'Mộc Cầm', emoji: '🪵' },
-        { id: 'bells', nameVi: 'Chuông Tiên', emoji: '🔔' },
-        { id: 'cat', nameVi: 'Mèo Meo', emoji: '🐱' },
-      ];
-
-      const handleToggleDemo = () => {
-        if (isDemoPlaying) {
-          stopXylophoneDemo();
-        } else {
-          stopXylophoneDemo();
-          setIsDemoPlaying(true);
-          let step = 0;
-          const notesList = activeSong.notes;
-
-          const playNext = () => {
-            if (step >= notesList.length) {
-              setIsDemoPlaying(false);
-              setActiveNoteIdx(null);
-              return;
-            }
-            const noteItem = notesList[step];
-            const targetK = XYLOPHONE_KEYS[noteItem.keyIdx];
-            setActiveNoteIdx(noteItem.keyIdx);
-            setLastPlayedNoteName(targetK.solfegeVi);
-            setSongStepIdx(step);
-            playMusicalInstrumentNote(targetK.freq, musicalInstrument, settings.volume);
-
-            step += 1;
-            xylophoneDemoTimerRef.current = window.setTimeout(playNext, 460);
-          };
-
-          playNext();
-        }
-      };
-
-      const handleKeyPress = (idx: number, e: React.MouseEvent) => {
-        const k = XYLOPHONE_KEYS[idx];
-        if (isDemoPlaying) {
-          stopXylophoneDemo();
-        }
-
-        playMusicalInstrumentNote(k.freq, musicalInstrument, settings.volume);
-        setActiveNoteIdx(idx);
-        setLastPlayedNoteName(k.solfegeVi);
-        window.setTimeout(() => setActiveNoteIdx(null), 240);
-
-        if (xylophoneMode === 'free') {
-          setFreeNoteCount((c) => c + 1);
-          return;
-        }
-
-        // Guided mode
-        if (idx === targetKeyIdx) {
-          const nextStep = songStepIdx + 1;
-          if (nextStep >= activeSong.notes.length) {
-            setSongStepIdx(0);
-            triggerRoundWin(
-              `Wonderful melody! You played ${activeSong.titleEn}!`,
-              `Hoan hô bé ơi! Bé đã hoàn thành trọn vẹn bài hát "${activeSong.titleVi}" rồi!`,
-              e
-            );
-          } else {
-            setSongStepIdx(nextStep);
-          }
-        }
-      };
-
-      const handleBlackKeyPress = (blackKey: PianoBlackKeyItem, _e: React.MouseEvent) => {
-        if (isDemoPlaying) {
-          stopXylophoneDemo();
-        }
-        playMusicalInstrumentNote(blackKey.freq, musicalInstrument, settings.volume);
-        setActiveBlackKeyId(blackKey.id);
-        setLastPlayedNoteName(blackKey.nameVi);
-        window.setTimeout(() => setActiveBlackKeyId(null), 240);
-
-        if (xylophoneMode === 'free') {
-          setFreeNoteCount((c) => c + 1);
-        }
-      };
-
-      const filteredSongs = RAINBOW_SONGS.filter((s) => {
-        if (songCategoryFilter === 'all') return true;
-        return s.category === songCategoryFilter;
-      });
-
-      const currentSongIdx = RAINBOW_SONGS.findIndex((s) => s.id === activeSong.id);
-      const handlePrevSong = () => {
-        stopXylophoneDemo();
-        const prevIdx = (currentSongIdx - 1 + RAINBOW_SONGS.length) % RAINBOW_SONGS.length;
-        setSelectedSongId(RAINBOW_SONGS[prevIdx].id);
-        setSongStepIdx(0);
-      };
-      const handleNextSong = () => {
-        stopXylophoneDemo();
-        const nextIdx = (currentSongIdx + 1) % RAINBOW_SONGS.length;
-        setSelectedSongId(RAINBOW_SONGS[nextIdx].id);
-        setSongStepIdx(0);
-      };
-
       return (
-        <div className="flex flex-col items-center gap-3 py-1 w-full max-w-3xl mx-auto select-none">
-          {/* Top Control Bar: Nhạc cụ (Piano vs Cầu Vồng) & Chế độ chơi & Nhịp trống */}
-          <div className="w-full bg-gradient-to-r from-amber-50 via-rose-50 to-sky-50 border-2 border-amber-200/90 rounded-2xl p-3 shadow-xs flex flex-col gap-2.5">
-            {/* Row 1: Instrument Mode Switch (Piano vs Rainbow Xylophone) */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-1.5 p-1 bg-white rounded-2xl border border-amber-200 shadow-2xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInstrumentView('piano');
-                    setMusicalInstrument('piano');
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black cursor-pointer transition flex items-center gap-1.5 ${
-                    instrumentView === 'piano'
-                      ? 'bg-slate-900 text-amber-300 shadow-xs scale-102 ring-2 ring-amber-400'
-                      : 'text-slate-700 hover:text-slate-950'
-                  }`}
-                >
-                  <span className="text-base">🎹</span>
-                  <span>Đàn Piano Cổ Điển</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setInstrumentView('xylophone');
-                    setMusicalInstrument('xylophone');
-                  }}
-                  className={`px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-black cursor-pointer transition flex items-center gap-1.5 ${
-                    instrumentView === 'xylophone'
-                      ? 'bg-gradient-to-r from-red-500 via-amber-500 to-indigo-500 text-white shadow-xs scale-102 ring-2 ring-amber-300'
-                      : 'text-slate-700 hover:text-slate-950'
-                  }`}
-                >
-                  <span className="text-base">🌈</span>
-                  <span>Đàn Gõ Cầu Vồng</span>
-                </button>
-              </div>
-
-              {/* Mode Toggle: Guided vs Free */}
-              <div className="inline-flex p-1 bg-white rounded-xl border border-amber-200 shadow-2xs">
-                <button
-                  type="button"
-                  onClick={() => {
-                    stopXylophoneDemo();
-                    setXylophoneMode('guided');
-                  }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-black cursor-pointer transition ${
-                    xylophoneMode === 'guided'
-                      ? 'bg-amber-500 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-amber-700'
-                  }`}
-                >
-                  🎵 Tập Theo Bài
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    stopXylophoneDemo();
-                    setXylophoneMode('free');
-                  }}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-black cursor-pointer transition ${
-                    xylophoneMode === 'free'
-                      ? 'bg-amber-500 text-white shadow-xs'
-                      : 'text-slate-600 hover:text-amber-700'
-                  }`}
-                >
-                  ✨ Chơi Tự Do
-                </button>
-              </div>
-            </div>
-
-            {/* Row 2: Sound Timbre Selector & Drum Beat */}
-            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-amber-100">
-              <div className="flex items-center gap-1.5">
-                <span className="text-[11px] font-bold text-slate-500">Âm Sắc:</span>
-                <div className="flex flex-wrap gap-1">
-                  {INSTRUMENTS.map((ins) => (
-                    <button
-                      key={ins.id}
-                      type="button"
-                      onClick={() => {
-                        setMusicalInstrument(ins.id);
-                        playMusicalInstrumentNote(440, ins.id, settings.volume * 0.8);
-                      }}
-                      className={`flex items-center gap-1 px-2.5 py-1 rounded-xl text-xs font-extrabold cursor-pointer transition ${
-                        musicalInstrument === ins.id
-                          ? 'bg-indigo-600 text-white shadow-2xs scale-105'
-                          : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
-                      }`}
-                    >
-                      <span>{ins.emoji}</span>
-                      <span>{ins.nameVi}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Nhịp Trống Vui Nhộn */}
-              <button
-                type="button"
-                onClick={() => setIsRhythmPlaying((v) => !v)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-extrabold cursor-pointer border transition shadow-2xs ${
-                  isRhythmPlaying
-                    ? 'bg-rose-500 text-white border-rose-600 animate-pulse'
-                    : 'bg-white text-slate-700 border-slate-200 hover:bg-rose-50'
-                }`}
-                title="Bật/Tắt nhịp trống đệm rộn ràng"
-              >
-                <span>🥁</span>
-                <span>{isRhythmPlaying ? 'Tắt Nhịp Trống' : 'Bật Nhịp Trống Vui'}</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Guided Mode: Song Picker Bar & Karaoke Lyrics */}
-          {xylophoneMode === 'guided' ? (
-            <div className="w-full bg-white border-2 border-indigo-100 rounded-2xl p-3 shadow-xs flex flex-col gap-2.5">
-              {/* Song Header with Modal Launcher */}
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center gap-1">
-                    <button
-                      type="button"
-                      onClick={handlePrevSong}
-                      className="p-1 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 cursor-pointer"
-                      title="Bài trước"
-                    >
-                      ◀
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleNextSong}
-                      className="p-1 rounded-lg border border-slate-200 hover:bg-slate-100 text-slate-600 cursor-pointer"
-                      title="Bài kế tiếp"
-                    >
-                      ▶
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-xl">
-                    <span className="text-lg">{activeSong.emoji}</span>
-                    <div>
-                      <div className="text-xs sm:text-sm font-black text-indigo-950 flex items-center gap-1.5">
-                        <span>{activeSong.titleVi}</span>
-                        <span className="text-[10px] font-bold text-indigo-500">
-                          ({activeSong.badgeVi})
-                        </span>
-                      </div>
-                      <div className="text-[10px] text-slate-500 font-semibold truncate max-w-[160px] sm:max-w-none">
-                        {activeSong.titleEn}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  {/* Button to open the full 16-song picker modal */}
-                  <button
-                    type="button"
-                    onClick={() => setShowSongPickerModal(true)}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black cursor-pointer shadow-2xs transition"
-                  >
-                    <Music className="w-3.5 h-3.5 text-amber-600" />
-                    <span>Kho 16 Bài Hát 🎶</span>
-                    <span className="text-amber-600 text-[10px]">▼</span>
-                  </button>
-
-                  {/* Auto Demo Play Button */}
-                  <button
-                    type="button"
-                    onClick={handleToggleDemo}
-                    className={`flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-black cursor-pointer border transition shadow-2xs ${
-                      isDemoPlaying
-                        ? 'bg-emerald-500 text-white border-emerald-600 ring-2 ring-emerald-300'
-                        : 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
-                    }`}
-                  >
-                    {isDemoPlaying ? (
-                      <>
-                        <Pause className="w-3.5 h-3.5" />
-                        <span>Dừng Nghe</span>
-                      </>
-                    ) : (
-                      <>
-                        <Play className="w-3.5 h-3.5 fill-current" />
-                        <span>Nghe Mẫu</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Karaoke Display & Next Note Target Banner */}
-              <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl p-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                <div className="flex flex-col">
-                  <span className="text-[11px] font-bold text-amber-700 uppercase tracking-wider">
-                    Lời Bài Hát (Karaoke):
-                  </span>
-                  <div className="flex flex-wrap items-center gap-1 mt-0.5">
-                    {activeSong.notes
-                      .slice(
-                        Math.max(0, songStepIdx - 2),
-                        Math.min(activeSong.notes.length, songStepIdx + 5)
-                      )
-                      .map((n, i) => {
-                        const actualIdx = Math.max(0, songStepIdx - 2) + i;
-                        const isCurrent = actualIdx === songStepIdx;
-                        return (
-                          <span
-                            key={actualIdx}
-                            className={`px-2 py-0.5 rounded-lg text-xs font-extrabold transition-transform ${
-                              isCurrent
-                                ? 'bg-amber-400 text-slate-900 shadow-xs scale-110 font-black animate-bounce ring-2 ring-amber-500'
-                                : actualIdx < songStepIdx
-                                ? 'text-slate-400 line-through'
-                                : 'text-slate-700 bg-white/70'
-                            }`}
-                          >
-                            {n.syllableVi}
-                          </span>
-                        );
-                      })}
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 bg-white/90 px-3 py-1.5 rounded-lg border border-amber-200 self-start sm:self-auto">
-                  <span className="text-xs font-extrabold text-slate-800">
-                    Phím tiếp theo:
-                  </span>
-                  <span
-                    style={{ backgroundColor: targetKey.bgHex }}
-                    className="px-2 py-0.5 rounded text-white text-xs font-black shadow-2xs"
-                  >
-                    {targetKey.solfegeVi} ⭐
-                  </span>
-                  <span className="text-[11px] font-semibold text-slate-500">
-                    ({songStepIdx + 1}/{activeSong.notes.length})
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* Free Play Banner */
-            <div className="w-full bg-gradient-to-r from-purple-50 via-pink-50 to-amber-50 border-2 border-purple-200 rounded-2xl p-3 shadow-xs flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl">🎶</span>
-                <div>
-                  <h4 className="text-xs sm:text-sm font-black text-purple-900">
-                    Sân Khấu Âm Nhạc Tự Do
-                  </h4>
-                  <p className="text-[11px] font-semibold text-purple-700">
-                    Bé tự do gõ mọi nốt đàn {instrumentView === 'piano' ? 'Piano' : 'Cầu Vồng'} để sáng tác bài ca của riêng mình!
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-extrabold text-slate-700 bg-white px-3 py-1 rounded-xl border border-purple-200 shadow-2xs">
-                  🎵 Đã gõ: <strong className="text-purple-600">{freeNoteCount}</strong> nốt
-                </span>
-                {freeNoteCount > 0 && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFreeNoteCount(0);
-                      setLastPlayedNoteName('');
-                    }}
-                    className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-purple-100 cursor-pointer"
-                    title="Bắt đầu lại"
-                  >
-                    <RotateCcw className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* INSTRUMENT INTERFACE: PIANO or RAINBOW XYLOPHONE */}
-          {instrumentView === 'piano' ? (
-            /* 🎹 Grand Piano Keyboard (Ivory White Keys + Elevated Ebony Black Keys) */
-            <div className="w-full bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 p-3 sm:p-5 rounded-3xl border-4 border-slate-700 shadow-2xl relative overflow-hidden">
-              {/* Piano Top Nameplate */}
-              <div className="w-full flex items-center justify-between px-3 py-1.5 mb-2.5 rounded-xl bg-slate-950/70 border border-amber-500/30 text-amber-300">
-                <div className="flex items-center gap-2">
-                  <span className="text-lg">🎹</span>
-                  <span className="text-xs sm:text-sm font-black tracking-widest uppercase">
-                    Grand Piano · Dương Cầm Cổ Điển
-                  </span>
-                </div>
-                <div className="text-[11px] font-bold text-amber-200/80">
-                  {lastPlayedNoteName ? `Đang gõ: ${lastPlayedNoteName}` : 'Chạm phím đàn'}
-                </div>
-              </div>
-
-              {/* The Piano Keys Container */}
-              <div className="relative w-full h-56 sm:h-68 rounded-2xl overflow-hidden shadow-inner bg-slate-950 p-1">
-                {/* 8 White Ivory Keys */}
-                <div className="grid grid-cols-8 gap-1 h-full w-full">
-                  {XYLOPHONE_KEYS.map((k, idx) => {
-                    const isGuidedNext = xylophoneMode === 'guided' && idx === targetKeyIdx;
-                    const isPressed = activeNoteIdx === idx;
-
-                    return (
-                      <button
-                        key={`piano-white-${k.note}`}
-                        type="button"
-                        onClick={(e) => handleKeyPress(idx, e)}
-                        className={`w-full h-full rounded-b-2xl border-x border-b-6 flex flex-col justify-end pb-3 sm:pb-4 items-center transition-all cursor-pointer select-none relative ${
-                          isPressed
-                            ? 'bg-amber-100 border-b-2 border-slate-400 translate-y-1 shadow-inner'
-                            : 'bg-gradient-to-b from-[#FFFDF5] via-[#FCF9F2] to-[#F3EEE3] border-slate-300 hover:bg-slate-50 shadow-md active:translate-y-1 active:border-b-2'
-                        } ${
-                          isGuidedNext
-                            ? 'ring-4 ring-amber-400 ring-offset-2 ring-offset-slate-900 animate-pulse'
-                            : ''
-                        }`}
-                      >
-                        {/* Guided Target Indicator ⭐ */}
-                        {isGuidedNext && (
-                          <div className="absolute top-28 sm:top-32 flex flex-col items-center">
-                            <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
-                              ⭐
-                            </span>
-                          </div>
-                        )}
-
-                        {/* Note Solfege Name & Letter */}
-                        <div className="text-center z-10 pointer-events-none">
-                          <div
-                            className={`text-sm sm:text-lg font-black leading-none ${
-                              isGuidedNext ? 'text-amber-700' : 'text-slate-800'
-                            }`}
-                          >
-                            {k.solfegeVi}
-                          </div>
-                          <div className="text-[10px] sm:text-xs font-extrabold text-slate-500 mt-0.5">
-                            {k.note}
-                          </div>
-                        </div>
-
-                        {/* White Key Accent Bevel */}
-                        <div
-                          className="w-3/4 h-1 rounded-full mt-1.5 opacity-80"
-                          style={{ backgroundColor: k.bgHex }}
-                        />
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* 5 Elevated Ebony Black Keys */}
-                <div className="absolute top-1 left-1 right-1 h-32 sm:h-40 pointer-events-none">
-                  {PIANO_BLACK_KEYS.map((bk) => {
-                    const isPressed = activeBlackKeyId === bk.id;
-                    return (
-                      <button
-                        key={bk.id}
-                        type="button"
-                        onClick={(e) => handleBlackKeyPress(bk, e)}
-                        style={{
-                          left: `${bk.leftPct}%`,
-                          width: '9.2%',
-                        }}
-                        className={`absolute top-0 h-full rounded-b-xl border-x-2 border-b-6 border-slate-950 flex flex-col justify-end pb-2 items-center pointer-events-auto transition-all cursor-pointer shadow-2xl ${
-                          isPressed
-                            ? 'bg-slate-700 border-b-2 translate-y-1 brightness-150'
-                            : 'bg-gradient-to-b from-[#28292C] via-[#1A1B1E] to-[#0A0A0C] hover:brightness-125 active:translate-y-1 active:border-b-2'
-                        }`}
-                      >
-                        <span className="text-[9px] sm:text-[11px] font-black text-amber-200/90 leading-none drop-shadow-sm">
-                          {bk.nameVi}
-                        </span>
-                        <span className="text-[8px] font-bold text-slate-400 mt-0.5">
-                          {bk.note}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          ) : (
-            /* 🌈 Rainbow Xylophone Instrument (8 Colored Keys with Mallet Pegs) */
-            <div className="w-full grid grid-cols-8 gap-1.5 sm:gap-2.5 items-end h-64 sm:h-72 px-3 py-4 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-3xl border-4 border-amber-200/90 shadow-md">
-              {XYLOPHONE_KEYS.map((k, idx) => {
-                const isGuidedNext = xylophoneMode === 'guided' && idx === targetKeyIdx;
-                const isPressed = activeNoteIdx === idx;
-
-                return (
-                  <button
-                    key={k.note}
-                    type="button"
-                    onClick={(e) => handleKeyPress(idx, e)}
-                    style={{
-                      backgroundColor: k.bgHex,
-                      borderColor: k.borderHex,
-                      height: `${k.heightPct}%`,
-                    }}
-                    className={`w-full rounded-2xl border-b-4 text-white flex flex-col items-center justify-between py-2 px-1 transition-all cursor-pointer select-none shadow-sm relative ${
-                      isPressed
-                        ? 'scale-95 brightness-125 shadow-inner'
-                        : 'hover:scale-[1.03] active:scale-95'
-                    } ${
-                      isGuidedNext
-                        ? 'ring-4 ring-amber-300 ring-offset-2 animate-pulse scale-[1.02]'
-                        : ''
-                    }`}
-                  >
-                    {/* Top Mallet Peg */}
-                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
-
-                    {/* Guided Star or Sparkle Indicator */}
-                    <div className="my-auto flex flex-col items-center justify-center">
-                      {isGuidedNext ? (
-                        <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
-                          ⭐
-                        </span>
-                      ) : (
-                        <span className="text-xs sm:text-sm opacity-50">⚪</span>
-                      )}
-
-                      <div className="text-center mt-1">
-                        <div className="text-sm sm:text-lg font-black leading-none drop-shadow-sm">
-                          {k.solfegeVi}
-                        </div>
-                        <div className="text-[10px] sm:text-xs font-extrabold opacity-90 mt-0.5">
-                          {k.note.replace('4', '').replace('5', '')}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Bottom Mallet Peg */}
-                    <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          {/* Bottom Footnote Guide */}
-          <div className="flex items-center justify-center gap-2 text-[11px] sm:text-xs font-bold text-slate-500 text-center">
-            <span>💡 Mẹo nhỏ:</span>
-            {xylophoneMode === 'guided' ? (
-              <span>
-                Chạm vào phím đàn có ngôi sao <span className="text-amber-500 font-extrabold">⭐</span> để đánh đúng từng nốt bài hát!
-              </span>
-            ) : (
-              <span>
-                Bé tự do gõ mọi phím {instrumentView === 'piano' ? 'Piano (cả phím trắng & phím đen)' : 'Cầu vồng'} để sáng tác bài ca của riêng mình!
-              </span>
-            )}
-          </div>
-
-          {/* ========================================================================= */}
-          {/* MODAL: KHO NHẠC THIẾU NHI 16 BÀI HÁT CHO BÉ */}
-          {/* ========================================================================= */}
-          {showSongPickerModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-              <div className="bg-white rounded-3xl border-2 border-amber-300 shadow-2xl max-w-xl w-full max-h-[85vh] flex flex-col overflow-hidden">
-                {/* Modal Header */}
-                <div className="px-5 py-4 border-b border-amber-100 bg-gradient-to-r from-amber-50 via-rose-50 to-indigo-50 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-2xl">🎼</span>
-                    <div>
-                      <h3 className="text-base sm:text-lg font-black text-slate-900">
-                        Kho Bài Hát Thiếu Nhi ({RAINBOW_SONGS.length} Bài)
-                      </h3>
-                      <p className="text-xs font-semibold text-slate-600">
-                        Chọn một bài hát để bé tập đàn hoặc nghe máy tự chơi mẫu nhé!
-                      </p>
-                    </div>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowSongPickerModal(false)}
-                    className="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer shadow-2xs"
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                {/* Category Filter Tabs */}
-                <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-200/80 flex flex-wrap gap-1.5 shrink-0">
-                  <button
-                    type="button"
-                    onClick={() => setSongCategoryFilter('all')}
-                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
-                      songCategoryFilter === 'all'
-                        ? 'bg-indigo-600 text-white shadow-2xs'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
-                    }`}
-                  >
-                    Tất Cả ({RAINBOW_SONGS.length})
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSongCategoryFilter('vietnam')}
-                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
-                      songCategoryFilter === 'vietnam'
-                        ? 'bg-indigo-600 text-white shadow-2xs'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
-                    }`}
-                  >
-                    🇻🇳 Việt Nam ({RAINBOW_SONGS.filter((s) => s.category === 'vietnam').length})
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSongCategoryFilter('international')}
-                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
-                      songCategoryFilter === 'international'
-                        ? 'bg-indigo-600 text-white shadow-2xs'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
-                    }`}
-                  >
-                    🌍 Quốc Tế ({RAINBOW_SONGS.filter((s) => s.category === 'international').length})
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setSongCategoryFilter('folk_animals')}
-                    className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
-                      songCategoryFilter === 'folk_animals'
-                        ? 'bg-indigo-600 text-white shadow-2xs'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
-                    }`}
-                  >
-                    🐾 Đồng Dao & Thú Cưng ({RAINBOW_SONGS.filter((s) => s.category === 'folk_animals').length})
-                  </button>
-                </div>
-
-                {/* Scrollable Song Cards Grid (Strictly Vertical) */}
-                <div className="p-4 overflow-y-auto space-y-2 flex-1">
-                  {filteredSongs.map((song, sIdx) => {
-                    const isSelected = song.id === selectedSongId;
-                    return (
-                      <button
-                        key={song.id}
-                        type="button"
-                        onClick={() => {
-                          stopXylophoneDemo();
-                          setSelectedSongId(song.id);
-                          setSongStepIdx(0);
-                          setShowSongPickerModal(false);
-                          speakTeacherVoice(
-                            [
-                              { lang: 'vi', text: `Bé đã chọn bài hát: ${song.titleVi}` },
-                              { lang: 'en', text: song.titleEn },
-                            ],
-                            settings
-                          );
-                        }}
-                        className={`w-full text-left p-3 rounded-2xl border-2 transition-all flex items-center justify-between gap-3 cursor-pointer ${
-                          isSelected
-                            ? 'bg-indigo-50/90 border-indigo-500 shadow-sm scale-[1.01]'
-                            : 'bg-white hover:bg-amber-50/60 border-slate-200'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 min-w-0">
-                          <div className="w-11 h-11 rounded-2xl bg-[#FFFDF5] border border-amber-200 flex items-center justify-center text-2xl shrink-0 shadow-2xs">
-                            {song.emoji}
-                          </div>
-                          <div className="min-w-0">
-                            <div className="flex items-center gap-2">
-                              <span className="text-xs font-black text-slate-400">
-                                #{sIdx + 1}
-                              </span>
-                              <h4 className="text-sm font-black text-slate-900 truncate">
-                                {song.titleVi}
-                              </h4>
-                              {isSelected && (
-                                <span className="bg-indigo-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full shadow-2xs">
-                                  Đang chọn ✓
-                                </span>
-                              )}
-                            </div>
-                            <div className="text-xs font-semibold text-slate-500 truncate">
-                              {song.titleEn}
-                            </div>
-                            <div className="text-[11px] font-bold text-amber-700 mt-0.5">
-                              {song.badgeVi} · {song.notes.length} nốt nhạc
-                            </div>
-                          </div>
-                        </div>
-
-                        <div className="shrink-0 flex items-center gap-1.5">
-                          <span className="text-xs font-black text-indigo-600 bg-white border border-indigo-200 px-3 py-1.5 rounded-xl shadow-2xs hover:bg-indigo-50">
-                            Chơi Bài Này ▶
-                          </span>
-                        </div>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                {/* Modal Footer */}
-                <div className="px-5 py-3 border-t border-slate-100 bg-slate-50 flex items-center justify-between text-xs font-bold text-slate-600">
-                  <span>Tổng cộng: {filteredSongs.length} bài hát</span>
-                  <button
-                    type="button"
-                    onClick={() => setShowSongPickerModal(false)}
-                    className="px-4 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 font-black cursor-pointer"
-                  >
-                    Đóng
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        <RainbowXylophoneGame
+          settings={settings}
+          onBack={onBack}
+          onWin={(titleVi, titleEn) => {
+            triggerRoundWin(
+              `Wonderful melody! You played ${titleEn}!`,
+              `Hoan hô bé ơi! Bé đã hoàn thành trọn vẹn bài hát "${titleVi}" rồi!`
+            );
+          }}
+        />
       );
     }
 
@@ -3530,6 +2765,78 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
             );
           })}
         </div>
+      </div>
+    );
+  }
+
+  // Dedicated Full-Screen Single-Screen Rainbow Xylophone Game
+  if (game.id === 'rainbow-xylophone') {
+    return (
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="fixed inset-0 z-50 bg-[#FFFDF7] flex flex-col select-none overflow-hidden"
+      >
+        <RainbowXylophoneGame
+          settings={settings}
+          onBack={onBack}
+          onWin={(titleVi, titleEn) => {
+            triggerRoundWin(
+              `Wonderful melody! You played ${titleEn}!`,
+              `Hoan hô bé ơi! Bé đã hoàn thành trọn vẹn bài hát "${titleVi}" rồi!`
+            );
+          }}
+        />
+
+        {/* Level Complete Fireworks Modal — shown after completing all 3 rounds */}
+        {showVictoryModal && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="w-full max-w-md rounded-[32px] bg-white p-6 text-center shadow-2xl border-4 border-amber-300 space-y-4">
+              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-amber-200 via-yellow-300 to-orange-300 mx-auto flex items-center justify-center text-6xl shadow-md border-4 border-white">
+                🌈
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-black uppercase">
+                <Trophy className="w-4 h-4 text-amber-600" /> Chúc mừng bé qua đủ 3 màn · Lv.{currentLevel + 1}
+              </div>
+              <h2 className="text-2xl font-extrabold text-slate-900">{game.titleVi}</h2>
+              <p className="text-sm font-semibold text-slate-600">
+                Chúc mừng bé ơi! Bé đã vượt qua cả 3 màn chơi và nhận thêm <strong>+3 Ngôi Sao Vàng</strong>!
+              </p>
+              <div className="flex items-center justify-center gap-2 text-3xl text-amber-400">
+                <span>⭐</span>
+                <span>⭐</span>
+                <span>⭐</span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowVictoryModal(false);
+                    setRound(1);
+                  }}
+                  className="min-h-[42px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" /> Chơi lại
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowVictoryModal(false);
+                    onBack();
+                  }}
+                  className="min-h-[42px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 cursor-pointer"
+                >
+                  Về màn hình chính
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

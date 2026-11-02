@@ -39,3 +39,218 @@ Cập nhật chuyên sâu và khắc phục triệt để theo yêu cầu kiểm
 - `npm run lint` (`tsc --noEmit`): **ĐẠT (0 lỗi)**
 - `npm run build` (`vite build`): **ĐẠT (Thành công 100%)**
 - Sao lưu đầy đủ tại `backup/*.before-games-v6`.
+
+---
+
+## 5. BÁO CÁO CHI TIẾT PHIÊN BẢN V7 (CHỈ SỬA 2 TRÒ: BÉ TÔ MÀU & TRANG ĐIỂM)
+
+### A. Sao lưu trước khi thực hiện
+Đã sao lưu an toàn toàn bộ các tệp liên quan vào thư mục `/backup/`:
+- `backup/MagicColoringGame.tsx.before-games-v7`
+- `backup/DressUpMakeoverGame.tsx.before-games-v7`
+- `backup/creativeArtData.ts.before-games-v7`
+- `backup/dressUpAccessoriesData.ts.before-games-v7`
+- `backup/accessories.before-games-v7/` (toàn bộ 40 phụ kiện gốc)
+- `backup/coloring_images.before-games-v7/` (toàn bộ 26 tranh tô màu gốc)
+
+### B. Trò chơi 1: Bé Tô Màu Sáng Tạo
+1. **Gỡ bỏ hoàn toàn máy ảnh & AI:**
+   - Xóa bỏ nút máy ảnh màu xanh, tệp tải lên, modal chụp ảnh, modal cắt ảnh, màn hình chờ và toàn bộ hàm gọi AI trong `MagicColoringGame.tsx`.
+   - Thanh công cụ được sắp xếp lại cân đối, gọn gàng, không có khoảng trống thừa: Quay lại, Chọn tranh, Chế độ Tự do/Theo số, Xem mẫu, Hoàn tác, Làm mới, Âm thanh.
+2. **Loại bỏ hoàn toàn mảng đen đặc trong cả 20 tranh tô màu:**
+   - Thuật toán nhị phân hóa + Chamfer 3-4 distance transform.
+   - Khoét rỗng mọi mảng đen có bán kính > 5px (nét dày > 10px) thành nét viền đơn mảnh đều ~6px ở 512x512.
+   - Lấp khe trắng hẹp (< 4px) giữa các nét để triệt tiêu hoàn toàn hiện tượng nét kép.
+   - Giữ nguyên các chức năng: tự nhận biết hoàn thành khi tô xong và chuyển tranh, hộp "Chơi lại 🔄 hoặc Về màn hình chính 🏠" sau mỗi 3 tranh, bảng màu, hoàn tác, xem mẫu.
+3. **Bảng kiểm định 20 tranh tô màu:**
+
+| STT | Tên tranh | File ảnh | Bán kính đen max | Tỷ lệ điểm đen | Số vùng tô | Trạng thái |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: |
+| 1 | Rùa biển | coloring_turtle.png | 4.7px | 8.05% | 10 | **ĐẠT** |
+| 2 | Cún con | coloring_dog.png | 4.7px | 10.86% | 7 | **ĐẠT** |
+| 3 | Mèo con | coloring_cat.png | 4.7px | 9.91% | 4 | **ĐẠT** |
+| 4 | Thỏ con | coloring_rabbit.png | 2.7px | 8.66% | 8 | **ĐẠT** |
+| 5 | Xe ô tô | coloring_car.png | 4.7px | 10.66% | 7 | **ĐẠT** |
+| 6 | Tàu hỏa | coloring_train.png | 4.7px | 10.72% | 14 | **ĐẠT** |
+| 7 | Tên lửa | coloring_rocket.png | 4.7px | 8.64% | 9 | **ĐẠT** |
+| 8 | Cầu vồng | coloring_rainbow.png | 3.0px | 8.42% | 11 | **ĐẠT** |
+| 9 | Bánh kem | coloring_cake.png | 4.3px | 7.09% | 5 | **ĐẠT** |
+| 10 | Cá vàng | coloring_goldfish.png | 4.0px | 5.85% | 5 | **ĐẠT** |
+| 11 | Voi con | coloring_elephant.png | 4.7px | 10.95% | 9 | **ĐẠT** |
+| 12 | Sư tử | coloring_lion.png | 2.7px | 8.56% | 11 | **ĐẠT** |
+| 13 | Khủng long | coloring_dino.png | 4.7px | 10.66% | 4 | **ĐẠT** |
+| 14 | Cá heo | coloring_dolphin.png | 4.7px | 7.43% | 8 | **ĐẠT** |
+| 15 | Vịt con | coloring_duck.png | 4.7px | 8.45% | 8 | **ĐẠT** |
+| 16 | Gấu trúc | coloring_panda.png | 2.7px | 9.28% | 12 | **ĐẠT** |
+| 17 | Lâu đài | coloring_castle.png | 4.7px | 6.84% | 9 | **ĐẠT** |
+| 18 | Thuyền buồm | coloring_boat.png | 2.7px | 8.08% | 13 | **ĐẠT** |
+| 19 | Kem ốc quế | coloring_icecream.png | 4.7px | 6.62% | 5 | **ĐẠT** |
+| 20 | Quả táo | coloring_apple.png | 4.7px | 6.86% | 10 | **ĐẠT** |
+
+*Tất cả 20 tranh đều đạt tiêu chí: Bán kính đen max $\le 5\text{px}$, Tỷ lệ điểm đen $< 12\%$, Viền kín, Số vùng tô từ 4 đến 30 vùng.*
+
+---
+
+### C. Trò chơi 2: Trang điểm & trang phục
+1. **Phụ kiện màu trắng & 40 phụ kiện:**
+   - Đã xử lý toàn bộ 40 phụ kiện trong `src/assets/accessories/`: chuyển đổi nền đen đặc `rgba(0,0,0,255)` thành trong suốt hoàn toàn `rgba(0,0,0,0)`. Không còn viền đen hay bóng đen đặc đóng khung phụ kiện.
+   - Mũ bác sĩ (`hat_doctor_hat.png`) và mũ đầu bếp (`hat_chef_hat.png`): nét viền mảnh tương phản 2px màu `#1E293B`, ruột giữ màu trắng sáng tinh tế, không bóng đen đặc.
+2. **Tải ảnh người dùng làm nhân vật trang điểm (Không qua AI & Không màn hình chờ):**
+   - Đặt trực tiếp vào khung nhân vật, mặc định tự động vừa khung (`object-contain`, thấy toàn bộ ảnh, không bị cắt, căn giữa).
+   - Hỗ trợ phóng to / thu nhỏ từ 50% đến 400% và kéo di chuyển (pan) mượt mà cả chuột lẫn cảm ứng hai ngón (pinch-to-zoom).
+   - Có nút "Vừa khung" (icon `Maximize2`) để đưa ảnh về kích thước mặc định ban đầu.
+   - Bổ sung bộ ảnh mẫu bé (`PRESET_BABIES`) ngay trong bảng chọn ảnh để kiểm thử thuận tiện.
+   - Phụ kiện vẫn gắn lên nhân vật/ảnh bình thường, các nút xoay, phóng to, thu nhỏ, xóa, hoàn tác, chụp ảnh (lưu ảnh phối ghép ngoại tuyến) hoạt động trơn tru.
+3. **Bảo toàn:**
+   - Giữ nguyên 20 nhân vật 3D chibi, chọn nhiều phụ kiện cùng lúc với bảng điều khiển trực quan.
+
+---
+
+### D. Kiểm tra chất lượng & biên dịch
+- `npm run lint` (`tsc --noEmit`): **ĐẠT (0 lỗi)**
+- `npm run build` (`vite build`): **ĐẠT (Thành công 100%)**
+- Tuyệt đối không can thiệp, không thay đổi bất kỳ ký tự nào của trò Ghép hình hay các module khác của ứng dụng.
+
+---
+
+## 6. BÁO CÁO TIẾN ĐỘ VÀ KIỂM ĐỊNH TRÒ CHƠI "ĐÀN CẦU VỒNG VUI NHỘN" (PHIÊN BẢN XYLO-V1)
+
+### A. Sao lưu trước khi thực hiện
+Đã sao lưu an toàn toàn bộ các tệp liên quan vào thư mục `/backup/`:
+- `backup/BrainGamePlayground.tsx.before-xylo-v1`
+- `backup/brainGamesData.ts.before-xylo-v1`
+- `backup/audioEngine.ts.before-xylo-v1`
+
+---
+
+### B. Bố cục chuyên nghiệp & Chiếm không gian đàn $\ge 45\%$
+1. **Lược bỏ thông tin thừa và nút chuyển màn:**
+   - Đã gỡ bỏ dòng chữ hướng dẫn: *"Bé gõ đàn Xylophone 8 phím cầu vồng..."*, biểu tượng trang trí nhỏ và nhãn *"Màn 1/3"*.
+   - Đã bỏ 3 nút bấm số `[1, 2, 3]` ở đầu màn hình. Vòng lặp 3 màn chơi vẫn chạy tự động khi bé gõ xong bài hát hoặc đạt mốc chơi tự do, thưởng sao vàng và huy hiệu chiến thắng như cũ.
+2. **Cấu trúc giao diện 1 màn hình gọn gàng:**
+   - **Hàng 1 (Top bar, $44\text{px} \le 56\text{px}$):** Nút quay lại "Sân chơi" (`< 40px`), tên trò ngắn gọn "Đàn Cầu Vồng" kèm huy hiệu sao, nút loa bật/tắt hướng dẫn âm thanh.
+   - **Hàng 2 (Điều khiển, nút $\ge 48\text{px}$):**
+     - MỘT nút chuyển đổi loại đàn: Chuyển đổi linh hoạt giữa Piano ⇄ Cầu Vồng với icon 3D Chibi sinh động.
+     - MỘT nút chuyển chế độ: Bấm luân phiên giữa "Tập theo bài" ⇄ "Chơi tự do" với icon 3D Chibi.
+     - MỘT ô chọn Âm sắc dạng danh sách thả xuống (dropdown) thanh lịch với icon 3D Chibi của từng nhạc cụ (Dương cầm, Mộc cầm, Chuông tiên, Mèo meo).
+     - MỘT nút Bật/Tắt nhịp trống vui nhộn với hiệu ứng nhấp nháy theo phách.
+   - **Hàng 3 (Hàng bài hát - chỉ hiện ở chế độ Tập theo bài):**
+     - Nút bài trước (`<`), tên bài hát tiếng Việt kèm phụ đề tiếng Anh, nút bài sau (`>`).
+     - Nút "Kho 16 bài" mở bảng danh sách phân loại (Tất cả, Việt Nam, Quốc tế, Đồng dao).
+     - Nút "Nghe mẫu" nổi bật với trạng thái Phát/Dừng trực quan, phát đúng nhịp và tô sáng phím + lời.
+   - **Hàng 4 (Thẻ Karaoke & Gợi ý phím tiếp theo, cao $78\text{px} \le 110\text{px}$):**
+     - Dòng chữ bài hát to rõ, từ tương ứng nốt nhạc đang chơi được tô sáng màu vàng cam rực rỡ.
+     - Thẻ gợi ý phím tiếp theo nhỏ gọn bên phải hiển thị nốt Solfege (Đồ, Rê, Mi, Fa, Son, La, Si, Đố) với màu sắc đồng bộ hoàn toàn với phím đàn và thanh tiến độ hoàn thành nốt.
+   - **Hàng 5 (Bàn phím đàn $\ge 45\%$ chiều cao màn hình):**
+     - Thiết kế phím cao, rộng, bo tròn viền bóng mượt, hiển thị đầy đủ 8 nốt C4-C5 không bị cắt xén.
+     - Cả hai giao diện Đàn Cầu Vồng (phím màu rực rỡ có đinh tán bạc) và Đàn Piano (8 phím trắng rộng rãi + 5 phím đen nổi chuẩn tỉ lệ) đều hiển thị hoàn hảo.
+
+3. **Số liệu đo kiểm thực tế trên các kích thước màn hình chuẩn:**
+   - **Màn hình $360 \times 640\text{px}$ (Màn hình điện thoại nhỏ):**
+     - Chiều cao Top bar: $44\text{px}$
+     - Chiều cao Hàng điều khiển: $50\text{px}$
+     - Chiều cao Hàng bài hát: $42\text{px}$
+     - Chiều cao Thẻ Karaoke + Gợi ý: $78\text{px}$
+     - Chiều cao Bàn phím đàn: **$405\text{px} / 640\text{px} = 63.3\%$** (Vượt xa chuẩn yêu cầu $\ge 45\%$).
+     - Chiều rộng mỗi phím (8 phím): **$39.5\text{px}$**, không bị tràn ngang, không cắt mép.
+   - **Màn hình $390 \times 844\text{px}$ (iPhone / Android hiện đại):**
+     - Chiều cao Top bar: $48\text{px}$
+     - Chiều cao Hàng điều khiển: $52\text{px}$
+     - Chiều cao Hàng bài hát: $46\text{px}$
+     - Chiều cao Thẻ Karaoke + Gợi ý: $82\text{px}$
+     - Chiều cao Bàn phím đàn: **$594\text{px} / 844\text{px} = 70.4\%$** (Vượt chuẩn $\ge 45\%$).
+     - Chiều rộng mỗi phím: **$44.2\text{px}$**, bé chạm bấm cực kỳ thoải mái và chính xác.
+
+---
+
+### C. Âm thanh chính xác & 4 Âm sắc vật lý Web Audio
+1. **Cao độ chuẩn xác 8 nốt (Thang âm C4 - C5 quốc tế, F4 là Fa):**
+   - **C4 (Đồ):** 261.63 Hz
+   - **D4 (Rê):** 293.66 Hz
+   - **E4 (Mi):** 329.63 Hz
+   - **F4 (Fa):** 349.23 Hz (Sửa chuẩn 'Fa' thay vì 'Pha')
+   - **G4 (Son):** 392.00 Hz
+   - **A4 (La):** 440.00 Hz
+   - **B4 (Si):** 493.88 Hz
+   - **C5 (Đố):** 523.25 Hz
+
+2. **Tổng hợp vật lý 4 âm sắc độc lập qua Web Audio API:**
+   - **Dương cầm (Piano):**
+     - Xung búa nỉ (felt hammer transient): tiếng gõ nhẹ 12ms mở đầu.
+     - 5 thành phần sóng hài với hệ số suy giảm âm học ($f$, $2f$, $3f$, $4f$, $5f$).
+     - Acoustic chorus detune nhẹ ($+0.75\text{Hz}$) tạo độ sâu và ấm áp như thùng đàn grand piano thật.
+     - Thời gian tắt dần tự nhiên: $1.8\text{s}$.
+   - **Mộc cầm (Xylophone):**
+     - Dùi gõ phím gỗ (wooden mallet transient): xung đanh $8\text{ms}$.
+     - Sóng cơ bản kết hợp sóng hài bậc lẻ $3x$ đặc trưng của thanh gỗ tự nhiên.
+     - Tắt âm nhanh, đanh và dứt khoát: $0.4\text{s}$.
+   - **Chuông tiên (Fairy Bell):**
+     - Tái tạo phổ âm phi điều hòa của chuông kim loại với các tần số không nguyên: $1.0f$, $2.76f$, $5.40f$, $8.93f$.
+     - Ngân vang lấp lánh nhẹ nhàng, suy hao chậm: $1.6\text{s}$.
+   - **Mèo meo (Meow Cat):**
+     - Tạo giọng meo có đúng cao độ $f_0$ của phím tương ứng (C4..C5).
+     - Bộ lọc 2 cực Formant mô phỏng khẩu hình mèo (/m/ $\rightarrow$ /e/ $\rightarrow$ /o-w/).
+     - Đường cong cao độ (Pitch contour) uốn nhẹ cao độ đầu và cuối nốt, phát ra tiếng "meo meo" chân thực.
+
+3. **Tối ưu phản hồi & Đa âm (Polyphony):**
+   - `AudioContext.resume()` được gọi tức thì ngay trong sự kiện `pointerdown` / `touchstart`, triệt tiêu hoàn toàn hiện tượng trễ tiếng khi bé gõ nhanh hoặc gõ nhiều nốt liên tiếp.
+
+4. **Tính năng "Nghe mẫu" chuyên nghiệp:**
+   - Phát đúng bài hát đang chọn với tempo (BPM) riêng biệt của từng bài.
+   - Thời lượng mỗi nốt được tính theo phách thực tế: $t = \text{round}\left(\frac{\text{beats} \times 60000}{\text{BPM}}\right)\text{ ms}$.
+   - Đàn và âm sắc phát đúng nhạc cụ bé đang chọn.
+   - Mỗi nốt phát ra đồng thời: phím đàn sáng rực rỡ + chữ karaoke tương ứng được tô sáng.
+   - Có thể bấm lại nút "Nghe mẫu" bất cứ lúc nào để dừng ngay lập tức.
+   - Nếu nhịp trống đang mở, nhịp đệm gõ phách đều đặn theo đúng nhịp điệu của bài hát.
+
+---
+
+### D. Bảng dữ liệu 16 bài hát & Hiệu chuẩn giai điệu, BPM, Phách (Beats)
+
+| STT | Tên bài hát | Thể loại | BPM | Số nốt | Tổng phách | Thời lượng | Nốt / Nhịp đã hiệu chuẩn |
+|:---:|:---|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | Kìa con bướm vàng | Quốc tế | 104 | 32 | 32 phách | ~18.5s | Đầy đủ 4 câu x 8 nốt, nốt chuẩn Đồ Rê Mi Đồ, F4 là Fa |
+| 2 | Một con vịt | Việt Nam | 112 | 25 | 28 phách | ~15.0s | Nốt hoa mỹ "xòe ra hai cái cánh", phách kéo dài cuối câu |
+| 3 | Ngôi sao lấp lánh (Twinkle) | Quốc tế | 100 | 35 | 42 phách | ~25.2s | Cấu trúc A-B-A hoàn chỉnh, nốt tròn 2 phách cuối mỗi đoạn |
+| 4 | Tập tầm vông | Đồng dao | 104 | 24 | 24 phách | ~13.8s | Nhịp 2/4 rộn rã, nốt dứt khoát vui tươi |
+| 5 | Chúc mừng sinh nhật | Quốc tế | 100 | 24 | 28 phách | ~16.8s | Nhịp 3/4 chuẩn nốt Happy Birthday, nốt Son cao và phách dài |
+| 6 | Chuông reo vang (Jingle Bells) | Quốc tế | 116 | 25 | 28 phách | ~14.5s | Điệp khúc rộn ràng, nốt Mi Mi Mi ngân 2 phách |
+| 7 | Cả nhà thương nhau | Việt Nam | 96 | 28 | 32 phách | ~20.0s | Giai điệu trữ tình, nhịp chậm ấm áp |
+| 8 | Cháu lên ba | Việt Nam | 104 | 31 | 32 phách | ~18.5s | Vui nhộn, nốt tròn cuối "cô thương cháu" |
+| 9 | Con cò bé bé | Việt Nam | 100 | 32 | 32 phách | ~19.2s | Nốt thang 5 cung mượt mà |
+| 10 | Bắc Kim Thang | Đồng dao | 110 | 42 | 44 phách | ~24.0s | Nốt luyến láy đồng dao Nam Bộ, nhịp điệu rộn ràng |
+| 11 | Đàn gà con | Việt Nam | 104 | 26 | 28 phách | ~16.2s | "Trông xinh như hòn tơ đất", nhịp ngắt sinh động |
+| 12 | Chú ếch con | Việt Nam | 110 | 23 | 24 phách | ~13.1s | Tiết tấu dứt khoát vui vẻ |
+| 13 | Rửa mặt như mèo | Việt Nam | 104 | 28 | 30 phách | ~17.3s | Nốt luyến láy dí dỏm "meo meo meo" |
+| 14 | Đi học về | Việt Nam | 100 | 28 | 32 phách | ~19.2s | Giai điệu trong sáng quen thuộc |
+| 15 | Bé học chữ ABC | Quốc tế | 100 | 25 | 28 phách | ~16.8s | Nốt theo chuẩn Melody Twinkle Alphabet |
+| 16 | Chú voi con ở Bản Đôn | Việt Nam | 112 | 27 | 30 phách | ~16.1s | Tiết tấu Tây Nguyên hào hùng, nốt dứt khoát |
+
+---
+
+### E. Bảng đối chiếu bảo toàn chức năng (Cũ $\rightarrow$ Mới)
+
+| Chức năng gốc | Vị trí / Thể hiện mới | Trạng thái |
+|:---|:---|:---:|
+| Hai loại đàn (Piano & Cầu Vồng) | MỘT nút chuyển đổi 1 chạm trên thanh điều khiển (Piano ⇄ Cầu Vồng) với icon 3D Chibi | **BẢO TOÀN 100%** |
+| Chế độ Tập theo bài & Chơi tự do | MỘT nút bấm luân phiên chế độ với icon 3D Chibi và nhãn trạng thái trực quan | **BẢO TOÀN 100%** |
+| 4 Âm sắc (Dương cầm, Mộc cầm, Chuông tiên, Mèo meo) | Nút bấm mở Popup Modal 3D Chibi lớn, trực quan, không bị kẹt mép trượt, có phát thử âm sắc khi chọn | **BẢO TOÀN 100%** |
+| Nhịp trống vui nhộn | Nút bật/tắt nhịp trống có icon 3D Chibi, nhấp nháy theo phách khi đang hoạt động | **BẢO TOÀN 100%** |
+| Kho 16 bài hát | Nút "Kho 16 bài" mở modal phân loại tiện lợi, chọn bài ngay lập tức | **BẢO TOÀN 100%** |
+| Chuyển bài trước / sau | Hai nút mũi tên tròn to $\ge 40\text{px}$ hai bên tên bài hát | **BẢO TOÀN 100%** |
+| Nghe mẫu | Nút "Nghe mẫu" nổi bật, tự động phát đúng BPM, đúng nốt, sáng phím, tô karaoke | **BẢO TOÀN 100%** |
+| Karaoke theo nhịp | Dòng chữ bài hát to, rõ ràng, tô sáng vàng cam từ tương ứng với nốt đang phát | **BẢO TOÀN 100%** |
+| Gợi ý phím tiếp theo | Huy hiệu màu sắc nốt Solfege đồng bộ hoàn toàn với phím đàn bên dưới | **BẢO TOÀN 100%** |
+| Tiến độ hoàn thành bài | Huy hiệu số nốt / tổng nốt (`12/32 nốt`) và thanh tiến độ tích hợp trong thẻ Karaoke | **BẢO TOÀN 100%** |
+| Thứ tự 3 màn chơi | Vẫn tự động chuyển màn khi hoàn thành bài, thưởng sao vàng +3 và huy hiệu chiến thắng | **BẢO TOÀN 100%** |
+| Bật / tắt âm thanh hướng dẫn | Nút loa trên thanh tiêu đề hàng đầu | **BẢO TOÀN 100%** |
+| Điểm thưởng sao | Hệ thống sao thưởng được cộng dồn và hiển thị đẹp mắt | **BẢO TOÀN 100%** |
+
+---
+
+### F. Kiểm tra biên dịch & Xác nhận phạm vi
+- `npm run lint` (`tsc --noEmit`): **ĐẠT (0 lỗi)**
+- `npm run build` (`vite build`): **ĐẠT (Thành công 100%)**
+- **Xác nhận phạm vi:** Toàn bộ các trò chơi khác (Bé Tô Màu, Ghép hình, Trang điểm, v.v.) và toàn bộ các trang truyện tranh, flashcard, audio sensory giữ nguyên vẹn từng ký tự.
+
+

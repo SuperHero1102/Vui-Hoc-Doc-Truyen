@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Volume2, Sparkles, Eye, Smile } from 'lucide-react';
 import type { ParentSettings, TopicLesson, VocabularyItem } from '../types/learning';
 import {
   playCelebrationChime,
   playSoundEffect,
   speakTeacherVoice,
+  stopAllAudio,
 } from '../utils/audioEngine';
 import { buildSegmentedVocabularyScript } from '../utils/learningLogic';
 import { PastelIllustration } from './PastelIllustration';
@@ -45,7 +46,20 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
   const [poppedBubbles, setPoppedBubbles] = useState<Record<string, boolean>>({});
   const [activeCardId, setActiveCardId] = useState<string | null>(null);
 
+  // Cleanup audio when leaving or unmounting
+  useEffect(() => {
+    return () => {
+      stopAllAudio();
+    };
+  }, []);
+
+  const handleSelectSubMode = (nextMode: 'peekaboo' | 'bubbles' | 'cards') => {
+    stopAllAudio();
+    setSubMode(nextMode);
+  };
+
   const handlePeekabooTap = (spot: (typeof PEEKABOO_HIDING_SPOTS)[number]) => {
+    stopAllAudio();
     const item = spotWordMap[spot.id] || combinedWords[0];
     setRevealedSpotId(spot.id);
     playCelebrationChime(settings.volume);
@@ -68,6 +82,7 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
   };
 
   const handlePopBubble = (item: VocabularyItem) => {
+    stopAllAudio();
     setPoppedBubbles((prev) => ({ ...prev, [item.id]: true }));
     playSoundEffect('pop', settings.volume);
     speakTeacherVoice(
@@ -85,6 +100,7 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
   };
 
   const handleGiantCardTap = (item: VocabularyItem) => {
+    stopAllAudio();
     setActiveCardId(item.id);
     playSoundEffect(item.soundEffect, settings.volume);
     const segments = buildSegmentedVocabularyScript(item, '4-12m');
@@ -100,7 +116,7 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
         <div className="flex items-center gap-1.5 flex-1 min-w-[260px]">
           <button
             type="button"
-            onClick={() => setSubMode('peekaboo')}
+            onClick={() => handleSelectSubMode('peekaboo')}
             className={`flex-1 min-h-[42px] px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer ${
               subMode === 'peekaboo'
                 ? 'bg-amber-500 text-white shadow-sm'
@@ -113,7 +129,7 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
 
           <button
             type="button"
-            onClick={() => setSubMode('bubbles')}
+            onClick={() => handleSelectSubMode('bubbles')}
             className={`flex-1 min-h-[42px] px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer ${
               subMode === 'bubbles'
                 ? 'bg-sky-500 text-white shadow-sm'
@@ -126,7 +142,7 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
 
           <button
             type="button"
-            onClick={() => setSubMode('cards')}
+            onClick={() => handleSelectSubMode('cards')}
             className={`flex-1 min-h-[42px] px-3 py-1.5 rounded-xl font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer ${
               subMode === 'cards'
                 ? 'bg-emerald-600 text-white shadow-sm'

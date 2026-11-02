@@ -699,118 +699,168 @@ export function playMusicalInstrumentNote(
 ): void {
   const ctx = getAudioContext();
   if (!ctx) return;
+  if (ctx.state === 'suspended') {
+    ctx.resume().catch(() => {});
+  }
   const now = ctx.currentTime;
   const vol = Math.max(0.05, Math.min(1, volume));
 
   if (instrument === 'piano') {
-    // Acoustic Piano: fundamental + rich lower harmonics
+    // 1. Acoustic Grand Piano: felt hammer impact + rich multi-harmonic structure + slow 1.8s decay
     const masterGain = ctx.createGain();
     masterGain.gain.setValueAtTime(0.001, now);
-    masterGain.gain.linearRampToValueAtTime(vol * 0.5, now + 0.015);
-    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+    masterGain.gain.linearRampToValueAtTime(vol * 0.58, now + 0.012);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.8);
     masterGain.connect(ctx.destination);
 
-    // Fundamental (triangle for warmer body)
+    // Felt hammer attack transient click (8-12ms)
+    try {
+      const clickBuf = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.012), ctx.sampleRate);
+      const clickData = clickBuf.getChannelData(0);
+      for (let i = 0; i < clickData.length; i++) {
+        clickData[i] = (Math.random() * 2 - 1) * Math.exp(-i / (clickData.length * 0.3));
+      }
+      const clickSrc = ctx.createBufferSource();
+      clickSrc.buffer = clickBuf;
+      const clickFilter = ctx.createBiquadFilter();
+      clickFilter.type = 'bandpass';
+      clickFilter.frequency.setValueAtTime(Math.min(3000, frequency * 4), now);
+      clickFilter.Q.setValueAtTime(2.0, now);
+      const clickGain = ctx.createGain();
+      clickGain.gain.setValueAtTime(vol * 0.22, now);
+      clickSrc.connect(clickFilter);
+      clickFilter.connect(clickGain);
+      clickGain.connect(ctx.destination);
+      clickSrc.start(now);
+    } catch {
+      // Fallback silent if buffer creation fails
+    }
+
+    // Fundamental string 1 (triangle wave)
     const o1 = ctx.createOscillator();
     o1.type = 'triangle';
     o1.frequency.setValueAtTime(frequency, now);
     o1.connect(masterGain);
     o1.start(now);
-    o1.stop(now + 1.25);
+    o1.stop(now + 1.85);
 
-    // 2nd harmonic (octave overtone)
+    // Fundamental string 2 (slight acoustic chorus detune +0.75 Hz)
+    const o1Detune = ctx.createOscillator();
+    const g1Detune = ctx.createGain();
+    o1Detune.type = 'sine';
+    o1Detune.frequency.setValueAtTime(frequency + 0.75, now);
+    g1Detune.gain.setValueAtTime(0.35, now);
+    g1Detune.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+    o1Detune.connect(g1Detune);
+    g1Detune.connect(masterGain);
+    o1Detune.start(now);
+    o1Detune.stop(now + 1.65);
+
+    // 2nd harmonic (octave overtone 2f)
     const o2 = ctx.createOscillator();
     const g2 = ctx.createGain();
     o2.type = 'sine';
     o2.frequency.setValueAtTime(frequency * 2, now);
-    g2.gain.setValueAtTime(0.35, now);
-    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+    g2.gain.setValueAtTime(0.32, now);
+    g2.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
     o2.connect(g2);
     g2.connect(masterGain);
     o2.start(now);
-    o2.stop(now + 0.85);
+    o2.stop(now + 1.25);
 
-    // 3rd harmonic (subtle fifth sparkle)
+    // 3rd harmonic (twelfth 3f)
     const o3 = ctx.createOscillator();
     const g3 = ctx.createGain();
     o3.type = 'sine';
     o3.frequency.setValueAtTime(frequency * 3, now);
     g3.gain.setValueAtTime(0.18, now);
-    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
     o3.connect(g3);
     g3.connect(masterGain);
     o3.start(now);
-    o3.stop(now + 0.55);
+    o3.stop(now + 0.9);
+
+    // 4th harmonic (sparkle 4f)
+    const o4 = ctx.createOscillator();
+    const g4 = ctx.createGain();
+    o4.type = 'sine';
+    o4.frequency.setValueAtTime(frequency * 4, now);
+    g4.gain.setValueAtTime(0.09, now);
+    g4.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+    o4.connect(g4);
+    g4.connect(masterGain);
+    o4.start(now);
+    o4.stop(now + 0.6);
     return;
   }
 
   if (instrument === 'bells') {
-    // Fairy Bell / Music Box: inharmonic crystal chimes
+    // 2. Celestial Magic Bell / Music Box: inharmonic metallic partials + long 1.6s shimmering sustain
     const masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(vol * 0.45, now);
-    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.4);
+    masterGain.gain.setValueAtTime(0.001, now);
+    masterGain.gain.linearRampToValueAtTime(vol * 0.48, now + 0.006);
+    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
     masterGain.connect(ctx.destination);
 
-    const f1 = ctx.createOscillator();
-    f1.type = 'sine';
-    f1.frequency.setValueAtTime(frequency, now);
-    f1.connect(masterGain);
-    f1.start(now);
-    f1.stop(now + 1.45);
+    // Inharmonic Bell Partials (1.0f, 2.76f, 5.40f, 8.93f)
+    const bellPartials = [
+      { ratio: 1.0, gain: 0.55, decay: 1.6 },
+      { ratio: 2.76, gain: 0.28, decay: 1.1 },
+      { ratio: 5.4, gain: 0.16, decay: 0.75 },
+      { ratio: 8.93, gain: 0.08, decay: 0.45 },
+    ];
 
-    // Bell inharmonic overtone ~2.76x
-    const f2 = ctx.createOscillator();
-    const g2 = ctx.createGain();
-    f2.type = 'sine';
-    f2.frequency.setValueAtTime(frequency * 2.76, now);
-    g2.gain.setValueAtTime(0.28, now);
-    g2.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
-    f2.connect(g2);
-    g2.connect(masterGain);
-    f2.start(now);
-    f2.stop(now + 0.95);
-
-    // Bell shimmer ~5.4x
-    const f3 = ctx.createOscillator();
-    const g3 = ctx.createGain();
-    f3.type = 'sine';
-    f3.frequency.setValueAtTime(frequency * 5.4, now);
-    g3.gain.setValueAtTime(0.15, now);
-    g3.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
-    f3.connect(g3);
-    g3.connect(masterGain);
-    f3.start(now);
-    f3.stop(now + 0.65);
+    bellPartials.forEach((p) => {
+      const osc = ctx.createOscillator();
+      const g = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(frequency * p.ratio, now);
+      g.gain.setValueAtTime(p.gain, now);
+      g.gain.exponentialRampToValueAtTime(0.001, now + p.decay);
+      osc.connect(g);
+      g.connect(masterGain);
+      osc.start(now);
+      osc.stop(now + p.decay + 0.05);
+    });
     return;
   }
 
   if (instrument === 'cat') {
-    // Adorable Kitten Meow ("Meo~ meo~") tuned to musical pitch
+    // 3. Playful Kitten Meow ("Meo~ meo~") tuned to musical note with throat formant filters
     const osc = ctx.createOscillator();
-    const formantFilter = ctx.createBiquadFilter();
+    const formant1 = ctx.createBiquadFilter();
+    const formant2 = ctx.createBiquadFilter();
     const gain = ctx.createGain();
 
     osc.type = 'sawtooth';
-    // Vocal pitch sweep: starts lower, peaks playfully, settles down
-    osc.frequency.setValueAtTime(frequency * 0.92, now);
+    // Pitch inflection contour: begins slightly lower, arcs delightfully, then settles at exact note frequency
+    osc.frequency.setValueAtTime(frequency * 0.94, now);
     osc.frequency.linearRampToValueAtTime(frequency * 1.12, now + 0.12);
     osc.frequency.exponentialRampToValueAtTime(frequency, now + 0.38);
 
-    // Formant filter simulating "m-e-o-w" mouth vowel shape
-    formantFilter.type = 'bandpass';
-    formantFilter.frequency.setValueAtTime(800, now);
-    formantFilter.frequency.exponentialRampToValueAtTime(1750, now + 0.14);
-    formantFilter.frequency.exponentialRampToValueAtTime(1100, now + 0.38);
-    formantFilter.Q.setValueAtTime(3.8, now);
+    // Formant 1: /m/ -> /e/ -> /o/
+    formant1.type = 'bandpass';
+    formant1.frequency.setValueAtTime(450, now);
+    formant1.frequency.exponentialRampToValueAtTime(900, now + 0.14);
+    formant1.frequency.exponentialRampToValueAtTime(520, now + 0.38);
+    formant1.Q.setValueAtTime(3.5, now);
 
-    // Amplitude envelope
+    // Formant 2: Vocal harmonic brightness
+    formant2.type = 'bandpass';
+    formant2.frequency.setValueAtTime(1300, now);
+    formant2.frequency.exponentialRampToValueAtTime(2100, now + 0.14);
+    formant2.frequency.exponentialRampToValueAtTime(1200, now + 0.38);
+    formant2.Q.setValueAtTime(3.2, now);
+
+    // Amplitude envelope: cute 0.42s vocalization
     gain.gain.setValueAtTime(0.001, now);
-    gain.gain.linearRampToValueAtTime(vol * 0.55, now + 0.05);
-    gain.gain.exponentialRampToValueAtTime(vol * 0.35, now + 0.22);
+    gain.gain.linearRampToValueAtTime(vol * 0.55, now + 0.04);
+    gain.gain.exponentialRampToValueAtTime(vol * 0.32, now + 0.22);
     gain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
 
-    osc.connect(formantFilter);
-    formantFilter.connect(gain);
+    osc.connect(formant1);
+    formant1.connect(formant2);
+    formant2.connect(gain);
     gain.connect(ctx.destination);
 
     osc.start(now);
@@ -818,51 +868,57 @@ export function playMusicalInstrumentNote(
     return;
   }
 
-  // Default: Xylophone / Marimba
+  // 4. Default: Rosewood Xylophone / Marimba
   playXylophoneNote(frequency, volume);
 }
 
 export function playXylophoneNote(frequency: number, volume = 0.85): void {
   const ctx = getAudioContext();
   if (!ctx) return;
+  if (ctx.state === 'suspended') {
+    ctx.resume().catch(() => {});
+  }
   const now = ctx.currentTime;
   const vol = Math.max(0.05, Math.min(1, volume));
 
-  // Fundamental wooden bar tone
+  // Wooden Bar: Pure fundamental + odd 3x harmonic overtone + crisp mallet tap + fast 0.4s decay
+  const masterGain = ctx.createGain();
+  masterGain.gain.setValueAtTime(0.001, now);
+  masterGain.gain.linearRampToValueAtTime(vol * 0.65, now + 0.005);
+  masterGain.gain.exponentialRampToValueAtTime(0.001, now + 0.42);
+  masterGain.connect(ctx.destination);
+
+  // Fundamental wooden resonance
   const osc1 = ctx.createOscillator();
-  const gain1 = ctx.createGain();
   osc1.type = 'sine';
   osc1.frequency.setValueAtTime(frequency, now);
-  gain1.gain.setValueAtTime(Math.min(0.55, vol * 0.55), now);
-  gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.65);
-  osc1.connect(gain1);
-  gain1.connect(ctx.destination);
+  osc1.connect(masterGain);
   osc1.start(now);
-  osc1.stop(now + 0.68);
+  osc1.stop(now + 0.45);
 
-  // Harmonic overtone for bright xylophone chime
+  // Odd harmonic overtone (3x frequency) typical of wooden xylophone bars
   const osc2 = ctx.createOscillator();
   const gain2 = ctx.createGain();
   osc2.type = 'triangle';
   osc2.frequency.setValueAtTime(frequency * 3, now);
-  gain2.gain.setValueAtTime(Math.min(0.22, vol * 0.22), now);
-  gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+  gain2.gain.setValueAtTime(0.28, now);
+  gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.14);
   osc2.connect(gain2);
-  gain2.connect(ctx.destination);
+  gain2.connect(masterGain);
   osc2.start(now);
-  osc2.stop(now + 0.2);
+  osc2.stop(now + 0.16);
 
-  // Soft wooden mallet attack transient click
+  // Wooden mallet head tap transient (8ms)
   const mallet = ctx.createOscillator();
   const malletGain = ctx.createGain();
   mallet.type = 'sine';
-  mallet.frequency.setValueAtTime(frequency * 5, now);
-  malletGain.gain.setValueAtTime(Math.min(0.12, vol * 0.12), now);
-  malletGain.gain.exponentialRampToValueAtTime(0.001, now + 0.045);
+  mallet.frequency.setValueAtTime(frequency * 4.5, now);
+  malletGain.gain.setValueAtTime(vol * 0.18, now);
+  malletGain.gain.exponentialRampToValueAtTime(0.001, now + 0.025);
   mallet.connect(malletGain);
   malletGain.connect(ctx.destination);
   mallet.start(now);
-  mallet.stop(now + 0.05);
+  mallet.stop(now + 0.03);
 }
 
 export function playRhythmDrumHit(

@@ -322,6 +322,11 @@ export default function App() {
     }
   }, [activeBrainGame?.id, activeTopic?.id, isParentDashboardOpen]);
 
+  // Stop all audio immediately whenever switching major navigation views/tabs
+  useEffect(() => {
+    stopAllAudio();
+  }, [activeDockTab, activeBrainGame?.id, activeTopic?.id, selectedStory?.id]);
+
   useEffect(() => {
     try {
       localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(settings));

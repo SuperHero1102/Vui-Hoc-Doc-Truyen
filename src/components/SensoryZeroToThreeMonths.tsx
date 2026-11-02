@@ -154,6 +154,13 @@ export const SensoryZeroToThreeMonths: React.FC<SensoryProps> = ({
     return () => clearInterval(timer);
   }, [isScreenDimmed, autoOffEnabled]);
 
+  // Cleanup audio on unmount
+  useEffect(() => {
+    return () => {
+      stopAllAudio();
+    };
+  }, []);
+
   const handleToggleAutoOff = () => {
     const next = !autoOffEnabled;
     setAutoOffEnabled(next);
@@ -172,7 +179,21 @@ export const SensoryZeroToThreeMonths: React.FC<SensoryProps> = ({
     onUpdateSettings?.({ ...settings, autoOffEnabled: true });
   };
 
+  const handlePrevCard = () => {
+    stopAllAudio();
+    setActiveLullaby(null);
+    setCardIndex((i) => (i - 1 + SENSORY_CARDS.length) % SENSORY_CARDS.length);
+  };
+
+  const handleNextCard = () => {
+    stopAllAudio();
+    setActiveLullaby(null);
+    setCardIndex((i) => (i + 1) % SENSORY_CARDS.length);
+  };
+
   const handlePlayWhisper = () => {
+    stopAllAudio();
+    setActiveLullaby(null);
     const gentleSettings: ParentSettings = {
       ...settings,
       volume: Math.min(0.4, settings.volume),
@@ -182,6 +203,7 @@ export const SensoryZeroToThreeMonths: React.FC<SensoryProps> = ({
   };
 
   const handlePlayLullaby = (lullaby: (typeof LULLABIES)[number]) => {
+    stopAllAudio();
     setActiveLullaby(lullaby.id);
     playMelodyNotes(lullaby.style, 0.25);
     const gentleSettings: ParentSettings = {
@@ -368,7 +390,7 @@ export const SensoryZeroToThreeMonths: React.FC<SensoryProps> = ({
           <div className="mt-2.5 flex items-center justify-between gap-2">
             <button
               type="button"
-              onClick={() => setCardIndex((i) => (i - 1 + SENSORY_CARDS.length) % SENSORY_CARDS.length)}
+              onClick={handlePrevCard}
               className="min-h-[42px] px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-bold text-xs flex items-center gap-1 cursor-pointer shrink-0"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -379,7 +401,7 @@ export const SensoryZeroToThreeMonths: React.FC<SensoryProps> = ({
             </p>
             <button
               type="button"
-              onClick={() => setCardIndex((i) => (i + 1) % SENSORY_CARDS.length)}
+              onClick={handleNextCard}
               className="min-h-[42px] px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1 cursor-pointer shrink-0"
             >
               <span>Tiếp</span>
