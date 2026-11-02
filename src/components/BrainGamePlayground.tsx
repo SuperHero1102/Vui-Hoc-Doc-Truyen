@@ -51,6 +51,7 @@ import { CountryFlagSvg } from './CountryFlagSvg';
 import { GameCardVisual } from './GameCardVisual';
 import { CharacterPuzzleGame } from './CharacterPuzzleGame';
 import { DressUpMakeoverGame } from './DressUpMakeoverGame';
+import { MagicColoringGame } from './MagicColoringGame';
 
 interface BrainGamePlaygroundProps {
   game: BrainGameItem;
@@ -604,6 +605,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       return (
         <CharacterPuzzleGame
           settings={settings}
+          onBack={onBack}
           onWin={() =>
             triggerRoundWin(
               'Character puzzle solved!',
@@ -618,6 +620,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       return (
         <DressUpMakeoverGame
           settings={settings}
+          onBack={onBack}
           onWin={() =>
             triggerRoundWin(
               'Fashion star!',
@@ -2533,480 +2536,22 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
     }
 
 
-    // 14. MAGIC COLORING (Bé Tô Màu Sáng Tạo — Tự Do & Theo Số + 8 Tranh Đen Trắng Đáng Yêu)
+    // 14. MAGIC COLORING (Bé Tô Màu Sáng Tạo — 512x512 Canvas Flood Fill + Camera Sobel Pipeline)
     if (game.id === 'magic-coloring') {
-      const currentTemplate =
-        COLORING_BOOK_TEMPLATES[coloringTemplateIdx % COLORING_BOOK_TEMPLATES.length];
-      const selectedColorItem =
-        STUDIO_COLOR_PALETTE.find((c) => c.hex === brushColor) || STUDIO_COLOR_PALETTE[0];
-      const coloredCount = Object.keys(coloredZones).length;
-      const totalRegions = currentTemplate.regions.length;
-
-      const handleRegionClick = (
-        region: (typeof currentTemplate.regions)[number],
-        e: React.MouseEvent
-      ) => {
-        const expectedColor =
-          STUDIO_COLOR_PALETTE.find((c) => c.number === region.colorNumber) ||
-          STUDIO_COLOR_PALETTE[0];
-
-        if (coloringMode === 'number' && selectedColorItem.number !== region.colorNumber) {
-          triggerGentleRetry(
-            `Vùng "${region.labelVi}" mang số ${region.colorNumber} (${expectedColor.nameVi.toLowerCase()}). Bé hãy chọn màu số ${region.colorNumber} ở thanh màu bên dưới nhé!`,
-            expectedColor.nameEn
-          );
-          return;
-        }
-
-        playSoundEffect('sparkle', settings.volume);
-        setColoringHistory((prev) => [...prev.slice(-15), coloredZones]);
-        const nextZones = { ...coloredZones, [region.id]: brushColor };
-        setColoredZones(nextZones);
-
-        speakTeacherVoice(
-          [
-            { lang: 'en', text: `${selectedColorItem.nameEn}!` },
-            {
-              lang: 'vi',
-              text: `Bé tô ${region.labelVi.toLowerCase()} ${selectedColorItem.nameVi.toLowerCase()} đẹp lắm!`,
-            },
-          ],
-          settings
-        );
-
-        if (Object.keys(nextZones).length >= totalRegions) {
-          triggerRoundWin(
-            `${currentTemplate.titleEn}! Beautiful coloring!`,
-            `Tuyệt vời! Bé đã tô kín bức tranh ${currentTemplate.titleVi} rực rỡ quá!`,
-            e
-          );
-        }
-      };
-
-      const handleUndoColoring = () => {
-        if (coloringHistory.length === 0) return;
-        const previous = coloringHistory[coloringHistory.length - 1];
-        setColoringHistory((prev) => prev.slice(0, -1));
-        setColoredZones(previous);
-      };
-
-      const handleResetColoring = () => {
-        setColoringHistory([]);
-        setColoredZones({});
-      };
-
       return (
-        <div className="flex flex-col items-center gap-2 py-0.5">
-          {/* Top Sub-Toolbar in Amber Border Box (Matches User Screenshot image_6be366fd.png) */}
-          <div className="w-full max-w-lg rounded-2xl border-2 border-amber-400 bg-[#FFFDF5] p-1.5 shadow-2xs flex items-center justify-between gap-1.5 flex-wrap">
-            {/* Left: Template Selector Pill */}
-            <button
-              type="button"
-              onClick={() => setShowTemplatePickerModal(true)}
-              className="min-h-[36px] px-3 py-1 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-xs shrink-0 active:scale-95 transition"
-            >
-              <span>📖</span>
-              <span className="truncate max-w-[130px] sm:max-w-[180px]">
-                {currentTemplate.titleVi} ...
-              </span>
-              <span className="text-amber-200 text-xs">▼</span>
-            </button>
-
-            {/* Mode Switcher: Tự Do vs Theo Số */}
-            <div className="flex items-center bg-amber-100/80 p-0.5 rounded-xl border border-amber-300/80 shrink-0">
-              <button
-                type="button"
-                onClick={() => {
-                  setColoringMode('free');
-                  playSoundEffect('pop', settings.volume);
-                }}
-                className={`px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition ${
-                  coloringMode === 'free'
-                    ? 'bg-amber-500 text-white shadow-2xs'
-                    : 'text-amber-950 hover:bg-amber-200/60'
-                }`}
-              >
-                <span>🎨</span>
-                <span>Tự Do</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setColoringMode('number');
-                  setShowSamplePreview(true);
-                  playSoundEffect('pop', settings.volume);
-                }}
-                className={`px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition ${
-                  coloringMode === 'number'
-                    ? 'bg-amber-500 text-white shadow-2xs'
-                    : 'text-amber-950 hover:bg-amber-200/60'
-                }`}
-              >
-                <span>🔢</span>
-                <span>Theo Số</span>
-              </button>
-            </div>
-
-            {/* Right Actions: Eye Toggle, Undo, Reset */}
-            <div className="flex items-center gap-1 shrink-0">
-              {/* Eye Button: Toggles mini sample preview in top-right */}
-              <button
-                type="button"
-                onClick={() => {
-                  const next = !showSamplePreview;
-                  setShowSamplePreview(next);
-                  playSoundEffect('pop', settings.volume);
-                  speakTeacherVoice(
-                    [
-                      {
-                        lang: 'vi',
-                        text: next ? 'Cô mở hình mẫu cho bé xem nhé!' : 'Tắt hình mẫu để bé thỏa sức sáng tạo!',
-                      },
-                    ],
-                    settings
-                  );
-                }}
-                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-base cursor-pointer transition ${
-                  showSamplePreview
-                    ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-2xs scale-105'
-                    : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
-                }`}
-                title="Bật / Tắt hình mẫu gợi ý ở góc trên"
-                aria-label="Hình mẫu"
-              >
-                👁️
-              </button>
-
-              <button
-                type="button"
-                onClick={handleUndoColoring}
-                disabled={coloringHistory.length === 0}
-                className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-slate-700 text-xs font-black flex items-center justify-center cursor-pointer transition active:scale-95"
-                title="Hoàn tác nét vừa tô"
-                aria-label="Hoàn tác"
-              >
-                ↩️
-              </button>
-              <button
-                type="button"
-                onClick={handleResetColoring}
-                className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-black flex items-center justify-center cursor-pointer transition active:scale-95"
-                title="Tô lại từ đầu"
-                aria-label="Tô lại"
-              >
-                🔄
-              </button>
-            </div>
-          </div>
-
-          {/* Interactive SVG Line-Art Coloring Canvas in Golden Border Box (Matches Image 6be366fd.png) */}
-          <div className="relative w-full max-w-md sm:max-w-lg aspect-[3/4] sm:aspect-auto sm:min-h-[440px] rounded-[32px] border-4 border-amber-400 bg-white shadow-md flex flex-col items-center justify-center p-3 relative overflow-hidden">
-            {/* Top-Right Mini Color Reference Preview: SHOWN ONLY WHEN EYE 👁️ IS CLICKED OR THEO SỐ */}
-            {showSamplePreview && (
-              <div
-                className="absolute top-3 right-3 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-2xl p-1.5 shadow-md flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200"
-                title="Hình mẫu tham khảo tô màu"
-              >
-                <div className="flex items-center gap-1 text-[9px] font-black text-amber-900 uppercase tracking-wider mb-0.5">
-                  <span>🎨</span> Mẫu
-                </div>
-                <svg
-                  viewBox="0 0 320 320"
-                  className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-slate-50 border border-slate-200 shadow-2xs"
-                  aria-label={`Hình mẫu màu gợi ý ${currentTemplate.titleVi}`}
-                >
-                  <rect x="4" y="4" width="312" height="312" rx="20" fill="#FFFFFF" />
-                  {currentTemplate.regions.map((reg) => {
-                    const sampleHex =
-                      STUDIO_COLOR_PALETTE.find((c) => c.number === reg.colorNumber)?.hex || '#FDE68A';
-                    return (
-                      <path
-                        key={`sample-mini-${reg.id}`}
-                        d={reg.d}
-                        fill={sampleHex}
-                        stroke="#334155"
-                        strokeWidth="3"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    );
-                  })}
-                </svg>
-              </div>
-            )}
-
-            <svg
-              viewBox="0 0 320 320"
-              className="w-full max-w-[280px] sm:max-w-[310px] aspect-square select-none touch-manipulation drop-shadow-2xs"
-              aria-label={`Tranh tô màu ${currentTemplate.titleVi}`}
-            >
-              {/* Soft background frame */}
-              <rect x="4" y="4" width="312" height="312" rx="28" fill="#FFFFFF" />
-
-              {/* Decorative rays for sun-rainbow template */}
-              {currentTemplate.id === 'sun-rainbow' && (
-                <g stroke="#F59E0B" strokeWidth="4" strokeLinecap="round">
-                  <line x1="72" y1="36" x2="72" y2="24" />
-                  <line x1="36" y1="72" x2="24" y2="72" />
-                  <line x1="45" y1="45" x2="35" y2="35" />
-                  <line x1="100" y1="45" x2="110" y2="35" />
-                </g>
-              )}
-
-              {/* Interactive Colorable Regions */}
-              {currentTemplate.regions.map((region) => {
-                const sampleColorHex =
-                  STUDIO_COLOR_PALETTE.find((c) => c.number === region.colorNumber)?.hex ||
-                  '#FDE68A';
-                const userFillHex = coloredZones[region.id];
-                const effectiveFill = showSamplePreview
-                  ? sampleColorHex
-                  : userFillHex || '#FFFFFF';
-
-                return (
-                  <g
-                    key={region.id}
-                    onClick={(e) => handleRegionClick(region, e)}
-                    className="cursor-pointer transition-opacity hover:opacity-90"
-                  >
-                    <path
-                      d={region.d}
-                      fill={effectiveFill}
-                      stroke="#1E293B"
-                      strokeWidth="3.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </g>
-                );
-              })}
-
-              {/* Cute Non-Interactive Facial Details & Line Art Accents */}
-              {currentTemplate.id === 'happy-puppy' && (
-                <g pointerEvents="none">
-                  <circle cx="135" cy="126" r="6" fill="#1E293B" />
-                  <circle cx="133" cy="124" r="2" fill="#FFFFFF" />
-                  <circle cx="188" cy="126" r="6" fill="#1E293B" />
-                  <circle cx="186" cy="124" r="2" fill="#FFFFFF" />
-                  <ellipse cx="160" cy="152" rx="9" ry="6.5" fill="#1E293B" />
-                  <path
-                    d="M 148 166 Q 160 176 172 166"
-                    fill="none"
-                    stroke="#1E293B"
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                  />
-                </g>
-              )}
-
-              {currentTemplate.id === 'kitty-yarn' && (
-                <g pointerEvents="none">
-                  <circle cx="136" cy="134" r="6" fill="#1E293B" />
-                  <circle cx="184" cy="134" r="6" fill="#1E293B" />
-                  <polygon points="155,148 165,148 160,155" fill="#EC4899" />
-                  <path
-                    d="M 148 162 Q 160 170 172 162"
-                    fill="none"
-                    stroke="#1E293B"
-                    strokeWidth="3.2"
-                    strokeLinecap="round"
-                  />
-                  <line x1="88" y1="142" x2="112" y2="146" stroke="#1E293B" strokeWidth="2.8" />
-                  <line x1="86" y1="154" x2="112" y2="154" stroke="#1E293B" strokeWidth="2.8" />
-                  <line x1="208" y1="146" x2="232" y2="142" stroke="#1E293B" strokeWidth="2.8" />
-                  <line x1="208" y1="154" x2="234" y2="154" stroke="#1E293B" strokeWidth="2.8" />
-                </g>
-              )}
-
-              {currentTemplate.id === 'bunny-carrot' && (
-                <g pointerEvents="none">
-                  <circle cx="140" cy="148" r="5.5" fill="#1E293B" />
-                  <circle cx="180" cy="148" r="5.5" fill="#1E293B" />
-                  <ellipse cx="160" cy="160" rx="6" ry="4.5" fill="#EC4899" />
-                  <path
-                    d="M 150 170 Q 160 178 170 170"
-                    fill="none"
-                    stroke="#1E293B"
-                    strokeWidth="3"
-                    strokeLinecap="round"
-                  />
-                </g>
-              )}
-
-              {/* Number Badges Overlay in 'Theo Số' Mode (Matches Image 5) */}
-              {coloringMode === 'number' &&
-                !showSamplePreview &&
-                currentTemplate.regions.map((region) => {
-                  const isColored = Boolean(coloredZones[region.id]);
-                  if (isColored) return null;
-                  const isSelectedNumber = selectedColorItem.number === region.colorNumber;
-                  return (
-                    <g
-                      key={`badge-${region.id}`}
-                      onClick={(e) => handleRegionClick(region, e)}
-                      className="cursor-pointer"
-                    >
-                      <circle
-                        cx={region.badgePos.x}
-                        cy={region.badgePos.y}
-                        r={isSelectedNumber ? 11.5 : 9.5}
-                        fill={isSelectedNumber ? '#FEF08A' : '#FFFFFF'}
-                        stroke={isSelectedNumber ? '#CA8A04' : '#334155'}
-                        strokeWidth={isSelectedNumber ? '2.5' : '1.8'}
-                      />
-                      <text
-                        x={region.badgePos.x}
-                        y={region.badgePos.y + 3.5}
-                        textAnchor="middle"
-                        fontSize="10.5"
-                        fontWeight="900"
-                        fill="#0F172A"
-                      >
-                        {region.colorNumber}
-                      </text>
-                    </g>
-                  );
-                })}
-            </svg>
-          </div>
-
-          {/* Bottom Bar in Amber Border Box with Color Bubbles & Green "⭐ Xong" Button (Matches User Screenshot image_6be366fd.png) */}
-          <div className="w-full max-w-md sm:max-w-lg rounded-2xl border-2 border-amber-400 bg-[#FFFDF5] p-2 sm:p-2.5 shadow-2xs flex items-center justify-between gap-2">
-            {/* Scrollable / Flexible Row of Color Bubbles */}
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto py-1 px-0.5 no-scrollbar flex-1 min-w-0">
-              {STUDIO_COLOR_PALETTE.map((c) => {
-                const isSelected = brushColor === c.hex;
-                return (
-                  <button
-                    key={c.id}
-                    type="button"
-                    onClick={() => {
-                      setBrushColor(c.hex);
-                      speakTeacherVoice(
-                        [
-                          { lang: 'en', text: `${c.nameEn}!` },
-                          { lang: 'vi', text: c.nameVi },
-                        ],
-                        settings
-                      );
-                    }}
-                    style={{ backgroundColor: c.hex }}
-                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-sm cursor-pointer transition-all select-none shrink-0 ${
-                      isSelected
-                        ? 'ring-4 ring-amber-400 scale-110 border-2 border-white shadow-md'
-                        : 'border-2 border-white hover:scale-105 shadow-2xs opacity-90 hover:opacity-100'
-                    }`}
-                    aria-label={`Màu số ${c.number} ${c.nameVi}`}
-                  >
-                    {coloringMode === 'number' && (
-                      <span
-                        className={`drop-shadow-xs font-black ${
-                          c.number === 3 || c.number === 11 || c.number === 12
-                            ? 'text-slate-900'
-                            : 'text-white'
-                        }`}
-                      >
-                        {c.number}
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Green "⭐ Xong" Button on Right (Exact match to screenshot image_6be366fd.png) */}
-            <button
-              type="button"
-              onClick={(e) => {
-                if (coloredCount === 0) {
-                  triggerGentleRetry(
-                    `Bé hãy chọn màu yêu thích rồi chấm tô lên bức tranh ${currentTemplate.titleVi} trước nhé!`,
-                    currentTemplate.titleEn
-                  );
-                  return;
-                }
-                fireFireworksCelebration();
-                triggerRoundWin(
-                  `${currentTemplate.titleEn}! Great job!`,
-                  `Tuyệt vời! Bức tranh ${currentTemplate.titleVi} của bé thật lộng lẫy và rực rỡ!`,
-                  e
-                );
-              }}
-              className="shrink-0 px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 shadow-sm active:scale-95 transition cursor-pointer"
-              title="Hoàn thành tô màu và nhận sao thưởng"
-            >
-              <span className="text-amber-300 text-base">⭐</span>
-              <span>Xong</span>
-            </button>
-          </div>
-
-          {/* Modal: Chọn Tranh Tô Màu Đen Trắng (Matches Reference Image 4) */}
-          {showTemplatePickerModal && (
-            <div
-              className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Chọn Tranh Tô Màu Đen Trắng"
-            >
-              <div className="w-full max-w-lg rounded-[28px] bg-white p-5 shadow-2xl border-2 border-slate-200 space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">📖</span>
-                    <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
-                      Chọn Tranh Tô Màu Đen Trắng
-                    </h3>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => setShowTemplatePickerModal(false)}
-                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-black text-base flex items-center justify-center cursor-pointer"
-                    aria-label="Đóng"
-                  >
-                    ×
-                  </button>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 max-h-[65vh] overflow-y-auto pr-1">
-                  {COLORING_BOOK_TEMPLATES.map((tpl, idx) => {
-                    const isCurrent = idx === coloringTemplateIdx % COLORING_BOOK_TEMPLATES.length;
-                    return (
-                      <button
-                        key={tpl.id}
-                        type="button"
-                        onClick={() => {
-                          setColoringTemplateIdx(idx);
-                          setColoredZones({});
-                          setColoringHistory([]);
-                          setShowTemplatePickerModal(false);
-                          speakTeacherVoice(
-                            [
-                              { lang: 'vi', text: tpl.titleVi },
-                              { lang: 'en', text: tpl.titleEn },
-                            ],
-                            settings
-                          );
-                        }}
-                        className={`rounded-2xl p-3.5 border-2 flex flex-col items-center gap-1.5 text-center cursor-pointer transition-all ${
-                          isCurrent
-                            ? 'bg-amber-50/90 border-amber-400 shadow-xs'
-                            : 'bg-slate-50/70 hover:bg-amber-50/40 border-slate-200'
-                        }`}
-                      >
-                        <span className="text-4xl sm:text-5xl">{tpl.emoji}</span>
-                        <span className="text-xs sm:text-sm font-extrabold text-slate-900">
-                          {tpl.titleVi}
-                        </span>
-                        <span className="text-[11px] font-bold text-slate-500">
-                          {tpl.regions.length} vùng tô màu
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
+        <MagicColoringGame
+          settings={settings}
+          onBack={onBack}
+          onWin={() => {
+            triggerRoundWin(
+              'Splendid coloring! You are a brilliant artist!',
+              'Tuyệt vời! Bé đã hoàn thành bức tranh tô màu rực rỡ quá!'
+            );
+          }}
+          onGentleRetry={(msgVi, msgEn) => {
+            triggerGentleRetry(msgVi, msgEn);
+          }}
+        />
       );
     }
 
@@ -3083,52 +2628,134 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
       };
 
       return (
-        <div className="flex flex-col items-center gap-3.5 py-1">
-          {/* Top Header Bar (Matches Reference Image 1) */}
-          <div className="w-full flex flex-wrap items-center justify-between gap-2 bg-slate-50/90 border border-slate-200/90 rounded-2xl px-3.5 py-2.5 shadow-2xs">
-            <div className="flex flex-wrap items-center gap-2">
+        <div className="w-full h-full flex flex-col items-center justify-between gap-1 select-none overflow-hidden">
+          {/* Top Toolbar: SINGLE ROW, MAX HEIGHT 48px, ICONS ONLY (No text, no title chips, no long instructions) */}
+          <div className="w-full max-w-md h-11 shrink-0 rounded-2xl border-2 border-indigo-300 bg-white px-2 shadow-2xs flex items-center justify-between gap-1">
+            {/* Left: Back + Prev letter + Next letter + Lang toggle */}
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onClick={onBack}
+                className="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95"
+                title="Quay lại sân chơi"
+                aria-label="Quay lại"
+              >
+                <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveStrokeIdx(0);
+                  setActiveStrokePoints([]);
+                  setTraceLetterIdx(
+                    (prev) =>
+                      (prev - 1 + VIETNAMESE_LETTER_TRACES.length) %
+                      VIETNAMESE_LETTER_TRACES.length
+                  );
+                }}
+                className="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-700 flex items-center justify-center font-black text-sm cursor-pointer transition active:scale-95"
+                title="Chữ trước"
+                aria-label="Chữ trước"
+              >
+                ◀
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveStrokeIdx(0);
+                  setActiveStrokePoints([]);
+                  setTraceLetterIdx(
+                    (prev) => (prev + 1) % VIETNAMESE_LETTER_TRACES.length
+                  );
+                }}
+                className="w-9 h-9 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 flex items-center justify-center font-black text-sm cursor-pointer transition active:scale-95"
+                title="Chữ tiếp theo"
+                aria-label="Chữ tiếp theo"
+              >
+                ▶
+              </button>
+
               <button
                 type="button"
                 onClick={() =>
                   setTraceAlphabetLang((prev) => (prev === 'vi' ? 'en' : 'vi'))
                 }
-                className="px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-900 font-extrabold text-xs flex items-center gap-1.5 cursor-pointer"
+                className="w-9 h-9 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-200 text-base flex items-center justify-center cursor-pointer transition active:scale-95"
+                title={
+                  traceAlphabetLang === 'vi'
+                    ? 'Chuyển sang Tiếng Anh'
+                    : 'Chuyển sang Tiếng Việt'
+                }
+                aria-label="Đổi ngôn ngữ"
               >
-                <span>{traceAlphabetLang === 'vi' ? '🇻🇳' : '🇬🇧'}</span>
-                <span>
-                  {traceAlphabetLang === 'vi'
-                    ? 'Bảng Chữ Cái Tiếng Việt'
-                    : 'Bảng Chữ Cái Tiếng Anh'}
-                </span>
+                {traceAlphabetLang === 'vi' ? '🇻🇳' : '🇬🇧'}
               </button>
-
-              <span className="text-sm sm:text-base font-black text-indigo-700">
-                Chữ {currentLetterObj.letter}
-              </span>
-              <span className="text-xs sm:text-sm font-extrabold text-slate-700">
-                — {currentLetterObj.emoji}{' '}
-                {traceAlphabetLang === 'vi'
-                  ? currentLetterObj.wordVi
-                  : `${currentLetterObj.wordEn} (${currentLetterObj.wordVi})`}
-              </span>
-              <span className="text-xs font-bold text-slate-500">
-                (Nét {safeStrokeIdx + 1}/{totalStrokes})
-              </span>
             </div>
 
-            {/* Right Stroke Step Badges (1) (2) (3) + Viết lại */}
-            <div className="flex items-center gap-1.5">
+            {/* Right: Reset current letter + Audio Guide */}
+            <div className="flex items-center gap-1 shrink-0">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveStrokeIdx(0);
+                  setActiveStrokePoints([]);
+                }}
+                className="w-9 h-9 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 flex items-center justify-center text-sm cursor-pointer transition active:scale-95"
+                title="Viết lại từ nét đầu"
+                aria-label="Viết lại"
+              >
+                🔄
+              </button>
+
+              <button
+                type="button"
+                onClick={() =>
+                  speakTeacherVoice(
+                    [
+                      {
+                        lang: 'vi',
+                        text: `Chữ ${currentLetterObj.letter}. ${currentLetterObj.wordVi}! Bé hãy vẽ nét số ${safeStrokeIdx + 1} nhé!`,
+                      },
+                      {
+                        lang: 'en',
+                        text: `Letter ${currentLetterObj.letter}. ${currentLetterObj.wordEn}!`,
+                      },
+                    ],
+                    settings
+                  )
+                }
+                className="w-9 h-9 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95"
+                title="Nghe hướng dẫn phát âm"
+                aria-label="Nghe hướng dẫn"
+              >
+                <Volume2 className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Compact Stroke Progress & Letter Info on 1 Single Line */}
+          <div className="w-full max-w-md px-2 flex items-center justify-between text-xs font-black shrink-0">
+            <span className="text-indigo-800 truncate">
+              Chữ {currentLetterObj.letter} · {currentLetterObj.emoji}{' '}
+              {traceAlphabetLang === 'vi'
+                ? currentLetterObj.wordVi
+                : currentLetterObj.wordEn}
+            </span>
+
+            <div className="flex items-center gap-1 shrink-0">
               {currentLetterObj.strokes.map((_, sIdx) => {
                 const isDone = sIdx < safeStrokeIdx;
                 const isCurrent = sIdx === safeStrokeIdx;
                 return (
                   <span
                     key={sIdx}
-                    className={`w-7 h-7 rounded-full text-xs font-black flex items-center justify-center transition ${
+                    className={`w-5 h-5 rounded-full text-[10px] font-black flex items-center justify-center transition ${
                       isDone
                         ? 'bg-emerald-500 text-white'
                         : isCurrent
-                        ? 'bg-emerald-500 text-white ring-3 ring-emerald-200 scale-110'
+                        ? 'bg-indigo-600 text-white ring-2 ring-indigo-200'
                         : 'bg-slate-200 text-slate-600'
                     }`}
                   >
@@ -3136,30 +2763,18 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                   </span>
                 );
               })}
-
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveStrokeIdx(0);
-                  setActiveStrokePoints([]);
-                }}
-                className="ml-1 px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-200 text-rose-700 font-extrabold text-xs flex items-center gap-1 cursor-pointer"
-              >
-                <span>🔄</span>
-                <span>Viết lại</span>
-              </button>
             </div>
           </div>
 
-          {/* Interactive Lined-Paper SVG Letter Tracing Canvas (Matches Reference Image 1) */}
-          <div className="w-full max-w-2xl rounded-[28px] bg-[#FAFBFD] border-2 border-slate-200/90 shadow-inner flex flex-col items-center justify-center p-4 sm:p-6">
+          {/* Interactive Lined-Paper SVG Letter Tracing Canvas: Fills remaining space, maintains aspect-square, largest possible */}
+          <div className="relative flex-1 min-h-0 w-full max-w-md aspect-square rounded-[24px] bg-[#FAFBFD] border-2 border-indigo-200 shadow-inner flex items-center justify-center p-1.5 sm:p-2 overflow-hidden">
             <svg
               viewBox="0 0 300 300"
               onPointerDown={handleTracingPointerDown}
               onPointerMove={handleTracingPointerMove}
               onPointerUp={handleTracingPointerUp}
               onPointerLeave={handleTracingPointerUp}
-              className="w-full max-w-[330px] sm:max-w-[360px] aspect-square rounded-3xl bg-white border border-slate-200/80 shadow-xs touch-none select-none cursor-crosshair"
+              className="w-full h-full max-h-full aspect-square rounded-2xl bg-white border border-slate-200/80 shadow-xs touch-none select-none cursor-crosshair"
               aria-label={`Bảng tập viết chữ ${currentLetterObj.letter}`}
             >
               {/* Primary school notebook horizontal guide lines */}
@@ -3290,61 +2905,49 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
                 </text>
               </g>
             </svg>
-
-            <p className="mt-3 text-xs sm:text-sm font-extrabold text-slate-600 text-center">
-              👆 {currentStroke.hintVi} (Từ nút tròn xanh <strong>{safeStrokeIdx + 1}</strong> đến ngôi sao <strong>⭐</strong>)
-            </p>
           </div>
 
-          {/* Bottom Navigation & Ink Color Bar (Matches Reference Image 1) */}
-          <div className="w-full flex flex-wrap items-center justify-between gap-2 bg-slate-50/90 border border-slate-200/90 rounded-2xl px-3.5 py-2.5">
-            <button
-              type="button"
-              onClick={() => {
-                setActiveStrokeIdx(0);
-                setActiveStrokePoints([]);
-                setTraceLetterIdx(
-                  (prev) =>
-                    (prev - 1 + VIETNAMESE_LETTER_TRACES.length) %
-                    VIETNAMESE_LETTER_TRACES.length
-                );
-              }}
-              className="min-h-[40px] px-4 py-1.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-2xs"
-            >
-              <span>◀</span>
-              <span>Chữ trước</span>
-            </button>
-
-            <div className="flex items-center gap-1.5">
-              {STUDIO_COLOR_PALETTE.slice(0, 6).map((c) => (
+          {/* Bottom Bar: SINGLE HORIZONTAL ROW, BUTTONS 36-40px, DONE BUTTON ON RIGHT (Not overlapping) */}
+          <div className="w-full max-w-md h-12 sm:h-14 shrink-0 rounded-2xl border-2 border-indigo-300 bg-white px-2 shadow-2xs flex items-center justify-between gap-1.5 overflow-hidden">
+            <div className="flex items-center gap-1.5 overflow-x-auto py-1 px-0.5 no-scrollbar flex-1 min-w-0">
+              {STUDIO_COLOR_PALETTE.map((c) => (
                 <button
                   key={c.id}
                   type="button"
                   onClick={() => setBrushColor(c.hex)}
                   style={{ backgroundColor: c.hex }}
-                  className={`w-7 h-7 rounded-full border-2 cursor-pointer transition-transform ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full border-2 cursor-pointer shrink-0 transition-transform ${
                     brushColor === c.hex
-                      ? 'scale-115 border-slate-900 ring-2 ring-amber-300'
-                      : 'border-white'
+                      ? 'scale-110 border-slate-900 ring-2 ring-indigo-300 shadow-sm'
+                      : 'border-white hover:scale-105'
                   }`}
                   aria-label={`Chọn màu mực ${c.nameVi}`}
                 />
               ))}
             </div>
 
+            {/* Green "⭐ Xong" Button on Right of color row without overlapping */}
             <button
               type="button"
-              onClick={() => {
-                setActiveStrokeIdx(0);
-                setActiveStrokePoints([]);
-                setTraceLetterIdx(
-                  (prev) => (prev + 1) % VIETNAMESE_LETTER_TRACES.length
+              onClick={(e) => {
+                if (safeStrokeIdx === 0 && activeStrokePoints.length === 0) {
+                  triggerGentleRetry(
+                    `Bé hãy tập viết nét số 1 của chữ ${currentLetterObj.letter} trước nhé!`,
+                    currentLetterObj.letter
+                  );
+                  return;
+                }
+                triggerRoundWin(
+                  `Letter ${currentLetterObj.letter}! ${currentLetterObj.wordEn}!`,
+                  `Tuyệt vời! Bé đã hoàn thành bài tập viết chữ ${currentLetterObj.letter}!`,
+                  e
                 );
               }}
-              className="min-h-[40px] px-4 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 text-indigo-700 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-2xs"
+              className="shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 text-white font-black text-base flex items-center justify-center shadow-xs active:scale-95 transition cursor-pointer"
+              title="Xong"
+              aria-label="Xong"
             >
-              <span>Chữ tiếp theo</span>
-              <span>▶</span>
+              ⭐
             </button>
           </div>
         </div>
@@ -3927,6 +3530,100 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
             );
           })}
         </div>
+      </div>
+    );
+  }
+
+  // Dedicated Single-Screen Non-Scrolling Container for Step 1 Games
+  const isCompactSingleScreenGame = [
+    'magic-coloring',
+    'alphabet-tracing',
+    'character-puzzle',
+    'dress-up-makeover',
+  ].includes(game.id);
+
+  if (isCompactSingleScreenGame) {
+    return (
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="w-full max-w-md mx-auto h-[calc(100dvh-92px)] max-h-[calc(100dvh-92px)] flex flex-col p-1 sm:p-2 select-none overflow-hidden justify-between"
+      >
+        {renderGameBody()}
+        {showVictoryModal && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-xs"
+            role="dialog"
+            aria-modal="true"
+          >
+            <div className="w-full max-w-md rounded-[32px] bg-white p-6 text-center shadow-2xl border-4 border-amber-300 space-y-4">
+              <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-amber-200 via-yellow-300 to-orange-300 mx-auto flex items-center justify-center text-6xl shadow-md border-4 border-white">
+                {game.emoji}
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-black uppercase">
+                <Trophy className="w-4 h-4 text-amber-600" /> Chúc mừng bé qua đủ 3 màn · Lv.{currentLevel + 1}
+              </div>
+              <h2 className="text-2xl font-extrabold text-slate-900">{game.titleVi}</h2>
+              <p className="text-sm font-semibold text-slate-600">
+                Chúc mừng bé ơi! Bé đã vượt qua cả 3 màn chơi và nhận thêm <strong>+3 Ngôi Sao Vàng</strong>!
+              </p>
+              <div className="flex items-center justify-center gap-2 text-3xl text-amber-400">
+                <span>⭐</span>
+                <span>⭐</span>
+                <span>⭐</span>
+              </div>
+
+              <div className="space-y-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    fireFireworksCelebration();
+                    playCelebrationChime(settings.volume);
+                  }}
+                  className="w-full min-h-[46px] rounded-2xl bg-gradient-to-r from-amber-400 to-orange-400 text-slate-950 font-black text-sm flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <Sparkles className="w-4 h-4" /> 🎆 Bắn Pháo Hoa Khen Thưởng!
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowVictoryModal(false);
+                    setRound(1);
+                    onSelectNextGame(nextGame);
+                  }}
+                  className="w-full min-h-[46px] rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-sm flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                >
+                  <span>Chơi tiếp: {nextGame.titleVi}</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowVictoryModal(false);
+                      setRound(1);
+                    }}
+                    className="min-h-[42px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" /> Chơi lại
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowVictoryModal(false);
+                      onBack();
+                    }}
+                    className="min-h-[42px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center gap-1 cursor-pointer"
+                  >
+                    Về màn hình chính
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

@@ -133,7 +133,271 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
-  app.use(express.json({ limit: '2mb' }));
+  app.use(express.json({ limit: '10mb' }));
+
+  // Server-side AI image to coloring line-art endpoint
+  app.post('/api/image-to-coloring', async (req, res) => {
+    const startTime = Date.now();
+    try {
+      const { imageBase64, mimeType = 'image/jpeg' } = req.body as {
+        imageBase64?: string;
+        mimeType?: string;
+      };
+
+      if (!imageBase64 || typeof imageBase64 !== 'string') {
+        console.warn('[IMAGE_TO_COLORING] Bad request: imageBase64 missing');
+        res.status(400).json({
+          success: false,
+          fallback: true,
+          statusCode: 400,
+          reason: 'BAD_REQUEST',
+          errorMessage: 'imageBase64 is required',
+        });
+        return;
+      }
+
+      const apiKey = process.env.GEMINI_API_KEY;
+      const hasValidGeminiKey = Boolean(
+        apiKey && apiKey !== 'MY_GEMINI_API_KEY' && apiKey.trim().length > 5
+      );
+
+      if (!hasValidGeminiKey || !apiKey) {
+        const errorMsg =
+          'GEMINI_API_KEY chưa được cấu hình trong process.env (khóa rỗng hoặc không tồn tại). Kích hoạt bộ xử lý thị giác cục bộ trên máy bé.';
+        console.warn(`[IMAGE_TO_COLORING] HTTP 503: ${errorMsg}`);
+        res.status(200).json({
+          success: false,
+          fallback: true,
+          statusCode: 503,
+          reason: 'NO_API_KEY_CONFIGURED',
+          errorMessage: errorMsg,
+          elapsedMs: Date.now() - startTime,
+        });
+        return;
+      }
+
+      const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z+]+;base64,/, '');
+
+      const ai = new GoogleGenAI({
+        apiKey,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build',
+          },
+        },
+      });
+
+      const promptText =
+        'Convert the main subject of this photo into a coloring page: ONE cute 3D chibi character or object, pure white background, thick black outline, no color, no shading, simple large shapes, suitable for kids coloring.';
+
+      try {
+        console.log('[IMAGE_TO_COLORING] Calling Gemini model gemini-3.1-flash-lite-image...');
+        const response = await ai.models.generateContent({
+          model: 'gemini-3.1-flash-lite-image',
+          contents: {
+            parts: [
+              {
+                inlineData: {
+                  data: cleanBase64,
+                  mimeType,
+                },
+              },
+              {
+                text: promptText,
+              },
+            ],
+          },
+          config: {
+            imageConfig: {
+              aspectRatio: '1:1',
+            },
+          },
+        });
+
+        for (const part of response.candidates?.[0]?.content?.parts ?? []) {
+          if (part.inlineData?.data) {
+            const resultMime = part.inlineData.mimeType || 'image/png';
+            const elapsed = Date.now() - startTime;
+            console.log(`[IMAGE_TO_COLORING] Succeeded in ${elapsed}ms`);
+            res.json({
+              success: true,
+              imageBase64: `data:${resultMime};base64,${part.inlineData.data}`,
+              fallback: false,
+              elapsedMs: elapsed,
+            });
+            return;
+          }
+        }
+
+        const elapsed = Date.now() - startTime;
+        console.warn(`[IMAGE_TO_COLORING] No image part in response after ${elapsed}ms`);
+        res.json({
+          success: false,
+          fallback: true,
+          statusCode: 502,
+          reason: 'NO_IMAGE_PART_RETURNED',
+          errorMessage: 'Mô hình không trả về phần dữ liệu ảnh',
+          elapsedMs: elapsed,
+        });
+      } catch (err: unknown) {
+        const elapsed = Date.now() - startTime;
+        const errMsg = err instanceof Error ? err.message : String(err);
+        const errStatus = (err as Record<string, unknown>)?.status || 500;
+        console.error(`[IMAGE_TO_COLORING] Gemini API call failed (${errStatus}) after ${elapsed}ms:`, errMsg);
+        res.json({
+          success: false,
+          fallback: true,
+          statusCode: typeof errStatus === 'number' ? errStatus : 502,
+          reason: 'GEMINI_API_ERROR',
+          errorMessage: errMsg,
+          elapsedMs: elapsed,
+        });
+      }
+    } catch (error: unknown) {
+      const elapsed = Date.now() - startTime;
+      const errMsg = error instanceof Error ? error.message : 'Server error';
+      console.error(`[IMAGE_TO_COLORING] General error after ${elapsed}ms:`, errMsg);
+      res.status(500).json({
+        success: false,
+        fallback: true,
+        statusCode: 500,
+        reason: 'SERVER_EXCEPTION',
+        errorMessage: errMsg,
+        elapsedMs: elapsed,
+      });
+    }
+  });
+
+  // Server-side AI image to 3D chibi character for Makeover & Dress-up
+  app.post('/api/image-to-chibi', async (req, res) => {
+    const startTime = Date.now();
+    try {
+      const { imageBase64, mimeType = 'image/jpeg' } = req.body as {
+        imageBase64?: string;
+        mimeType?: string;
+      };
+
+      if (!imageBase64 || typeof imageBase64 !== 'string') {
+        res.status(400).json({
+          success: false,
+          fallback: true,
+          statusCode: 400,
+          reason: 'BAD_REQUEST',
+          errorMessage: 'imageBase64 is required',
+        });
+        return;
+      }
+
+      const apiKey = process.env.GEMINI_API_KEY;
+      const hasValidGeminiKey = Boolean(
+        apiKey && apiKey !== 'MY_GEMINI_API_KEY' && apiKey.trim().length > 5
+      );
+
+      if (!hasValidGeminiKey || !apiKey) {
+        const errorMsg =
+          'GEMINI_API_KEY chưa được cấu hình trong process.env. Kích hoạt bộ xử lý thị giác chibi cục bộ trên máy bé.';
+        console.warn(`[IMAGE_TO_CHIBI] HTTP 503: ${errorMsg}`);
+        res.status(200).json({
+          success: false,
+          fallback: true,
+          statusCode: 503,
+          reason: 'NO_API_KEY_CONFIGURED',
+          errorMessage: errorMsg,
+          elapsedMs: Date.now() - startTime,
+        });
+        return;
+      }
+
+      const cleanBase64 = imageBase64.replace(/^data:image\/[a-zA-Z+]+;base64,/, '');
+
+      const ai = new GoogleGenAI({
+        apiKey,
+        httpOptions: {
+          headers: {
+            'User-Agent': 'aistudio-build',
+          },
+        },
+      });
+
+      const promptText =
+        'Convert the main subject of this photo into ONE cute 3D clay chibi character, front-facing, clean solid pastel background, simplified soft colors, keep large round eyes with twin shine highlights, smooth clay texture, suitable as a base dress-up character.';
+
+      try {
+        console.log('[IMAGE_TO_CHIBI] Calling Gemini model gemini-3.1-flash-lite-image...');
+        const response = await ai.models.generateContent({
+          model: 'gemini-3.1-flash-lite-image',
+          contents: {
+            parts: [
+              {
+                inlineData: {
+                  data: cleanBase64,
+                  mimeType,
+                },
+              },
+              {
+                text: promptText,
+              },
+            ],
+          },
+          config: {
+            imageConfig: {
+              aspectRatio: '1:1',
+            },
+          },
+        });
+
+        for (const part of response.candidates?.[0]?.content?.parts ?? []) {
+          if (part.inlineData?.data) {
+            const resultMime = part.inlineData.mimeType || 'image/png';
+            const elapsed = Date.now() - startTime;
+            console.log(`[IMAGE_TO_CHIBI] Succeeded in ${elapsed}ms`);
+            res.json({
+              success: true,
+              imageBase64: `data:${resultMime};base64,${part.inlineData.data}`,
+              fallback: false,
+              elapsedMs: elapsed,
+            });
+            return;
+          }
+        }
+
+        const elapsed = Date.now() - startTime;
+        res.json({
+          success: false,
+          fallback: true,
+          statusCode: 502,
+          reason: 'NO_IMAGE_PART_RETURNED',
+          errorMessage: 'Mô hình không trả về phần dữ liệu ảnh',
+          elapsedMs: elapsed,
+        });
+      } catch (err: unknown) {
+        const elapsed = Date.now() - startTime;
+        const errMsg = err instanceof Error ? err.message : String(err);
+        const errStatus = (err as Record<string, unknown>)?.status || 500;
+        console.error(`[IMAGE_TO_CHIBI] Gemini API call failed (${errStatus}) after ${elapsed}ms:`, errMsg);
+        res.json({
+          success: false,
+          fallback: true,
+          statusCode: typeof errStatus === 'number' ? errStatus : 502,
+          reason: 'GEMINI_API_ERROR',
+          errorMessage: errMsg,
+          elapsedMs: elapsed,
+        });
+      }
+    } catch (error: unknown) {
+      const elapsed = Date.now() - startTime;
+      const errMsg = error instanceof Error ? error.message : 'Server error';
+      console.error(`[IMAGE_TO_CHIBI] General error after ${elapsed}ms:`, errMsg);
+      res.status(500).json({
+        success: false,
+        fallback: true,
+        statusCode: 500,
+        reason: 'SERVER_EXCEPTION',
+        errorMessage: errMsg,
+        elapsedMs: elapsed,
+      });
+    }
+  });
 
   // Health & TTS cache status endpoint
   app.get('/api/tts/status', (_req, res) => {

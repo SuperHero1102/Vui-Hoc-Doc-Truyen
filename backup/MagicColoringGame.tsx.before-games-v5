@@ -1,0 +1,906 @@
+import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { ArrowLeft, Camera, RotateCcw, Volume2, Sparkles, Check, Eye } from 'lucide-react';
+import type { ParentSettings } from '../types/learning';
+import {
+  STUDIO_COLOR_PALETTE,
+  COLORING_BOOK_TEMPLATES,
+  type ColoringTemplate,
+} from '../data/creativeArtData';
+import { playSoundEffect, speakTeacherVoice } from '../utils/audioEngine';
+import { fireFireworksCelebration } from '../utils/confetti';
+
+interface MagicColoringGameProps {
+  settings: ParentSettings;
+  onBack: () => void;
+  onWin?: () => void;
+  onGentleRetry?: (msgVi: string, msgEn: string) => void;
+}
+
+export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
+  settings,
+  onBack,
+  onWin,
+  onGentleRetry,
+}) => {
+  const [templateIdx, setTemplateIdx] = useState<number>(0);
+  const [coloringMode, setColoringMode] = useState<'free' | 'number'>('free');
+  const [brushColor, setBrushColor] = useState<string>(STUDIO_COLOR_PALETTE[0].hex);
+  const [showTemplateModal, setShowTemplateModal] = useState<boolean>(false);
+  const [showSampleHint, setShowSampleHint] = useState<boolean>(false);
+  const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
+  const [cameraCustomName, setCameraCustomName] = useState<string | null>(null);
+
+  // Canvas refs
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // Undo history stack
+  const undoStackRef = useRef<ImageData[]>([]);
+  const [canUndo, setCanUndo] = useState(false);
+
+  // Number mode badges completed tracking
+  const [completedBadges, setCompletedBadges] = useState<Record<string, boolean>>({});
+
+  const activeTemplate = COLORING_BOOK_TEMPLATES[templateIdx % COLORING_BOOK_TEMPLATES.length];
+  const selectedColorItem =
+    STUDIO_COLOR_PALETTE.find((c) => c.hex === brushColor) || STUDIO_COLOR_PALETTE[0];
+
+  // Helper: Hex to RGB
+  const hexToRgb = (hex: string): [number, number, number] => {
+    const clean = hex.replace('#', '');
+    const num = parseInt(clean, 16);
+    return [(num >> 16) & 255, (num >> 8) & 255, num & 255];
+  };
+
+  // 1. Thicken & Binarize Lines onto 512x512 Canvas (thick black closed lines on white)
+  const drawThickenedImage = useCallback((img: HTMLImageElement | HTMLCanvasElement) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+
+    // Draw base image scaled to 512x512
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 512, 512);
+
+    // Maintain aspect ratio inside 512x512 with padding
+    const padding = 16;
+    const availW = 512 - padding * 2;
+    const availH = 512 - padding * 2;
+    const scale = Math.min(availW / img.width, availH / img.height);
+    const drawW = img.width * scale;
+    const drawH = img.height * scale;
+    const drawX = (512 - drawW) / 2;
+    const drawY = (512 - drawH) / 2;
+
+    ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+    // Read pixel data to thicken borders (dilate dark pixels) and make non-borders pure white
+    const imgData = ctx.getImageData(0, 0, 512, 512);
+    const srcData = imgData.data;
+    const outputData = ctx.createImageData(512, 512);
+    const dst = outputData.data;
+
+    // Pre-fill destination with white
+    for (let i = 0; i < dst.length; i += 4) {
+      dst[i] = 255;
+      dst[i + 1] = 255;
+      dst[i + 2] = 255;
+      dst[i + 3] = 255;
+    }
+
+    // Binary dark mask
+    const isDark = new Uint8Array(512 * 512);
+    for (let y = 0; y < 512; y++) {
+      for (let x = 0; x < 512; x++) {
+        const idx = (y * 512 + x) * 4;
+        const r = srcData[idx];
+        const g = srcData[idx + 1];
+        const b = srcData[idx + 2];
+        const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        if (lum < 110) {
+          isDark[y * 512 + x] = 1;
+        }
+      }
+    }
+
+    // Dilation radius (1 pixel dilation -> 3px thick stroke, prevents leaks)
+    const radius = 1;
+    for (let y = 0; y < 512; y++) {
+      for (let x = 0; x < 512; x++) {
+        if (isDark[y * 512 + x] === 1) {
+          for (let dy = -radius; dy <= radius; dy++) {
+            const ny = y + dy;
+            if (ny < 0 || ny >= 512) continue;
+            for (let dx = -radius; dx <= radius; dx++) {
+              const nx = x + dx;
+              if (nx < 0 || nx >= 512) continue;
+              const dstIdx = (ny * 512 + nx) * 4;
+              dst[dstIdx] = 25;
+              dst[dstIdx + 1] = 30;
+              dst[dstIdx + 2] = 40;
+              dst[dstIdx + 3] = 255;
+            }
+          }
+        }
+      }
+    }
+
+    ctx.putImageData(outputData, 0, 0);
+
+    // Reset undo history
+    undoStackRef.current = [ctx.getImageData(0, 0, 512, 512)];
+    setCanUndo(false);
+    setCompletedBadges({});
+  }, []);
+
+  // 2. Load SVG paths into Canvas if template has no raster image
+  const renderSvgTemplateToCanvas = useCallback((template: ColoringTemplate) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 512, 512);
+
+    // Build SVG string to rasterize
+    const svgHeader = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="512" height="512">`;
+    const paths = template.regions
+      .map(
+        (r) =>
+          `<path d="${r.d}" fill="#FFFFFF" stroke="#1E293B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>`
+      )
+      .join('');
+    const svgFooter = `</svg>`;
+    const fullSvg = `${svgHeader}${paths}${svgFooter}`;
+
+    const blob = new Blob([fullSvg], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = () => {
+      drawThickenedImage(img);
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
+  }, [drawThickenedImage]);
+
+  // Load active template onto canvas
+  useEffect(() => {
+    if (isCameraActive) return;
+
+    if (activeTemplate.imageUrl) {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        drawThickenedImage(img);
+      };
+      img.src = activeTemplate.imageUrl;
+    } else {
+      renderSvgTemplateToCanvas(activeTemplate);
+    }
+  }, [activeTemplate, isCameraActive, drawThickenedImage, renderSvgTemplateToCanvas]);
+
+  // 3. Scanline Flood Fill on 512x512 Canvas
+  const handleCanvasClick = (e: React.PointerEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = 512 / rect.width;
+    const scaleY = 512 / rect.height;
+    const startX = Math.floor((e.clientX - rect.left) * scaleX);
+    const startY = Math.floor((e.clientY - rect.top) * scaleY);
+
+    if (startX < 0 || startX >= 512 || startY < 0 || startY >= 512) return;
+
+    const imgData = ctx.getImageData(0, 0, 512, 512);
+    const data = imgData.data;
+
+    const startIndex = (startY * 512 + startX) * 4;
+    const startR = data[startIndex];
+    const startG = data[startIndex + 1];
+    const startB = data[startIndex + 2];
+
+    // Don't fill border lines (dark luminance < 90)
+    const startLum = 0.299 * startR + 0.587 * startG + 0.114 * startB;
+    if (startLum < 90) return;
+
+    const [fillR, fillG, fillB] = hexToRgb(brushColor);
+
+    // If already the same color, skip
+    if (
+      Math.abs(startR - fillR) < 10 &&
+      Math.abs(startG - fillG) < 10 &&
+      Math.abs(startB - fillB) < 10
+    ) {
+      return;
+    }
+
+    // Number Mode Validation: check if clicked near a region badge
+    if (coloringMode === 'number' && !isCameraActive) {
+      // Find the closest region to click
+      let matchedRegion = null;
+      let minDistance = Infinity;
+
+      for (const reg of activeTemplate.regions) {
+        const badgeCanvasX = (reg.badgePos.x * 512) / 320;
+        const badgeCanvasY = (reg.badgePos.y * 512) / 320;
+        const dist = Math.hypot(startX - badgeCanvasX, startY - badgeCanvasY);
+        if (dist < minDistance) {
+          minDistance = dist;
+          matchedRegion = reg;
+        }
+      }
+
+      // If clicked reasonably close to a numbered region, verify color
+      if (matchedRegion && minDistance < 120) {
+        if (selectedColorItem.number !== matchedRegion.colorNumber) {
+          const expectedColor =
+            STUDIO_COLOR_PALETTE.find((c) => c.number === matchedRegion.colorNumber) ||
+            STUDIO_COLOR_PALETTE[0];
+          if (onGentleRetry) {
+            onGentleRetry(
+              `Vùng này mang số ${matchedRegion.colorNumber} (${expectedColor.nameVi.toLowerCase()}). Bé hãy chọn màu số ${matchedRegion.colorNumber} ở thanh màu bên dưới nhé!`,
+              expectedColor.nameEn
+            );
+          } else {
+            speakTeacherVoice(
+              [
+                {
+                  lang: 'vi',
+                  text: `Vùng này số ${matchedRegion.colorNumber}. Bé chọn màu số ${matchedRegion.colorNumber} nhé!`,
+                },
+              ],
+              settings
+            );
+          }
+          return;
+        } else {
+          setCompletedBadges((prev) => ({ ...prev, [matchedRegion.id]: true }));
+        }
+      }
+    }
+
+    // Stack-based 4-way Flood Fill
+    const pixelStack: [number, number][] = [[startX, startY]];
+    const colorTolerance = 45;
+
+    const matchStartColor = (idx: number) => {
+      const r = data[idx];
+      const g = data[idx + 1];
+      const b = data[idx + 2];
+      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+      if (lum < 90) return false; // Border barrier
+      return (
+        Math.abs(r - startR) <= colorTolerance &&
+        Math.abs(g - startG) <= colorTolerance &&
+        Math.abs(b - startB) <= colorTolerance
+      );
+    };
+
+    const visited = new Uint8Array(512 * 512);
+
+    while (pixelStack.length > 0) {
+      const [x, y] = pixelStack.pop()!;
+      let curY = y;
+      let idx = (curY * 512 + x) * 4;
+
+      while (curY >= 0 && matchStartColor(idx) && visited[curY * 512 + x] === 0) {
+        curY--;
+        idx -= 512 * 4;
+      }
+      curY++;
+      idx += 512 * 4;
+
+      let spanLeft = false;
+      let spanRight = false;
+
+      while (curY < 512 && matchStartColor(idx) && visited[curY * 512 + x] === 0) {
+        visited[curY * 512 + x] = 1;
+        data[idx] = fillR;
+        data[idx + 1] = fillG;
+        data[idx + 2] = fillB;
+        data[idx + 3] = 255;
+
+        if (x > 0) {
+          const leftIdx = idx - 4;
+          if (matchStartColor(leftIdx) && visited[curY * 512 + (x - 1)] === 0) {
+            if (!spanLeft) {
+              pixelStack.push([x - 1, curY]);
+              spanLeft = true;
+            }
+          } else if (spanLeft) {
+            spanLeft = false;
+          }
+        }
+
+        if (x < 511) {
+          const rightIdx = idx + 4;
+          if (matchStartColor(rightIdx) && visited[curY * 512 + (x + 1)] === 0) {
+            if (!spanRight) {
+              pixelStack.push([x + 1, curY]);
+              spanRight = true;
+            }
+          } else if (spanRight) {
+            spanRight = false;
+          }
+        }
+
+        curY++;
+        idx += 512 * 4;
+      }
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+
+    // Push new state to undo stack (max 15)
+    undoStackRef.current.push(ctx.getImageData(0, 0, 512, 512));
+    if (undoStackRef.current.length > 16) {
+      undoStackRef.current.shift();
+    }
+    setCanUndo(true);
+
+    playSoundEffect('sparkle', settings.volume);
+    speakTeacherVoice(
+      [
+        { lang: 'en', text: `${selectedColorItem.nameEn}!` },
+        { lang: 'vi', text: selectedColorItem.nameVi },
+      ],
+      settings
+    );
+  };
+
+  // Undo Action
+  const handleUndo = () => {
+    if (undoStackRef.current.length <= 1) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Pop current
+    undoStackRef.current.pop();
+    const previous = undoStackRef.current[undoStackRef.current.length - 1];
+    ctx.putImageData(previous, 0, 0);
+    setCanUndo(undoStackRef.current.length > 1);
+    playSoundEffect('pop', settings.volume);
+  };
+
+  // Reset Action
+  const handleReset = () => {
+    playSoundEffect('pop', settings.volume);
+    if (isCameraActive) {
+      // Re-trigger camera upload or keep outline
+      const firstState = undoStackRef.current[0];
+      if (firstState && canvasRef.current) {
+        const ctx = canvasRef.current.getContext('2d');
+        if (ctx) ctx.putImageData(firstState, 0, 0);
+        undoStackRef.current = [firstState];
+        setCanUndo(false);
+      }
+    } else {
+      if (activeTemplate.imageUrl) {
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => drawThickenedImage(img);
+        img.src = activeTemplate.imageUrl;
+      } else {
+        renderSvgTemplateToCanvas(activeTemplate);
+      }
+    }
+  };
+
+  // 4. Bước 4: Camera Edge Detection Pipeline
+  const handleCameraClick = () => {
+    playSoundEffect('pop', settings.volume);
+    fileInputRef.current?.click();
+  };
+
+  const handleImageFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        processUploadedImageIntoColoringBook(img);
+      };
+      img.src = event.target?.result as string;
+    };
+    reader.readAsDataURL(file);
+
+    // Reset input value so same photo can be picked again
+    e.target.value = '';
+  };
+
+  const processUploadedImageIntoColoringBook = (img: HTMLImageElement) => {
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = 512;
+    offCanvas.height = 512;
+    const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+    if (!offCtx) return;
+
+    // 1. Draw scaled down image
+    const scale = Math.min(512 / img.width, 512 / img.height);
+    const drawW = Math.round(img.width * scale);
+    const drawH = Math.round(img.height * scale);
+    const drawX = Math.round((512 - drawW) / 2);
+    const drawY = Math.round((512 - drawH) / 2);
+
+    offCtx.fillStyle = '#FFFFFF';
+    offCtx.fillRect(0, 0, 512, 512);
+    offCtx.drawImage(img, drawX, drawY, drawW, drawH);
+
+    const imgData = offCtx.getImageData(0, 0, 512, 512);
+    const src = imgData.data;
+
+    // 2. Grayscale & 3x3 Gaussian Blur
+    const gray = new Float32Array(512 * 512);
+    for (let y = 0; y < 512; y++) {
+      for (let x = 0; x < 512; x++) {
+        const idx = (y * 512 + x) * 4;
+        gray[y * 512 + x] = 0.299 * src[idx] + 0.587 * src[idx + 1] + 0.114 * src[idx + 2];
+      }
+    }
+
+    const blurred = new Float32Array(512 * 512);
+    for (let y = 1; y < 511; y++) {
+      for (let x = 1; x < 511; x++) {
+        const sum =
+          gray[(y - 1) * 512 + (x - 1)] * 1 +
+          gray[(y - 1) * 512 + x] * 2 +
+          gray[(y - 1) * 512 + (x + 1)] * 1 +
+          gray[y * 512 + (x - 1)] * 2 +
+          gray[y * 512 + x] * 4 +
+          gray[y * 512 + (x + 1)] * 2 +
+          gray[(y + 1) * 512 + (x - 1)] * 1 +
+          gray[(y + 1) * 512 + x] * 2 +
+          gray[(y + 1) * 512 + (x + 1)] * 1;
+        blurred[y * 512 + x] = sum / 16;
+      }
+    }
+
+    // 3. Sobel Edge Detection
+    const edges = new Uint8Array(512 * 512);
+    const threshold = 38;
+
+    for (let y = 1; y < 511; y++) {
+      for (let x = 1; x < 511; x++) {
+        const gx =
+          -1 * blurred[(y - 1) * 512 + (x - 1)] +
+          1 * blurred[(y - 1) * 512 + (x + 1)] +
+          -2 * blurred[y * 512 + (x - 1)] +
+          2 * blurred[y * 512 + (x + 1)] +
+          -1 * blurred[(y + 1) * 512 + (x - 1)] +
+          1 * blurred[(y + 1) * 512 + (x + 1)];
+
+        const gy =
+          -1 * blurred[(y - 1) * 512 + (x - 1)] +
+          -2 * blurred[(y - 1) * 512 + x] +
+          -1 * blurred[(y - 1) * 512 + (x + 1)] +
+          1 * blurred[(y + 1) * 512 + (x - 1)] +
+          2 * blurred[(y + 1) * 512 + x] +
+          1 * blurred[(y + 1) * 512 + (x + 1)];
+
+        const mag = Math.hypot(gx, gy);
+        if (mag > threshold) {
+          edges[y * 512 + x] = 1;
+        }
+      }
+    }
+
+    // 4. Invert to Black Lines on Pure White & Thicken 2-3px
+    const finalData = offCtx.createImageData(512, 512);
+    const dst = finalData.data;
+
+    // Initialize all to white
+    for (let i = 0; i < dst.length; i += 4) {
+      dst[i] = 255;
+      dst[i + 1] = 255;
+      dst[i + 2] = 255;
+      dst[i + 3] = 255;
+    }
+
+    // Dilate edges by 2 pixels (thick solid contours)
+    const dilateR = 1;
+    for (let y = 2; y < 510; y++) {
+      for (let x = 2; x < 510; x++) {
+        if (edges[y * 512 + x] === 1) {
+          for (let dy = -dilateR; dy <= dilateR; dy++) {
+            const ny = y + dy;
+            for (let dx = -dilateR; dx <= dilateR; dx++) {
+              const nx = x + dx;
+              const idx = (ny * 512 + nx) * 4;
+              dst[idx] = 25;
+              dst[idx + 1] = 30;
+              dst[idx + 2] = 40;
+              dst[idx + 3] = 255;
+            }
+          }
+        }
+      }
+    }
+
+    // Put into main canvas
+    const mainCanvas = canvasRef.current;
+    if (!mainCanvas) return;
+    const mainCtx = mainCanvas.getContext('2d');
+    if (!mainCtx) return;
+
+    mainCtx.putImageData(finalData, 0, 0);
+
+    // Save to undo stack
+    undoStackRef.current = [mainCtx.getImageData(0, 0, 512, 512)];
+    setCanUndo(false);
+    setIsCameraActive(true);
+    setCameraCustomName('Tranh từ máy ảnh của bé');
+    setColoringMode('free'); // Camera mode is always free coloring mode
+
+    playSoundEffect('sparkle', settings.volume);
+    speakTeacherVoice(
+      [{ lang: 'vi', text: 'Tranh chụp của bé đã biến thành tranh tô màu rồi! Cùng tô nhé!' }],
+      settings
+    );
+  };
+
+  return (
+    <div className="w-full h-full max-h-[100dvh] flex flex-col justify-between items-center bg-gradient-to-b from-amber-50/70 via-pink-50/30 to-sky-50/70 p-1 sm:p-2 select-none overflow-hidden font-sans">
+      {/* Hidden File Input for Camera/Gallery Upload (No capture attribute to let OS offer camera or photo library) */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleImageFileChange}
+      />
+
+      {/* 1. Header Toolbar: Single row <= 48px, Icons Only */}
+      <div className="w-full max-w-md h-11 sm:h-12 shrink-0 rounded-2xl border-2 border-amber-400 bg-white/95 backdrop-blur-md px-2 shadow-2xs flex items-center justify-between gap-1">
+        {/* Left: Back button + Template Picker + Camera Button + Mode Switcher */}
+        <div className="flex items-center gap-1 shrink-0">
+          <button
+            type="button"
+            onClick={onBack}
+            className="w-9 h-9 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-800 flex items-center justify-center cursor-pointer transition active:scale-95"
+            title="Quay lại sân chơi"
+            aria-label="Quay lại"
+          >
+            <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+          </button>
+
+          {/* Template Selector Button: Icon only */}
+          <button
+            type="button"
+            onClick={() => setShowTemplateModal(true)}
+            className="w-9 h-9 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95 text-base"
+            title="Chọn tranh tô màu"
+            aria-label="Chọn tranh"
+          >
+            🖼️
+          </button>
+
+          {/* Camera Button (Bước 4): Camera Icon Only */}
+          <button
+            type="button"
+            onClick={handleCameraClick}
+            className="w-9 h-9 rounded-xl bg-gradient-to-r from-sky-500 to-blue-500 hover:from-sky-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95"
+            title="Chụp hoặc chọn ảnh từ máy"
+            aria-label="Chụp ảnh tô màu"
+          >
+            <Camera className="w-5 h-5" />
+          </button>
+
+          {/* Mode Switcher: Tự Do (🎨) vs Theo Số (🔢) - Icons only */}
+          <div className="flex items-center bg-amber-100/90 p-0.5 rounded-xl border border-amber-300 shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                setColoringMode('free');
+                playSoundEffect('pop', settings.volume);
+              }}
+              className={`w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center cursor-pointer transition ${
+                coloringMode === 'free'
+                  ? 'bg-amber-500 text-white shadow-2xs'
+                  : 'text-amber-950 hover:bg-amber-200/60'
+              }`}
+              title="Chế độ Tự do"
+              aria-label="Tự do"
+            >
+              🎨
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (isCameraActive) {
+                  speakTeacherVoice(
+                    [{ lang: 'vi', text: 'Tranh máy ảnh đang ở chế độ tô màu tự do bé nhé!' }],
+                    settings
+                  );
+                  return;
+                }
+                setColoringMode('number');
+                playSoundEffect('pop', settings.volume);
+              }}
+              className={`w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center cursor-pointer transition ${
+                coloringMode === 'number'
+                  ? 'bg-amber-500 text-white shadow-2xs'
+                  : 'text-amber-950 hover:bg-amber-200/60'
+              }`}
+              title="Chế độ Theo số"
+              aria-label="Theo số"
+            >
+              🔢
+            </button>
+          </div>
+        </div>
+
+        {/* Right: Hint (Eye), Undo, Reset, Audio Guide */}
+        <div className="flex items-center gap-1 shrink-0">
+          {!isCameraActive && (
+            <button
+              type="button"
+              onClick={() => {
+                setShowSampleHint(!showSampleHint);
+                playSoundEffect('pop', settings.volume);
+              }}
+              className={`w-9 h-9 rounded-xl border flex items-center justify-center text-base cursor-pointer transition ${
+                showSampleHint
+                  ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-2xs scale-105'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+              }`}
+              title="Xem mẫu gợi ý"
+              aria-label="Hình mẫu"
+            >
+              <Eye className="w-4 h-4" />
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={handleUndo}
+            disabled={!canUndo}
+            className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 disabled:opacity-30 border border-slate-200 text-slate-700 text-base flex items-center justify-center cursor-pointer transition active:scale-95"
+            title="Hoàn tác nét vừa tô"
+            aria-label="Hoàn tác"
+          >
+            ↩️
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-base flex items-center justify-center cursor-pointer transition active:scale-95"
+            title="Tô lại từ đầu"
+            aria-label="Tô lại"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              speakTeacherVoice(
+                [
+                  {
+                    lang: 'vi',
+                    text: isCameraActive
+                      ? 'Bé hãy chọn màu và chạm vào các ô để đổ màu cho bức tranh nhé!'
+                      : `Bé tô màu tranh ${activeTemplate.titleVi} nhé!`,
+                  },
+                ],
+                settings
+              )
+            }
+            className="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95"
+            title="Nghe hướng dẫn"
+            aria-label="Nghe hướng dẫn"
+          >
+            <Volume2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Interactive Coloring Canvas: Takes remaining space, maintains aspect-square, largest possible */}
+      <div className="relative flex-1 min-h-0 w-full max-w-md aspect-square rounded-[24px] border-4 border-amber-400 bg-white shadow-md p-1 sm:p-2 flex items-center justify-center overflow-hidden">
+        {/* Sample Reference Thumbnail when Eye is Active */}
+        {showSampleHint && !isCameraActive && (
+          <div className="absolute top-2 right-2 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-xl p-1.5 shadow-md flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200 pointer-events-none">
+            {activeTemplate.imageUrl ? (
+              <img
+                src={activeTemplate.imageUrl}
+                alt="Hình mẫu"
+                className="w-14 h-14 rounded-lg object-contain bg-amber-50/50"
+              />
+            ) : (
+              <span className="text-3xl">{activeTemplate.emoji}</span>
+            )}
+            <span className="text-[10px] font-black text-amber-900 mt-0.5">Hình Mẫu</span>
+          </div>
+        )}
+
+        {/* HTML Canvas with Flood Fill */}
+        <canvas
+          ref={canvasRef}
+          width={512}
+          height={512}
+          onPointerDown={handleCanvasClick}
+          className="w-full h-full max-h-full aspect-square object-contain touch-none cursor-crosshair rounded-[20px] select-none"
+        />
+
+        {/* Number Badges Overlay in "Theo Số" Mode */}
+        {coloringMode === 'number' && !isCameraActive && (
+          <div className="absolute inset-0 pointer-events-none p-1 sm:p-2 flex items-center justify-center">
+            <div className="relative w-full h-full aspect-square">
+              {activeTemplate.regions.map((region) => {
+                const isCompleted = completedBadges[region.id];
+                if (isCompleted) return null;
+
+                const isSelectedNumber = selectedColorItem.number === region.colorNumber;
+                const leftPercent = (region.badgePos.x / 320) * 100;
+                const topPercent = (region.badgePos.y / 320) * 100;
+
+                return (
+                  <div
+                    key={region.id}
+                    style={{
+                      left: `${leftPercent}%`,
+                      top: `${topPercent}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                    className={`absolute pointer-events-auto cursor-pointer rounded-full flex items-center justify-center font-black text-xs transition-transform ${
+                      isSelectedNumber
+                        ? 'w-6 h-6 bg-amber-400 text-amber-950 ring-2 ring-amber-600 scale-125 shadow-md animate-bounce'
+                        : 'w-5 h-5 bg-white text-slate-800 border-2 border-slate-600 shadow-xs'
+                    }`}
+                    onClick={() => {
+                      if (selectedColorItem.number !== region.colorNumber) {
+                        const expectedColor =
+                          STUDIO_COLOR_PALETTE.find((c) => c.number === region.colorNumber) ||
+                          STUDIO_COLOR_PALETTE[0];
+                        if (onGentleRetry) {
+                          onGentleRetry(
+                            `Vùng này mang số ${region.colorNumber} (${expectedColor.nameVi.toLowerCase()}). Bé hãy chọn màu số ${region.colorNumber} ở thanh màu bên dưới nhé!`,
+                            expectedColor.nameEn
+                          );
+                        }
+                      }
+                    }}
+                    title={`Vùng số ${region.colorNumber}`}
+                  >
+                    {region.colorNumber}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 3. Bottom Palette Drawer: SINGLE HORIZONTAL ROW, BUTTONS 36-40px, DONE BUTTON ON RIGHT */}
+      <div className="w-full max-w-md h-12 sm:h-14 shrink-0 rounded-2xl border-2 border-amber-400 bg-[#FFFDF5] px-2 shadow-2xs flex items-center justify-between gap-1.5 overflow-hidden">
+        {/* Scrollable Row of Color Bubbles */}
+        <div className="flex items-center gap-1.5 overflow-x-auto py-1 px-0.5 no-scrollbar flex-1 min-w-0">
+          {STUDIO_COLOR_PALETTE.map((c) => {
+            const isSelected = brushColor === c.hex;
+            return (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => {
+                  setBrushColor(c.hex);
+                  speakTeacherVoice(
+                    [
+                      { lang: 'en', text: `${c.nameEn}!` },
+                      { lang: 'vi', text: c.nameVi },
+                    ],
+                    settings
+                  );
+                }}
+                style={{ backgroundColor: c.hex }}
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-black text-xs sm:text-sm cursor-pointer transition-all select-none shrink-0 ${
+                  isSelected
+                    ? 'ring-4 ring-amber-400 scale-110 border-2 border-white shadow-md'
+                    : 'border-2 border-white hover:scale-105 shadow-2xs opacity-90 hover:opacity-100'
+                }`}
+                title={`Màu số ${c.number}: ${c.nameVi}`}
+                aria-label={c.nameVi}
+              >
+                <span className="text-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.8)] font-black">
+                  {c.number}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Done / Finished Button */}
+        <button
+          type="button"
+          onClick={() => {
+            fireFireworksCelebration();
+            speakTeacherVoice(
+              [
+                {
+                  lang: 'vi',
+                  text: 'Hoan hô bé! Bức tranh tô màu rực rỡ và xinh xắn quá đi thôi!',
+                },
+                { lang: 'en', text: 'Splendid coloring! You are a brilliant little artist!' },
+              ],
+              settings
+            );
+            if (onWin) onWin();
+          }}
+          className="shrink-0 h-9 sm:h-10 px-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 text-white font-black text-xs flex items-center gap-1 shadow-xs active:scale-95 transition cursor-pointer"
+          title="Xong"
+          aria-label="Xong"
+        >
+          <span>⭐</span>
+          <span>Xong</span>
+        </button>
+      </div>
+
+      {/* 4. Template Picker Modal */}
+      {showTemplateModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200">
+          <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-amber-400 shadow-2xl p-4 flex flex-col items-center space-y-3 max-h-[85vh] overflow-y-auto">
+            <div className="flex items-center justify-between w-full border-b border-amber-100 pb-2">
+              <div className="flex items-center gap-1.5 text-amber-800 font-black text-sm">
+                <span>🖼️</span>
+                <span>Chọn Tranh Tô Màu Cho Bé</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowTemplateModal(false)}
+                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center cursor-pointer text-xs"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 w-full">
+              {COLORING_BOOK_TEMPLATES.map((tmpl, idx) => {
+                const isCurrent = !isCameraActive && templateIdx === idx;
+                return (
+                  <button
+                    key={`${tmpl.id}-${idx}`}
+                    type="button"
+                    onClick={() => {
+                      setTemplateIdx(idx);
+                      setIsCameraActive(false);
+                      setCameraCustomName(null);
+                      setShowTemplateModal(false);
+                      playSoundEffect('pop', settings.volume);
+                      speakTeacherVoice([{ lang: 'vi', text: tmpl.titleVi }], settings);
+                    }}
+                    className={`p-2 rounded-2xl border-2 flex flex-col items-center gap-1 cursor-pointer transition text-center ${
+                      isCurrent
+                        ? 'border-amber-500 bg-amber-50 shadow-md scale-105'
+                        : 'border-slate-200 bg-white hover:bg-slate-50'
+                    }`}
+                  >
+                    {tmpl.imageUrl ? (
+                      <img
+                        src={tmpl.imageUrl}
+                        alt={tmpl.titleVi}
+                        className="w-12 h-12 rounded-lg object-contain bg-amber-50/40 p-0.5"
+                      />
+                    ) : (
+                      <span className="text-3xl">{tmpl.emoji}</span>
+                    )}
+                    <span className="text-[11px] font-bold text-slate-700 line-clamp-1">
+                      {tmpl.titleVi}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -1,0 +1,963 @@
+import React, { useState } from 'react';
+import { Sparkles, Camera, RotateCcw, ArrowLeft, Volume2, Check } from 'lucide-react';
+import type { ParentSettings } from '../types/learning';
+import { playSoundEffect, speakTeacherVoice } from '../utils/audioEngine';
+import { fireFireworksCelebration } from '../utils/confetti';
+
+interface DressUpMakeoverGameProps {
+  settings: ParentSettings;
+  onBack?: () => void;
+  onWin?: () => void;
+}
+
+type CharacterId = 'lily' | 'leo' | 'mimi';
+type CategoryTab = 'outfit' | 'hat' | 'makeup' | 'shoes' | 'prop';
+
+interface StylingItem {
+  id: string;
+  nameVi: string;
+  emoji: string;
+  colorHex: string;
+  lipstickColor?: string;
+  eyeshadowColor?: string;
+}
+
+const CHARACTERS = [
+  { id: 'lily' as CharacterId, nameVi: 'Bé Gái Lily', nameEn: 'Lily', emoji: '👧' },
+  { id: 'leo' as CharacterId, nameVi: 'Bé Trai Leo', nameEn: 'Leo', emoji: '👦' },
+  { id: 'mimi' as CharacterId, nameVi: 'Mèo Mimi', nameEn: 'Mimi', emoji: '🐱' },
+];
+
+const OUTFITS: StylingItem[] = [
+  { id: 'casual', nameVi: 'Áo thun năng động', emoji: '👕', colorHex: '#38BDF8' },
+  { id: 'princess', nameVi: 'Váy công chúa', emoji: '👗', colorHex: '#EC4899' },
+  { id: 'superhero', nameVi: 'Đồ siêu nhân', emoji: '🦸', colorHex: '#2563EB' },
+  { id: 'doctor', nameVi: 'Áo blouse bác sĩ', emoji: '🥼', colorHex: '#0284C7' },
+  { id: 'winter', nameVi: 'Áo len ấm áp', emoji: '🧥', colorHex: '#F59E0B' },
+  { id: 'fairy', nameVi: 'Váy tiên hoa', emoji: '🧚', colorHex: '#10B981' },
+];
+
+const HATS: StylingItem[] = [
+  { id: 'none', nameVi: 'Không đội mũ', emoji: '✨', colorHex: '#94A3B8' },
+  { id: 'crown', nameVi: 'Vương miện vàng', emoji: '👑', colorHex: '#FACC15' },
+  { id: 'pink-bow', nameVi: 'Nơ hồng xinh', emoji: '🎀', colorHex: '#F472B6' },
+  { id: 'cap', nameVi: 'Mũ lưỡi trai', emoji: '🧢', colorHex: '#3B82F6' },
+  { id: 'cat-ears', nameVi: 'Băng đô tai mèo', emoji: '🐱', colorHex: '#A855F7' },
+  { id: 'chef-hat', nameVi: 'Mũ đầu bếp', emoji: '👨‍🍳', colorHex: '#E2E8F0' },
+];
+
+const MAKEUPS: StylingItem[] = [
+  {
+    id: 'peach-blush',
+    nameVi: 'Má hồng đào & Son san hô',
+    emoji: '🌸',
+    colorHex: '#FB7185',
+    lipstickColor: '#FB7185',
+    eyeshadowColor: '#FDE047',
+  },
+  {
+    id: 'strawberry-glam',
+    nameVi: 'Son đỏ dâu & Phấn dâu',
+    emoji: '🍓',
+    colorHex: '#EF4444',
+    lipstickColor: '#E11D48',
+    eyeshadowColor: '#FDA4AF',
+  },
+  {
+    id: 'heart-cheeks',
+    nameVi: 'Má trái tim & Son hồng kẹo',
+    emoji: '💖',
+    colorHex: '#F43F5E',
+    lipstickColor: '#F43F5E',
+    eyeshadowColor: '#F472B6',
+  },
+  {
+    id: 'sparkle-eyes',
+    nameVi: 'Mắt kim tuyến & Son bóng',
+    emoji: '✨',
+    colorHex: '#38BDF8',
+    lipstickColor: '#EC4899',
+    eyeshadowColor: '#38BDF8',
+  },
+  {
+    id: 'star-glitter',
+    nameVi: 'Sticker sao & Son cam tươi',
+    emoji: '⭐',
+    colorHex: '#FACC15',
+    lipstickColor: '#F97316',
+    eyeshadowColor: '#FBBF24',
+  },
+  {
+    id: 'butterfly-face',
+    nameVi: 'Cánh bướm & Son tím hồng',
+    emoji: '🦋',
+    colorHex: '#C084FC',
+    lipstickColor: '#A855F7',
+    eyeshadowColor: '#C084FC',
+  },
+  {
+    id: 'natural',
+    nameVi: 'Mặt mộc tự nhiên & Dưỡng môi',
+    emoji: '🌿',
+    colorHex: '#CBD5E1',
+    lipstickColor: '#FDA4AF',
+    eyeshadowColor: 'transparent',
+  },
+];
+
+const SHOES: StylingItem[] = [
+  { id: 'sneakers', nameVi: 'Giày thể thao', emoji: '👟', colorHex: '#38BDF8' },
+  { id: 'mary-jane', nameVi: 'Giày búp bê đỏ', emoji: '👠', colorHex: '#EF4444' },
+  { id: 'boots', nameVi: 'Ủng ấm áp', emoji: '🥾', colorHex: '#F59E0B' },
+  { id: 'sandals', nameVi: 'Dép hoa mùa hè', emoji: '🩴', colorHex: '#10B981' },
+  { id: 'royal-shoes', nameVi: 'Hài hoàng gia', emoji: '🥿', colorHex: '#6366F1' },
+];
+
+const PROPS: StylingItem[] = [
+  { id: 'none', nameVi: 'Tay không', emoji: '✋', colorHex: '#94A3B8' },
+  { id: 'magic-wand', nameVi: 'Gậy ngôi sao phép thuật', emoji: '🪄', colorHex: '#FACC15' },
+  { id: 'teddy', nameVi: 'Gấu bông ôm ngực', emoji: '🧸', colorHex: '#B45309' },
+  { id: 'balloon', nameVi: 'Bóng bay trái tim', emoji: '🎈', colorHex: '#EF4444' },
+  { id: 'ice-cream', nameVi: 'Que kem ốc quế', emoji: '🍦', colorHex: '#EC4899' },
+  { id: 'backpack', nameVi: 'Balo đi học', emoji: '🎒', colorHex: '#3B82F6' },
+];
+
+export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
+  settings,
+  onBack,
+  onWin,
+}) => {
+  const [character, setCharacter] = useState<CharacterId>('lily');
+  const [activeTab, setActiveTab] = useState<CategoryTab>('outfit');
+
+  // Equipped state
+  const [outfit, setOutfit] = useState<string>('princess');
+  const [hat, setHat] = useState<string>('crown');
+  const [makeup, setMakeup] = useState<string>('peach-blush');
+  const [shoes, setShoes] = useState<string>('sneakers');
+  const [prop, setProp] = useState<string>('magic-wand');
+
+  // Flash photo modal
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [photoFlash, setPhotoFlash] = useState(false);
+
+  const activeCharacterObj = CHARACTERS.find((c) => c.id === character) || CHARACTERS[0];
+  const activeMakeupObj = MAKEUPS.find((m) => m.id === makeup) || MAKEUPS[0];
+
+  const handleRandomize = () => {
+    playSoundEffect('pop', settings.volume);
+    const randomOutfit = OUTFITS[Math.floor(Math.random() * OUTFITS.length)].id;
+    const randomHat = HATS[Math.floor(Math.random() * HATS.length)].id;
+    const randomMakeup = MAKEUPS[Math.floor(Math.random() * MAKEUPS.length)].id;
+    const randomShoes = SHOES[Math.floor(Math.random() * SHOES.length)].id;
+    const randomProp = PROPS[Math.floor(Math.random() * PROPS.length)].id;
+
+    setOutfit(randomOutfit);
+    setHat(randomHat);
+    setMakeup(randomMakeup);
+    setShoes(randomShoes);
+    setProp(randomProp);
+
+    speakTeacherVoice(
+      [{ lang: 'vi', text: 'Bé xem bộ trang phục phối ngẫu nhiên mới xinh chưa này!' }],
+      settings
+    );
+  };
+
+  const handleReset = () => {
+    playSoundEffect('pop', settings.volume);
+    setOutfit('casual');
+    setHat('none');
+    setMakeup('natural');
+    setShoes('sneakers');
+    setProp('none');
+  };
+
+  const handleTakePhoto = () => {
+    playSoundEffect('sparkle', settings.volume);
+    setPhotoFlash(true);
+    setTimeout(() => {
+      setPhotoFlash(false);
+      setShowPhotoModal(true);
+      fireFireworksCelebration();
+    }, 280);
+  };
+
+  const currentTabItems = (): StylingItem[] => {
+    switch (activeTab) {
+      case 'outfit':
+        return OUTFITS;
+      case 'hat':
+        return HATS;
+      case 'makeup':
+        return MAKEUPS;
+      case 'shoes':
+        return SHOES;
+      case 'prop':
+        return PROPS;
+    }
+  };
+
+  const isCurrentEquipped = (id: string) => {
+    switch (activeTab) {
+      case 'outfit':
+        return outfit === id;
+      case 'hat':
+        return hat === id;
+      case 'makeup':
+        return makeup === id;
+      case 'shoes':
+        return shoes === id;
+      case 'prop':
+        return prop === id;
+    }
+  };
+
+  const handleSelectEquipped = (id: string) => {
+    playSoundEffect('pop', settings.volume);
+    switch (activeTab) {
+      case 'outfit':
+        setOutfit(id);
+        break;
+      case 'hat':
+        setHat(id);
+        break;
+      case 'makeup':
+        setMakeup(id);
+        break;
+      case 'shoes':
+        setShoes(id);
+        break;
+      case 'prop':
+        setProp(id);
+        break;
+    }
+  };
+
+  return (
+    <div className="w-full h-full max-h-[100dvh] flex flex-col justify-between items-center bg-gradient-to-b from-amber-50/70 via-pink-50/40 to-sky-50/70 p-1 sm:p-2 select-none overflow-hidden font-sans">
+      {/* 1. Header Toolbar: Single row <= 48px, Icons Only */}
+      <div className="w-full max-w-md h-11 sm:h-12 shrink-0 flex items-center justify-between gap-1.5 px-2 bg-white/95 backdrop-blur-md rounded-2xl border-2 border-pink-300 shadow-2xs">
+        {/* Left: Back button (if available) + Character selector */}
+        <div className="flex items-center gap-1 shrink-0">
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="w-9 h-9 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-700 flex items-center justify-center cursor-pointer transition active:scale-95"
+              title="Quay lại"
+              aria-label="Quay lại"
+            >
+              <ArrowLeft className="w-5 h-5" />
+            </button>
+          )}
+
+          {/* Character selector: 👧 Lily, 👦 Leo, 🐱 Mimi */}
+          <div className="flex items-center gap-0.5 bg-pink-50 p-0.5 rounded-xl border border-pink-200">
+            {CHARACTERS.map((char) => (
+              <button
+                key={char.id}
+                type="button"
+                onClick={() => {
+                  setCharacter(char.id);
+                  playSoundEffect('pop', settings.volume);
+                  speakTeacherVoice([{ lang: 'vi', text: char.nameVi }], settings);
+                }}
+                className={`w-8 h-8 rounded-lg text-lg flex items-center justify-center transition cursor-pointer ${
+                  character === char.id
+                    ? 'bg-pink-500 text-white shadow-xs scale-105'
+                    : 'hover:bg-pink-100 text-slate-700'
+                }`}
+                title={char.nameVi}
+                aria-label={char.nameVi}
+              >
+                <span>{char.emoji}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Center: Action Buttons (Randomize 🎲, Reset 🔄) */}
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={handleRandomize}
+            className="w-9 h-9 rounded-xl bg-purple-100 hover:bg-purple-200 border border-purple-300 text-purple-900 text-base flex items-center justify-center cursor-pointer transition active:scale-95 shadow-2xs"
+            title="Phối đồ ngẫu nhiên"
+            aria-label="Phối đồ ngẫu nhiên"
+          >
+            <span>🎲</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-sm flex items-center justify-center cursor-pointer transition active:scale-95"
+            title="Mặc lại đồ ban đầu"
+            aria-label="Mặc lại"
+          >
+            <RotateCcw className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Right: Snapshot Camera (Icon only) + Voice Button */}
+        <div className="flex items-center gap-1 shrink-0">
+          <button
+            type="button"
+            onClick={handleTakePhoto}
+            className="w-9 h-9 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 text-white flex items-center justify-center cursor-pointer transition active:scale-95 shadow-xs"
+            title="Chụp ảnh người mẫu"
+            aria-label="Chụp ảnh"
+          >
+            <Camera className="w-5 h-5" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              speakTeacherVoice(
+                [
+                  { lang: 'vi', text: `Bé chọn đồ và trang điểm thật xinh cho ${activeCharacterObj.nameVi} nhé!` },
+                ],
+                settings
+              )
+            }
+            className="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95"
+            title="Nghe hướng dẫn"
+            aria-label="Nghe hướng dẫn"
+          >
+            <Volume2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Interactive Dressing Room Canvas: Chibi 3D Pastel Clay Style */}
+      <div className="relative flex-1 min-h-0 w-full max-w-md aspect-[3/4] sm:aspect-square rounded-[24px] border-4 border-pink-400 bg-gradient-to-b from-sky-50 via-pink-50/40 to-amber-50 shadow-md p-1.5 sm:p-2 flex flex-col items-center justify-center overflow-hidden">
+        {/* Flash effect overlay */}
+        {photoFlash && (
+          <div className="absolute inset-0 bg-white z-40 animate-out fade-out duration-300 pointer-events-none" />
+        )}
+
+        {/* Sparkling environment accents */}
+        <div className="absolute top-2 left-2 text-2xl animate-pulse">✨</div>
+        <div className="absolute top-3 right-3 text-xl animate-bounce">💖</div>
+        <div className="absolute bottom-4 left-3 text-xl">🌸</div>
+        <div className="absolute bottom-5 right-3 text-2xl">⭐</div>
+
+        {/* Multi-layered SVG Avatar — Adorable 3D Pastel Clay Toddler Chibi */}
+        <svg
+          viewBox="0 0 300 360"
+          className="w-full max-w-[280px] sm:max-w-[320px] h-auto drop-shadow-md cursor-pointer transition-transform hover:scale-102 active:scale-98 select-none"
+          onClick={() => {
+            playSoundEffect('sparkle', settings.volume);
+            speakTeacherVoice(
+              [{ lang: 'vi', text: `Chào bé! ${activeCharacterObj.nameVi} thích bộ đồ này lắm!` }],
+              settings
+            );
+          }}
+          aria-label={`Nhân vật ${activeCharacterObj.nameVi}`}
+        >
+          <defs>
+            {/* 3D Clay Soft Spherical Skin Gradient */}
+            <radialGradient id="chibiSkin3D" cx="42%" cy="32%" r="68%">
+              <stop offset="0%" stopColor="#FFF7ED" />
+              <stop offset="55%" stopColor="#FED7AA" />
+              <stop offset="88%" stopColor="#FDBA74" />
+              <stop offset="100%" stopColor="#FB923C" />
+            </radialGradient>
+
+            {/* Rosy Cheek Blush Gradient */}
+            <radialGradient id="chibiCheek3D" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor="#FB7185" stopOpacity="0.85" />
+              <stop offset="65%" stopColor="#FDA4AF" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#FDA4AF" stopOpacity="0" />
+            </radialGradient>
+
+            {/* Hair Gradients */}
+            <radialGradient id="lilyHair3D" cx="40%" cy="30%" r="70%">
+              <stop offset="0%" stopColor="#A16207" />
+              <stop offset="50%" stopColor="#854D0E" />
+              <stop offset="100%" stopColor="#451A03" />
+            </radialGradient>
+            <radialGradient id="leoHair3D" cx="40%" cy="30%" r="70%">
+              <stop offset="0%" stopColor="#475569" />
+              <stop offset="60%" stopColor="#1E293B" />
+              <stop offset="100%" stopColor="#0F172A" />
+            </radialGradient>
+            <radialGradient id="mimiFur3D" cx="40%" cy="30%" r="70%">
+              <stop offset="0%" stopColor="#FFFBEB" />
+              <stop offset="60%" stopColor="#FED7AA" />
+              <stop offset="100%" stopColor="#F97316" />
+            </radialGradient>
+
+            {/* Outfit Gradients */}
+            <linearGradient id="chibiGown3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#F472B6" />
+              <stop offset="55%" stopColor="#EC4899" />
+              <stop offset="100%" stopColor="#BE185D" />
+            </linearGradient>
+            <linearGradient id="chibiHero3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#60A5FA" />
+              <stop offset="55%" stopColor="#2563EB" />
+              <stop offset="100%" stopColor="#1D4ED8" />
+            </linearGradient>
+            <linearGradient id="chibiCasual3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#7DD3FC" />
+              <stop offset="55%" stopColor="#38BDF8" />
+              <stop offset="100%" stopColor="#0284C7" />
+            </linearGradient>
+            <linearGradient id="chibiWinter3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#FDE047" />
+              <stop offset="55%" stopColor="#F59E0B" />
+              <stop offset="100%" stopColor="#D97706" />
+            </linearGradient>
+            <linearGradient id="chibiFairy3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#6EE7B7" />
+              <stop offset="55%" stopColor="#34D399" />
+              <stop offset="100%" stopColor="#059669" />
+            </linearGradient>
+            <linearGradient id="chibiGold3D" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#FEF08A" />
+              <stop offset="50%" stopColor="#FACC15" />
+              <stop offset="100%" stopColor="#CA8A04" />
+            </linearGradient>
+          </defs>
+
+          {/* 1. SOFT 3D SHADOW ON FLOOR */}
+          <ellipse cx="150" cy="326" rx="72" ry="12" fill="#000000" opacity="0.12" />
+
+          {/* SUPERHERO CAPE (Layer behind body) */}
+          {outfit === 'superhero' && (
+            <path
+              d="M110 178 C70 215, 60 270, 72 295 L228 295 C240 270, 230 215, 190 178 Z"
+              fill="#EF4444"
+              stroke="#B91C1C"
+              strokeWidth="3"
+            />
+          )}
+
+          {/* FAIRY WINGS (Layer behind body) */}
+          {outfit === 'fairy' && (
+            <g opacity="0.9">
+              <ellipse cx="88" cy="180" rx="36" ry="46" fill="#A7F3D0" stroke="#10B981" strokeWidth="2.5" transform="rotate(-25 88 180)" />
+              <ellipse cx="88" cy="180" rx="20" ry="30" fill="#ECFDF5" transform="rotate(-25 88 180)" />
+              <ellipse cx="212" cy="180" rx="36" ry="46" fill="#A7F3D0" stroke="#10B981" strokeWidth="2.5" transform="rotate(25 212 180)" />
+              <ellipse cx="212" cy="180" rx="20" ry="30" fill="#ECFDF5" transform="rotate(25 212 180)" />
+            </g>
+          )}
+
+          {/* BACKPACK STRAPS & BODY (Behind torso if backpack equipped) */}
+          {prop === 'backpack' && (
+            <g>
+              <rect x="70" y="174" width="30" height="42" rx="9" fill="#0284C7" stroke="#0369A1" strokeWidth="3" />
+              <rect x="74" y="184" width="22" height="18" rx="5" fill="#38BDF8" />
+              <path d="M85 174 Q85 156 114 172" fill="none" stroke="#0284C7" strokeWidth="3.5" />
+            </g>
+          )}
+
+          {/* 2. CHIBI TODDLER LEGS (Centered under body: left leg center 132, right leg center 168) */}
+          <rect x="120" y="235" width="24" height="66" rx="12" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1.5" strokeOpacity="0.3" />
+          <rect x="156" y="235" width="24" height="66" rx="12" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1.5" strokeOpacity="0.3" />
+
+          {/* 3. SHOES (Perfect alignment at 132 and 168, baseline y=304) */}
+          {shoes === 'sneakers' && (
+            <g>
+              <ellipse cx="132" cy="304" rx="17" ry="11" fill="#FFFFFF" stroke="#0284C7" strokeWidth="3" />
+              <path d="M118 304 Q126 295 136 295" stroke="#0284C7" strokeWidth="2.5" fill="none" />
+              <circle cx="127" cy="304" r="2" fill="#EF4444" />
+              <ellipse cx="168" cy="304" rx="17" ry="11" fill="#FFFFFF" stroke="#0284C7" strokeWidth="3" />
+              <path d="M154 304 Q162 295 172 295" stroke="#0284C7" strokeWidth="2.5" fill="none" />
+              <circle cx="163" cy="304" r="2" fill="#EF4444" />
+            </g>
+          )}
+          {shoes === 'mary-jane' && (
+            <g>
+              <ellipse cx="132" cy="304" rx="17" ry="11" fill="#EF4444" stroke="#991B1B" strokeWidth="2.5" />
+              <ellipse cx="168" cy="304" rx="17" ry="11" fill="#EF4444" stroke="#991B1B" strokeWidth="2.5" />
+              <circle cx="132" cy="298" r="3.5" fill="#FFFFFF" />
+              <circle cx="168" cy="298" r="3.5" fill="#FFFFFF" />
+            </g>
+          )}
+          {shoes === 'boots' && (
+            <g>
+              <rect x="118" y="274" width="28" height="34" rx="8" fill="#F59E0B" stroke="#B45309" strokeWidth="3" />
+              <rect x="154" y="274" width="28" height="34" rx="8" fill="#F59E0B" stroke="#B45309" strokeWidth="3" />
+              <line x1="118" y1="286" x2="146" y2="286" stroke="#EF4444" strokeWidth="3.5" />
+              <line x1="154" y1="286" x2="182" y2="286" stroke="#EF4444" strokeWidth="3.5" />
+            </g>
+          )}
+          {shoes === 'sandals' && (
+            <g>
+              <ellipse cx="132" cy="306" rx="16" ry="9" fill="#10B981" stroke="#047857" strokeWidth="2.5" />
+              <ellipse cx="168" cy="306" rx="16" ry="9" fill="#10B981" stroke="#047857" strokeWidth="2.5" />
+              <circle cx="132" cy="304" r="4" fill="#FDE047" stroke="#CA8A04" strokeWidth="1.5" />
+              <circle cx="168" cy="304" r="4" fill="#FDE047" stroke="#CA8A04" strokeWidth="1.5" />
+            </g>
+          )}
+          {shoes === 'royal-shoes' && (
+            <g>
+              <ellipse cx="132" cy="304" rx="17" ry="10" fill="#4338CA" stroke="#312E81" strokeWidth="2.5" />
+              <ellipse cx="168" cy="304" rx="17" ry="10" fill="#4338CA" stroke="#312E81" strokeWidth="2.5" />
+              <polygon points="132,298 135,304 129,304" fill="#FACC15" />
+              <polygon points="168,298 171,304 165,304" fill="#FACC15" />
+            </g>
+          )}
+
+          {/* 4. CHIBI ARMS (Shoulders at 114 and 186, Hands at 88 and 212) */}
+          <g>
+            <line x1="114" y1="178" x2="90" y2="220" stroke="url(#chibiSkin3D)" strokeWidth="18" strokeLinecap="round" />
+            <circle cx="88" cy="224" r="11" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1" strokeOpacity="0.3" />
+            <line x1="186" y1="178" x2="210" y2="220" stroke="url(#chibiSkin3D)" strokeWidth="18" strokeLinecap="round" />
+            <circle cx="212" cy="224" r="11" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1" strokeOpacity="0.3" />
+          </g>
+
+          {/* 5. OUTFITS (Fitted snugly on chubby torso y=168-235, with matching sleeves) */}
+          {outfit === 'casual' && (
+            <g>
+              {/* Sleeves */}
+              <line x1="114" y1="178" x2="100" y2="202" stroke="url(#chibiCasual3D)" strokeWidth="20" strokeLinecap="round" />
+              <line x1="186" y1="178" x2="200" y2="202" stroke="url(#chibiCasual3D)" strokeWidth="20" strokeLinecap="round" />
+              {/* T-Shirt */}
+              <path d="M102 168 Q150 162 198 168 L194 242 Q150 246 106 242 Z" fill="url(#chibiCasual3D)" stroke="#0284C7" strokeWidth="3" />
+              <circle cx="150" cy="200" r="16" fill="#FFFFFF" stroke="#BAE6FD" strokeWidth="2" />
+              <polygon points="150,190 153,198 162,198 155,204 157,212 150,207 143,212 145,204 138,198 147,198" fill="#FACC15" />
+              {/* Shorts */}
+              <rect x="114" y="238" width="72" height="24" rx="7" fill="#1E293B" stroke="#0F172A" strokeWidth="2" />
+            </g>
+          )}
+
+          {outfit === 'princess' && (
+            <g>
+              {/* Puffy Sleeves */}
+              <circle cx="106" cy="180" r="14" fill="#F472B6" stroke="#BE185D" strokeWidth="2.5" />
+              <circle cx="194" cy="180" r="14" fill="#F472B6" stroke="#BE185D" strokeWidth="2.5" />
+              {/* Bodice */}
+              <path d="M108 168 Q150 162 192 168 L188 206 Q150 212 112 206 Z" fill="url(#chibiGown3D)" stroke="#BE185D" strokeWidth="3" />
+              <circle cx="150" cy="186" r="6" fill="#FDE047" stroke="#CA8A04" strokeWidth="1.5" />
+              {/* Ballgown Skirt */}
+              <path d="M112 206 C72 226, 56 278, 66 288 L234 288 C244 278, 228 226, 188 206 Z" fill="#F472B6" stroke="#BE185D" strokeWidth="3.5" />
+              <rect x="110" y="202" width="80" height="8" rx="4" fill="url(#chibiGold3D)" />
+              <path d="M78 282 Q114 270 150 282 Q186 270 222 282" fill="none" stroke="#FFFFFF" strokeWidth="5" strokeLinecap="round" />
+            </g>
+          )}
+
+          {outfit === 'superhero' && (
+            <g>
+              {/* Sleeves */}
+              <line x1="114" y1="178" x2="94" y2="214" stroke="url(#chibiHero3D)" strokeWidth="20" strokeLinecap="round" />
+              <line x1="186" y1="178" x2="206" y2="214" stroke="url(#chibiHero3D)" strokeWidth="20" strokeLinecap="round" />
+              {/* Suit Body */}
+              <rect x="104" y="168" width="92" height="84" rx="16" fill="url(#chibiHero3D)" stroke="#1D4ED8" strokeWidth="3" />
+              {/* Shield Crest */}
+              <polygon points="150,182 168,194 162,214 150,222 138,214 132,194" fill="#FACC15" stroke="#CA8A04" strokeWidth="2" />
+              <polygon points="150,190 153,198 161,198 155,203 157,211 150,206 143,211 145,203 139,198 147,198" fill="#EF4444" />
+              {/* Belt */}
+              <rect x="104" y="244" width="92" height="12" fill="#FACC15" stroke="#CA8A04" strokeWidth="2" />
+            </g>
+          )}
+
+          {outfit === 'doctor' && (
+            <g>
+              {/* Sleeves */}
+              <line x1="114" y1="178" x2="94" y2="214" stroke="#FFFFFF" strokeWidth="20" strokeLinecap="round" />
+              <line x1="186" y1="178" x2="206" y2="214" stroke="#FFFFFF" strokeWidth="20" strokeLinecap="round" />
+              {/* Lab Coat */}
+              <rect x="102" y="168" width="96" height="88" rx="14" fill="#FFFFFF" stroke="#0284C7" strokeWidth="3" />
+              <line x1="150" y1="168" x2="150" y2="256" stroke="#0284C7" strokeWidth="2" strokeDasharray="4,4" />
+              {/* Stethoscope */}
+              <path d="M118 172 C118 214, 182 214, 182 172" fill="none" stroke="#EA580C" strokeWidth="4" strokeLinecap="round" />
+              <circle cx="150" cy="214" r="9" fill="#F97316" stroke="#C2410C" strokeWidth="2" />
+              {/* Badge with red cross */}
+              <rect x="110" y="194" width="22" height="22" rx="4" fill="#E0F2FE" stroke="#0284C7" strokeWidth="2" />
+              <path d="M121 199 L121 211 M115 205 L127 205" stroke="#EF4444" strokeWidth="3.5" strokeLinecap="round" />
+            </g>
+          )}
+
+          {outfit === 'winter' && (
+            <g>
+              {/* Knit Sleeves */}
+              <line x1="114" y1="178" x2="94" y2="214" stroke="url(#chibiWinter3D)" strokeWidth="20" strokeLinecap="round" />
+              <line x1="186" y1="178" x2="206" y2="214" stroke="url(#chibiWinter3D)" strokeWidth="20" strokeLinecap="round" />
+              {/* Chunky Sweater */}
+              <rect x="100" y="166" width="100" height="90" rx="18" fill="url(#chibiWinter3D)" stroke="#B45309" strokeWidth="3" />
+              <line x1="102" y1="192" x2="198" y2="192" stroke="#FEF3C7" strokeWidth="4" strokeDasharray="6,4" />
+              <line x1="102" y1="220" x2="198" y2="220" stroke="#FEF3C7" strokeWidth="4" strokeDasharray="6,4" />
+              <circle cx="150" cy="180" r="5" fill="#78350F" />
+              <circle cx="150" cy="206" r="5" fill="#78350F" />
+              {/* Pants */}
+              <rect x="114" y="248" width="72" height="24" rx="7" fill="#475569" stroke="#334155" strokeWidth="2" />
+            </g>
+          )}
+
+          {outfit === 'fairy' && (
+            <g>
+              {/* Fairy Sleeves */}
+              <line x1="114" y1="178" x2="100" y2="202" stroke="url(#chibiFairy3D)" strokeWidth="18" strokeLinecap="round" />
+              <line x1="186" y1="178" x2="200" y2="202" stroke="url(#chibiFairy3D)" strokeWidth="18" strokeLinecap="round" />
+              {/* Petal Dress */}
+              <path d="M108 168 Q150 162 192 168 L186 250 Q150 256 114 250 Z" fill="url(#chibiFairy3D)" stroke="#047857" strokeWidth="3" />
+              <path d="M114 212 Q132 242 150 212 Q168 242 186 212" fill="none" stroke="#A7F3D0" strokeWidth="4" />
+              <circle cx="150" cy="190" r="9" fill="#FEF08A" stroke="#CA8A04" strokeWidth="2" />
+            </g>
+          )}
+
+          {/* 6. BIG 3D CHIBI CLAY HEAD (~1/2 TOTAL CHARACTER HEIGHT) Center at (150, 115), Radius 56 */}
+          <circle cx="150" cy="115" r="56" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="2" strokeOpacity="0.3" />
+
+          {/* EARS (Round clay toddler ears) */}
+          <circle cx="94" cy="120" r="11" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1.5" strokeOpacity="0.3" />
+          <circle cx="94" cy="120" r="6" fill="#FDBA74" />
+          <circle cx="206" cy="120" r="11" fill="url(#chibiSkin3D)" stroke="#EA580C" strokeWidth="1.5" strokeOpacity="0.3" />
+          <circle cx="206" cy="120" r="6" fill="#FDBA74" />
+
+          {/* MIMI CAT EARS */}
+          {character === 'mimi' && (
+            <g>
+              <polygon points="106,78 122,30 144,68" fill="#FDBA74" stroke="#EA580C" strokeWidth="3" />
+              <polygon points="112,72 124,42 138,68" fill="#FECDD3" />
+              <polygon points="194,78 178,30 156,68" fill="#FDBA74" stroke="#EA580C" strokeWidth="3" />
+              <polygon points="188,72 176,42 162,68" fill="#FECDD3" />
+              {/* Whiskers */}
+              <line x1="88" y1="124" x2="114" y2="127" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="88" y1="134" x2="114" y2="132" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="212" y1="124" x2="186" y2="127" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+              <line x1="212" y1="134" x2="186" y2="132" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+            </g>
+          )}
+
+          {/* HAIR: LILY (Pigtails with bows) / LEO (Clay short boy tufts) */}
+          {character === 'lily' && (
+            <g>
+              <path d="M98 114 C98 56, 202 56, 202 114 C184 80, 116 80, 98 114 Z" fill="url(#lilyHair3D)" />
+              {/* Left Pigtail */}
+              <ellipse cx="90" cy="120" rx="16" ry="26" fill="url(#lilyHair3D)" transform="rotate(-20 90 120)" />
+              <circle cx="98" cy="100" r="7" fill="#F472B6" />
+              {/* Right Pigtail */}
+              <ellipse cx="210" cy="120" rx="16" ry="26" fill="url(#lilyHair3D)" transform="rotate(20 210 120)" />
+              <circle cx="202" cy="100" r="7" fill="#F472B6" />
+              {/* Bangs */}
+              <path d="M104 98 C122 116, 142 90, 150 100 C158 90, 178 116, 196 98 C188 72, 112 72, 104 98 Z" fill="#9A3412" />
+            </g>
+          )}
+
+          {character === 'leo' && (
+            <g>
+              <path d="M98 110 C98 54, 202 54, 202 110 C190 74, 110 74, 98 110 Z" fill="url(#leoHair3D)" />
+              <polygon points="135,70 150,50 165,70" fill="url(#leoHair3D)" />
+              <polygon points="118,76 130,58 142,76" fill="url(#leoHair3D)" />
+              <polygon points="158,76 170,58 182,76" fill="url(#leoHair3D)" />
+            </g>
+          )}
+
+          {/* EYESHADOW MAKEUP (Visibly reflects selected eyeshadow) */}
+          {activeMakeupObj.eyeshadowColor && activeMakeupObj.eyeshadowColor !== 'transparent' && (
+            <g opacity="0.65">
+              <ellipse cx="128" cy="106" rx="11" ry="5" fill={activeMakeupObj.eyeshadowColor} />
+              <ellipse cx="172" cy="106" rx="11" ry="5" fill={activeMakeupObj.eyeshadowColor} />
+            </g>
+          )}
+
+          {/* 7. SPARKLING CHIBI CLAY EYES (Big glossy anime eyes with double sparkles) */}
+          {makeup === 'sparkle-eyes' ? (
+            <g>
+              <ellipse cx="128" cy="116" rx="9.5" ry="13.5" fill="#0284C7" />
+              <circle cx="125" cy="111" r="4.2" fill="#FFFFFF" />
+              <circle cx="132" cy="122" r="2.2" fill="#FFFFFF" />
+              <text x="122" y="104" fontSize="12">✨</text>
+              <ellipse cx="172" cy="116" rx="9.5" ry="13.5" fill="#0284C7" />
+              <circle cx="169" cy="111" r="4.2" fill="#FFFFFF" />
+              <circle cx="176" cy="122" r="2.2" fill="#FFFFFF" />
+              <text x="166" y="104" fontSize="12">✨</text>
+            </g>
+          ) : (
+            <g>
+              {/* Left Eye */}
+              <ellipse cx="128" cy="116" rx="9.5" ry="13.5" fill="#1E293B" />
+              <ellipse cx="128" cy="122" rx="7.5" ry="5.5" fill="#38BDF8" opacity="0.8" />
+              <circle cx="125" cy="111" r="4.2" fill="#FFFFFF" />
+              <circle cx="132" cy="123" r="2" fill="#FFFFFF" />
+              {/* Right Eye */}
+              <ellipse cx="172" cy="116" rx="9.5" ry="13.5" fill="#1E293B" />
+              <ellipse cx="172" cy="122" rx="7.5" ry="5.5" fill="#38BDF8" opacity="0.8" />
+              <circle cx="169" cy="111" r="4.2" fill="#FFFFFF" />
+              <circle cx="176" cy="123" r="2" fill="#FFFFFF" />
+              {/* Eyebrows */}
+              <path d="M120 100 Q128 95 136 98" fill="none" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M164 98 Q172 95 180 100" fill="none" stroke="#78350F" strokeWidth="2.5" strokeLinecap="round" />
+            </g>
+          )}
+
+          {/* 8. ROSY BLUSH CHEEKS & MAKEUP STICKERS */}
+          {makeup === 'peach-blush' && (
+            <g>
+              <circle cx="112" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <circle cx="188" cy="130" r="14" fill="url(#chibiCheek3D)" />
+            </g>
+          )}
+          {makeup === 'strawberry-glam' && (
+            <g>
+              <circle cx="112" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <circle cx="188" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <text x="105" y="136" fontSize="14">🍓</text>
+              <text x="181" y="136" fontSize="14">🍓</text>
+            </g>
+          )}
+          {makeup === 'heart-cheeks' && (
+            <g>
+              <circle cx="112" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <circle cx="188" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <text x="104" y="136" fontSize="16">💖</text>
+              <text x="180" y="136" fontSize="16">💖</text>
+            </g>
+          )}
+          {makeup === 'star-glitter' && (
+            <g>
+              <circle cx="112" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <circle cx="188" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <text x="104" y="136" fontSize="16">⭐</text>
+              <text x="180" y="136" fontSize="16">⭐</text>
+            </g>
+          )}
+          {makeup === 'butterfly-face' && (
+            <g>
+              <circle cx="112" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <circle cx="188" cy="130" r="14" fill="url(#chibiCheek3D)" />
+              <text x="104" y="136" fontSize="16">🦋</text>
+              <text x="180" y="136" fontSize="16">🦋</text>
+            </g>
+          )}
+          {makeup === 'natural' && (
+            <g>
+              <circle cx="114" cy="130" r="11" fill="url(#chibiCheek3D)" />
+              <circle cx="186" cy="130" r="11" fill="url(#chibiCheek3D)" />
+            </g>
+          )}
+
+          {/* Cute Clay Button Nose */}
+          <ellipse cx="150" cy="126" rx="2.8" ry="2" fill="#FDBA74" />
+
+          {/* DYNAMIC LIPSTICK & SMILE (Reflects selected makeup lip color!) */}
+          <path
+            d="M142 134 Q150 146 158 134"
+            fill={activeMakeupObj.lipstickColor || '#F43F5E'}
+            stroke="#9F1239"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+          {/* Glossy Lip Shine Highlight */}
+          <ellipse cx="150" cy="137" rx="3.5" ry="1.5" fill="#FFFFFF" opacity="0.65" />
+
+          {/* 9. HATS & HAIR ACCESSORIES (Fitted snugly on head top y=59) */}
+          {hat === 'crown' && (
+            <g>
+              <polygon points="122,68 128,34 140,50 150,26 160,50 172,34 178,68" fill="url(#chibiGold3D)" stroke="#CA8A04" strokeWidth="3" />
+              <circle cx="128" cy="34" r="3.5" fill="#EF4444" />
+              <circle cx="150" cy="26" r="4.5" fill="#3B82F6" />
+              <circle cx="172" cy="34" r="3.5" fill="#10B981" />
+            </g>
+          )}
+          {hat === 'pink-bow' && (
+            <g>
+              <polygon points="134,60 114,42 114,78" fill="#F472B6" stroke="#DB2777" strokeWidth="2.5" />
+              <polygon points="166,60 186,42 186,78" fill="#F472B6" stroke="#DB2777" strokeWidth="2.5" />
+              <circle cx="150" cy="60" r="9" fill="#EC4899" stroke="#BE185D" strokeWidth="2" />
+            </g>
+          )}
+          {hat === 'cap' && (
+            <g>
+              <path d="M106,78 C106,42 194,42 194,78 Z" fill="#3B82F6" stroke="#1D4ED8" strokeWidth="3.5" />
+              <ellipse cx="162" cy="78" rx="40" ry="10" fill="#2563EB" />
+              <circle cx="150" cy="48" r="4" fill="#FACC15" />
+            </g>
+          )}
+          {hat === 'cat-ears' && character !== 'mimi' && (
+            <g>
+              <path d="M110 72 C130 62, 170 62, 190 72" fill="none" stroke="#A855F7" strokeWidth="4.5" strokeLinecap="round" />
+              <polygon points="116,68 126,38 140,66" fill="#C084FC" stroke="#7E22CE" strokeWidth="2.5" />
+              <polygon points="184,68 174,38 160,66" fill="#C084FC" stroke="#7E22CE" strokeWidth="2.5" />
+            </g>
+          )}
+          {hat === 'chef-hat' && (
+            <g>
+              <path d="M120 70 L180 70 L180 52 C198 44, 180 14, 150 20 C120 14, 102 44, 120 52 Z" fill="#FFFFFF" stroke="#94A3B8" strokeWidth="3.5" />
+              <rect x="120" y="58" width="60" height="14" rx="3" fill="#FFFFFF" stroke="#94A3B8" strokeWidth="2.5" />
+            </g>
+          )}
+
+          {/* 10. HANDHELD PROPS (Firmly anchored in hands: left hand at (88, 224), right hand at (212, 224)) */}
+          {prop === 'magic-wand' && (
+            <g>
+              <line x1="212" y1="224" x2="252" y2="156" stroke="#78350F" strokeWidth="4.5" strokeLinecap="round" />
+              <polygon points="252,156 256,144 268,148 260,158 266,170 253,163 242,170 246,157 238,148 250,146" fill="url(#chibiGold3D)" stroke="#CA8A04" strokeWidth="2" />
+              <text x="258" y="140" fontSize="18">✨</text>
+            </g>
+          )}
+          {prop === 'teddy' && (
+            <g>
+              {/* Hugged tight in left arm */}
+              <circle cx="98" cy="220" r="17" fill="#B45309" stroke="#78350F" strokeWidth="2" />
+              <circle cx="98" cy="202" r="13" fill="#B45309" stroke="#78350F" strokeWidth="2" />
+              <circle cx="89" cy="193" r="5.5" fill="#D97706" />
+              <circle cx="107" cy="193" r="5.5" fill="#D97706" />
+              <circle cx="94" cy="201" r="2.5" fill="#1E293B" />
+              <circle cx="102" cy="201" r="2.5" fill="#1E293B" />
+              <ellipse cx="98" cy="207" rx="4.5" ry="3" fill="#FDE68A" />
+            </g>
+          )}
+          {prop === 'balloon' && (
+            <g>
+              {/* Tied to right hand at (212, 224) */}
+              <line x1="212" y1="224" x2="242" y2="128" stroke="#94A3B8" strokeWidth="2" strokeDasharray="3,3" />
+              <path d="M242 115 C225 87, 202 121, 242 151 C282 121, 259 87, 242 115 Z" fill="#EF4444" stroke="#DC2626" strokeWidth="2.5" />
+            </g>
+          )}
+          {prop === 'ice-cream' && (
+            <g>
+              {/* Held in right hand at (212, 224) */}
+              <polygon points="204,222 216,264 228,222" fill="#F59E0B" stroke="#B45309" strokeWidth="2.5" />
+              <circle cx="216" cy="212" r="13" fill="#EC4899" />
+              <circle cx="216" cy="196" r="11" fill="#38BDF8" />
+              <circle cx="216" cy="182" r="9" fill="#FDE047" />
+              <circle cx="216" cy="172" r="4" fill="#DC2626" />
+            </g>
+          )}
+        </svg>
+      </div>
+
+      {/* 3. Bottom Wardrobe Drawer: SINGLE HORIZONTAL ROW, BUTTONS 36-40px, SCROLLABLE */}
+      <div className="w-full max-w-md h-12 sm:h-14 shrink-0 rounded-2xl border-2 border-pink-400 bg-[#FFFDF5] px-1.5 sm:px-2 shadow-2xs flex items-center justify-between gap-1.5 overflow-hidden">
+        {/* Category Tab Selector: 5 Compact Round Buttons (👗 👒 💄 👟 🎒) */}
+        <div className="flex items-center gap-1 bg-pink-100/90 p-0.5 rounded-xl border border-pink-300 shrink-0">
+          {[
+            { id: 'outfit' as CategoryTab, emoji: '👗', name: 'Trang phục' },
+            { id: 'hat' as CategoryTab, emoji: '👒', name: 'Mũ & Nơ' },
+            { id: 'makeup' as CategoryTab, emoji: '💄', name: 'Trang điểm' },
+            { id: 'shoes' as CategoryTab, emoji: '👟', name: 'Giày dép' },
+            { id: 'prop' as CategoryTab, emoji: '🎒', name: 'Cầm tay' },
+          ].map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => {
+                setActiveTab(tab.id);
+                playSoundEffect('pop', settings.volume);
+              }}
+              className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg text-sm sm:text-base flex items-center justify-center cursor-pointer transition select-none ${
+                activeTab === tab.id
+                  ? 'bg-pink-500 text-white shadow-2xs scale-105'
+                  : 'text-pink-950 hover:bg-pink-200/60'
+              }`}
+              title={tab.name}
+              aria-label={tab.name}
+            >
+              {tab.emoji}
+            </button>
+          ))}
+        </div>
+
+        {/* Vertical divider */}
+        <div className="h-6 w-0.5 bg-pink-200 shrink-0" />
+
+        {/* Horizontally scrollable items for the active category (36-40px round buttons) */}
+        <div className="flex-1 min-w-0 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-1">
+          {currentTabItems().map((item) => {
+            const isSelected = isCurrentEquipped(item.id);
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => handleSelectEquipped(item.id)}
+                className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-lg cursor-pointer transition-all shrink-0 select-none ${
+                  isSelected
+                    ? 'ring-4 ring-pink-400 bg-pink-500 text-white shadow-md scale-110 border-2 border-white'
+                    : 'bg-white hover:bg-pink-50 border-2 border-slate-200 text-slate-700 hover:scale-105 shadow-2xs'
+                }`}
+                title={item.nameVi}
+                aria-label={item.nameVi}
+              >
+                <span>{item.emoji}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Done / Finished Button */}
+        <button
+          type="button"
+          onClick={() => {
+            fireFireworksCelebration();
+            speakTeacherVoice(
+              [
+                { lang: 'vi', text: `Người mẫu nhí ${activeCharacterObj.nameVi} diện đồ và trang điểm xinh xắn tuyệt vời!` },
+                { lang: 'en', text: 'Stunning makeover! You are a great fashion designer!' },
+              ],
+              settings
+            );
+            if (onWin) onWin();
+          }}
+          className="shrink-0 h-9 sm:h-10 px-3 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 text-white font-black text-xs flex items-center gap-1 shadow-xs active:scale-95 transition cursor-pointer"
+          title="Xong"
+          aria-label="Xong"
+        >
+          <span>⭐</span>
+          <span>Xong</span>
+        </button>
+      </div>
+
+      {/* 4. Photo Snapshot Modal (Preview & Save/Share) */}
+      {showPhotoModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200">
+          <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-pink-400 shadow-2xl p-4 flex flex-col items-center text-center space-y-3">
+            <div className="flex items-center justify-between w-full border-b border-pink-100 pb-2">
+              <div className="flex items-center gap-1.5 text-pink-600 font-black text-sm">
+                <span>📸</span>
+                <span>Ảnh Thời Trang Của Bé</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPhotoModal(false)}
+                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center cursor-pointer text-xs"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Instant Polaroid Photo Frame */}
+            <div className="p-3 bg-amber-50/70 border-2 border-pink-200 rounded-2xl shadow-inner w-full flex flex-col items-center">
+              <div className="text-5xl my-2">
+                {activeCharacterObj.emoji}
+              </div>
+              <div className="text-sm font-black text-pink-900">
+                {activeCharacterObj.nameVi}
+              </div>
+              <div className="text-xs font-bold text-slate-500 mt-1 flex flex-wrap gap-1 justify-center">
+                <span className="bg-white px-2 py-0.5 rounded-full border border-pink-200">
+                  {OUTFITS.find((o) => o.id === outfit)?.nameVi}
+                </span>
+                <span className="bg-white px-2 py-0.5 rounded-full border border-pink-200">
+                  {MAKEUPS.find((m) => m.id === makeup)?.nameVi}
+                </span>
+              </div>
+            </div>
+
+            <p className="text-xs font-bold text-slate-600">
+              Bé đã tự tay phối đồ và trang điểm rất khéo léo!
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                setShowPhotoModal(false);
+                if (onWin) onWin();
+              }}
+              className="w-full py-2.5 rounded-xl bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black text-sm shadow-xs flex items-center justify-center gap-1 cursor-pointer"
+            >
+              <span>🎉</span>
+              <span>Lưu Kỷ Niệm & Chơi Tiếp</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -25,7 +25,7 @@ import {
 import lessonsJson from './data/lessonsData.json';
 import { ALL_BRAIN_GAMES, BRAIN_GAME_SECTIONS } from './data/brainGamesData';
 import { STORY_BOOKS_DATA } from './data/storiesData';
-import { getStoryRealisticPhoto } from './data/storyPhotosData';
+import { getStoryRealisticPhoto, getStoryLogoPhoto } from './data/storyPhotosData';
 import type {
   AgeGroupId,
   BrainCategoryKey,
@@ -1611,8 +1611,22 @@ export default function App() {
                           {/* Story Card Header: Cute compact logo badge + Title & Metadata */}
                           <div className="flex items-start gap-3">
                             {/* Cute compact logo badge */}
-                            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-purple-100 via-pink-50 to-amber-100 border-2 border-purple-200/80 flex items-center justify-center text-3xl shadow-2xs shrink-0 select-none group-hover:scale-105 transition-transform">
-                              <span>{story.emoji}</span>
+                            <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-purple-100 via-pink-50 to-amber-100 border-2 border-purple-200/80 flex items-center justify-center text-3xl shadow-2xs shrink-0 select-none group-hover:scale-105 transition-transform overflow-hidden relative">
+                              {getStoryLogoPhoto(story.id) ? (
+                                <>
+                                  <span className="absolute inset-0 flex items-center justify-center text-3xl select-none">{story.emoji}</span>
+                                  <img
+                                    src={getStoryLogoPhoto(story.id)}
+                                    alt={story.titleVi}
+                                    className="w-full h-full object-cover relative z-10"
+                                    onError={(e) => {
+                                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                                    }}
+                                  />
+                                </>
+                              ) : (
+                                <span>{story.emoji}</span>
+                              )}
                             </div>
 
                             <div className="flex-1 min-w-0">

@@ -1,0 +1,523 @@
+import React, { useState, useMemo, useEffect, useRef } from 'react';
+import { Volume2, ArrowLeft, RefreshCw, Eye, Check } from 'lucide-react';
+import type { ParentSettings } from '../types/learning';
+import { playGentleEncourageTone, playSoundEffect, speakTeacherVoice } from '../utils/audioEngine';
+import { fireFireworksCelebration } from '../utils/confetti';
+import { PUZZLE_CHARACTERS_DATA, type PuzzleCharacterDef } from '../data/puzzleCharactersData';
+
+interface CharacterPuzzleGameProps {
+  settings: ParentSettings;
+  onBack?: () => void;
+  onWin?: () => void;
+  onGentleRetry?: (msgVi: string, msgEn: string) => void;
+}
+
+export const CharacterPuzzleGame: React.FC<CharacterPuzzleGameProps> = ({
+  settings,
+  onBack,
+  onWin,
+  onGentleRetry,
+}) => {
+  const [templateIdx, setTemplateIdx] = useState<number>(0);
+  const [pieceCount, setPieceCount] = useState<4 | 6 | 9>(4);
+  const [placedSlots, setPlacedSlots] = useState<Record<number, number>>({});
+  const [selectedPieceIdx, setSelectedPieceIdx] = useState<number | null>(null);
+  const [showGhostHint, setShowGhostHint] = useState<boolean>(false);
+  const [showPickerModal, setShowPickerModal] = useState<boolean>(false);
+  const [pieceDataUrls, setPieceDataUrls] = useState<string[]>([]);
+  const [reassemblyDiff, setReassemblyDiff] = useState<number>(0);
+
+  const currentTemplate = PUZZLE_CHARACTERS_DATA[templateIdx % PUZZLE_CHARACTERS_DATA.length];
+
+  // Grid dimensions
+  const { cols, rows } = useMemo(() => {
+    if (pieceCount === 4) return { cols: 2, rows: 2 };
+    if (pieceCount === 6) return { cols: 3, rows: 2 };
+    return { cols: 3, rows: 3 };
+  }, [pieceCount]);
+
+  const totalPieces = cols * rows;
+
+  // Pixel-accurate canvas slicing (direct ctx.drawImage pixel extraction)
+  useEffect(() => {
+    let isCancelled = false;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+
+    img.onload = () => {
+      if (isCancelled) return;
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.width = 600;
+      sourceCanvas.height = 600;
+      const sCtx = sourceCanvas.getContext('2d');
+      if (!sCtx) return;
+
+      // Draw center-cropped 600x600 square
+      const minDim = Math.min(img.width, img.height);
+      const sx = (img.width - minDim) / 2;
+      const sy = (img.height - minDim) / 2;
+      sCtx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 600, 600);
+
+      const pieceW = 600 / cols;
+      const pieceH = 600 / rows;
+      const urls: string[] = [];
+      const pieceCanvases: HTMLCanvasElement[] = [];
+
+      for (let idx = 0; idx < totalPieces; idx++) {
+        const col = idx % cols;
+        const row = Math.floor(idx / cols);
+
+        const pieceCanvas = document.createElement('canvas');
+        pieceCanvas.width = pieceW;
+        pieceCanvas.height = pieceH;
+        const pCtx = pieceCanvas.getContext('2d');
+        if (pCtx) {
+          pCtx.drawImage(
+            sourceCanvas,
+            col * pieceW,
+            row * pieceH,
+            pieceW,
+            pieceH,
+            0,
+            0,
+            pieceW,
+            pieceH
+          );
+          urls.push(pieceCanvas.toDataURL('image/jpeg', 0.92));
+          pieceCanvases.push(pieceCanvas);
+        }
+      }
+
+      // Automated Verification: Reassemble and compare against source (< 2% diff)
+      const assembledCanvas = document.createElement('canvas');
+      assembledCanvas.width = 600;
+      assembledCanvas.height = 600;
+      const aCtx = assembledCanvas.getContext('2d');
+      if (aCtx) {
+        for (let idx = 0; idx < pieceCanvases.length; idx++) {
+          const col = idx % cols;
+          const row = Math.floor(idx / cols);
+          aCtx.drawImage(pieceCanvases[idx], col * pieceW, row * pieceH);
+        }
+        const sPixels = sCtx.getImageData(0, 0, 600, 600).data;
+        const aPixels = aCtx.getImageData(0, 0, 600, 600).data;
+        let diffCount = 0;
+        for (let i = 0; i < sPixels.length; i += 4) {
+          if (
+            Math.abs(sPixels[i] - aPixels[i]) > 4 ||
+            Math.abs(sPixels[i + 1] - aPixels[i + 1]) > 4 ||
+            Math.abs(sPixels[i + 2] - aPixels[i + 2]) > 4
+          ) {
+            diffCount++;
+          }
+        }
+        const diffRatio = diffCount / (600 * 600);
+        setReassemblyDiff(diffRatio);
+      }
+
+      setPieceDataUrls(urls);
+      setPlacedSlots({});
+      setSelectedPieceIdx(null);
+    };
+
+    img.src = currentTemplate.imageUrl;
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [currentTemplate, cols, rows, totalPieces]);
+
+  // Unplaced pieces for the tray
+  const unplacedPieces = useMemo(() => {
+    const placedIndices = new Set(Object.values(placedSlots));
+    const list: number[] = [];
+    for (let i = 0; i < totalPieces; i++) {
+      if (!placedIndices.has(i)) {
+        list.push(i);
+      }
+    }
+    // Stable pseudo-random shuffle
+    return list.sort((a, b) => ((a * 7 + templateIdx * 3) % totalPieces) - ((b * 7 + templateIdx * 3) % totalPieces));
+  }, [totalPieces, placedSlots, templateIdx]);
+
+  const handleReset = () => {
+    setPlacedSlots({});
+    setSelectedPieceIdx(null);
+    playSoundEffect('pop', settings.volume);
+  };
+
+  const handleSlotClick = (slotIdx: number) => {
+    if (placedSlots[slotIdx] !== undefined) return;
+
+    if (selectedPieceIdx === null) {
+      speakTeacherVoice(
+        [{ lang: 'vi', text: 'Bé hãy chạm chọn 1 mảnh ghép ở khay bên dưới trước nhé!' }],
+        settings
+      );
+      return;
+    }
+
+    if (selectedPieceIdx === slotIdx) {
+      playSoundEffect('sparkle', settings.volume);
+      const nextPlaced = { ...placedSlots, [slotIdx]: selectedPieceIdx };
+      setPlacedSlots(nextPlaced);
+      setSelectedPieceIdx(null);
+
+      if (Object.keys(nextPlaced).length >= totalPieces) {
+        fireFireworksCelebration();
+        speakTeacherVoice(
+          [
+            { lang: 'en', text: `Great job! ${currentTemplate.nameEn}!` },
+            {
+              lang: 'vi',
+              text: `Tuyệt vời! Bé đã ghép hoàn thành bức tranh ${currentTemplate.nameVi} rồi!`,
+            },
+          ],
+          settings
+        );
+        if (onWin) onWin();
+      } else {
+        speakTeacherVoice(
+          [{ lang: 'vi', text: 'Đúng rồi! Mảnh ghép vừa khít luôn!' }],
+          settings
+        );
+      }
+    } else {
+      playGentleEncourageTone(settings.volume);
+      if (onGentleRetry) {
+        onGentleRetry(
+          'Mảnh này chưa đúng vị trí bé ơi. Bé quan sát và thử lại nhé!',
+          'Try another slot!'
+        );
+      }
+    }
+  };
+
+  const isCompleted = Object.keys(placedSlots).length === totalPieces;
+
+  return (
+    <div className="w-full h-full max-h-[100dvh] flex flex-col items-center justify-between p-1 sm:p-2 bg-gradient-to-b from-sky-50 via-amber-50/40 to-teal-50 select-none overflow-hidden font-sans">
+      {/* 1. Sub-Toolbar: SINGLE ROW <= 48px, ICONS ONLY */}
+      <div className="w-full max-w-md h-11 shrink-0 rounded-2xl border-2 border-amber-400 bg-white/95 backdrop-blur-md px-2 shadow-2xs flex items-center justify-between gap-1">
+        {/* Left: Back + Character Picker + Piece Count Switcher */}
+        <div className="flex items-center gap-1 shrink-0">
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="w-9 h-9 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 flex items-center justify-center cursor-pointer transition active:scale-95"
+              title="Quay lại"
+              aria-label="Quay lại"
+            >
+              <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
+            </button>
+          )}
+
+          {/* Character Picker Button */}
+          <button
+            type="button"
+            onClick={() => setShowPickerModal(true)}
+            className="w-9 h-9 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95 text-base"
+            title="Chọn nhân vật ghép hình"
+            aria-label="Chọn nhân vật"
+          >
+            🧩
+          </button>
+
+          {/* Piece Count Switcher: 4, 6, 9 */}
+          <div className="flex items-center bg-amber-100/80 p-0.5 rounded-xl border border-amber-300">
+            {([4, 6, 9] as const).map((cnt) => (
+              <button
+                key={cnt}
+                type="button"
+                onClick={() => {
+                  setPieceCount(cnt);
+                  playSoundEffect('pop', settings.volume);
+                }}
+                className={`w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center cursor-pointer transition ${
+                  pieceCount === cnt
+                    ? 'bg-amber-500 text-white shadow-2xs'
+                    : 'text-amber-950 hover:bg-amber-200/60'
+                }`}
+                title={`Ghép ${cnt} mảnh`}
+              >
+                {cnt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Hint (Eye), Reset, Voice */}
+        <div className="flex items-center gap-1 shrink-0">
+          <button
+            type="button"
+            onClick={() => {
+              setShowGhostHint(!showGhostHint);
+              playSoundEffect('pop', settings.volume);
+            }}
+            className={`w-9 h-9 rounded-xl border flex items-center justify-center text-base cursor-pointer transition ${
+              showGhostHint
+                ? 'bg-amber-400 border-amber-500 text-amber-950 shadow-2xs scale-105'
+                : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+            }`}
+            title="Hình mẫu gợi ý"
+            aria-label="Hình mẫu"
+          >
+            <Eye className="w-4 h-4" />
+          </button>
+
+          <button
+            type="button"
+            onClick={handleReset}
+            className="w-9 h-9 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95"
+            title="Ghép lại từ đầu"
+            aria-label="Ghép lại"
+          >
+            <RefreshCw className="w-4 h-4" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              speakTeacherVoice(
+                [
+                  { lang: 'vi', text: `Bé ghép tranh ${currentTemplate.nameVi} nhé!` },
+                  { lang: 'en', text: currentTemplate.nameEn },
+                ],
+                settings
+              )
+            }
+            className="w-9 h-9 rounded-xl bg-sky-500 hover:bg-sky-600 text-white flex items-center justify-center cursor-pointer shadow-2xs transition active:scale-95"
+            title="Nghe hướng dẫn"
+            aria-label="Nghe hướng dẫn"
+          >
+            <Volume2 className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+
+      {/* 2. Main Puzzle Board: STRICTLY SQUARE (aspect-square), Fills remaining height, as large as possible */}
+      <div className="relative flex-1 min-h-0 w-full max-w-md aspect-square rounded-[24px] border-4 border-amber-400 bg-white shadow-md p-1.5 sm:p-2 flex items-center justify-center overflow-hidden">
+        {/* Top-Right Mini Sample Thumbnail */}
+        {showGhostHint && (
+          <div className="absolute top-2 right-2 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-xl p-1 shadow-md flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-12 h-12 rounded-lg overflow-hidden border border-slate-200">
+              <img
+                src={currentTemplate.imageUrl}
+                alt={currentTemplate.nameVi}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Ghost background guide when hint is active */}
+        {showGhostHint && !isCompleted && (
+          <div className="absolute inset-2 opacity-25 pointer-events-none rounded-xl overflow-hidden">
+            <img
+              src={currentTemplate.imageUrl}
+              alt={currentTemplate.nameVi}
+              className="w-full h-full object-cover rounded-xl"
+            />
+          </div>
+        )}
+
+        {/* Puzzle Grid Slots */}
+        <div
+          className="w-full h-full grid gap-1.5 relative z-10"
+          style={{
+            gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
+            gridTemplateRows: `repeat(${rows}, minmax(0, 1fr))`,
+          }}
+        >
+          {Array.from({ length: totalPieces }).map((_, slotIdx) => {
+            const placedPiece = placedSlots[slotIdx];
+            const isFilled = placedPiece !== undefined;
+
+            return (
+              <div
+                key={`slot-${slotIdx}`}
+                onClick={() => handleSlotClick(slotIdx)}
+                className={`rounded-xl relative overflow-hidden transition-all duration-150 flex items-center justify-center cursor-pointer ${
+                  isFilled
+                    ? 'border-2 border-emerald-400 bg-white shadow-2xs'
+                    : selectedPieceIdx !== null
+                    ? 'border-2 border-dashed border-amber-400 bg-amber-50/70 hover:bg-amber-100/80 animate-pulse'
+                    : 'border-2 border-dashed border-slate-200 bg-slate-50/70 hover:border-amber-300'
+                }`}
+              >
+                {isFilled && pieceDataUrls[placedPiece] ? (
+                  <img
+                    src={pieceDataUrls[placedPiece]}
+                    alt={`Mảnh ${placedPiece + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xs sm:text-sm font-black text-slate-300">
+                    {slotIdx + 1}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Celebration Overlay when finished */}
+        {isCompleted && (
+          <div className="absolute inset-0 bg-white/95 backdrop-blur-xs z-30 flex flex-col items-center justify-center p-3 text-center animate-in fade-in zoom-in-95 duration-200">
+            <span className="text-4xl sm:text-5xl mb-1 animate-bounce">🎉</span>
+            <h3 className="text-sm sm:text-base font-black text-amber-900 mb-0.5">
+              Hoàn thành xuất sắc!
+            </h3>
+            <div className="flex items-center gap-2 mt-2">
+              <button
+                type="button"
+                onClick={handleReset}
+                className="w-10 h-10 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 font-black text-lg flex items-center justify-center cursor-pointer shadow-2xs"
+                title="Ghép lại"
+              >
+                🔄
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setTemplateIdx((prev) => (prev + 1) % PUZZLE_CHARACTERS_DATA.length);
+                  handleReset();
+                }}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 text-white font-black text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shadow-xs"
+              >
+                <span>Tranh tiếp theo</span>
+                <span>➡️</span>
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 3. Pieces Tray: SINGLE ROW, TRAY HEIGHT >= 130px, PIECE WIDTH >= 25% (>= 96px), CONFIRM BUTTON >= 56px */}
+      <div className="w-full max-w-md h-[132px] shrink-0 rounded-2xl border-2 border-amber-300/80 bg-amber-50/80 px-2 py-1 flex items-center justify-between gap-2 shadow-2xs overflow-hidden">
+        {/* Scrollable piece bank */}
+        <div className="flex-1 min-w-0 h-full flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          {unplacedPieces.length === 0 ? (
+            <div className="w-full text-center text-xs font-black text-emerald-700 flex items-center justify-center gap-1">
+              <span>⭐</span>
+              <span>Đã ghép xong toàn bộ mảnh!</span>
+            </div>
+          ) : (
+            unplacedPieces.map((pieceIdx) => {
+              const isSelected = selectedPieceIdx === pieceIdx;
+
+              return (
+                <button
+                  key={`tray-piece-${pieceIdx}`}
+                  type="button"
+                  onClick={() => {
+                    setSelectedPieceIdx(isSelected ? null : pieceIdx);
+                    playSoundEffect('pop', settings.volume);
+                  }}
+                  className={`min-w-[96px] w-[26vw] max-w-[110px] h-[110px] rounded-xl overflow-hidden border-2 cursor-pointer transition-all shrink-0 bg-white flex items-center justify-center ${
+                    isSelected
+                      ? 'border-amber-500 ring-4 ring-amber-300 scale-105 shadow-md -translate-y-1'
+                      : 'border-slate-300 hover:border-amber-400 shadow-2xs hover:scale-102'
+                  }`}
+                  aria-label={`Mảnh ghép ${pieceIdx + 1}`}
+                >
+                  {pieceDataUrls[pieceIdx] ? (
+                    <img
+                      src={pieceDataUrls[pieceIdx]}
+                      alt={`Mảnh ${pieceIdx + 1}`}
+                      className="w-full h-full object-cover pointer-events-none"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-slate-100 flex items-center justify-center text-xs text-slate-400">
+                      {pieceIdx + 1}
+                    </div>
+                  )}
+                </button>
+              );
+            })
+          )}
+        </div>
+
+        {/* Finished / Confirm button: >= 56px */}
+        <button
+          type="button"
+          onClick={() => {
+            if (isCompleted) {
+              setTemplateIdx((prev) => (prev + 1) % PUZZLE_CHARACTERS_DATA.length);
+              handleReset();
+            } else {
+              speakTeacherVoice(
+                [{ lang: 'vi', text: 'Bé ghép nốt các mảnh còn lại nhé!' }],
+                settings
+              );
+            }
+          }}
+          className={`shrink-0 w-14 h-14 min-w-[56px] min-h-[56px] rounded-2xl flex flex-col items-center justify-center text-base cursor-pointer transition active:scale-95 shadow-md ${
+            isCompleted
+              ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white animate-pulse'
+              : 'bg-white border-2 border-amber-400 text-amber-800'
+          }`}
+          title="Xác nhận"
+          aria-label="Xác nhận"
+        >
+          {isCompleted ? <Check className="w-7 h-7 stroke-[3]" /> : <span>⭐</span>}
+        </button>
+      </div>
+
+      {/* 4. Character Picker Modal (20 3D Chibi characters) */}
+      {showPickerModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200">
+          <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-amber-400 shadow-2xl p-4 flex flex-col items-center space-y-3 max-h-[85vh] overflow-y-auto">
+            <div className="flex items-center justify-between w-full border-b border-amber-100 pb-2">
+              <div className="flex items-center gap-1.5 text-amber-800 font-black text-sm">
+                <span>🧩</span>
+                <span>Chọn Nhân Vật 3D Để Ghép</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPickerModal(false)}
+                className="w-7 h-7 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center cursor-pointer text-xs"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="grid grid-cols-3 gap-2 w-full">
+              {PUZZLE_CHARACTERS_DATA.map((char, idx) => {
+                const isCurrent = templateIdx === idx;
+                return (
+                  <button
+                    key={char.id}
+                    type="button"
+                    onClick={() => {
+                      setTemplateIdx(idx);
+                      setShowPickerModal(false);
+                      playSoundEffect('pop', settings.volume);
+                      speakTeacherVoice([{ lang: 'vi', text: char.nameVi }], settings);
+                    }}
+                    className={`p-1.5 rounded-2xl border-2 flex flex-col items-center gap-1 cursor-pointer transition text-center ${
+                      isCurrent
+                        ? 'border-amber-500 bg-amber-50 shadow-md scale-105'
+                        : 'border-slate-200 bg-white hover:bg-slate-50'
+                    }`}
+                  >
+                    <img
+                      src={char.imageUrl}
+                      alt={char.nameVi}
+                      className="w-14 h-14 rounded-xl object-cover border border-slate-100 shadow-2xs"
+                    />
+                    <span className="text-[11px] font-bold text-slate-700 line-clamp-1">
+                      {char.nameVi}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

@@ -2902,7 +2902,7 @@
           "colorHex": "#0EA5E9",
           "bgTint": "#E0F2FE",
           "soundEffect": "splash",
-          "soundLabelVi": "Uống sữa cao lớn!",
+          "soundLabelVi": "Trắng ngần bổ dưỡng!",
           "phrase2To3y": {
             "en": "Warm milk",
             "vi": "Sữa tươi ấm đáng yêu"
@@ -2980,7 +2980,7 @@
           "colorHex": "#EC4899",
           "bgTint": "#FCE7F3",
           "soundEffect": "sparkle",
-          "soundLabelVi": "Hạt cơm dẻo thơm!",
+          "soundLabelVi": "Hạt dẻo ngọt bùi!",
           "phrase2To3y": {
             "en": "Hot rice",
             "vi": "Bát cơm trắng đáng yêu"
@@ -3006,7 +3006,7 @@
           "colorHex": "#8B5CF6",
           "bgTint": "#EDE9FE",
           "soundEffect": "splash",
-          "soundLabelVi": "Súp nóng ấm bụng!",
+          "soundLabelVi": "Nóng hổi ấm bụng!",
           "phrase2To3y": {
             "en": "Yummy soup",
             "vi": "Bát súp ấm đáng yêu"
@@ -3032,7 +3032,7 @@
           "colorHex": "#EF4444",
           "bgTint": "#FEE2E2",
           "soundEffect": "splash",
-          "soundLabelVi": "Sợi mì dài thơm ngon!",
+          "soundLabelVi": "Dai dai trơn tuột!",
           "phrase2To3y": {
             "en": "Warm noodles",
             "vi": "Mì sợi ngon đáng yêu"
@@ -3084,7 +3084,7 @@
           "colorHex": "#D97706",
           "bgTint": "#FFEDD5",
           "soundEffect": "splash",
-          "soundLabelVi": "Uống nước mát lành!",
+          "soundLabelVi": "Mát lành tinh khiết!",
           "phrase2To3y": {
             "en": "Clean water",
             "vi": "Cốc nước lọc đáng yêu"
@@ -3110,7 +3110,7 @@
           "colorHex": "#D97706",
           "bgTint": "#FEF3C7",
           "soundEffect": "bell",
-          "soundLabelVi": "Bát cháo thơm!",
+          "soundLabelVi": "Ấm nóng dễ tiêu!",
           "phrase2To3y": {
             "en": "Warm porridge",
             "vi": "Bát cháo ấm nóng"
@@ -3130,20 +3130,20 @@
         {
           "id": "oatmeal",
           "en": "Oatmeal",
-          "vi": "Bột yến mạch",
+          "vi": "Cháo yến mạch",
           "phonetic": "/ˈoʊtmiːl/",
           "emoji": "🥣",
           "colorHex": "#CA8A04",
           "bgTint": "#FEF9C3",
           "soundEffect": "bell",
-          "soundLabelVi": "Bột yến mạch!",
+          "soundLabelVi": "Bổ dưỡng thơm ngon!",
           "phrase2To3y": {
             "en": "Nutritious oatmeal",
-            "vi": "Yến mạch bổ dưỡng"
+            "vi": "Cháo yến mạch bổ dưỡng"
           },
           "sentence3To4y": {
             "en": "Oatmeal with berries is so good.",
-            "vi": "Bột yến mạch thơm ấm bụng bé ơi."
+            "vi": "Cháo yến mạch thơm ấm bụng bé ơi."
           },
           "phonics4To5y": {
             "letter": "O",
@@ -3162,7 +3162,7 @@
           "colorHex": "#2563EB",
           "bgTint": "#DBEAFE",
           "soundEffect": "bell",
-          "soundLabelVi": "Hũ sữa chua!",
+          "soundLabelVi": "Chua ngọt sánh mịn!",
           "phrase2To3y": {
             "en": "Creamy yogurt",
             "vi": "Sữa chua sánh mịn"
@@ -3182,20 +3182,20 @@
         {
           "id": "pancake",
           "en": "Pancake",
-          "vi": "Bánh pancake xốp",
+          "vi": "Bánh kếp xốp",
           "phonetic": "/ˈpænkeɪk/",
           "emoji": "🥞",
           "colorHex": "#F59E0B",
           "bgTint": "#FEF3C7",
           "soundEffect": "bell",
-          "soundLabelVi": "Bánh pancake xốp!",
+          "soundLabelVi": "Xốp mềm thơm phức!",
           "phrase2To3y": {
             "en": "Soft pancake",
-            "vi": "Bánh pancake mềm"
+            "vi": "Bánh kếp mềm"
           },
           "sentence3To4y": {
             "en": "Fluffy pancakes for morning snack.",
-            "vi": "Chiếc bánh pancake thơm ngát mùi bơ."
+            "vi": "Chiếc bánh kếp thơm ngát mùi bơ."
           },
           "phonics4To5y": {
             "letter": "P",
@@ -3214,7 +3214,7 @@
           "colorHex": "#B45309",
           "bgTint": "#FEF3C7",
           "soundEffect": "bell",
-          "soundLabelVi": "Bánh quy giòn!",
+          "soundLabelVi": "Giòn tan rôm rốp!",
           "phrase2To3y": {
             "en": "Crunchy cookie",
             "vi": "Bánh quy giòn tan"
@@ -3240,7 +3240,7 @@
           "colorHex": "#EA580C",
           "bgTint": "#FFEDD5",
           "soundEffect": "bell",
-          "soundLabelVi": "Nước cam tươi!",
+          "soundLabelVi": "Chua ngọt mát rượi!",
           "phrase2To3y": {
             "en": "Sweet orange juice",
             "vi": "Nước cam thơm ngọt"
@@ -3266,7 +3266,7 @@
           "colorHex": "#F59E0B",
           "bgTint": "#FEF3C7",
           "soundEffect": "bell",
-          "soundLabelVi": "Bánh pudding mềm!",
+          "soundLabelVi": "Núng nính tan mềm!",
           "phrase2To3y": {
             "en": "Jiggly pudding",
             "vi": "Pudding mềm núng nính"
@@ -3286,20 +3286,20 @@
         {
           "id": "waffle",
           "en": "Waffle",
-          "vi": "Bánh quế thơm",
+          "vi": "Bánh waffle thơm",
           "phonetic": "/ˈwɑːfl/",
           "emoji": "🧇",
           "colorHex": "#D97706",
           "bgTint": "#FEF3C7",
           "soundEffect": "bell",
-          "soundLabelVi": "Bánh quế thơm!",
+          "soundLabelVi": "Vàng ươm mật ong!",
           "phrase2To3y": {
             "en": "Golden waffle",
-            "vi": "Bánh quế vàng óng"
+            "vi": "Bánh waffle vàng óng"
           },
           "sentence3To4y": {
             "en": "Warm waffle smells like sweet honey.",
-            "vi": "Bánh quế thơm ngậy vị mật ong mật."
+            "vi": "Bánh waffle thơm ngậy vị mật ong."
           },
           "phonics4To5y": {
             "letter": "W",

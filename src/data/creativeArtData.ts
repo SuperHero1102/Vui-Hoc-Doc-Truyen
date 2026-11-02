@@ -1,3 +1,26 @@
+import coloringSeaTurtleImg from '../assets/images/coloring_turtle.png';
+import coloringPuppyImg from '../assets/images/coloring_dog.png';
+import coloringKittyImg from '../assets/images/coloring_cat.png';
+import coloringBunnyImg from '../assets/images/coloring_rabbit.png';
+import coloringCarImg from '../assets/images/coloring_car.png';
+import coloringRocketImg from '../assets/images/coloring_rocket.png';
+import coloringTrainImg from '../assets/images/coloring_train.png';
+import coloringRainbowImg from '../assets/images/coloring_rainbow.png';
+import coloringCakeImg from '../assets/images/coloring_cake.png';
+import coloringGoldfishImg from '../assets/images/coloring_goldfish.png';
+import coloringElephantImg from '../assets/images/coloring_elephant.png';
+import coloringLionImg from '../assets/images/coloring_lion.png';
+import coloringDinoImg from '../assets/images/coloring_dino.png';
+import coloringDolphinImg from '../assets/images/coloring_dolphin.png';
+import coloringDuckImg from '../assets/images/coloring_duck.png';
+import coloringPandaImg from '../assets/images/coloring_panda.png';
+import coloringCastleImg from '../assets/images/coloring_castle.png';
+import coloringBoatImg from '../assets/images/coloring_boat.png';
+import coloringIcecreamImg from '../assets/images/coloring_icecream.png';
+import coloringAppleImg from '../assets/images/coloring_apple.png';
+import coloringHelicopterImg from '../assets/images/coloring_helicopter.png';
+import coloringMushroomImg from '../assets/images/coloring_mushroom.png';
+
 export interface ArtColorItem {
   number: number;
   id: string;
@@ -383,15 +406,75 @@ export interface ColoringTemplate {
   titleVi: string;
   titleEn: string;
   emoji: string;
+  imageUrl?: string;
   regions: ColoringRegionDef[];
 }
 
 export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
   {
+    id: 'sea-turtle',
+    titleVi: 'Chú Rùa Biển Đại Dương',
+    titleEn: 'Sea Turtle',
+    emoji: '🐢',
+    imageUrl: coloringSeaTurtleImg,
+    regions: [
+      {
+        id: 'shell-center',
+        labelVi: 'Mai rùa chính',
+        d: 'M 180 150 C 220 120, 260 140, 270 180 C 270 210, 230 230, 180 210 Z',
+        colorNumber: 4,
+        badgePos: { x: 195, y: 155 },
+      },
+      {
+        id: 'shell-rim',
+        labelVi: 'Viền mai rùa',
+        d: 'M 170 190 C 200 220, 260 220, 280 180 L 260 220 Z',
+        colorNumber: 3,
+        badgePos: { x: 215, y: 195 },
+      },
+      {
+        id: 'turtle-head',
+        labelVi: 'Đầu rùa con',
+        d: 'M 90 120 C 120 90, 160 110, 150 160 C 130 180, 90 170, 90 120 Z',
+        colorNumber: 11,
+        badgePos: { x: 115, y: 140 },
+      },
+      {
+        id: 'front-flipper',
+        labelVi: 'Chân bơi trước',
+        d: 'M 90 180 C 80 230, 120 250, 160 240 Z',
+        colorNumber: 11,
+        badgePos: { x: 105, y: 215 },
+      },
+      {
+        id: 'rear-flipper',
+        labelVi: 'Chân bơi sau',
+        d: 'M 160 210 C 170 255, 210 260, 220 210 Z',
+        colorNumber: 11,
+        badgePos: { x: 185, y: 235 },
+      },
+      {
+        id: 'water-bubble',
+        labelVi: 'Bong bóng nước',
+        d: 'M 60 70 A 15 15 0 1 0 60 100 A 15 15 0 1 0 60 70 Z',
+        colorNumber: 5,
+        badgePos: { x: 60, y: 85 },
+      },
+      {
+        id: 'sea-waves',
+        labelVi: 'Sóng biển xanh',
+        d: 'M 40 250 C 90 230, 160 270, 260 250 Z',
+        colorNumber: 6,
+        badgePos: { x: 140, y: 270 },
+      },
+    ],
+  },
+  {
     id: 'happy-puppy',
     titleVi: 'Chú Chó Con Vui Vẻ',
     titleEn: 'Happy Puppy',
     emoji: '🐶',
+    imageUrl: coloringPuppyImg,
     regions: [
       {
         id: 'left-ear',
@@ -484,6 +567,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Mèo Con & Cuộn Len',
     titleEn: 'Kitty & Yarn',
     emoji: '🐱',
+    imageUrl: coloringKittyImg,
     regions: [
       {
         id: 'left-ear',
@@ -548,6 +632,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Thỏ Con Cầm Cà Rốt',
     titleEn: 'Bunny & Carrot',
     emoji: '🐰',
+    imageUrl: coloringBunnyImg,
     regions: [
       {
         id: 'left-ear',
@@ -612,6 +697,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Xe Ô Tô Đi Dã Ngoại',
     titleEn: 'Picnic Car',
     emoji: '🚗',
+    imageUrl: coloringCarImg,
     regions: [
       {
         id: 'sun',
@@ -683,6 +769,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Tàu Hỏa Xe Lửa Tu Tu',
     titleEn: 'Choo Choo Train',
     emoji: '🚂',
+    imageUrl: coloringTrainImg,
     regions: [
       {
         id: 'smoke',
@@ -761,6 +848,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Tên Lửa Bay Vào Vũ Trụ',
     titleEn: 'Space Rocket',
     emoji: '🚀',
+    imageUrl: coloringRocketImg,
     regions: [
       {
         id: 'nose-cone',
@@ -825,6 +913,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Mặt Trời & Cầu Vồng',
     titleEn: 'Sun & Rainbow',
     emoji: '🌈',
+    imageUrl: coloringRainbowImg,
     regions: [
       {
         id: 'sun',
@@ -882,6 +971,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Bánh Sinh Nhật 3 Tầng',
     titleEn: 'Birthday Cake',
     emoji: '🎂',
+    imageUrl: coloringCakeImg,
     regions: [
       {
         id: 'flame-1',
@@ -946,6 +1036,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Cá Vàng Đại Dương',
     titleEn: 'Magic Fish',
     emoji: '🐠',
+    imageUrl: coloringGoldfishImg,
     regions: [
       {
         id: 'body',
@@ -996,6 +1087,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Chú Voi Con Thông Minh',
     titleEn: 'Baby Elephant',
     emoji: '🐘',
+    imageUrl: coloringElephantImg,
     regions: [
       {
         id: 'head',
@@ -1039,6 +1131,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Sư Tử Bờm Vàng',
     titleEn: 'Brave Lion',
     emoji: '🦁',
+    imageUrl: coloringLionImg,
     regions: [
       {
         id: 'mane',
@@ -1089,6 +1182,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Khủng Long T-Rex Thân Thiện',
     titleEn: 'Friendly Dino',
     emoji: '🦖',
+    imageUrl: coloringDinoImg,
     regions: [
       {
         id: 'head',
@@ -1139,6 +1233,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Cá Heo Nhảy Sóng',
     titleEn: 'Jumping Dolphin',
     emoji: '🐬',
+    imageUrl: coloringDolphinImg,
     regions: [
       {
         id: 'body',
@@ -1178,60 +1273,11 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     ],
   },
   {
-    id: 'sea-turtle',
-    titleVi: 'Chú Rùa Biển Bơi Lội',
-    titleEn: 'Sea Turtle',
-    emoji: '🐢',
-    regions: [
-      {
-        id: 'shell',
-        labelVi: 'Mai rùa lớn',
-        d: 'M 160 95 C 225 95, 255 140, 255 190 C 255 240, 225 270, 160 270 C 95 270, 65 240, 65 190 C 65 140, 95 95, 160 95 Z',
-        colorNumber: 4,
-        badgePos: { x: 160, y: 180 },
-      },
-      {
-        id: 'shell-center',
-        labelVi: 'Hoa văn mai rùa',
-        d: 'M 160 130 C 195 130, 210 160, 210 190 C 210 220, 195 240, 160 240 C 125 240, 110 220, 110 190 C 110 160, 125 130, 160 130 Z',
-        colorNumber: 11,
-        badgePos: { x: 160, y: 185 },
-      },
-      {
-        id: 'head',
-        labelVi: 'Đầu rùa bơi',
-        d: 'M 160 55 C 180 55, 185 80, 180 98 L 140 98 C 135 80, 140 55, 160 55 Z',
-        colorNumber: 4,
-        badgePos: { x: 160, y: 75 },
-      },
-      {
-        id: 'flipper-left',
-        labelVi: 'Chèo bơi trái',
-        d: 'M 95 125 C 45 105, 30 145, 75 165 Z',
-        colorNumber: 4,
-        badgePos: { x: 60, y: 135 },
-      },
-      {
-        id: 'flipper-right',
-        labelVi: 'Chèo bơi phải',
-        d: 'M 225 125 C 275 105, 290 145, 245 165 Z',
-        colorNumber: 4,
-        badgePos: { x: 260, y: 135 },
-      },
-      {
-        id: 'rear-flippers',
-        labelVi: 'Chân sau',
-        d: 'M 105 255 L 75 285 L 105 275 Z',
-        colorNumber: 4,
-        badgePos: { x: 90, y: 270 },
-      },
-    ],
-  },
-  {
     id: 'swimming-duck',
     titleVi: 'Chú Vịt Vàng Tung Tăng',
     titleEn: 'Swimming Duck',
     emoji: '🦆',
+    imageUrl: coloringDuckImg,
     regions: [
       {
         id: 'head',
@@ -1275,6 +1321,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Gấu Trúc Đáng Yêu',
     titleEn: 'Panda Bear',
     emoji: '🐼',
+    imageUrl: coloringPandaImg,
     regions: [
       {
         id: 'head',
@@ -1325,6 +1372,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Lâu Đài Cổ Tích',
     titleEn: 'Magic Castle',
     emoji: '🏰',
+    imageUrl: coloringCastleImg,
     regions: [
       {
         id: 'main-wall',
@@ -1382,6 +1430,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Thuyền Buồm Ra Khơi',
     titleEn: 'Sailing Boat',
     emoji: '⛵',
+    imageUrl: coloringBoatImg,
     regions: [
       {
         id: 'hull',
@@ -1425,6 +1474,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Kem Ốc Quế Ngọt Ngào',
     titleEn: 'Ice Cream Cone',
     emoji: '🍦',
+    imageUrl: coloringIcecreamImg,
     regions: [
       {
         id: 'cone',
@@ -1461,6 +1511,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Quả Táo Ngọt Lành',
     titleEn: 'Sweet Apple',
     emoji: '🍎',
+    imageUrl: coloringAppleImg,
     regions: [
       {
         id: 'apple-body',
@@ -1490,6 +1541,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Trực Thăng Cứu Hộ',
     titleEn: 'Rescue Helicopter',
     emoji: '🚁',
+    imageUrl: coloringHelicopterImg,
     regions: [
       {
         id: 'cockpit',
@@ -1533,6 +1585,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleVi: 'Cây Nấm Kỳ Diệu',
     titleEn: 'Magic Mushroom',
     emoji: '🍄',
+    imageUrl: coloringMushroomImg,
     regions: [
       {
         id: 'cap',
