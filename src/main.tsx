@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
+import App from './App';
 import './index.css';
 
 // Register Network-First Offline Service Worker for 100% Offline capability + automatic updates when online

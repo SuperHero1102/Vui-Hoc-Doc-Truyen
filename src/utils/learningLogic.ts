@@ -11,112 +11,87 @@ import type {
 export const AGE_GROUPS: AgeGroupConfig[] = [
   {
     id: '0-3m',
-    label: '0–3 tháng',
-    shortLabel: '0–3 th',
-    stageTitle: 'Giác quan đầu đời',
-    subtitle: 'Bố mẹ dẫn dắt · Tương phản Đen–Trắng–Đỏ & Nhạc ru',
-    sessionMinutes: '2–3 phút',
+    label: '0 - 3 tháng',
+    shortLabel: '0-3m',
+    stageTitle: 'Kích thích thị giác & thính giác',
+    subtitle: 'Tương phản đen trắng, âm thanh êm dịu',
+    sessionMinutes: '3-5 phút',
     recommendedDailyLimitMins: 5,
     underTwoNotice: true,
-    badgeColor: 'bg-rose-100 text-rose-900',
-    accentColor: '#F43F5E',
-    focusDescription:
-      'Hình tương phản cao chuyển động chậm, nhạc ru êm dịu và thẻ gợi ý để bố mẹ trò chuyện, hát ru cùng bé.',
-    supportedGameTypes: ['tap_correct'],
+    badgeColor: 'bg-slate-100 text-slate-700',
+    accentColor: '#64748B',
+    focusDescription: 'Tranh tương phản cao đen trắng đỏ, tiếng vỗ về dịu nhẹ giúp phát triển thị giác và làm quen âm điệu ngôn ngữ.',
+    supportedGameTypes: [],
   },
   {
     id: '4-12m',
-    label: '4–12 tháng',
-    shortLabel: '4–12 th',
-    stageTitle: 'Nghe và nhìn',
-    subtitle: 'Thẻ âm thanh lớn · Trò Ú òa (Peek-a-boo) & Đập bong bóng',
-    sessionMinutes: '3–5 phút',
+    label: '4 - 12 tháng',
+    shortLabel: '4-12m',
+    stageTitle: 'Ú òa & Khám phá âm thanh',
+    subtitle: 'Trò chơi ú òa, tiếng kêu động vật vui nhộn',
+    sessionMinutes: '5-10 phút',
     recommendedDailyLimitMins: 10,
     underTwoNotice: true,
-    badgeColor: 'bg-amber-100 text-amber-900',
-    accentColor: '#F59E0B',
-    focusDescription:
-      'Chạm thẻ hình lớn nghe từ tiếng Anh và tiếng kêu thật, chơi Ú òa hoạt hình và chạm vỡ bong bóng xà phòng.',
-    supportedGameTypes: ['tap_correct', 'balloon_pop'],
+    badgeColor: 'bg-pink-100 text-pink-700',
+    accentColor: '#EC4899',
+    focusDescription: 'Thẻ bài ú òa tương tác, làm quen với tiếng kêu con vật và âm thanh tự nhiên.',
+    supportedGameTypes: ['tap_correct'],
   },
   {
     id: '1-2y',
-    label: '1–2 tuổi',
-    shortLabel: '1–2 tuổi',
-    stageTitle: 'Nói bi bô',
-    subtitle: 'Từ đơn · Chạm hình, Đập bóng bay, Kéo vào giỏ & Tô màu',
-    sessionMinutes: '5–7 phút',
+    label: '1 - 2 tuổi',
+    shortLabel: '1-2y',
+    stageTitle: 'Bập bẹ từ vựng đầu đời',
+    subtitle: 'Chạm nghe từ đơn, bóng bay, vỗ tay',
+    sessionMinutes: '10-15 phút',
     recommendedDailyLimitMins: 15,
     underTwoNotice: true,
-    badgeColor: 'bg-sky-100 text-sky-900',
-    accentColor: '#0EA5E9',
-    focusDescription:
-      'Từ vựng đơn quen thuộc (màu sắc, con vật, trái cây, gia đình). Bé chạm đúng hình, cho vật vào giỏ và tô màu bằng ngón tay.',
-    supportedGameTypes: ['tap_correct', 'balloon_pop', 'basket_drag', 'coloring_count'],
+    badgeColor: 'bg-amber-100 text-amber-800',
+    accentColor: '#F59E0B',
+    focusDescription: 'Từ đơn giản, âm thanh chuẩn cô giáo phát âm rõ ràng, hứng thú khám phá.',
+    supportedGameTypes: ['tap_correct', 'balloon_pop'],
   },
   {
     id: '2-3y',
-    label: '2–3 tuổi',
-    shortLabel: '2–3 tuổi',
-    stageTitle: 'Khám phá thế giới',
-    subtitle: 'Cụm 2–3 từ · Ghép đôi trí nhớ, Phân loại, Đếm 1–10',
-    sessionMinutes: '6–8 phút',
+    label: '2 - 3 tuổi',
+    shortLabel: '2-3y',
+    stageTitle: 'Cụm từ 2 từ & Thu hoạch',
+    subtitle: 'Kéo thả vào giỏ, cụm từ ghép sinh động',
+    sessionMinutes: '15-20 phút',
     recommendedDailyLimitMins: 20,
     underTwoNotice: false,
-    badgeColor: 'bg-emerald-100 text-emerald-900',
+    badgeColor: 'bg-emerald-100 text-emerald-800',
     accentColor: '#10B981',
-    focusDescription:
-      'Làm quen cụm từ "red apple", "big cow". Chơi lật thẻ trí nhớ (Memory Match), phân loại vào giỏ và đếm đồ vật.',
-    supportedGameTypes: [
-      'tap_correct',
-      'basket_drag',
-      'memory_match',
-      'coloring_count',
-      'balloon_pop',
-    ],
+    focusDescription: 'Kết hợp cụm từ ngắn (A cute cat, red apple), kéo thả đồ vật vào giỏ theo yêu cầu.',
+    supportedGameTypes: ['tap_correct', 'balloon_pop', 'basket_drag'],
   },
   {
     id: '3-4y',
-    label: '3–4 tuổi',
-    shortLabel: '3–4 tuổi',
-    stageTitle: 'Bé tập nói câu',
-    subtitle: 'Câu ngắn "I like..." · Chữ cái A–Z, Đố nghe-chọn, Nhập vai',
-    sessionMinutes: '8–10 phút',
-    recommendedDailyLimitMins: 20,
+    label: '3 - 4 tuổi',
+    shortLabel: '3-4y',
+    stageTitle: 'Câu hoàn chỉnh & Trí nhớ',
+    subtitle: 'Lật thẻ ghép đôi, tô màu đếm số',
+    sessionMinutes: '15-25 phút',
+    recommendedDailyLimitMins: 25,
     underTwoNotice: false,
-    badgeColor: 'bg-purple-100 text-purple-900',
-    accentColor: '#8B5CF6',
-    focusDescription:
-      'Tập nói câu đơn giản ("I like apples", "I see a cow"), ghép chữ cái đầu tiên (A is for Apple) và giải câu đố.',
-    supportedGameTypes: [
-      'tap_correct',
-      'memory_match',
-      'basket_drag',
-      'word_echo',
-      'coloring_count',
-    ],
+    badgeColor: 'bg-sky-100 text-sky-800',
+    accentColor: '#0EA5E9',
+    focusDescription: 'Luyện câu hoàn chỉnh, rèn luyện trí nhớ qua trò lật thẻ và tô màu đếm đồ vật.',
+    supportedGameTypes: ['tap_correct', 'balloon_pop', 'basket_drag', 'memory_match', 'coloring_count'],
   },
   {
     id: '4-5y',
-    label: '4–5 tuổi',
-    shortLabel: '4–5 tuổi',
-    stageTitle: 'Bé sắp vào lớp 1',
-    subtitle: 'Phonics & Đánh vần · Ghép từ 3 chữ cái, Đố vui & Tập nói',
-    sessionMinutes: '8–10 phút',
-    recommendedDailyLimitMins: 25,
+    label: '4 - 5 tuổi',
+    shortLabel: '4-5y',
+    stageTitle: 'Phonics, Ghép chữ & Tự tin nói',
+    subtitle: 'Phát âm chữ cái phonics, ghép vần & tập nói',
+    sessionMinutes: '20-30 phút',
+    recommendedDailyLimitMins: 30,
     underTwoNotice: false,
-    badgeColor: 'bg-pink-100 text-pink-900',
-    accentColor: '#EC4899',
-    focusDescription:
-      'Âm vị (Phonics), đánh vần từ ngắn (C-A-T, S-U-N), nối từ với hình, đếm số và trò chơi luyện nói chuẩn bản xứ.',
-    supportedGameTypes: [
-      'word_echo',
-      'memory_match',
-      'tap_correct',
-      'basket_drag',
-      'coloring_count',
-      'balloon_pop',
-    ],
+    badgeColor: 'bg-indigo-100 text-indigo-800',
+    accentColor: '#6366F1',
+    focusDescription: 'Nhận diện mặt chữ cái, phát âm Phonics theo chuẩn quốc tế, tự tin nói nhại theo cô.',
+    supportedGameTypes: ['tap_correct', 'balloon_pop', 'basket_drag', 'memory_match', 'coloring_count', 'word_echo'],
   },
 ];
 
@@ -124,239 +99,192 @@ export function getAgeGroupConfig(ageId: AgeGroupId): AgeGroupConfig {
   return AGE_GROUPS.find((g) => g.id === ageId) || AGE_GROUPS[2];
 }
 
-/**
- * Builds language-separated speech segments (`lang: 'vi'` vs `lang: 'en'`)
- * so that Vietnamese is 100% read by a Northern Vietnamese voice and English
- * is 100% read by a native English voice (never an English voice reading Vietnamese!).
- */
+export function getRotatedGamesForAge(ageId: AgeGroupId, seed = 0): GameType[] {
+  const cfg = getAgeGroupConfig(ageId);
+  const games = [...cfg.supportedGameTypes];
+  if (games.length <= 1) return games;
+  const shift = Math.abs(seed) % games.length;
+  return [...games.slice(shift), ...games.slice(0, shift)];
+}
+
 export function buildSegmentedVocabularyScript(
   item: VocabularyItem,
   ageId: AgeGroupId
 ): SpeechSegment[] {
-  const spelledEnglish = item.en
-    .toUpperCase()
-    .replace(/[^A-Z]/g, '')
-    .split('')
-    .join(', ');
-
-  const cleanVi = item.vi.replace(/^[Cc]hữ\s+[A-Z]\s*-\s*/, '').toLowerCase();
-
-  switch (ageId) {
-    case '0-3m':
-    case '4-12m':
-    case '1-2y':
-      return [
-        { lang: 'vi', text: `Bé ơi nhìn nè! Đây là ${cleanVi}.` },
-        { lang: 'en', text: `${item.en}! ${item.en}!` },
-        { lang: 'vi', text: item.soundLabelVi },
-      ];
-    case '2-3y':
-      return [
-        { lang: 'vi', text: `Đây là ${cleanVi}.` },
-        { lang: 'en', text: `${item.en}! ${item.phrase2To3y.en}!` },
-        { lang: 'vi', text: `${item.phrase2To3y.vi}. ${item.soundLabelVi}` },
-      ];
-    case '3-4y':
-      return [
-        { lang: 'vi', text: `Đây là ${cleanVi}. Cùng nói câu tiếng Anh với cô nhé!` },
-        { lang: 'en', text: `${item.en}! ${item.sentence3To4y.en}` },
-        { lang: 'vi', text: `Nghĩa là: ${item.sentence3To4y.vi}` },
-      ];
-    case '4-5y':
-      return [
-        { lang: 'vi', text: `Đây là ${cleanVi}. Cùng đánh vần tiếng Anh với cô nhé!` },
-        { lang: 'en', text: `${spelledEnglish}. ${item.en}! ${item.sentence3To4y.en}` },
-        { lang: 'vi', text: item.sentence3To4y.vi },
-      ];
+  if (ageId === '0-3m' || ageId === '4-12m') {
+    return [
+      { lang: 'vi', text: `Bé ơi, đây là ${item.vi.toLowerCase()}.` },
+      { lang: 'en', text: item.en },
+    ];
   }
-}
 
-/**
- * Legacy string builder for display/captions, using buildSegmentedVocabularyScript.
- */
-export function buildBilingualVocabularyScript(
-  item: VocabularyItem,
-  ageId: AgeGroupId
-): string {
-  return buildSegmentedVocabularyScript(item, ageId)
-    .map((s) => s.text)
-    .join(' ');
-}
+  if (ageId === '1-2y') {
+    return [
+      { lang: 'vi', text: `Bé ơi, đây là ${item.vi.toLowerCase()}!` },
+      { lang: 'en', text: `${item.en}!` },
+    ];
+  }
 
-/**
- * Builds segmented encouragement when a child taps a different option.
- * Explicitly uses "Cố lên nào bé ơi!" and keeps Vietnamese and English segments 100% separate.
- */
-export function buildSegmentedGentleTryAgain(
-  tappedItem: VocabularyItem,
-  targetItem: VocabularyItem
-): SpeechSegment[] {
-  const tappedVi = tappedItem.vi.replace(/^[Cc]hữ\s+[A-Z]\s*-\s*/, '').toLowerCase();
-  const targetVi = targetItem.vi.replace(/^[Cc]hữ\s+[A-Z]\s*-\s*/, '').toLowerCase();
+  if (ageId === '2-3y' && item.phrase2To3y) {
+    return [
+      { lang: 'vi', text: `${item.vi}! ${item.phrase2To3y.vi}.` },
+      { lang: 'en', text: `${item.en}! ${item.phrase2To3y.en}!` },
+    ];
+  }
+
+  if (ageId === '3-4y' && item.sentence3To4y) {
+    return [
+      { lang: 'vi', text: `${item.vi}! ${item.sentence3To4y.vi}.` },
+      { lang: 'en', text: `${item.sentence3To4y.en}!` },
+    ];
+  }
+
+  if (ageId === '4-5y' && item.phonics4To5y) {
+    return [
+      {
+        lang: 'vi',
+        text: `Chữ ${item.phonics4To5y.letter}. Phát âm là ${item.phonics4To5y.sound}. ${item.phonics4To5y.questionVi}`,
+      },
+      {
+        lang: 'en',
+        text: `${item.phonics4To5y.letter}! ${item.phonics4To5y.sound}! ${item.en}!`,
+      },
+    ];
+  }
+
   return [
-    { lang: 'vi', text: `Cố lên nào bé ơi! Đây là ${tappedVi}.` },
-    { lang: 'en', text: `${tappedItem.en}!` },
-    { lang: 'vi', text: `Bé hãy tìm ${targetVi} cùng cô nhé!` },
-    { lang: 'en', text: `${targetItem.en}!` },
+    { lang: 'vi', text: `${item.vi}!` },
+    { lang: 'en', text: `${item.en}!` },
   ];
 }
 
 export function buildGentleTryAgainScript(
-  tappedItem: VocabularyItem,
-  targetItem: VocabularyItem
+  choice: VocabularyItem,
+  target: VocabularyItem
 ): string {
-  return buildSegmentedGentleTryAgain(tappedItem, targetItem)
-    .map((s) => s.text)
-    .join(' ');
+  return `Chưa đúng rồi bé ơi, đây là ${choice.vi.toLowerCase()} (${choice.en}) mà! Bé tìm lại ${target.vi.toLowerCase()} (${target.en}) nhé!`;
 }
 
-/**
- * Rotates the order of supported games for a given age group and session seed
- * so the child experiences fresh variety every time they enter a lesson.
- */
-export function getRotatedGamesForAge(
-  ageId: AgeGroupId,
-  rotationSeed: number
-): GameType[] {
-  const config = getAgeGroupConfig(ageId);
-  const games = [...config.supportedGameTypes];
-  if (games.length <= 1) return games;
-  const offset = Math.abs(Math.floor(rotationSeed)) % games.length;
-  return [...games.slice(offset), ...games.slice(0, offset)];
+export function buildSegmentedGentleTryAgain(
+  choice: VocabularyItem,
+  target: VocabularyItem
+): SpeechSegment[] {
+  return [
+    { lang: 'vi', text: `Bé ơi, đây là ${choice.vi.toLowerCase()} mà.` },
+    { lang: 'en', text: `${choice.en}!` },
+    { lang: 'vi', text: `Bé tìm ${target.vi.toLowerCase()} nhé!` },
+    { lang: 'en', text: `${target.en}!` },
+  ];
 }
 
-/**
- * Deterministically picks "Bài ngẫu nhiên hôm nay" (Today's Random Topic)
- * based on the date string (YYYY-MM-DD) or an optional offset.
- */
 export function getDailyRandomTopic(
   topics: TopicLesson[],
-  dateString: string,
-  extraOffset = 0
+  dateStr: string,
+  seedOffset = 0
 ): TopicLesson {
-  if (topics.length === 0) {
-    throw new Error('Topics array must not be empty');
-  }
+  if (!topics || topics.length === 0) return {} as TopicLesson;
   let hash = 0;
-  for (let i = 0; i < dateString.length; i++) {
-    hash = (hash * 31 + dateString.charCodeAt(i)) >>> 0;
+  for (let i = 0; i < dateStr.length; i++) {
+    hash = (hash << 5) - hash + dateStr.charCodeAt(i);
+    hash |= 0;
   }
-  const index = (hash + Math.abs(extraOffset)) % topics.length;
+  const index = Math.abs(hash + seedOffset) % topics.length;
   return topics[index];
 }
 
-/**
- * Selects up to `limit` words for Spaced Repetition Review ("Ôn lại từ cũ").
- */
 export function getWordsForSpacedRepetition(
-  wordsLearned: Record<string, WordMasteryRecord>,
-  topics: TopicLesson[],
-  limit = 4
+  wordsLearned: Record<string, WordMasteryRecord> = {},
+  topics: TopicLesson[] = [],
+  count = 4
 ): WordMasteryRecord[] {
-  const records = Object.values(wordsLearned);
-  if (records.length > 0) {
-    return [...records]
-      .sort((a, b) => {
-        if (a.timesPracticed !== b.timesPracticed) {
-          return a.timesPracticed - b.timesPracticed;
-        }
-        return a.lastPracticedAt - b.lastPracticedAt;
-      })
-      .slice(0, limit);
+  const learnedList = Object.values(wordsLearned);
+  if (learnedList.length >= count) {
+    const sorted = [...learnedList].sort((a, b) => {
+      if (a.timesPracticed !== b.timesPracticed) {
+        return a.timesPracticed - b.timesPracticed;
+      }
+      return a.lastPracticedAt - b.lastPracticedAt;
+    });
+    return sorted.slice(0, count);
   }
 
-  const fallbackRecords: WordMasteryRecord[] = [];
+  const result: WordMasteryRecord[] = [...learnedList];
+  const usedIds = new Set(result.map((r) => r.wordId));
+
   for (const topic of topics) {
-    for (const vocab of topic.vocabulary) {
-      fallbackRecords.push({
-        wordId: vocab.id,
-        topicId: topic.id,
-        en: vocab.en,
-        vi: vocab.vi,
-        emoji: vocab.emoji,
-        timesPracticed: 1,
-        lastPracticedAt: 0,
-      });
-      if (fallbackRecords.length >= limit) return fallbackRecords;
+    for (const v of topic.vocabulary || []) {
+      if (result.length >= count) break;
+      if (!usedIds.has(v.id)) {
+        usedIds.add(v.id);
+        result.push({
+          wordId: v.id,
+          topicId: topic.id,
+          en: v.en,
+          vi: v.vi,
+          emoji: v.emoji,
+          timesPracticed: 0,
+          lastPracticedAt: 0,
+        });
+      }
     }
+    if (result.length >= count) break;
   }
-  return fallbackRecords;
-}
 
-export interface ParentMathChallenge {
-  a: number;
-  b: number;
-  questionText: string;
-  expectedAnswer: number;
-}
-
-export function generateParentMathChallenge(seed?: number): ParentMathChallenge {
-  const s = typeof seed === 'number' ? Math.abs(Math.floor(seed)) : Date.now();
-  const a = (s % 6) + 3;
-  const b = ((s >> 3) % 5) + 2;
-  return {
-    a,
-    b,
-    questionText: `${a} + ${b} = ?`,
-    expectedAnswer: a + b,
-  };
-}
-
-export function verifyParentMathAnswer(
-  challenge: ParentMathChallenge,
-  userInput: string | number
-): boolean {
-  const parsed = typeof userInput === 'number' ? userInput : parseInt(userInput.trim(), 10);
-  if (Number.isNaN(parsed)) return false;
-  return parsed === challenge.expectedAnswer;
-}
-
-/**
- * Verifies the parent's custom PIN/password (or falls back to math answer only if no custom PIN is set).
- */
-export function verifyParentPassword(
-  configuredPin: string | undefined,
-  enteredValue: string,
-  fallbackChallenge?: ParentMathChallenge
-): boolean {
-  const trimmedEntered = enteredValue.trim();
-  if (!trimmedEntered) return false;
-  const activePin = configuredPin?.trim();
-  if (activePin && activePin.length > 0) {
-    return trimmedEntered === activePin;
-  }
-  if (fallbackChallenge) {
-    return verifyParentMathAnswer(fallbackChallenge, trimmedEntered);
-  }
-  return false;
-}
-
-export interface ScreenTimeStatus {
-  minutesPlayed: number;
-  dailyLimit: number;
-  remainingMinutes: number;
-  autoOffEnabled: boolean;
-  isLimitReached: boolean;
-  shouldRemindEyeRest: boolean;
+  return result.slice(0, count);
 }
 
 export function checkScreenTimeStatus(
   minutesPlayed: number,
   dailyLimit: number,
   autoOffEnabled = true
-): ScreenTimeStatus {
-  const safePlayed = Math.max(0, Math.round(minutesPlayed));
-  const safeLimit = Math.max(1, Math.round(dailyLimit));
-  const remainingMinutes = Math.max(0, safeLimit - safePlayed);
-  const isLimitReached = autoOffEnabled && safePlayed >= safeLimit;
-  const shouldRemindEyeRest = autoOffEnabled && safePlayed > 0 && safePlayed % 10 === 0;
+): { shouldRemindEyeRest: boolean; isLimitReached: boolean; minutesRemaining: number } {
+  if (!autoOffEnabled) {
+    return { shouldRemindEyeRest: false, isLimitReached: false, minutesRemaining: 999 };
+  }
+  const minutesRemaining = Math.max(0, dailyLimit - minutesPlayed);
+  const isLimitReached = minutesPlayed >= dailyLimit;
+  const shouldRemindEyeRest = isLimitReached || (minutesRemaining <= 2 && minutesRemaining > 0);
+  return { shouldRemindEyeRest, isLimitReached, minutesRemaining };
+}
+
+export function generateParentMathChallenge(seed = Date.now()): {
+  questionText: string;
+  answer: number;
+} {
+  const a = (Math.abs(Math.sin(seed) * 10000) % 8 | 0) + 2;
+  const b = (Math.abs(Math.cos(seed) * 10000) % 7 | 0) + 2;
+  const isMult = Math.abs(seed) % 2 === 0;
+  if (isMult) {
+    return {
+      questionText: `${a} × ${b} = ?`,
+      answer: a * b,
+    };
+  }
   return {
-    minutesPlayed: safePlayed,
-    dailyLimit: safeLimit,
-    remainingMinutes,
-    autoOffEnabled,
-    isLimitReached,
-    shouldRemindEyeRest,
+    questionText: `${a + b} − ${b} = ?`,
+    answer: a,
   };
 }
 
+export function verifyParentMathAnswer(
+  challenge: { answer: number },
+  input: string
+): boolean {
+  if (!input || !challenge) return false;
+  return parseInt(input.trim(), 10) === challenge.answer;
+}
+
+export function verifyParentPassword(
+  pin: string | undefined,
+  input: string,
+  challenge?: { answer: number }
+): boolean {
+  const cleanInput = input?.trim() || '';
+  if (pin && pin.trim().length > 0) {
+    return cleanInput === pin.trim();
+  }
+  if (challenge) {
+    return parseInt(cleanInput, 10) === challenge.answer;
+  }
+  return cleanInput.length > 0;
+}
