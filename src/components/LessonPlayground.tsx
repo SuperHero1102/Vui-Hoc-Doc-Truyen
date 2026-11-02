@@ -12,6 +12,7 @@ import {
   CheckCircle2,
   Heart,
   Palette,
+  BarChart3,
 } from 'lucide-react';
 import type {
   AgeGroupId,
@@ -44,6 +45,7 @@ interface LessonPlaygroundProps {
   settings: ParentSettings;
   rotationSeed: number;
   onBack: () => void;
+  onOpenActivityHistory?: () => void;
   onWordPracticed: (item: VocabularyItem, topicId: string) => void;
   onTopicCompleted: (topic: TopicLesson, starsEarned: number) => void;
 }
@@ -106,6 +108,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   settings,
   rotationSeed,
   onBack,
+  onOpenActivityHistory,
   onWordPracticed,
   onTopicCompleted,
 }) => {
@@ -174,6 +177,12 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   const [wordEchoCompletedCount, setWordEchoCompletedCount] = useState(0);
   const [showCelebrationModal, setShowCelebrationModal] = useState(false);
 
+  // Dedicated Echo/Imitate modal state for vocabulary items (When settings.allowMicrophone === true)
+  const [echoVocabItem, setEchoVocabItem] = useState<VocabularyItem | null>(null);
+  const [echoStep, setEchoStep] = useState<'intro' | 'listening' | 'praise'>('intro');
+  const [echoWaveLevel, setEchoWaveLevel] = useState<number>(0);
+  const isAdvancingGameRef = React.useRef<boolean>(false);
+
   const triggerTopicCompletion = (starsEarned = 3) => {
     onTopicCompleted(topic, starsEarned);
     setShowCelebrationModal(true);
@@ -227,6 +236,59 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
     setTimeout(() => setActiveVocabId(null), 900);
   };
 
+  const handleStartEchoMicrophone = async (item: VocabularyItem) => {
+    stopAllAudio();
+    setEchoVocabItem(item);
+    setEchoStep('intro');
+    setEchoWaveLevel(0);
+
+    // 1. Teacher introduces the word
+    await speakTeacherVoice(
+      [
+        { lang: 'vi', text: `Bé ơi, nói theo cô nhé:` },
+        { lang: 'en', text: `${item.en}!` },
+      ],
+      settings
+    );
+
+    // 2. Start listening mode (no audio is saved anywhere)
+    setEchoStep('listening');
+    let stream: MediaStream | null = null;
+    try {
+      if (typeof navigator !== 'undefined' && navigator.mediaDevices?.getUserMedia) {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true }).catch(() => null);
+      }
+    } catch {
+      // browser declined or no mic
+    }
+
+    // Dynamic wave visualizer for 2.6 seconds
+    const startMs = Date.now();
+    const interval = window.setInterval(() => {
+      const elapsed = Date.now() - startMs;
+      const progress = elapsed / 2600;
+      setEchoWaveLevel(Math.min(100, Math.floor(Math.sin(elapsed / 100) * 35 + 55)));
+      if (progress >= 1) {
+        window.clearInterval(interval);
+        if (stream) {
+          stream.getTracks().forEach((track) => track.stop());
+        }
+        // 3. Praise baby
+        setEchoStep('praise');
+        fireStarExplosion(0.5, 0.45);
+        playCelebrationChime(settings.volume);
+        onWordPracticed(item, topic.id);
+        speakTeacherVoice(
+          [
+            { lang: 'vi', text: `Bé nhại giọng siêu quá! Đúng là ${item.vi.toLowerCase()} rồi!` },
+            { lang: 'en', text: `${item.en}! Excellent!` },
+          ],
+          settings
+        );
+      }
+    }, 100);
+  };
+
   const promptCurrentTapQuestion = (item: VocabularyItem) => {
     speakTeacherVoice(
       [
@@ -237,9 +299,12 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
     );
   };
 
-  const handleTapChoice = (choice: VocabularyItem) => {
+  const handleTapChoice = async (choice: VocabularyItem) => {
+    if (isAdvancingGameRef.current) return;
     onWordPracticed(choice, topic.id);
+
     if (choice.id === currentTapTarget.id) {
+      isAdvancingGameRef.current = true;
       playCelebrationChime(settings.volume);
       playSoundEffect(choice.soundEffect, settings.volume);
       const nextStars = scoreStars + 1;
@@ -249,29 +314,44 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
       if (nextStars >= 3) {
         const praiseText = `Hoan hô! Đúng là ${choice.vi.toLowerCase()} (${choice.en}) rồi! Chúc mừng bé đã hoàn thành cả 3 màn!`;
         setFeedbackBanner({ text: praiseText, tone: 'happy' });
-        setTimeout(() => {
-          setScoreStars(0);
-          setTargetIndex((i) => (i + 1) % topic.vocabulary.length);
-          setFeedbackBanner(null);
-          triggerTopicCompletion(3);
-        }, 700);
-      } else {
-        const praiseText = `Giỏi lắm! Đúng là ${choice.vi.toLowerCase()} (${choice.en}) rồi! Mình sang màn ${nextStars + 1}/3 nhé!`;
-        setFeedbackBanner({ text: praiseText, tone: 'happy' });
-        speakTeacherVoice(
+
+        // Chờ nói xong xuôi trọn vẹn lời khen trước khi chuyển sang modal chúc mừng
+        await speakTeacherVoice(
           [
-            { lang: 'vi', text: `Giỏi lắm! Đúng là ${choice.vi.toLowerCase()} rồi!` },
+            { lang: 'vi', text: `Hoan hô! Đúng là ${choice.vi.toLowerCase()} rồi!` },
             { lang: 'en', text: `${choice.en}!` },
-            { lang: 'vi', text: 'Bé sang câu tiếp theo nhé!' },
+            { lang: 'vi', text: 'Chúc mừng bé đã hoàn thành cả 3 màn chơi!' },
           ],
           settings
         );
-        setTimeout(() => {
-          const nextIdx = (targetIndex + 1) % topic.vocabulary.length;
-          setTargetIndex(nextIdx);
-          setFeedbackBanner(null);
-          promptCurrentTapQuestion(topic.vocabulary[nextIdx]);
-        }, 1600);
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        setScoreStars(0);
+        setTargetIndex((i) => (i + 1) % topic.vocabulary.length);
+        setFeedbackBanner(null);
+        isAdvancingGameRef.current = false;
+        triggerTopicCompletion(3);
+      } else {
+        const nextIdx = (targetIndex + 1) % topic.vocabulary.length;
+        const nextItem = topic.vocabulary[nextIdx];
+        const praiseText = `Giỏi lắm! Đúng là ${choice.vi.toLowerCase()} (${choice.en}) rồi! Mình sang màn ${nextStars + 1}/3 nhé!`;
+        setFeedbackBanner({ text: praiseText, tone: 'happy' });
+
+        // Chờ nói xong trọn vẹn lời chúc mừng và dặn dò của màn cũ rồi mới chuyển sang màn mới
+        await speakTeacherVoice(
+          [
+            { lang: 'vi', text: `Giỏi lắm! Đúng là ${choice.vi.toLowerCase()} rồi!` },
+            { lang: 'en', text: `${choice.en}!` },
+            { lang: 'vi', text: `Bé sang câu ${nextStars + 1} nhé!` },
+          ],
+          settings
+        );
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        setTargetIndex(nextIdx);
+        setFeedbackBanner(null);
+        isAdvancingGameRef.current = false;
+        promptCurrentTapQuestion(nextItem);
       }
     } else {
       playGentleEncourageTone(settings.volume);
@@ -294,10 +374,11 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
     );
   };
 
-  const handleBalloonPop = (item: VocabularyItem) => {
-    if (poppedIds[item.id]) return;
+  const handleBalloonPop = async (item: VocabularyItem) => {
+    if (poppedIds[item.id] || isAdvancingGameRef.current) return;
 
     if (item.id === currentBalloonTarget.id) {
+      isAdvancingGameRef.current = true;
       const nextPopped = { ...poppedIds, [item.id]: true };
       setPoppedIds(nextPopped);
       playSoundEffect('pop', settings.volume);
@@ -312,33 +393,48 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
           text: `Bụp! Đúng là ${item.vi} (${item.en})! Chúc mừng bé đã hoàn thành cả 3 màn đập bóng!`,
           tone: 'happy',
         });
-        setTimeout(() => {
-          setPoppedIds({});
-          setBalloonRound(0);
-          setBalloonTargetIdx((i) => (i + 1) % topic.vocabulary.length);
-          setFeedbackBanner(null);
-          triggerTopicCompletion(3);
-        }, 800);
+        await speakTeacherVoice(
+          [
+            { lang: 'vi', text: `Bụp! Đúng là ${item.vi.toLowerCase()} rồi!` },
+            { lang: 'en', text: `${item.en}!` },
+            { lang: 'vi', text: 'Chúc mừng bé đã hoàn thành cả 3 màn đập bóng xuất sắc!' },
+          ],
+          settings
+        );
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        setPoppedIds({});
+        setBalloonRound(0);
+        setBalloonTargetIdx((i) => (i + 1) % topic.vocabulary.length);
+        setFeedbackBanner(null);
+        isAdvancingGameRef.current = false;
+        triggerTopicCompletion(3);
       } else {
         // Pick next unpopped item
         const unpoppedIdx = topic.vocabulary.findIndex(
           (v, idx) => !nextPopped[v.id] && idx !== balloonTargetIdx % topic.vocabulary.length
         );
         const nextIdx = unpoppedIdx >= 0 ? unpoppedIdx : (balloonTargetIdx + 1) % topic.vocabulary.length;
+        const nextItem = topic.vocabulary[nextIdx];
+
         setFeedbackBanner({
           text: `Bụp! Đúng là ${item.vi} (${item.en})! Mình sang màn ${nextRound + 1}/3 nhé!`,
           tone: 'happy',
         });
-        speakTeacherVoice(
+
+        // Chờ nói xong xuôi câu màn cũ rồi mới đổi đích bóng bay mới
+        await speakTeacherVoice(
           [
             { lang: 'vi', text: `Bụp! Đúng là ${item.vi.toLowerCase()} rồi!` },
             { lang: 'en', text: `${item.en}!` },
-            { lang: 'vi', text: `Tiếp theo, bé tìm quả bóng ${topic.vocabulary[nextIdx].vi.toLowerCase()} nhé!` },
-            { lang: 'en', text: `${topic.vocabulary[nextIdx].en}!` },
+            { lang: 'vi', text: `Tiếp theo, bé tìm quả bóng ${nextItem.vi.toLowerCase()} nhé!` },
+            { lang: 'en', text: `${nextItem.en}!` },
           ],
           settings
         );
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         setBalloonTargetIdx(nextIdx);
+        isAdvancingGameRef.current = false;
       }
     } else {
       playGentleEncourageTone(settings.volume);
@@ -355,9 +451,12 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
     return [basketTargetItem, ...others].sort((a, b) => a.id.localeCompare(b.id));
   }, [topic.vocabulary, basketTargetItem]);
 
-  const handlePutInBasket = (item: VocabularyItem) => {
+  const handlePutInBasket = async (item: VocabularyItem) => {
+    if (isAdvancingGameRef.current) return;
     onWordPracticed(item, topic.id);
+
     if (item.id === basketTargetItem.id) {
+      isAdvancingGameRef.current = true;
       playCelebrationChime(settings.volume);
       fireStarExplosion(0.5, 0.45);
       const updated = [...basketCollected, item.id];
@@ -366,17 +465,28 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
       if (updated.length >= 3) {
         const praise = `Hoan hô! Bé đã thu hoạch đủ 3 món vào giỏ của ${topic.narrator.name}!`;
         setFeedbackBanner({ text: praise, tone: 'happy' });
-        setTimeout(() => {
-          setBasketCollected([]);
-          setBasketTargetIdx((i) => i + 1);
-          setFeedbackBanner(null);
-          triggerTopicCompletion(3);
-        }, 700);
+
+        await speakTeacherVoice(
+          [
+            { lang: 'vi', text: `Hoan hô! Bé đã thu hoạch đủ ba món vào giỏ rồi!` },
+            { lang: 'en', text: `${item.en}! Super job!` },
+          ],
+          settings
+        );
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        setBasketCollected([]);
+        setBasketTargetIdx((i) => i + 1);
+        setFeedbackBanner(null);
+        isAdvancingGameRef.current = false;
+        triggerTopicCompletion(3);
       } else {
         const nextItem = topic.vocabulary[(basketTargetIdx + 1) % topic.vocabulary.length];
         const praise = `Tuyệt vời! Bé đã cho ${item.vi.toLowerCase()} (${item.en}) vào giỏ! Màn ${updated.length + 1}/3: Tìm ${nextItem.vi.toLowerCase()} nhé!`;
         setFeedbackBanner({ text: praise, tone: 'happy' });
-        speakTeacherVoice(
+
+        // Chờ cô giáo đọc xong xuôi câu dặn màn cũ trước khi sang món đồ tiếp theo
+        await speakTeacherVoice(
           [
             { lang: 'vi', text: `Tuyệt vời! Bé đã cho ${item.vi.toLowerCase()} vào giỏ rồi!` },
             { lang: 'en', text: `${item.en}!` },
@@ -385,7 +495,10 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
           ],
           settings
         );
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
         setBasketTargetIdx((i) => i + 1);
+        isAdvancingGameRef.current = false;
       }
     } else {
       playGentleEncourageTone(settings.volume);
@@ -396,8 +509,8 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   };
 
   // Game 4: Memory Match logic (all 4 pairs required)
-  const handleMemoryCardFlip = (uid: string, item: VocabularyItem) => {
-    if (matchedWordIds.includes(item.id) || flippedUids.includes(uid) || flippedUids.length >= 2) {
+  const handleMemoryCardFlip = async (uid: string, item: VocabularyItem) => {
+    if (matchedWordIds.includes(item.id) || flippedUids.includes(uid) || flippedUids.length >= 2 || isAdvancingGameRef.current) {
       return;
     }
     playSoundEffect(item.soundEffect, settings.volume);
@@ -423,17 +536,26 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
         onWordPracticed(firstCard.item, topic.id);
 
         if (nextMatched.length >= 4) {
+          isAdvancingGameRef.current = true;
           setFeedbackBanner({
             text: `Hoan hô! Bé đã ghép đúng cả 4/4 cặp thẻ!`,
             tone: 'happy',
           });
-          setTimeout(() => {
-            setMatchedWordIds([]);
-            setFlippedUids([]);
-            setMemoryShuffleSeed((s) => s + 1);
-            setFeedbackBanner(null);
-            triggerTopicCompletion(3);
-          }, 800);
+          await speakTeacherVoice(
+            [
+              { lang: 'vi', text: `Hoan hô! Bé đã ghép đúng cả 4 cặp thẻ nhớ xuất sắc!` },
+              { lang: 'en', text: 'You found all pairs! Excellent!' },
+            ],
+            settings
+          );
+          await new Promise((resolve) => setTimeout(resolve, 300));
+
+          setMatchedWordIds([]);
+          setFlippedUids([]);
+          setMemoryShuffleSeed((s) => s + 1);
+          setFeedbackBanner(null);
+          isAdvancingGameRef.current = false;
+          triggerTopicCompletion(3);
         } else {
           setFeedbackBanner({
             text: `Ghép đôi thành công (${nextMatched.length}/4 cặp): ${firstCard.item.vi} – ${firstCard.item.en}! Bé tìm cặp tiếp theo nhé!`,
@@ -720,11 +842,25 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                 stopAllAudio();
                 onBack();
               }}
-              className="min-h-[36px] sm:min-h-[40px] px-2.5 sm:px-3 py-1 rounded-xl sm:rounded-2xl bg-white hover:bg-slate-50 text-slate-900 font-bold text-xs sm:text-sm flex items-center gap-1 shadow-sm border border-slate-200 cursor-pointer shrink-0"
+              className="min-h-[44px] px-3 sm:px-3.5 py-2 rounded-2xl bg-white hover:bg-slate-50 text-slate-900 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm border border-slate-200 cursor-pointer shrink-0"
+              title="Quay lại sân chơi"
             >
-              <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>Chủ đề</span>
+              <ArrowLeft className="w-4 h-4" />
+              <span>Quay lại</span>
             </button>
+
+            {onOpenActivityHistory && (
+              <button
+                type="button"
+                onClick={onOpenActivityHistory}
+                className="min-h-[44px] px-3 sm:px-3.5 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shrink-0 shadow-2xs"
+                title="Lịch sử hoạt động của bé (Dành cho bố mẹ)"
+              >
+                <BarChart3 className="w-4 h-4 text-slate-950" />
+                <span className="hidden sm:inline">Lịch sử hoạt động</span>
+                <span className="sm:hidden">Lịch sử</span>
+              </button>
+            )}
 
             <div
               className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shrink-0 border-2 border-white shadow-sm"
@@ -852,6 +988,23 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                       bgTint={item.bgTint}
                       size="hero"
                     />
+
+                    {/* Interactive Echo Microphone Button (Strictly rendered ONLY when settings.allowMicrophone is TRUE!) */}
+                    {settings.allowMicrophone && (
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleStartEchoMicrophone(item);
+                        }}
+                        className="absolute top-2.5 left-2.5 min-h-[38px] px-3 py-1 rounded-full bg-purple-600/90 hover:bg-purple-600 active:scale-95 text-white shadow-md flex items-center gap-1.5 backdrop-blur-md border border-white/40 cursor-pointer z-10 transition-all hover:scale-105"
+                        title={`Bé nhại giọng theo cô: ${item.en}`}
+                        aria-label={`Bé nhại giọng theo cô: ${item.en}`}
+                      >
+                        <Mic className="w-3.5 h-3.5 text-white animate-pulse" />
+                        <span className="text-[11px] font-black tracking-tight">Nhại theo cô</span>
+                      </button>
+                    )}
 
                     {/* Sound trigger icon badge with glass backdrop */}
                     <div className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-md opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all">
@@ -1512,6 +1665,110 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
             ))}
           </div>
         </section>
+      )}
+
+      {/* Interactive Echo Microphone Modal ("Nhại Giọng Theo Cô") */}
+      {echoVocabItem && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/70 backdrop-blur-xs p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="echo-modal-title"
+        >
+          <div className="w-full max-w-sm rounded-3xl bg-white p-6 text-center shadow-2xl border-4 border-purple-300 space-y-4">
+            <div className="flex items-center justify-between border-b border-purple-100 pb-2">
+              <span className="text-xs font-black text-purple-700 uppercase tracking-wider flex items-center gap-1.5">
+                <Mic className="w-4 h-4 text-purple-600 animate-pulse" />
+                <span>Nhại Giọng Theo Cô</span>
+              </span>
+              <button
+                type="button"
+                onClick={() => setEchoVocabItem(null)}
+                className="text-slate-400 hover:text-slate-700 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-full hover:bg-slate-100 cursor-pointer"
+                aria-label="Đóng"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="w-24 h-24 rounded-3xl bg-purple-50 border-2 border-purple-200 flex items-center justify-center text-5xl mx-auto shadow-inner">
+              {echoVocabItem.emoji}
+            </div>
+
+            <div>
+              <h2 id="echo-modal-title" className="text-2xl font-black text-slate-900 tracking-tight">
+                {echoVocabItem.en}
+              </h2>
+              <p className="text-sm font-extrabold text-purple-700 mt-0.5">
+                {echoVocabItem.vi}
+              </p>
+            </div>
+
+            {/* Dynamic Status Box */}
+            <div className="rounded-2xl bg-purple-50 p-4 border border-purple-200 space-y-2">
+              {echoStep === 'intro' && (
+                <div className="text-xs sm:text-sm font-bold text-slate-700 animate-pulse">
+                  🔊 Cô đang đọc mẫu, bé lắng nghe kỹ nhé...
+                </div>
+              )}
+
+              {echoStep === 'listening' && (
+                <div className="space-y-2">
+                  <div className="text-xs sm:text-sm font-extrabold text-purple-800">
+                    🎤 Bé nói to: "{echoVocabItem.en}" đi nào!
+                  </div>
+                  {/* Dynamic sound wave visualizer */}
+                  <div className="flex items-center justify-center gap-1.5 h-10">
+                    {[40, 70, 95, 60, 85, 50, 90, 65].map((h, i) => (
+                      <span
+                        key={i}
+                        className="w-2 bg-gradient-to-t from-purple-600 to-pink-500 rounded-full transition-all duration-100"
+                        style={{
+                          height: `${Math.max(12, Math.round((h * echoWaveLevel) / 100))}px`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p className="text-[10px] text-slate-500 font-medium">
+                    🔒 An toàn: Không lưu âm thanh của bé
+                  </p>
+                </div>
+              )}
+
+              {echoStep === 'praise' && (
+                <div className="space-y-1">
+                  <div className="text-sm font-black text-emerald-700 flex items-center justify-center gap-1">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                    <span>Bé phát âm siêu quá! Giỏi lắm!</span>
+                  </div>
+                  <p className="text-xs font-bold text-slate-600">
+                    Bé nhận được 1 lượt sao ghi nhớ từ vựng!
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {/* Action buttons */}
+            <div className="grid grid-cols-2 gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => handleStartEchoMicrophone(echoVocabItem)}
+                className="min-h-[44px] rounded-2xl bg-purple-100 hover:bg-purple-200 text-purple-900 font-extrabold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Nói lại lần nữa</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setEchoVocabItem(null)}
+                className="min-h-[44px] rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs shadow-xs flex items-center justify-center cursor-pointer"
+              >
+                <span>Xong rồi ✓</span>
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Celebratory Topic Completion Modal with Fireworks (Confetti) */}

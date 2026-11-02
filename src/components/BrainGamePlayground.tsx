@@ -263,7 +263,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
         const roundMsg = `${viPraise} Bé qua màn ${round}/${totalRounds} rồi, mình sang màn ${round + 1} nhé!`;
         setFeedbackVi(roundMsg);
 
-        // Chờ cô giáo đọc trọn vẹn lời chúc mừng và hướng dẫn trước khi chuyển sang màn mới
+        // Chờ cô giáo nói xong xuôi lời chúc mừng và hướng dẫn trước khi chuyển sang màn mới
         const speechPromise = speakTeacherVoice(
           [
             { lang: 'en', text: enSpeech },
@@ -271,11 +271,12 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
           ],
           settings
         );
-        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3600));
+        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 12000));
 
         await Promise.race([speechPromise, safetyTimeoutPromise]);
 
-        // Dọn sạch hoàn toàn âm thanh màn cũ trước khi sang màn mới
+        // Đợi thêm một thoáng 350ms tự nhiên rồi mới dọn sạch âm thanh và sang màn mới
+        await new Promise((resolve) => setTimeout(resolve, 350));
         stopAllAudio();
         setSelectedRightId(null);
         setFedCount(0);
@@ -302,9 +303,10 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
           ],
           settings
         );
-        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 3800));
+        const safetyTimeoutPromise = new Promise((resolve) => setTimeout(resolve, 12000));
 
         await Promise.race([speechPromise, safetyTimeoutPromise]);
+        await new Promise((resolve) => setTimeout(resolve, 400));
 
         stopAllAudio();
         setSelectedRightId(null);

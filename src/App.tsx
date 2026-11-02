@@ -22,12 +22,14 @@ import {
   BookOpen,
   Headphones,
   BarChart3,
+  Music,
 } from 'lucide-react';
 import lessonsJson from './data/lessonsData.json';
 import { ALL_BRAIN_GAMES, BRAIN_GAME_SECTIONS } from './data/brainGamesData';
 import { STORY_BOOKS_DATA } from './data/storiesData';
 import { getStoryRealisticPhoto, getStoryLogoPhoto } from './data/storyPhotosData';
 import type {
+  ActivityGroupType,
   AgeGroupId,
   BrainCategoryKey,
   BrainGameItem,
@@ -64,6 +66,7 @@ import { AppBrandLogo, OfflineIndicator, PWAInstallButton } from './components/P
 import { ProfileManagerModal } from './components/ProfileManagerModal';
 import { StoryReaderModal } from './components/StoryReaderModal';
 import { ActivityHistoryModal } from './components/ActivityHistoryModal';
+import { KidsMusicPlayer } from './components/KidsMusicPlayer';
 import { startTrackingActivity } from './utils/activityTracker';
 
 const SETTINGS_STORAGE_KEY = 'bevuihoc_parent_settings_v3';
@@ -142,7 +145,7 @@ const INITIAL_PROFILES: ChildProfile[] = [
   },
 ];
 
-type AppDockTab = 'arcade' | 'stories' | 'worlds' | 'today' | 'sensory';
+type AppDockTab = 'arcade' | 'stories' | 'worlds' | 'today' | 'music';
 type CategoryFilterId = 'all' | 'nature' | 'food_body' | 'thinking' | 'life';
 type ArcadeFilterId = 'all' | BrainCategoryKey | 'topics';
 
@@ -384,16 +387,49 @@ export default function App() {
     }
   }, [hasAttemptedAutoFullscreen, settings.autoFullscreen]);
 
-  // Check if daily limit is already reached when autoOffEnabled is true
+  const currentAgeConfig = useMemo(
+    () => getAgeGroupConfig(currentAgeId),
+    [currentAgeId]
+  );
+
+  const effectiveSettings: ParentSettings = useMemo(
+    () => ({
+      ...settings,
+      selectedAge: currentAgeId,
+    }),
+    [settings, currentAgeId]
+  );
+
+  // Check if daily limit is approaching (2 minutes left) or already reached
   useEffect(() => {
     if (!settings.autoOffEnabled) {
       setShowEyeRestModal(false);
+      setHasWarnedTimeLimit(false);
       return;
+    }
+    const minsLeft = settings.dailyLimitMinutes - progress.todayMinutesPlayed;
+    if (minsLeft <= 2 && minsLeft > 0 && !hasWarnedTimeLimit) {
+      setHasWarnedTimeLimit(true);
+      speakTeacherVoice(
+        [
+          {
+            lang: 'vi',
+            text: 'Bé yêu ơi, chỉ còn 2 phút nữa là đến giờ cho mắt nghỉ ngơi rồi nhé. Bé chơi thêm một chút nữa nha!',
+          },
+        ],
+        effectiveSettings
+      );
     }
     if (progress.todayMinutesPlayed >= settings.dailyLimitMinutes) {
       setShowEyeRestModal(true);
     }
-  }, [settings.autoOffEnabled, settings.dailyLimitMinutes, progress.todayMinutesPlayed]);
+  }, [
+    settings.autoOffEnabled,
+    settings.dailyLimitMinutes,
+    progress.todayMinutesPlayed,
+    hasWarnedTimeLimit,
+    effectiveSettings,
+  ]);
 
   // Track play time every 60 seconds (only triggers eye-rest modal when autoOffEnabled is true)
   useEffect(() => {
@@ -417,18 +453,35 @@ export default function App() {
     return () => window.clearInterval(interval);
   }, [settings.dailyLimitMinutes, settings.autoOffEnabled, updateActiveProgress]);
 
-  const currentAgeConfig = useMemo(
-    () => getAgeGroupConfig(currentAgeId),
-    [currentAgeId]
-  );
-
-  const effectiveSettings: ParentSettings = useMemo(
-    () => ({
-      ...settings,
-      selectedAge: currentAgeId,
-    }),
-    [settings, currentAgeId]
-  );
+  // Automatic session logging across topics, games, and stories for 90-day activity history
+  useEffect(() => {
+    if (activeTopic) {
+      const stopTrack = startTrackingActivity('vocab', activeTopic.titleVi, activeTopic.titleEn);
+      return () => stopTrack();
+    }
+    if (activeBrainGame) {
+      const groupType: ActivityGroupType =
+        activeBrainGame.id === 'rainbow-xylophone'
+          ? 'music'
+          : activeBrainGame.id.includes('coloring') || activeBrainGame.id.includes('dress-up')
+          ? 'art'
+          : 'game';
+      const stopTrack = startTrackingActivity(
+        groupType,
+        activeBrainGame.titleVi,
+        activeBrainGame.titleEn
+      );
+      return () => stopTrack();
+    }
+    if (selectedStory) {
+      const stopTrack = startTrackingActivity(
+        'story',
+        selectedStory.titleVi,
+        selectedStory.titleEn
+      );
+      return () => stopTrack();
+    }
+  }, [activeTopic?.id, activeBrainGame?.id, selectedStory?.id]);
 
   const dailyRandomTopic = useMemo(
     () => getDailyRandomTopic(allTopics, getTodayDateString(), randomSeedOffset),
@@ -471,7 +524,7 @@ export default function App() {
       prev.map((p) => (p.id === activeProfile.id ? { ...p, ageId } : p))
     );
     if (ageId === '0-3m' || ageId === '4-12m') {
-      setActiveDockTab('sensory');
+      setActiveDockTab('today');
     }
     speakTeacherVoice(
       [{ lang: 'vi', text: `Chế độ ${cfg.label}: ${cfg.stageTitle} cho ${activeProfile.name}!` }],
@@ -1118,6 +1171,7 @@ export default function App() {
                 }));
               }}
               onClose={() => setIsParentDashboardOpen(false)}
+              onOpenActivityHistory={() => setIsActivityHistoryOpen(true)}
             />
           ) : activeBrainGame ? (
             <BrainGamePlayground
@@ -1127,6 +1181,7 @@ export default function App() {
               topics={allTopics}
               allGames={ALL_BRAIN_GAMES}
               onBack={() => setActiveBrainGame(null)}
+              onOpenActivityHistory={() => setIsHistoryGateOpen(true)}
               onLevelComplete={handleBrainGameLevelComplete}
               onSelectNextGame={(nextGame) => handleOpenBrainGame(nextGame)}
             />
@@ -1137,6 +1192,7 @@ export default function App() {
               settings={effectiveSettings}
               rotationSeed={progress.sessionRotationSeed}
               onBack={() => setActiveTopic(null)}
+              onOpenActivityHistory={() => setIsHistoryGateOpen(true)}
               onWordPracticed={handleWordPracticed}
               onTopicCompleted={handleTopicCompleted}
             />
@@ -1960,56 +2016,72 @@ export default function App() {
                       ))}
                     </div>
                   </div>
+
+                  {/* Sensory Stimulation Section for Under 1 Year at Bottom of Today */}
+                  <div className="lg:col-span-12 rounded-3xl bg-white border-2 border-rose-200 p-4 sm:p-5 shadow-sm space-y-3 mt-1">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-rose-100 pb-2">
+                      <div className="flex items-center gap-2">
+                        <span className="text-xl">👶</span>
+                        <div>
+                          <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
+                            Góc Giác Quan & Ú Òa Cho Bé Dưới 1 Tuổi
+                          </h3>
+                          <p className="text-[11px] text-slate-500">
+                            Kích thích thị giác đen-trắng-đỏ, thính giác hát ru và tương tác ú òa
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => handleSelectAge('0-3m')}
+                          className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold cursor-pointer transition ${
+                            currentAgeId === '0-3m'
+                              ? 'bg-rose-500 text-white shadow-xs'
+                              : 'bg-slate-100 text-slate-700 hover:bg-rose-50'
+                          }`}
+                        >
+                          0–3 tháng (Hình tương phản & Hát ru)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSelectAge('4-12m')}
+                          className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold cursor-pointer transition ${
+                            currentAgeId !== '0-3m'
+                              ? 'bg-amber-500 text-white shadow-xs'
+                              : 'bg-slate-100 text-slate-700 hover:bg-amber-50'
+                          }`}
+                        >
+                          4–12 tháng (Ú òa & Bong bóng)
+                        </button>
+                      </div>
+                    </div>
+
+                    {currentAgeId === '0-3m' ? (
+                      <SensoryZeroToThreeMonths
+                        settings={effectiveSettings}
+                        onUpdateSettings={setSettings}
+                      />
+                    ) : (
+                      <PeekabooFourToTwelveMonths
+                        topics={allTopics}
+                        settings={effectiveSettings}
+                        onWordPracticed={handleWordPracticed}
+                        onSelectTopicLesson={handleOpenTopic}
+                      />
+                    )}
+                  </div>
                 </section>
               )}
 
-              {/* DOCK TAB 3: Sensory 0-3m & Peek-a-boo 4-12m Studio */}
-              {activeDockTab === 'sensory' && (
-                <section className="flex-1 min-h-0 flex flex-col gap-2 overflow-y-auto">
-                  <div className="shrink-0 flex flex-wrap items-center justify-between gap-2 bg-white px-4 py-2 rounded-2xl border border-rose-200">
-                    <span className="text-xs sm:text-sm font-extrabold text-slate-800">
-                      Sân chơi Giác quan & Ú òa cho bé dưới 1 tuổi:
-                    </span>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => handleSelectAge('0-3m')}
-                        className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold cursor-pointer ${
-                          currentAgeId === '0-3m'
-                            ? 'bg-rose-500 text-white'
-                            : 'bg-slate-100 text-slate-700'
-                        }`}
-                      >
-                        0–3 tháng (Đen–Trắng–Đỏ & Hát ru)
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleSelectAge('4-12m')}
-                        className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold cursor-pointer ${
-                          currentAgeId !== '0-3m'
-                            ? 'bg-amber-500 text-white'
-                            : 'bg-slate-100 text-slate-700'
-                        }`}
-                      >
-                        4–12 tháng (Ú òa & Bong bóng)
-                      </button>
-                    </div>
-                  </div>
-
-                  {currentAgeId === '0-3m' ? (
-                    <SensoryZeroToThreeMonths
-                      settings={effectiveSettings}
-                      onUpdateSettings={setSettings}
-                    />
-                  ) : (
-                    <PeekabooFourToTwelveMonths
-                      topics={allTopics}
-                      settings={effectiveSettings}
-                      onWordPracticed={handleWordPracticed}
-                      onSelectTopicLesson={handleOpenTopic}
-                    />
-                  )}
-                </section>
+              {/* DOCK TAB: Kids Music Player (41 Curated Nursery Songs & English Rhymes) */}
+              {activeDockTab === 'music' && (
+                <KidsMusicPlayer
+                  settings={effectiveSettings}
+                  childName={activeProfile.name}
+                  onOpenParentGate={() => setIsParentGateOpen(true)}
+                />
               )}
             </div>
           )}
@@ -2085,16 +2157,16 @@ export default function App() {
 
             <button
               type="button"
-              onClick={() => setActiveDockTab('sensory')}
+              onClick={() => setActiveDockTab('music')}
               className={`min-h-[46px] sm:min-h-[50px] rounded-2xl flex flex-col items-center justify-center transition cursor-pointer ${
-                activeDockTab === 'sensory'
+                activeDockTab === 'music'
                   ? 'bg-rose-500 text-white shadow-xs'
                   : 'text-slate-600 hover:bg-rose-50'
               }`}
             >
-              <Baby className="w-5 h-5" />
+              <Music className="w-5 h-5" />
               <span className="text-[10px] sm:text-[11px] font-extrabold mt-0.5 truncate max-w-full px-1">
-                Giác quan
+                Nhạc
               </span>
             </button>
           </div>
@@ -2158,8 +2230,27 @@ export default function App() {
           settings={effectiveSettings}
           onClose={() => setSelectedStory(null)}
           onSelectAnotherStory={(nextStory) => setSelectedStory(nextStory)}
+          onUpdateSettings={(next) => setSettings(next)}
         />
       )}
+
+      {/* Activity History Modal Protected by Parent Gate */}
+      <ParentGateModal
+        isOpen={isHistoryGateOpen}
+        parentPin={settings.parentPin}
+        onClose={() => setIsHistoryGateOpen(false)}
+        onUnlocked={() => {
+          setIsHistoryGateOpen(false);
+          setIsActivityHistoryOpen(true);
+        }}
+      />
+
+      <ActivityHistoryModal
+        isOpen={isActivityHistoryOpen}
+        onClose={() => setIsActivityHistoryOpen(false)}
+        settings={effectiveSettings}
+        onUpdateSettings={(next) => setSettings(next)}
+      />
 
       <OfflineIndicator />
     </div>

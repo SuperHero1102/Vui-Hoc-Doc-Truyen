@@ -31,12 +31,14 @@ interface StoryReaderModalProps {
   settings: ParentSettings;
   onClose: () => void;
   onSelectAnotherStory?: (story: StoryBookItem) => void;
+  onUpdateSettings?: (next: ParentSettings) => void;
 }
 
 export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
   story,
   settings,
   onClose,
+  onUpdateSettings,
 }) => {
   const [currentPageIdx, setCurrentPageIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -396,8 +398,36 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
           </div>
         </div>
 
-        {/* Right: Language Switcher + Night Mode + Close */}
+        {/* Right: Language Switcher + Narrator Voice Switcher + Night Mode */}
         <div className="flex items-center gap-1.5 shrink-0">
+          {/* Narrator Voice Switcher (Teacher / Mother / Grandmother) */}
+          <button
+            type="button"
+            onClick={() => {
+              const current = settings.storyNarratorVoice || 'teacher';
+              const next: 'teacher' | 'mother' | 'grandmother' =
+                current === 'teacher' ? 'mother' : current === 'mother' ? 'grandmother' : 'teacher';
+              onUpdateSettings?.({ ...settings, storyNarratorVoice: next });
+              stopAllAudio();
+              setIsPlaying(false);
+              setTimeout(() => setIsPlaying(true), 150);
+            }}
+            className={`min-h-[38px] px-2.5 py-1 rounded-xl text-xs font-black flex items-center gap-1 border cursor-pointer transition ${
+              nightMode
+                ? 'bg-slate-800 border-slate-700 text-sky-300 hover:bg-slate-700'
+                : 'bg-sky-50 hover:bg-sky-100 border-sky-300 text-sky-900'
+            }`}
+            title="Đổi giọng người kể chuyện: Giọng Cô giáo / Giọng Mẹ / Giọng Bà"
+          >
+            <span>
+              {settings.storyNarratorVoice === 'mother'
+                ? '👩‍👧 Giọng Mẹ'
+                : settings.storyNarratorVoice === 'grandmother'
+                ? '👵 Giọng Bà'
+                : '👩‍🏫 Giọng Cô'}
+            </span>
+          </button>
+
           {/* Quick Language Toggle */}
           <button
             type="button"

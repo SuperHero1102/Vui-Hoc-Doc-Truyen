@@ -58,14 +58,15 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
     setSubMode(nextMode);
   };
 
-  const handlePeekabooTap = (spot: (typeof PEEKABOO_HIDING_SPOTS)[number]) => {
+  const handlePeekabooTap = async (spot: (typeof PEEKABOO_HIDING_SPOTS)[number]) => {
     stopAllAudio();
     const item = spotWordMap[spot.id] || combinedWords[0];
     setRevealedSpotId(spot.id);
     playCelebrationChime(settings.volume);
     playSoundEffect(item.soundEffect, settings.volume);
 
-    speakTeacherVoice(
+    onWordPracticed(item, farmTopic.id);
+    await speakTeacherVoice(
       [
         { lang: 'vi', text: `Ú òa! Đây là ${item.vi.toLowerCase()}!` },
         { lang: 'en', text: `Peek-a-boo! ${item.en}! ${item.en}!` },
@@ -73,12 +74,11 @@ export const PeekabooFourToTwelveMonths: React.FC<PeekabooProps> = ({
       ],
       settings
     );
-    onWordPracticed(item, farmTopic.id);
 
-    setTimeout(() => {
-      const randomNext = combinedWords[Math.floor(Math.random() * combinedWords.length)];
-      setSpotWordMap((prev) => ({ ...prev, [spot.id]: randomNext }));
-    }, 3200);
+    // Sau khi cô giáo đã nói xong xuôi trọn vẹn mới ẩn lại và đổi con vật ngẫu nhiên
+    await new Promise((resolve) => setTimeout(resolve, 300));
+    const randomNext = combinedWords[Math.floor(Math.random() * combinedWords.length)];
+    setSpotWordMap((prev) => ({ ...prev, [spot.id]: randomNext }));
   };
 
   const handlePopBubble = (item: VocabularyItem) => {
