@@ -98,30 +98,58 @@ function speakSegmentWithBrowserFallback(
     }
 
     const voices = window.speechSynthesis.getVoices();
-    let pitchMod = 1.05;
+    let pitchMod = 1.0;
     let rateMod = 1.0;
 
     if (voiceStyle === 'wolf') {
       pitchMod = 0.60;
       rateMod = 0.82;
-    } else if (voiceStyle === 'bird') {
-      pitchMod = 1.55;
-      rateMod = 1.08;
-    } else if (voiceStyle === 'child') {
-      pitchMod = 1.35;
-      rateMod = 1.02;
+    } else if (voiceStyle === 'bird' || voiceStyle === 'child') {
+      pitchMod = 1.38;
+      rateMod = 1.04;
     } else if (voiceStyle === 'elder') {
-      pitchMod = 0.80;
-      rateMod = 0.88;
+      pitchMod = 0.78;
+      rateMod = 0.84;
     } else if (voiceStyle === 'hero') {
-      pitchMod = 0.95;
+      pitchMod = 0.92;
       rateMod = 0.95;
     } else if (voiceStyle === 'gentle') {
-      pitchMod = 1.15;
-      rateMod = 0.92;
+      pitchMod = 1.12;
+      rateMod = 0.94;
     } else if (voiceStyle === 'fox') {
       pitchMod = 1.25;
       rateMod = 1.08;
+    } else if (voiceStyle === 'narrator') {
+      if (settings.storyNarratorVoice === 'mother') {
+        pitchMod = 1.15;
+        rateMod = 0.94;
+      } else if (settings.storyNarratorVoice === 'grandmother') {
+        pitchMod = 0.78;
+        rateMod = 0.82;
+      } else {
+        if (settings.voicePersona === 'Zephyr') {
+          pitchMod = 1.22;
+          rateMod = 1.05;
+        } else if (settings.voicePersona === 'Puck') {
+          pitchMod = 0.86;
+          rateMod = 0.86;
+        } else {
+          pitchMod = 1.0;
+          rateMod = 0.92;
+        }
+      }
+    } else {
+      // Teacher persona in games & learning lessons
+      if (settings.voicePersona === 'Zephyr') {
+        pitchMod = 1.22;
+        rateMod = 1.05;
+      } else if (settings.voicePersona === 'Puck') {
+        pitchMod = 0.86;
+        rateMod = 0.86;
+      } else {
+        pitchMod = 1.0;
+        rateMod = 0.92;
+      }
     }
 
     if (segment.lang === 'vi') {
@@ -187,11 +215,14 @@ function speakSegmentWithBrowserFallback(
 
 export async function fetchOrGetCachedSegmentUrl(
   segment: SpeechSegment,
-  settings: ParentSettings
+  settings: ParentSettings,
+  voiceStyle?: string
 ): Promise<{ url: string | null; fromCache: boolean }> {
   const accentKey = settings.englishAccent || 'en-US';
   const cleanText = sanitizeSegmentText(segment.text, segment.lang);
-  const cacheKey = `v4:${segment.lang}:${accentKey}:${settings.voicePersona}:${settings.voiceSpeed}:${cleanText}`;
+  const persona = settings.voicePersona || 'Kore';
+  const narratorVoice = settings.storyNarratorVoice || 'teacher';
+  const cacheKey = `v5:${segment.lang}:${accentKey}:${persona}:${narratorVoice}:${voiceStyle || 'none'}:${settings.voiceSpeed}:${cleanText}`;
   const cached = clientAudioUrlCache.get(cacheKey);
   if (cached) {
     return { url: cached, fromCache: true };
@@ -213,6 +244,8 @@ export async function fetchOrGetCachedSegmentUrl(
         voiceName: settings.voicePersona,
         speed: settings.voiceSpeed,
         englishAccent: settings.englishAccent || 'en-US',
+        storyNarratorVoice: settings.storyNarratorVoice || 'teacher',
+        voiceStyle: voiceStyle || 'none',
       }),
       signal: controller.signal,
     });
@@ -260,7 +293,8 @@ function playAudioUrl(
   volume: number,
   speed: 'slow' | 'normal' | 'fast',
   gen: number,
-  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird',
+  settings?: ParentSettings
 ): Promise<boolean> {
   return new Promise((resolve) => {
     if (gen !== playbackGeneration) {
@@ -277,20 +311,54 @@ function playAudioUrl(
     let shouldPreservePitch = true;
 
     if (voiceStyle === 'wolf') {
-      baseRate *= 0.82;
+      baseRate *= 0.74;
       shouldPreservePitch = false;
-    } else if (voiceStyle === 'bird') {
-      baseRate *= 1.25;
-      shouldPreservePitch = false;
-    } else if (voiceStyle === 'child') {
-      baseRate *= 1.12;
+    } else if (voiceStyle === 'bird' || voiceStyle === 'child') {
+      baseRate *= 1.28;
       shouldPreservePitch = false;
     } else if (voiceStyle === 'elder') {
-      baseRate *= 0.88;
+      baseRate *= 0.82;
       shouldPreservePitch = false;
-    } else if (voiceStyle === 'fox') {
+    } else if (voiceStyle === 'hero') {
+      baseRate *= 0.94;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'gentle') {
       baseRate *= 1.08;
       shouldPreservePitch = false;
+    } else if (voiceStyle === 'fox') {
+      baseRate *= 1.18;
+      shouldPreservePitch = false;
+    } else if (voiceStyle === 'narrator') {
+      if (settings?.storyNarratorVoice === 'mother') {
+        baseRate *= 1.12;
+        shouldPreservePitch = false;
+      } else if (settings?.storyNarratorVoice === 'grandmother') {
+        baseRate *= 0.80;
+        shouldPreservePitch = false;
+      } else {
+        if (settings?.voicePersona === 'Zephyr') {
+          baseRate *= 1.18;
+          shouldPreservePitch = false;
+        } else if (settings?.voicePersona === 'Puck') {
+          baseRate *= 0.86;
+          shouldPreservePitch = false;
+        } else {
+          baseRate *= 0.95;
+          shouldPreservePitch = false;
+        }
+      }
+    } else {
+      // General teacher voice in games and lessons
+      if (settings?.voicePersona === 'Zephyr') {
+        baseRate *= 1.18;
+        shouldPreservePitch = false;
+      } else if (settings?.voicePersona === 'Puck') {
+        baseRate *= 0.86;
+        shouldPreservePitch = false;
+      } else {
+        baseRate *= 0.95;
+        shouldPreservePitch = false;
+      }
     }
 
     try {
@@ -362,7 +430,14 @@ export async function speakSegments(
 
     if (url) {
       usedServerTts = true;
-      const ok = await playAudioUrl(url, settings.volume, settings.voiceSpeed, currentGen);
+      const ok = await playAudioUrl(
+        url,
+        settings.volume,
+        settings.voiceSpeed,
+        currentGen,
+        undefined,
+        settings
+      );
       if (!ok && currentGen === playbackGeneration) {
         await speakSegmentWithBrowserFallback(seg, settings);
       }
@@ -443,7 +518,8 @@ export async function speakStoryNarration(
     segments.map((s) =>
       fetchOrGetCachedSegmentUrl(
         { text: sanitizeSegmentText(s.text, s.lang), lang: s.lang },
-        settings
+        settings,
+        s.voiceStyle
       )
     )
   );
@@ -470,7 +546,8 @@ export async function speakStoryNarration(
         settings.volume,
         settings.voiceSpeed,
         currentGen,
-        isCharacterLine ? seg.voiceStyle : 'narrator'
+        isCharacterLine ? seg.voiceStyle : 'narrator',
+        settings
       );
     }
     if (!playedOk && currentGen === playbackGeneration) {
@@ -496,6 +573,81 @@ export async function speakStoryNarration(
     }
     onEnd?.();
   }
+}
+
+export const TEACHER_PERSONAS = [
+  {
+    id: 'Kore' as const,
+    nameVi: 'Cô Mai (Hà Nội)',
+    titleVi: 'Chuẩn mực, dịu dàng, mẫu mực',
+    pitch: 1.0,
+    rate: 0.92,
+    previewText: 'Cô Mai chào bé yêu! Hôm nay cô trò mình cùng học tập thật vui và chăm ngoan nhé!',
+  },
+  {
+    id: 'Zephyr' as const,
+    nameVi: 'Cô Lan (Hà Nội)',
+    titleVi: 'Vui tươi, trong trẻo, líu lo',
+    pitch: 1.22,
+    rate: 1.05,
+    previewText: 'Cô Lan chào bé yêu nè! Chúng mình cùng chơi những trò chơi siêu vui nào, hoan hô!',
+  },
+  {
+    id: 'Puck' as const,
+    nameVi: 'Cô Hương (Kể chuyện)',
+    titleVi: 'Truyền cảm, trầm ấm, sâu lắng',
+    pitch: 0.86,
+    rate: 0.86,
+    previewText: 'Cô Hương chào bé yêu. Chúng mình cùng lắng nghe những câu chuyện diệu kỳ nhé.',
+  },
+];
+
+export const STORY_NARRATOR_VOICES = [
+  {
+    id: 'teacher' as const,
+    nameVi: 'Giọng Cô giáo',
+    descVi: 'Mẫu mực, dịu hiền, chuẩn giọng Hà Nội',
+    previewText: 'Cô giáo chào bé yêu! Chúng mình cùng mở trang sách đầu tiên của câu chuyện nhé!',
+  },
+  {
+    id: 'mother' as const,
+    nameVi: 'Giọng Mẹ',
+    descVi: 'Trong trẻo, ấm áp, thủ thỉ yêu thương',
+    previewText: 'Mẹ yêu chào con! Để mẹ đọc cho con nghe câu chuyện thật hay trước giờ đi ngủ nhé.',
+  },
+  {
+    id: 'grandmother' as const,
+    nameVi: 'Giọng Bà',
+    descVi: 'Khàn nhẹ, trầm ấm, chậm rãi nhân từ',
+    previewText: 'Bà chào cháu ngoan của bà. Lại đây bà kể cho nghe chuyện ngày xưa thật là hay nào.',
+  },
+];
+
+export function previewTeacherVoice(
+  teacherId: 'Kore' | 'Zephyr' | 'Puck',
+  baseSettings: ParentSettings
+): Promise<any> {
+  const item = TEACHER_PERSONAS.find((t) => t.id === teacherId) || TEACHER_PERSONAS[0];
+  const customSettings: ParentSettings = {
+    ...baseSettings,
+    voicePersona: teacherId,
+  };
+  return speakTeacherVoice([{ lang: 'vi', text: item.previewText }], customSettings);
+}
+
+export function previewStoryNarratorVoice(
+  narratorId: 'teacher' | 'mother' | 'grandmother',
+  baseSettings: ParentSettings
+): Promise<any> {
+  const item = STORY_NARRATOR_VOICES.find((n) => n.id === narratorId) || STORY_NARRATOR_VOICES[0];
+  const customSettings: ParentSettings = {
+    ...baseSettings,
+    storyNarratorVoice: narratorId,
+  };
+  return speakStoryNarration(
+    [{ text: item.previewText, lang: 'vi', speaker: item.nameVi, voiceStyle: 'narrator' }],
+    customSettings
+  );
 }
 
 /**

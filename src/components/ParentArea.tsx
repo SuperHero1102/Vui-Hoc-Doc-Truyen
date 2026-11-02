@@ -29,7 +29,14 @@ import {
   verifyParentMathAnswer,
   verifyParentPassword,
 } from '../utils/learningLogic';
-import { getClientAudioCacheSize, speakTeacherVoice } from '../utils/audioEngine';
+import {
+  getClientAudioCacheSize,
+  speakTeacherVoice,
+  TEACHER_PERSONAS,
+  STORY_NARRATOR_VOICES,
+  previewTeacherVoice,
+  previewStoryNarratorVoice,
+} from '../utils/audioEngine';
 
 interface ParentGateModalProps {
   isOpen: boolean;
@@ -419,6 +426,7 @@ interface ParentDashboardProps {
   onUpdateSettings: (next: ParentSettings) => void;
   onResetProgress: () => void;
   onClose: () => void;
+  onOpenActivityHistory?: () => void;
 }
 
 export const ParentDashboard: React.FC<ParentDashboardProps> = ({
@@ -428,8 +436,11 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
   onUpdateSettings,
   onResetProgress,
   onClose,
+  onOpenActivityHistory,
 }) => {
   const [ttsStatusMsg, setTtsStatusMsg] = useState<string>('');
+  const [previewingTeacher, setPreviewingTeacher] = useState<string | null>(null);
+  const [previewingNarrator, setPreviewingNarrator] = useState<string | null>(null);
   const [serverTtsInfo, setServerTtsInfo] = useState<{
     available: boolean;
     cachedCount: number;
@@ -540,13 +551,25 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={onClose}
-          className="min-h-[44px] px-4 py-2 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm cursor-pointer"
-        >
-          Quay lại Sân chơi của bé
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          {onOpenActivityHistory && (
+            <button
+              type="button"
+              onClick={onOpenActivityHistory}
+              className="min-h-[44px] px-3.5 sm:px-4 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs sm:text-sm cursor-pointer flex items-center gap-1.5 shadow-sm"
+            >
+              <BarChart3 className="w-4 h-4 text-slate-950" />
+              <span>📊 Lịch sử hoạt động của bé</span>
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onClose}
+            className="min-h-[44px] px-4 py-2 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs sm:text-sm cursor-pointer"
+          >
+            Quay lại Sân chơi của bé
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -704,25 +727,131 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              {[
-                { id: 'Kore' as const, label: 'Cô Mai (Hà Nội)', desc: 'Ấm áp, dịu dàng, chuẩn mẫu' },
-                { id: 'Zephyr' as const, label: 'Cô Lan (Hà Nội)', desc: 'Tươi vui, trong trẻo' },
-                { id: 'Puck' as const, label: 'Cô Hương (Kể chuyện)', desc: 'Sinh động, truyền cảm' },
-              ].map((v) => (
-                <button
-                  key={v.id}
-                  type="button"
-                  onClick={() => onUpdateSettings({ ...settings, voicePersona: v.id })}
-                  className={`p-2.5 rounded-2xl border-2 text-left cursor-pointer ${
-                    settings.voicePersona === v.id
-                      ? 'border-sky-500 bg-sky-50'
-                      : 'border-slate-200 hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="font-bold text-xs sm:text-sm text-slate-900">{v.label}</div>
-                  <div className="text-[11px] text-slate-600">{v.desc}</div>
-                </button>
-              ))}
+              {TEACHER_PERSONAS.map((teacher) => {
+                const isSelected = (settings.voicePersona || 'Kore') === teacher.id;
+                const isTesting = previewingTeacher === teacher.id;
+                return (
+                  <div
+                    key={teacher.id}
+                    className={`p-3 rounded-2xl border-2 flex flex-col justify-between transition ${
+                      isSelected
+                        ? 'border-sky-500 bg-sky-50/80 shadow-xs'
+                        : 'border-slate-200 bg-white hover:border-slate-300'
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <span className="text-xl">{teacher.avatar}</span>
+                        {isSelected && (
+                          <span className="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-sky-500 text-white flex items-center gap-1">
+                            <CheckCircle2 className="w-3 h-3" /> Đang dùng
+                          </span>
+                        )}
+                      </div>
+                      <div className="font-extrabold text-sm text-slate-900">{teacher.name}</div>
+                      <div className="text-[11px] font-bold text-sky-700 mb-1">{teacher.title}</div>
+                      <p className="text-[11px] text-slate-600 leading-snug mb-2">{teacher.description}</p>
+                      <div className="inline-block px-1.5 py-0.5 rounded-md bg-slate-100 text-[10px] font-semibold text-slate-600 mb-2">
+                        {teacher.tone}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1.5 pt-2 border-t border-slate-100">
+                      <button
+                        type="button"
+                        onClick={() => onUpdateSettings({ ...settings, voicePersona: teacher.id })}
+                        className={`w-full min-h-[44px] px-3 py-1.5 rounded-xl text-xs font-extrabold transition cursor-pointer flex items-center justify-center gap-1 ${
+                          isSelected
+                            ? 'bg-sky-500 text-white shadow-xs'
+                            : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                        }`}
+                      >
+                        {isSelected ? '✓ Đang chọn' : 'Chọn cô này'}
+                      </button>
+
+                      <button
+                        type="button"
+                        disabled={isTesting}
+                        onClick={async () => {
+                          setPreviewingTeacher(teacher.id);
+                          setTtsStatusMsg(`Đang phát mẫu giọng ${teacher.name}...`);
+                          await previewTeacherVoice(teacher.id, settings);
+                          setPreviewingTeacher(null);
+                          setTtsStatusMsg(`Đã phát mẫu giọng ${teacher.name}!`);
+                        }}
+                        className="w-full min-h-[44px] px-3 py-1.5 rounded-xl border border-sky-300 hover:bg-sky-100 text-sky-800 text-xs font-bold transition cursor-pointer flex items-center justify-center gap-1.5 disabled:opacity-50"
+                      >
+                        <Volume2 className={`w-3.5 h-3.5 ${isTesting ? 'animate-bounce text-sky-600' : ''}`} />
+                        <span>{isTesting ? 'Đang phát...' : 'Nghe thử'}</span>
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Story Narrator Voice Selection */}
+            <div className="pt-2 border-t border-slate-100">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="block text-xs font-extrabold text-slate-800">
+                  📖 Giọng Người Kể Truyện (Cổ tích & Đồng thoại):
+                </span>
+                <span className="text-[11px] text-slate-500">Lời nhân vật sẽ đổi giọng riêng</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                {STORY_NARRATOR_VOICES.map((narrator) => {
+                  const isSelected = (settings.storyNarratorVoice || 'teacher') === narrator.id;
+                  const isTesting = previewingNarrator === narrator.id;
+                  return (
+                    <div
+                      key={narrator.id}
+                      className={`p-2.5 rounded-xl border-2 flex flex-col justify-between transition ${
+                        isSelected
+                          ? 'border-amber-500 bg-amber-50/70'
+                          : 'border-slate-200 bg-white hover:border-slate-300'
+                      }`}
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-lg">{narrator.avatar}</span>
+                          {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-amber-600" />}
+                        </div>
+                        <div className="font-extrabold text-xs text-slate-900">{narrator.name}</div>
+                        <p className="text-[10px] text-slate-600 leading-tight mb-2">{narrator.description}</p>
+                      </div>
+
+                      <div className="space-y-1">
+                        <button
+                          type="button"
+                          onClick={() => onUpdateSettings({ ...settings, storyNarratorVoice: narrator.id })}
+                          className={`w-full min-h-[44px] px-2 py-1 rounded-lg text-xs font-bold transition cursor-pointer flex items-center justify-center ${
+                            isSelected
+                              ? 'bg-amber-500 text-white'
+                              : 'bg-slate-100 hover:bg-slate-200 text-slate-800'
+                          }`}
+                        >
+                          {isSelected ? '✓ Đang chọn' : 'Chọn giọng'}
+                        </button>
+                        <button
+                          type="button"
+                          disabled={isTesting}
+                          onClick={async () => {
+                            setPreviewingNarrator(narrator.id);
+                            setTtsStatusMsg(`Đang phát mẫu ${narrator.name}...`);
+                            await previewStoryNarratorVoice(narrator.id, settings);
+                            setPreviewingNarrator(null);
+                            setTtsStatusMsg(`Đã phát mẫu ${narrator.name}!`);
+                          }}
+                          className="w-full min-h-[44px] px-2 py-1 rounded-lg border border-amber-300 hover:bg-amber-100 text-amber-900 text-[11px] font-bold transition cursor-pointer flex items-center justify-center gap-1 disabled:opacity-50"
+                        >
+                          <Volume2 className={`w-3 h-3 ${isTesting ? 'animate-bounce text-amber-600' : ''}`} />
+                          <span>{isTesting ? 'Đang phát...' : 'Nghe thử'}</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* English Accent Selection: American vs British English */}

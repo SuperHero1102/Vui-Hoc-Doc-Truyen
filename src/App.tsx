@@ -21,6 +21,7 @@ import {
   X,
   BookOpen,
   Headphones,
+  BarChart3,
 } from 'lucide-react';
 import lessonsJson from './data/lessonsData.json';
 import { ALL_BRAIN_GAMES, BRAIN_GAME_SECTIONS } from './data/brainGamesData';
@@ -62,6 +63,8 @@ import { ParentDashboard, ParentGateModal, ScreenTimeLockModal } from './compone
 import { AppBrandLogo, OfflineIndicator, PWAInstallButton } from './components/PWAWidgets';
 import { ProfileManagerModal } from './components/ProfileManagerModal';
 import { StoryReaderModal } from './components/StoryReaderModal';
+import { ActivityHistoryModal } from './components/ActivityHistoryModal';
+import { startTrackingActivity } from './utils/activityTracker';
 
 const SETTINGS_STORAGE_KEY = 'bevuihoc_parent_settings_v3';
 const PROFILES_STORAGE_KEY = 'bevuihoc_child_profiles_v3';
@@ -232,6 +235,9 @@ export default function App() {
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isParentGateOpen, setIsParentGateOpen] = useState(false);
   const [isParentDashboardOpen, setIsParentDashboardOpen] = useState(false);
+  const [isActivityHistoryOpen, setIsActivityHistoryOpen] = useState(false);
+  const [isHistoryGateOpen, setIsHistoryGateOpen] = useState(false);
+  const [hasWarnedTimeLimit, setHasWarnedTimeLimit] = useState(false);
   const [showEyeRestModal, setShowEyeRestModal] = useState(false);
   const [showQuickTimerPopover, setShowQuickTimerPopover] = useState(false);
   const [customMinutesInput, setCustomMinutesInput] = useState<string>(() =>

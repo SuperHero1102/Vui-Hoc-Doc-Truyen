@@ -125,13 +125,32 @@ export interface ParentSettings {
   volume: number; // 0.0 to 1.0
   autoOffEnabled: boolean; // Allows toggling auto-off / eye-rest timer ON or OFF
   dailyLimitMinutes: number; // Adjustable timer duration in minutes
+  groupDailyLimits?: {
+    games?: number;
+    stories?: number;
+    vocab?: number;
+    art?: number;
+    music?: number;
+  };
   useGeminiTTS: boolean;
   allowMicrophone: boolean;
   autoFullscreen?: boolean; // Automatically enter full-screen mode on launch/interaction
   englishAccent?: 'en-US' | 'en-GB'; // American vs British English accent choice
   parentPin?: string; // Custom PIN or password configured by parents to unlock settings and screen-time limit
   storyLanguage?: 'vi' | 'en' | 'bilingual'; // Cài đặt ngôn ngữ đọc truyện: Tiếng Việt, Tiếng Anh, hoặc Song ngữ
+  storyNarratorVoice?: 'teacher' | 'mother' | 'grandmother'; // Giọng người kể: Cô giáo, Giọng Mẹ, Giọng Bà
   characterVoices?: boolean; // Giả giọng đọc theo nhân vật (giọng sói trầm, giọng thỏ/heo con non nớt, tiên ông ấm áp...)
+}
+
+export type ActivityGroupType = 'vocab' | 'story' | 'game' | 'music' | 'art';
+
+export interface ActivityLogEntry {
+  id: string;
+  group: ActivityGroupType;
+  title: string;
+  detail?: string;
+  timestamp: number;
+  durationSeconds: number;
 }
 
 export type StoryAgeCategory = '0-2y' | '2-4y' | '4-5y';

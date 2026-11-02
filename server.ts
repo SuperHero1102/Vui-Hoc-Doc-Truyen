@@ -424,6 +424,8 @@ async function startServer() {
         speed = 'slow',
         stylePrompt,
         englishAccent = 'en-US',
+        storyNarratorVoice,
+        voiceStyle,
       } = req.body as {
         text?: string;
         lang?: 'vi' | 'en';
@@ -431,6 +433,8 @@ async function startServer() {
         speed?: 'slow' | 'normal' | 'fast';
         stylePrompt?: string;
         englishAccent?: 'en-US' | 'en-GB';
+        storyNarratorVoice?: 'teacher' | 'mother' | 'grandmother';
+        voiceStyle?: string;
       };
 
       if (!text || typeof text !== 'string' || !text.trim()) {
@@ -442,7 +446,7 @@ async function startServer() {
       const trimmedText = normalizeVietnameseTtsText(text, targetLang).slice(0, 2000);
       const allowedVoices = ['Kore', 'Zephyr', 'Puck', 'Charon', 'Fenrir'];
       const selectedVoice = allowedVoices.includes(voiceName) ? voiceName : 'Kore';
-      const cacheKey = `v4:${targetLang}:${englishAccent}:${selectedVoice}:${speed}:${trimmedText}`;
+      const cacheKey = `v5:${targetLang}:${englishAccent}:${selectedVoice}:${storyNarratorVoice || 'teacher'}:${voiceStyle || 'none'}:${speed}:${trimmedText}`;
 
       const cached = ttsAudioCache.get(cacheKey);
       if (cached) {
