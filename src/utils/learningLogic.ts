@@ -101,14 +101,14 @@ export const AGE_GROUPS: AgeGroupConfig[] = [
     label: '4–5 tuổi',
     shortLabel: '4–5 tuổi',
     stageTitle: 'Bé sắp vào lớp 1',
-    subtitle: 'Phonics & Đánh vần · Ghép từ 3 chữ cái, Đố vui & Nhại giọng',
+    subtitle: 'Phonics & Đánh vần · Ghép từ 3 chữ cái, Đố vui & Tập nói',
     sessionMinutes: '8–10 phút',
     recommendedDailyLimitMins: 25,
     underTwoNotice: false,
     badgeColor: 'bg-pink-100 text-pink-900',
     accentColor: '#EC4899',
     focusDescription:
-      'Âm vị (Phonics), đánh vần từ ngắn (C-A-T, S-U-N), nối từ với hình, đếm số và trò chơi nhại giọng chuẩn bản xứ.',
+      'Âm vị (Phonics), đánh vần từ ngắn (C-A-T, S-U-N), nối từ với hình, đếm số và trò chơi luyện nói chuẩn bản xứ.',
     supportedGameTypes: [
       'word_echo',
       'memory_match',

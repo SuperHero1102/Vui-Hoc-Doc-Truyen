@@ -12,7 +12,6 @@ import {
   CheckCircle2,
   Heart,
   Palette,
-  BarChart3,
 } from 'lucide-react';
 import type {
   AgeGroupId,
@@ -45,7 +44,6 @@ interface LessonPlaygroundProps {
   settings: ParentSettings;
   rotationSeed: number;
   onBack: () => void;
-  onOpenActivityHistory?: () => void;
   onWordPracticed: (item: VocabularyItem, topicId: string) => void;
   onTopicCompleted: (topic: TopicLesson, starsEarned: number) => void;
 }
@@ -77,7 +75,7 @@ const GAME_META: Record<GameType, { titleVi: string; shortVi: string; badgeEmoji
     badgeEmoji: '🎨',
   },
   word_echo: {
-    titleVi: 'Ghép chữ & Nhại giọng',
+    titleVi: 'Ghép chữ & Tập nói',
     shortVi: 'Ghép chữ',
     badgeEmoji: '🔤',
   },
@@ -108,7 +106,6 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   settings,
   rotationSeed,
   onBack,
-  onOpenActivityHistory,
   onWordPracticed,
   onTopicCompleted,
 }) => {
@@ -849,19 +846,6 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
               <span>Quay lại</span>
             </button>
 
-            {onOpenActivityHistory && (
-              <button
-                type="button"
-                onClick={onOpenActivityHistory}
-                className="min-h-[44px] px-3 sm:px-3.5 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-extrabold text-xs sm:text-sm flex items-center gap-1.5 cursor-pointer shrink-0 shadow-2xs"
-                title="Lịch sử hoạt động của bé (Dành cho bố mẹ)"
-              >
-                <BarChart3 className="w-4 h-4 text-slate-950" />
-                <span className="hidden sm:inline">Lịch sử hoạt động</span>
-                <span className="sm:hidden">Lịch sử</span>
-              </button>
-            )}
-
             <div
               className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl flex items-center justify-center text-xl sm:text-2xl shrink-0 border-2 border-white shadow-sm"
               style={{ backgroundColor: topic.narrator.avatarBg }}
@@ -998,11 +982,11 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                           handleStartEchoMicrophone(item);
                         }}
                         className="absolute top-2.5 left-2.5 min-h-[38px] px-3 py-1 rounded-full bg-purple-600/90 hover:bg-purple-600 active:scale-95 text-white shadow-md flex items-center gap-1.5 backdrop-blur-md border border-white/40 cursor-pointer z-10 transition-all hover:scale-105"
-                        title={`Bé nhại giọng theo cô: ${item.en}`}
-                        aria-label={`Bé nhại giọng theo cô: ${item.en}`}
+                        title={`Bé nói theo cô: ${item.en}`}
+                        aria-label={`Bé nói theo cô: ${item.en}`}
                       >
                         <Mic className="w-3.5 h-3.5 text-white animate-pulse" />
-                        <span className="text-[11px] font-black tracking-tight">Nhại theo cô</span>
+                        <span className="text-[11px] font-black tracking-tight">Nói</span>
                       </button>
                     )}
 
@@ -1570,7 +1554,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
               <div className="rounded-2xl bg-sky-50 border border-sky-200 p-3.5 flex flex-col sm:flex-row items-center justify-between gap-3">
                 <div>
                   <h4 className="text-xs sm:text-sm font-extrabold text-slate-900">
-                    Bước 2: Nhại giọng theo cô ({currentPhonicsItem.en} — {currentPhonicsItem.sentence3To4y.en})
+                    Bước 2: Bé nói theo cô ({currentPhonicsItem.en} — {currentPhonicsItem.sentence3To4y.en})
                   </h4>
                   <p className="text-[11px] text-slate-600">
                     Sau khi ghép xong chữ ở Bước 1, bé bấm nút để đọc to theo cô nhé!
@@ -1679,7 +1663,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
             <div className="flex items-center justify-between border-b border-purple-100 pb-2">
               <span className="text-xs font-black text-purple-700 uppercase tracking-wider flex items-center gap-1.5">
                 <Mic className="w-4 h-4 text-purple-600 animate-pulse" />
-                <span>Nhại Giọng Theo Cô</span>
+                <span>Bé Nói Cùng Cô</span>
               </span>
               <button
                 type="button"

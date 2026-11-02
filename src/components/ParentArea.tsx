@@ -1098,7 +1098,7 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
               <div className="flex items-start gap-2">
                 <Mic className="w-4 h-4 text-purple-600 shrink-0 mt-0.5" />
                 <div className="text-xs font-bold text-slate-800">
-                  Cho phép bật Micro trong trò "Nhại giọng theo cô" (Không lưu âm thanh)
+                  Cho phép bật Micro trong phần "Bé nói cùng cô" (Không lưu âm thanh)
                 </div>
               </div>
               <input

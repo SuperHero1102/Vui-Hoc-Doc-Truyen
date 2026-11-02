@@ -328,6 +328,10 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
 
   // Stage pointer handlers
   const handleStagePointerDown = (e: React.PointerEvent) => {
+    const target = e.target as HTMLElement | null;
+    if (target?.closest?.('[data-accessory-control="true"]')) {
+      return;
+    }
     setSelectedInstanceId(null);
     if (!isCustomPhotoActive) return;
 
@@ -342,6 +346,10 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
   };
 
   const handleStageTouchStart = (e: React.TouchEvent) => {
+    const target = e.target as HTMLElement | null;
+    if (target?.closest?.('[data-accessory-control="true"]')) {
+      return;
+    }
     setSelectedInstanceId(null);
     if (!isCustomPhotoActive) return;
 
@@ -752,50 +760,83 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
 
         {/* Floating Quick Controls (+, -, rotate, delete) near active item */}
         {activePlacedItem && (
-          <div className="absolute top-2 left-2 z-40 bg-white/95 backdrop-blur-md border-2 border-pink-300 rounded-2xl p-1 shadow-lg flex items-center gap-1 animate-in fade-in zoom-in-95 duration-150">
+          <div
+            data-accessory-control="true"
+            onPointerDown={(e) => e.stopPropagation()}
+            onTouchStart={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
+            className="absolute top-2 left-2 z-40 bg-white/95 backdrop-blur-md border-2 border-pink-400 rounded-2xl p-1.5 shadow-xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 duration-150"
+          >
+            <div className="flex items-center gap-1 pl-1 pr-1.5 py-0.5 rounded-xl bg-pink-50 border border-pink-200">
+              <span className="text-xs font-black text-pink-900 max-w-[85px] sm:max-w-[120px] truncate">
+                {activePlacedItem.item.nameVi}
+              </span>
+            </div>
+
             <button
               type="button"
+              data-accessory-control="true"
+              onPointerDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleZoomAccessory(0.15);
               }}
-              className="w-8 h-8 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-900 flex items-center justify-center cursor-pointer transition active:scale-95 font-bold"
-              title="Phóng to phụ kiện"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-sky-100 hover:bg-sky-200 active:scale-90 text-sky-800 border border-sky-300 flex items-center justify-center cursor-pointer transition shadow-2xs font-black"
+              title="Phóng to phụ kiện (+15%)"
+              aria-label="Phóng to phụ kiện"
             >
-              <Plus className="w-4 h-4 stroke-[3]" />
+              <Plus className="w-5 h-5 stroke-[2.5]" />
             </button>
             <button
               type="button"
+              data-accessory-control="true"
+              onPointerDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleZoomAccessory(-0.15);
               }}
-              className="w-8 h-8 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-900 flex items-center justify-center cursor-pointer transition active:scale-95 font-bold"
-              title="Thu nhỏ phụ kiện"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-100 hover:bg-amber-200 active:scale-90 text-amber-800 border border-amber-300 flex items-center justify-center cursor-pointer transition shadow-2xs font-black"
+              title="Thu nhỏ phụ kiện (-15%)"
+              aria-label="Thu nhỏ phụ kiện"
             >
-              <Minus className="w-4 h-4 stroke-[3]" />
+              <Minus className="w-5 h-5 stroke-[2.5]" />
             </button>
             <button
               type="button"
+              data-accessory-control="true"
+              onPointerDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleRotateAccessory(20);
               }}
-              className="w-8 h-8 rounded-xl bg-pink-100 hover:bg-pink-200 text-pink-900 flex items-center justify-center cursor-pointer transition active:scale-95"
-              title="Xoay phụ kiện"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-purple-100 hover:bg-purple-200 active:scale-90 text-purple-800 border border-purple-300 flex items-center justify-center cursor-pointer transition shadow-2xs font-bold"
+              title="Xoay phụ kiện (+20°)"
+              aria-label="Xoay phụ kiện"
             >
-              <RotateCw className="w-4 h-4" />
+              <RotateCw className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
             </button>
             <button
               type="button"
+              data-accessory-control="true"
+              onPointerDown={(e) => e.stopPropagation()}
+              onTouchStart={(e) => e.stopPropagation()}
+              onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => {
                 e.stopPropagation();
                 handleDeleteActive();
               }}
-              className="w-8 h-8 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-700 flex items-center justify-center cursor-pointer transition active:scale-95"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-rose-100 hover:bg-rose-200 active:scale-90 text-rose-700 border border-rose-300 flex items-center justify-center cursor-pointer transition shadow-2xs"
               title="Xóa phụ kiện này"
+              aria-label="Xóa phụ kiện"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
             </button>
           </div>
         )}

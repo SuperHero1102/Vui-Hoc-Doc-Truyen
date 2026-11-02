@@ -1192,7 +1192,6 @@ export default function App() {
               settings={effectiveSettings}
               rotationSeed={progress.sessionRotationSeed}
               onBack={() => setActiveTopic(null)}
-              onOpenActivityHistory={() => setIsHistoryGateOpen(true)}
               onWordPracticed={handleWordPracticed}
               onTopicCompleted={handleTopicCompleted}
             />

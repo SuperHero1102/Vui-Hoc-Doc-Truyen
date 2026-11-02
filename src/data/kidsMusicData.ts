@@ -14,6 +14,7 @@ export interface KidsSong {
   lyrics: string[];
   englishTranslation?: string[];
   funFactVi: string;
+  audioUrl?: string; // Real recorded audio track (vocal or acoustic instruments)
   melodyNotes?: { note: string; dur: number }[]; // Note frequency representation for Web Audio player
 }
 
@@ -42,6 +43,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'La la la, là la la la!',
     ],
     funFactVi: 'Bài hát quen thuộc nhất giúp bé hào hứng, vui vẻ khi bước vào lớp mẫu giáo đầu tiên!',
+    audioUrl: '/assets/music/chau-len-ba.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -69,6 +71,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Đau mắt rồi lại khóc meo meo!',
     ],
     funFactVi: 'Bài hát giáo dục bé thói quen rửa mặt bằng khăn sạch mỗi sáng thức dậy.',
+    audioUrl: '/assets/music/rua-mat-nhu-meo.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 },
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.8 },
@@ -127,6 +130,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Trường của cháu đây là trường mầm non!',
     ],
     funFactVi: 'Khích lệ tình yêu thương giữa cô giáo mầm non và các bé nhỏ.',
+    audioUrl: '/assets/music/truong-chung-chau-la-truong-mam-non.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'A4', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.6 },
@@ -158,6 +162,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Mẹ có yêu không nào!',
     ],
     funFactVi: 'Bài học lễ giáo đầu đời: đi thưa về gửi, ngoan ngoãn vâng lời cha mẹ.',
+    audioUrl: '/assets/music/con-co-be-be.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -185,6 +190,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Xa là nhớ, gần nhau là cười!',
     ],
     funFactVi: 'Bài hát gia đình ấm áp được mọi thế hệ trẻ em Việt Nam yêu mến.',
+    audioUrl: '/assets/music/ca-nha-thuong-nhau.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
       { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.5 }, { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.8 },
@@ -212,6 +218,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Khi cháu vâng lời, cháu biết bà vui!',
     ],
     funFactVi: 'Từng câu từ ngọt ngào nuôi dưỡng lòng hiếu thảo của bé với ông bà.',
+    audioUrl: '/assets/music/chau-yeu-ba.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.7 },
       { note: 'C5', dur: 0.5 }, { note: 'D5', dur: 0.5 }, { note: 'C5', dur: 0.8 },
@@ -239,6 +246,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Lên bờ vẫy cái cánh cho khô!',
     ],
     funFactVi: 'Vận động theo bài hát: bé xòe 2 tay làm cánh vịt đập nhẹ rất dễ thương.',
+    audioUrl: '/assets/music/mot-con-vit.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'C5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'A4', dur: 0.4 },
@@ -269,6 +277,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cá vàng bắt bọ gậy cho nước thêm sạch trong!',
     ],
     funFactVi: 'Dạy bé biết cá vàng bắt bọ gậy bảo vệ nguồn nước trong sạch.',
+    audioUrl: '/assets/music/ca-vang-boi.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.6 },
       { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
@@ -295,6 +304,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Tung cánh bay, tung cánh bay!',
     ],
     funFactVi: 'Giai điệu Frère Jacques kinh điển thế giới với lời Việt mộc mạc cho bé múa bướm.',
+    audioUrl: '/assets/music/kia-con-buom-vang.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'D4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'C4', dur: 0.5 },
       { note: 'C4', dur: 0.5 }, { note: 'D4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'C4', dur: 0.5 },
@@ -329,6 +339,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cho ta bao tình thương đi suốt cả cuộc đời!',
     ],
     funFactVi: 'Bài ca bất hủ về mái ấm gia đình, ngọn nến tượng trưng cho tình yêu thương.',
+    audioUrl: '/assets/music/ba-ngon-nen-lung-linh.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.8 },
       { note: 'D4', dur: 0.5 }, { note: 'F4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
@@ -358,6 +369,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Bố là phi thuyền đưa em lên trời!',
     ],
     funFactVi: 'Những hình ảnh ngộ nghĩnh tưởng tượng về người bố vĩ đại của bé.',
+    audioUrl: '/assets/music/bo-la-tat-ca.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -384,6 +396,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Mẹ và cô ấy hai mẹ hiền!',
     ],
     funFactVi: 'Gợi mở sự gần gũi, dịu hiền giữa cô giáo ở trường và mẹ ở nhà.',
+    audioUrl: '/assets/music/co-va-me.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
@@ -413,6 +426,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Em để dành tiền nuôi heo đất lớn nhanh!',
     ],
     funFactVi: 'Dạy bé bài học tiết kiệm và biết nâng niu những món quà của mẹ.',
+    audioUrl: '/assets/music/con-heo-dat.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -439,6 +453,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!',
     ],
     funFactVi: 'Giai điệu rộn ràng, nổi tiếng cả trong nước và quốc tế!',
+    audioUrl: '/assets/music/chu-ech-con.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'D4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.4 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -467,6 +482,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Uống nước vào là no căng diều!',
     ],
     funFactVi: 'Miêu tả hình ảnh chú gà con lông tơ vàng óng chạy lon ton theo mẹ kiếm mồi.',
+    audioUrl: '/assets/music/dan-ga-con.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'C4', dur: 0.8 },
@@ -498,6 +514,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Kéo gỗ cho buôn làng của ta!',
     ],
     funFactVi: 'Giai điệu Tây Nguyên rộn rã, dạy bé tinh thần hăng say lao động và yêu thiên nhiên.',
+    audioUrl: '/assets/music/chu-voi-con.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -527,6 +544,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Con bìm bịp thổi tò tí te tò te!',
     ],
     funFactVi: 'Trò chơi đồng dao dân gian giúp các bé phối hợp nhịp nhàng và vui cười sảng khoái.',
+    audioUrl: '/assets/music/bac-kim-thang.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'C4', dur: 0.3 }, { note: 'D4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -587,6 +605,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Có cô giáo đón em vào lớp học!',
     ],
     funFactVi: 'Khung cảnh buổi sáng rạng rỡ, giúp bé 5 tuổi rèn luyện tính tự lập và tự tin.',
+    audioUrl: '/assets/music/em-di-mau-giao.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -644,6 +663,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Trường mầm non thân yêu!',
     ],
     funFactVi: 'Bài hát kinh điển trong lễ tổng kết ra trường của các bé 5 tuổi tạm biệt trường mầm non.',
+    audioUrl: '/assets/music/tam-biet-bup-be.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.8 },
@@ -672,6 +692,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Chạy nhảy tung tăng đón ánh bình minh!',
     ],
     funFactVi: 'Bài thể dục khởi động ngày mới tràn đầy năng lượng cho bé.',
+    audioUrl: '/assets/music/tap-the-duc-buoi-sang.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'C5', dur: 0.6 },
       { note: 'D5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.6 },
@@ -728,6 +749,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cùng bay nào cho trái đất quay!',
     ],
     funFactVi: 'Nuôi dưỡng lý tưởng hòa bình, tình bạn bè quốc tế và ý thức bảo vệ hành tinh xanh.',
+    audioUrl: '/assets/music/trai-dat-nay-la-cua-chung-minh.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
@@ -756,6 +778,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cô giáo khen em bé ngoan chăm chỉ!',
     ],
     funFactVi: 'Bài hát vui nhộn dạy bé ý thức kỷ luật: làm xong bài tập mới đi chơi.',
+    audioUrl: '/assets/music/hong-dam-dau.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'C5', dur: 0.4 }, { note: 'D5', dur: 0.6 },
       { note: 'E5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -792,6 +815,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Bé học phát âm từng chữ cái chuẩn xác và tự tin!',
     ],
     funFactVi: 'Bài hát đầu đời giúp mọi em bé làm quen với 26 chữ cái tiếng Anh qua giai điệu vui tươi!',
+    audioUrl: '/assets/music/alphabet-song.ogg',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'C4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'G4', dur: 0.5 },
       { note: 'A4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
@@ -821,6 +845,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'How I wonder what you are!',
     ],
     funFactVi: 'Giai điệu êm ái của Mozart giúp bé dễ đi vào giấc ngủ ngon và an lành.',
+    audioUrl: '/assets/music/twinkle-twinkle.ogg',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'C4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'G4', dur: 0.5 },
       { note: 'A4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
@@ -1006,6 +1031,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Four little monkeys jumping on the bed...',
     ],
     funFactVi: 'Dạy bé đếm ngược từ 5 xuống 1 và nhắc nhở không nhảy nghịch ngợm trên giường.',
+    audioUrl: '/assets/music/five-little-ducks.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.8 },
@@ -1169,6 +1195,89 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       { note: 'C4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.8 }, { note: 'A4', dur: 0.8 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'F4', dur: 0.8 }, { note: 'F4', dur: 0.8 },
       { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'Bb4', dur: 0.8 }, { note: 'D5', dur: 0.8 },
+    ],
+  },
+  {
+    id: 'three-little-kittens',
+    title: 'Three Little Kittens',
+    subtitleEn: 'They lost their mittens!',
+    category: 'en_rhymes',
+    categoryLabelVi: 'Nhạc Tiếng Anh · Ba chú mèo con',
+    ageBadge: '0–5 tuổi',
+    composer: 'Traditional Mother Goose Rhyme',
+    emoji: '🐱',
+    colorHex: '#EC4899',
+    bgGradient: 'from-pink-500 to-rose-600',
+    tempo: 104,
+    melodyStyle: 'playful',
+    lyrics: [
+      'Three little kittens, they lost their mittens,',
+      'And they began to cry: Oh, mother dear, we sadly fear,',
+      'Our mittens we have lost!',
+      'What! Lost your mittens, you naughty kittens!',
+      'Then you shall have no pie! Mee-ow, mee-ow, mee-ow!',
+    ],
+    funFactVi: 'Câu chuyện âm nhạc vui nhộn về ba chú mèo con làm rơi găng tay và mẹ mèo nhắc nhở.',
+    audioUrl: '/assets/music/three-little-kittens.ogg',
+    melodyNotes: [
+      { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
+      { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'A4', dur: 0.8 },
+    ],
+  },
+  {
+    id: 'pop-goes-the-weasel',
+    title: 'Pop! Goes the Weasel',
+    subtitleEn: 'Up and down the city road',
+    category: 'en_rhymes',
+    categoryLabelVi: 'Nhạc Tiếng Anh · Điệu nhảy sôi động',
+    ageBadge: '0–5 tuổi',
+    composer: 'Traditional English Dance Song',
+    emoji: '🦡',
+    colorHex: '#8B5CF6',
+    bgGradient: 'from-purple-500 to-indigo-600',
+    tempo: 120,
+    melodyStyle: 'cheerful',
+    lyrics: [
+      'All around the mulberry bush,',
+      'The monkey chased the weasel.',
+      'The monkey thought \'twas all in fun,',
+      'Pop! Goes the weasel!',
+    ],
+    funFactVi: 'Đến chữ "Pop!", bé bật nhảy thật cao tạo tiếng nổ bất ngờ cực kỳ vui nhộn!',
+    audioUrl: '/assets/music/pop-goes-the-weasel.ogg',
+    melodyNotes: [
+      { note: 'C4', dur: 0.3 }, { note: 'F4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'A4', dur: 0.5 },
+      { note: 'Bb4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.5 }, { note: 'F4', dur: 0.8 },
+    ],
+  },
+  {
+    id: 'hot-cross-buns',
+    title: 'Hot Cross Buns',
+    subtitleEn: 'One a penny, two a penny!',
+    category: 'en_rhymes',
+    categoryLabelVi: 'Nhạc Tiếng Anh · Bánh mì ngọt ngào',
+    ageBadge: '0–5 tuổi',
+    composer: 'Traditional Street Cry Song',
+    emoji: '🥯',
+    colorHex: '#D97706',
+    bgGradient: 'from-amber-500 to-orange-600',
+    tempo: 96,
+    melodyStyle: 'gentle',
+    lyrics: [
+      'Hot cross buns! Hot cross buns!',
+      'One a penny, two a penny,',
+      'Hot cross buns!',
+      'If you have no daughters, give them to your sons,',
+      'One a penny, two a penny, hot cross buns!',
+    ],
+    funFactVi: 'Giai điệu ba nốt nhạc đầu tiên kinh điển (B - A - G) rất dễ cho bé nhớ và nhẩm theo.',
+    audioUrl: '/assets/music/hot-cross-buns.ogg',
+    melodyNotes: [
+      { note: 'B4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
+      { note: 'B4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
+      { note: 'G4', dur: 0.25 }, { note: 'G4', dur: 0.25 }, { note: 'G4', dur: 0.25 }, { note: 'G4', dur: 0.25 },
+      { note: 'A4', dur: 0.25 }, { note: 'A4', dur: 0.25 }, { note: 'A4', dur: 0.25 }, { note: 'A4', dur: 0.25 },
+      { note: 'B4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
     ],
   },
 ];
