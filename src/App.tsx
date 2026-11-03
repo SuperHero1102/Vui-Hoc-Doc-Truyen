@@ -68,6 +68,7 @@ import { StoryReaderModal } from './components/StoryReaderModal';
 import { ActivityHistoryModal } from './components/ActivityHistoryModal';
 import { KidsMusicPlayer } from './components/KidsMusicPlayer';
 import { DailyCommunicationStage } from './components/DailyCommunicationStage';
+import { AppErrorBoundary } from './components/AppErrorBoundary';
 import { startTrackingActivity } from './utils/activityTracker';
 
 const SETTINGS_STORAGE_KEY = 'bevuihoc_parent_settings_v3';
@@ -839,6 +840,7 @@ export default function App() {
                 stopAllAudio();
                 setActiveTopic(null);
                 setActiveBrainGame(null);
+                setIsDailyCommunicationOpen(false);
                 setIsParentDashboardOpen(false);
                 setActiveDockTab('arcade');
               }}
@@ -1182,39 +1184,63 @@ export default function App() {
               onOpenActivityHistory={() => setIsActivityHistoryOpen(true)}
             />
           ) : isDailyCommunicationOpen ? (
-            <DailyCommunicationStage
-              settings={effectiveSettings}
-              childName={activeProfile.name}
-              onBack={() => setIsDailyCommunicationOpen(false)}
-              onEarnStar={(count) => {
-                updateActiveProgress((prev) => ({
-                  ...prev,
-                  stars: prev.stars + count,
-                }));
-              }}
-            />
+            <AppErrorBoundary
+              fallbackTitle="Không thể tải chủ đề Giao tiếp"
+              onReset={() => setIsDailyCommunicationOpen(false)}
+            >
+              <DailyCommunicationStage
+                settings={effectiveSettings}
+                childName={activeProfile.name}
+                initialStars={progress.stars}
+                onBack={() => setIsDailyCommunicationOpen(false)}
+                onEarnStar={(count) => {
+                  updateActiveProgress((prev) => ({
+                    ...prev,
+                    stars: prev.stars + count,
+                  }));
+                }}
+                onCompleteSituation={(situationId) => {
+                  updateActiveProgress((prev) => ({
+                    ...prev,
+                    completedTopics: prev.completedTopics.includes('daily-communication')
+                      ? prev.completedTopics
+                      : [...prev.completedTopics, 'daily-communication'],
+                  }));
+                }}
+              />
+            </AppErrorBoundary>
           ) : activeBrainGame ? (
-            <BrainGamePlayground
-              game={activeBrainGame}
-              currentLevel={progress.gameLevels?.[activeBrainGame.id] || activeBrainGame.defaultLevel || 1}
-              settings={effectiveSettings}
-              topics={allTopics}
-              allGames={ALL_BRAIN_GAMES}
-              onBack={() => setActiveBrainGame(null)}
-              onOpenActivityHistory={() => setIsHistoryGateOpen(true)}
-              onLevelComplete={handleBrainGameLevelComplete}
-              onSelectNextGame={(nextGame) => handleOpenBrainGame(nextGame)}
-            />
+            <AppErrorBoundary
+              fallbackTitle="Không thể tải trò chơi"
+              onReset={() => setActiveBrainGame(null)}
+            >
+              <BrainGamePlayground
+                game={activeBrainGame}
+                currentLevel={progress.gameLevels?.[activeBrainGame.id] || activeBrainGame.defaultLevel || 1}
+                settings={effectiveSettings}
+                topics={allTopics}
+                allGames={ALL_BRAIN_GAMES}
+                onBack={() => setActiveBrainGame(null)}
+                onOpenActivityHistory={() => setIsHistoryGateOpen(true)}
+                onLevelComplete={handleBrainGameLevelComplete}
+                onSelectNextGame={(nextGame) => handleOpenBrainGame(nextGame)}
+              />
+            </AppErrorBoundary>
           ) : activeTopic ? (
-            <LessonPlayground
-              topic={activeTopic}
-              ageId={currentAgeId}
-              settings={effectiveSettings}
-              rotationSeed={progress.sessionRotationSeed}
-              onBack={() => setActiveTopic(null)}
-              onWordPracticed={handleWordPracticed}
-              onTopicCompleted={handleTopicCompleted}
-            />
+            <AppErrorBoundary
+              fallbackTitle="Không thể tải bài học"
+              onReset={() => setActiveTopic(null)}
+            >
+              <LessonPlayground
+                topic={activeTopic}
+                ageId={currentAgeId}
+                settings={effectiveSettings}
+                rotationSeed={progress.sessionRotationSeed}
+                onBack={() => setActiveTopic(null)}
+                onWordPracticed={handleWordPracticed}
+                onTopicCompleted={handleTopicCompleted}
+              />
+            </AppErrorBoundary>
           ) : (
             <div className="flex flex-col gap-3 sm:gap-4 pb-4">
               {/* Mobile/Tablet Age Selector Strip (Visible when < xl, wraps vertically without horizontal scroll) */}
@@ -1423,7 +1449,7 @@ export default function App() {
                         </div>
                         <div>
                           <h2 className="text-base sm:text-lg font-extrabold text-slate-900 leading-tight">
-                            32 Chủ Đề Từ Vựng & Mẫu Câu
+                            {allTopics.length} Chủ Đề Từ Vựng & Kỹ Năng Giao Tiếp
                           </h2>
                           <p className="text-xs font-semibold text-slate-500">
                             512+ từ vựng song ngữ kèm kể chuyện & trò chơi tương tác
@@ -1435,7 +1461,7 @@ export default function App() {
                         onClick={() => setActiveDockTab('worlds')}
                         className="min-h-[34px] px-3 py-1 rounded-xl bg-[#1E88E5] hover:bg-[#1565C0] text-white text-xs font-extrabold cursor-pointer shrink-0"
                       >
-                        Xem tất cả 32 chủ đề →
+                        Xem tất cả {allTopics.length} chủ đề →
                       </button>
                     </div>
 
@@ -2144,8 +2170,8 @@ export default function App() {
         </div>
       </main>
 
-      {/* Native App Bottom Navigation Dock (Hidden inside active lesson/game for full-screen focus) */}
-      {!activeTopic && !activeBrainGame && !isParentDashboardOpen && (
+      {/* Native App Bottom Navigation Dock (Hidden inside active lesson/game/communication for full-screen focus) */}
+      {!activeTopic && !activeBrainGame && !isParentDashboardOpen && !isDailyCommunicationOpen && (
         <nav
           aria-label="Thanh điều hướng ứng dụng"
           className="shrink-0 bg-white/95 border-t border-slate-200 px-2 sm:px-3 py-1.5 z-30 shadow-xs"

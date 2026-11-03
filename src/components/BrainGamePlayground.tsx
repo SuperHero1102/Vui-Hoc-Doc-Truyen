@@ -153,8 +153,6 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   const [showVictoryModal, setShowVictoryModal] = useState(false);
   const [selectedRightId, setSelectedRightId] = useState<string | null>(null);
   const isAdvancingRef = useRef(false);
-  const touchStartXRef = useRef<number | null>(null);
-  const touchStartYRef = useRef<number | null>(null);
 
   // Deduplicated concrete vocabulary pool so every emoji matches its exact word 100%
   const concreteVocab = useMemo(() => {
@@ -2491,44 +2489,6 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
     );
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      const target = e.target as HTMLElement | null;
-      // Do not trigger swipe back when drawing or tracing
-      if (
-        target?.tagName === 'CANVAS' ||
-        target?.closest('canvas') ||
-        target?.closest('svg.touch-none') ||
-        target?.closest('svg[aria-label^="Bảng tập viết"]')
-      ) {
-        return;
-      }
-      touchStartXRef.current = e.touches[0].clientX;
-      touchStartYRef.current = e.touches[0].clientY;
-    }
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (
-      touchStartXRef.current !== null &&
-      touchStartYRef.current !== null &&
-      e.changedTouches.length === 1
-    ) {
-      const dx = e.changedTouches[0].clientX - touchStartXRef.current;
-      const dy = e.changedTouches[0].clientY - touchStartYRef.current;
-      // Swipe left-to-right: started at left edge with travel, or standard rightward swipe >= 100px
-      const isEdgeSwipe = touchStartXRef.current < 90 && dx >= 60 && Math.abs(dy) < 80;
-      const isStandardSwipe = dx >= 100 && Math.abs(dy) < 65;
-      if (isEdgeSwipe || isStandardSwipe) {
-        stopAllAudio();
-        playGentleEncourageTone(settings.volume);
-        onBack();
-      }
-    }
-    touchStartXRef.current = null;
-    touchStartYRef.current = null;
-  };
-
   // Dedicated Full-Screen Free Drawing Canvas Mode (Matches User Reference Image image_5bd3e63b.png)
   if (game.id === 'free-drawing') {
     const STROKE_SIZES = [
@@ -2540,11 +2500,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
     const hasDrawnEnough = drawnDistance >= minRequiredStrokeDistance;
 
     return (
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="fixed inset-0 z-50 bg-[#F4F9FD] flex flex-col p-2 sm:p-3.5 select-none overflow-hidden"
-      >
+      <div className="fixed inset-0 z-50 bg-[#F4F9FD] flex flex-col p-2 sm:p-3.5 select-none overflow-hidden">
         {/* Row 1: Top Navigation Bar (Matches Reference Image 5bd3e63b.png) */}
         <div className="w-full flex items-center justify-between gap-2 shrink-0 pb-1">
           {/* Left: Rounded Blue Square Back Button */}
@@ -2555,7 +2511,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
               onBack();
             }}
             className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-[#E0F2FE] hover:bg-[#BAE6FD] border-2 border-[#38BDF8] text-[#0284C7] shadow-xs flex items-center justify-center cursor-pointer shrink-0 transition active:scale-95"
-            title="Trở về sân chơi (Bé có thể vuốt phải 👉)"
+            title="Trở về sân chơi"
             aria-label="Trở về sân chơi"
           >
             <ArrowLeft className="w-6 h-6 stroke-[3]" />
@@ -2777,11 +2733,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   // Dedicated Full-Screen Single-Screen Rainbow Xylophone Game
   if (game.id === 'rainbow-xylophone') {
     return (
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="fixed inset-0 z-50 bg-[#FFFDF7] flex flex-col select-none overflow-hidden"
-      >
+      <div className="fixed inset-0 z-50 bg-[#FFFDF7] flex flex-col select-none overflow-hidden">
         <RainbowXylophoneGame
           settings={settings}
           onBack={onBack}
@@ -2856,11 +2808,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
 
   if (isCompactSingleScreenGame) {
     return (
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        className="w-full max-w-md mx-auto h-[calc(100dvh-92px)] max-h-[calc(100dvh-92px)] flex flex-col p-1 sm:p-2 select-none overflow-hidden justify-between"
-      >
+      <div className="w-full max-w-md mx-auto h-[calc(100dvh-92px)] max-h-[calc(100dvh-92px)] flex flex-col p-1 sm:p-2 select-none overflow-hidden justify-between">
         {renderGameBody()}
         {showVictoryModal && (
           <div
@@ -2941,11 +2889,7 @@ export const BrainGamePlayground: React.FC<BrainGamePlaygroundProps> = ({
   }
 
   return (
-    <div
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      className="w-full max-w-4xl mx-auto flex flex-col gap-3 pb-6 select-none"
-    >
+    <div className="w-full max-w-4xl mx-auto flex flex-col gap-3 pb-6 select-none">
       {/* Top Game Navigation Header */}
       <div className="rounded-3xl bg-white border border-slate-200/90 px-4 py-3 shadow-xs flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">

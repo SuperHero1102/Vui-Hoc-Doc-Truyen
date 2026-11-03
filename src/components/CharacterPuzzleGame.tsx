@@ -41,22 +41,23 @@ export const CharacterPuzzleGame: React.FC<CharacterPuzzleGameProps> = ({
   useEffect(() => {
     let isCancelled = false;
     const img = new Image();
-    img.crossOrigin = 'anonymous';
 
-    img.onload = () => {
-      if (isCancelled) return;
+    // Only configure crossOrigin for external URLs that differ from origin
+    const isExternal =
+      currentTemplate.imageUrl.startsWith('http://') ||
+      currentTemplate.imageUrl.startsWith('https://');
+    if (isExternal && typeof window !== 'undefined') {
+      try {
+        const parsed = new URL(currentTemplate.imageUrl, window.location.href);
+        if (parsed.origin !== window.location.origin) {
+          img.crossOrigin = 'anonymous';
+        }
+      } catch {
+        // ignore
+      }
+    }
 
-      const sourceCanvas = document.createElement('canvas');
-      sourceCanvas.width = 600;
-      sourceCanvas.height = 600;
-      const sCtx = sourceCanvas.getContext('2d');
-      if (!sCtx) return;
-
-      const minDim = Math.min(img.width, img.height);
-      const sx = (img.width - minDim) / 2;
-      const sy = (img.height - minDim) / 2;
-      sCtx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 600, 600);
-
+    const generatePiecesFromCanvas = (sourceCanvas: HTMLCanvasElement) => {
       const pieceW = 600 / cols;
       const pieceH = 600 / rows;
       const urls: string[] = [];
@@ -89,6 +90,42 @@ export const CharacterPuzzleGame: React.FC<CharacterPuzzleGameProps> = ({
       setPlacedSlots({});
       setSelectedPieceIdx(null);
       setShowCelebration(false);
+    };
+
+    img.onload = () => {
+      if (isCancelled) return;
+
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.width = 600;
+      sourceCanvas.height = 600;
+      const sCtx = sourceCanvas.getContext('2d');
+      if (!sCtx) return;
+
+      const minDim = Math.min(img.width, img.height);
+      const sx = (img.width - minDim) / 2;
+      const sy = (img.height - minDim) / 2;
+      sCtx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 600, 600);
+
+      generatePiecesFromCanvas(sourceCanvas);
+    };
+
+    img.onerror = () => {
+      if (isCancelled) return;
+      // Resilient fallback: Draw high-visibility colorful puzzle illustration canvas
+      const sourceCanvas = document.createElement('canvas');
+      sourceCanvas.width = 600;
+      sourceCanvas.height = 600;
+      const sCtx = sourceCanvas.getContext('2d');
+      if (!sCtx) return;
+
+      sCtx.fillStyle = '#E0F2FE';
+      sCtx.fillRect(0, 0, 600, 600);
+      sCtx.fillStyle = '#0284C7';
+      sCtx.font = 'bold 36px sans-serif';
+      sCtx.textAlign = 'center';
+      sCtx.fillText(currentTemplate.nameVi, 300, 300);
+
+      generatePiecesFromCanvas(sourceCanvas);
     };
 
     img.src = currentTemplate.imageUrl;

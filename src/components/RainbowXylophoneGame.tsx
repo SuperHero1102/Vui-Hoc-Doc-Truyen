@@ -874,7 +874,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
           /* ===================================================================== */
           /* 🌈 ĐÀN GÕ CẦU VỒNG: 8 THANH MÀU RỰC RỠ VỚI ĐINH TÁN BẠC */
           /* ===================================================================== */
-          <div className="w-full h-full grid grid-cols-8 gap-1 sm:gap-2 items-end p-2 sm:p-3 bg-gradient-to-b from-amber-50 to-orange-50/70 rounded-3xl border-4 border-amber-300 shadow-md">
+          <div className="w-full h-full grid grid-cols-8 gap-0.5 sm:gap-2 items-end p-1.5 sm:p-3 bg-gradient-to-b from-amber-50 to-orange-50/70 rounded-3xl border-4 border-amber-300 shadow-md">
             {XYLOPHONE_KEYS.map((k, idx) => {
               const isGuidedNext = playMode === 'guided' && idx === targetKeyIdx;
               const isPressed = activeNoteIdx === idx;

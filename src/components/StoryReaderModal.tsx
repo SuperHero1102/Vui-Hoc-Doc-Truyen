@@ -49,8 +49,6 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
   );
   const [nightMode, setNightMode] = useState(false);
 
-  const touchStartXRef = useRef<number | null>(null);
-  const touchStartYRef = useRef<number | null>(null);
   const wakeLockRef = useRef<any>(null);
 
   const totalPages = story.pages.length;
@@ -286,35 +284,6 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
     };
   }, [currentPageIdx, isPlaying, speechSegments, totalPages, settings]);
 
-  // Instantaneous Left-to-Right Swipe Gesture to exit back to main playground
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length === 1) {
-      touchStartXRef.current = e.touches[0].clientX;
-      touchStartYRef.current = e.touches[0].clientY;
-    }
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (
-      touchStartXRef.current !== null &&
-      touchStartYRef.current !== null &&
-      e.changedTouches.length === 1
-    ) {
-      const dx = e.changedTouches[0].clientX - touchStartXRef.current;
-      const dy = e.changedTouches[0].clientY - touchStartYRef.current;
-      // Swipe left-to-right: edge swipe dx >= 50 or standard rightward travel dx >= 80
-      const isEdgeSwipe = touchStartXRef.current < 90 && dx >= 50 && Math.abs(dy) < 80;
-      const isStandardSwipe = dx >= 80 && Math.abs(dy) < 65;
-      if (isEdgeSwipe || isStandardSwipe) {
-        stopAllAudio();
-        onClose();
-        return;
-      }
-    }
-    touchStartXRef.current = null;
-    touchStartYRef.current = null;
-  };
-
   const handleTogglePlay = () => {
     if (isPlaying) {
       setIsPlaying(false);
@@ -325,12 +294,14 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
   };
 
   const handlePrevPage = () => {
+    stopAllAudio();
     if (currentPageIdx > 0) {
       setCurrentPageIdx((p) => p - 1);
     }
   };
 
   const handleNextPage = () => {
+    stopAllAudio();
     if (currentPageIdx < totalPages - 1) {
       setCurrentPageIdx((p) => p + 1);
     } else {
@@ -346,8 +317,6 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
 
   return (
     <div
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
       className={`fixed inset-0 z-50 flex flex-col select-none overflow-hidden transition-colors duration-300 ${
         nightMode ? 'bg-[#0F172A] text-slate-100' : 'bg-[#FFFDF7] text-slate-900'
       }`}
@@ -360,7 +329,7 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
             : 'bg-white/95 border-amber-200/80'
         }`}
       >
-        {/* Left: Rounded Back Button with Swipe Hint */}
+        {/* Left: Rounded Back Button */}
         <button
           type="button"
           onClick={() => {
@@ -372,13 +341,10 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
               ? 'bg-slate-800 text-sky-400 hover:bg-slate-700 border border-slate-700'
               : 'bg-[#E0F2FE] hover:bg-[#BAE6FD] text-[#0284C7] border border-[#38BDF8]'
           }`}
-          title="Thoát ra màn hình chính (Bé có thể vuốt phải 👉)"
+          title="Thoát ra màn hình chính"
         >
           <ArrowLeft className="w-5 h-5 stroke-[2.5]" />
           <span>Thoát</span>
-          <span className="hidden sm:inline text-[11px] font-bold text-sky-600/80">
-            (vuốt phải 👉)
-          </span>
         </button>
 
         {/* Center: Story Title + Page Badge */}

@@ -79,7 +79,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({
   const handleUnlockSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (hasCustomPin && !useMathRecovery) {
-      if (verifyParentPassword(parentPin, answerInput)) {
+      if (verifyParentPassword(parentPin, answerInput.trim())) {
         onUnlocked();
       } else {
         setHintMessage('Mã PIN / Mật khẩu chưa đúng, bố mẹ vui lòng nhập lại nhé!');
@@ -88,7 +88,7 @@ export const ParentGateModal: React.FC<ParentGateModalProps> = ({
       return;
     }
 
-    if (verifyParentMathAnswer(challenge, answerInput)) {
+    if (verifyParentMathAnswer(challenge, answerInput.trim())) {
       onUnlocked();
     } else {
       setHintMessage('Chưa đúng phép tính, bố mẹ thử lại nhé!');

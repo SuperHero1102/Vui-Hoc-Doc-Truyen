@@ -39,16 +39,20 @@ interface DailyCommunicationStageProps {
   settings: ParentSettings;
   childName?: string;
   initialSituationId?: string;
+  initialStars?: number;
   onBack: () => void;
   onEarnStar?: (count: number) => void;
+  onCompleteSituation?: (situationId: string) => void;
 }
 
 export const DailyCommunicationStage: React.FC<DailyCommunicationStageProps> = ({
   settings,
   childName = 'Bé',
   initialSituationId,
+  initialStars = 0,
   onBack,
   onEarnStar,
+  onCompleteSituation,
 }) => {
   const [selectedSituationIndex, setSelectedSituationIndex] = useState<number>(() => {
     if (initialSituationId) {
@@ -63,7 +67,7 @@ export const DailyCommunicationStage: React.FC<DailyCommunicationStageProps> = (
   const [selectedQuizOptionId, setSelectedQuizOptionId] = useState<string | null>(null);
   const [isQuizCorrect, setIsQuizCorrect] = useState<boolean>(false);
   const [completedSituations, setCompletedSituations] = useState<Record<string, boolean>>({});
-  const [totalStars, setTotalStars] = useState<number>(0);
+  const [totalStars, setTotalStars] = useState<number>(initialStars);
   const [playingLineId, setPlayingLineId] = useState<string | null>(null);
   const [playingCardId, setPlayingCardId] = useState<string | null>(null);
   const [isParentTipOpen, setIsParentTipOpen] = useState<boolean>(false);
@@ -193,6 +197,9 @@ export const DailyCommunicationStage: React.FC<DailyCommunicationStageProps> = (
         setTotalStars((prev) => prev + 1);
         if (onEarnStar) {
           onEarnStar(1);
+        }
+        if (onCompleteSituation) {
+          onCompleteSituation(currentSituation.id);
         }
       }
 
