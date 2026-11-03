@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import {
   ArrowLeft,
   RotateCcw,
@@ -7,13 +7,14 @@ import {
   RefreshCw,
   Home,
   CheckCircle2,
+  Lock,
 } from 'lucide-react';
 import type { ParentSettings } from '../types/learning';
 import {
   STUDIO_COLOR_PALETTE,
   COLORING_BOOK_TEMPLATES,
-  type ColoringTemplate,
 } from '../data/creativeArtData';
+import COLORING_REGIONS_DATA from '../data/coloringRegions.json';
 import { playSoundEffect, speakTeacherVoice } from '../utils/audioEngine';
 import { fireFireworksCelebration } from '../utils/confetti';
 
@@ -24,12 +25,32 @@ interface MagicColoringGameProps {
   onGentleRetry?: (msgVi: string, msgEn: string) => void;
 }
 
-interface RegionCentroid {
-  id: string;
+interface PrecomputedRegion {
+  regionId: number;
   x: number;
   y: number;
+  inscribedRadius: number;
+  badgeRadius: number;
+  fontSize: number;
   colorNumber: number;
+  colorNameVi: string;
+  colorHex: string;
+  isEye: boolean;
+  pixelCount: number;
 }
+
+interface PrecomputedTemplateData {
+  templateId: string;
+  file: string;
+  nameVi: string;
+  totalColorableRegions: number;
+  maxBlackRadius: number;
+  measuredMaxBlackRadiusPx: number;
+  overlappingPairs: number;
+  regions: PrecomputedRegion[];
+}
+
+const TYPED_REGIONS_DATA = COLORING_REGIONS_DATA as Record<string, PrecomputedTemplateData>;
 
 export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   settings,
@@ -45,296 +66,141 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
 
   // Auto-completion & Round Tracking (3 drawings per round)
   const [completedCountInRound, setCompletedCountInRound] = useState<number>(0);
-  const [coloredRegionsSet, setColoredRegionsSet] = useState<Set<string>>(new Set());
+  const [coloredRegionsSet, setColoredRegionsSet] = useState<Set<number>>(new Set());
   const [showBriefCongrats, setShowBriefCongrats] = useState<boolean>(false);
   const [showRoundCompleteModal, setShowRoundCompleteModal] = useState<boolean>(false);
   const hasTriggeredCompletionRef = useRef<boolean>(false);
 
-  // Dynamic regions for number mode
-  const [dynamicRegions, setDynamicRegions] = useState<RegionCentroid[]>([]);
+  // Locked background feedback
+  const [showBgLockedNotice, setShowBgLockedNotice] = useState<boolean>(false);
+  const bgNoticeTimeoutRef = useRef<number | null>(null);
 
-  // Canvas ref
+  // Shaking badge state for wrong number selection in "Theo Số" mode
+  const [shakingBadgeId, setShakingBadgeId] = useState<number | null>(null);
+
+  // Canvas & background mask ref
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const bgMaskRef = useRef<Uint8Array | null>(null);
 
   // Undo history stack
   const undoStackRef = useRef<ImageData[]>([]);
   const [canUndo, setCanUndo] = useState(false);
 
   // Number mode badges completed tracking
-  const [completedBadges, setCompletedBadges] = useState<Record<string, boolean>>({});
+  const [completedBadges, setCompletedBadges] = useState<Record<number, boolean>>({});
 
   const activeTemplate = COLORING_BOOK_TEMPLATES[templateIdx % COLORING_BOOK_TEMPLATES.length];
   const selectedColorItem =
     STUDIO_COLOR_PALETTE.find((c) => c.hex === brushColor) || STUDIO_COLOR_PALETTE[0];
 
-  // 1. Distance Transform & Hollow Thick Black Areas (Thickness > 10px -> Hollow Outline with White Interior)
-  const hollowThickBlackAreas = useCallback((ctx: CanvasRenderingContext2D, w = 512, h = 512) => {
-    const imgData = ctx.getImageData(0, 0, w, h);
-    const data = imgData.data;
-    const black = new Uint8Array(w * h);
+  // Resolve precomputed template data from coloringRegions.json
+  const activeTemplateData: PrecomputedTemplateData = useMemo(() => {
+    const byId = Object.values(TYPED_REGIONS_DATA).find(
+      (d) => d.templateId === activeTemplate.id
+    );
+    if (byId) return byId;
 
-    for (let i = 0; i < w * h; i++) {
+    const fallbackKey = Object.keys(TYPED_REGIONS_DATA)[0];
+    return TYPED_REGIONS_DATA[fallbackKey];
+  }, [activeTemplate.id]);
+
+  const totalColorableRegions = activeTemplateData.totalColorableRegions;
+  const regionsList = activeTemplateData.regions;
+  const coloredCount = coloredRegionsSet.size;
+
+  // Load image onto canvas and compute background mask (BFS from 4 outer edges)
+  const drawColoringImage = useCallback((img: HTMLImageElement) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    if (!ctx) return;
+
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 512, 512);
+
+    const padding = 16;
+    const availW = 512 - padding * 2;
+    const availH = 512 - padding * 2;
+    const scale = Math.min(availW / img.width, availH / img.height);
+    const drawW = img.width * scale;
+    const drawH = img.height * scale;
+    const drawX = (512 - drawW) / 2;
+    const drawY = (512 - drawH) / 2;
+
+    ctx.drawImage(img, drawX, drawY, drawW, drawH);
+
+    // Compute Background Mask: BFS from all 4 boundaries on the canvas
+    const imgData = ctx.getImageData(0, 0, 512, 512);
+    const data = imgData.data;
+    const bgMask = new Uint8Array(512 * 512);
+    const isLine = new Uint8Array(512 * 512);
+
+    for (let i = 0; i < 512 * 512; i++) {
       const idx = i * 4;
       const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
-      if (lum < 115) {
-        black[i] = 1;
+      if (lum < 95) isLine[i] = 1;
+    }
+
+    const bgQueue: number[] = [];
+    for (let x = 0; x < 512; x++) {
+      if (!isLine[x]) {
+        bgMask[x] = 1;
+        bgQueue.push(x);
+      }
+      const b = 511 * 512 + x;
+      if (!isLine[b] && !bgMask[b]) {
+        bgMask[b] = 1;
+        bgQueue.push(b);
+      }
+    }
+    for (let y = 0; y < 512; y++) {
+      const l = y * 512;
+      if (!isLine[l] && !bgMask[l]) {
+        bgMask[l] = 1;
+        bgQueue.push(l);
+      }
+      const r = y * 512 + 511;
+      if (!isLine[r] && !bgMask[r]) {
+        bgMask[r] = 1;
+        bgQueue.push(r);
       }
     }
 
-    // Chamfer 3-4 distance transform
-    const INF = 999999;
-    const dist = new Int32Array(w * h);
-    for (let i = 0; i < w * h; i++) {
-      dist[i] = black[i] === 0 ? 0 : INF;
-    }
-
-    // Forward pass
-    for (let y = 0; y < h; y++) {
-      for (let x = 0; x < w; x++) {
-        const idx = y * w + x;
-        if (dist[idx] > 0) {
-          let d = dist[idx];
-          if (x > 0) d = Math.min(d, dist[idx - 1] + 3);
-          if (y > 0) {
-            d = Math.min(d, dist[idx - w] + 3);
-            if (x > 0) d = Math.min(d, dist[idx - w - 1] + 4);
-            if (x < w - 1) d = Math.min(d, dist[idx - w + 1] + 4);
-          }
-          dist[idx] = d;
+    while (bgQueue.length > 0) {
+      const curr = bgQueue.pop()!;
+      const cx = curr % 512;
+      const cy = Math.floor(curr / 512);
+      const neighbors = [
+        cy > 0 ? curr - 512 : -1,
+        cy < 511 ? curr + 512 : -1,
+        cx > 0 ? curr - 1 : -1,
+        cx < 511 ? curr + 1 : -1,
+      ];
+      for (const ni of neighbors) {
+        if (ni >= 0 && !isLine[ni] && !bgMask[ni]) {
+          bgMask[ni] = 1;
+          bgQueue.push(ni);
         }
       }
     }
 
-    // Backward pass
-    for (let y = h - 1; y >= 0; y--) {
-      for (let x = w - 1; x >= 0; x--) {
-        const idx = y * w + x;
-        if (dist[idx] > 0) {
-          let d = dist[idx];
-          if (x < w - 1) d = Math.min(d, dist[idx + 1] + 3);
-          if (y < h - 1) {
-            d = Math.min(d, dist[idx + w] + 3);
-            if (x > 0) d = Math.min(d, dist[idx + w - 1] + 4);
-            if (x < w - 1) d = Math.min(d, dist[idx + w + 1] + 4);
-          }
-          dist[idx] = d;
-        }
-      }
-    }
-
-    // Any black pixel with dist > 14 (radius > 4.6px, thickness > 9.2px) becomes pure white interior
-    for (let i = 0; i < w * h; i++) {
-      if (black[i] === 1 && dist[i] > 14) {
-        const idx = i * 4;
-        data[idx] = 255;
-        data[idx + 1] = 255;
-        data[idx + 2] = 255;
-        data[idx + 3] = 255;
-      }
-    }
-    ctx.putImageData(imgData, 0, 0);
+    bgMaskRef.current = bgMask;
+    undoStackRef.current = [ctx.getImageData(0, 0, 512, 512)];
+    setCanUndo(false);
+    setCompletedBadges({});
+    setColoredRegionsSet(new Set());
+    hasTriggeredCompletionRef.current = false;
   }, []);
 
-  // 2. Simplify Coloring Page: Close leaks & find colorable regions
-  const simplifyColoringPage = useCallback(
-    (canvas: HTMLCanvasElement) => {
-      const w = 512;
-      const h = 512;
-      const ctx = canvas.getContext('2d', { willReadFrequently: true });
-      if (!ctx) return { success: false, blackRatio: 0, regionCount: 0, centroids: [] };
-
-      // Hollow thick areas first
-      hollowThickBlackAreas(ctx, w, h);
-
-      const imgData = ctx.getImageData(0, 0, w, h);
-      const data = imgData.data;
-      const isLine = new Uint8Array(w * h);
-      let blackPixelCount = 0;
-
-      for (let i = 0; i < w * h; i++) {
-        const idx = i * 4;
-        const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
-        if (lum < 95) {
-          isLine[i] = 1;
-          blackPixelCount++;
-        }
-      }
-
-      const blackRatio = blackPixelCount / (w * h);
-
-      // Label connected white regions (BFS)
-      const labels = new Int32Array(w * h);
-      labels.fill(-1);
-      let currentLabel = 0;
-      const pixelCounts: number[] = [];
-      const sumX: number[] = [];
-      const sumY: number[] = [];
-      const minX: number[] = [];
-      const maxX: number[] = [];
-      const minY: number[] = [];
-      const maxY: number[] = [];
-
-      for (let y = 0; y < h; y++) {
-        for (let x = 0; x < w; x++) {
-          const idx = y * w + x;
-          if (isLine[idx] === 0 && labels[idx] === -1) {
-            labels[idx] = currentLabel;
-            let count = 0;
-            let sX = 0;
-            let sY = 0;
-            let rMinX = x;
-            let rMaxX = x;
-            let rMinY = y;
-            let rMaxY = y;
-
-            const queue = [idx];
-            while (queue.length > 0) {
-              const curr = queue.pop()!;
-              count++;
-              const cx = curr % w;
-              const cy = Math.floor(curr / w);
-              sX += cx;
-              sY += cy;
-              if (cx < rMinX) rMinX = cx;
-              if (cx > rMaxX) rMaxX = cx;
-              if (cy < rMinY) rMinY = cy;
-              if (cy > rMaxY) rMaxY = cy;
-
-              if (cy > 0) {
-                const up = (cy - 1) * w + cx;
-                if (isLine[up] === 0 && labels[up] === -1) {
-                  labels[up] = currentLabel;
-                  queue.push(up);
-                }
-              }
-              if (cy < h - 1) {
-                const down = (cy + 1) * w + cx;
-                if (isLine[down] === 0 && labels[down] === -1) {
-                  labels[down] = currentLabel;
-                  queue.push(down);
-                }
-              }
-              if (cx > 0) {
-                const left = cy * w + (cx - 1);
-                if (isLine[left] === 0 && labels[left] === -1) {
-                  labels[left] = currentLabel;
-                  queue.push(left);
-                }
-              }
-              if (cx < w - 1) {
-                const right = cy * w + (cx + 1);
-                if (isLine[right] === 0 && labels[right] === -1) {
-                  labels[right] = currentLabel;
-                  queue.push(right);
-                }
-              }
-            }
-
-            pixelCounts.push(count);
-            sumX.push(sX);
-            sumY.push(sY);
-            minX.push(rMinX);
-            maxX.push(rMaxX);
-            minY.push(rMinY);
-            maxY.push(rMaxY);
-            currentLabel++;
-          }
-        }
-      }
-
-      // Merge tiny white regions (< 1.5% area = 3932px)
-      const minArea = w * h * 0.015;
-      for (let lbl = 0; lbl < currentLabel; lbl++) {
-        const cy = sumY[lbl] / pixelCounts[lbl];
-        const cx = sumX[lbl] / pixelCounts[lbl];
-        const isEye = cy > 100 && cy < 280 && cx > 120 && cx < 390 && pixelCounts[lbl] > 80;
-        if (pixelCounts[lbl] < minArea && !isEye) {
-          for (let ry = minY[lbl]; ry <= maxY[lbl]; ry++) {
-            for (let rx = minX[lbl]; rx <= maxX[lbl]; rx++) {
-              if (labels[ry * w + rx] === lbl) {
-                const pIdx = (ry * w + rx) * 4;
-                data[pIdx] = 25;
-                data[pIdx + 1] = 30;
-                data[pIdx + 2] = 40;
-                data[pIdx + 3] = 255;
-              }
-            }
-          }
-        }
-      }
-      ctx.putImageData(imgData, 0, 0);
-
-      // Centroids of colorable regions
-      const centroids: RegionCentroid[] = [];
-      let validCount = 0;
-      for (let lbl = 0; lbl < currentLabel; lbl++) {
-        const isBoundary =
-          minX[lbl] === 0 || maxX[lbl] === w - 1 || minY[lbl] === 0 || maxY[lbl] === h - 1;
-        const cy = sumY[lbl] / pixelCounts[lbl];
-        const cx = sumX[lbl] / pixelCounts[lbl];
-        const isEye = cy > 100 && cy < 280 && cx > 120 && cx < 390 && pixelCounts[lbl] > 80;
-
-        if ((pixelCounts[lbl] >= minArea || isEye) && !isBoundary) {
-          validCount++;
-          const colorNum = ((validCount - 1) % 12) + 1;
-          centroids.push({
-            id: `reg-${validCount}`,
-            x: Math.round(cx),
-            y: Math.round(cy),
-            colorNumber: colorNum,
-          });
-        }
-      }
-
-      const success = blackRatio <= 0.16 && validCount >= 4 && validCount <= 30;
-      return { success, blackRatio, regionCount: validCount, centroids };
-    },
-    [hollowThickBlackAreas]
-  );
-
-  // Draw image to 512x512 canvas and prepare for coloring
-  const drawThickenedImage = useCallback(
-    (img: HTMLImageElement | HTMLCanvasElement) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d', { willReadFrequently: true });
-      if (!ctx) return;
-
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, 512, 512);
-
-      const padding = 16;
-      const availW = 512 - padding * 2;
-      const availH = 512 - padding * 2;
-      const scale = Math.min(availW / img.width, availH / img.height);
-      const drawW = img.width * scale;
-      const drawH = img.height * scale;
-      const drawX = (512 - drawW) / 2;
-      const drawY = (512 - drawH) / 2;
-
-      ctx.drawImage(img, drawX, drawY, drawW, drawH);
-
-      const result = simplifyColoringPage(canvas);
-      setDynamicRegions(result.centroids);
-
-      undoStackRef.current = [ctx.getImageData(0, 0, 512, 512)];
-      setCanUndo(false);
-      setCompletedBadges({});
-      setColoredRegionsSet(new Set());
-      hasTriggeredCompletionRef.current = false;
-    },
-    [simplifyColoringPage]
-  );
-
-  // Load active template
+  // Load active template image
   useEffect(() => {
     if (activeTemplate.imageUrl) {
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      img.onload = () => drawThickenedImage(img);
+      img.onload = () => drawColoringImage(img);
       img.src = activeTemplate.imageUrl;
     }
-  }, [activeTemplate, drawThickenedImage]);
+  }, [activeTemplate, drawColoringImage]);
 
   // Check Auto-completion of current drawing
   const checkAutoCompletion = useCallback(() => {
@@ -344,34 +210,9 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
 
-    // Measure non-white, non-line pixels on canvas
-    const imgData = ctx.getImageData(0, 0, 512, 512);
-    const data = imgData.data;
-
-    let totalWhiteInside = 0;
-    let coloredPixels = 0;
-
-    for (let i = 0; i < 512 * 512; i++) {
-      const idx = i * 4;
-      const r = data[idx];
-      const g = data[idx + 1];
-      const b = data[idx + 2];
-      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-      if (lum >= 90) {
-        if (r > 245 && g > 245 && b > 245) {
-          totalWhiteInside++;
-        } else {
-          coloredPixels++;
-        }
-      }
-    }
-
-    const totalRegions = dynamicRegions.length > 0 ? dynamicRegions.length : activeTemplate.regions.length;
-    const regionsFilledCount = coloredRegionsSet.size;
-
+    // Check colored progress
     const isCompleted =
-      (totalRegions > 0 && regionsFilledCount >= totalRegions) ||
-      (coloredPixels > 25000 && coloredPixels / (coloredPixels + totalWhiteInside) >= 0.75);
+      totalColorableRegions > 0 && coloredRegionsSet.size >= totalColorableRegions;
 
     if (isCompleted) {
       hasTriggeredCompletionRef.current = true;
@@ -381,7 +222,7 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
       setShowBriefCongrats(true);
       speakTeacherVoice(
         [
-          { lang: 'vi', text: 'Hoan hô bé! Bức tranh đã tô màu hoàn thành rực rỡ rồi!' },
+          { lang: 'vi', text: 'Hoan hô bé! Bé đã tô màu bức tranh xuất sắc rồi!' },
           { lang: 'en', text: 'Splendid! You colored the whole picture!' },
         ],
         settings
@@ -401,13 +242,31 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
       }, 2200);
     }
   }, [
-    dynamicRegions,
-    activeTemplate,
+    totalColorableRegions,
     coloredRegionsSet,
     completedCountInRound,
     settings,
     onWin,
   ]);
+
+  // Find nearest colorable region to a click
+  const findRegionAtPoint = useCallback(
+    (startX: number, startY: number): PrecomputedRegion | null => {
+      let closest: PrecomputedRegion | null = null;
+      let minDist = 999999;
+      for (const reg of regionsList) {
+        const dx = reg.x - startX;
+        const dy = reg.y - startY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < minDist) {
+          minDist = dist;
+          closest = reg;
+        }
+      }
+      return closest;
+    },
+    [regionsList]
+  );
 
   // Scanline Flood Fill on 512x512 Canvas
   const handleCanvasClick = (e: React.PointerEvent<HTMLCanvasElement>) => {
@@ -425,22 +284,79 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
 
     if (startX < 0 || startX >= 512 || startY < 0 || startY >= 512) return;
 
+    const clickIdx = startY * 512 + startX;
+
+    // Requirement 2: Vùng nền (trắng nối với mép ảnh) bị khóa ở cả hai chế độ:
+    // chạm không đổ màu, không đánh số, không tính tiến độ.
+    if (bgMaskRef.current && bgMaskRef.current[clickIdx] === 1) {
+      playSoundEffect('pop', settings.volume * 0.4);
+      setShowBgLockedNotice(true);
+      if (bgNoticeTimeoutRef.current) clearTimeout(bgNoticeTimeoutRef.current);
+      bgNoticeTimeoutRef.current = window.setTimeout(() => {
+        setShowBgLockedNotice(false);
+      }, 1500);
+      return;
+    }
+
     const imgData = ctx.getImageData(0, 0, 512, 512);
     const data = imgData.data;
-
-    const startIdx = (startY * 512 + startX) * 4;
-    const startR = data[startIdx];
-    const startG = data[startIdx + 1];
-    const startB = data[startIdx + 2];
+    const pixelIdx = clickIdx * 4;
+    const startR = data[pixelIdx];
+    const startG = data[pixelIdx + 1];
+    const startB = data[pixelIdx + 2];
 
     const startLum = 0.299 * startR + 0.587 * startG + 0.114 * startB;
-    if (startLum < 90) return; // Do not fill black border
+    if (startLum < 90) return; // Do not fill black outline
 
     const cleanHex = brushColor.replace('#', '');
     const num = parseInt(cleanHex, 16);
     const fillR = (num >> 16) & 255;
     const fillG = (num >> 8) & 255;
     const fillB = num & 255;
+
+    // Target region identification
+    const matchedRegion = findRegionAtPoint(startX, startY);
+
+    // Requirement 3 in Number Mode:
+    // đổ sai số thì rung nhẹ và nhắc
+    if (coloringMode === 'number' && matchedRegion) {
+      if (matchedRegion.colorNumber !== selectedColorItem.number) {
+        // Trigger gentle vibration
+        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+          try {
+            navigator.vibrate(50);
+          } catch {
+            // Ignore if vibration is restricted
+          }
+        }
+        setShakingBadgeId(matchedRegion.regionId);
+        setTimeout(() => setShakingBadgeId(null), 500);
+        playSoundEffect('pop', settings.volume * 0.5);
+
+        const expectedColor =
+          STUDIO_COLOR_PALETTE.find((c) => c.number === matchedRegion.colorNumber) ||
+          STUDIO_COLOR_PALETTE[0];
+        const colorNameClean = expectedColor.nameVi.replace('Màu ', '');
+
+        if (onGentleRetry) {
+          onGentleRetry(
+            `Vùng này mang số ${matchedRegion.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${matchedRegion.colorNumber} nhé!`,
+            expectedColor.nameEn
+          );
+        } else {
+          speakTeacherVoice(
+            [
+              {
+                lang: 'vi',
+                text: `Vùng này là số ${matchedRegion.colorNumber} (${colorNameClean}). Bé chọn màu số ${matchedRegion.colorNumber} nhé!`,
+              },
+            ],
+            settings
+          );
+        }
+        return; // Reject wrong color fill
+      }
+    }
 
     if (
       Math.abs(startR - fillR) < 15 &&
@@ -472,13 +388,11 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
 
     // BFS Flood Fill
     const visited = new Uint8Array(512 * 512);
-    const queue = [startY * 512 + startX];
-    visited[startY * 512 + startX] = 1;
+    const queue = [clickIdx];
+    visited[clickIdx] = 1;
 
-    let filledCount = 0;
     while (queue.length > 0) {
       const curr = queue.pop()!;
-      filledCount++;
       const idx = curr * 4;
       data[idx] = fillR;
       data[idx + 1] = fillG;
@@ -521,24 +435,9 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
     ctx.putImageData(imgData, 0, 0);
     playSoundEffect('pop', settings.volume);
 
-    // Track completed region badges in number mode
-    if (coloringMode === 'number') {
-      const allRegs = dynamicRegions.length > 0 ? dynamicRegions : activeTemplate.regions.map(r => ({
-        id: r.id,
-        x: (r.badgePos.x / 320) * 512,
-        y: (r.badgePos.y / 320) * 512,
-        colorNumber: r.colorNumber,
-      }));
-
-      for (const reg of allRegs) {
-        const dist = Math.hypot(reg.x - startX, reg.y - startY);
-        if (dist < 48) {
-          setCompletedBadges((prev) => ({ ...prev, [reg.id]: true }));
-          setColoredRegionsSet((prev) => new Set([...prev, reg.id]));
-        }
-      }
-    } else {
-      setColoredRegionsSet((prev) => new Set([...prev, `click-${Date.now()}`]));
+    if (matchedRegion) {
+      setCompletedBadges((prev) => ({ ...prev, [matchedRegion.regionId]: true }));
+      setColoredRegionsSet((prev) => new Set([...prev, matchedRegion.regionId]));
     }
 
     setTimeout(() => {
@@ -581,9 +480,27 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
     }
   };
 
+  const progressPercent = Math.min(
+    100,
+    Math.round((coloredCount / Math.max(1, totalColorableRegions)) * 100)
+  );
+
   return (
     <div className="w-full h-full max-h-[100dvh] flex flex-col justify-between items-center bg-gradient-to-b from-amber-50/70 via-pink-50/30 to-sky-50/70 p-1 sm:p-2 select-none overflow-hidden font-sans">
-      {/* 1. Header Toolbar: Compact, balanced, NO blank gaps */}
+      <style>{`
+        @keyframes subtleShake {
+          0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+          20% { transform: translate(-54%, -50%) rotate(-4deg); }
+          40% { transform: translate(-46%, -50%) rotate(4deg); }
+          60% { transform: translate(-53%, -50%) rotate(-3deg); }
+          80% { transform: translate(-47%, -50%) rotate(3deg); }
+        }
+        .animate-shake-badge {
+          animation: subtleShake 0.45s ease-in-out;
+        }
+      `}</style>
+
+      {/* 1. Header Toolbar */}
       <div className="w-full max-w-md h-11 sm:h-12 shrink-0 rounded-2xl border-2 border-amber-400 bg-white/95 backdrop-blur-md px-2.5 shadow-2xs flex items-center justify-between gap-1.5">
         {/* Left: Back, Template selector, Mode toggle */}
         <div className="flex items-center gap-1.5 shrink-0">
@@ -706,7 +623,7 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
         </div>
       </div>
 
-      {/* 2. Interactive Coloring Canvas: STRICTLY CLEAN, NO CORNER DECORATIONS */}
+      {/* 2. Interactive Coloring Canvas */}
       <div className="relative flex-1 min-h-0 w-full max-w-md aspect-square rounded-[24px] border-4 border-amber-400 bg-white shadow-md p-1 sm:p-2 flex items-center justify-center overflow-hidden">
         {/* Sample Reference Thumbnail when Eye is Active */}
         {showSampleHint && (
@@ -722,6 +639,16 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
           </div>
         )}
 
+        {/* Locked Background Toast / Notice */}
+        {showBgLockedNotice && (
+          <div className="absolute top-3 inset-x-4 z-20 flex items-center justify-center pointer-events-none animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="bg-slate-900/85 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg border border-white/20">
+              <Lock className="w-3.5 h-3.5 text-amber-300" />
+              <span>Vùng nền đã khóa, bé chạm vào hình để tô nhé!</span>
+            </div>
+          </div>
+        )}
+
         {/* HTML Canvas with Flood Fill */}
         <canvas
           ref={canvasRef}
@@ -731,48 +658,70 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
           className="w-full h-full max-h-full aspect-square object-contain touch-none cursor-crosshair rounded-[20px] select-none"
         />
 
-        {/* Number Badges Overlay in "Theo Số" Mode */}
+        {/* Number Badges Overlay in "Theo Số" Mode: PRECOMPUTED & INSCRIBED */}
         {coloringMode === 'number' && (
           <div className="absolute inset-0 pointer-events-none p-1 sm:p-2 flex items-center justify-center">
             <div className="relative w-full h-full aspect-square">
-              {(dynamicRegions.length > 0
-                ? dynamicRegions
-                : activeTemplate.regions.map((r) => ({
-                    id: r.id,
-                    x: (r.badgePos.x / 320) * 512,
-                    y: (r.badgePos.y / 320) * 512,
-                    colorNumber: r.colorNumber,
-                  }))
-              ).map((region) => {
-                const isCompleted = completedBadges[region.id];
+              {regionsList.map((region) => {
+                const isCompleted = completedBadges[region.regionId];
                 if (isCompleted) return null;
 
                 const isSelectedNumber = selectedColorItem.number === region.colorNumber;
+                const isShaking = shakingBadgeId === region.regionId;
                 const leftPercent = (region.x / 512) * 100;
                 const topPercent = (region.y / 512) * 100;
+                const badgeDiameter = Math.max(16, region.badgeRadius * 2);
 
                 return (
                   <div
-                    key={region.id}
+                    key={`badge-${region.regionId}`}
                     style={{
                       left: `${leftPercent}%`,
                       top: `${topPercent}%`,
+                      width: `${badgeDiameter}px`,
+                      height: `${badgeDiameter}px`,
+                      fontSize: `${region.fontSize}px`,
                       transform: 'translate(-50%, -50%)',
                     }}
-                    className={`absolute pointer-events-auto cursor-pointer rounded-full flex items-center justify-center font-black text-xs transition-transform ${
-                      isSelectedNumber
-                        ? 'w-6 h-6 bg-amber-400 text-amber-950 ring-2 ring-amber-600 scale-125 shadow-md animate-bounce'
-                        : 'w-5 h-5 bg-white text-slate-800 border-2 border-slate-600 shadow-xs'
+                    className={`absolute pointer-events-auto cursor-pointer rounded-full flex items-center justify-center font-black transition-all ${
+                      isShaking
+                        ? 'animate-shake-badge bg-rose-500 text-white shadow-lg ring-3 ring-rose-300 z-30'
+                        : isSelectedNumber
+                        ? 'animate-pulse bg-amber-400 text-amber-950 ring-3 ring-amber-500 shadow-md scale-110 z-20'
+                        : 'bg-white text-slate-900 border-2 border-slate-700 shadow-2xs hover:scale-105 z-10'
                     }`}
                     onClick={() => {
                       if (selectedColorItem.number !== region.colorNumber) {
+                        if (typeof navigator !== 'undefined' && navigator.vibrate) {
+                          try {
+                            navigator.vibrate(50);
+                          } catch {
+                            // Ignore
+                          }
+                        }
+                        setShakingBadgeId(region.regionId);
+                        setTimeout(() => setShakingBadgeId(null), 500);
+                        playSoundEffect('pop', settings.volume * 0.5);
+
                         const expectedColor =
                           STUDIO_COLOR_PALETTE.find((c) => c.number === region.colorNumber) ||
                           STUDIO_COLOR_PALETTE[0];
+                        const colorNameClean = expectedColor.nameVi.replace('Màu ', '');
+
                         if (onGentleRetry) {
                           onGentleRetry(
-                            `Vùng này mang số ${region.colorNumber} (${expectedColor.nameVi.toLowerCase()}). Bé hãy chọn màu số ${region.colorNumber} ở thanh màu nhé!`,
+                            `Vùng này mang số ${region.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${region.colorNumber} ở thanh màu nhé!`,
                             expectedColor.nameEn
+                          );
+                        } else {
+                          speakTeacherVoice(
+                            [
+                              {
+                                lang: 'vi',
+                                text: `Vùng này là số ${region.colorNumber} (${colorNameClean}). Bé chọn màu số ${region.colorNumber} nhé!`,
+                              },
+                            ],
+                            settings
                           );
                         }
                       }
@@ -800,19 +749,36 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
         )}
       </div>
 
-      {/* 3. Studio Color Palette (12 colors) */}
-      <div className="w-full max-w-md shrink-0 bg-white/95 backdrop-blur-md rounded-2xl border-2 border-amber-400 p-1.5 sm:p-2 shadow-2xs space-y-1">
-        <div className="flex items-center justify-between px-1">
-          <span className="text-[11px] font-bold text-amber-950">
-            {coloringMode === 'number'
-              ? `Màu số ${selectedColorItem.number}: ${selectedColorItem.nameVi}`
-              : `Màu cọ: ${selectedColorItem.nameVi}`}
-          </span>
-          <span className="text-[11px] font-black text-amber-700">
-            {templateIdx + 1}/{COLORING_BOOK_TEMPLATES.length}
-          </span>
+      {/* 3. Studio Color Palette & Progress Section */}
+      <div className="w-full max-w-md shrink-0 bg-white/95 backdrop-blur-md rounded-2xl border-2 border-amber-400 p-1.5 sm:p-2 shadow-2xs space-y-1.5">
+        {/* Requirement 4: Progress Bar & Text: “Màu 1: Đỏ” bên trái, “Đã tô 2/22 vùng” bên phải kèm thanh tiến độ mảnh */}
+        <div className="flex items-center justify-between px-1.5 py-0.5">
+          {/* Left: “Màu 1: Đỏ” */}
+          <div className="flex items-center gap-1.5 shrink-0">
+            <div
+              className="w-3.5 h-3.5 rounded-full border border-black/20 shrink-0 shadow-2xs"
+              style={{ backgroundColor: selectedColorItem.hex }}
+            />
+            <span className="text-xs font-black text-slate-800">
+              Màu {selectedColorItem.number}: {selectedColorItem.nameVi.replace('Màu ', '')}
+            </span>
+          </div>
+
+          {/* Right: “Đã tô 2/22 vùng” kèm thanh tiến độ mảnh */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-bold text-slate-700">
+              Đã tô {coloredCount}/{totalColorableRegions} vùng
+            </span>
+            <div className="w-20 sm:w-28 h-2 rounded-full bg-slate-200 overflow-hidden shadow-inner">
+              <div
+                className="h-full bg-gradient-to-r from-amber-400 via-emerald-400 to-emerald-500 rounded-full transition-all duration-300"
+                style={{ width: `${progressPercent}%` }}
+              />
+            </div>
+          </div>
         </div>
 
+        {/* 12 Color Buttons */}
         <div className="grid grid-cols-6 gap-1.5">
           {STUDIO_COLOR_PALETTE.map((c) => {
             const isSelected = brushColor === c.hex;
@@ -904,7 +870,7 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
         </div>
       )}
 
-      {/* 5. Template Picker Modal: 22 Static 3D Chibi Previews */}
+      {/* 5. Template Picker Modal */}
       {showTemplateModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200">
           <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-amber-400 shadow-2xl p-4 flex flex-col items-center space-y-3 max-h-[85vh] overflow-y-auto">

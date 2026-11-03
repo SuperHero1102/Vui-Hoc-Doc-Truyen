@@ -18,9 +18,14 @@ import {
   X,
   Radio,
   Repeat,
+  Shuffle,
   Headphones,
+  CheckCircle2,
+  Info,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react';
-import { KIDS_SONGS_DATA, type KidsSong } from '../data/kidsMusicData';
+import { KIDS_SONGS_DATA, type KidsSong, type TimedLyricLine } from '../data/kidsMusicData';
 import type { ParentSettings } from '../types/learning';
 import { stopAllAudio } from '../utils/audioEngine';
 import { logActivity } from '../utils/activityTracker';
@@ -32,7 +37,10 @@ interface KidsMusicPlayerProps {
   onOpenParentGate?: () => void;
 }
 
-// Frequency mapping for authentic acoustic glockenspiel / marimba tones
+const FAVORITES_STORAGE_KEY = 'bevuihoc_favorited_songs_v4';
+const RECENT_SONG_KEY = 'bevuihoc_recent_song_id_v4';
+
+// Acoustic music box frequencies for instrumental fallback songs
 const NOTE_FREQS: Record<string, number> = {
   G3: 196.0,
   A3: 220.0,
@@ -53,21 +61,49 @@ const NOTE_FREQS: Record<string, number> = {
   A5: 880.0,
 };
 
+const CATEGORY_CHIPS = [
+  { id: 'all', label: 'Tất cả (44)', count: 44, icon: Music },
+  { id: 'vi_all', label: 'Nhạc Việt (26)', count: 26, icon: Sparkles },
+  { id: 'vi_3y', label: 'Lớp 3 tuổi (10)', count: 10, icon: Star },
+  { id: 'vi_4y', label: 'Lớp 4 tuổi (8)', count: 8, icon: Star },
+  { id: 'vi_5y', label: 'Lớp 5 tuổi (8)', count: 8, icon: Star },
+  { id: 'en_rhymes', label: 'English (18)', count: 18, icon: Headphones },
+  { id: 'favorites', label: 'Yêu thích', count: 0, icon: Heart },
+];
+
 export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   settings,
   childName = 'Bé',
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeSong, setActiveSong] = useState<KidsSong | null>(KIDS_SONGS_DATA[0]);
+  const [activeSong, setActiveSong] = useState<KidsSong | null>(() => {
+    try {
+      const recentId = localStorage.getItem(RECENT_SONG_KEY);
+      if (recentId) {
+        const found = KIDS_SONGS_DATA.find((s) => s.id === recentId);
+        if (found) return found;
+      }
+    } catch {}
+    return KIDS_SONGS_DATA[0];
+  });
+
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isKaraokeMode, setIsKaraokeMode] = useState<boolean>(true);
   const [isLooping, setIsLooping] = useState<boolean>(false);
+  const [isShuffle, setIsShuffle] = useState<boolean>(false);
   const [currentLineIndex, setCurrentLineIndex] = useState<number>(0);
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [durationSec, setDurationSec] = useState<number>(30);
   const [tappedBeatsCount, setTappedBeatsCount] = useState<number>(0);
-  const [favoritedSongIds, setFavoritedSongIds] = useState<Record<string, boolean>>({});
+  const [isFactExpanded, setIsFactExpanded] = useState<boolean>(false);
+
+  const [favoritedSongIds, setFavoritedSongIds] = useState<Record<string, boolean>>(() => {
+    try {
+      const saved = localStorage.getItem(FAVORITES_STORAGE_KEY);
+      if (saved) return JSON.parse(saved);
+    } catch {}
+    return {};
+  });
 
   const audioElementRef = useRef<HTMLAudioElement | null>(null);
   const audioCtxRef = useRef<AudioContext | null>(null);
@@ -75,17 +111,26 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const currentSongRef = useRef<KidsSong | null>(null);
   const melodyTimeoutIdsRef = useRef<number[]>([]);
   const songStartTimeRef = useRef<number>(Date.now());
-  const progressIntervalRef = useRef<number | null>(null);
+  const activeLineRef = useRef<HTMLDivElement | null>(null);
+  const karaokeListRef = useRef<HTMLDivElement | null>(null);
+  const playerStageRef = useRef<HTMLDivElement | null>(null);
+
+  // Sync favorites count in category chips
+  const favCount = useMemo(() => {
+    return Object.values(favoritedSongIds).filter(Boolean).length;
+  }, [favoritedSongIds]);
 
   // Filtered song list
   const filteredSongs = useMemo(() => {
     return KIDS_SONGS_DATA.filter((s) => {
-      const matchCat =
-        selectedCategory === 'all'
-          ? true
-          : selectedCategory === 'vi_all'
-          ? s.category.startsWith('vi_')
-          : s.category === selectedCategory;
+      let matchCat = true;
+      if (selectedCategory === 'vi_all') {
+        matchCat = s.category.startsWith('vi_');
+      } else if (selectedCategory === 'favorites') {
+        matchCat = Boolean(favoritedSongIds[s.id]);
+      } else if (selectedCategory !== 'all') {
+        matchCat = s.category === selectedCategory;
+      }
 
       const q = searchQuery.trim().toLowerCase();
       const matchSearch =
@@ -97,8 +142,9 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
 
       return matchCat && matchSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, favoritedSongIds]);
 
+  // Audio Context initialization for acoustic music box
   const getAudioContext = (): AudioContext | null => {
     if (typeof window === 'undefined') return null;
     const AudioCtx =
@@ -114,16 +160,13 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     return audioCtxRef.current;
   };
 
-  // Rich Polyphonic Music Box & Marimba Tone Generator (Natural acoustic bell timbre)
-  const playAcousticMusicBoxNote = (freq: number, durationSec: number) => {
+  const playAcousticMusicBoxNote = (freq: number, durSec: number) => {
     try {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const now = ctx.currentTime;
       const masterVol = Math.max(0.05, Math.min(0.8, settings.volume * 0.45));
 
-      // 1. Fundamental warm sine tone (soft wooden body)
       const osc1 = ctx.createOscillator();
       const gain1 = ctx.createGain();
       osc1.type = 'sine';
@@ -131,14 +174,13 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
 
       gain1.gain.setValueAtTime(0, now);
       gain1.gain.linearRampToValueAtTime(masterVol * 0.7, now + 0.015);
-      gain1.gain.exponentialRampToValueAtTime(0.0001, now + durationSec);
+      gain1.gain.exponentialRampToValueAtTime(0.0001, now + durSec);
 
       osc1.connect(gain1);
       gain1.connect(ctx.destination);
       osc1.start(now);
-      osc1.stop(now + durationSec + 0.05);
+      osc1.stop(now + durSec + 0.05);
 
-      // 2. Bell harmonic overtone (sparkly music box chime)
       const osc2 = ctx.createOscillator();
       const gain2 = ctx.createGain();
       osc2.type = 'triangle';
@@ -146,40 +188,19 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
 
       gain2.gain.setValueAtTime(0, now);
       gain2.gain.linearRampToValueAtTime(masterVol * 0.35, now + 0.01);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + Math.min(durationSec, 0.4));
+      gain2.gain.exponentialRampToValueAtTime(0.0001, now + Math.min(durSec, 0.4));
 
       osc2.connect(gain2);
       gain2.connect(ctx.destination);
       osc2.start(now);
-      osc2.stop(now + durationSec + 0.05);
-
-      // 3. Gentle harmonic fifth (provides rich acoustic fullness)
-      if (durationSec > 0.4) {
-        const osc3 = ctx.createOscillator();
-        const gain3 = ctx.createGain();
-        osc3.type = 'sine';
-        osc3.frequency.setValueAtTime(freq * 1.5, now);
-
-        gain3.gain.setValueAtTime(0, now);
-        gain3.gain.linearRampToValueAtTime(masterVol * 0.2, now + 0.02);
-        gain3.gain.exponentialRampToValueAtTime(0.0001, now + durationSec * 0.7);
-
-        osc3.connect(gain3);
-        gain3.connect(ctx.destination);
-        osc3.start(now);
-        osc3.stop(now + durationSec + 0.05);
-      }
-    } catch {
-      // AudioContext unavailable
-    }
+      osc2.stop(now + durSec + 0.05);
+    } catch {}
   };
 
-  // Percussive baby sound effects for interactive beat tapping
   const playPercussionSound = (type: 'drum' | 'bell' | 'wood') => {
     try {
       const ctx = getAudioContext();
       if (!ctx) return;
-
       const now = ctx.currentTime;
       setTappedBeatsCount((c) => c + 1);
       fireStarExplosion(0.5, 0.5);
@@ -207,7 +228,6 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         osc.start(now);
         osc.stop(now + 0.38);
       } else {
-        // Wood block
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'triangle';
@@ -220,28 +240,20 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         osc.start(now);
         osc.stop(now + 0.1);
       }
-    } catch {
-      // ignore
-    }
+    } catch {}
   };
 
-  // Stop all running audio, timers, and synth timeouts
+  // Stop all running audio and reset state
   const stopPlayback = () => {
     isPlayingRef.current = false;
     setIsPlaying(false);
 
     if (audioElementRef.current) {
       audioElementRef.current.pause();
-      audioElementRef.current.currentTime = 0;
     }
 
     melodyTimeoutIdsRef.current.forEach((id) => clearTimeout(id));
     melodyTimeoutIdsRef.current = [];
-
-    if (progressIntervalRef.current) {
-      window.clearInterval(progressIntervalRef.current);
-      progressIntervalRef.current = null;
-    }
 
     stopAllAudio();
 
@@ -256,22 +268,42 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     }
   };
 
-  // Play next or previous song in current filtered list
+  // Immediate cleanup on unmount
+  useEffect(() => {
+    return () => {
+      stopPlayback();
+    };
+  }, []);
+
+  // Sync active line auto-scroll in karaoke viewport
+  useEffect(() => {
+    if (activeLineRef.current && isPlaying) {
+      activeLineRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [currentLineIndex, isPlaying]);
+
   const handleNextSong = () => {
-    if (!activeSong) return;
+    if (!activeSong || filteredSongs.length === 0) return;
+    if (isShuffle) {
+      const randomIdx = Math.floor(Math.random() * filteredSongs.length);
+      startSongPlayback(filteredSongs[randomIdx]);
+      return;
+    }
     const currentIndex = filteredSongs.findIndex((s) => s.id === activeSong.id);
     const nextIdx = (currentIndex + 1) % filteredSongs.length;
     startSongPlayback(filteredSongs[nextIdx]);
   };
 
   const handlePrevSong = () => {
-    if (!activeSong) return;
+    if (!activeSong || filteredSongs.length === 0) return;
     const currentIndex = filteredSongs.findIndex((s) => s.id === activeSong.id);
     const prevIdx = (currentIndex - 1 + filteredSongs.length) % filteredSongs.length;
     startSongPlayback(filteredSongs[prevIdx]);
   };
 
-  // Start Song Playback: Real Audio Track or Rich Polyphonic Acoustic Music Box
   const startSongPlayback = (song: KidsSong) => {
     stopPlayback();
     setActiveSong(song);
@@ -282,8 +314,12 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     setCurrentLineIndex(0);
     setCurrentTimeSec(0);
 
-    // Option A: If real audio file track is available, play via HTML5 Audio
-    if (song.audioUrl) {
+    try {
+      localStorage.setItem(RECENT_SONG_KEY, song.id);
+    } catch {}
+
+    // Option A: Real vocal audio track
+    if (song.audioUrl && song.isVocalTrack !== false) {
       if (!audioElementRef.current) {
         audioElementRef.current = new Audio();
       }
@@ -302,8 +338,18 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         if (!isPlayingRef.current) return;
         const cur = audio.currentTime;
         setCurrentTimeSec(Math.round(cur));
-        const dur = audio.duration || 30;
-        if (dur > 0 && song.lyrics.length > 0) {
+
+        // Synchronize karaoke timed lyrics
+        if (song.timedLyrics && song.timedLyrics.length > 0) {
+          const matchIdx = song.timedLyrics.findIndex((line, i) => {
+            const nextLineStart = song.timedLyrics![i + 1]?.startTimeSec ?? Infinity;
+            return cur >= line.startTimeSec && cur < nextLineStart;
+          });
+          if (matchIdx !== -1) {
+            setCurrentLineIndex(matchIdx);
+          }
+        } else if (song.lyrics.length > 0) {
+          const dur = audio.duration || 30;
           const ratio = Math.min(1, Math.max(0, cur / dur));
           const lineIdx = Math.min(
             song.lyrics.length - 1,
@@ -323,17 +369,16 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       };
 
       audio.play().catch((err) => {
-        console.warn('Direct audio play failed, falling back to acoustic melody synth:', err);
+        console.warn('Real audio play error, switching to acoustic melody:', err);
         playSynthesizedAcousticMelody(song);
       });
       return;
     }
 
-    // Option B: Rich Polyphonic Acoustic Music Box & Marimba Synthesizer
+    // Option B: Acoustic melody box synth for instrumental songs
     playSynthesizedAcousticMelody(song);
   };
 
-  // Polyphonic acoustic music box arrangement for instrumental nursery songs
   const playSynthesizedAcousticMelody = (song: KidsSong) => {
     const notes = song.melodyNotes || [
       { note: 'C4', dur: 0.5 },
@@ -351,19 +396,17 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       const tId = window.setTimeout(() => {
         if (!isPlayingRef.current) return;
         playAcousticMusicBoxNote(freq, item.dur);
-
-        // Update time and karaoke line highlight
         setCurrentTimeSec(Math.round(delayMs / 1000));
         if (song.lyrics.length > 0) {
           const lineIdx = Math.floor((idx / notes.length) * song.lyrics.length);
           setCurrentLineIndex(Math.min(lineIdx, song.lyrics.length - 1));
         }
       }, delayMs);
+
       melodyTimeoutIdsRef.current.push(tId);
-      delayMs += Math.round(item.dur * 1000);
+      delayMs += item.dur * 1000;
     });
 
-    // End of song cycle
     const endId = window.setTimeout(() => {
       if (!isPlayingRef.current) return;
       if (isLooping) {
@@ -371,136 +414,111 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       } else {
         handleNextSong();
       }
-    }, delayMs + 800);
+    }, delayMs + 600);
     melodyTimeoutIdsRef.current.push(endId);
   };
 
-  useEffect(() => {
-    return () => {
-      stopPlayback();
-    };
-  }, []);
+  const handleSeek = (newTime: number) => {
+    setCurrentTimeSec(newTime);
+    if (audioElementRef.current && activeSong?.audioUrl && activeSong.isVocalTrack !== false) {
+      audioElementRef.current.currentTime = newTime;
+    }
+  };
 
-  const toggleFavorite = (songId: string, e?: React.MouseEvent) => {
-    e?.stopPropagation();
-    setFavoritedSongIds((prev) => ({ ...prev, [songId]: !prev[songId] }));
-    fireStarExplosion(0.8, 0.3);
+  const toggleFavorite = (songId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    setFavoritedSongIds((prev) => {
+      const next = { ...prev, [songId]: !prev[songId] };
+      try {
+        localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(next));
+      } catch {}
+      return next;
+    });
+  };
+
+  const scrollToPlayer = () => {
+    playerStageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <div className="flex-1 min-h-0 flex flex-col gap-3 sm:gap-4 pb-4">
-      {/* 1. Header Hero Card with Music Theme */}
-      <div className="rounded-[28px] bg-gradient-to-r from-rose-500 via-pink-600 to-indigo-600 p-4 sm:p-6 text-white shadow-md border-2 border-pink-300/80 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 sm:gap-4">
-        <div className="space-y-1 sm:space-y-1.5 flex-1 min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="text-2xl sm:text-3xl select-none">🎵</span>
-            <h1 className="text-lg sm:text-2xl font-black tracking-tight font-display">
-              Góc Âm Nhạc & Bài Hát Cho Bé (0–5 Tuổi)
-            </h1>
-            <span className="bg-amber-400 text-amber-950 text-xs font-black px-2.5 py-0.5 rounded-full shadow-2xs">
-              {KIDS_SONGS_DATA.length} Bài Hát Chọn Lọc
-            </span>
+    <div className="space-y-4 pb-24 max-w-7xl mx-auto">
+      {/* 1. COMPACT COMMERCIAL BANNER */}
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-rose-500 via-pink-500 to-amber-500 text-white p-4 sm:p-5 shadow-sm">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 relative z-10">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="p-1.5 rounded-xl bg-white/20 backdrop-blur-md">
+                <Music className="w-5 h-5 text-white" />
+              </span>
+              <h1 className="text-xl sm:text-2xl font-black tracking-tight drop-shadow-xs">
+                Giai Điệu Tuổi Thơ
+              </h1>
+            </div>
+            <p className="text-xs sm:text-sm text-white/90 font-medium mt-1">
+              44 bài hát rộn ràng (26 bài Việt · 18 bài Anh) cho bé nghe & hát karaoke
+            </p>
           </div>
-          <p className="text-xs sm:text-sm text-pink-100 font-medium">
-            Kho bài hát thiếu nhi & Đồng dao tiếng Anh với âm thanh thu âm, giai điệu thực tế vui tươi, giàu cảm xúc giúp bé phát triển thính giác và hát theo lời ca.
-          </p>
-          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1 text-[11px] font-bold">
-            <span className="bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-xl flex items-center gap-1 text-white">
-              <Headphones className="w-3.5 h-3.5" /> Âm thanh bài hát & hòa tấu thực tế
-            </span>
-            <span className="bg-white/20 backdrop-blur-xs px-2.5 py-1 rounded-xl flex items-center gap-1 text-white">
-              <Mic className="w-3.5 h-3.5" /> Chế độ Karaoke hát theo lời ca
-            </span>
-            <span className="bg-amber-300 text-slate-900 px-2.5 py-1 rounded-xl flex items-center gap-1 font-black shadow-2xs">
-              ⭐ {tappedBeatsCount > 0 ? `Bé đã gõ ${tappedBeatsCount} nhịp sao!` : 'Bé gõ nhịp cùng bài hát nhé!'}
-            </span>
+
+          <div className="flex items-center gap-2 self-stretch sm:self-auto">
+            {activeSong && (
+              <button
+                type="button"
+                onClick={() => {
+                  scrollToPlayer();
+                  if (!isPlaying) startSongPlayback(activeSong);
+                }}
+                className="flex-1 sm:flex-none min-h-[44px] px-4 py-2 rounded-2xl bg-white text-rose-600 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-1.5 shadow-sm hover:bg-rose-50 active:scale-95 transition cursor-pointer"
+              >
+                {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current" />}
+                <span>{isPlaying ? 'Đang phát' : 'Tiếp tục nghe'}</span>
+              </button>
+            )}
           </div>
         </div>
-
-        {/* Quick Active Song Player Bar */}
-        {activeSong && (
-          <div className="shrink-0 bg-white/20 backdrop-blur-md p-3 rounded-2xl border border-white/30 flex items-center gap-3 w-full lg:w-auto">
-            <div
-              className={`w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl shadow-xs ${
-                isPlaying ? 'animate-bounce-gentle' : ''
-              }`}
-            >
-              {activeSong.emoji}
-            </div>
-            <div className="min-w-0 flex-1">
-              <div className="text-xs font-extrabold truncate flex items-center gap-1">
-                <span>{activeSong.title}</span>
-                {activeSong.audioUrl && (
-                  <span className="px-1.5 py-0.5 bg-emerald-400 text-emerald-950 text-[9px] rounded-md font-black flex items-center gap-0.5">
-                    🎤 Ca sĩ hát
-                  </span>
-                )}
-              </div>
-              <div className="text-[10px] text-pink-100 truncate">{activeSong.composer}</div>
-            </div>
-            <button
-              type="button"
-              onClick={() => {
-                if (isPlaying) {
-                  stopPlayback();
-                } else {
-                  startSongPlayback(activeSong);
-                }
-              }}
-              className="min-h-[44px] min-w-[44px] rounded-xl bg-white text-rose-600 hover:bg-rose-50 active:scale-95 flex items-center justify-center shadow-sm cursor-pointer transition"
-              aria-label={isPlaying ? 'Dừng phát nhạc' : 'Phát bài hát'}
-            >
-              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 fill-current ml-0.5" />}
-            </button>
-          </div>
-        )}
       </div>
 
-      {/* 2. Category Filter & Search Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-2.5 bg-white/95 px-3 sm:px-4 py-2.5 rounded-2xl border border-slate-200/80 shadow-2xs">
-        <div className="flex flex-wrap items-center gap-1.5 min-w-0">
-          {[
-            { id: 'all', label: `Tất cả (${KIDS_SONGS_DATA.length})` },
-            { id: 'vi_all', label: `🇻🇳 Toàn bộ Nhạc Việt (${KIDS_SONGS_DATA.filter((s) => s.category.startsWith('vi_')).length})` },
-            { id: 'vi_3y', label: 'Lớp 3 tuổi (10 bài)' },
-            { id: 'vi_4y', label: 'Lớp 4 tuổi (8 bài)' },
-            { id: 'vi_5y', label: 'Lớp 5 tuổi (8 bài)' },
-            { id: 'en_rhymes', label: `🇬🇧 English Nursery Rhymes (${KIDS_SONGS_DATA.filter((s) => s.category === 'en_rhymes').length})` },
-          ].map((cat) => {
-            const active = selectedCategory === cat.id;
+      {/* 2. HORIZONTAL SCROLLING CHIPS & SEARCH */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar scroll-smooth pb-1 -mx-2 px-2 sm:mx-0 sm:px-0">
+          {CATEGORY_CHIPS.map((chip) => {
+            const isSelected = selectedCategory === chip.id;
+            const Icon = chip.icon;
+            const label = chip.id === 'favorites' ? `Yêu thích (${favCount})` : chip.label;
+
             return (
               <button
-                key={cat.id}
+                key={chip.id}
                 type="button"
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`min-h-[32px] sm:min-h-[34px] px-3 py-1 rounded-xl text-xs font-extrabold transition cursor-pointer whitespace-nowrap ${
-                  active
-                    ? 'bg-rose-500 text-white shadow-xs'
-                    : 'bg-slate-100 text-slate-700 hover:bg-rose-50'
+                onClick={() => setSelectedCategory(chip.id)}
+                className={`min-h-[44px] px-3.5 py-2 rounded-2xl text-xs font-bold whitespace-nowrap shrink-0 flex items-center gap-1.5 transition cursor-pointer select-none active:scale-95 ${
+                  isSelected
+                    ? 'bg-rose-500 text-white shadow-sm font-extrabold'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
                 }`}
               >
-                {cat.label}
+                <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-rose-500'}`} />
+                <span>{label}</span>
               </button>
             );
           })}
         </div>
 
         {/* Search input */}
-        <div className="relative w-full sm:w-60">
+        <div className="relative min-w-[220px]">
+          <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Tìm bài hát, tác giả..."
-            aria-label="Tìm kiếm bài hát"
-            className="w-full min-h-[34px] pl-8 pr-3 rounded-xl border border-slate-200 text-xs font-medium text-slate-800 focus:outline-none focus:ring-2 focus:ring-rose-400 bg-slate-50"
+            placeholder="Tìm tên bài, tác giả..."
+            className="w-full min-h-[44px] pl-9 pr-8 text-xs font-medium rounded-2xl bg-white border border-slate-200 focus:outline-none focus:border-rose-400 focus:ring-2 focus:ring-rose-200 transition"
           />
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
           {searchQuery && (
             <button
               type="button"
               onClick={() => setSearchQuery('')}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+              className="min-h-[44px] min-w-[36px] flex items-center justify-center absolute right-0 top-0 text-slate-400 hover:text-slate-600 cursor-pointer"
+              aria-label="Xóa tìm kiếm"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -508,131 +526,106 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         </div>
       </div>
 
-      {/* 3. Main Split View: Active Interactive Player & Song Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        {/* Left Column: Interactive Karaoke & Tap-Along Stage */}
+      {/* 3. MAIN SPLIT VIEW: STAGE & SONGS LIST */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5" ref={playerStageRef}>
+        {/* LEFT COLUMN: ACTIVE INTERACTIVE PLAYER & KARAOKE STAGE */}
         {activeSong && (
           <div className="lg:col-span-5 flex flex-col gap-3">
-            <div className="rounded-3xl bg-white border-2 border-rose-200 p-4 sm:p-5 shadow-sm space-y-4">
+            <div className="rounded-3xl bg-white border border-slate-200 p-4 sm:p-5 shadow-sm space-y-4">
               {/* Header Badges */}
               <div className="flex items-center justify-between gap-2">
-                <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-rose-100 text-rose-800 flex items-center gap-1">
-                  <span>{activeSong.categoryLabelVi}</span>
+                <span className="text-[11px] font-extrabold px-3 py-1 rounded-full bg-slate-100 text-slate-700">
+                  {activeSong.categoryLabelVi}
                 </span>
+
                 <div className="flex items-center gap-1.5">
-                  {activeSong.audioUrl && (
-                    <span className="text-[10px] font-black px-2 py-0.5 rounded-lg bg-emerald-100 text-emerald-800 flex items-center gap-1 border border-emerald-300">
-                      <Headphones className="w-3 h-3" /> 🎤 Ca Sĩ Hát
+                  {activeSong.isVocalTrack !== false ? (
+                    <span className="text-[10px] font-black px-2.5 py-1 rounded-xl bg-emerald-100 text-emerald-800 border border-emerald-300 flex items-center gap-1">
+                      <Headphones className="w-3 h-3" /> Ca sĩ hát
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-black px-2.5 py-1 rounded-xl bg-sky-100 text-sky-800 border border-sky-300 flex items-center gap-1">
+                      <Music className="w-3 h-3" /> Nghe giai điệu
                     </span>
                   )}
-                  <span className="text-[11px] font-black px-2.5 py-0.5 rounded-lg bg-amber-100 text-amber-900">
+                  <span className="text-[11px] font-black px-2.5 py-1 rounded-xl bg-amber-100 text-amber-900">
                     {activeSong.ageBadge}
                   </span>
                 </div>
               </div>
 
-              {/* Album Visual Canvas */}
-              <div
-                className={`w-full h-40 sm:h-48 rounded-2xl bg-gradient-to-br ${activeSong.bgGradient} flex flex-col items-center justify-center text-white relative overflow-hidden shadow-inner p-4 text-center select-none`}
-              >
-                <div
-                  className={`text-6xl sm:text-7xl mb-2 transition-transform duration-300 ${
-                    isPlaying ? 'scale-110 drop-shadow-md' : ''
-                  }`}
-                >
-                  {activeSong.emoji}
-                </div>
-                <h2 className="text-base sm:text-lg font-black tracking-tight drop-shadow-xs">
-                  {activeSong.title}
-                </h2>
-                {activeSong.subtitleEn && (
-                  <p className="text-xs text-white/80 font-bold">{activeSong.subtitleEn}</p>
-                )}
-                <div className="text-[11px] text-white/90 font-medium mt-1">
-                  {activeSong.composer}
-                </div>
-
-                {/* Spinning vinyl record badge when playing */}
-                {isPlaying && (
-                  <div className="absolute top-2 right-2 text-white/80 animate-spin">
-                    <Disc3 className="w-6 h-6" />
-                  </div>
-                )}
-
-                {/* Interactive vinyl tap trigger on album cover */}
-                <button
-                  type="button"
-                  onClick={() => playPercussionSound('bell')}
-                  className="absolute bottom-2 right-2 px-2.5 py-1 rounded-xl bg-white/20 hover:bg-white/30 backdrop-blur-md text-[10px] font-black text-white flex items-center gap-1 cursor-pointer transition active:scale-95"
-                  title="Chạm vào đây để lắc chuông theo nhạc"
-                >
-                  <span>🔔 Lắc chuông</span>
-                </button>
-              </div>
-
-              {/* Player Progress Bar & Controls */}
-              <div className="space-y-1.5 px-1">
-                <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                  <div
-                    className="bg-gradient-to-r from-rose-500 to-pink-500 h-full rounded-full transition-all duration-300"
-                    style={{
-                      width: `${Math.min(
-                        100,
-                        Math.max(0, (currentTimeSec / Math.max(1, durationSec)) * 100)
-                      )}%`,
-                    }}
+              {/* Large 3D Chibi Artwork */}
+              <div className="flex flex-col items-center justify-center text-center space-y-2">
+                <div className="relative group w-44 h-44 sm:w-52 sm:h-52 rounded-3xl overflow-hidden shadow-md border-4 border-white bg-slate-100">
+                  <img
+                    src={activeSong.cover || `/assets/music/covers/music_cover_${activeSong.id}.webp`}
+                    alt={activeSong.title}
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover transition duration-300 group-hover:scale-105"
                   />
-                </div>
-                <div className="flex items-center justify-between text-[10px] font-bold text-slate-500">
-                  <span>{Math.floor(currentTimeSec / 60)}:{String(currentTimeSec % 60).padStart(2, '0')}</span>
-                  <span>{Math.floor(durationSec / 60)}:{String(durationSec % 60).padStart(2, '0')}</span>
-                </div>
-              </div>
-
-              {/* Karaoke Lyrics Screen with Real-Time Glowing Line */}
-              <div className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 max-h-48 overflow-y-auto space-y-2">
-                <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <Mic className="w-3.5 h-3.5 text-purple-600" />
-                    <span>Lời ca cho bé & bố mẹ cùng hát:</span>
-                  </span>
                   {isPlaying && (
-                    <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold">
-                      <Radio className="w-3.5 h-3.5 animate-pulse" /> Đang phát nhạc
-                    </span>
+                    <div className="absolute top-2 right-2 bg-slate-900/60 backdrop-blur-md text-white p-1.5 rounded-full animate-spin">
+                      <Disc3 className="w-5 h-5 text-rose-400" />
+                    </div>
                   )}
                 </div>
-                <div className="space-y-1.5 pt-1">
-                  {activeSong.lyrics.map((line, idx) => {
-                    const isCurrent = isPlaying && currentLineIndex === idx;
-                    return (
-                      <div
-                        key={idx}
-                        className={`text-xs sm:text-sm font-bold transition-all px-2.5 py-1.5 rounded-xl flex items-center gap-2 ${
-                          isCurrent
-                            ? 'bg-rose-500 text-white font-extrabold shadow-sm scale-[1.02]'
-                            : 'text-slate-700 bg-white/70'
-                        }`}
-                      >
-                        {isCurrent && <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300 animate-pulse shrink-0" />}
-                        <span className="leading-snug">{line}</span>
-                      </div>
-                    );
-                  })}
+
+                <div className="space-y-0.5">
+                  <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+                    {activeSong.title}
+                  </h2>
+                  {activeSong.subtitleEn && (
+                    <p className="text-xs text-slate-500 font-bold">{activeSong.subtitleEn}</p>
+                  )}
+                  <p className="text-[11px] text-slate-500 font-medium">{activeSong.composer}</p>
                 </div>
               </div>
 
-              {/* Educational fun fact */}
-              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-xs text-amber-950 leading-relaxed">
-                <strong>💡 Ý nghĩa bài hát:</strong> {activeSong.funFactVi}
+              {/* Scrubbable Progress Bar */}
+              <div className="space-y-1 px-1">
+                <div className="relative flex items-center">
+                  <input
+                    type="range"
+                    min={0}
+                    max={Math.max(1, durationSec)}
+                    value={currentTimeSec}
+                    onChange={(e) => handleSeek(Number(e.target.value))}
+                    className="w-full h-2 bg-slate-100 rounded-full appearance-none cursor-pointer accent-rose-500 focus:outline-none"
+                    aria-label="Tua bài hát"
+                  />
+                </div>
+                <div className="flex items-center justify-between text-[11px] font-bold text-slate-500">
+                  <span>
+                    {Math.floor(currentTimeSec / 60)}:
+                    {String(currentTimeSec % 60).padStart(2, '0')}
+                  </span>
+                  <span>
+                    {Math.floor(durationSec / 60)}:
+                    {String(durationSec % 60).padStart(2, '0')}
+                  </span>
+                </div>
               </div>
 
-              {/* Playback Transport Controls (Prev, Play/Pause, Next, Loop) */}
-              <div className="flex items-center justify-between gap-2 pt-1">
+              {/* Main Large Controls Row */}
+              <div className="flex items-center justify-center gap-2 sm:gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setIsShuffle((v) => !v)}
+                  className={`min-h-[44px] min-w-[44px] rounded-2xl flex items-center justify-center cursor-pointer transition active:scale-95 border ${
+                    isShuffle
+                      ? 'bg-amber-100 text-amber-700 border-amber-300 font-bold'
+                      : 'bg-white text-slate-400 border-slate-200 hover:text-slate-700'
+                  }`}
+                  title="Phát ngẫu nhiên"
+                  aria-label="Phát ngẫu nhiên"
+                >
+                  <Shuffle className="w-4 h-4" />
+                </button>
+
                 <button
                   type="button"
                   onClick={handlePrevSong}
-                  className="w-11 h-11 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95 shadow-2xs"
+                  className="min-h-[44px] min-w-[44px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95"
                   title="Bài trước đó"
                   aria-label="Bài trước đó"
                 >
@@ -648,7 +641,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                       startSongPlayback(activeSong);
                     }
                   }}
-                  className={`flex-1 min-h-[46px] rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition cursor-pointer shadow-sm active:scale-95 ${
+                  className={`min-h-[50px] px-6 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition cursor-pointer shadow-sm active:scale-95 ${
                     isPlaying
                       ? 'bg-slate-900 text-white hover:bg-slate-800'
                       : 'bg-rose-500 hover:bg-rose-600 text-white'
@@ -656,13 +649,13 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 >
                   {isPlaying ? (
                     <>
-                      <Pause className="w-5 h-5" />
+                      <Pause className="w-5 h-5 fill-current" />
                       <span>Tạm Dừng</span>
                     </>
                   ) : (
                     <>
                       <Play className="w-5 h-5 fill-current ml-0.5" />
-                      <span>{activeSong.audioUrl ? 'Nghe Ca Sĩ Hát' : 'Phát Giai Điệu Bé Hát'}</span>
+                      <span>{activeSong.isVocalTrack !== false ? 'Ca sĩ hát' : 'Nghe giai điệu'}</span>
                     </>
                   )}
                 </button>
@@ -670,7 +663,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 <button
                   type="button"
                   onClick={handleNextSong}
-                  className="w-11 h-11 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95 shadow-2xs"
+                  className="min-h-[44px] min-w-[44px] rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-95"
                   title="Bài tiếp theo"
                   aria-label="Bài tiếp theo"
                 >
@@ -680,22 +673,115 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 <button
                   type="button"
                   onClick={() => setIsLooping((v) => !v)}
-                  className={`w-11 h-11 rounded-2xl border flex items-center justify-center cursor-pointer transition active:scale-95 shadow-2xs ${
+                  className={`min-h-[44px] min-w-[44px] rounded-2xl border flex items-center justify-center cursor-pointer transition active:scale-95 ${
                     isLooping
                       ? 'bg-purple-100 border-purple-300 text-purple-700 font-bold'
                       : 'bg-white border-slate-200 text-slate-400 hover:text-slate-700'
                   }`}
-                  title={isLooping ? 'Đang bật lặp lại bài này' : 'Bật lặp lại bài này'}
+                  title={isLooping ? 'Đang bật lặp lại' : 'Lặp lại bài hát'}
                   aria-label="Lặp lại bài hát"
                 >
                   <Repeat className="w-4 h-4" />
                 </button>
               </div>
 
+              {/* Karaoke Stage with Glowing Active Line and Bilingual Subtitles */}
+              <div
+                ref={karaokeListRef}
+                className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 max-h-56 overflow-y-auto space-y-2 select-none"
+              >
+                <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center justify-between">
+                  <span className="flex items-center gap-1">
+                    <Mic className="w-3.5 h-3.5 text-purple-600" />
+                    <span>
+                      {activeSong.isVocalTrack !== false
+                        ? 'Lời ca hát cùng bé:'
+                        : 'Lời bài hát (chưa có lời chạy):'}
+                    </span>
+                  </span>
+                  {isPlaying && (
+                    <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold">
+                      <Radio className="w-3.5 h-3.5 animate-pulse" /> Đang phát
+                    </span>
+                  )}
+                </div>
+
+                {activeSong.isVocalTrack === false ? (
+                  <div className="py-2 space-y-2">
+                    <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 font-medium">
+                      🎵 Đang phát giai điệu hộp nhạc. Bé và bố mẹ hãy cùng hòa giọng đọc lời bên dưới nhé!
+                    </div>
+                    <div className="space-y-1 text-xs text-slate-700 font-semibold px-2">
+                      {activeSong.lyrics.map((l, i) => (
+                        <p key={i}>• {l}</p>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="space-y-2 pt-1">
+                    {(activeSong.timedLyrics && activeSong.timedLyrics.length > 0
+                      ? activeSong.timedLyrics
+                      : activeSong.lyrics.map((l, idx) => ({
+                          startTimeSec: idx * 4,
+                          text: l,
+                          translation: activeSong.englishTranslation?.[idx],
+                        }))
+                    ).map((line, idx) => {
+                      const isCurrent = isPlaying && currentLineIndex === idx;
+                      const isPast = isPlaying && currentLineIndex > idx;
+                      const showSubtitle =
+                        Boolean(line.translation) &&
+                        (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
+
+                      return (
+                        <div
+                          key={idx}
+                          ref={isCurrent ? activeLineRef : null}
+                          className={`transition-all duration-300 px-3 py-2 rounded-2xl flex flex-col gap-0.5 ${
+                            isCurrent
+                              ? 'bg-rose-500 text-white font-black shadow-sm scale-[1.02]'
+                              : isPast
+                              ? 'text-slate-400 bg-white/40 opacity-50'
+                              : 'text-slate-700 bg-white/80 opacity-85'
+                          }`}
+                        >
+                          <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
+                            {isCurrent && (
+                              <Star className="w-3.5 h-3.5 fill-amber-300 text-amber-300 animate-pulse shrink-0" />
+                            )}
+                            <span className="leading-snug">{line.text}</span>
+                          </div>
+
+                          {showSubtitle && (
+                            <div
+                              className={`text-[11px] font-medium pl-5 italic ${
+                                isCurrent ? 'text-rose-100' : 'text-slate-400'
+                              }`}
+                            >
+                              {line.translation}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+
+              {/* Short Educational Fun Fact (<= 15 words) */}
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-2.5 text-xs text-amber-950 flex items-start justify-between gap-2">
+                <div className="flex items-start gap-1.5 min-w-0">
+                  <Info className="w-3.5 h-3.5 text-amber-600 shrink-0 mt-0.5" />
+                  <p className="font-semibold leading-relaxed">
+                    <strong>Ý nghĩa:</strong> {activeSong.funFactVi}
+                  </p>
+                </div>
+              </div>
+
               {/* Interactive Rhythmic Beat Tap Pads (Trống, Lắc chuông, Mõ gỗ) */}
-              <div className="pt-2 border-t border-slate-100 space-y-2">
+              <div className="pt-1 border-t border-slate-100 space-y-2">
                 <span className="text-xs font-extrabold text-slate-700 block text-center">
-                  👏 Bé gõ nhịp nhạc cụ cùng bài hát:
+                  👏 Bé gõ nhịp nhạc cụ cùng bài hát ({tappedBeatsCount} nhịp):
                 </span>
                 <div className="grid grid-cols-3 gap-2">
                   <button
@@ -725,11 +811,11 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
           </div>
         )}
 
-        {/* Right Column: Song Grid */}
+        {/* RIGHT COLUMN: 44 SONGS LIST WITH 72PX 3D CHIBI COVERS */}
         <div className={`space-y-3 ${activeSong ? 'lg:col-span-7' : 'lg:col-span-12'}`}>
           <div className="flex items-center justify-between text-xs font-extrabold text-slate-600 px-1">
             <span>Danh sách bài hát ({filteredSongs.length})</span>
-            <span>Chạm bài để phát & xem lời</span>
+            <span>Chạm để phát & xem lời</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-h-[750px] overflow-y-auto pr-1">
@@ -737,6 +823,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
               const isSelected = activeSong?.id === song.id;
               const isCurPlaying = isSelected && isPlaying;
               const isFav = Boolean(favoritedSongIds[song.id]);
+              const coverImg = song.cover || `/assets/music/covers/music_cover_${song.id}.webp`;
 
               return (
                 <div
@@ -748,80 +835,85 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                       startSongPlayback(song);
                     }
                   }}
-                  className={`group rounded-2xl border-2 p-3 sm:p-3.5 flex flex-col justify-between gap-2.5 transition-all cursor-pointer hover:shadow-md select-none ${
+                  className={`group rounded-2xl border-2 p-3 flex items-start gap-3 transition-all cursor-pointer hover:shadow-md select-none ${
                     isSelected
-                      ? 'border-rose-500 bg-rose-50/50 shadow-sm'
+                      ? 'border-rose-500 bg-rose-50/60 shadow-sm'
                       : 'border-slate-200 bg-white hover:border-rose-300'
                   }`}
                 >
-                  {/* Top Row: Emoji, Title, Fav & Play Indicator */}
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <div
-                        className={`w-11 h-11 rounded-xl bg-gradient-to-br ${song.bgGradient} text-white flex items-center justify-center text-2xl shadow-xs shrink-0 group-hover:scale-105 transition`}
-                      >
-                        {song.emoji}
+                  {/* 72px 3D Chibi Cover */}
+                  <div className="w-[72px] h-[72px] rounded-2xl overflow-hidden bg-slate-100 border border-slate-200 shadow-2xs shrink-0 group-hover:scale-105 transition">
+                    <img
+                      src={coverImg}
+                      alt={song.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+
+                  {/* Song Information */}
+                  <div className="flex-1 min-w-0 flex flex-col justify-between self-stretch gap-1">
+                    <div>
+                      <div className="flex items-start justify-between gap-1">
+                        <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
+                          {song.title}
+                        </h3>
+                        <button
+                          type="button"
+                          onClick={(e) => toggleFavorite(song.id, e)}
+                          className={`min-h-[44px] min-w-[44px] -mt-2 -mr-2 flex items-center justify-center cursor-pointer transition ${
+                            isFav ? 'text-rose-500' : 'text-slate-300 hover:text-slate-500'
+                          }`}
+                          aria-label="Yêu thích bài hát"
+                        >
+                          <Heart className={`w-4 h-4 ${isFav ? 'fill-rose-500' : ''}`} />
+                        </button>
                       </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <h3 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate">
-                            {song.title}
-                          </h3>
-                          {song.audioUrl && (
-                            <span className="px-1.5 py-0.5 bg-emerald-100 text-emerald-800 text-[9px] rounded-md font-black border border-emerald-300 flex items-center gap-0.5">
-                              🎤 Ca sĩ hát
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-[11px] font-semibold text-slate-500 truncate">
-                          {song.composer}
-                        </p>
-                      </div>
+
+                      <p className="text-[11px] font-medium text-slate-500 truncate">
+                        {song.composer}
+                      </p>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={(e) => toggleFavorite(song.id, e)}
-                      className={`min-h-[32px] min-w-[32px] rounded-lg flex items-center justify-center cursor-pointer transition ${
-                        isFav ? 'text-rose-500' : 'text-slate-300 hover:text-slate-500'
-                      }`}
-                      aria-label="Yêu thích bài hát"
-                    >
-                      <Heart className={`w-4 h-4 ${isFav ? 'fill-rose-500' : ''}`} />
-                    </button>
-                  </div>
+                    {/* Single-line lyric quote */}
+                    <p className="text-[11px] text-slate-600 italic truncate">
+                      "{song.lyrics[0]}"
+                    </p>
 
-                  {/* Lyrics excerpt */}
-                  <div className="text-[11px] text-slate-600 line-clamp-2 italic bg-slate-50 p-2 rounded-xl border border-slate-100">
-                    "{song.lyrics[0]}"
-                  </div>
+                    {/* Age Badge and Clear Action Button */}
+                    <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">
+                        {song.ageBadge}
+                      </span>
 
-                  {/* Bottom Tags & Play Button */}
-                  <div className="flex items-center justify-between gap-2 pt-1 border-t border-slate-100">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 truncate max-w-[140px]">
-                      {song.ageBadge}
-                    </span>
-
-                    <button
-                      type="button"
-                      className={`min-h-[32px] px-3 py-1 rounded-xl font-extrabold text-xs flex items-center gap-1.5 transition ${
-                        isCurPlaying
-                          ? 'bg-rose-500 text-white'
-                          : 'bg-slate-100 group-hover:bg-rose-100 text-slate-700 group-hover:text-rose-700'
-                      }`}
-                    >
-                      {isCurPlaying ? (
-                        <>
-                          <Pause className="w-3.5 h-3.5" />
-                          <span>Đang phát</span>
-                        </>
-                      ) : (
-                        <>
-                          <Play className="w-3.5 h-3.5 fill-current" />
-                          <span>{song.audioUrl ? 'Ca sĩ hát' : 'Bé hát'}</span>
-                        </>
-                      )}
-                    </button>
+                      <button
+                        type="button"
+                        className={`min-h-[32px] px-2.5 py-1 rounded-xl font-black text-[11px] flex items-center gap-1 transition ${
+                          isCurPlaying
+                            ? 'bg-rose-500 text-white'
+                            : song.isVocalTrack !== false
+                            ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200 border border-emerald-300'
+                            : 'bg-sky-100 text-sky-800 hover:bg-sky-200 border border-sky-300'
+                        }`}
+                      >
+                        {isCurPlaying ? (
+                          <>
+                            <Pause className="w-3 h-3 fill-current" />
+                            <span>Đang phát</span>
+                          </>
+                        ) : song.isVocalTrack !== false ? (
+                          <>
+                            <Play className="w-3 h-3 fill-current" />
+                            <span>Ca sĩ hát</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3 h-3 fill-current" />
+                            <span>Nghe giai điệu</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -829,6 +921,73 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
           </div>
         </div>
       </div>
+
+      {/* 4. STICKY MINI-PLAYER AT BOTTOM (Always accessible when scrolling) */}
+      {activeSong && (
+        <div className="fixed bottom-4 left-3 right-3 sm:left-auto sm:right-6 sm:w-96 z-40 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-slate-200 p-2.5 flex items-center justify-between gap-3 select-none">
+          {/* Top hairline progress bar */}
+          <div className="absolute top-0 left-3 right-3 h-1 bg-slate-100 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-rose-500 rounded-full transition-all duration-300"
+              style={{
+                width: `${Math.min(100, Math.max(0, (currentTimeSec / Math.max(1, durationSec)) * 100))}%`,
+              }}
+            />
+          </div>
+
+          <div
+            onClick={scrollToPlayer}
+            className="flex items-center gap-2.5 min-w-0 cursor-pointer pt-1"
+          >
+            <img
+              src={activeSong.cover || `/assets/music/covers/music_cover_${activeSong.id}.webp`}
+              alt={activeSong.title}
+              className="w-10 h-10 rounded-xl object-cover shrink-0 shadow-2xs border border-slate-200"
+            />
+            <div className="min-w-0">
+              <h4 className="text-xs font-black text-slate-900 truncate">{activeSong.title}</h4>
+              <p className="text-[10px] font-semibold text-slate-500 truncate">
+                {activeSong.isVocalTrack !== false ? '🎤 Ca sĩ hát' : '🎵 Nghe giai điệu'}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1 pt-1 shrink-0">
+            <button
+              type="button"
+              onClick={handlePrevSong}
+              className="min-h-[44px] min-w-[36px] flex items-center justify-center text-slate-600 hover:text-slate-900 cursor-pointer"
+              aria-label="Bài trước đó"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                if (isPlaying) {
+                  stopPlayback();
+                } else {
+                  startSongPlayback(activeSong);
+                }
+              }}
+              className="min-h-[44px] min-w-[44px] rounded-xl bg-rose-500 hover:bg-rose-600 text-white flex items-center justify-center cursor-pointer shadow-sm active:scale-95"
+              aria-label={isPlaying ? 'Tạm dừng' : 'Phát tiếp'}
+            >
+              {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleNextSong}
+              className="min-h-[44px] min-w-[36px] flex items-center justify-center text-slate-600 hover:text-slate-900 cursor-pointer"
+              aria-label="Bài tiếp theo"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

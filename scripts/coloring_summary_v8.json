@@ -1,0 +1,222 @@
+[
+  {
+    "stt": 1,
+    "name": "Rùa biển",
+    "file": "coloring_turtle.png",
+    "regionCount": 18,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 2,
+    "name": "Cún con",
+    "file": "coloring_dog.png",
+    "regionCount": 12,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 3,
+    "name": "Mèo con",
+    "file": "coloring_cat.png",
+    "regionCount": 20,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 4,
+    "name": "Thỏ con",
+    "file": "coloring_rabbit.png",
+    "regionCount": 21,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 5,
+    "name": "Xe ô tô",
+    "file": "coloring_car.png",
+    "regionCount": 15,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 6,
+    "name": "Tàu hỏa",
+    "file": "coloring_train.png",
+    "regionCount": 23,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 7,
+    "name": "Tên lửa",
+    "file": "coloring_rocket.png",
+    "regionCount": 10,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 8,
+    "name": "Cầu vồng",
+    "file": "coloring_rainbow.png",
+    "regionCount": 13,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 9,
+    "name": "Bánh kem",
+    "file": "coloring_cake.png",
+    "regionCount": 7,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 10,
+    "name": "Cá vàng",
+    "file": "coloring_goldfish.png",
+    "regionCount": 5,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 11,
+    "name": "Voi con",
+    "file": "coloring_elephant.png",
+    "regionCount": 17,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 12,
+    "name": "Sư tử",
+    "file": "coloring_lion.png",
+    "regionCount": 19,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 13,
+    "name": "Khủng long",
+    "file": "coloring_dino.png",
+    "regionCount": 20,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 14,
+    "name": "Cá heo",
+    "file": "coloring_dolphin.png",
+    "regionCount": 10,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 15,
+    "name": "Vịt con",
+    "file": "coloring_duck.png",
+    "regionCount": 15,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 16,
+    "name": "Gấu trúc",
+    "file": "coloring_panda.png",
+    "regionCount": 21,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 17,
+    "name": "Lâu đài",
+    "file": "coloring_castle.png",
+    "regionCount": 10,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 18,
+    "name": "Thuyền buồm",
+    "file": "coloring_boat.png",
+    "regionCount": 25,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 19,
+    "name": "Kem ốc quế",
+    "file": "coloring_icecream.png",
+    "regionCount": 18,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  },
+  {
+    "stt": 20,
+    "name": "Quả táo",
+    "file": "coloring_apple.png",
+    "regionCount": 18,
+    "maxBlackRadius": 0,
+    "measuredMaxBlackRadiusPx": 5,
+    "overlappingPairs": 0,
+    "failed": false,
+    "status": "ĐẠT"
+  }
+]
