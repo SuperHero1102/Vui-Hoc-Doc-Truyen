@@ -2,7 +2,7 @@ import React from 'react';
 import type { DailyCommunicationSituation } from '../data/dailyCommunicationData';
 
 interface DailyScenicArtworkProps {
-  scenicType: DailyCommunicationSituation['scenicType'];
+  scenicType?: string;
   className?: string;
   isCelebrating?: boolean;
 }

@@ -397,12 +397,22 @@ function playAudioUrl(
 
 /**
  * Plays an array of language-separated segments (`SpeechSegment[]`) or a text string
- * so Vietnamese is spoken by a Northern Vietnamese female voice and English by a native English voice.
  */
+export type CharacterVoiceRole =
+  | 'child'
+  | 'friend'
+  | 'teacher'
+  | 'mom'
+  | 'dad'
+  | 'grandpa'
+  | 'grandma'
+  | 'guest';
+
 export async function speakSegments(
   rawSegments: SpeechSegment[],
   settings: ParentSettings,
-  onEnd?: () => void
+  onEnd?: () => void,
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<{ usedServerTts: boolean; fromCache: boolean }> {
   stopAllAudio();
   const currentGen = playbackGeneration;
@@ -414,9 +424,9 @@ export async function speakSegments(
     }))
     .filter((s) => s.text.length > 0);
 
-  // Prefetch all segments in parallel for gapless playback
+  // Prefetch all segments in parallel for gapless playback with voice style
   const fetched = await Promise.all(
-    segments.map((seg) => fetchOrGetCachedSegmentUrl(seg, settings))
+    segments.map((seg) => fetchOrGetCachedSegmentUrl(seg, settings, voiceStyle))
   );
 
   let usedServerTts = false;
@@ -435,14 +445,14 @@ export async function speakSegments(
         settings.volume,
         settings.voiceSpeed,
         currentGen,
-        undefined,
+        voiceStyle,
         settings
       );
       if (!ok && currentGen === playbackGeneration) {
-        await speakSegmentWithBrowserFallback(seg, settings);
+        await speakSegmentWithBrowserFallback(seg, settings, voiceStyle);
       }
     } else {
-      await speakSegmentWithBrowserFallback(seg, settings);
+      await speakSegmentWithBrowserFallback(seg, settings, voiceStyle);
     }
   }
 
@@ -455,14 +465,41 @@ export async function speakSegments(
 export async function speakTeacherVoice(
   textOrSegments: string | SpeechSegment[],
   settings: ParentSettings,
-  onEnd?: () => void
+  onEnd?: () => void,
+  voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<{ usedGemini: boolean; fromCache: boolean }> {
   const segments =
     typeof textOrSegments === 'string'
       ? parseTextToSpeechSegments(textOrSegments)
       : textOrSegments;
-  const res = await speakSegments(segments, settings, onEnd);
+  const res = await speakSegments(segments, settings, onEnd, voiceStyle);
   return { usedGemini: res.usedServerTts, fromCache: res.fromCache };
+}
+
+/**
+ * Plays dialogue specifically tailored to character roles so that
+ * child lines (Bé Bông, Bạn Mi) are played in a bright child/toddler voice,
+ * teachers and mothers in gentle voices, fathers in warm deep voices,
+ * and grandparents in warm elder voices.
+ */
+export async function speakCharacterVoice(
+  textOrSegments: string | SpeechSegment[],
+  role: CharacterVoiceRole,
+  settings: ParentSettings,
+  onEnd?: () => void
+): Promise<{ usedGemini: boolean; fromCache: boolean }> {
+  let style: 'child' | 'gentle' | 'hero' | 'elder' = 'gentle';
+  if (role === 'child' || role === 'friend') {
+    style = 'child';
+  } else if (role === 'dad' || role === 'guest') {
+    style = 'hero';
+  } else if (role === 'grandpa' || role === 'grandma') {
+    style = 'elder';
+  } else {
+    style = 'gentle';
+  }
+
+  return speakTeacherVoice(textOrSegments, settings, onEnd, style);
 }
 
 let backgroundKeepAliveAudio: HTMLAudioElement | null = null;
