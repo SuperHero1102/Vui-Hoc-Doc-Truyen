@@ -67,6 +67,7 @@ import { ProfileManagerModal } from './components/ProfileManagerModal';
 import { StoryReaderModal } from './components/StoryReaderModal';
 import { ActivityHistoryModal } from './components/ActivityHistoryModal';
 import { KidsMusicPlayer } from './components/KidsMusicPlayer';
+import { DailyCommunicationStage } from './components/DailyCommunicationStage';
 import { startTrackingActivity } from './utils/activityTracker';
 
 const SETTINGS_STORAGE_KEY = 'bevuihoc_parent_settings_v3';
@@ -146,15 +147,16 @@ const INITIAL_PROFILES: ChildProfile[] = [
 ];
 
 type AppDockTab = 'arcade' | 'stories' | 'worlds' | 'today' | 'music';
-type CategoryFilterId = 'all' | 'nature' | 'food_body' | 'thinking' | 'life';
+type CategoryFilterId = 'all' | 'communication' | 'nature' | 'food_body' | 'thinking' | 'life';
 type ArcadeFilterId = 'all' | BrainCategoryKey | 'topics';
 
 const CATEGORY_FILTERS: { id: CategoryFilterId; label: string; orders: number[] }[] = [
-  { id: 'all', label: 'Tất cả (32)', orders: [] },
+  { id: 'all', label: 'Tất cả (33)', orders: [] },
+  { id: 'communication', label: '💬 Giao tiếp hàng ngày (10 Tình Huống)', orders: [33] },
   { id: 'nature', label: 'Động vật & Tự nhiên', orders: [1, 2, 3, 4, 19, 25, 26, 30] },
   { id: 'food_body', label: 'Ẩm thực & Cơ thể', orders: [5, 6, 7, 12, 20, 21, 32] },
   { id: 'thinking', label: 'Chữ số & Tư duy', orders: [8, 9, 10, 11, 23, 27, 28, 29] },
-  { id: 'life', label: 'Gia đình & Đời sống', orders: [13, 14, 15, 16, 17, 18, 22, 24, 31] },
+  { id: 'life', label: 'Gia đình & Đời sống', orders: [13, 14, 15, 16, 17, 18, 22, 24, 31, 33] },
 ];
 
 export default function App() {
@@ -232,6 +234,7 @@ export default function App() {
   const [categoryFilter, setCategoryFilter] = useState<CategoryFilterId>('all');
   const [activeTopic, setActiveTopic] = useState<TopicLesson | null>(null);
   const [activeBrainGame, setActiveBrainGame] = useState<BrainGameItem | null>(null);
+  const [isDailyCommunicationOpen, setIsDailyCommunicationOpen] = useState(false);
   const [worldPage, setWorldPage] = useState(0);
   const [randomSeedOffset, setRandomSeedOffset] = useState(0);
   const [isStickerAlbumOpen, setIsStickerAlbumOpen] = useState(false);
@@ -329,12 +332,12 @@ export default function App() {
     if (mainScrollRef.current) {
       mainScrollRef.current.scrollTo({ top: 0, behavior: 'instant' });
     }
-  }, [activeBrainGame?.id, activeTopic?.id, isParentDashboardOpen]);
+  }, [activeBrainGame?.id, activeTopic?.id, isParentDashboardOpen, isDailyCommunicationOpen]);
 
   // Stop all audio immediately whenever switching major navigation views/tabs
   useEffect(() => {
     stopAllAudio();
-  }, [activeDockTab, activeBrainGame?.id, activeTopic?.id, selectedStory?.id]);
+  }, [activeDockTab, activeBrainGame?.id, activeTopic?.id, selectedStory?.id, isDailyCommunicationOpen]);
 
   useEffect(() => {
     try {
@@ -652,6 +655,11 @@ export default function App() {
 
   const handleOpenTopic = (topic: TopicLesson) => {
     setActiveBrainGame(null);
+    if (topic.id === 'daily-communication') {
+      stopAllAudio();
+      setIsDailyCommunicationOpen(true);
+      return;
+    }
     setActiveTopic(topic);
     updateActiveProgress((prev) => {
       const nextRecent: RecentActivityItem = {
@@ -1172,6 +1180,18 @@ export default function App() {
               }}
               onClose={() => setIsParentDashboardOpen(false)}
               onOpenActivityHistory={() => setIsActivityHistoryOpen(true)}
+            />
+          ) : isDailyCommunicationOpen ? (
+            <DailyCommunicationStage
+              settings={effectiveSettings}
+              childName={activeProfile.name}
+              onBack={() => setIsDailyCommunicationOpen(false)}
+              onEarnStar={(count) => {
+                updateActiveProgress((prev) => ({
+                  ...prev,
+                  stars: prev.stars + count,
+                }));
+              }}
             />
           ) : activeBrainGame ? (
             <BrainGamePlayground
@@ -1846,6 +1866,43 @@ export default function App() {
                         <ChevronRight className="w-3.5 h-3.5" />
                       </button>
                     </div>
+                  </div>
+
+                  {/* Featured Hero Banner for Giao Tiếp Hàng Ngày */}
+                  <div className="rounded-[28px] bg-gradient-to-r from-sky-600 via-indigo-600 to-purple-600 p-3.5 sm:p-5 text-white shadow-md border-2 border-sky-400/80 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-5">
+                    <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/20 backdrop-blur-xs flex items-center justify-center text-3xl sm:text-4xl shrink-0 shadow-inner">
+                        💬
+                      </div>
+                      <div className="space-y-0.5 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-black text-[10px] sm:text-[11px] shadow-2xs">
+                            ✨ MỚI · ĐẶC BIỆT
+                          </span>
+                          <span className="text-[10px] sm:text-xs font-bold text-sky-100">
+                            10 Tình Huống Giao Tiếp Đời Sống
+                          </span>
+                        </div>
+                        <h2 className="text-sm sm:text-lg font-black text-white leading-tight truncate">
+                          Chủ Đề Mới: Giao Tiếp Hàng Ngày Cho Bé
+                        </h2>
+                        <p className="text-[11px] sm:text-xs text-sky-100 font-medium line-clamp-1">
+                          Đến trường chào cô, về nhà chào bố mẹ, đi siêu thị, công viên, sở thú & nhận sao bé ngoan!
+                        </p>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        stopAllAudio();
+                        setIsDailyCommunicationOpen(true);
+                      }}
+                      className="min-h-[42px] px-4 sm:px-5 py-2 rounded-2xl bg-amber-400 hover:bg-amber-300 text-amber-950 font-black text-xs sm:text-sm flex items-center justify-center gap-1.5 transition cursor-pointer active:scale-95 shadow-md shrink-0 w-full sm:w-auto"
+                    >
+                      <span>Khám Phá Tình Huống</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
                   </div>
 
                   {/* 4x2 (Desktop) / 2x4 (Mobile) Little-Brain Style Topic Cards */}

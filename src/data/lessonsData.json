@@ -15135,6 +15135,271 @@
           }
         }
       ]
+    },
+    {
+      "id": "daily-communication",
+      "order": 33,
+      "titleVi": "Giao tiếp hàng ngày",
+      "titleEn": "Daily Communication",
+      "isCompleteSample": true,
+      "worldTheme": {
+        "bgGradient": "from-sky-100 via-blue-50 to-indigo-100",
+        "cardBg": "#F0F9FF",
+        "borderColor": "#38BDF8",
+        "accentHex": "#0284C7",
+        "iconEmoji": "💬"
+      },
+      "narrator": {
+        "id": "narrator-daily-comm",
+        "name": "Cô Giáo Mầm Non & Bạn Nhỏ",
+        "species": "Người bạn đồng hành",
+        "emoji": "🗣️",
+        "avatarBg": "#E0F2FE",
+        "greetingVi": "Chào bé yêu! Cùng cô rèn luyện các tình huống giao tiếp lễ phép hàng ngày nhé!"
+      },
+      "storyIntroVi": "Chào bé yêu! Hãy cùng cô bước vào các tình huống giao tiếp đời sống gần gũi: đến trường chào cô giáo, về nhà chào bố mẹ, đi siêu thị, đi công viên và sở thú nhé!",
+      "parentRealLifeTipVi": "Khen ngợi cụ thể mỗi khi con chủ động chào hỏi hoặc nói cảm ơn, xin lỗi.",
+      "rewardSticker": {
+        "id": "sticker-daily-comm",
+        "nameVi": "Huy hiệu Bé Ngoan Lễ Phép",
+        "emoji": "🌟"
+      },
+      "rhyme": {
+        "title": "Bé Ngoan Lễ Phép",
+        "melodyStyle": "happy",
+        "lines": [
+          {
+            "en": "Greet with love every day",
+            "vi": "Đi thưa về gửi rộn ràng",
+            "actionHintVi": "Khoanh tay cúi đầu"
+          },
+          {
+            "en": "Say hello and say goodbye",
+            "vi": "Chào cô chào bạn nở nụ cười tươi",
+            "actionHintVi": "Vẫy tay tươi cười"
+          },
+          {
+            "en": "Please and thank you from the heart",
+            "vi": "Lời cảm ơn xin lỗi chân thành",
+            "actionHintVi": "Đặt tay lên ngực"
+          },
+          {
+            "en": "Good manners everywhere we go",
+            "vi": "Bé ngoan lễ phép cả nhà yêu thương",
+            "actionHintVi": "Vỗ tay hoan hô"
+          }
+        ]
+      },
+      "vocabulary": [
+        {
+          "id": "comm-chao-co",
+          "en": "Good Morning Teacher",
+          "vi": "Chào cô giáo",
+          "phonetic": "Gút mo-ninh ti-chơ",
+          "emoji": "👩‍🏫",
+          "colorHex": "#3B82F6",
+          "bgTint": "#EFF6FF",
+          "soundEffect": "bell",
+          "soundLabelVi": "Khoanh tay: Con chào cô ạ!",
+          "phrase2To3y": {
+            "en": "Hello teacher",
+            "vi": "Con chào cô ạ"
+          },
+          "sentence3To4y": {
+            "en": "Good morning teacher, have a nice day!",
+            "vi": "Con chào cô giáo, chúc cô buổi sáng vui vẻ ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "G",
+            "sound": "chữ G",
+            "spelling": "G - R - E - E - T",
+            "questionEn": "Which word starts with letter G?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ G?"
+          }
+        },
+        {
+          "id": "comm-chao-bo-me",
+          "en": "Goodbye Parents",
+          "vi": "Chào bố mẹ",
+          "phonetic": "Gút-bai pe-rừn-ts",
+          "emoji": "👨‍👩‍👧",
+          "colorHex": "#10B981",
+          "bgTint": "#ECFDF5",
+          "soundEffect": "sparkle",
+          "soundLabelVi": "Con chào bố mẹ con đi học ạ!",
+          "phrase2To3y": {
+            "en": "Bye bye mommy",
+            "vi": "Chào bố mẹ"
+          },
+          "sentence3To4y": {
+            "en": "Goodbye Daddy, I am going to school!",
+            "vi": "Con chào bố con đi học đây ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "P",
+            "sound": "chữ P",
+            "spelling": "P - A - R - E - N - T",
+            "questionEn": "Which word starts with letter P?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ P?"
+          }
+        },
+        {
+          "id": "comm-ve-nha",
+          "en": "I Am Home",
+          "vi": "Về nhà chào",
+          "phonetic": "Ai em hôm",
+          "emoji": "🏡",
+          "colorHex": "#F59E0B",
+          "bgTint": "#FFFBEB",
+          "soundEffect": "bell",
+          "soundLabelVi": "Con mới đi học về ạ!",
+          "phrase2To3y": {
+            "en": "I am home",
+            "vi": "Con về rồi ạ"
+          },
+          "sentence3To4y": {
+            "en": "Hello Grandma, I am back home!",
+            "vi": "Con chào bà, con mới đi học về ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "H",
+            "sound": "chữ H",
+            "spelling": "H - O - M - E",
+            "questionEn": "Which word starts with letter H?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ H?"
+          }
+        },
+        {
+          "id": "comm-cam-on",
+          "en": "Thank You",
+          "vi": "Cảm ơn",
+          "phonetic": "Thenk diu",
+          "emoji": "🙏",
+          "colorHex": "#EC4899",
+          "bgTint": "#FDF2F8",
+          "soundEffect": "sparkle",
+          "soundLabelVi": "Cháu cảm ơn bà ạ!",
+          "phrase2To3y": {
+            "en": "Thank you",
+            "vi": "Con cảm ơn"
+          },
+          "sentence3To4y": {
+            "en": "Thank you very much for the lovely gift!",
+            "vi": "Cháu cảm ơn bà rất nhiều vì món quà ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "T",
+            "sound": "chữ T",
+            "spelling": "T - H - A - N - K",
+            "questionEn": "Which word starts with letter T?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ T?"
+          }
+        },
+        {
+          "id": "comm-xin-loi",
+          "en": "I Am Sorry",
+          "vi": "Xin lỗi",
+          "phonetic": "Ai em so-ri",
+          "emoji": "🙇",
+          "colorHex": "#059669",
+          "bgTint": "#ECFDF5",
+          "soundEffect": "bell",
+          "soundLabelVi": "Con xin lỗi mẹ ạ!",
+          "phrase2To3y": {
+            "en": "I am sorry",
+            "vi": "Con xin lỗi ạ"
+          },
+          "sentence3To4y": {
+            "en": "I am so sorry, I will be more careful!",
+            "vi": "Con xin lỗi mẹ, lần sau con sẽ cẩn thận hơn ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "S",
+            "sound": "chữ S",
+            "spelling": "S - O - R - R - Y",
+            "questionEn": "Which word starts with letter S?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ S?"
+          }
+        },
+        {
+          "id": "comm-sieu-thi",
+          "en": "At Supermarket",
+          "vi": "Đi siêu thị",
+          "phonetic": "Ét su-pơ-ma-kịt",
+          "emoji": "🛒",
+          "colorHex": "#8B5CF6",
+          "bgTint": "#F5F3FF",
+          "soundEffect": "sparkle",
+          "soundLabelVi": "Mẹ ơi con xin phép ạ!",
+          "phrase2To3y": {
+            "en": "May I please",
+            "vi": "Con xin phép"
+          },
+          "sentence3To4y": {
+            "en": "Mommy, may I please have this yogurt?",
+            "vi": "Mẹ ơi con có thể xin hộp sữa chua này được không ạ?"
+          },
+          "phonics4To5y": {
+            "letter": "M",
+            "sound": "chữ M",
+            "spelling": "M - A - R - K - E - T",
+            "questionEn": "Which word starts with letter M?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ M?"
+          }
+        },
+        {
+          "id": "comm-cong-vien",
+          "en": "At The Park",
+          "vi": "Đi công viên",
+          "phonetic": "Ét đờ pác",
+          "emoji": "🎡",
+          "colorHex": "#06B6D4",
+          "bgTint": "#ECFEFF",
+          "soundEffect": "bell",
+          "soundLabelVi": "Mình cùng chơi xếp hàng nhé!",
+          "phrase2To3y": {
+            "en": "Play together",
+            "vi": "Chơi cùng nhau"
+          },
+          "sentence3To4y": {
+            "en": "Hello, let us take turns on the slide!",
+            "vi": "Chào bạn, chúng mình cùng xếp hàng trượt cầu trượt nhé!"
+          },
+          "phonics4To5y": {
+            "letter": "P",
+            "sound": "chữ P",
+            "spelling": "P - L - A - Y",
+            "questionEn": "Which word starts with letter P?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ P?"
+          }
+        },
+        {
+          "id": "comm-so-thu",
+          "en": "At The Zoo",
+          "vi": "Đi sở thú",
+          "phonetic": "Ét đờ zu",
+          "emoji": "🦒",
+          "colorHex": "#14B8A6",
+          "bgTint": "#F0FDFA",
+          "soundEffect": "sparkle",
+          "soundLabelVi": "Dạ vâng ạ, cháu nhớ rồi ạ!",
+          "phrase2To3y": {
+            "en": "See giraffe",
+            "vi": "Ngắm hươu cao cổ"
+          },
+          "sentence3To4y": {
+            "en": "We hold hands and stay behind the fence!",
+            "vi": "Chúng cháu nắm tay bố mẹ và đứng sau rào chắn an toàn ạ!"
+          },
+          "phonics4To5y": {
+            "letter": "Z",
+            "sound": "chữ Z",
+            "spelling": "Z - O - O",
+            "questionEn": "Which word starts with letter Z?",
+            "questionVi": "Đố bé từ nào bắt đầu bằng chữ Z?"
+          }
+        }
+      ]
     }
   ]
 }

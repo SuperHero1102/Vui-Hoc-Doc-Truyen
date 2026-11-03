@@ -43,7 +43,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'La la la, là la la la!',
     ],
     funFactVi: 'Bài hát quen thuộc nhất giúp bé hào hứng, vui vẻ khi bước vào lớp mẫu giáo đầu tiên!',
-    audioUrl: '/assets/music/chau-len-ba.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Chau%20Di%20Mau%20Giao.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -71,7 +71,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Đau mắt rồi lại khóc meo meo!',
     ],
     funFactVi: 'Bài hát giáo dục bé thói quen rửa mặt bằng khăn sạch mỗi sáng thức dậy.',
-    audioUrl: '/assets/music/rua-mat-nhu-meo.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Rua%20Mat%20Nhu%20Meo.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 },
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.8 },
@@ -130,7 +130,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Trường của cháu đây là trường mầm non!',
     ],
     funFactVi: 'Khích lệ tình yêu thương giữa cô giáo mầm non và các bé nhỏ.',
-    audioUrl: '/assets/music/truong-chung-chau-la-truong-mam-non.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tr%C6%B0%E1%BB%9Dng%20C%E1%BB%A7a%20Ch%C3%BAng%20Ch%C3%A1u%20L%C3%A0%20Tr%C6%B0%E1%BB%9Dng%20M%E1%BA%A7m%20Non.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'A4', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.6 },
@@ -162,7 +162,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Mẹ có yêu không nào!',
     ],
     funFactVi: 'Bài học lễ giáo đầu đời: đi thưa về gửi, ngoan ngoãn vâng lời cha mẹ.',
-    audioUrl: '/assets/music/con-co-be-be.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Con%20Co%CC%81%20Be%CC%81%20Be%CC%81.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -190,7 +190,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Xa là nhớ, gần nhau là cười!',
     ],
     funFactVi: 'Bài hát gia đình ấm áp được mọi thế hệ trẻ em Việt Nam yêu mến.',
-    audioUrl: '/assets/music/ca-nha-thuong-nhau.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Ca%20Nha%20Thuong%20Nhau.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
       { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.5 }, { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.8 },
@@ -218,7 +218,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Khi cháu vâng lời, cháu biết bà vui!',
     ],
     funFactVi: 'Từng câu từ ngọt ngào nuôi dưỡng lòng hiếu thảo của bé với ông bà.',
-    audioUrl: '/assets/music/chau-yeu-ba.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Ch%C3%A1u%20Y%C3%AAu%20B%C3%A0.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.7 },
       { note: 'C5', dur: 0.5 }, { note: 'D5', dur: 0.5 }, { note: 'C5', dur: 0.8 },
@@ -246,7 +246,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Lên bờ vẫy cái cánh cho khô!',
     ],
     funFactVi: 'Vận động theo bài hát: bé xòe 2 tay làm cánh vịt đập nhẹ rất dễ thương.',
-    audioUrl: '/assets/music/mot-con-vit.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Mot%20Con%20Vit.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'C5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'A4', dur: 0.4 },
@@ -277,7 +277,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cá vàng bắt bọ gậy cho nước thêm sạch trong!',
     ],
     funFactVi: 'Dạy bé biết cá vàng bắt bọ gậy bảo vệ nguồn nước trong sạch.',
-    audioUrl: '/assets/music/ca-vang-boi.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Ca%20Vang%20Boi.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.6 },
       { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
@@ -304,7 +304,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Tung cánh bay, tung cánh bay!',
     ],
     funFactVi: 'Giai điệu Frère Jacques kinh điển thế giới với lời Việt mộc mạc cho bé múa bướm.',
-    audioUrl: '/assets/music/kia-con-buom-vang.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/K%C3%ACa%20Con%20B%C6%B0%E1%BB%9Bm%20V%C3%A0ng.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'D4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'C4', dur: 0.5 },
       { note: 'C4', dur: 0.5 }, { note: 'D4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'C4', dur: 0.5 },
@@ -339,7 +339,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cho ta bao tình thương đi suốt cả cuộc đời!',
     ],
     funFactVi: 'Bài ca bất hủ về mái ấm gia đình, ngọn nến tượng trưng cho tình yêu thương.',
-    audioUrl: '/assets/music/ba-ngon-nen-lung-linh.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/3%20Ng%E1%BB%8Dn%20N%E1%BA%BFn%20Lung%20Linh.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.8 },
       { note: 'D4', dur: 0.5 }, { note: 'F4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
@@ -369,7 +369,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Bố là phi thuyền đưa em lên trời!',
     ],
     funFactVi: 'Những hình ảnh ngộ nghĩnh tưởng tượng về người bố vĩ đại của bé.',
-    audioUrl: '/assets/music/bo-la-tat-ca.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Bo%20La%20Tat%20Ca.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -396,7 +396,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Mẹ và cô ấy hai mẹ hiền!',
     ],
     funFactVi: 'Gợi mở sự gần gũi, dịu hiền giữa cô giáo ở trường và mẹ ở nhà.',
-    audioUrl: '/assets/music/co-va-me.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/C%C3%B4%20V%C3%A0%20M%E1%BA%B9.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
@@ -426,7 +426,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Em để dành tiền nuôi heo đất lớn nhanh!',
     ],
     funFactVi: 'Dạy bé bài học tiết kiệm và biết nâng niu những món quà của mẹ.',
-    audioUrl: '/assets/music/con-heo-dat.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Con%20Heo%20Dat.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -453,7 +453,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!',
     ],
     funFactVi: 'Giai điệu rộn ràng, nổi tiếng cả trong nước và quốc tế!',
-    audioUrl: '/assets/music/chu-ech-con.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Ch%C3%BA%20%E1%BA%BFch%20Con.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'D4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.4 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -482,7 +482,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Uống nước vào là no căng diều!',
     ],
     funFactVi: 'Miêu tả hình ảnh chú gà con lông tơ vàng óng chạy lon ton theo mẹ kiếm mồi.',
-    audioUrl: '/assets/music/dan-ga-con.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Dan%20Ga%20Trong%20San.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.6 },
       { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'C4', dur: 0.8 },
@@ -514,7 +514,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Kéo gỗ cho buôn làng của ta!',
     ],
     funFactVi: 'Giai điệu Tây Nguyên rộn rã, dạy bé tinh thần hăng say lao động và yêu thiên nhiên.',
-    audioUrl: '/assets/music/chu-voi-con.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Chu%20Voi%20Con%20O%20Ban%20Don.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -544,7 +544,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Con bìm bịp thổi tò tí te tò te!',
     ],
     funFactVi: 'Trò chơi đồng dao dân gian giúp các bé phối hợp nhịp nhàng và vui cười sảng khoái.',
-    audioUrl: '/assets/music/bac-kim-thang.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Bac%20Kim%20Thang.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'C4', dur: 0.3 }, { note: 'D4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.6 },
       { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'D4', dur: 0.6 },
@@ -605,7 +605,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Có cô giáo đón em vào lớp học!',
     ],
     funFactVi: 'Khung cảnh buổi sáng rạng rỡ, giúp bé 5 tuổi rèn luyện tính tự lập và tự tin.',
-    audioUrl: '/assets/music/em-di-mau-giao.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Em%20%C4%90i%20M%E1%BA%ABu%20Gi%C3%A1o.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -663,7 +663,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Trường mầm non thân yêu!',
     ],
     funFactVi: 'Bài hát kinh điển trong lễ tổng kết ra trường của các bé 5 tuổi tạm biệt trường mầm non.',
-    audioUrl: '/assets/music/tam-biet-bup-be.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tam%20Biet%20Bup%20Be%20Than%20Yeu.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 0.8 },
       { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'C5', dur: 0.5 }, { note: 'A4', dur: 0.8 },
@@ -692,7 +692,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Chạy nhảy tung tăng đón ánh bình minh!',
     ],
     funFactVi: 'Bài thể dục khởi động ngày mới tràn đầy năng lượng cho bé.',
-    audioUrl: '/assets/music/tap-the-duc-buoi-sang.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tap%20The%20Duc%20Buoi%20Sang.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'E4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'C5', dur: 0.6 },
       { note: 'D5', dur: 0.3 }, { note: 'C5', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.6 },
@@ -749,7 +749,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cùng bay nào cho trái đất quay!',
     ],
     funFactVi: 'Nuôi dưỡng lý tưởng hòa bình, tình bạn bè quốc tế và ý thức bảo vệ hành tinh xanh.',
-    audioUrl: '/assets/music/trai-dat-nay-la-cua-chung-minh.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tr%C3%A1i%20%C4%90%E1%BA%A5t%20N%C3%A0y%20L%C3%A0%20C%E1%BB%A7a%20Ch%C3%BAng%20M%C3%ACnh.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.5 }, { note: 'A4', dur: 0.7 },
       { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
@@ -778,7 +778,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Cô giáo khen em bé ngoan chăm chỉ!',
     ],
     funFactVi: 'Bài hát vui nhộn dạy bé ý thức kỷ luật: làm xong bài tập mới đi chơi.',
-    audioUrl: '/assets/music/hong-dam-dau.mp3',
+    audioUrl: 'https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Hong%20Dam%20Dau.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'C5', dur: 0.4 }, { note: 'D5', dur: 0.6 },
       { note: 'E5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -814,8 +814,8 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Bài hát bảng chữ cái tiếng Anh quen thuộc nhất hành tinh',
       'Bé học phát âm từng chữ cái chuẩn xác và tự tin!',
     ],
-    funFactVi: 'Bài hát đầu đời giúp mọi em bé làm quen với 26 chữ cái tiếng Anh qua giọng ca thiếu nhi trong trẻo.',
-    audioUrl: '/assets/music/alphabet-song.mp3',
+    funFactVi: 'Bài hát đầu đời kinh điển giúp bé phát âm 26 chữ cái tiếng Anh với tiết tấu vui nhộn, hào hứng.',
+    audioUrl: 'https://archive.org/download/ABCAlphabetSong/A%20B%20C%20-Alphabet%20Song.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'C4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'G4', dur: 0.5 },
       { note: 'A4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
@@ -845,7 +845,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'How I wonder what you are!',
     ],
     funFactVi: 'Giai điệu Mozart êm dịu hòa quyện cùng tiếng hát ca sĩ nhí ru bé giấc ngủ bình yên.',
-    audioUrl: '/assets/music/twinkle-twinkle.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/23.%20Twinkle%20Twinkle%20Little%20Star.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'C4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'G4', dur: 0.5 },
       { note: 'A4', dur: 0.5 }, { note: 'A4', dur: 0.5 }, { note: 'G4', dur: 1.0 },
@@ -874,7 +874,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Old MacDonald had a farm, E-I-E-I-O!',
     ],
     funFactVi: 'Ca sĩ thiếu nhi thể hiện tiếng kêu sống động của đàn bò, vịt, heo trên nông trại vui tươi!',
-    audioUrl: '/assets/music/old-macdonald-had-a-farm.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/19.%20Old%20MacDonald%20Had%20A%20Farm.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'C4', dur: 0.4 }, { note: 'C4', dur: 0.4 }, { note: 'G3', dur: 0.4 },
       { note: 'A3', dur: 0.4 }, { note: 'A3', dur: 0.4 }, { note: 'G3', dur: 0.8 },
@@ -903,7 +903,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'The wipers on the bus go swish swish swish!',
     ],
     funFactVi: 'Âm thanh còi xe beep beep và gạt nước chân thật, kích thích bé làm động tác xoay tay.',
-    audioUrl: '/assets/music/the-wheels-on-the-bus.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/02.%20The%20Wheels%20On%20The%20Bus.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'F4', dur: 0.4 },
       { note: 'F4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'F4', dur: 0.8 },
@@ -930,7 +930,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'And one for the little boy who lives down the lane.',
     ],
     funFactVi: 'Giọng hát ấm áp của cô và các bé đồng ca giúp trẻ cảm nhận lòng tốt và sẻ chia.',
-    audioUrl: '/assets/music/baa-baa-black-sheep.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/20.%20Baa%2C%20Baa%20Black%20Sheep.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.5 }, { note: 'C4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'G4', dur: 0.5 },
       { note: 'A4', dur: 0.3 }, { note: 'B4', dur: 0.3 }, { note: 'C5', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
@@ -958,7 +958,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'If you\'re happy and you know it, shout hurray! (Hurray!)',
     ],
     funFactVi: 'Ca sĩ nhí vỗ tay và reo hò rộn rã trong bài hát, tạo sự phấn khởi tuyệt đối cho bé.',
-    audioUrl: '/assets/music/if-youre-happy-and-you-know-it.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/17.%20If%20You%27re%20Happy%20And%20You%20Know%20It.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'C4', dur: 0.3 }, { note: 'F4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'F4', dur: 0.4 },
       { note: 'E4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
@@ -984,7 +984,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Life is but a dream!',
     ],
     funFactVi: 'Giai điệu hợp xướng thiếu nhi trong vắt và dịu êm như dòng suối nhỏ.',
-    audioUrl: '/assets/music/row-row-row-your-boat.mp3',
+    audioUrl: 'https://archive.org/download/thebestnurseryrhymes1/1-07%20Row%20Row%20Your%20Boat.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.6 }, { note: 'C4', dur: 0.6 }, { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.8 },
       { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 1.2 },
@@ -1010,7 +1010,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Head, shoulders, knees and toes, knees and toes!',
     ],
     funFactVi: 'Bản thu âm sống động với nhịp trống và tiếng ca sĩ hô vang từng bộ phận cơ thể cho bé nhảy theo.',
-    audioUrl: '/assets/music/head-shoulders-knees-and-toes.mp3',
+    audioUrl: 'https://archive.org/download/17.-listen-to-the-animals/03.%20Head%2C%20Shoulders%2C%20Knees%20and%20Toes.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'E5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'E5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'C5', dur: 0.6 },
@@ -1037,7 +1037,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Four little monkeys jumping on the bed...',
     ],
     funFactVi: 'Giọng đọc bác sĩ nghiêm khắc nhưng hóm hỉnh dạy bé cẩn thận khi chơi đùa.',
-    audioUrl: '/assets/music/five-little-monkeys.mp3',
+    audioUrl: 'https://archive.org/download/17.-listen-to-the-animals/07.%20Five%20Little%20Monkeys.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.6 },
       { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.8 },
@@ -1050,7 +1050,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     category: 'en_rhymes',
     categoryLabelVi: 'Nhạc Tiếng Anh · Gia đình cá mập',
     ageBadge: '0–5 tuổi',
-    composer: 'Kids Dance Party',
+    composer: 'Pinkfong & Kids Dance Choir',
     emoji: '🦈',
     colorHex: '#0284C7',
     bgGradient: 'from-sky-400 to-blue-600',
@@ -1059,15 +1059,22 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     lyrics: [
       'Baby shark, doo doo doo doo doo doo!',
       'Baby shark, doo doo doo doo doo doo!',
-      'Baby shark, doo doo doo doo doo doo!',
-      'Baby shark!',
+      'Baby shark, doo doo doo doo doo doo, Baby shark!',
       'Mommy shark, doo doo doo doo doo doo!',
+      'Mommy shark, doo doo doo doo doo doo!',
+      'Mommy shark, doo doo doo doo doo doo, Mommy shark!',
       'Daddy shark, doo doo doo doo doo doo!',
+      'Daddy shark, doo doo doo doo doo doo!',
+      'Daddy shark, doo doo doo doo doo doo, Daddy shark!',
       'Grandma shark, doo doo doo doo doo doo!',
       'Grandpa shark, doo doo doo doo doo doo!',
+      'Let\'s go hunt, doo doo doo doo doo doo!',
+      'Run away, doo doo doo doo doo doo, Run away!',
+      'Safe at last, doo doo doo doo doo doo, Safe at last!',
+      'It\'s the end, doo doo doo doo doo doo!',
     ],
-    funFactVi: 'Giai điệu bùng nổ năng lượng, ca sĩ hát tràn ngập hứng khởi khiến mọi em bé nhún nhảy ngay lập tức.',
-    audioUrl: '/assets/music/baby-shark.mp3',
+    funFactVi: 'Giai điệu bùng nổ năng lượng, ca sĩ hát tràn ngập hứng khởi với các động tác múa tay cả nhà cá mập.',
+    audioUrl: 'https://archive.org/download/TheBestSongsOfMay2017BeHappyWithBabySharkCompilationPinkfongSongsForChildren/Baby%20Shark%20_%20Sing%20and%20Dance%21%20_%20Animal%20Songs%20_%20PINKFONG%20Songs%20for%20Children.mp3',
     melodyNotes: [
       { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'G4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'G4', dur: 0.3 },
       { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'G4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'G4', dur: 0.3 },
@@ -1093,7 +1100,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'And Bingo was his name-o!',
     ],
     funFactVi: 'Ca sĩ và các bạn nhỏ vừa hát vừa vỗ tay theo từng chữ cái B-I-N-G-O rất sôi động.',
-    audioUrl: '/assets/music/bingo-dog-song.mp3',
+    audioUrl: 'https://archive.org/download/12.-shakin-down-the-sugar/15.%20Bingo%20Was%20His%20Name-O.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
       { note: 'C5', dur: 0.4 }, { note: 'C5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'D5', dur: 0.4 }, { note: 'E5', dur: 0.8 },
@@ -1121,7 +1128,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'The lamb was sure to go!',
     ],
     funFactVi: 'Giọng ca trong sáng của ca sĩ nhí kể câu chuyện chú cừu trắng lon ton theo bạn Mary tới trường.',
-    audioUrl: '/assets/music/mary-had-a-little-lamb.mp3',
+    audioUrl: 'https://archive.org/download/02.-the-wheels-on-the-bus/06.%20Mary%20Had%20A%20Little%20Lamb.mp3',
     melodyNotes: [
       { note: 'E4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 },
       { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'E4', dur: 0.8 },
@@ -1136,7 +1143,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     category: 'en_rhymes',
     categoryLabelVi: 'Nhạc Tiếng Anh · Mưa ơi đi nhé',
     ageBadge: '0–5 tuổi',
-    composer: 'The Best Nursery Rhymes Choir',
+    composer: 'Barney & Kids Choir',
     emoji: '🌧️',
     colorHex: '#0EA5E9',
     bgGradient: 'from-sky-500 to-blue-600',
@@ -1145,11 +1152,15 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     lyrics: [
       'Rain, rain, go away,',
       'Come again another day!',
-      'Little baby wants to play,',
+      'Little Johnny wants to play,',
       'Rain, rain, go away!',
+      'Daddy wants to play, rain, rain, go away!',
+      'Mommy wants to play, rain, rain, go away!',
+      'Brother wants to play, sister wants to play,',
+      'All the family wants to play, rain, rain, go away!',
     ],
-    funFactVi: 'Tiếng hát dễ thương của thiếu nhi hòa cùng tiếng mưa rơi lách tách vui tai.',
-    audioUrl: '/assets/music/rain-rain-go-away.mp3',
+    funFactVi: 'Tiếng hát dễ thương của thiếu nhi hòa cùng tiếng mưa rơi lách tách vui tai, khuyến khích bé lạc quan, vui vẻ.',
+    audioUrl: 'https://archive.org/download/BarneySongsfromtheParkMusicCD/02%20Rain%2C%20Rain%20Go%20Away.mp3',
     melodyNotes: [
       { note: 'G4', dur: 0.5 }, { note: 'E4', dur: 0.5 }, { note: 'G4', dur: 0.5 }, { note: 'E4', dur: 0.5 },
       { note: 'G4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
@@ -1176,7 +1187,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Tick tock, tick tock, tick tock!',
     ],
     funFactVi: 'Tiếng đồng hồ gõ chuông "Bong" và tiếng chuột chạy vội tạo sự thích thú đặc biệt cho bé.',
-    audioUrl: '/assets/music/hickory-dickory-dock.mp3',
+    audioUrl: 'https://archive.org/download/thebestnurseryrhymes1/1-08%20Hickory%20Dickory%20Dock.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'D4', dur: 0.4 }, { note: 'E4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 0.8 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'B4', dur: 0.4 }, { note: 'C5', dur: 0.8 },
@@ -1202,7 +1213,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Please don\'t take my sunshine away!',
     ],
     funFactVi: 'Giọng hát mộc mạc kèm tiếng đàn acoustic ấm áp của nữ ca sĩ Elizabeth Mitchell được yêu mến khắp năm châu.',
-    audioUrl: '/assets/music/you-are-my-sunshine.mp3',
+    audioUrl: 'https://archive.org/download/ElizabethMitchellYouAreMySunshine/Elizabeth%20Mitchell%20-%20You%20Are%20My%20Sunshine.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.4 }, { note: 'F4', dur: 0.4 }, { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.8 }, { note: 'A4', dur: 0.8 },
       { note: 'G4', dur: 0.4 }, { note: 'A4', dur: 0.4 }, { note: 'F4', dur: 0.8 }, { note: 'F4', dur: 0.8 },
@@ -1256,7 +1267,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       'Pop! Goes the weasel!',
     ],
     funFactVi: 'Ca sĩ hát với tiết tấu rộn ràng, đến chữ "Pop!" tạo điểm nhấn nổ vui tai cho bé nhảy lên.',
-    audioUrl: '/assets/music/pop-goes-the-weasel.mp3',
+    audioUrl: 'https://archive.org/download/17.-listen-to-the-animals/11.%20Pop%20Goes%20the%20Weasel.mp3',
     melodyNotes: [
       { note: 'C4', dur: 0.3 }, { note: 'F4', dur: 0.3 }, { note: 'G4', dur: 0.3 }, { note: 'A4', dur: 0.5 },
       { note: 'Bb4', dur: 0.3 }, { note: 'A4', dur: 0.3 }, { note: 'G4', dur: 0.5 }, { note: 'F4', dur: 0.8 },
