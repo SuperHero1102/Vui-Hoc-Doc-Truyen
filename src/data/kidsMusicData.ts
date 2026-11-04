@@ -1820,13 +1820,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_ngay-dau-tien-di-hoc.webp",
-    "isVocalTrack": false,
+    "isVocalTrack": true,
     "englishTranslation": [
       "The very first day going to school",
       "Mother held my hand, I cried softly",
       "Teacher caressed my head comforting me",
       "Now grown up, I fondly remember that gentle day!"
-    ]
+    ],
+    "audioUrl": "/assets/music/ngay-dau-tien-di-hoc.mp3"
   },
   {
     "id": "em-di-mau-giao",
@@ -1897,13 +1898,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_em-di-mau-giao.webp",
-    "isVocalTrack": false,
+    "isVocalTrack": true,
     "englishTranslation": [
       "Sunny morning birds chirp in the branches",
       "I put on my backpack and walk to class",
       "Teacher welcomes me with open loving arms",
       "Preschool is my joyful second home!"
-    ]
+    ],
+    "audioUrl": "/assets/music/em-di-mau-giao.mp3"
   },
   {
     "id": "em-yeu-truong-em",
@@ -2091,13 +2093,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_tam-biet-bup-be.webp",
-    "isVocalTrack": false,
+    "isVocalTrack": true,
     "englishTranslation": [
       "Goodbye lovely doll, goodbye cute teddy bear",
       "Goodbye yellow birdie, now I enter grade one",
       "I will remember my dear kindergarten school",
       "Carrying sweet memories into grade one!"
-    ]
+    ],
+    "audioUrl": "/assets/music/tam-biet-bup-be.mp3"
   },
   {
     "id": "tap-the-duc-buoi-sang",
@@ -2253,13 +2256,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_chiec-den-ong-sao.webp",
-    "isVocalTrack": false,
+    "isVocalTrack": true,
     "englishTranslation": [
       "Star lantern with five colorful glowing points",
       "Holding lantern high on Mid-Autumn night",
       "Tung rinh rinh, drums beat under full moon",
       "Children singing and dancing under bright moonlight!"
-    ]
+    ],
+    "audioUrl": "/assets/music/chiec-den-ong-sao.mp3"
   },
   {
     "id": "trai-dat-nay-la-cua-chung-minh",
@@ -2338,13 +2342,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_trai-dat-nay-la-cua-chung-minh.webp",
-    "isVocalTrack": false,
+    "isVocalTrack": true,
     "englishTranslation": [
       "This earth belongs to all of us children",
       "Golden fruit of peace, shining sun of hope",
       "White doves flying across the blue sky",
       "Singing for a peaceful and loving world!"
-    ]
+    ],
+    "audioUrl": "/assets/music/trai-dat-nay-la-cua-chung-minh.mp3"
   },
   {
     "id": "hong-dam-dau",

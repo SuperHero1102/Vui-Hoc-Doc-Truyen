@@ -2157,11 +2157,12 @@ export default function App() {
                 </section>
               )}
 
-              {/* DOCK TAB: Kids Music Player (41 Curated Nursery Songs & English Rhymes) */}
+              {/* DOCK TAB: Kids Music Player (44 Curated Nursery Songs & English Rhymes) */}
               {activeDockTab === 'music' && (
                 <KidsMusicPlayer
                   settings={effectiveSettings}
                   childName={activeProfile.name}
+                  onBack={() => setActiveDockTab('arcade')}
                   onOpenParentGate={() => setIsParentGateOpen(true)}
                 />
               )}
