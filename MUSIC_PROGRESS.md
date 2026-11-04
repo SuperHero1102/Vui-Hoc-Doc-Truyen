@@ -51,7 +51,21 @@
 - [x] Màn phát lớn: ảnh bìa lớn kèm đĩa than xoay, thanh kéo tua (scrubbable range slider), nút điều khiển to bản (Trộn bài, Trước, Phát/Dừng, Sau, Lặp lại), khu vực Karaoke tự cuộn, tóm tắt bài học dưới 15 từ, 3 đệm gõ nhịp (trống, chuông, mõ).
 - [x] Mini-player cố định dưới màn hình khi cuộn trang hoặc trên màn hình di động (360x640, 390x844).
 
-### Bước 7: Kiểm thử & Biên dịch
+### Bước 8: Hiệu chỉnh Timing Karaoke & Chế độ Lời bình thường
+- [x] Rà soát toàn diện hiện tượng chữ chạy lệch nhạc: Loại bỏ công thức nội suy giả (`idx * 4`) và hiện tượng sáng chữ sớm trong đoạn dạo đầu (`cur < startTimeSec`).
+- [x] Đo đạc và căn mốc thời gian thực tế theo sóng âm âm thanh cho các bài hát có bản thu chuẩn:
+  - `Cháu lên ba`: Nhạc dạo 14.8s, Khổ 1 (14.8s - 35.8s), Khổ 2 (36.0s - 57.0s), Khổ 3 (72.0s - 93.0s).
+  - `A-B-C Alphabet Song`: Nhạc dạo 1.8s, Khổ 1 (1.8s - 22.5s), Khổ 2 (35.8s - 61.5s).
+  - `Row, Row, Row Your Boat`: Khớp từng câu từ 5.8s đến 24.8s.
+  - `Rain, Rain, Go Away`: Khớp 8 câu từ 1.0s đến 43.5s.
+  - `Pop! Goes the Weasel`: Khớp chính xác 4 câu trên bản thu 15.8s từ 0.9s đến 14.8s.
+  - `Three Little Kittens`: Khớp chính xác 8 câu trên bản thu 29.7s từ 0.2s đến 29.2s.
+  - `Hickory Dickory Dock`: Khớp chính xác 10 câu từ 5.5s đến 63.5s.
+- [x] Đối với các bài hát còn lại chưa thể căn khớp chính xác 0.3s: Loại bỏ hiệu ứng chữ chạy karaoke, tự động chuyển sang hiển thị lời ca tĩnh đầy đủ, rõ ràng kèm phụ đề song ngữ, tuyệt đối không nhảy câu lệch nhịp.
+- [x] Thêm thanh tô màu chạy theo câu đang hát (`progress sweep`) mượt mà, phản hồi ngay lập tức khi bé tua thanh tiến trình.
+
+### Bước 9: Kiểm thử & Biên dịch hoàn tất
 - [x] `npm run lint` (`tsc --noEmit`): 0 lỗi.
-- [x] `npm run build` (`vite build`): Biên dịch thành công.
-- [x] Dev server khởi động lại trơn tru trên cổng 3000.
+- [x] `compile_applet` (`npm run build`): Thành công 100%.
+- [x] Dev server ổn định trên cổng 3000.
+

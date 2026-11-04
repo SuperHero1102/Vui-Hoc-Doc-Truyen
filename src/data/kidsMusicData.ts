@@ -121,62 +121,92 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
+        "startTimeSec": 14.8,
+        "endTimeSec": 18.8,
         "text": "Cháu lên ba cháu đi mẫu giáo",
-        "translation": "I'm three years old, I go to kindergarten"
+        "translation": "I am three years old, I go to kindergarten"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
+        "startTimeSec": 19,
+        "endTimeSec": 23,
         "text": "Cô thương cháu vì cháu không khóc nhè",
         "translation": "Teacher loves me because I don't cry"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
+        "startTimeSec": 23.2,
+        "endTimeSec": 27.2,
         "text": "Không khóc nhè để mẹ trồng cây trái",
         "translation": "I don't cry so mother can grow fruit trees"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
+        "startTimeSec": 27.5,
+        "endTimeSec": 31.5,
         "text": "Ba vào nhà máy ông bà vui cấy cày",
         "translation": "Father works in the factory, grandparents happily farm"
       },
       {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
+        "startTimeSec": 31.8,
+        "endTimeSec": 35.8,
         "text": "La la la, là la la la!",
         "translation": "La la la, la la la la!"
       },
       {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
+        "startTimeSec": 36,
+        "endTimeSec": 40,
         "text": "Cháu lên ba cháu đi mẫu giáo",
-        "translation": "I'm three years old, I go to kindergarten"
+        "translation": "I am three years old, I go to kindergarten"
       },
       {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
+        "startTimeSec": 40.2,
+        "endTimeSec": 44.2,
         "text": "Cô thương cháu vì cháu không khóc nhè",
         "translation": "Teacher loves me because I don't cry"
       },
       {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
+        "startTimeSec": 44.5,
+        "endTimeSec": 48.5,
         "text": "Không khóc nhè để mẹ trồng cây trái",
         "translation": "I don't cry so mother can grow fruit trees"
       },
       {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
+        "startTimeSec": 48.8,
+        "endTimeSec": 52.8,
         "text": "Ba vào nhà máy ông bà vui cấy cày",
         "translation": "Father works in the factory, grandparents happily farm"
       },
       {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
+        "startTimeSec": 53,
+        "endTimeSec": 57,
+        "text": "La la la, là la la la!",
+        "translation": "La la la, la la la la!"
+      },
+      {
+        "startTimeSec": 72,
+        "endTimeSec": 76,
+        "text": "Cháu lên ba cháu đi mẫu giáo",
+        "translation": "I am three years old, I go to kindergarten"
+      },
+      {
+        "startTimeSec": 76.2,
+        "endTimeSec": 80.2,
+        "text": "Cô thương cháu vì cháu không khóc nhè",
+        "translation": "Teacher loves me because I don't cry"
+      },
+      {
+        "startTimeSec": 80.5,
+        "endTimeSec": 84.5,
+        "text": "Không khóc nhè để mẹ trồng cây trái",
+        "translation": "I don't cry so mother can grow fruit trees"
+      },
+      {
+        "startTimeSec": 84.8,
+        "endTimeSec": 88.8,
+        "text": "Ba vào nhà máy ông bà vui cấy cày",
+        "translation": "Father works in the factory, grandparents happily farm"
+      },
+      {
+        "startTimeSec": 89,
+        "endTimeSec": 93,
         "text": "La la la, là la la la!",
         "translation": "La la la, la la la la!"
       }
@@ -270,56 +300,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_rua-mat-nhu-meo.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Meo meo meo, rửa mặt như mèo",
-        "translation": "Meow meow meow, washing face like a kitten"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Sâu sâu lắm chẳng được mẹ yêu",
-        "translation": "Not very clean, mother will not praise"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Khăn mặt đâu mà ngồi liếm mép",
-        "translation": "Where is your clean towel instead of licking paws"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Đau mắt rồi lại khóc meo meo!",
-        "translation": "Sore eyes will make kitten cry meow meow!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Meo meo meo, rửa mặt như mèo",
-        "translation": "Meow meow meow, washing face like a kitten"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Sâu sâu lắm chẳng được mẹ yêu",
-        "translation": "Not very clean, mother will not praise"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Khăn mặt đâu mà ngồi liếm mép",
-        "translation": "Where is your clean towel instead of licking paws"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Đau mắt rồi lại khóc meo meo!",
-        "translation": "Sore eyes will make kitten cry meow meow!"
-      }
-    ],
     "englishTranslation": [
       "Meow meow meow, washing face like a kitten",
       "Not very clean, mother will not praise",
@@ -403,7 +383,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_di-hoc.webp",
     "isVocalTrack": false,
-    "timedLyrics": [],
     "englishTranslation": [
       "Yesterday mother guided my steps to school",
       "Today mother goes to the terrace field",
@@ -510,56 +489,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_truong-chung-chau-la-truong-mam-non.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Ai hỏi cháu cháu học trường nào đây?",
-        "translation": "Who is asking where is my preschool?"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Bé mà ngoan lại múa hát thật hay!",
-        "translation": "Come here and visit, our school is so lovely"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Cô là mẹ và các cháu là con",
-        "translation": "Lots of pretty toys and kind teacher"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Trường của cháu đây là trường mầm non!",
-        "translation": "Our school is a cheerful kindergarten!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Ai hỏi cháu cháu học trường nào đây?",
-        "translation": "Who is asking where is my preschool?"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Bé mà ngoan lại múa hát thật hay!",
-        "translation": "Come here and visit, our school is so lovely"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Cô là mẹ và các cháu là con",
-        "translation": "Lots of pretty toys and kind teacher"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Trường của cháu đây là trường mầm non!",
-        "translation": "Our school is a cheerful kindergarten!"
-      }
-    ],
     "englishTranslation": [
       "Who is asking where is my preschool?",
       "Come here and visit, our school is so lovely",
@@ -656,96 +585,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_con-co-be-be.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Con cò bé bé",
-        "translation": "Little white egret perched on the bamboo branch"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Nó đậu cành tre",
-        "translation": "Where are you going without asking your mother?"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Đi không hỏi mẹ",
-        "translation": "Now that I ask, mother loves me so much"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Biết đi đường nào?",
-        "translation": "Going out I say hello, coming back I say hello!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Khi đi em hỏi"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Khi về em chào"
-      },
-      {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Miệng em chúm chím"
-      },
-      {
-        "startTimeSec": 29,
-        "endTimeSec": 31.8,
-        "text": "Mẹ có yêu không nào!"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Con cò bé bé",
-        "translation": "Little white egret perched on the bamboo branch"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Nó đậu cành tre",
-        "translation": "Where are you going without asking your mother?"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Đi không hỏi mẹ",
-        "translation": "Now that I ask, mother loves me so much"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Biết đi đường nào?",
-        "translation": "Going out I say hello, coming back I say hello!"
-      },
-      {
-        "startTimeSec": 52,
-        "endTimeSec": 54.8,
-        "text": "Khi đi em hỏi"
-      },
-      {
-        "startTimeSec": 55,
-        "endTimeSec": 57.8,
-        "text": "Khi về em chào"
-      },
-      {
-        "startTimeSec": 58,
-        "endTimeSec": 60.8,
-        "text": "Miệng em chúm chím"
-      },
-      {
-        "startTimeSec": 61,
-        "endTimeSec": 63.8,
-        "text": "Mẹ có yêu không nào!"
-      }
-    ],
     "englishTranslation": [
       "Little white egret perched on the bamboo branch",
       "Where are you going without asking your mother?",
@@ -858,56 +697,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_ca-nha-thuong-nhau.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Ba thương con vì con giống mẹ",
-        "translation": "Daddy loves baby because baby looks like mommy"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Mẹ thương con vì con giống ba",
-        "translation": "Mommy loves baby because baby looks like daddy"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Cả nhà ta cùng thương yêu nhau",
-        "translation": "Our whole happy family loves one another"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Xa là nhớ, gần nhau là cười!",
-        "translation": "When apart we miss, when together we smile!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Ba thương con vì con giống mẹ",
-        "translation": "Daddy loves baby because baby looks like mommy"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Mẹ thương con vì con giống ba",
-        "translation": "Mommy loves baby because baby looks like daddy"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Cả nhà ta cùng thương yêu nhau",
-        "translation": "Our whole happy family loves one another"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Xa là nhớ, gần nhau là cười!",
-        "translation": "When apart we miss, when together we smile!"
-      }
-    ],
     "englishTranslation": [
       "Daddy loves baby because baby looks like mommy",
       "Mommy loves baby because baby looks like daddy",
@@ -996,56 +785,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_chau-yeu-ba.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Bà ơi bà, cháu yêu bà lắm",
-        "translation": "Dear grandma, I love you so much"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Tóc bà trắng, màu trắng như mây",
-        "translation": "Your hair is pure white like fluffy clouds"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Cháu yêu bà, cháu nắm bàn tay",
-        "translation": "I love you and gently hold your hand"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Khi cháu vâng lời, cháu biết bà vui!",
-        "translation": "When I listen obediently, I know you are joyful!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Bà ơi bà, cháu yêu bà lắm",
-        "translation": "Dear grandma, I love you so much"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Tóc bà trắng, màu trắng như mây",
-        "translation": "Your hair is pure white like fluffy clouds"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Cháu yêu bà, cháu nắm bàn tay",
-        "translation": "I love you and gently hold your hand"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Khi cháu vâng lời, cháu biết bà vui!",
-        "translation": "When I listen obediently, I know you are joyful!"
-      }
-    ],
     "englishTranslation": [
       "Dear grandma, I love you so much",
       "Your hair is pure white like fluffy clouds",
@@ -1142,56 +881,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_mot-con-vit.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Một con vịt xòe ra hai cái cánh",
-        "translation": "One little duckling spreads out two wings"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Nó kêu rằng: Cáp cáp cáp, cạp cạp cạp!",
-        "translation": "Quacking loudly: Quack quack quack!"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Gặp hồ nước nó bì bõm bì bõm",
-        "translation": "Seeing the blue pond, it splashes playfully"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Lên bờ vẫy cái cánh cho khô!",
-        "translation": "Stepping ashore, it flaps wings dry in the sun!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Một con vịt xòe ra hai cái cánh",
-        "translation": "One little duckling spreads out two wings"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Nó kêu rằng: Cáp cáp cáp, cạp cạp cạp!",
-        "translation": "Quacking loudly: Quack quack quack!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Gặp hồ nước nó bì bõm bì bõm",
-        "translation": "Seeing the blue pond, it splashes playfully"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Lên bờ vẫy cái cánh cho khô!",
-        "translation": "Stepping ashore, it flaps wings dry in the sun!"
-      }
-    ],
     "englishTranslation": [
       "One little duckling spreads out two wings",
       "Quacking loudly: Quack quack quack!",
@@ -1272,96 +961,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_ca-vang-boi.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Hai vây xinh xinh",
-        "translation": "Two little goldfish swim in a crystal tank"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Cá vàng bơi trong bể nước",
-        "translation": "Dancing up and down so graceful and quick"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Ngoi lên, lặn xuống",
-        "translation": "Two goldfish swim so swiftly"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Cá vàng múa tung tăng",
-        "translation": "Catching pesky bugs to keep the water clean!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Hai vây xinh xinh"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Sao mà bơi nhanh thế?"
-      },
-      {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Cá vàng thấy bọ gậy nên đuổi theo rất nhanh"
-      },
-      {
-        "startTimeSec": 29,
-        "endTimeSec": 31.8,
-        "text": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Hai vây xinh xinh",
-        "translation": "Two little goldfish swim in a crystal tank"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Cá vàng bơi trong bể nước",
-        "translation": "Dancing up and down so graceful and quick"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Ngoi lên, lặn xuống",
-        "translation": "Two goldfish swim so swiftly"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Cá vàng múa tung tăng",
-        "translation": "Catching pesky bugs to keep the water clean!"
-      },
-      {
-        "startTimeSec": 52,
-        "endTimeSec": 54.8,
-        "text": "Hai vây xinh xinh"
-      },
-      {
-        "startTimeSec": 55,
-        "endTimeSec": 57.8,
-        "text": "Sao mà bơi nhanh thế?"
-      },
-      {
-        "startTimeSec": 58,
-        "endTimeSec": 60.8,
-        "text": "Cá vàng thấy bọ gậy nên đuổi theo rất nhanh"
-      },
-      {
-        "startTimeSec": 61,
-        "endTimeSec": 63.8,
-        "text": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!"
-      }
-    ],
     "englishTranslation": [
       "Two little goldfish swim in a crystal tank",
       "Dancing up and down so graceful and quick",
@@ -1450,56 +1049,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_kia-con-buom-vang.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Kìa con bướm vàng, kìa con bướm vàng",
-        "translation": "Look at the lovely yellow butterfly"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Xòe đôi cánh, xòe đôi cánh",
-        "translation": "Spreading out two bright colorful wings"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Bươm bướm bay đôi ba vòng, bươm bướm bay đôi ba vòng",
-        "translation": "Flying round and round in the fresh air"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Tung cánh bay, tung cánh bay!",
-        "translation": "Flapping wings, flapping wings in the breeze!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Kìa con bướm vàng, kìa con bướm vàng",
-        "translation": "Look at the lovely yellow butterfly"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Xòe đôi cánh, xòe đôi cánh",
-        "translation": "Spreading out two bright colorful wings"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Bươm bướm bay đôi ba vòng, bươm bướm bay đôi ba vòng",
-        "translation": "Flying round and round in the fresh air"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Tung cánh bay, tung cánh bay!",
-        "translation": "Flapping wings, flapping wings in the breeze!"
-      }
-    ],
     "englishTranslation": [
       "Look at the lovely yellow butterfly",
       "Spreading out two bright colorful wings",
@@ -1599,86 +1148,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_ba-ngon-nen-lung-linh.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Ba là cây nến vàng",
-        "translation": "Yellow candle represents strong father"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Mẹ là cây nến xanh",
-        "translation": "Pink candle represents gentle mother"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Con là cây nến hồng",
-        "translation": "Blue candle represents cheerful baby"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Ba ngọn nến lung linh",
-        "translation": "Three bright candles light up a happy home!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Thắp sáng một gia đình!"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Gia đình gia đình, ôm ấp những ngày thơ"
-      },
-      {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Cho ta bao tình thương đi suốt cả cuộc đời!"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Ba là cây nến vàng",
-        "translation": "Yellow candle represents strong father"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Mẹ là cây nến xanh",
-        "translation": "Pink candle represents gentle mother"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Con là cây nến hồng",
-        "translation": "Blue candle represents cheerful baby"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Ba ngọn nến lung linh",
-        "translation": "Three bright candles light up a happy home!"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Thắp sáng một gia đình!"
-      },
-      {
-        "startTimeSec": 52,
-        "endTimeSec": 54.8,
-        "text": "Gia đình gia đình, ôm ấp những ngày thơ"
-      },
-      {
-        "startTimeSec": 55,
-        "endTimeSec": 57.8,
-        "text": "Cho ta bao tình thương đi suốt cả cuộc đời!"
-      }
-    ],
     "englishTranslation": [
       "Yellow candle represents strong father",
       "Pink candle represents gentle mother",
@@ -1757,76 +1226,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_bo-la-tat-ca.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Bố là tàu lửa, bố là xe hơi",
-        "translation": "Daddy is a train engine chugging ahead"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Bố là con ngựa em cưỡi em chơi",
-        "translation": "Daddy is a sturdy horse giving me rides"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Bố là thuyền lớn cho em vượt sóng",
-        "translation": "Daddy is a ship sailing across oceans"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Bố là sông rộng cho thuyền em bơi",
-        "translation": "Daddy is the whole world of wonder for me!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Bố là bờ đê cho em nằm ngủ"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Bố là phi thuyền đưa em lên trời!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Bố là tàu lửa, bố là xe hơi",
-        "translation": "Daddy is a train engine chugging ahead"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Bố là con ngựa em cưỡi em chơi",
-        "translation": "Daddy is a sturdy horse giving me rides"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Bố là thuyền lớn cho em vượt sóng",
-        "translation": "Daddy is a ship sailing across oceans"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Bố là sông rộng cho thuyền em bơi",
-        "translation": "Daddy is the whole world of wonder for me!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Bố là bờ đê cho em nằm ngủ"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Bố là phi thuyền đưa em lên trời!"
-      }
-    ],
     "englishTranslation": [
       "Daddy is a train engine chugging ahead",
       "Daddy is a sturdy horse giving me rides",
@@ -1911,56 +1310,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_co-va-me.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Lúc ở nhà mẹ cũng là cô giáo",
-        "translation": "At home, mommy is also like a teacher"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Khi đến trường cô giáo như mẹ hiền",
-        "translation": "At school, teacher is just like a sweet mommy"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Cô và mẹ là hai cô giáo",
-        "translation": "Teacher and mommy are two gentle mothers"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Mẹ và cô ấy hai mẹ hiền!",
-        "translation": "Mommy and teacher are two radiant smiles!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Lúc ở nhà mẹ cũng là cô giáo",
-        "translation": "At home, mommy is also like a teacher"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Khi đến trường cô giáo như mẹ hiền",
-        "translation": "At school, teacher is just like a sweet mommy"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Cô và mẹ là hai cô giáo",
-        "translation": "Teacher and mommy are two gentle mothers"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Mẹ và cô ấy hai mẹ hiền!",
-        "translation": "Mommy and teacher are two radiant smiles!"
-      }
-    ],
     "englishTranslation": [
       "At home, mommy is also like a teacher",
       "At school, teacher is just like a sweet mommy",
@@ -2043,76 +1392,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_con-heo-dat.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Mẹ mua cho con heo đất",
-        "translation": "Mom bought for me a cute ceramic piggy bank"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Mẹ mua cho con heo đất, í o i ò!",
-        "translation": "Feeding it small coins each happy day"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Ngày hôm nay em vui lắm",
-        "translation": "Piggy does not eat bran, piggy only saves"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Cầm đồng tiền nhỏ em nhét vào bụng heo!",
-        "translation": "Helping me learn to save for school supplies!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Em không thèm ăn kem, em không thèm mua kẹo"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Em để dành tiền nuôi heo đất lớn nhanh!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Mẹ mua cho con heo đất",
-        "translation": "Mom bought for me a cute ceramic piggy bank"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Mẹ mua cho con heo đất, í o i ò!",
-        "translation": "Feeding it small coins each happy day"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Ngày hôm nay em vui lắm",
-        "translation": "Piggy does not eat bran, piggy only saves"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Cầm đồng tiền nhỏ em nhét vào bụng heo!",
-        "translation": "Helping me learn to save for school supplies!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Em không thèm ăn kem, em không thèm mua kẹo"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Em để dành tiền nuôi heo đất lớn nhanh!"
-      }
-    ],
     "englishTranslation": [
       "Mom bought for me a cute ceramic piggy bank",
       "Feeding it small coins each happy day",
@@ -2193,56 +1472,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_chu-ech-con.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Kìa chú là chú ếch con, có hai là hai mắt tròn",
-        "translation": "Little frog sitting on a green lotus leaf"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Chú ngồi học bài một mình bên hố bom kề vườn xoan",
-        "translation": "Big round eyes reading his morning lesson"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Bao cô cá trê non cùng bao chú cá rô ron",
-        "translation": "Two little birds singing on the tree branch"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!",
-        "translation": "Praising the diligent little froggy scholar!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Kìa chú là chú ếch con, có hai là hai mắt tròn",
-        "translation": "Little frog sitting on a green lotus leaf"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Chú ngồi học bài một mình bên hố bom kề vườn xoan",
-        "translation": "Big round eyes reading his morning lesson"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Bao cô cá trê non cùng bao chú cá rô ron",
-        "translation": "Two little birds singing on the tree branch"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!",
-        "translation": "Praising the diligent little froggy scholar!"
-      }
-    ],
     "englishTranslation": [
       "Little frog sitting on a green lotus leaf",
       "Big round eyes reading his morning lesson",
@@ -2329,76 +1558,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_dan-ga-con.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Trông kìa đàn gà con lông vàng",
-        "translation": "Look at the yellow chicks in the sunny garden"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Đi theo mẹ tìm ăn trong vườn",
-        "translation": "Feathers fluffy like warm golden balls"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Cùng tìm mồi ăn ngon ngon",
-        "translation": "Pecking tiny seeds with mother hen"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Đàn gà con đi lon ton!",
-        "translation": "Chirping happily: Cheep cheep cheep!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Thóc vãi rồi nhặt ăn cho nhiều"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Uống nước vào là no căng diều!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Trông kìa đàn gà con lông vàng",
-        "translation": "Look at the yellow chicks in the sunny garden"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Đi theo mẹ tìm ăn trong vườn",
-        "translation": "Feathers fluffy like warm golden balls"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Cùng tìm mồi ăn ngon ngon",
-        "translation": "Pecking tiny seeds with mother hen"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Đàn gà con đi lon ton!",
-        "translation": "Chirping happily: Cheep cheep cheep!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Thóc vãi rồi nhặt ăn cho nhiều"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Uống nước vào là no căng diều!"
-      }
-    ],
     "englishTranslation": [
       "Look at the yellow chicks in the sunny garden",
       "Feathers fluffy like warm golden balls",
@@ -2495,96 +1654,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_chu-voi-con-o-ban-don.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Chú voi con ở Bản Đôn",
-        "translation": "Baby elephant living in Ban Don village"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Chưa có ngà nên còn trẻ con",
-        "translation": "Still so little without any ivory yet"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Từ rừng già chú đến với người",
-        "translation": "Eating sweet bananas and splashing by the stream"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Rất ham ăn với lại ham chơi!",
-        "translation": "Growing big and strong to help our village!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Voi con ơi, voi con ơi!"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Mau lớn nhanh có đôi ngà to"
-      },
-      {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Có sức đi khắp miền rừng xa"
-      },
-      {
-        "startTimeSec": 29,
-        "endTimeSec": 31.8,
-        "text": "Kéo gỗ cho buôn làng của ta!"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Chú voi con ở Bản Đôn",
-        "translation": "Baby elephant living in Ban Don village"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Chưa có ngà nên còn trẻ con",
-        "translation": "Still so little without any ivory yet"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Từ rừng già chú đến với người",
-        "translation": "Eating sweet bananas and splashing by the stream"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Rất ham ăn với lại ham chơi!",
-        "translation": "Growing big and strong to help our village!"
-      },
-      {
-        "startTimeSec": 52,
-        "endTimeSec": 54.8,
-        "text": "Voi con ơi, voi con ơi!"
-      },
-      {
-        "startTimeSec": 55,
-        "endTimeSec": 57.8,
-        "text": "Mau lớn nhanh có đôi ngà to"
-      },
-      {
-        "startTimeSec": 58,
-        "endTimeSec": 60.8,
-        "text": "Có sức đi khắp miền rừng xa"
-      },
-      {
-        "startTimeSec": 61,
-        "endTimeSec": 63.8,
-        "text": "Kéo gỗ cho buôn làng của ta!"
-      }
-    ],
     "englishTranslation": [
       "Baby elephant living in Ban Don village",
       "Still so little without any ivory yet",
@@ -2671,76 +1740,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_bac-kim-thang.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Bắc kim thang cà lang bí rợ",
-        "translation": "Bac kim thang balancing on the wooden stile"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Cột qua kèo là kèo qua cột",
-        "translation": "Spur-of-the-moment folk rhyme game"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Chú bán dầu qua cầu mà té",
-        "translation": "Singing together in rhythm and clapping"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Chú bán ếch ở lại làm chi",
-        "translation": "Joyful laughter across the playground!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Con chim le le bổ trống thổi kèn"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Con bìm bịp thổi tò tí te tò te!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Bắc kim thang cà lang bí rợ",
-        "translation": "Bac kim thang balancing on the wooden stile"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Cột qua kèo là kèo qua cột",
-        "translation": "Spur-of-the-moment folk rhyme game"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Chú bán dầu qua cầu mà té",
-        "translation": "Singing together in rhythm and clapping"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Chú bán ếch ở lại làm chi",
-        "translation": "Joyful laughter across the playground!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Con chim le le bổ trống thổi kèn"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Con bìm bịp thổi tò tí te tò te!"
-      }
-    ],
     "englishTranslation": [
       "Bac kim thang balancing on the wooden stile",
       "Spur-of-the-moment folk rhyme game",
@@ -2822,7 +1821,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_ngay-dau-tien-di-hoc.webp",
     "isVocalTrack": false,
-    "timedLyrics": [],
     "englishTranslation": [
       "The very first day going to school",
       "Mother held my hand, I cried softly",
@@ -2852,7 +1850,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Có cô giáo đón em vào lớp học!"
     ],
     "funFactVi": "Bước chân rộn rã tới lớp mầm non đón chào ngày học mới.",
-    "audioUrl": "https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Em%20%C4%90i%20M%E1%BA%ABu%20Gi%C3%A1o.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -2900,77 +1897,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_em-di-mau-giao.webp",
-    "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Nắng vừa lên em đi mẫu giáo",
-        "translation": "Sunny morning birds chirp in the branches"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Chim chuyền cành hót véo von",
-        "translation": "I put on my backpack and walk to class"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Mẹ dắt tay em đi trên đường làng",
-        "translation": "Teacher welcomes me with open loving arms"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Em mỉm cười chào chú công an!",
-        "translation": "Preschool is my joyful second home!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Đến trường rồi vui ơi là vui"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Có cô giáo đón em vào lớp học!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Nắng vừa lên em đi mẫu giáo",
-        "translation": "Sunny morning birds chirp in the branches"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Chim chuyền cành hót véo von",
-        "translation": "I put on my backpack and walk to class"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Mẹ dắt tay em đi trên đường làng",
-        "translation": "Teacher welcomes me with open loving arms"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Em mỉm cười chào chú công an!",
-        "translation": "Preschool is my joyful second home!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Đến trường rồi vui ơi là vui"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Có cô giáo đón em vào lớp học!"
-      }
-    ],
+    "isVocalTrack": false,
     "englishTranslation": [
       "Sunny morning birds chirp in the branches",
       "I put on my backpack and walk to class",
@@ -3060,7 +1987,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_em-yeu-truong-em.webp",
     "isVocalTrack": false,
-    "timedLyrics": [],
     "englishTranslation": [
       "I love my school with all my good friends",
       "And kind teachers loving like mother",
@@ -3090,7 +2016,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Trường mầm non thân yêu!"
     ],
     "funFactVi": "Lời tạm biệt trường mầm non bước vào lớp một tự tin, chững chạc.",
-    "audioUrl": "https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tam%20Biet%20Bup%20Be%20Than%20Yeu.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -3166,77 +2091,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_tam-biet-bup-be.webp",
-    "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Tạm biệt búp bê thân yêu",
-        "translation": "Goodbye lovely doll, goodbye cute teddy bear"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Tạm biệt gấu mi-sa nhé",
-        "translation": "Goodbye yellow birdie, now I enter grade one"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Tạm biệt thỏ trắng mắt tròn",
-        "translation": "I will remember my dear kindergarten school"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Mai tôi vào lớp một rồi!",
-        "translation": "Carrying sweet memories into grade one!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Nhớ lắm quên sao được"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Trường mầm non thân yêu!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Tạm biệt búp bê thân yêu",
-        "translation": "Goodbye lovely doll, goodbye cute teddy bear"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Tạm biệt gấu mi-sa nhé",
-        "translation": "Goodbye yellow birdie, now I enter grade one"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Tạm biệt thỏ trắng mắt tròn",
-        "translation": "I will remember my dear kindergarten school"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Mai tôi vào lớp một rồi!",
-        "translation": "Carrying sweet memories into grade one!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Nhớ lắm quên sao được"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Trường mầm non thân yêu!"
-      }
-    ],
+    "isVocalTrack": false,
     "englishTranslation": [
       "Goodbye lovely doll, goodbye cute teddy bear",
       "Goodbye yellow birdie, now I enter grade one",
@@ -3318,66 +2173,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_tap-the-duc-buoi-sang.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Một hai ba, hít thở thật sâu",
-        "translation": "One two three, breathe in fresh morning air"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Hai tay giơ lên cao qua đầu",
-        "translation": "Hands up high, stretch wide to both sides"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Nghiêng sang trái, nghiêng sang phải",
-        "translation": "Hands on waist, jump merrily in place"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Bé tập thể dục cho người khỏe dai!",
-        "translation": "Healthy exercise makes body strong and alert!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Chạy nhảy tung tăng đón ánh bình minh!"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Một hai ba, hít thở thật sâu",
-        "translation": "One two three, breathe in fresh morning air"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Hai tay giơ lên cao qua đầu",
-        "translation": "Hands up high, stretch wide to both sides"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Nghiêng sang trái, nghiêng sang phải",
-        "translation": "Hands on waist, jump merrily in place"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Bé tập thể dục cho người khỏe dai!",
-        "translation": "Healthy exercise makes body strong and alert!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Chạy nhảy tung tăng đón ánh bình minh!"
-      }
-    ],
     "englishTranslation": [
       "One two three, breathe in fresh morning air",
       "Hands up high, stretch wide to both sides",
@@ -3459,7 +2254,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_chiec-den-ong-sao.webp",
     "isVocalTrack": false,
-    "timedLyrics": [],
     "englishTranslation": [
       "Star lantern with five colorful glowing points",
       "Holding lantern high on Mid-Autumn night",
@@ -3489,7 +2283,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Cùng bay nào cho trái đất quay!"
     ],
     "funFactVi": "Khát vọng hòa bình, tình hữu nghị giữa trẻ em trên toàn thế giới.",
-    "audioUrl": "https://ia600607.us.archive.org/1/items/rua-mat-nhu-meo/Tr%C3%A1i%20%C4%90%E1%BA%A5t%20N%C3%A0y%20L%C3%A0%20C%E1%BB%A7a%20Ch%C3%BAng%20M%C3%ACnh.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -3545,77 +2338,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       }
     ],
     "cover": "/assets/music/covers/music_cover_trai-dat-nay-la-cua-chung-minh.webp",
-    "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Trái đất này là của chúng mình",
-        "translation": "This earth belongs to all of us children"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Quả bóng xanh bay giữa trời xanh",
-        "translation": "Golden fruit of peace, shining sun of hope"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Bồ câu ơi tiếng chim gù thương mến",
-        "translation": "White doves flying across the blue sky"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Hải âu ơi cánh chim vờn sóng biển",
-        "translation": "Singing for a peaceful and loving world!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Cùng bay nào cho trái đất quay!"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Cùng bay nào cho trái đất quay!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Trái đất này là của chúng mình",
-        "translation": "This earth belongs to all of us children"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Quả bóng xanh bay giữa trời xanh",
-        "translation": "Golden fruit of peace, shining sun of hope"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Bồ câu ơi tiếng chim gù thương mến",
-        "translation": "White doves flying across the blue sky"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Hải âu ơi cánh chim vờn sóng biển",
-        "translation": "Singing for a peaceful and loving world!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Cùng bay nào cho trái đất quay!"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Cùng bay nào cho trái đất quay!"
-      }
-    ],
+    "isVocalTrack": false,
     "englishTranslation": [
       "This earth belongs to all of us children",
       "Golden fruit of peace, shining sun of hope",
@@ -3697,66 +2420,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_hong-dam-dau.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Trên cành cao chim hót líu lo",
-        "translation": "Friends call me out to play and skip study"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Mời em ra ngoài kia cùng chơi đá bóng",
-        "translation": "I say no way, learning comes first today"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Hổng dám đâu, em còn phải học bài!",
-        "translation": "Doing all my homework before going out to play"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Học bài xong rồi em mới đi chơi",
-        "translation": "Diligent child earns high marks and praise!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Cô giáo khen em bé ngoan chăm chỉ!"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Trên cành cao chim hót líu lo",
-        "translation": "Friends call me out to play and skip study"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Mời em ra ngoài kia cùng chơi đá bóng",
-        "translation": "I say no way, learning comes first today"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Hổng dám đâu, em còn phải học bài!",
-        "translation": "Doing all my homework before going out to play"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Học bài xong rồi em mới đi chơi",
-        "translation": "Diligent child earns high marks and praise!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Cô giáo khen em bé ngoan chăm chỉ!"
-      }
-    ],
     "englishTranslation": [
       "Friends call me out to play and skip study",
       "I say no way, learning comes first today",
@@ -3857,76 +2520,64 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "A B C D E F G",
-        "translation": "A B C D E F G"
+        "startTimeSec": 1.8,
+        "endTimeSec": 4.8,
+        "text": "A - B - C - D - E - F - G",
+        "translation": "Chữ cái A B C D E F G"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "H I J K L M N O P",
-        "translation": "H I J K L M N O P"
+        "startTimeSec": 5,
+        "endTimeSec": 8.5,
+        "text": "H - I - J - K - L - M - N - O - P",
+        "translation": "Chữ cái H I J K L M N O P"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Q R S, T U V",
-        "translation": "Q R S, T U V"
+        "startTimeSec": 8.8,
+        "endTimeSec": 12.2,
+        "text": "Q - R - S, T - U - V",
+        "translation": "Chữ cái Q R S, T U V"
+      },
+      {
+        "startTimeSec": 12.5,
+        "endTimeSec": 16.5,
+        "text": "W - X, Y and Z",
+        "translation": "Chữ cái W X, Y và Z"
       },
       {
         "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "W X, Y and Z",
-        "translation": "W X, Y and Z"
+        "endTimeSec": 22.5,
+        "text": "Now I know my ABCs, next time won't you sing with me?",
+        "translation": "Bây giờ bé đã thuộc bảng chữ cái rồi đấy!"
       },
       {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Now I know my ABCs",
-        "translation": "Bây giờ bé đã thuộc bài ca bảng chữ cái"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Next time won't you sing with me!",
-        "translation": "Lần tới bạn có muốn cùng hát với bé không?"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "A B C D E F G",
-        "translation": "A B C D E F G"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "H I J K L M N O P",
-        "translation": "H I J K L M N O P"
+        "startTimeSec": 35.8,
+        "endTimeSec": 39.5,
+        "text": "A - B - C - D - E - F - G",
+        "translation": "Chữ cái A B C D E F G"
       },
       {
         "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Q R S, T U V",
-        "translation": "Q R S, T U V"
+        "endTimeSec": 43.5,
+        "text": "H - I - J - K - L - M - N - O - P",
+        "translation": "Chữ cái H I J K L M N O P"
       },
       {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "W X, Y and Z",
-        "translation": "W X, Y and Z"
+        "startTimeSec": 44,
+        "endTimeSec": 47.5,
+        "text": "Q - R - S, T - U - V",
+        "translation": "Chữ cái Q R S, T U V"
       },
       {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Now I know my ABCs",
-        "translation": "Bây giờ bé đã thuộc bài ca bảng chữ cái"
+        "startTimeSec": 48,
+        "endTimeSec": 52,
+        "text": "W - X, Y and Z",
+        "translation": "Chữ cái W X, Y và Z"
       },
       {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Next time won't you sing with me!",
-        "translation": "Lần tới bạn có muốn cùng hát với bé không?"
+        "startTimeSec": 52.5,
+        "endTimeSec": 61.5,
+        "text": "Now I know my ABCs, 26 letters from A to Z!",
+        "translation": "26 chữ cái tiếng Anh bé đã thuộc làu!"
       }
     ]
   },
@@ -4013,76 +2664,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_twinkle-twinkle-little-star.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Twinkle, twinkle, little star,",
-        "translation": "Ngôi sao nhỏ lấp lánh trên bầu trời đêm"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "How I wonder what you are!",
-        "translation": "Bé tự hỏi bạn là điều kỳ diệu phương nào"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Up above the world so high,",
-        "translation": "Tít trên cao vút trên thế gian này"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Like a diamond in the sky.",
-        "translation": "Giống như viên kim cương sáng rực trên bầu trời!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Twinkle, twinkle, little star,"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "How I wonder what you are!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Twinkle, twinkle, little star,",
-        "translation": "Ngôi sao nhỏ lấp lánh trên bầu trời đêm"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "How I wonder what you are!",
-        "translation": "Bé tự hỏi bạn là điều kỳ diệu phương nào"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Up above the world so high,",
-        "translation": "Tít trên cao vút trên thế gian này"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Like a diamond in the sky.",
-        "translation": "Giống như viên kim cương sáng rực trên bầu trời!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Twinkle, twinkle, little star,"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "How I wonder what you are!"
-      }
-    ],
     "englishTranslation": [
       "Ngôi sao nhỏ lấp lánh trên bầu trời đêm",
       "Bé tự hỏi bạn là điều kỳ diệu phương nào",
@@ -4164,66 +2745,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_old-macdonald-had-a-farm.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Old MacDonald had a farm, E-I-E-I-O!",
-        "translation": "Bác MacDonald có một trang trại vui vẻ, E-I-E-I-O"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "And on that farm he had a cow, E-I-E-I-O!",
-        "translation": "Và trên nông trại bác nuôi những chú bò sữa, E-I-E-I-O"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "With a moo moo here, and a moo moo there,",
-        "translation": "Với tiếng kêu: Ùm bò nơi đây, ùm bò nơi đó"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Here a moo, there a moo, everywhere a moo moo!",
-        "translation": "Nông trại của bác MacDonald thật rộn ràng!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Old MacDonald had a farm, E-I-E-I-O!"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Old MacDonald had a farm, E-I-E-I-O!",
-        "translation": "Bác MacDonald có một trang trại vui vẻ, E-I-E-I-O"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "And on that farm he had a cow, E-I-E-I-O!",
-        "translation": "Và trên nông trại bác nuôi những chú bò sữa, E-I-E-I-O"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "With a moo moo here, and a moo moo there,",
-        "translation": "Với tiếng kêu: Ùm bò nơi đây, ùm bò nơi đó"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Here a moo, there a moo, everywhere a moo moo!",
-        "translation": "Nông trại của bác MacDonald thật rộn ràng!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Old MacDonald had a farm, E-I-E-I-O!"
-      }
-    ],
     "englishTranslation": [
       "Bác MacDonald có một trang trại vui vẻ, E-I-E-I-O",
       "Và trên nông trại bác nuôi những chú bò sữa, E-I-E-I-O",
@@ -4306,76 +2827,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_the-wheels-on-the-bus.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "The wheels on the bus go round and round,",
-        "translation": "Những bánh xe buýt cứ xoay tròn xoay tròn"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Round and round, round and round.",
-        "translation": "Xoay tròn suốt cả ngày trên khắp nẻo đường"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "The wheels on the bus go round and round,",
-        "translation": "Cần gạt nước kêu vun vút, vun vút, vun vút"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "All through the town!",
-        "translation": "Tiếng còi xe kêu: Bim bim bim cho bé tới trường!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "The horn on the bus goes beep beep beep,"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "The wipers on the bus go swish swish swish!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "The wheels on the bus go round and round,",
-        "translation": "Những bánh xe buýt cứ xoay tròn xoay tròn"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Round and round, round and round.",
-        "translation": "Xoay tròn suốt cả ngày trên khắp nẻo đường"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "The wheels on the bus go round and round,",
-        "translation": "Cần gạt nước kêu vun vút, vun vút, vun vút"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "All through the town!",
-        "translation": "Tiếng còi xe kêu: Bim bim bim cho bé tới trường!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "The horn on the bus goes beep beep beep,"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "The wipers on the bus go swish swish swish!"
-      }
-    ],
     "englishTranslation": [
       "Những bánh xe buýt cứ xoay tròn xoay tròn",
       "Xoay tròn suốt cả ngày trên khắp nẻo đường",
@@ -4444,56 +2895,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_baa-baa-black-sheep.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Baa, baa, black sheep, have you any wool?",
-        "translation": "Cừu đen ơi cừu có cuộn len nào không?"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Yes, sir, yes, sir, three bags full!",
-        "translation": "Dạ có chứ, cháu có tận ba túi len đầy"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "One for the master, and one for the dame,",
-        "translation": "Một túi cho ông chủ, một túi cho bà chủ"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "And one for the little boy who lives down the lane.",
-        "translation": "Và một túi cho em bé ngoan sống ở cuối đường!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Baa, baa, black sheep, have you any wool?",
-        "translation": "Cừu đen ơi cừu có cuộn len nào không?"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Yes, sir, yes, sir, three bags full!",
-        "translation": "Dạ có chứ, cháu có tận ba túi len đầy"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "One for the master, and one for the dame,",
-        "translation": "Một túi cho ông chủ, một túi cho bà chủ"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "And one for the little boy who lives down the lane.",
-        "translation": "Và một túi cho em bé ngoan sống ở cuối đường!"
-      }
-    ],
     "englishTranslation": [
       "Cừu đen ơi cừu có cuộn len nào không?",
       "Dạ có chứ, cháu có tận ba túi len đầy",
@@ -4564,76 +2965,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_if-youre-happy-and-you-know-it.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "If you're happy and you know it, and you really want to show it,",
-        "translation": "Nếu bạn vui vẻ và muốn lan tỏa điều đó"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Hãy cùng vỗ tay thật to nào bạn ơi!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "If you're happy and you know it, stomp your feet! (Stomp, stomp!)"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "If you're happy and you know it, shout hurray! (Hurray!)"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "If you're happy and you know it, and you really want to show it,",
-        "translation": "Nếu bạn vui vẻ và muốn lan tỏa điều đó"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "If you're happy and you know it, clap your hands! (Clap, clap!)",
-        "translation": "Hãy cùng vỗ tay thật to nào bạn ơi!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "If you're happy and you know it, stomp your feet! (Stomp, stomp!)"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "If you're happy and you know it, shout hurray! (Hurray!)"
-      }
-    ],
     "englishTranslation": [
       "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!",
       "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!",
@@ -4708,50 +3039,26 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
+        "startTimeSec": 5.8,
+        "endTimeSec": 10.2,
         "text": "Row, row, row your boat",
         "translation": "Chèo chèo chèo con thuyền nhỏ xuôi dòng êm ả"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
+        "startTimeSec": 10.3,
+        "endTimeSec": 14.8,
         "text": "Gently down the stream,",
         "translation": "Thật nhẹ nhàng, thật dịu dàng, cuộc đời tựa giấc mơ"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
+        "startTimeSec": 14.9,
+        "endTimeSec": 19.5,
         "text": "Merrily, merrily, merrily, merrily,",
         "translation": "Chèo chèo chèo con thuyền nhỏ ngắm nhìn dòng suối"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Life is but a dream!",
-        "translation": "Nếu gặp chú cá sấu, đừng quên mỉm cười chào bạn nhé!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Row, row, row your boat",
-        "translation": "Chèo chèo chèo con thuyền nhỏ xuôi dòng êm ả"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Gently down the stream,",
-        "translation": "Thật nhẹ nhàng, thật dịu dàng, cuộc đời tựa giấc mơ"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Merrily, merrily, merrily, merrily,",
-        "translation": "Chèo chèo chèo con thuyền nhỏ ngắm nhìn dòng suối"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
+        "startTimeSec": 19.6,
+        "endTimeSec": 24.8,
         "text": "Life is but a dream!",
         "translation": "Nếu gặp chú cá sấu, đừng quên mỉm cười chào bạn nhé!"
       }
@@ -4828,56 +3135,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_head-shoulders-knees-and-toes.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu, vai, đầu gối và ngón chân"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu gối và ngón chân!"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "And eyes, and ears, and mouth, and nose,",
-        "translation": "Mắt, tai, miệng và mũi nhỏ xinh"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu, vai, đầu gối và ngón chân xinh xắn!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu, vai, đầu gối và ngón chân"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu gối và ngón chân!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "And eyes, and ears, and mouth, and nose,",
-        "translation": "Mắt, tai, miệng và mũi nhỏ xinh"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Head, shoulders, knees and toes, knees and toes!",
-        "translation": "Đầu, vai, đầu gối và ngón chân xinh xắn!"
-      }
-    ],
     "englishTranslation": [
       "Đầu, vai, đầu gối và ngón chân",
       "Đầu gối và ngón chân!",
@@ -4943,66 +3200,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_five-little-monkeys.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Five little monkeys jumping on the bed,",
-        "translation": "Năm chú khỉ con nhảy nhót tung tăng trên giường"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "One fell off and bumped his head!",
-        "translation": "Một chú bị trượt chân ngã u đầu xuống sàn"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Mama called the doctor and the doctor said:",
-        "translation": "Mẹ liền gọi bác sĩ, bác sĩ dặn ngay:"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "\"No more monkeys jumping on the bed!\"",
-        "translation": "Không được nhảy nhót trên giường nữa nhé khỉ con!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Four little monkeys jumping on the bed..."
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Five little monkeys jumping on the bed,",
-        "translation": "Năm chú khỉ con nhảy nhót tung tăng trên giường"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "One fell off and bumped his head!",
-        "translation": "Một chú bị trượt chân ngã u đầu xuống sàn"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Mama called the doctor and the doctor said:",
-        "translation": "Mẹ liền gọi bác sĩ, bác sĩ dặn ngay:"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "\"No more monkeys jumping on the bed!\"",
-        "translation": "Không được nhảy nhót trên giường nữa nhé khỉ con!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Four little monkeys jumping on the bed..."
-      }
-    ],
     "englishTranslation": [
       "Năm chú khỉ con nhảy nhót tung tăng trên giường",
       "Một chú bị trượt chân ngã u đầu xuống sàn",
@@ -5094,166 +3291,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_baby-shark.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Baby shark, doo doo doo doo doo doo!",
-        "translation": "Cá mập con, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Baby shark, doo doo doo doo doo doo!",
-        "translation": "Cá mập mẹ, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Baby shark, doo doo doo doo doo doo, Baby shark!",
-        "translation": "Cá mập bố, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Mommy shark, doo doo doo doo doo doo!",
-        "translation": "Cùng bơi lội dưới đại dương xanh bao la!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Mommy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Mommy shark, doo doo doo doo doo doo, Mommy shark!"
-      },
-      {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Daddy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 29,
-        "endTimeSec": 31.8,
-        "text": "Daddy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 32,
-        "endTimeSec": 34.8,
-        "text": "Daddy shark, doo doo doo doo doo doo, Daddy shark!"
-      },
-      {
-        "startTimeSec": 35,
-        "endTimeSec": 37.8,
-        "text": "Grandma shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 38,
-        "endTimeSec": 40.8,
-        "text": "Grandpa shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 41,
-        "endTimeSec": 43.8,
-        "text": "Let's go hunt, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 44,
-        "endTimeSec": 46.8,
-        "text": "Run away, doo doo doo doo doo doo, Run away!"
-      },
-      {
-        "startTimeSec": 47,
-        "endTimeSec": 49.8,
-        "text": "Safe at last, doo doo doo doo doo doo, Safe at last!"
-      },
-      {
-        "startTimeSec": 50,
-        "endTimeSec": 52.8,
-        "text": "It's the end, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 61,
-        "endTimeSec": 63.8,
-        "text": "Baby shark, doo doo doo doo doo doo!",
-        "translation": "Cá mập con, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 64,
-        "endTimeSec": 66.8,
-        "text": "Baby shark, doo doo doo doo doo doo!",
-        "translation": "Cá mập mẹ, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 67,
-        "endTimeSec": 69.8,
-        "text": "Baby shark, doo doo doo doo doo doo, Baby shark!",
-        "translation": "Cá mập bố, đu đu đu đu đu"
-      },
-      {
-        "startTimeSec": 70,
-        "endTimeSec": 72.8,
-        "text": "Mommy shark, doo doo doo doo doo doo!",
-        "translation": "Cùng bơi lội dưới đại dương xanh bao la!"
-      },
-      {
-        "startTimeSec": 73,
-        "endTimeSec": 75.8,
-        "text": "Mommy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 76,
-        "endTimeSec": 78.8,
-        "text": "Mommy shark, doo doo doo doo doo doo, Mommy shark!"
-      },
-      {
-        "startTimeSec": 79,
-        "endTimeSec": 81.8,
-        "text": "Daddy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 82,
-        "endTimeSec": 84.8,
-        "text": "Daddy shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 85,
-        "endTimeSec": 87.8,
-        "text": "Daddy shark, doo doo doo doo doo doo, Daddy shark!"
-      },
-      {
-        "startTimeSec": 88,
-        "endTimeSec": 90.8,
-        "text": "Grandma shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 91,
-        "endTimeSec": 93.8,
-        "text": "Grandpa shark, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 94,
-        "endTimeSec": 96.8,
-        "text": "Let's go hunt, doo doo doo doo doo doo!"
-      },
-      {
-        "startTimeSec": 97,
-        "endTimeSec": 99.8,
-        "text": "Run away, doo doo doo doo doo doo, Run away!"
-      },
-      {
-        "startTimeSec": 100,
-        "endTimeSec": 102.8,
-        "text": "Safe at last, doo doo doo doo doo doo, Safe at last!"
-      },
-      {
-        "startTimeSec": 103,
-        "endTimeSec": 105.8,
-        "text": "It's the end, doo doo doo doo doo doo!"
-      }
-    ],
     "englishTranslation": [
       "Cá mập con, đu đu đu đu đu",
       "Cá mập mẹ, đu đu đu đu đu",
@@ -5338,56 +3375,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_bingo-dog-song.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "There was a farmer had a dog,",
-        "translation": "Có một bác nông dân nuôi một chú cún đáng yêu"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "And Bingo was his name-o.",
-        "translation": "Và Bingo là tên của chú cún ấy"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O,",
-        "translation": "B-I-N-G-O! B-I-N-G-O! B-I-N-G-O!"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "And Bingo was his name-o!",
-        "translation": "Và Bingo là tên của chú cún con!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "There was a farmer had a dog,",
-        "translation": "Có một bác nông dân nuôi một chú cún đáng yêu"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "And Bingo was his name-o.",
-        "translation": "Và Bingo là tên của chú cún ấy"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O,",
-        "translation": "B-I-N-G-O! B-I-N-G-O! B-I-N-G-O!"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "And Bingo was his name-o!",
-        "translation": "Và Bingo là tên của chú cún con!"
-      }
-    ],
     "englishTranslation": [
       "Có một bác nông dân nuôi một chú cún đáng yêu",
       "Và Bingo là tên của chú cún ấy",
@@ -5474,76 +3461,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_mary-had-a-little-lamb.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Mary had a little lamb,",
-        "translation": "Mary có một chú cừu nhỏ lông trắng như tuyết"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Little lamb, little lamb,",
-        "translation": "Lông của chú cừu trắng muốt như những đám mây"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Mary had a little lamb,",
-        "translation": "Và bất cứ nơi đâu cô bé Mary đi tới"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Its fleece was white as snow.",
-        "translation": "Chú cừu nhỏ cũng lon ton bước theo sau!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "And everywhere that Mary went,"
-      },
-      {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "The lamb was sure to go!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "Mary had a little lamb,",
-        "translation": "Mary có một chú cừu nhỏ lông trắng như tuyết"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Little lamb, little lamb,",
-        "translation": "Lông của chú cừu trắng muốt như những đám mây"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Mary had a little lamb,",
-        "translation": "Và bất cứ nơi đâu cô bé Mary đi tới"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Its fleece was white as snow.",
-        "translation": "Chú cừu nhỏ cũng lon ton bước theo sau!"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "And everywhere that Mary went,"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "The lamb was sure to go!"
-      }
-    ],
     "englishTranslation": [
       "Mary có một chú cừu nhỏ lông trắng như tuyết",
       "Lông của chú cừu trắng muốt như những đám mây",
@@ -5618,92 +3535,52 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Rain, rain, go away,",
-        "translation": "Mưa ơi mưa ơi hãy bay đi nơi khác nhé"
+        "startTimeSec": 1,
+        "endTimeSec": 5.5,
+        "text": "Rain, rain, go away",
+        "translation": "Mưa ơi mưa ơi xin hãy bay đi xa"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "Come again another day!",
-        "translation": "Hãy quay lại vào một ngày khác nha mưa"
+        "startTimeSec": 5.8,
+        "endTimeSec": 10.5,
+        "text": "Come again another day",
+        "translation": "Hẹn ngày khác hãy quay lại đây nhé"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Little Johnny wants to play,",
-        "translation": "Em bé nhỏ muốn chạy ra ngoài sân vui chơi"
+        "startTimeSec": 10.8,
+        "endTimeSec": 15.5,
+        "text": "Little Johnny wants to play",
+        "translation": "Bé con Johnny đang muốn ra ngoài chơi đùa"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Rain, rain, go away!",
-        "translation": "Mưa ơi hãy tạnh đi để trời trong xanh nào!"
+        "startTimeSec": 15.8,
+        "endTimeSec": 20.8,
+        "text": "Rain, rain, go away",
+        "translation": "Mưa ơi mưa ơi xin hãy bay đi xa nhé"
       },
       {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Daddy wants to play, rain, rain, go away!"
+        "startTimeSec": 23.8,
+        "endTimeSec": 28.5,
+        "text": "Rain, rain, go away",
+        "translation": "Mưa ơi mưa ơi xin hãy bay đi xa"
       },
       {
-        "startTimeSec": 23,
-        "endTimeSec": 25.8,
-        "text": "Mommy wants to play, rain, rain, go away!"
+        "startTimeSec": 28.8,
+        "endTimeSec": 33.5,
+        "text": "Come again another day",
+        "translation": "Hẹn ngày khác hãy quay lại đây nhé"
       },
       {
-        "startTimeSec": 26,
-        "endTimeSec": 28.8,
-        "text": "Brother wants to play, sister wants to play,"
+        "startTimeSec": 33.8,
+        "endTimeSec": 38.5,
+        "text": "Little Johnny wants to play",
+        "translation": "Bé con Johnny đang muốn ra ngoài chơi đùa"
       },
       {
-        "startTimeSec": 29,
-        "endTimeSec": 31.8,
-        "text": "All the family wants to play, rain, rain, go away!"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Rain, rain, go away,",
-        "translation": "Mưa ơi mưa ơi hãy bay đi nơi khác nhé"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Come again another day!",
-        "translation": "Hãy quay lại vào một ngày khác nha mưa"
-      },
-      {
-        "startTimeSec": 46,
-        "endTimeSec": 48.8,
-        "text": "Little Johnny wants to play,",
-        "translation": "Em bé nhỏ muốn chạy ra ngoài sân vui chơi"
-      },
-      {
-        "startTimeSec": 49,
-        "endTimeSec": 51.8,
-        "text": "Rain, rain, go away!",
-        "translation": "Mưa ơi hãy tạnh đi để trời trong xanh nào!"
-      },
-      {
-        "startTimeSec": 52,
-        "endTimeSec": 54.8,
-        "text": "Daddy wants to play, rain, rain, go away!"
-      },
-      {
-        "startTimeSec": 55,
-        "endTimeSec": 57.8,
-        "text": "Mommy wants to play, rain, rain, go away!"
-      },
-      {
-        "startTimeSec": 58,
-        "endTimeSec": 60.8,
-        "text": "Brother wants to play, sister wants to play,"
-      },
-      {
-        "startTimeSec": 61,
-        "endTimeSec": 63.8,
-        "text": "All the family wants to play, rain, rain, go away!"
+        "startTimeSec": 38.8,
+        "endTimeSec": 43.5,
+        "text": "Rain, rain, go away",
+        "translation": "Mưa ơi mưa ơi xin hãy bay đi xa nhé"
       }
     ],
     "englishTranslation": [
@@ -5777,62 +3654,64 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Hickory dickory dock,",
-        "translation": "Tích tắc tích tắc, chiếc đồng hồ gõ nhịp"
+        "startTimeSec": 5.5,
+        "endTimeSec": 9.2,
+        "text": "Hickory, dickory, dock,",
+        "translation": "Tích tắc tích tắc tiếng chuông đồng hồ reo"
       },
       {
-        "startTimeSec": 11,
+        "startTimeSec": 9.5,
         "endTimeSec": 13.8,
         "text": "The mouse ran up the clock.",
-        "translation": "Chú chuột nhắt chạy nhanh lên đỉnh đồng hồ"
+        "translation": "Chú chuột nhắt tinh nghịch trèo lên đồng hồ"
       },
       {
         "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "The clock struck one, the mouse ran down,",
-        "translation": "Đồng hồ điểm một giờ: Bính boong!"
+        "endTimeSec": 18.2,
+        "text": "The clock struck one,",
+        "translation": "Đồng hồ điểm đúng một giờ vang vang"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Hickory dickory dock!",
-        "translation": "Chú chuột liền chạy tuột xuống dưới!"
+        "startTimeSec": 18.5,
+        "endTimeSec": 22.5,
+        "text": "The mouse ran down,",
+        "translation": "Chú chuột vội vàng chạy thụt lùi xuống ngay"
       },
       {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Tick tock, tick tock, tick tock!"
+        "startTimeSec": 22.8,
+        "endTimeSec": 27.5,
+        "text": "Hickory, dickory, dock.",
+        "translation": "Tích tắc tích tắc đồng hồ gõ nhịp đều đều"
       },
       {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Hickory dickory dock,",
-        "translation": "Tích tắc tích tắc, chiếc đồng hồ gõ nhịp"
+        "startTimeSec": 41.5,
+        "endTimeSec": 45.2,
+        "text": "Hickory, dickory, dock,",
+        "translation": "Tích tắc tích tắc tiếng chuông đồng hồ reo"
       },
       {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
+        "startTimeSec": 45.5,
+        "endTimeSec": 49.8,
         "text": "The mouse ran up the clock.",
-        "translation": "Chú chuột nhắt chạy nhanh lên đỉnh đồng hồ"
+        "translation": "Chú chuột nhắt tinh nghịch trèo lên đồng hồ"
       },
       {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "The clock struck one, the mouse ran down,",
-        "translation": "Đồng hồ điểm một giờ: Bính boong!"
+        "startTimeSec": 50,
+        "endTimeSec": 54.2,
+        "text": "The clock struck two,",
+        "translation": "Đồng hồ điểm đúng hai giờ reo vang"
       },
       {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "Hickory dickory dock!",
-        "translation": "Chú chuột liền chạy tuột xuống dưới!"
+        "startTimeSec": 54.5,
+        "endTimeSec": 58.5,
+        "text": "And down he flew,",
+        "translation": "Chú chuột nhảy vọt xuống sàn thật nhanh"
       },
       {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Tick tock, tick tock, tick tock!"
+        "startTimeSec": 58.8,
+        "endTimeSec": 63.5,
+        "text": "Hickory, dickory, dock.",
+        "translation": "Tích tắc tích tắc nhịp gõ vui tai"
       }
     ],
     "englishTranslation": [
@@ -5923,56 +3802,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_you-are-my-sunshine.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "You are my sunshine, my only sunshine,",
-        "translation": "Bé là ánh mặt trời rực rỡ duy nhất của mẹ"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "You make me happy when skies are gray.",
-        "translation": "Bé làm cho mẹ hạnh phúc cả khi trời u ám"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "You'll never know, dear, how much I love you,",
-        "translation": "Bé yêu sẽ không bao giờ biết mẹ yêu bé chừng nào đâu"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Please don't take my sunshine away!",
-        "translation": "Xin đừng mang ánh mặt trời ấm áp của mẹ đi nhé!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "You are my sunshine, my only sunshine,",
-        "translation": "Bé là ánh mặt trời rực rỡ duy nhất của mẹ"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "You make me happy when skies are gray.",
-        "translation": "Bé làm cho mẹ hạnh phúc cả khi trời u ám"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "You'll never know, dear, how much I love you,",
-        "translation": "Bé yêu sẽ không bao giờ biết mẹ yêu bé chừng nào đâu"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Please don't take my sunshine away!",
-        "translation": "Xin đừng mang ánh mặt trời ấm áp của mẹ đi nhé!"
-      }
-    ],
     "englishTranslation": [
       "Bé là ánh mặt trời rực rỡ duy nhất của mẹ",
       "Bé làm cho mẹ hạnh phúc cả khi trời u ám",
@@ -6036,62 +3865,52 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Three little kittens, they lost their mittens,",
-        "translation": "Ba chú mèo con tinh nghịch làm mất đôi găng tay"
+        "startTimeSec": 0.2,
+        "endTimeSec": 4,
+        "text": "Three little kittens, they lost their mittens",
+        "translation": "Ba chú mèo con làm rơi mất đôi găng tay"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "And they began to cry: Oh, mother dear, we sadly fear,",
-        "translation": "Và chúng bắt đầu òa khóc meo meo"
+        "startTimeSec": 4.1,
+        "endTimeSec": 7.2,
+        "text": "And they began to cry,",
+        "translation": "Và các bạn ấy bắt đầu khóc thút thít"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Our mittens we have lost!",
-        "translation": "Ôi mẹ ơi mẹ, chúng con làm mất găng tay rồi"
+        "startTimeSec": 7.3,
+        "endTimeSec": 11,
+        "text": "\"Oh, mother dear, we sadly fear",
+        "translation": "Mẹ yêu ơi, chúng con buồn bã sợ rằng"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "What! Lost your mittens, you naughty kittens!",
-        "translation": "Các chú mèo ngoan tìm lại được găng tay và mẹ mỉm cười!"
+        "startTimeSec": 11.1,
+        "endTimeSec": 14.5,
+        "text": "Our mittens we have lost!\"",
+        "translation": "Đôi găng tay ấm đã rơi mất rồi!"
       },
       {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "Then you shall have no pie! Mee-ow, mee-ow, mee-ow!"
+        "startTimeSec": 14.6,
+        "endTimeSec": 18.2,
+        "text": "\"What! Lost your mittens, you naughty kittens!",
+        "translation": "Sao cơ! Mất găng tay à, mấy chú mèo con nghịch ngợm!"
       },
       {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Three little kittens, they lost their mittens,",
-        "translation": "Ba chú mèo con tinh nghịch làm mất đôi găng tay"
+        "startTimeSec": 18.3,
+        "endTimeSec": 22,
+        "text": "Then you shall have no pie!\"",
+        "translation": "Thế thì các con sẽ không được thưởng bánh nướng đâu nhé!"
       },
       {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "And they began to cry: Oh, mother dear, we sadly fear,",
-        "translation": "Và chúng bắt đầu òa khóc meo meo"
+        "startTimeSec": 22.1,
+        "endTimeSec": 26,
+        "text": "\"Mee-ow, mee-ow, mee-ow, mee-ow!\"",
+        "translation": "Meo meo, meo meo ngoan ngoãn xin lỗi mẹ!"
       },
       {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Our mittens we have lost!",
-        "translation": "Ôi mẹ ơi mẹ, chúng con làm mất găng tay rồi"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "What! Lost your mittens, you naughty kittens!",
-        "translation": "Các chú mèo ngoan tìm lại được găng tay và mẹ mỉm cười!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "Then you shall have no pie! Mee-ow, mee-ow, mee-ow!"
+        "startTimeSec": 26.1,
+        "endTimeSec": 29.2,
+        "text": "\"Then you shall have no pie!\"",
+        "translation": "Thế thì các con sẽ không được bánh đâu!"
       }
     ],
     "englishTranslation": [
@@ -6160,52 +3979,28 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "isVocalTrack": true,
     "timedLyrics": [
       {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "All around the mulberry bush,",
-        "translation": "Xoay tròn chiếc hộp nhạc theo điệu nhạc ngân nga"
+        "startTimeSec": 0.9,
+        "endTimeSec": 4.2,
+        "text": "All around the mulberry bush",
+        "translation": "Dạo quanh bụi dâu tằm râm mát"
       },
       {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "The monkey chased the weasel.",
-        "translation": "Khỉ con đuổi theo chú chồn nhỏ quanh bụi dâu"
+        "startTimeSec": 4.3,
+        "endTimeSec": 7.8,
+        "text": "The monkey chased the weasel;",
+        "translation": "Chú khỉ tinh nghịch đuổi theo chú chồn"
       },
       {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
+        "startTimeSec": 7.9,
+        "endTimeSec": 11.2,
         "text": "The monkey thought 'twas all in fun,",
-        "translation": "Khỉ con nghĩ trò chơi thật là vui nhộn"
+        "translation": "Khỉ con nghĩ rằng trò chơi thật vui nhộn"
       },
       {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "Pop! Goes the weasel!",
-        "translation": "Bật tung nắp hộp: Bính boong chú chồn nhảy ra!"
-      },
-      {
-        "startTimeSec": 28,
-        "endTimeSec": 30.8,
-        "text": "All around the mulberry bush,",
-        "translation": "Xoay tròn chiếc hộp nhạc theo điệu nhạc ngân nga"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "The monkey chased the weasel.",
-        "translation": "Khỉ con đuổi theo chú chồn nhỏ quanh bụi dâu"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "The monkey thought 'twas all in fun,",
-        "translation": "Khỉ con nghĩ trò chơi thật là vui nhộn"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Pop! Goes the weasel!",
-        "translation": "Bật tung nắp hộp: Bính boong chú chồn nhảy ra!"
+        "startTimeSec": 11.3,
+        "endTimeSec": 14.8,
+        "text": "Pop! goes the weasel.",
+        "translation": "Bốp! Chú chồn nhảy vọt qua rào!"
       }
     ],
     "englishTranslation": [
@@ -6309,66 +4104,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "/assets/music/covers/music_cover_hot-cross-buns.webp",
     "isVocalTrack": true,
-    "timedLyrics": [
-      {
-        "startTimeSec": 8,
-        "endTimeSec": 10.8,
-        "text": "Hot cross buns! Hot cross buns!",
-        "translation": "Bánh nướng chữ thập thơm lừng, bánh nướng thơm lừng!"
-      },
-      {
-        "startTimeSec": 11,
-        "endTimeSec": 13.8,
-        "text": "One a penny, two a penny,",
-        "translation": "Một đồng một chiếc, hai đồng một chiếc"
-      },
-      {
-        "startTimeSec": 14,
-        "endTimeSec": 16.8,
-        "text": "Hot cross buns!",
-        "translation": "Nếu bạn không có con gái thì hãy mua cho con trai"
-      },
-      {
-        "startTimeSec": 17,
-        "endTimeSec": 19.8,
-        "text": "If you have no daughters, give them to your sons,",
-        "translation": "Bánh nướng chữ thập thơm ngon nóng hổi vừa ra lò!"
-      },
-      {
-        "startTimeSec": 20,
-        "endTimeSec": 22.8,
-        "text": "One a penny, two a penny, hot cross buns!"
-      },
-      {
-        "startTimeSec": 31,
-        "endTimeSec": 33.8,
-        "text": "Hot cross buns! Hot cross buns!",
-        "translation": "Bánh nướng chữ thập thơm lừng, bánh nướng thơm lừng!"
-      },
-      {
-        "startTimeSec": 34,
-        "endTimeSec": 36.8,
-        "text": "One a penny, two a penny,",
-        "translation": "Một đồng một chiếc, hai đồng một chiếc"
-      },
-      {
-        "startTimeSec": 37,
-        "endTimeSec": 39.8,
-        "text": "Hot cross buns!",
-        "translation": "Nếu bạn không có con gái thì hãy mua cho con trai"
-      },
-      {
-        "startTimeSec": 40,
-        "endTimeSec": 42.8,
-        "text": "If you have no daughters, give them to your sons,",
-        "translation": "Bánh nướng chữ thập thơm ngon nóng hổi vừa ra lò!"
-      },
-      {
-        "startTimeSec": 43,
-        "endTimeSec": 45.8,
-        "text": "One a penny, two a penny, hot cross buns!"
-      }
-    ],
     "englishTranslation": [
       "Bánh nướng chữ thập thơm lừng, bánh nướng thơm lừng!",
       "Một đồng một chiếc, hai đồng một chiếc",

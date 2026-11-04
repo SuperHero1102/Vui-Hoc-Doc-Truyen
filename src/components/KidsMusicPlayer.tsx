@@ -339,23 +339,21 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         const cur = audio.currentTime;
         setCurrentTimeSec(Math.round(cur));
 
-        // Synchronize karaoke timed lyrics
+        // Synchronize karaoke timed lyrics strictly when available
         if (song.timedLyrics && song.timedLyrics.length > 0) {
-          const matchIdx = song.timedLyrics.findIndex((line, i) => {
-            const nextLineStart = song.timedLyrics![i + 1]?.startTimeSec ?? Infinity;
-            return cur >= line.startTimeSec && cur < nextLineStart;
-          });
-          if (matchIdx !== -1) {
-            setCurrentLineIndex(matchIdx);
+          if (cur < song.timedLyrics[0].startTimeSec) {
+            setCurrentLineIndex(-1);
+            return;
           }
-        } else if (song.lyrics.length > 0) {
-          const dur = audio.duration || 30;
-          const ratio = Math.min(1, Math.max(0, cur / dur));
-          const lineIdx = Math.min(
-            song.lyrics.length - 1,
-            Math.floor(ratio * song.lyrics.length)
-          );
-          setCurrentLineIndex(lineIdx);
+          const matchIdx = song.timedLyrics.findIndex((line, i) => {
+            const end =
+              line.endTimeSec ??
+              (song.timedLyrics![i + 1]?.startTimeSec ?? line.startTimeSec + 4);
+            return cur >= line.startTimeSec && cur <= end;
+          });
+          setCurrentLineIndex(matchIdx);
+        } else {
+          setCurrentLineIndex(-1);
         }
       };
 
@@ -422,6 +420,21 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     setCurrentTimeSec(newTime);
     if (audioElementRef.current && activeSong?.audioUrl && activeSong.isVocalTrack !== false) {
       audioElementRef.current.currentTime = newTime;
+    }
+    if (activeSong?.timedLyrics && activeSong.timedLyrics.length > 0) {
+      if (newTime < activeSong.timedLyrics[0].startTimeSec) {
+        setCurrentLineIndex(-1);
+      } else {
+        const matchIdx = activeSong.timedLyrics.findIndex((line, i) => {
+          const end =
+            line.endTimeSec ??
+            (activeSong.timedLyrics![i + 1]?.startTimeSec ?? line.startTimeSec + 4);
+          return newTime >= line.startTimeSec && newTime <= end;
+        });
+        setCurrentLineIndex(matchIdx);
+      }
+    } else {
+      setCurrentLineIndex(-1);
     }
   };
 
@@ -690,14 +703,26 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 ref={karaokeListRef}
                 className="bg-slate-50 border border-slate-200 rounded-2xl p-3.5 max-h-56 overflow-y-auto space-y-2 select-none"
               >
+                {/* Header label */}
                 <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center justify-between">
-                  <span className="flex items-center gap-1">
-                    <Mic className="w-3.5 h-3.5 text-purple-600" />
-                    <span>
-                      {activeSong.isVocalTrack !== false
-                        ? 'Lời ca hát cùng bé:'
-                        : 'Lời bài hát (chưa có lời chạy):'}
-                    </span>
+                  <span className="flex items-center gap-1.5">
+                    {activeSong.isVocalTrack !== false &&
+                    activeSong.timedLyrics &&
+                    activeSong.timedLyrics.length > 0 ? (
+                      <>
+                        <Mic className="w-3.5 h-3.5 text-purple-600" />
+                        <span className="text-purple-700 font-black">
+                          Lời ca hát cùng bé (karaoke chạy chữ):
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        <BookOpen className="w-3.5 h-3.5 text-slate-600" />
+                        <span className="text-slate-700 font-black">
+                          Lời bài hát:
+                        </span>
+                      </>
+                    )}
                   </span>
                   {isPlaying && (
                     <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold">
@@ -706,32 +731,69 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                   )}
                 </div>
 
-                {activeSong.isVocalTrack === false ? (
-                  <div className="py-2 space-y-2">
-                    <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 font-medium">
-                      🎵 Đang phát giai điệu hộp nhạc. Bé và bố mẹ hãy cùng hòa giọng đọc lời bên dưới nhé!
+                {/* Case 1: Song does NOT have synced timing -> clean static display */}
+                {!(
+                  activeSong.isVocalTrack !== false &&
+                  activeSong.timedLyrics &&
+                  activeSong.timedLyrics.length > 0
+                ) ? (
+                  <div className="py-1 space-y-2">
+                    <div className="p-2.5 rounded-xl bg-sky-50 border border-sky-200 text-xs text-sky-900 font-medium leading-relaxed">
+                      {activeSong.isVocalTrack !== false
+                        ? '🎵 Bài hát có bản thu âm ca sĩ. Lời bài hát hiển thị đầy đủ bên dưới để bé và bố mẹ cùng hòa giọng nhé!'
+                        : '🎵 Đang phát giai điệu hộp nhạc. Bé và bố mẹ hãy cùng hòa giọng đọc lời bên dưới nhé!'}
                     </div>
-                    <div className="space-y-1 text-xs text-slate-700 font-semibold px-2">
-                      {activeSong.lyrics.map((l, i) => (
-                        <p key={i}>• {l}</p>
-                      ))}
+                    <div className="space-y-2 text-xs sm:text-sm text-slate-700 font-semibold px-1">
+                      {activeSong.lyrics.map((l, i) => {
+                        const translation = activeSong.englishTranslation?.[i];
+                        const showSubtitle =
+                          Boolean(translation) &&
+                          (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
+                        return (
+                          <div
+                            key={i}
+                            className="p-2 rounded-xl bg-white/70 border border-slate-100 flex flex-col gap-0.5"
+                          >
+                            <p className="flex items-start gap-1.5 text-slate-800">
+                              <span className="text-rose-400 font-black">•</span>
+                              <span>{l}</span>
+                            </p>
+                            {showSubtitle && (
+                              <p className="text-[11px] font-medium text-slate-400 pl-4 italic">
+                                {translation}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 ) : (
+                  /* Case 2: Song HAS calibrated synchronized timing */
                   <div className="space-y-2 pt-1">
-                    {(activeSong.timedLyrics && activeSong.timedLyrics.length > 0
-                      ? activeSong.timedLyrics
-                      : activeSong.lyrics.map((l, idx) => ({
-                          startTimeSec: idx * 4,
-                          text: l,
-                          translation: activeSong.englishTranslation?.[idx],
-                        }))
-                    ).map((line, idx) => {
+                    {/* Intro or interlude indicator */}
+                    {isPlaying && currentLineIndex === -1 && (
+                      <div className="px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 text-xs font-black flex items-center gap-1.5 animate-pulse">
+                        <Sparkles className="w-3.5 h-3.5 text-purple-500" />
+                        <span>Nhạc dạo... Chuẩn bị hát nào bé ơi! ✨</span>
+                      </div>
+                    )}
+
+                    {activeSong.timedLyrics.map((line, idx) => {
                       const isCurrent = isPlaying && currentLineIndex === idx;
                       const isPast = isPlaying && currentLineIndex > idx;
                       const showSubtitle =
                         Boolean(line.translation) &&
                         (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
+
+                      const lineDur = Math.max(
+                        0.5,
+                        (line.endTimeSec ?? (line.startTimeSec + 3.5)) - line.startTimeSec
+                      );
+                      const lineProgress = Math.min(
+                        100,
+                        Math.max(0, ((currentTimeSec - line.startTimeSec) / lineDur) * 100)
+                      );
 
                       return (
                         <div
@@ -751,6 +813,16 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                             )}
                             <span className="leading-snug">{line.text}</span>
                           </div>
+
+                          {/* Dynamic progressive sweep on active line */}
+                          {isCurrent && (
+                            <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden mt-1">
+                              <div
+                                className="h-full bg-amber-300 rounded-full transition-all duration-150 ease-linear"
+                                style={{ width: `${lineProgress}%` }}
+                              />
+                            </div>
+                          )}
 
                           {showSubtitle && (
                             <div

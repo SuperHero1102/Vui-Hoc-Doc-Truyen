@@ -20,6 +20,28 @@ import coloringIcecreamImg from '../assets/images/coloring_icecream.png';
 import coloringAppleImg from '../assets/images/coloring_apple.png';
 import coloringHelicopterImg from '../assets/images/coloring_helicopter.png';
 import coloringMushroomImg from '../assets/images/coloring_mushroom.png';
+import coloringSeaTurtleSampleImg from '../assets/images/coloring_turtle_sample.png';
+import coloringPuppySampleImg from '../assets/images/coloring_dog_sample.png';
+import coloringKittySampleImg from '../assets/images/coloring_cat_sample.png';
+import coloringBunnySampleImg from '../assets/images/coloring_rabbit_sample.png';
+import coloringCarSampleImg from '../assets/images/coloring_car_sample.png';
+import coloringRocketSampleImg from '../assets/images/coloring_rocket_sample.png';
+import coloringTrainSampleImg from '../assets/images/coloring_train_sample.png';
+import coloringRainbowSampleImg from '../assets/images/coloring_rainbow_sample.png';
+import coloringCakeSampleImg from '../assets/images/coloring_cake_sample.png';
+import coloringGoldfishSampleImg from '../assets/images/coloring_goldfish_sample.png';
+import coloringElephantSampleImg from '../assets/images/coloring_elephant_sample.png';
+import coloringLionSampleImg from '../assets/images/coloring_lion_sample.png';
+import coloringDinoSampleImg from '../assets/images/coloring_dino_sample.png';
+import coloringDolphinSampleImg from '../assets/images/coloring_dolphin_sample.png';
+import coloringDuckSampleImg from '../assets/images/coloring_duck_sample.png';
+import coloringPandaSampleImg from '../assets/images/coloring_panda_sample.png';
+import coloringCastleSampleImg from '../assets/images/coloring_castle_sample.png';
+import coloringBoatSampleImg from '../assets/images/coloring_boat_sample.png';
+import coloringIcecreamSampleImg from '../assets/images/coloring_icecream_sample.png';
+import coloringAppleSampleImg from '../assets/images/coloring_apple_sample.png';
+import coloringHelicopterSampleImg from '../assets/images/coloring_helicopter_sample.png';
+import coloringMushroomSampleImg from '../assets/images/coloring_mushroom_sample.png';
 
 export interface ArtColorItem {
   number: number;
@@ -407,6 +429,7 @@ export interface ColoringTemplate {
   titleEn: string;
   emoji: string;
   imageUrl?: string;
+  sampleImageUrl?: string;
   regions: ColoringRegionDef[];
 }
 
@@ -417,6 +440,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Sea Turtle',
     emoji: '🐢',
     imageUrl: coloringSeaTurtleImg,
+    sampleImageUrl: coloringSeaTurtleSampleImg,
     regions: [
       {
         id: 'shell-center',
@@ -475,6 +499,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Happy Puppy',
     emoji: '🐶',
     imageUrl: coloringPuppyImg,
+    sampleImageUrl: coloringPuppySampleImg,
     regions: [
       {
         id: 'left-ear',
@@ -568,6 +593,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Kitty & Yarn',
     emoji: '🐱',
     imageUrl: coloringKittyImg,
+    sampleImageUrl: coloringKittySampleImg,
     regions: [
       {
         id: 'left-ear',
@@ -633,6 +659,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Bunny & Carrot',
     emoji: '🐰',
     imageUrl: coloringBunnyImg,
+    sampleImageUrl: coloringBunnySampleImg,
     regions: [
       {
         id: 'left-ear',
@@ -698,6 +725,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Picnic Car',
     emoji: '🚗',
     imageUrl: coloringCarImg,
+    sampleImageUrl: coloringCarSampleImg,
     regions: [
       {
         id: 'sun',
@@ -770,6 +798,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Choo Choo Train',
     emoji: '🚂',
     imageUrl: coloringTrainImg,
+    sampleImageUrl: coloringTrainSampleImg,
     regions: [
       {
         id: 'smoke',
@@ -849,6 +878,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Space Rocket',
     emoji: '🚀',
     imageUrl: coloringRocketImg,
+    sampleImageUrl: coloringRocketSampleImg,
     regions: [
       {
         id: 'nose-cone',
@@ -914,6 +944,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Sun & Rainbow',
     emoji: '🌈',
     imageUrl: coloringRainbowImg,
+    sampleImageUrl: coloringRainbowSampleImg,
     regions: [
       {
         id: 'sun',
@@ -972,6 +1003,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Birthday Cake',
     emoji: '🎂',
     imageUrl: coloringCakeImg,
+    sampleImageUrl: coloringCakeSampleImg,
     regions: [
       {
         id: 'flame-1',
@@ -1037,6 +1069,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Magic Fish',
     emoji: '🐠',
     imageUrl: coloringGoldfishImg,
+    sampleImageUrl: coloringGoldfishSampleImg,
     regions: [
       {
         id: 'body',
@@ -1088,6 +1121,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Baby Elephant',
     emoji: '🐘',
     imageUrl: coloringElephantImg,
+    sampleImageUrl: coloringElephantSampleImg,
     regions: [
       {
         id: 'head',
@@ -1132,6 +1166,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Brave Lion',
     emoji: '🦁',
     imageUrl: coloringLionImg,
+    sampleImageUrl: coloringLionSampleImg,
     regions: [
       {
         id: 'mane',
@@ -1183,6 +1218,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Friendly Dino',
     emoji: '🦖',
     imageUrl: coloringDinoImg,
+    sampleImageUrl: coloringDinoSampleImg,
     regions: [
       {
         id: 'head',
@@ -1234,6 +1270,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Jumping Dolphin',
     emoji: '🐬',
     imageUrl: coloringDolphinImg,
+    sampleImageUrl: coloringDolphinSampleImg,
     regions: [
       {
         id: 'body',
@@ -1278,6 +1315,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Swimming Duck',
     emoji: '🦆',
     imageUrl: coloringDuckImg,
+    sampleImageUrl: coloringDuckSampleImg,
     regions: [
       {
         id: 'head',
@@ -1322,6 +1360,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Panda Bear',
     emoji: '🐼',
     imageUrl: coloringPandaImg,
+    sampleImageUrl: coloringPandaSampleImg,
     regions: [
       {
         id: 'head',
@@ -1373,6 +1412,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Magic Castle',
     emoji: '🏰',
     imageUrl: coloringCastleImg,
+    sampleImageUrl: coloringCastleSampleImg,
     regions: [
       {
         id: 'main-wall',
@@ -1431,6 +1471,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Sailing Boat',
     emoji: '⛵',
     imageUrl: coloringBoatImg,
+    sampleImageUrl: coloringBoatSampleImg,
     regions: [
       {
         id: 'hull',
@@ -1475,6 +1516,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Ice Cream Cone',
     emoji: '🍦',
     imageUrl: coloringIcecreamImg,
+    sampleImageUrl: coloringIcecreamSampleImg,
     regions: [
       {
         id: 'cone',
@@ -1512,6 +1554,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Sweet Apple',
     emoji: '🍎',
     imageUrl: coloringAppleImg,
+    sampleImageUrl: coloringAppleSampleImg,
     regions: [
       {
         id: 'apple-body',
@@ -1542,6 +1585,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Rescue Helicopter',
     emoji: '🚁',
     imageUrl: coloringHelicopterImg,
+    sampleImageUrl: coloringHelicopterSampleImg,
     regions: [
       {
         id: 'cockpit',
@@ -1586,6 +1630,7 @@ export const COLORING_BOOK_TEMPLATES: ColoringTemplate[] = [
     titleEn: 'Magic Mushroom',
     emoji: '🍄',
     imageUrl: coloringMushroomImg,
+    sampleImageUrl: coloringMushroomSampleImg,
     regions: [
       {
         id: 'cap',

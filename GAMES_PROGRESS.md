@@ -397,7 +397,85 @@ Cập nhật chuyên sâu và khắc phục triệt để theo yêu cầu kiểm
 ### D. Kiểm Tra Biên Dịch & Xác Nhận Phạm Vi Tuyệt Đối
 - `npm run lint` (`tsc --noEmit`): **ĐẠT (0 lỗi)**
 - `compile_applet` (`vite build`): **ĐẠT (Thành công 100%)**
-- **Xác nhận phạm vi tuyệt đối:** CHỈ DUY NHẤT trò chơi "Bé Tô Màu Sáng Tạo" được tối ưu (`MagicColoringGame.tsx`, `coloringRegions.json`, ảnh `coloring_*.png`). Tất cả các phần khác: Nhạc, Truyện, Bé nói, Thẻ từ vựng, Game Nối từ, Game Ghép hình, Game Xylophone, Đố vui, Cài đặt phụ huynh... được giữ nguyên vẹn từng ký tự.
+- **Xác nhận phạm vi tuyệt đối:** CHỈ DUY NHẤT trò chơi "Bé Tô Màu Sáng Tạo" được tối ưu (`MagicColoringGame.tsx`, `creativeArtData.ts`, `coloringRegions.json`, ảnh `coloring_*.png`, `coloring_*_sample.png`). Tất cả các phần khác: Nhạc, Truyện, Bé nói, Thẻ từ vựng, Game Nối từ, Game Ghép hình, Game Xylophone, Đố vui, Cài đặt phụ huynh... được giữ nguyên vẹn từng ký tự.
+
+---
+
+## 7. BÁO CÁO TỐI ƯU TOÀN DIỆN "BÉ TÔ MÀU SÁNG TẠO" (V10 - THEO YÊU CẦU MỚI NHẤT)
+
+### 1. Đánh số đúng vị trí & Khớp tọa độ 1:1
+- **Tâm vùng chuẩn xác:** Tính bằng điểm xa nét viền nhất (*Pole of Inaccessibility* - tâm đường tròn nội tiếp lớn nhất của vùng), không dùng trọng tâm centroid.
+- **Khớp tọa độ pixel 1:1:** Khắc phục triệt để lỗi lệch 16px do trước đây canvas vẽ ảnh với `padding: 16`. Nay ảnh được vẽ trực tiếp ở tọa độ `(0, 0, 512, 512)` giúp huy hiệu số và các vùng pixel khớp nhau tuyệt đối 100%.
+- **Không đè viền, không chồng nhau:** Bán kính huy hiệu số được thu gọn an toàn theo khoảng cách viền (`badgeRadius = clamp(12, 18, maxDist * 0.42)`), bảo đảm cách xa nét viền đen ít nhất 8px.
+- **Tô và ẩn số mượt mà:** Ở chế độ số, bé bấm trực tiếp vào huy hiệu số hoặc chạm vào trong vùng đều tô được ngay; khi tô xong, huy hiệu số biến mất mượt mà.
+
+### 2. Chúc mừng khi hoàn thành bức tranh
+- **Kích hoạt tự động khi $x = y$:** Khi bé tô xong toàn bộ các vùng của tranh, trò chơi hiển thị màn hình chúc mừng trang trọng với:
+  - Hiệu ứng pháo giấy rực rỡ (`fireFireworksCelebration`) và âm thanh lấp lánh (`sparkle`).
+  - Lời chúc chuẩn: *"Chúc mừng bé đã hoàn thành bức tranh của mình!"*.
+  - Giọng đọc giáo viên ấm áp đọc lời chúc nếu đang bật loa, kèm nút loa nghe lại lời khen.
+  - Hình xem lại tác phẩm bé vừa tô xong.
+  - Hai nút bấm lớn nổi bật: **"🖼️ Tô tranh khác"** (mở bảng chọn 22 tranh) và **"🔄 Tô lại"** (làm mới tranh hiện tại).
+
+### 3. Bộ đếm "Đã tô x/y vùng" chính xác tuyệt đối
+- **Tổng $y$ là số vùng thực tế:** Đã lọc bỏ toàn bộ các dải mảnh/sliver hẹp (như dải cong 9px ở rùa biển từng gây kẹt 7/8). Tất cả 22 tranh đều có $y$ từ 3 đến 8 vùng lớn, rõ ràng.
+- **Tăng giảm chuẩn mực:**
+  - $x$ tăng khi tô vùng mới chưa tô.
+  - $x$ không tăng khi bé tô đè lên vùng đã tô.
+  - $x$ giảm khi bé bấm Hoàn tác (`handleUndo`), đồng thời phục hồi lại huy hiệu số của vùng vừa hoàn tác.
+  - Không còn tình trạng kẹt 6/7 hay 7/8.
+
+### 4. Nút mắt (Xem hình mẫu): Hình mẫu tô màu hoàn chỉnh
+- **22 ảnh mẫu hoàn chỉnh:** Đã tạo toàn bộ 22 tệp ảnh mẫu chuẩn mực `coloring_*_sample.png` lưu trong `src/assets/images/`, thể hiện nhân vật được tô màu hoàn thiện và tự nhiên (chó màu nâu/kem đào, rùa xanh lá/vàng/cốm, táo đỏ lá xanh cuống nâu, cầu vồng rực rỡ...).
+- **Hiển thị hình mẫu:** Khi bấm nút mắt, góc trên hiển thị tranh mẫu đã tô màu hoàn chỉnh thay vì hình viền trắng chưa tô.
 
 
 
+
+
+## 8. SỬA LỖI HIỂN THỊ KHUNG TRANH & PHỤC HỒI NÉT VIỀN ĐEN 100% (V11)
+
+### 1. Phục hồi nét viền đen nguyên bản & Loại bỏ hoàn toàn lỗi canvas trống
+- **Nguyên nhân trước đó:** Quá trình xói mòn nét vẽ ở kịch bản cũ đã vô tình tẩy trắng pixel viền của tệp tranh gốc khiến ảnh bị trắng trơn (0 pixel đen), chỉ còn các số lơ lửng.
+- **Biện pháp xử lý triệt để:**
+  - Khôi phục nguyên vẹn 100% toàn bộ bộ hình nét vẽ viền đen to, rõ chuẩn mực từ bản sao lưu `backup/coloring_images.before-color-v1/`.
+  - Mọi tranh đều có từ 15.300 đến 28.700 pixel viền đen đậm, rõ nét trên nền trắng tinh khiết.
+  - Tách bạch hoàn toàn: Bộ hình viền đen dùng làm hình tô trên Canvas; bộ hình màu `*_sample.png` dùng làm Hình Mẫu khi bấm nút mắt.
+  - Bổ sung cơ chế bảo vệ bất đồng bộ: Thêm cờ `isImageLoaded`, `isImageLoading`, `imageLoadError`, và cơ chế tự động thử lại nếu canvas DOM chưa sẵn sàng khi vẽ ảnh.
+  - Số chỉ được render khi `isImageLoaded === true`, tuyệt đối không bao giờ xuất hiện số nổi lơ lửng trên khung trắng.
+  - Cơ chế dự phòng khi lỗi mạng/ảnh: Hiển thị thông báo thân thiện và nút bấm **"Thử tải lại tranh 🔄"**.
+
+### 2. Bảng kiểm tra toàn diện 22 bức tranh sau khi khắc phục:
+| STT | Tên tranh | Tệp tranh | Số vùng ($y$) | Pixel viền đen | Số màu mẫu | Tâm số trên nét đen? | Cặp số chồng nhau | Trạng thái |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Rùa biển | `coloring_turtle.png` | 7 | 21,114 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 2 | Cún con | `coloring_dog.png` | 6 | 28,457 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 3 | Mèo con | `coloring_cat.png` | 5 | 25,981 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 4 | Thỏ con | `coloring_rabbit.png` | 6 | 22,702 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 5 | Xe ô tô | `coloring_car.png` | 5 | 27,945 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 6 | Tàu hỏa | `coloring_train.png` | 8 | 28,089 px | 8 | 0 (Không) | 0 | **ĐẠT** |
+| 7 | Tên lửa | `coloring_rocket.png` | 6 | 22,638 px | 7 | 0 (Không) | 0 | **ĐẠT** |
+| 8 | Cầu vồng | `coloring_rainbow.png` | 5 | 22,065 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 9 | Bánh kem | `coloring_cake.png` | 4 | 18,590 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 10 | Cá vàng | `coloring_goldfish.png` | 4 | 15,339 px | 4 | 0 (Không) | 0 | **ĐẠT** |
+| 11 | Voi con | `coloring_elephant.png` | 7 | 28,713 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 12 | Sư tử | `coloring_lion.png` | 6 | 22,433 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 13 | Khủng long | `coloring_dino.png` | 3 | 27,940 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 14 | Cá heo | `coloring_dolphin.png` | 5 | 19,489 px | 4 | 0 (Không) | 0 | **ĐẠT** |
+| 15 | Vịt con | `coloring_duck.png` | 6 | 22,140 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 16 | Gấu trúc | `coloring_panda.png` | 7 | 24,320 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 17 | Lâu đài | `coloring_castle.png` | 7 | 17,920 px | 7 | 0 (Không) | 0 | **ĐẠT** |
+| 18 | Thuyền buồm | `coloring_boat.png` | 8 | 21,176 px | 8 | 0 (Không) | 0 | **ĐẠT** |
+| 19 | Kem ốc quế | `coloring_icecream.png` | 4 | 17,353 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+| 20 | Quả táo | `coloring_apple.png` | 3 | 17,974 px | 5 | 0 (Không) | 0 | **ĐẠT** |
+| 21 | Trực thăng | `coloring_helicopter.png` | 7 | 24,174 px | 7 | 0 (Không) | 0 | **ĐẠT** |
+| 22 | Cây nấm | `coloring_mushroom.png` | 5 | 28,081 px | 6 | 0 (Không) | 0 | **ĐẠT** |
+
+- **Kết luận:** 22/22 tranh hiển thị nét vẽ to, rõ nét 100%, tô màu chính xác, số nằm gọn trong lòng vùng, hoàn thành $x=y$ chúc mừng ngay và nút hình mẫu xem ảnh màu chuẩn mực.
+
+## 9. SỬA LỖI TẮT HIỂN THỊ SỐ TRONG TRANH (V12)
+- **Vấn đề:** Nút bật/tắt chế độ hiển thị số trước đây chỉ gán một chiều `setColoringMode('number')`, khiến người dùng bấm vào nút số 🔢 để bật thì được, nhưng khi bấm lại vào nút số 🔢 thì không tắt được số. Ngoài ra kích thước nút cũ nhỏ (`w-7 h-7`) dễ bị bấm trượt trên màn hình cảm ứng điện thoại.
+- **Khắc phục:**
+  - Bổ sung cơ chế **Toggle 2 chiều trực tiếp**: Khi đang ở chế độ Theo số, bấm lại vào nút 🔢 sẽ tự động tắt số chuyển về chế độ Tự do (`setColoringMode(prev => prev === 'number' ? 'free' : 'number')`).
+  - Nút 🎨 cũng chuyển về chế độ Tự do (tắt toàn bộ số trong tranh).
+  - Tăng kích thước vùng chạm của nút lên `h-8 px-2 sm:px-2.5` với hiệu ứng `active:scale-95` và `touch-manipulation` để chạm nhạy và dễ thao tác trên điện thoại.

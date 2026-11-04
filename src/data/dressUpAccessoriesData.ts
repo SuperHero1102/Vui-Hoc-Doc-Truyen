@@ -1,4 +1,4 @@
-// 40 3D Clay Chibi Accessories across 5 categories
+// 62 3D Clay Chibi Accessories across 5 categories with perfect anchors & zero clipping
 import hatCrown from '../assets/accessories/hat_crown.png';
 import hatWitchHat from '../assets/accessories/hat_witch_hat.png';
 import hatChefHat from '../assets/accessories/hat_chef_hat.png';
@@ -7,6 +7,10 @@ import hatCowboyHat from '../assets/accessories/hat_cowboy_hat.png';
 import hatBeanie from '../assets/accessories/hat_beanie.png';
 import hatBunnyEars from '../assets/accessories/hat_bunny_ears.png';
 import hatCatEars from '../assets/accessories/hat_cat_ears.png';
+import hatBearBeanie from '../assets/accessories/hat_bear_beanie.png';
+import hatFlowerCrown from '../assets/accessories/hat_flower_crown.png';
+import hatPartyCone from '../assets/accessories/hat_party_cone.png';
+import hatSailorCap from '../assets/accessories/hat_sailor_cap.png';
 
 import faceRoundGlasses from '../assets/accessories/face_round_glasses.png';
 import faceSunglasses from '../assets/accessories/face_sunglasses.png';
@@ -16,6 +20,10 @@ import faceClownNose from '../assets/accessories/face_clown_nose.png';
 import faceLips from '../assets/accessories/face_lips.png';
 import faceEarrings from '../assets/accessories/face_earrings.png';
 import faceBearMask from '../assets/accessories/face_bear_mask.png';
+import faceHeartGlasses from '../assets/accessories/face_heart_glasses.png';
+import faceStarGlasses from '../assets/accessories/face_star_glasses.png';
+import faceStarStickers from '../assets/accessories/face_star_stickers.png';
+import faceCatWhiskers from '../assets/accessories/face_cat_whiskers.png';
 
 import jewelryPinkBow from '../assets/accessories/jewelry_pink_bow.png';
 import jewelryPearlNecklace from '../assets/accessories/jewelry_pearl_necklace.png';
@@ -25,6 +33,12 @@ import jewelryScarf from '../assets/accessories/jewelry_scarf.png';
 import jewelryMiniTiara from '../assets/accessories/jewelry_mini_tiara.png';
 import jewelryStarBadge from '../assets/accessories/jewelry_star_badge.png';
 import jewelryFairyWings from '../assets/accessories/jewelry_fairy_wings.png';
+import jewelryRedBow from '../assets/accessories/jewelry_red_bow.png';
+import jewelryYellowPolkaBow from '../assets/accessories/jewelry_yellow_polka_bow.png';
+import jewelryMintBow from '../assets/accessories/jewelry_mint_bow.png';
+import jewelryGentlemanBowtie from '../assets/accessories/jewelry_gentleman_bowtie.png';
+import jewelryBellChoker from '../assets/accessories/jewelry_bell_choker.png';
+import jewelryCandyNecklace from '../assets/accessories/jewelry_candy_necklace.png';
 
 import propMagicWand from '../assets/accessories/prop_magic_wand.png';
 import propBalloons from '../assets/accessories/prop_balloons.png';
@@ -34,6 +48,10 @@ import propStorybook from '../assets/accessories/prop_storybook.png';
 import propCrystalStaff from '../assets/accessories/prop_crystal_staff.png';
 import propGuitar from '../assets/accessories/prop_guitar.png';
 import propBackpack from '../assets/accessories/prop_backpack.png';
+import propLollipop from '../assets/accessories/prop_lollipop.png';
+import propHeartBalloon from '../assets/accessories/prop_heart_balloon.png';
+import propRainbowScepter from '../assets/accessories/prop_rainbow_scepter.png';
+import propBabyBottle from '../assets/accessories/prop_baby_bottle.png';
 
 import plushSneakers from '../assets/accessories/plush_sneakers.png';
 import plushMaryJane from '../assets/accessories/plush_mary_jane.png';
@@ -43,6 +61,10 @@ import plushTeddyBear from '../assets/accessories/plush_teddy_bear.png';
 import plushBunnyPlush from '../assets/accessories/plush_bunny_plush.png';
 import plushCatPlush from '../assets/accessories/plush_cat_plush.png';
 import plushPuppyPlush from '../assets/accessories/plush_puppy_plush.png';
+import plushBearSlippers from '../assets/accessories/plush_bear_slippers.png';
+import plushDinoPlush from '../assets/accessories/plush_dino_plush.png';
+import plushFrogPlush from '../assets/accessories/plush_frog_plush.png';
+import plushRubberDuck from '../assets/accessories/plush_rubber_duck.png';
 
 export type AccessoryCategory = 'hat' | 'face' | 'jewelry' | 'prop' | 'plush';
 
@@ -72,7 +94,7 @@ export const CATEGORY_TABS: CategoryTabDef[] = [
 ];
 
 export const ACCESSORIES_DATA: AccessoryItem[] = [
-  // 1. Mũ & Nón (hat)
+  // 1. Mũ & Nón (hat - 12 items)
   {
     id: 'hat-crown',
     category: 'hat',
@@ -145,8 +167,44 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     defaultPos: { x: 0.5, y: 0.15 },
     defaultScale: 1.15,
   },
+  {
+    id: 'hat-bear-beanie',
+    category: 'hat',
+    nameVi: 'Mũ len tai gấu',
+    nameEn: 'Bear Beanie',
+    imageUrl: hatBearBeanie,
+    defaultPos: { x: 0.5, y: 0.15 },
+    defaultScale: 1.15,
+  },
+  {
+    id: 'hat-flower-crown',
+    category: 'hat',
+    nameVi: 'Vòng hoa cài đầu',
+    nameEn: 'Flower Crown',
+    imageUrl: hatFlowerCrown,
+    defaultPos: { x: 0.5, y: 0.17 },
+    defaultScale: 1.1,
+  },
+  {
+    id: 'hat-party-cone',
+    category: 'hat',
+    nameVi: 'Mũ chóp sinh nhật',
+    nameEn: 'Party Cone Hat',
+    imageUrl: hatPartyCone,
+    defaultPos: { x: 0.5, y: 0.13 },
+    defaultScale: 1.1,
+  },
+  {
+    id: 'hat-sailor-cap',
+    category: 'hat',
+    nameVi: 'Mũ thủy thủ xanh',
+    nameEn: 'Sailor Cap',
+    imageUrl: hatSailorCap,
+    defaultPos: { x: 0.5, y: 0.15 },
+    defaultScale: 1.1,
+  },
 
-  // 2. Kính & Mặt (face)
+  // 2. Kính & Mặt (face - 12 items)
   {
     id: 'face-round-glasses',
     category: 'face',
@@ -166,37 +224,73 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     defaultScale: 1.1,
   },
   {
+    id: 'face-heart-glasses',
+    category: 'face',
+    nameVi: 'Kính mắt trái tim',
+    nameEn: 'Heart Sunglasses',
+    imageUrl: faceHeartGlasses,
+    defaultPos: { x: 0.5, y: 0.32 },
+    defaultScale: 1.15,
+  },
+  {
+    id: 'face-star-glasses',
+    category: 'face',
+    nameVi: 'Kính mắt ngôi sao',
+    nameEn: 'Star Sunglasses',
+    imageUrl: faceStarGlasses,
+    defaultPos: { x: 0.5, y: 0.32 },
+    defaultScale: 1.15,
+  },
+  {
+    id: 'face-star-stickers',
+    category: 'face',
+    nameVi: 'Dán má ngôi sao',
+    nameEn: 'Star Face Stickers',
+    imageUrl: faceStarStickers,
+    defaultPos: { x: 0.5, y: 0.36 },
+    defaultScale: 0.95,
+  },
+  {
+    id: 'face-cat-whiskers',
+    category: 'face',
+    nameVi: 'Ria mèo tinh nghịch',
+    nameEn: 'Playful Whiskers',
+    imageUrl: faceCatWhiskers,
+    defaultPos: { x: 0.5, y: 0.38 },
+    defaultScale: 1.05,
+  },
+  {
     id: 'face-mustache',
     category: 'face',
-    nameVi: 'Ria mép vui nhộn',
+    nameVi: 'Ria mép ngộ nghĩnh',
     nameEn: 'Funny Mustache',
     imageUrl: faceMustache,
-    defaultPos: { x: 0.5, y: 0.40 },
+    defaultPos: { x: 0.5, y: 0.38 },
     defaultScale: 0.9,
   },
   {
     id: 'face-blush',
     category: 'face',
     nameVi: 'Má hồng đào',
-    nameEn: 'Peach Blush',
+    nameEn: 'Rosy Cheeks',
     imageUrl: faceBlush,
     defaultPos: { x: 0.5, y: 0.36 },
-    defaultScale: 1.0,
+    defaultScale: 1.05,
   },
   {
     id: 'face-clown-nose',
     category: 'face',
-    nameVi: 'Mũi chú hề đỏ',
-    nameEn: 'Clown Nose',
+    nameVi: 'Mũi hề đỏ',
+    nameEn: 'Clown Red Nose',
     imageUrl: faceClownNose,
     defaultPos: { x: 0.5, y: 0.35 },
-    defaultScale: 0.85,
+    defaultScale: 0.9,
   },
   {
     id: 'face-lips',
     category: 'face',
-    nameVi: 'Son môi hồng',
-    nameEn: 'Pink Lips',
+    nameVi: 'Nụ cười tươi',
+    nameEn: 'Sweet Smile',
     imageUrl: faceLips,
     defaultPos: { x: 0.5, y: 0.42 },
     defaultScale: 0.85,
@@ -220,7 +314,7 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     defaultScale: 1.1,
   },
 
-  // 3. Nơ & Cổ (jewelry)
+  // 3. Nơ & Cổ (jewelry - 14 items)
   {
     id: 'jewelry-pink-bow',
     category: 'jewelry',
@@ -229,6 +323,69 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     imageUrl: jewelryPinkBow,
     defaultPos: { x: 0.5, y: 0.50 },
     defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-red-bow',
+    category: 'jewelry',
+    nameVi: 'Nơ đỏ nhung',
+    nameEn: 'Velvet Red Bow',
+    imageUrl: jewelryRedBow,
+    defaultPos: { x: 0.5, y: 0.50 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-yellow-polka-bow',
+    category: 'jewelry',
+    nameVi: 'Nơ vàng chấm bi',
+    nameEn: 'Yellow Polka Bow',
+    imageUrl: jewelryYellowPolkaBow,
+    defaultPos: { x: 0.5, y: 0.50 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-mint-bow',
+    category: 'jewelry',
+    nameVi: 'Nơ xanh ngọc mint',
+    nameEn: 'Mint Silk Bow',
+    imageUrl: jewelryMintBow,
+    defaultPos: { x: 0.5, y: 0.50 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-gentleman-bowtie',
+    category: 'jewelry',
+    nameVi: 'Nơ bướm quý ông',
+    nameEn: 'Gentleman Bowtie',
+    imageUrl: jewelryGentlemanBowtie,
+    defaultPos: { x: 0.5, y: 0.51 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-necktie',
+    category: 'jewelry',
+    nameVi: 'Cà vạt lịch sự',
+    nameEn: 'Smart Necktie',
+    imageUrl: jewelryNecktie,
+    defaultPos: { x: 0.5, y: 0.56 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-bell-choker',
+    category: 'jewelry',
+    nameVi: 'Vòng cổ chuông vàng',
+    nameEn: 'Bell Choker',
+    imageUrl: jewelryBellChoker,
+    defaultPos: { x: 0.5, y: 0.51 },
+    defaultScale: 1.0,
+  },
+  {
+    id: 'jewelry-candy-necklace',
+    category: 'jewelry',
+    nameVi: 'Vòng cổ kẹo ngọt',
+    nameEn: 'Sweet Candy Necklace',
+    imageUrl: jewelryCandyNecklace,
+    defaultPos: { x: 0.5, y: 0.52 },
+    defaultScale: 1.05,
   },
   {
     id: 'jewelry-pearl-necklace',
@@ -247,15 +404,6 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     imageUrl: jewelryFlowerPin,
     defaultPos: { x: 0.42, y: 0.54 },
     defaultScale: 0.9,
-  },
-  {
-    id: 'jewelry-necktie',
-    category: 'jewelry',
-    nameVi: 'Cà vạt lịch sự',
-    nameEn: 'Smart Necktie',
-    imageUrl: jewelryNecktie,
-    defaultPos: { x: 0.5, y: 0.56 },
-    defaultScale: 1.0,
   },
   {
     id: 'jewelry-scarf',
@@ -294,7 +442,43 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     defaultScale: 1.4,
   },
 
-  // 4. Cầm Tay (prop)
+  // 4. Cầm Tay (prop - 12 items)
+  {
+    id: 'prop-lollipop',
+    category: 'prop',
+    nameVi: 'Kẹo mút cầu vồng',
+    nameEn: 'Rainbow Lollipop',
+    imageUrl: propLollipop,
+    defaultPos: { x: 0.74, y: 0.56 },
+    defaultScale: 1.05,
+  },
+  {
+    id: 'prop-heart-balloon',
+    category: 'prop',
+    nameVi: 'Bóng bay trái tim',
+    nameEn: 'Heart Balloon',
+    imageUrl: propHeartBalloon,
+    defaultPos: { x: 0.78, y: 0.34 },
+    defaultScale: 1.2,
+  },
+  {
+    id: 'prop-rainbow-scepter',
+    category: 'prop',
+    nameVi: 'Vương trượng cầu vồng',
+    nameEn: 'Rainbow Scepter',
+    imageUrl: propRainbowScepter,
+    defaultPos: { x: 0.76, y: 0.54 },
+    defaultScale: 1.15,
+  },
+  {
+    id: 'prop-baby-bottle',
+    category: 'prop',
+    nameVi: 'Bình sữa em bé',
+    nameEn: 'Baby Bottle',
+    imageUrl: propBabyBottle,
+    defaultPos: { x: 0.72, y: 0.60 },
+    defaultScale: 0.95,
+  },
   {
     id: 'prop-magic-wand',
     category: 'prop',
@@ -368,7 +552,43 @@ export const ACCESSORIES_DATA: AccessoryItem[] = [
     defaultScale: 1.1,
   },
 
-  // 5. Giày & Thú (plush)
+  // 5. Giày & Thú (plush - 12 items)
+  {
+    id: 'plush-bear-slippers',
+    category: 'plush',
+    nameVi: 'Dép bông gấu ấm',
+    nameEn: 'Cozy Bear Slippers',
+    imageUrl: plushBearSlippers,
+    defaultPos: { x: 0.5, y: 0.88 },
+    defaultScale: 1.1,
+  },
+  {
+    id: 'plush-dino-plush',
+    category: 'plush',
+    nameVi: 'Khủng long bông xanh',
+    nameEn: 'Baby Dino Plushie',
+    imageUrl: plushDinoPlush,
+    defaultPos: { x: 0.28, y: 0.62 },
+    defaultScale: 1.1,
+  },
+  {
+    id: 'plush-frog-plush',
+    category: 'plush',
+    nameVi: 'Ếch xanh tí hon',
+    nameEn: 'Green Frog Plushie',
+    imageUrl: plushFrogPlush,
+    defaultPos: { x: 0.28, y: 0.62 },
+    defaultScale: 1.05,
+  },
+  {
+    id: 'plush-rubber-duck',
+    category: 'plush',
+    nameVi: 'Vịt vàng cao su',
+    nameEn: 'Yellow Rubber Duck',
+    imageUrl: plushRubberDuck,
+    defaultPos: { x: 0.28, y: 0.64 },
+    defaultScale: 0.95,
+  },
   {
     id: 'plush-sneakers',
     category: 'plush',

@@ -50,6 +50,12 @@ interface PrecomputedTemplateData {
   regions: PrecomputedRegion[];
 }
 
+interface HistorySnapshot {
+  imageData: ImageData;
+  coloredSet: Set<number>;
+  completedBadges: Record<number, boolean>;
+}
+
 const TYPED_REGIONS_DATA = COLORING_REGIONS_DATA as Record<string, PrecomputedTemplateData>;
 
 export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
@@ -64,10 +70,10 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   const [showTemplateModal, setShowTemplateModal] = useState<boolean>(false);
   const [showSampleHint, setShowSampleHint] = useState<boolean>(false);
 
-  // Auto-completion & Round Tracking (3 drawings per round)
+  // Auto-completion & Completion Modal
   const [completedCountInRound, setCompletedCountInRound] = useState<number>(0);
   const [coloredRegionsSet, setColoredRegionsSet] = useState<Set<number>>(new Set());
-  const [showBriefCongrats, setShowBriefCongrats] = useState<boolean>(false);
+  const [showDrawingCompleteModal, setShowDrawingCompleteModal] = useState<boolean>(false);
   const [showRoundCompleteModal, setShowRoundCompleteModal] = useState<boolean>(false);
   const hasTriggeredCompletionRef = useRef<boolean>(false);
 
@@ -78,12 +84,19 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   // Shaking badge state for wrong number selection in "Theo Số" mode
   const [shakingBadgeId, setShakingBadgeId] = useState<number | null>(null);
 
+  // Image loading & fallback retry states
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+  const [isImageLoading, setIsImageLoading] = useState<boolean>(true);
+  const [imageLoadError, setImageLoadError] = useState<boolean>(false);
+  const [retryTrigger, setRetryTrigger] = useState<number>(0);
+  const activeImageRef = useRef<HTMLImageElement | null>(null);
+
   // Canvas & background mask ref
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const bgMaskRef = useRef<Uint8Array | null>(null);
 
-  // Undo history stack
-  const undoStackRef = useRef<ImageData[]>([]);
+  // Undo history stack tracking canvas + colored count + completed badges
+  const undoStackRef = useRef<HistorySnapshot[]>([]);
   const [canUndo, setCanUndo] = useState(false);
 
   // Number mode badges completed tracking
@@ -109,25 +122,17 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   const coloredCount = coloredRegionsSet.size;
 
   // Load image onto canvas and compute background mask (BFS from 4 outer edges)
-  const drawColoringImage = useCallback((img: HTMLImageElement) => {
+  const drawColoringImage = useCallback((img: HTMLImageElement): boolean => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) return false;
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
+    if (!ctx) return false;
 
     ctx.fillStyle = '#FFFFFF';
     ctx.fillRect(0, 0, 512, 512);
 
-    const padding = 16;
-    const availW = 512 - padding * 2;
-    const availH = 512 - padding * 2;
-    const scale = Math.min(availW / img.width, availH / img.height);
-    const drawW = img.width * scale;
-    const drawH = img.height * scale;
-    const drawX = (512 - drawW) / 2;
-    const drawY = (512 - drawH) / 2;
-
-    ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    // Draw 1:1 on 512x512 canvas so HTML badges match canvas pixel coordinates 100%
+    ctx.drawImage(img, 0, 0, 512, 512);
 
     // Compute Background Mask: BFS from all 4 boundaries on the canvas
     const imgData = ctx.getImageData(0, 0, 512, 512);
@@ -185,71 +190,75 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
     }
 
     bgMaskRef.current = bgMask;
-    undoStackRef.current = [ctx.getImageData(0, 0, 512, 512)];
+    undoStackRef.current = [];
     setCanUndo(false);
     setCompletedBadges({});
     setColoredRegionsSet(new Set());
     hasTriggeredCompletionRef.current = false;
+    setShowDrawingCompleteModal(false);
+    return true;
   }, []);
 
-  // Load active template image
+  // Load active template image with retry & safety
   useEffect(() => {
-    if (activeTemplate.imageUrl) {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => drawColoringImage(img);
-      img.src = activeTemplate.imageUrl;
+    let isCancelled = false;
+    setIsImageLoaded(false);
+    setIsImageLoading(true);
+    setImageLoadError(false);
+
+    if (!activeTemplate.imageUrl) {
+      setImageLoadError(true);
+      setIsImageLoading(false);
+      return;
     }
-  }, [activeTemplate, drawColoringImage]);
 
-  // Check Auto-completion of current drawing
-  const checkAutoCompletion = useCallback(() => {
-    if (hasTriggeredCompletionRef.current) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
 
-    // Check colored progress
-    const isCompleted =
-      totalColorableRegions > 0 && coloredRegionsSet.size >= totalColorableRegions;
+    const renderImage = () => {
+      if (isCancelled) return;
+      activeImageRef.current = img;
+      const ok = drawColoringImage(img);
+      if (ok) {
+        setIsImageLoaded(true);
+        setIsImageLoading(false);
+        setImageLoadError(false);
+      } else {
+        // If canvas ref was not yet mounted, retry on next tick
+        setTimeout(() => {
+          if (!isCancelled && canvasRef.current) {
+            const ok2 = drawColoringImage(img);
+            if (ok2) {
+              setIsImageLoaded(true);
+              setIsImageLoading(false);
+              setImageLoadError(false);
+            }
+          }
+        }, 60);
+      }
+    };
 
-    if (isCompleted) {
-      hasTriggeredCompletionRef.current = true;
-      playSoundEffect('sparkle', settings.volume);
-      fireFireworksCelebration();
+    img.onload = renderImage;
+    img.onerror = () => {
+      if (isCancelled) return;
+      console.error('Failed to load coloring template image:', activeTemplate.imageUrl);
+      setImageLoadError(true);
+      setIsImageLoading(false);
+      setIsImageLoaded(false);
+    };
 
-      setShowBriefCongrats(true);
-      speakTeacherVoice(
-        [
-          { lang: 'vi', text: 'Hoan hô bé! Bé đã tô màu bức tranh xuất sắc rồi!' },
-          { lang: 'en', text: 'Splendid! You colored the whole picture!' },
-        ],
-        settings
-      );
+    img.src = activeTemplate.imageUrl;
 
-      setTimeout(() => {
-        setShowBriefCongrats(false);
-        const nextCount = completedCountInRound + 1;
-        setCompletedCountInRound(nextCount);
-
-        if (nextCount >= 3) {
-          setShowRoundCompleteModal(true);
-          if (onWin) onWin();
-        } else {
-          setTemplateIdx((prev) => (prev + 1) % COLORING_BOOK_TEMPLATES.length);
-        }
-      }, 2200);
+    if (img.complete && img.naturalWidth > 0) {
+      renderImage();
     }
-  }, [
-    totalColorableRegions,
-    coloredRegionsSet,
-    completedCountInRound,
-    settings,
-    onWin,
-  ]);
 
-  // Find nearest colorable region to a click
+    return () => {
+      isCancelled = true;
+    };
+  }, [activeTemplate, drawColoringImage, retryTrigger]);
+
+  // Find nearest colorable region to a click (fallback)
   const findRegionAtPoint = useCallback(
     (startX: number, startY: number): PrecomputedRegion | null => {
       let closest: PrecomputedRegion | null = null;
@@ -271,7 +280,7 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   // Scanline Flood Fill on 512x512 Canvas
   const executeFill = useCallback(
     (startX: number, startY: number, targetRegionOverride?: PrecomputedRegion) => {
-      if (showRoundCompleteModal || showBriefCongrats) return;
+      if (showRoundCompleteModal || showDrawingCompleteModal) return;
       const canvas = canvasRef.current;
       if (!canvas) return;
       const ctx = canvas.getContext('2d', { willReadFrequently: true });
@@ -309,33 +318,34 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
       const fillG = (num >> 8) & 255;
       const fillB = num & 255;
 
-      // Target region identification
-      const matchedRegion = targetRegionOverride || findRegionAtPoint(startX, startY);
+      // Requirement 1 & 3: Check correct number badge selection in 'Theo Số' mode
+      let preliminaryRegion = targetRegionOverride;
+      if (!preliminaryRegion) {
+        // Quick distance check before flood fill for validation in Number Mode
+        preliminaryRegion = findRegionAtPoint(startX, startY);
+      }
 
-      // Requirement 3 in Number Mode:
-      // đổ sai số thì rung nhẹ và nhắc
-      if (coloringMode === 'number' && matchedRegion) {
-        if (matchedRegion.colorNumber !== selectedColorItem.number) {
-          // Trigger gentle vibration
+      if (coloringMode === 'number' && preliminaryRegion) {
+        if (preliminaryRegion.colorNumber !== selectedColorItem.number) {
           if (typeof navigator !== 'undefined' && navigator.vibrate) {
             try {
               navigator.vibrate(50);
             } catch {
-              // Ignore if vibration is restricted
+              // Ignore
             }
           }
-          setShakingBadgeId(matchedRegion.regionId);
+          setShakingBadgeId(preliminaryRegion.regionId);
           setTimeout(() => setShakingBadgeId(null), 500);
           playSoundEffect('pop', settings.volume * 0.5);
 
           const expectedColor =
-            STUDIO_COLOR_PALETTE.find((c) => c.number === matchedRegion.colorNumber) ||
+            STUDIO_COLOR_PALETTE.find((c) => c.number === preliminaryRegion.colorNumber) ||
             STUDIO_COLOR_PALETTE[0];
           const colorNameClean = expectedColor.nameVi.replace('Màu ', '');
 
           if (onGentleRetry) {
             onGentleRetry(
-              `Vùng này mang số ${matchedRegion.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${matchedRegion.colorNumber} nhé!`,
+              `Vùng này mang số ${preliminaryRegion.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${preliminaryRegion.colorNumber} nhé!`,
               expectedColor.nameEn
             );
           } else {
@@ -343,16 +353,17 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
               [
                 {
                   lang: 'vi',
-                  text: `Vùng này là số ${matchedRegion.colorNumber} (${colorNameClean}). Bé chọn màu số ${matchedRegion.colorNumber} nhé!`,
+                  text: `Vùng này là số ${preliminaryRegion.colorNumber} (${colorNameClean}). Bé chọn màu số ${preliminaryRegion.colorNumber} nhé!`,
                 },
               ],
               settings
             );
           }
-          return; // Reject wrong color fill
+          return; // Reject wrong color in Number Mode
         }
       }
 
+      // Check if already filled with identical color
       if (
         Math.abs(startR - fillR) < 15 &&
         Math.abs(startG - fillG) < 15 &&
@@ -374,11 +385,15 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
         );
       };
 
-      // Save undo step
-      if (undoStackRef.current.length >= 15) {
+      // Save undo snapshot (ImageData + coloredSet + completedBadges)
+      if (undoStackRef.current.length >= 25) {
         undoStackRef.current.shift();
       }
-      undoStackRef.current.push(ctx.getImageData(0, 0, 512, 512));
+      undoStackRef.current.push({
+        imageData: ctx.getImageData(0, 0, 512, 512),
+        coloredSet: new Set(coloredRegionsSet),
+        completedBadges: { ...completedBadges },
+      });
       setCanUndo(true);
 
       // BFS Flood Fill
@@ -430,25 +445,72 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
       ctx.putImageData(imgData, 0, 0);
       playSoundEffect('pop', settings.volume);
 
-      if (matchedRegion) {
-        setCompletedBadges((prev) => ({ ...prev, [matchedRegion.regionId]: true }));
-        setColoredRegionsSet((prev) => new Set([...prev, matchedRegion.regionId]));
+      // Topological Region Identification: find the region whose pole lies within the flooded area
+      let matchedRegion: PrecomputedRegion | null = targetRegionOverride || null;
+      if (!matchedRegion) {
+        for (const reg of regionsList) {
+          const regIdx = reg.y * 512 + reg.x;
+          if (visited[regIdx] === 1) {
+            matchedRegion = reg;
+            break;
+          }
+        }
+        if (!matchedRegion) {
+          matchedRegion = findRegionAtPoint(startX, startY);
+        }
       }
 
-      setTimeout(() => {
-        checkAutoCompletion();
-      }, 150);
+      if (matchedRegion) {
+        const regId = matchedRegion.regionId;
+        setCompletedBadges((prev) => ({ ...prev, [regId]: true }));
+        setColoredRegionsSet((prev) => {
+          const next = new Set(prev);
+          next.add(regId);
+
+          // Requirement 2: Check completion when all regions are colored
+          if (
+            totalColorableRegions > 0 &&
+            next.size >= totalColorableRegions &&
+            !hasTriggeredCompletionRef.current
+          ) {
+            hasTriggeredCompletionRef.current = true;
+            setTimeout(() => {
+              playSoundEffect('sparkle', settings.volume);
+              fireFireworksCelebration();
+              speakTeacherVoice(
+                [
+                  {
+                    lang: 'vi',
+                    text: 'Chúc mừng bé đã hoàn thành bức tranh của mình!',
+                  },
+                  {
+                    lang: 'en',
+                    text: 'Congratulations on completing your picture!',
+                  },
+                ],
+                settings
+              );
+              setShowDrawingCompleteModal(true);
+            }, 300);
+          }
+
+          return next;
+        });
+      }
     },
     [
       brushColor,
-      checkAutoCompletion,
+      coloredRegionsSet,
       coloringMode,
+      completedBadges,
       findRegionAtPoint,
       onGentleRetry,
+      regionsList,
       selectedColorItem,
       settings,
-      showBriefCongrats,
+      showDrawingCompleteModal,
       showRoundCompleteModal,
+      totalColorableRegions,
     ]
   );
 
@@ -464,38 +526,33 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
     executeFill(startX, startY);
   };
 
+  // Requirement 3: Undo restores both canvas pixels and decrement the counter x
   const handleUndo = () => {
-    if (undoStackRef.current.length <= 1) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
-
-    undoStackRef.current.pop();
-    const prev = undoStackRef.current[undoStackRef.current.length - 1];
-    if (prev) {
-      ctx.putImageData(prev, 0, 0);
-      playSoundEffect('pop', settings.volume);
-    }
-    setCanUndo(undoStackRef.current.length > 1);
-  };
-
-  const handleReset = () => {
     if (undoStackRef.current.length === 0) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d', { willReadFrequently: true });
     if (!ctx) return;
 
-    const initial = undoStackRef.current[0];
-    if (initial) {
-      ctx.putImageData(initial, 0, 0);
-      undoStackRef.current = [initial];
-      setCanUndo(false);
-      setCompletedBadges({});
-      setColoredRegionsSet(new Set());
-      hasTriggeredCompletionRef.current = false;
+    const previousSnapshot = undoStackRef.current.pop();
+    if (previousSnapshot) {
+      ctx.putImageData(previousSnapshot.imageData, 0, 0);
+      setColoredRegionsSet(new Set(previousSnapshot.coloredSet));
+      setCompletedBadges({ ...previousSnapshot.completedBadges });
       playSoundEffect('pop', settings.volume);
+      hasTriggeredCompletionRef.current = false;
+      setShowDrawingCompleteModal(false);
+    }
+    setCanUndo(undoStackRef.current.length > 0);
+  };
+
+  // Reset to uncolored original template
+  const handleReset = () => {
+    if (activeImageRef.current) {
+      drawColoringImage(activeImageRef.current);
+      playSoundEffect('pop', settings.volume);
+    } else {
+      setRetryTrigger((prev) => prev + 1);
     }
   };
 
@@ -543,39 +600,46 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
             🖼️
           </button>
 
-          {/* Mode Switcher: Tự Do (🎨) vs Theo Số (🔢) */}
-          <div className="flex items-center bg-amber-100/90 p-0.5 rounded-xl border border-amber-300 shrink-0">
+          {/* Mode Switcher: Tự Do (🎨) vs Theo Số (🔢) with full toggle capability */}
+          <div className="flex items-center bg-amber-100/90 p-0.5 sm:p-1 rounded-xl border border-amber-300 shrink-0 gap-0.5">
             <button
               type="button"
               onClick={() => {
                 setColoringMode('free');
                 playSoundEffect('pop', settings.volume);
               }}
-              className={`w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center cursor-pointer transition ${
+              className={`h-8 px-2 sm:px-2.5 rounded-lg text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition active:scale-95 touch-manipulation ${
                 coloringMode === 'free'
                   ? 'bg-amber-500 text-white shadow-2xs'
                   : 'text-amber-950 hover:bg-amber-200/60'
               }`}
-              title="Chế độ Tự do"
-              aria-label="Tự do"
+              title="Tô tự do (Tắt hiển thị số)"
+              aria-label="Tô tự do"
             >
-              🎨
+              <span className="text-sm">🎨</span>
+              <span className="hidden sm:inline text-[11px] font-bold">Tự do</span>
             </button>
             <button
               type="button"
               onClick={() => {
-                setColoringMode('number');
+                // Clicking when already in number mode toggles it off back to free mode!
+                setColoringMode((prev) => (prev === 'number' ? 'free' : 'number'));
                 playSoundEffect('pop', settings.volume);
               }}
-              className={`w-7 h-7 rounded-lg text-xs font-black flex items-center justify-center cursor-pointer transition ${
+              className={`h-8 px-2 sm:px-2.5 rounded-lg text-xs font-black flex items-center justify-center gap-1 cursor-pointer transition active:scale-95 touch-manipulation ${
                 coloringMode === 'number'
                   ? 'bg-amber-500 text-white shadow-2xs'
                   : 'text-amber-950 hover:bg-amber-200/60'
               }`}
-              title="Chế độ Theo số"
-              aria-label="Theo số"
+              title={
+                coloringMode === 'number'
+                  ? 'Đang hiện số trong tranh (Bấm để tắt hiển thị số)'
+                  : 'Bật hiển thị số trong tranh'
+              }
+              aria-label="Bật hoặc tắt hiển thị số"
             >
-              🔢
+              <span className="text-sm">🔢</span>
+              <span className="hidden sm:inline text-[11px] font-bold">Theo số</span>
             </button>
           </div>
         </div>
@@ -644,16 +708,39 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
 
       {/* 2. Interactive Coloring Canvas */}
       <div className="relative flex-1 min-h-0 w-full max-w-md aspect-square rounded-[24px] border-4 border-amber-400 bg-white shadow-md p-1 sm:p-2 flex items-center justify-center overflow-hidden">
+        {/* Loading Spinner */}
+        {isImageLoading && !imageLoadError && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/95 backdrop-blur-xs rounded-[20px] select-none">
+            <div className="w-10 h-10 border-4 border-amber-400 border-t-transparent rounded-full animate-spin mb-2" />
+            <span className="text-xs font-bold text-amber-900">Đang chuẩn bị tranh tô màu...</span>
+          </div>
+        )}
+
+        {/* Fallback Error & Retry UI (Requirement 4) */}
+        {imageLoadError && (
+          <div className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-amber-50/95 p-4 rounded-[20px] text-center select-none">
+            <span className="text-4xl mb-2">🎨</span>
+            <h4 className="text-base font-bold text-slate-800 mb-1">Chưa tải được nét tranh</h4>
+            <p className="text-xs text-slate-600 mb-3">Bé bấm nút bên dưới để tải lại tranh ngay nhé!</p>
+            <button
+              type="button"
+              onClick={() => setRetryTrigger((prev) => prev + 1)}
+              className="px-4 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-sm rounded-xl shadow-md hover:from-amber-600 hover:to-orange-600 active:scale-95 transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <RefreshCw className="w-4 h-4" />
+              <span>Thử tải lại tranh 🔄</span>
+            </button>
+          </div>
+        )}
+
         {/* Sample Reference Thumbnail when Eye is Active */}
         {showSampleHint && (
-          <div className="absolute top-2 right-2 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-xl p-1.5 shadow-md flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200 pointer-events-none">
-            {activeTemplate.imageUrl && (
-              <img
-                src={activeTemplate.imageUrl}
-                alt="Hình mẫu"
-                className="w-14 h-14 rounded-lg object-contain bg-amber-50/50"
-              />
-            )}
+          <div className="absolute top-2 right-2 z-20 bg-white/95 backdrop-blur-xs border-2 border-amber-300 rounded-2xl p-1.5 shadow-lg flex flex-col items-center select-none animate-in fade-in zoom-in-95 duration-200">
+            <img
+              src={activeTemplate.sampleImageUrl || activeTemplate.imageUrl}
+              alt="Hình mẫu hoàn chỉnh"
+              className="w-16 h-16 rounded-xl object-contain bg-amber-50/90 border border-amber-200 p-0.5"
+            />
             <span className="text-[10px] font-black text-amber-900 mt-0.5">Hình Mẫu</span>
           </div>
         )}
@@ -677,8 +764,8 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
           className="w-full h-full max-h-full aspect-square object-contain touch-none cursor-crosshair rounded-[20px] select-none"
         />
 
-        {/* Number Badges Overlay in "Theo Số" Mode: PRECOMPUTED & INSCRIBED */}
-        {coloringMode === 'number' && (
+        {/* Number Badges Overlay in "Theo Số" Mode: PRECOMPUTED & INSCRIBED (Only visible when image loaded) */}
+        {coloringMode === 'number' && isImageLoaded && (
           <div className="absolute inset-0 pointer-events-none p-1 sm:p-2 flex items-center justify-center">
             <div className="relative w-full h-full aspect-square">
               {regionsList.map((region) => {
@@ -757,18 +844,7 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
           </div>
         )}
 
-        {/* Brief Congratulations 3D Chibi Modal */}
-        {showBriefCongrats && (
-          <div className="absolute inset-0 z-30 bg-black/40 backdrop-blur-2xs flex items-center justify-center p-4 animate-in fade-in duration-200">
-            <div className="bg-white rounded-3xl border-4 border-amber-400 p-5 shadow-2xl flex flex-col items-center text-center space-y-2 animate-in zoom-in-95 duration-200 max-w-xs">
-              <div className="w-16 h-16 rounded-full bg-amber-100 border-2 border-amber-300 flex items-center justify-center text-3xl shadow-sm animate-bounce">
-                🌟
-              </div>
-              <h3 className="text-base font-black text-amber-950">Tuyệt Vời Quá Bé Ơi!</h3>
-              <p className="text-xs text-slate-600">Tranh bé tô thật rực rỡ và xinh xắn!</p>
-            </div>
-          </div>
-        )}
+
       </div>
 
       {/* 3. Studio Color Palette & Progress Section */}
@@ -848,7 +924,89 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
         </div>
       </div>
 
-      {/* 4. Complete 3 Drawings Modal (Chơi lại 🔄 vs Về màn hình chính 🏠) */}
+      {/* 4. Complete Single Drawing Celebration Modal (Requirement 2) */}
+      {showDrawingCompleteModal && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200 select-none">
+          <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-amber-400 shadow-2xl p-5 flex flex-col items-center text-center space-y-3.5">
+            <div className="relative">
+              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-amber-300 via-orange-300 to-amber-400 border-2 border-amber-300 flex items-center justify-center text-3xl shadow-md">
+                🎉
+              </div>
+              <div className="absolute -top-1 -right-1 text-xl animate-bounce">
+                ⭐
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-base sm:text-lg font-black text-amber-950 leading-snug">
+                Chúc mừng bé đã hoàn thành bức tranh của mình!
+              </h3>
+              <p className="text-xs text-slate-600 mt-1 font-semibold">
+                Bé đã tô kín {totalColorableRegions}/{totalColorableRegions} vùng màu thật xuất sắc!
+              </p>
+            </div>
+
+            {/* Preview of completed picture */}
+            <div className="w-24 h-24 rounded-2xl border-2 border-amber-200 overflow-hidden bg-amber-50 p-1 shadow-inner flex items-center justify-center">
+              <img
+                src={activeTemplate.sampleImageUrl || activeTemplate.imageUrl}
+                alt="Tranh bé vừa tô xong"
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            {/* Audio speaker button */}
+            <button
+              type="button"
+              onClick={() => {
+                speakTeacherVoice(
+                  [
+                    {
+                      lang: 'vi',
+                      text: 'Chúc mừng bé đã hoàn thành bức tranh của mình!',
+                    },
+                  ],
+                  settings
+                );
+              }}
+              className="px-3 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold flex items-center gap-1.5 hover:bg-amber-200 cursor-pointer transition active:scale-95"
+            >
+              <Volume2 className="w-3.5 h-3.5 text-amber-700" />
+              <span>Nghe lại lời khen</span>
+            </button>
+
+            {/* Two Action Buttons: Tô tranh khác vs Tô lại */}
+            <div className="flex flex-col gap-2 w-full pt-1">
+              <button
+                type="button"
+                onClick={() => {
+                  setShowDrawingCompleteModal(false);
+                  setShowTemplateModal(true);
+                  playSoundEffect('pop', settings.volume);
+                }}
+                className="w-full py-3 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md cursor-pointer transition active:scale-95"
+              >
+                <span>🖼️</span>
+                <span>Tô tranh khác</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowDrawingCompleteModal(false);
+                  handleReset();
+                }}
+                className="w-full py-2.5 rounded-2xl border-2 border-slate-300 bg-slate-50 hover:bg-slate-100 text-slate-700 font-black text-sm flex items-center justify-center gap-2 cursor-pointer transition active:scale-95"
+              >
+                <RotateCcw className="w-4 h-4 text-slate-600" />
+                <span>Tô lại</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 5. Complete 3 Drawings Modal (Chơi lại 🔄 vs Về màn hình chính 🏠) */}
       {showRoundCompleteModal && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 animate-in fade-in duration-200 select-none">
           <div className="w-full max-w-sm bg-white rounded-3xl border-4 border-amber-400 shadow-2xl p-5 flex flex-col items-center text-center space-y-4">
@@ -929,9 +1087,9 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
                         : 'border-slate-200 bg-white hover:bg-slate-50'
                     }`}
                   >
-                    {tmpl.imageUrl ? (
+                    {tmpl.sampleImageUrl || tmpl.imageUrl ? (
                       <img
-                        src={tmpl.imageUrl}
+                        src={tmpl.sampleImageUrl || tmpl.imageUrl}
                         alt={tmpl.titleVi}
                         className="w-14 h-14 rounded-lg object-contain bg-amber-50/40 p-0.5 border border-slate-100"
                       />
