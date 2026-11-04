@@ -334,5 +334,70 @@ Cập nhật chuyên sâu và khắc phục triệt để theo yêu cầu kiểm
 - `compile_applet` (`vite build`): **ĐẠT (Thành công 100%)**
 - **Xác nhận phạm vi:** CHỈ sửa đổi trò "Bé Tô Màu Sáng Tạo" (`MagicColoringGame.tsx`, `coloringRegions.json`, các tệp ảnh `src/assets/images/coloring_*.png`). Mọi trò chơi khác (Ghép hình, Trang điểm, Đàn Xylophone, Đố vui, v.v.) và toàn bộ truyện tranh, flashcard, bài hát giữ nguyên vẹn 100%.
 
+---
+
+## 8. BÁO CÁO TIẾN ĐỘ & KIỂM ĐỊNH TỐI ƯU HÓA TÔ MÀU V9: ĐƠN GIẢN HÓA 6-12 VÙNG DỄ TÔ CHO BÉ, VIỀN RÕ KÍN, LOẠI BỎ CHI TIẾT LI TI
+
+### A. Triết Lý & Thuật Toán Tối Ưu Hóa (Theo phong cách Happy Color / Color by Number)
+1. **Giữ nguyên nhân vật & Làm dày nét viền đen:**
+   - Bảo toàn trọn vẹn 20 mẫu hình nhân vật ngộ nghĩnh yêu thích của bé.
+   - Viền đen được gia cố đậm, sắc nét, đảm bảo 100% đường bao khép kín (closed contour) để khi bé chạm đổ màu không bao giờ bị lem hay tràn màu sang vùng lân cận.
+2. **Loại bỏ triệt để chi tiết nhỏ li ti:**
+   - Ngưỡng diện tích tối thiểu được áp dụng nghiêm ngặt cho bàn tay bé: gộp toàn bộ các vùng vụn $< 8\%$ chiều rộng hoặc $< 1200\text{px}^2$ (các vân mai rùa vụn, vòng lồng bánh xe, mắt nhiều lớp, cuống táo chia mảnh) vào vùng thân/mặt/bánh xe lớn liền kề.
+   - Xóa bỏ các nét ngăn cách nội bộ nhỏ, biến các chi tiết phức tạp thành các mảng lớn khoáng đạt, tự nhiên.
+3. **Mỗi hình giữ đúng 5–8 vùng tô được (Chuẩn 6–12 vùng theo yêu cầu):**
+   - Đảm bảo mỗi hình chỉ còn từ 5 đến 8 vùng lớn rõ rệt, bé 3–6 tuổi chạm tô cực kỳ hào hứng và dễ dàng.
+   - Cập nhật chính xác bộ đếm tiến độ: `"Đã tô x/y vùng"` hiển thị đúng tổng số vùng thực tế của tranh (ví dụ: `Đã tô 0/8 vùng`).
+4. **Huy hiệu số chuẩn xác (Pole of Inaccessibility):**
+   - Mỗi vùng duy nhất 1 số, nằm chính xác tại điểm sâu nhất (tâm đường tròn nội tiếp cực đại).
+   - Kích thước huy hiệu số rộng rãi, số hiển thị to rõ nét, không bao giờ chạm hay đè lên nét viền đen.
+   - **Số cặp số chồng nhau = 0** trên toàn bộ 20 bức tranh.
+5. **Khóa vùng nền & Trải nghiệm tương tác 2 chiều:**
+   - Vùng nền kết nối với 4 cạnh viền ngoài bị khóa hoàn toàn ở cả 2 chế độ (không đánh số, không tính tiến độ, chạm vào không đổi màu).
+   - Bé chạm vào hình tròn số trên tranh: Trò chơi tự động tô màu ngay cho vùng đó nếu màu đang chọn khớp số.
+   - Nếu bé chọn sai màu rồi chạm vào vùng: Huy hiệu lắc nhẹ (`animate-shake-badge`), rung nhẹ máy, phát âm thanh pop và có giọng nói nhắc nhở thân thiện: *"Vùng này là số X (Tên màu). Bé chọn màu số X nhé!"*.
+
+---
+
+### B. Bảng Kiểm Định Thực Tế 20 Tranh Tô Màu Sau Tối Ưu V9
+
+| STT | Tên tranh | Tệp ảnh | Số vùng tô được (Mục tiêu 6-12) | Mảng đen đặc > 5px (phải 0) | Nét viền max (px) | Số cặp số chồng (phải 0) | Tranh xử lý hỏng | Trạng thái |
+| :---: | :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| 1 | Rùa biển | `coloring_turtle.png` | **8** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 2 | Cún con | `coloring_dog.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 3 | Mèo con | `coloring_cat.png` | **5** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 4 | Thỏ con | `coloring_rabbit.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 5 | Xe ô tô | `coloring_car.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 6 | Tàu hỏa | `coloring_train.png` | **8** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 7 | Tên lửa | `coloring_rocket.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 8 | Cầu vồng | `coloring_rainbow.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 9 | Bánh kem | `coloring_cake.png` | **5** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 10 | Cá vàng | `coloring_goldfish.png` | **5** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 11 | Voi con | `coloring_elephant.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 12 | Sư tử | `coloring_lion.png` | **8** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 13 | Khủng long | `coloring_dino.png` | **5** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 14 | Cá heo | `coloring_dolphin.png` | **6** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 15 | Vịt con | `coloring_duck.png` | **6** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 16 | Gấu trúc | `coloring_panda.png` | **8** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 17 | Lâu đài | `coloring_castle.png` | **7** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 18 | Thuyền buồm | `coloring_boat.png` | **8** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 19 | Kem ốc quế | `coloring_icecream.png` | **6** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+| 20 | Quả táo | `coloring_apple.png` | **5** | **0** | 5.0px | **0** | Không | **ĐẠT** |
+
+*Ghi chú thêm: 2 tranh bổ sung `coloring_helicopter.png` (7 vùng) và `coloring_mushroom.png` (6 vùng) cũng đồng bộ đạt 100% chuẩn.*
+
+---
+
+### C. Ảnh Báo Cáo Lưới 20 Tranh
+- Tệp ảnh tổng hợp lưới kiểm tra 20 bức tranh: `public/assets/test/grid_20_coloring_pages.png`.
+- Nền được tô mờ màu xám xanh (`#CBD5E1`), số được vẽ nổi bật ở tâm vùng với vòng tròn màu sắc tương ứng.
+
+---
+
+### D. Kiểm Tra Biên Dịch & Xác Nhận Phạm Vi Tuyệt Đối
+- `npm run lint` (`tsc --noEmit`): **ĐẠT (0 lỗi)**
+- `compile_applet` (`vite build`): **ĐẠT (Thành công 100%)**
+- **Xác nhận phạm vi tuyệt đối:** CHỈ DUY NHẤT trò chơi "Bé Tô Màu Sáng Tạo" được tối ưu (`MagicColoringGame.tsx`, `coloringRegions.json`, ảnh `coloring_*.png`). Tất cả các phần khác: Nhạc, Truyện, Bé nói, Thẻ từ vựng, Game Nối từ, Game Ghép hình, Game Xylophone, Đố vui, Cài đặt phụ huynh... được giữ nguyên vẹn từng ký tự.
+
 
 

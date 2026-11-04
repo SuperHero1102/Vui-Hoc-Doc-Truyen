@@ -269,180 +269,199 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
   );
 
   // Scanline Flood Fill on 512x512 Canvas
+  const executeFill = useCallback(
+    (startX: number, startY: number, targetRegionOverride?: PrecomputedRegion) => {
+      if (showRoundCompleteModal || showBriefCongrats) return;
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d', { willReadFrequently: true });
+      if (!ctx) return;
+
+      if (startX < 0 || startX >= 512 || startY < 0 || startY >= 512) return;
+
+      const clickIdx = startY * 512 + startX;
+
+      // Requirement 2: Vùng nền (trắng nối với mép ảnh) bị khóa ở cả hai chế độ:
+      // chạm không đổ màu, không đánh số, không tính tiến độ.
+      if (bgMaskRef.current && bgMaskRef.current[clickIdx] === 1) {
+        playSoundEffect('pop', settings.volume * 0.4);
+        setShowBgLockedNotice(true);
+        if (bgNoticeTimeoutRef.current) clearTimeout(bgNoticeTimeoutRef.current);
+        bgNoticeTimeoutRef.current = window.setTimeout(() => {
+          setShowBgLockedNotice(false);
+        }, 1500);
+        return;
+      }
+
+      const imgData = ctx.getImageData(0, 0, 512, 512);
+      const data = imgData.data;
+      const pixelIdx = clickIdx * 4;
+      const startR = data[pixelIdx];
+      const startG = data[pixelIdx + 1];
+      const startB = data[pixelIdx + 2];
+
+      const startLum = 0.299 * startR + 0.587 * startG + 0.114 * startB;
+      if (startLum < 90) return; // Do not fill black outline
+
+      const cleanHex = brushColor.replace('#', '');
+      const num = parseInt(cleanHex, 16);
+      const fillR = (num >> 16) & 255;
+      const fillG = (num >> 8) & 255;
+      const fillB = num & 255;
+
+      // Target region identification
+      const matchedRegion = targetRegionOverride || findRegionAtPoint(startX, startY);
+
+      // Requirement 3 in Number Mode:
+      // đổ sai số thì rung nhẹ và nhắc
+      if (coloringMode === 'number' && matchedRegion) {
+        if (matchedRegion.colorNumber !== selectedColorItem.number) {
+          // Trigger gentle vibration
+          if (typeof navigator !== 'undefined' && navigator.vibrate) {
+            try {
+              navigator.vibrate(50);
+            } catch {
+              // Ignore if vibration is restricted
+            }
+          }
+          setShakingBadgeId(matchedRegion.regionId);
+          setTimeout(() => setShakingBadgeId(null), 500);
+          playSoundEffect('pop', settings.volume * 0.5);
+
+          const expectedColor =
+            STUDIO_COLOR_PALETTE.find((c) => c.number === matchedRegion.colorNumber) ||
+            STUDIO_COLOR_PALETTE[0];
+          const colorNameClean = expectedColor.nameVi.replace('Màu ', '');
+
+          if (onGentleRetry) {
+            onGentleRetry(
+              `Vùng này mang số ${matchedRegion.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${matchedRegion.colorNumber} nhé!`,
+              expectedColor.nameEn
+            );
+          } else {
+            speakTeacherVoice(
+              [
+                {
+                  lang: 'vi',
+                  text: `Vùng này là số ${matchedRegion.colorNumber} (${colorNameClean}). Bé chọn màu số ${matchedRegion.colorNumber} nhé!`,
+                },
+              ],
+              settings
+            );
+          }
+          return; // Reject wrong color fill
+        }
+      }
+
+      if (
+        Math.abs(startR - fillR) < 15 &&
+        Math.abs(startG - fillG) < 15 &&
+        Math.abs(startB - fillB) < 15
+      ) {
+        return;
+      }
+
+      const matchStartColor = (idx: number) => {
+        const r = data[idx];
+        const g = data[idx + 1];
+        const b = data[idx + 2];
+        const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+        if (lum < 90) return false;
+        return (
+          Math.abs(r - startR) <= 32 &&
+          Math.abs(g - startG) <= 32 &&
+          Math.abs(b - startB) <= 32
+        );
+      };
+
+      // Save undo step
+      if (undoStackRef.current.length >= 15) {
+        undoStackRef.current.shift();
+      }
+      undoStackRef.current.push(ctx.getImageData(0, 0, 512, 512));
+      setCanUndo(true);
+
+      // BFS Flood Fill
+      const visited = new Uint8Array(512 * 512);
+      const queue = [clickIdx];
+      visited[clickIdx] = 1;
+
+      while (queue.length > 0) {
+        const curr = queue.pop()!;
+        const idx = curr * 4;
+        data[idx] = fillR;
+        data[idx + 1] = fillG;
+        data[idx + 2] = fillB;
+        data[idx + 3] = 255;
+
+        const cx = curr % 512;
+        const cy = Math.floor(curr / 512);
+
+        if (cy > 0) {
+          const up = (cy - 1) * 512 + cx;
+          if (!visited[up] && matchStartColor(up * 4)) {
+            visited[up] = 1;
+            queue.push(up);
+          }
+        }
+        if (cy < 511) {
+          const down = (cy + 1) * 512 + cx;
+          if (!visited[down] && matchStartColor(down * 4)) {
+            visited[down] = 1;
+            queue.push(down);
+          }
+        }
+        if (cx > 0) {
+          const left = cy * 512 + (cx - 1);
+          if (!visited[left] && matchStartColor(left * 4)) {
+            visited[left] = 1;
+            queue.push(left);
+          }
+        }
+        if (cx < 511) {
+          const right = cy * 512 + (cx + 1);
+          if (!visited[right] && matchStartColor(right * 4)) {
+            visited[right] = 1;
+            queue.push(right);
+          }
+        }
+      }
+
+      ctx.putImageData(imgData, 0, 0);
+      playSoundEffect('pop', settings.volume);
+
+      if (matchedRegion) {
+        setCompletedBadges((prev) => ({ ...prev, [matchedRegion.regionId]: true }));
+        setColoredRegionsSet((prev) => new Set([...prev, matchedRegion.regionId]));
+      }
+
+      setTimeout(() => {
+        checkAutoCompletion();
+      }, 150);
+    },
+    [
+      brushColor,
+      checkAutoCompletion,
+      coloringMode,
+      findRegionAtPoint,
+      onGentleRetry,
+      selectedColorItem,
+      settings,
+      showBriefCongrats,
+      showRoundCompleteModal,
+    ]
+  );
+
   const handleCanvasClick = (e: React.PointerEvent<HTMLCanvasElement>) => {
-    if (showRoundCompleteModal || showBriefCongrats) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d', { willReadFrequently: true });
-    if (!ctx) return;
-
     const rect = canvas.getBoundingClientRect();
     const scaleX = 512 / rect.width;
     const scaleY = 512 / rect.height;
     const startX = Math.floor((e.clientX - rect.left) * scaleX);
     const startY = Math.floor((e.clientY - rect.top) * scaleY);
 
-    if (startX < 0 || startX >= 512 || startY < 0 || startY >= 512) return;
-
-    const clickIdx = startY * 512 + startX;
-
-    // Requirement 2: Vùng nền (trắng nối với mép ảnh) bị khóa ở cả hai chế độ:
-    // chạm không đổ màu, không đánh số, không tính tiến độ.
-    if (bgMaskRef.current && bgMaskRef.current[clickIdx] === 1) {
-      playSoundEffect('pop', settings.volume * 0.4);
-      setShowBgLockedNotice(true);
-      if (bgNoticeTimeoutRef.current) clearTimeout(bgNoticeTimeoutRef.current);
-      bgNoticeTimeoutRef.current = window.setTimeout(() => {
-        setShowBgLockedNotice(false);
-      }, 1500);
-      return;
-    }
-
-    const imgData = ctx.getImageData(0, 0, 512, 512);
-    const data = imgData.data;
-    const pixelIdx = clickIdx * 4;
-    const startR = data[pixelIdx];
-    const startG = data[pixelIdx + 1];
-    const startB = data[pixelIdx + 2];
-
-    const startLum = 0.299 * startR + 0.587 * startG + 0.114 * startB;
-    if (startLum < 90) return; // Do not fill black outline
-
-    const cleanHex = brushColor.replace('#', '');
-    const num = parseInt(cleanHex, 16);
-    const fillR = (num >> 16) & 255;
-    const fillG = (num >> 8) & 255;
-    const fillB = num & 255;
-
-    // Target region identification
-    const matchedRegion = findRegionAtPoint(startX, startY);
-
-    // Requirement 3 in Number Mode:
-    // đổ sai số thì rung nhẹ và nhắc
-    if (coloringMode === 'number' && matchedRegion) {
-      if (matchedRegion.colorNumber !== selectedColorItem.number) {
-        // Trigger gentle vibration
-        if (typeof navigator !== 'undefined' && navigator.vibrate) {
-          try {
-            navigator.vibrate(50);
-          } catch {
-            // Ignore if vibration is restricted
-          }
-        }
-        setShakingBadgeId(matchedRegion.regionId);
-        setTimeout(() => setShakingBadgeId(null), 500);
-        playSoundEffect('pop', settings.volume * 0.5);
-
-        const expectedColor =
-          STUDIO_COLOR_PALETTE.find((c) => c.number === matchedRegion.colorNumber) ||
-          STUDIO_COLOR_PALETTE[0];
-        const colorNameClean = expectedColor.nameVi.replace('Màu ', '');
-
-        if (onGentleRetry) {
-          onGentleRetry(
-            `Vùng này mang số ${matchedRegion.colorNumber} (${colorNameClean}). Bé hãy chọn màu số ${matchedRegion.colorNumber} nhé!`,
-            expectedColor.nameEn
-          );
-        } else {
-          speakTeacherVoice(
-            [
-              {
-                lang: 'vi',
-                text: `Vùng này là số ${matchedRegion.colorNumber} (${colorNameClean}). Bé chọn màu số ${matchedRegion.colorNumber} nhé!`,
-              },
-            ],
-            settings
-          );
-        }
-        return; // Reject wrong color fill
-      }
-    }
-
-    if (
-      Math.abs(startR - fillR) < 15 &&
-      Math.abs(startG - fillG) < 15 &&
-      Math.abs(startB - fillB) < 15
-    ) {
-      return;
-    }
-
-    const matchStartColor = (idx: number) => {
-      const r = data[idx];
-      const g = data[idx + 1];
-      const b = data[idx + 2];
-      const lum = 0.299 * r + 0.587 * g + 0.114 * b;
-      if (lum < 90) return false;
-      return (
-        Math.abs(r - startR) <= 32 &&
-        Math.abs(g - startG) <= 32 &&
-        Math.abs(b - startB) <= 32
-      );
-    };
-
-    // Save undo step
-    if (undoStackRef.current.length >= 15) {
-      undoStackRef.current.shift();
-    }
-    undoStackRef.current.push(ctx.getImageData(0, 0, 512, 512));
-    setCanUndo(true);
-
-    // BFS Flood Fill
-    const visited = new Uint8Array(512 * 512);
-    const queue = [clickIdx];
-    visited[clickIdx] = 1;
-
-    while (queue.length > 0) {
-      const curr = queue.pop()!;
-      const idx = curr * 4;
-      data[idx] = fillR;
-      data[idx + 1] = fillG;
-      data[idx + 2] = fillB;
-      data[idx + 3] = 255;
-
-      const cx = curr % 512;
-      const cy = Math.floor(curr / 512);
-
-      if (cy > 0) {
-        const up = (cy - 1) * 512 + cx;
-        if (!visited[up] && matchStartColor(up * 4)) {
-          visited[up] = 1;
-          queue.push(up);
-        }
-      }
-      if (cy < 511) {
-        const down = (cy + 1) * 512 + cx;
-        if (!visited[down] && matchStartColor(down * 4)) {
-          visited[down] = 1;
-          queue.push(down);
-        }
-      }
-      if (cx > 0) {
-        const left = cy * 512 + (cx - 1);
-        if (!visited[left] && matchStartColor(left * 4)) {
-          visited[left] = 1;
-          queue.push(left);
-        }
-      }
-      if (cx < 511) {
-        const right = cy * 512 + (cx + 1);
-        if (!visited[right] && matchStartColor(right * 4)) {
-          visited[right] = 1;
-          queue.push(right);
-        }
-      }
-    }
-
-    ctx.putImageData(imgData, 0, 0);
-    playSoundEffect('pop', settings.volume);
-
-    if (matchedRegion) {
-      setCompletedBadges((prev) => ({ ...prev, [matchedRegion.regionId]: true }));
-      setColoredRegionsSet((prev) => new Set([...prev, matchedRegion.regionId]));
-    }
-
-    setTimeout(() => {
-      checkAutoCompletion();
-    }, 150);
+    executeFill(startX, startY);
   };
 
   const handleUndo = () => {
@@ -724,6 +743,9 @@ export const MagicColoringGame: React.FC<MagicColoringGameProps> = ({
                             settings
                           );
                         }
+                      } else {
+                        // Matching color: directly fill the region
+                        executeFill(region.x, region.y, region);
                       }
                     }}
                   >
