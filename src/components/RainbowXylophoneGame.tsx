@@ -10,6 +10,10 @@ import {
   Music,
   Check,
   ChevronDown,
+  Star,
+  X,
+  Disc3,
+  Sparkles,
 } from 'lucide-react';
 import type { ParentSettings } from '../types/learning';
 import {
@@ -27,6 +31,92 @@ import {
   type MusicalInstrumentType,
 } from '../utils/audioEngine';
 import { fireStarExplosion, fireFireworksCelebration } from '../utils/confetti';
+
+// ============================================================================
+// UNIFIED VECTOR STROKE ICONS (Stroke 2px, 22px, commercial grade)
+// ============================================================================
+
+export const PianoSegmentIcon: React.FC<{ className?: string }> = ({
+  className = 'w-[22px] h-[22px]',
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <rect x="2" y="4" width="20" height="16" rx="3" />
+    <path d="M6 4v8a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V4" />
+    <path d="M14 4v8a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V4" />
+    <line x1="8" y1="13" x2="8" y2="20" />
+    <line x1="12" y1="4" x2="12" y2="20" />
+    <line x1="16" y1="13" x2="16" y2="20" />
+  </svg>
+);
+
+export const ModeSegmentIcon: React.FC<{ className?: string }> = ({
+  className = 'w-[22px] h-[22px]',
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 18V5l12-2v13" />
+    <circle cx="6" cy="18" r="3" />
+    <circle cx="18" cy="16" r="3" />
+  </svg>
+);
+
+export const TimbreSegmentIcon: React.FC<{ className?: string }> = ({
+  className = 'w-[22px] h-[22px]',
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <line x1="4" y1="21" x2="4" y2="14" />
+    <line x1="4" y1="10" x2="4" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="12" />
+    <line x1="12" y1="8" x2="12" y2="3" />
+    <line x1="20" y1="21" x2="20" y2="16" />
+    <line x1="20" y1="12" x2="20" y2="3" />
+    <line x1="1" y1="14" x2="7" y2="14" />
+    <line x1="9" y1="8" x2="15" y2="8" />
+    <line x1="17" y1="16" x2="23" y2="16" />
+  </svg>
+);
+
+export const DrumSegmentIcon: React.FC<{ className?: string }> = ({
+  className = 'w-[22px] h-[22px]',
+}) => (
+  <svg
+    viewBox="0 0 24 24"
+    className={className}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <ellipse cx="12" cy="7" rx="9" ry="3.5" />
+    <path d="M3 7v9.5c0 1.93 4.03 3.5 9 3.5s9-1.57 9-3.5V7" />
+    <path d="M6 8.5l4 9" />
+    <path d="M18 8.5l-4 9" />
+  </svg>
+);
 
 // ============================================================================
 // 3D CHIBI SVG ICONS (High-fidelity, colorful, tactile for toddlers)
@@ -246,6 +336,8 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
   // 16 songs picker modal
   const [showSongPickerModal, setShowSongPickerModal] = useState<boolean>(false);
   const [songCategoryFilter, setSongCategoryFilter] = useState<'all' | 'vietnam' | 'international' | 'folk_animals'>('all');
+  // Active segment in the 4-cell segmented control
+  const [activeControlSegment, setActiveControlSegment] = useState<'instrument' | 'mode' | 'timbre' | 'drum'>('instrument');
 
   // Timers and intervals refs
   const demoTimerRef = useRef<number | null>(null);
@@ -446,30 +538,30 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
   });
 
   return (
-    <div className="w-full h-full max-h-[100dvh] flex flex-col justify-between items-center bg-gradient-to-b from-amber-50/50 via-sky-50/20 to-purple-50/40 p-1 sm:p-2.5 select-none overflow-hidden font-sans">
+    <div className="w-full h-[100dvh] max-h-[100dvh] flex flex-col justify-start items-center bg-slate-50 p-3 pb-[max(16px,env(safe-area-inset-bottom))] select-none overflow-hidden font-sans gap-3">
       {/* ========================================================================= */}
-      {/* HÀNG 1: TOP BAR (CAO <= 56PX): QUAY LẠI SÂN CHƠI, TÊN TRÒ NGẮN, NÚT LOA */}
+      {/* HÀNG 1: TOP BAR (CAO 48PX, BO GÓC 16PX) */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-4xl h-11 sm:h-12 shrink-0 rounded-2xl border-2 border-amber-300 bg-white/95 backdrop-blur-md px-2.5 shadow-2xs flex items-center justify-between gap-2">
-        {/* Nút quay lại "Sân chơi" */}
+      <div className="w-full max-w-3xl h-12 shrink-0 rounded-2xl border border-slate-200/90 bg-white/95 backdrop-blur-md px-3 shadow-2xs flex items-center justify-between gap-2">
+        {/* Nút quay lại "Sân chơi" (Bo góc 12px) */}
         <button
           type="button"
           onClick={() => {
             stopDemo();
             onBack();
           }}
-          className="min-h-[40px] px-3 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-950 font-black text-xs flex items-center gap-1.5 cursor-pointer transition active:scale-95 shadow-2xs"
+          className="h-[38px] px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs flex items-center gap-1.5 cursor-pointer transition active:scale-[0.97]"
           title="Trở về sân chơi"
           aria-label="Sân chơi"
         >
-          <ArrowLeft className="w-4 h-4 stroke-[2.8]" />
+          <ArrowLeft className="w-4 h-4 stroke-[2.5]" />
           <span>Sân chơi</span>
         </button>
 
         {/* Tên trò ngắn */}
-        <div className="flex items-center gap-1.5 min-w-0">
-          <ChibiXylophone3dIcon className="w-6 h-6 shrink-0" />
-          <h2 className="text-xs sm:text-base font-black text-slate-800 tracking-tight truncate font-display">
+        <div className="flex items-center gap-2 min-w-0">
+          <PianoSegmentIcon className="w-5 h-5 text-amber-500 shrink-0" />
+          <h2 className="text-sm sm:text-base font-black text-slate-900 tracking-tight truncate">
             Đàn Cầu Vồng Vui Nhộn
           </h2>
         </div>
@@ -478,149 +570,144 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
         <button
           type="button"
           onClick={handleTeacherVoiceGuide}
-          className="w-10 h-10 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-800 flex items-center justify-center cursor-pointer transition active:scale-95 shadow-2xs shrink-0"
+          className="w-[38px] h-[38px] rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200/80 flex items-center justify-center cursor-pointer transition active:scale-[0.97] shrink-0"
           title="Cô giáo hướng dẫn âm thanh"
           aria-label="Hướng dẫn âm thanh"
         >
-          <Volume2 className="w-5 h-5 stroke-[2.4]" />
+          <Volume2 className="w-5 h-5 stroke-[2.2]" />
         </button>
       </div>
 
       {/* ========================================================================= */}
-      {/* HÀNG 2: ĐIỀU KHIỂN (CÁC NÚT >= 48PX): ĐỔI ĐÀN, ĐỔI CHẾ ĐỘ, ÂM SẮC, TRỐNG */}
+      {/* HÀNG 2: THANH SEGMENTED CONTROL 4 Ô BẰNG NHAU (CAO 44PX, BO GÓC 12PX) */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-4xl min-h-[50px] shrink-0 rounded-2xl bg-white border border-amber-200/90 px-2 py-1 shadow-2xs flex items-center justify-between gap-1.5 overflow-x-auto">
-        {/* 1. MỘT Nút chuyển đổi loại đàn: Piano ⇄ Cầu Vồng (>= 48px) */}
-        <button
-          type="button"
-          onClick={() => {
-            const nextView = instrumentView === 'piano' ? 'xylophone' : 'piano';
-            setInstrumentView(nextView);
-            setMusicalInstrument(nextView);
-            playMusicalInstrumentNote(440, nextView, settings.volume * 0.8);
-          }}
-          className={`min-h-[48px] px-2.5 sm:px-3.5 rounded-xl text-xs font-black cursor-pointer transition flex items-center gap-1.5 border shadow-2xs active:scale-95 shrink-0 ${
-            instrumentView === 'piano'
-              ? 'bg-slate-900 text-amber-300 border-amber-400 ring-2 ring-amber-300'
-              : 'bg-gradient-to-r from-red-500 via-amber-500 to-indigo-500 text-white border-amber-300 ring-2 ring-amber-300'
-          }`}
-          title="Bấm để đổi loại đàn (Piano ⇄ Cầu Vồng)"
-          aria-label="Chuyển đổi loại đàn"
-        >
-          {instrumentView === 'piano' ? (
-            <ChibiPiano3dIcon className="w-6 h-6 shrink-0" />
-          ) : (
-            <ChibiXylophone3dIcon className="w-6 h-6 shrink-0" />
-          )}
-          <div className="text-left leading-tight hidden xs:block">
-            <div className="text-[10px] opacity-80 uppercase tracking-wider">Đàn</div>
-            <div className="text-xs font-black">
-              {instrumentView === 'piano' ? 'Piano Cổ Điển' : 'Gõ Cầu Vồng'}
-            </div>
-          </div>
-        </button>
+      <div className="w-full max-w-3xl shrink-0 rounded-2xl bg-slate-100 p-1 border border-slate-200/90 shadow-2xs">
+        <div className="grid grid-cols-4 gap-1.5 w-full">
+          {/* Ô 1: Loại đàn (Piano / Cầu vồng) */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveControlSegment('instrument');
+              const nextView = instrumentView === 'piano' ? 'xylophone' : 'piano';
+              setInstrumentView(nextView);
+              setMusicalInstrument(nextView);
+              playMusicalInstrumentNote(440, nextView, settings.volume * 0.8);
+            }}
+            className={`h-[44px] rounded-xl flex flex-col items-center justify-center transition active:scale-[0.97] cursor-pointer select-none px-1 ${
+              activeControlSegment === 'instrument'
+                ? 'bg-slate-900 text-white border-2 border-[#F5CF55] shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-200/90 hover:bg-slate-50 shadow-2xs'
+            }`}
+            title="Bấm để đổi loại đàn (Piano ⇄ Cầu Vồng)"
+            aria-label="Chuyển đổi loại đàn"
+          >
+            <PianoSegmentIcon className="w-[22px] h-[22px] stroke-[2] shrink-0" />
+            <span className="text-[10px] sm:text-[11px] font-bold leading-none mt-0.5 truncate max-w-full">
+              {instrumentView === 'piano' ? 'Piano' : 'Cầu vồng'}
+            </span>
+          </button>
 
-        {/* 2. MỘT Nút chuyển chế độ: Tập theo bài ⇄ Chơi tự do (>= 48px) */}
-        <button
-          type="button"
-          onClick={() => {
-            stopDemo();
-            setPlayMode((m) => (m === 'guided' ? 'free' : 'guided'));
-          }}
-          className={`min-h-[48px] px-2.5 sm:px-3.5 rounded-xl text-xs font-black cursor-pointer transition flex items-center gap-1.5 border shadow-2xs active:scale-95 shrink-0 ${
-            playMode === 'guided'
-              ? 'bg-amber-500 text-white border-amber-600 ring-2 ring-amber-300'
-              : 'bg-purple-600 text-white border-purple-700 ring-2 ring-purple-300'
-          }`}
-          title="Bấm để đổi chế độ (Tập theo bài ⇄ Chơi tự do)"
-          aria-label="Chuyển chế độ chơi"
-        >
-          {playMode === 'guided' ? (
-            <ChibiPractice3dIcon className="w-6 h-6 shrink-0" />
-          ) : (
-            <ChibiFreePlay3dIcon className="w-6 h-6 shrink-0" />
-          )}
-          <div className="text-left leading-tight hidden xs:block">
-            <div className="text-[10px] opacity-80 uppercase tracking-wider">Chế độ</div>
-            <div className="text-xs font-black">
-              {playMode === 'guided' ? 'Tập Theo Bài' : 'Chơi Tự Do'}
-            </div>
-          </div>
-        </button>
+          {/* Ô 2: Chế độ (Tập theo bài / Tự do) */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveControlSegment('mode');
+              stopDemo();
+              setPlayMode((m) => (m === 'guided' ? 'free' : 'guided'));
+            }}
+            className={`h-[44px] rounded-xl flex flex-col items-center justify-center transition active:scale-[0.97] cursor-pointer select-none px-1 ${
+              activeControlSegment === 'mode'
+                ? 'bg-slate-900 text-white border-2 border-[#F5CF55] shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-200/90 hover:bg-slate-50 shadow-2xs'
+            }`}
+            title="Bấm để đổi chế độ (Tập theo bài ⇄ Chơi tự do)"
+            aria-label="Chuyển chế độ chơi"
+          >
+            <ModeSegmentIcon className="w-[22px] h-[22px] stroke-[2] shrink-0" />
+            <span className="text-[10px] sm:text-[11px] font-bold leading-none mt-0.5 truncate max-w-full">
+              {playMode === 'guided' ? 'Tập bài' : 'Tự do'}
+            </span>
+          </button>
 
-        {/* 3. MỘT Nút chọn Âm sắc dạng nút mở Modal 3D Chibi (>= 48px) */}
-        <button
-          type="button"
-          onClick={() => setShowTimbreModal(true)}
-          className="min-h-[48px] px-2.5 sm:px-3 rounded-xl bg-slate-50 hover:bg-indigo-50 border-2 border-indigo-200 text-indigo-950 text-xs font-black cursor-pointer flex items-center gap-1.5 shadow-2xs transition active:scale-95 shrink-0"
-          title="Bấm để chọn âm sắc nhạc cụ"
-          aria-label="Chọn âm sắc"
-        >
-          {activeTimbre.renderIcon()}
-          <div className="text-left leading-tight hidden xs:block">
-            <div className="text-[9px] text-indigo-500 uppercase tracking-wider">Âm sắc</div>
-            <div className="text-xs font-black text-indigo-900">{activeTimbre.nameVi}</div>
-          </div>
-          <ChevronDown className="w-3.5 h-3.5 text-indigo-600 ml-0.5" />
-        </button>
+          {/* Ô 3: Âm sắc (Mở bảng chọn) */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveControlSegment('timbre');
+              setShowTimbreModal(true);
+            }}
+            className={`h-[44px] rounded-xl flex flex-col items-center justify-center transition active:scale-[0.97] cursor-pointer select-none px-1 ${
+              activeControlSegment === 'timbre'
+                ? 'bg-slate-900 text-white border-2 border-[#F5CF55] shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-200/90 hover:bg-slate-50 shadow-2xs'
+            }`}
+            title="Bấm để chọn âm sắc nhạc cụ"
+            aria-label="Chọn âm sắc"
+          >
+            <TimbreSegmentIcon className="w-[22px] h-[22px] stroke-[2] shrink-0" />
+            <span className="text-[10px] sm:text-[11px] font-bold leading-none mt-0.5 truncate max-w-full">
+              {activeTimbre.nameVi}
+            </span>
+          </button>
 
-        {/* 4. Nút Bật nhịp trống vui dạng biểu tượng bật/tắt (>= 48px) */}
-        <button
-          type="button"
-          onClick={() => setIsRhythmPlaying((v) => !v)}
-          className={`min-h-[48px] px-2.5 sm:px-3 rounded-xl text-xs font-black cursor-pointer border shadow-2xs transition active:scale-95 flex items-center gap-1.5 shrink-0 ${
-            isRhythmPlaying
-              ? 'bg-rose-500 text-white border-rose-600 ring-2 ring-rose-300 animate-pulse'
-              : 'bg-white hover:bg-rose-50 text-slate-700 border-slate-200'
-          }`}
-          title="Bật/Tắt nhịp trống vui nhộn"
-          aria-label="Nhịp trống"
-        >
-          <ChibiDrum3dIcon className="w-6 h-6 shrink-0" isPlaying={isRhythmPlaying} />
-          <div className="text-left leading-tight hidden xs:block">
-            <div className="text-[10px] opacity-80 uppercase tracking-wider">Trống</div>
-            <div className="text-xs font-black">
-              {isRhythmPlaying ? 'Đang Bật' : 'Bật Nhịp'}
-            </div>
-          </div>
-        </button>
+          {/* Ô 4: Trống (Bật / Tắt) */}
+          <button
+            type="button"
+            onClick={() => {
+              setActiveControlSegment('drum');
+              setIsRhythmPlaying((v) => !v);
+            }}
+            className={`h-[44px] rounded-xl flex flex-col items-center justify-center transition active:scale-[0.97] cursor-pointer select-none px-1 ${
+              activeControlSegment === 'drum'
+                ? 'bg-slate-900 text-white border-2 border-[#F5CF55] shadow-xs'
+                : 'bg-white text-slate-700 border border-slate-200/90 hover:bg-slate-50 shadow-2xs'
+            }`}
+            title="Bật/Tắt nhịp trống vui nhộn"
+            aria-label="Nhịp trống"
+          >
+            <DrumSegmentIcon className="w-[22px] h-[22px] stroke-[2] shrink-0" />
+            <span className="text-[10px] sm:text-[11px] font-bold leading-none mt-0.5 truncate max-w-full">
+              {isRhythmPlaying ? 'Trống: Bật' : 'Trống: Tắt'}
+            </span>
+          </button>
+        </div>
       </div>
 
       {/* ========================================================================= */}
       {/* HÀNG 3: BÀI HÁT (CHỈ KHI Ở CHẾ ĐỘ TẬP THEO BÀI) */}
       {/* ========================================================================= */}
       {playMode === 'guided' && (
-        <div className="w-full max-w-4xl min-h-[42px] shrink-0 rounded-2xl bg-gradient-to-r from-indigo-50/90 via-white to-pink-50/90 border border-indigo-200/90 px-2 sm:px-3 py-1 shadow-2xs flex items-center justify-between gap-1.5">
+        <div className="w-full max-w-3xl h-[42px] shrink-0 rounded-2xl bg-white border border-slate-200/90 px-3 shadow-2xs flex items-center justify-between gap-2">
           {/* Cụm chuyển bài Trước / Kế tiếp & Tên bài */}
-          <div className="flex items-center gap-1.5 min-w-0">
-            <div className="flex items-center gap-0.5 shrink-0">
+          <div className="flex items-center gap-2 min-w-0">
+            <div className="flex items-center gap-1 shrink-0">
               <button
                 type="button"
                 onClick={handlePrevSong}
-                className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-indigo-50 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-90"
+                className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-[0.97]"
                 title="Bài trước"
                 aria-label="Bài trước"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-4 h-4 stroke-[2.2]" />
               </button>
               <button
                 type="button"
                 onClick={handleNextSong}
-                className="w-8 h-8 rounded-lg border border-slate-200 hover:bg-indigo-50 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-90"
+                className="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center cursor-pointer transition active:scale-[0.97]"
                 title="Bài kế tiếp"
                 aria-label="Bài kế tiếp"
               >
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-4 h-4 stroke-[2.2]" />
               </button>
             </div>
 
             <div className="flex items-center gap-1.5 min-w-0">
-              <span className="text-base sm:text-lg shrink-0">{activeSong.emoji}</span>
+              <Music className="w-4 h-4 text-amber-500 shrink-0" />
               <div className="min-w-0">
-                <div className="text-xs sm:text-sm font-black text-indigo-950 truncate leading-tight">
+                <div className="text-xs sm:text-sm font-black text-slate-900 truncate leading-tight">
                   {activeSong.titleVi}
                 </div>
-                <div className="text-[10px] font-semibold text-slate-500 truncate leading-none">
+                <div className="text-[10px] font-medium text-slate-500 truncate leading-none">
                   {activeSong.titleEn}
                 </div>
               </div>
@@ -633,34 +720,33 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
             <button
               type="button"
               onClick={() => setShowSongPickerModal(true)}
-              className="min-h-[38px] px-2.5 sm:px-3 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black flex items-center gap-1 cursor-pointer shadow-2xs transition active:scale-95"
+              className="h-[32px] px-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold flex items-center gap-1 cursor-pointer transition active:scale-[0.97]"
               title="Mở danh sách 16 bài hát"
             >
-              <Music className="w-3.5 h-3.5 text-amber-700" />
-              <span className="hidden xs:inline">Kho 16 bài</span>
-              <span className="xs:hidden">16 bài</span>
+              <Disc3 className="w-3.5 h-3.5" />
+              <span className="hidden xs:inline">16 bài</span>
             </button>
 
             {/* Nút Nghe mẫu nổi bật */}
             <button
               type="button"
               onClick={handleToggleDemo}
-              className={`min-h-[38px] px-3 sm:px-3.5 rounded-xl text-xs font-black cursor-pointer border transition shadow-xs flex items-center gap-1.5 active:scale-95 ${
+              className={`h-[32px] px-3 rounded-xl text-xs font-black cursor-pointer transition shadow-2xs flex items-center gap-1.5 active:scale-[0.97] ${
                 isDemoPlaying
-                  ? 'bg-rose-500 text-white border-rose-600 ring-2 ring-rose-300 animate-pulse'
-                  : 'bg-emerald-500 hover:bg-emerald-600 text-white border-emerald-600 ring-2 ring-emerald-300'
+                  ? 'bg-rose-500 text-white animate-pulse'
+                  : 'bg-[#F5CF55] hover:bg-amber-400 text-slate-950'
               }`}
               title="Phát giai điệu mẫu"
             >
               {isDemoPlaying ? (
                 <>
                   <Pause className="w-3.5 h-3.5 fill-current" />
-                  <span>Dừng Nghe</span>
+                  <span>Dừng</span>
                 </>
               ) : (
                 <>
                   <Play className="w-3.5 h-3.5 fill-current" />
-                  <span>Nghe Mẫu</span>
+                  <span>Nghe mẫu</span>
                 </>
               )}
             </button>
@@ -669,14 +755,14 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* HÀNG 4: KARAOKE VÀ "PHÍM TIẾP THEO" GỌN TRONG MỘT THẺ, CAO <= 110PX */}
+      {/* HÀNG 4: KARAOKE VÀ "PHÍM TIẾP THEO" GỌN TRONG MỘT THẺ, CAO ~72PX */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-4xl h-[78px] sm:h-[86px] max-h-[110px] shrink-0 rounded-2xl bg-gradient-to-r from-amber-50/90 via-orange-50/50 to-amber-50/90 border-2 border-amber-200/90 px-3 py-1.5 shadow-2xs flex flex-col justify-between overflow-hidden">
+      <div className="w-full max-w-3xl h-[62px] sm:h-[66px] shrink-0 rounded-2xl bg-white border border-slate-200/90 px-3 py-1.5 shadow-2xs flex flex-col justify-between overflow-hidden">
         {playMode === 'guided' ? (
           <>
             {/* Dòng 1: Lời bài hát Karaoke chạy theo nhịp */}
             <div className="w-full flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-              <span className="text-[10px] font-black uppercase text-amber-800 shrink-0">
+              <span className="text-[10px] font-black uppercase text-slate-500 shrink-0">
                 Lời hát:
               </span>
               <div className="flex items-center gap-1 shrink-0">
@@ -693,10 +779,10 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                         key={actualIdx}
                         className={`px-2 py-0.5 rounded-lg text-xs font-black transition-all ${
                           isCurrent
-                            ? 'bg-amber-400 text-slate-950 shadow-xs scale-105 ring-2 ring-amber-500'
+                            ? 'bg-[#F5CF55] text-slate-950 shadow-xs scale-105 ring-1 ring-amber-500'
                             : actualIdx < songStepIdx
                             ? 'text-slate-400 line-through'
-                            : 'text-slate-700 bg-white/80'
+                            : 'text-slate-700 bg-slate-100'
                         }`}
                       >
                         {n.syllableVi}
@@ -707,19 +793,22 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
             </div>
 
             {/* Dòng 2: Phím tiếp theo và tiến độ nốt */}
-            <div className="w-full flex items-center justify-between border-t border-amber-100 pt-1">
+            <div className="w-full flex items-center justify-between border-t border-slate-100 pt-1">
               <div className="flex items-center gap-1.5">
                 <span className="text-[11px] font-extrabold text-slate-700">
                   Phím tiếp theo:
                 </span>
                 <span
                   style={{ backgroundColor: targetKey.bgHex }}
-                  className="px-2.5 py-0.5 rounded-md text-white text-xs font-black shadow-2xs"
+                  className="px-2.5 py-0.5 rounded-md text-white text-xs font-black shadow-2xs flex items-center gap-1"
                 >
-                  {targetKey.solfegeVi} ({targetKey.note.replace('4', '').replace('5', '')}) ⭐
+                  <span>
+                    {targetKey.solfegeVi} ({targetKey.note.replace('4', '').replace('5', '')})
+                  </span>
+                  <Star className="w-3 h-3 fill-white text-white" />
                 </span>
               </div>
-              <div className="text-[11px] font-black text-amber-800">
+              <div className="text-[11px] font-black text-slate-600">
                 Nốt: {songStepIdx + 1}/{activeSong.notes.length}
               </div>
             </div>
@@ -728,20 +817,20 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
           /* Chế độ Chơi tự do: Thẻ hiển thị số nốt đã gõ */
           <div className="w-full h-full flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <ChibiFreePlay3dIcon className="w-8 h-8 shrink-0" />
+              <Sparkles className="w-5 h-5 text-amber-500 shrink-0" />
               <div>
-                <div className="text-xs sm:text-sm font-black text-purple-950">
+                <div className="text-xs sm:text-sm font-black text-slate-900">
                   Sân Khấu Âm Nhạc Tự Do
                 </div>
-                <div className="text-[11px] font-semibold text-purple-800">
+                <div className="text-[11px] font-medium text-slate-500">
                   Bé tự do gõ mọi nốt đàn {instrumentView === 'piano' ? 'Piano' : 'Cầu Vồng'}!
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs font-black bg-white px-3 py-1 rounded-xl border border-purple-200 text-purple-900 shadow-2xs">
-                🎵 Đã gõ: <strong className="text-purple-600">{freeNoteCount}</strong> nốt
+              <span className="text-xs font-black bg-slate-100 px-3 py-1 rounded-xl text-slate-800 border border-slate-200">
+                Đã gõ: <strong className="text-amber-600 font-black">{freeNoteCount}</strong> nốt
               </span>
               {freeNoteCount > 0 && (
                 <button
@@ -750,10 +839,10 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                     setFreeNoteCount(0);
                     setLastPlayedNoteName('');
                   }}
-                  className="p-1.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-800 cursor-pointer"
+                  className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer active:scale-[0.97]"
                   title="Đặt lại số nốt"
                 >
-                  <RotateCcw className="w-4 h-4" />
+                  <RotateCcw className="w-3.5 h-3.5" />
                 </button>
               )}
             </div>
@@ -762,29 +851,29 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
       </div>
 
       {/* ========================================================================= */}
-      {/* HÀNG 5: BÀN PHÍM ĐÀN (CHIẾM >= 45% CHIỀU CAO MÀN HÌNH) */}
+      {/* HÀNG 5: KHUNG ĐÀN (CHIẾM TOÀN BỘ CHIỀU CAO CÒN LẠI VỚI FLEX-1, CĂN GIỮA DỌC) */}
       {/* ========================================================================= */}
-      <div className="w-full max-w-4xl flex-1 min-h-[45%] flex flex-col justify-center items-center py-1">
+      <div className="w-full max-w-3xl mx-auto flex-1 min-h-0 flex flex-col justify-center items-center">
         {instrumentView === 'piano' ? (
           /* ===================================================================== */
           /* 🎹 ĐÀN GRAND PIANO: 8 PHÍM TRẮNG RỘNG + 5 PHÍM ĐEN NỔI */
           /* ===================================================================== */
-          <div className="w-full h-full flex flex-col bg-gradient-to-b from-slate-900 via-slate-800 to-slate-950 p-2 sm:p-3 rounded-3xl border-4 border-slate-700 shadow-2xl relative overflow-hidden">
+          <div className="w-full flex-1 min-h-0 flex flex-col bg-slate-900 p-2 sm:p-2.5 rounded-2xl border-2 border-slate-700 shadow-xl relative overflow-hidden justify-between">
             {/* Piano Gold Nameplate */}
-            <div className="w-full flex items-center justify-between px-3 py-1 mb-1.5 rounded-xl bg-slate-950/80 border border-amber-500/40 text-amber-300 shrink-0">
+            <div className="w-full flex items-center justify-between px-3 py-1 rounded-xl bg-slate-950 border border-amber-500/30 text-amber-300 shrink-0">
               <div className="flex items-center gap-1.5">
-                <ChibiPiano3dIcon className="w-4 h-4" />
-                <span className="text-[11px] sm:text-xs font-black tracking-wider uppercase font-display">
+                <PianoSegmentIcon className="w-3.5 h-3.5 text-[#F5CF55]" />
+                <span className="text-[10px] sm:text-[11px] font-black tracking-wider uppercase">
                   Grand Piano · Dương Cầm
                 </span>
               </div>
-              <div className="text-[10px] sm:text-xs font-bold text-amber-200">
+              <div className="text-[10px] sm:text-[11px] font-bold text-amber-200">
                 {lastPlayedNoteName ? `Nốt: ${lastPlayedNoteName}` : 'Chạm phím đàn'}
               </div>
             </div>
 
-            {/* Keys Container */}
-            <div className="relative w-full flex-1 rounded-2xl overflow-hidden shadow-inner bg-slate-950 p-1">
+            {/* Keys Container - Phím trắng cao 60% khung đàn, căn giữa theo chiều dọc */}
+            <div className="relative w-full rounded-xl overflow-hidden shadow-inner bg-slate-950 p-0.5 h-[60%] min-h-[175px] my-auto">
               {/* 8 White Ivory Keys */}
               <div className="grid grid-cols-8 gap-1 h-full w-full">
                 {XYLOPHONE_KEYS.map((k, idx) => {
@@ -796,42 +885,40 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                       key={`piano-white-${k.note}`}
                       type="button"
                       onPointerDown={(e) => handleKeyPress(idx, e)}
-                      className={`w-full h-full rounded-b-2xl border-x border-b-6 flex flex-col justify-end pb-3 sm:pb-4 items-center transition-all cursor-pointer select-none relative touch-manipulation ${
+                      className={`w-full h-full rounded-b-xl border-x border-b-4 flex flex-col justify-end pb-2 sm:pb-3 items-center transition-all cursor-pointer select-none relative touch-manipulation active:scale-[0.97] ${
                         isPressed
-                          ? 'bg-amber-200 border-b-2 border-slate-400 translate-y-1 shadow-inner'
-                          : 'bg-gradient-to-b from-[#FFFDF7] via-[#FCF9F2] to-[#F1E9DA] border-slate-300 hover:bg-slate-50 shadow-md active:translate-y-1 active:border-b-2'
+                          ? 'bg-amber-100 border-b-2 border-slate-400 translate-y-0.5 brightness-110 shadow-inner'
+                          : 'bg-gradient-to-b from-[#FFFDF9] via-[#FAF6ED] to-[#EFE7D8] border-slate-300 hover:brightness-105 shadow-md active:translate-y-0.5 active:border-b-2'
                       } ${
                         isGuidedNext
-                          ? 'ring-4 ring-amber-400 ring-offset-2 ring-offset-slate-900'
+                          ? 'ring-3 ring-[#F5CF55] ring-offset-2 ring-offset-slate-900'
                           : ''
                       }`}
                     >
-                      {/* Guided Star Guide */}
+                      {/* Guided Star Guide (no emoji) */}
                       {isGuidedNext && (
-                        <div className="absolute top-20 sm:top-28 flex flex-col items-center pointer-events-none">
-                          <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
-                            ⭐
-                          </span>
+                        <div className="absolute top-12 sm:top-14 flex flex-col items-center pointer-events-none">
+                          <Star className="w-5 h-5 fill-[#F5CF55] text-amber-500 animate-bounce drop-shadow" />
                         </div>
                       )}
 
                       {/* Note Solfege & Letter */}
                       <div className="text-center z-10 pointer-events-none">
                         <div
-                          className={`text-sm sm:text-lg font-black leading-none ${
-                            isGuidedNext ? 'text-amber-700' : 'text-slate-800'
+                          className={`text-xs sm:text-sm font-black leading-none ${
+                            isGuidedNext ? 'text-amber-800' : 'text-slate-900'
                           }`}
                         >
                           {k.solfegeVi}
                         </div>
-                        <div className="text-[10px] sm:text-xs font-extrabold text-slate-500 mt-0.5">
+                        <div className="text-[9px] sm:text-[10px] font-bold text-slate-500 mt-0.5">
                           {k.note.replace('4', '').replace('5', '')}
                         </div>
                       </div>
 
-                      {/* White Key Bottom Color Accent */}
+                      {/* White Key Bottom Rainbow Color Accent */}
                       <div
-                        className="w-3/4 h-1 rounded-full mt-1.5 opacity-80"
+                        className="w-3/4 h-1 rounded-full mt-1 opacity-80"
                         style={{ backgroundColor: k.bgHex }}
                       />
                     </button>
@@ -839,8 +926,8 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                 })}
               </div>
 
-              {/* 5 Elevated Ebony Black Keys */}
-              <div className="absolute top-1 left-1 right-1 h-32 sm:h-44 pointer-events-none">
+              {/* 5 Elevated Ebony Black Keys (Cao chính xác 60% phím trắng) */}
+              <div className="absolute top-0.5 left-0.5 right-0.5 h-[60%] pointer-events-none">
                 {PIANO_BLACK_KEYS.map((bk) => {
                   const isPressed = activeBlackKeyId === bk.id;
                   return (
@@ -852,16 +939,16 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                         left: `${bk.leftPct}%`,
                         width: '9.2%',
                       }}
-                      className={`absolute top-0 h-full rounded-b-xl border-x-2 border-b-6 border-slate-950 flex flex-col justify-end pb-2 items-center pointer-events-auto transition-all cursor-pointer shadow-2xl touch-manipulation ${
+                      className={`absolute top-0 h-full rounded-b-lg border-x border-b-4 border-slate-950 flex flex-col justify-end pb-1.5 items-center pointer-events-auto transition-all cursor-pointer shadow-xl touch-manipulation active:scale-[0.97] ${
                         isPressed
-                          ? 'bg-slate-700 border-b-2 translate-y-1 brightness-150'
-                          : 'bg-gradient-to-b from-[#2A2B2F] via-[#1A1B1E] to-[#0A0A0C] hover:brightness-125 active:translate-y-1 active:border-b-2'
+                          ? 'bg-slate-700 border-b-2 translate-y-0.5 brightness-150'
+                          : 'bg-gradient-to-b from-[#2A2B2F] via-[#1A1B1E] to-[#0A0A0C] hover:brightness-125 active:translate-y-0.5 active:border-b-2'
                       }`}
                     >
-                      <span className="text-[9px] sm:text-[11px] font-black text-amber-200/90 leading-none">
+                      <span className="text-[8px] sm:text-[10px] font-black text-amber-200/90 leading-none">
                         {bk.nameVi}
                       </span>
-                      <span className="text-[8px] font-bold text-slate-400 mt-0.5">
+                      <span className="text-[7px] sm:text-[8px] font-bold text-slate-400 mt-0.5">
                         {bk.note}
                       </span>
                     </button>
@@ -869,64 +956,68 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                 })}
               </div>
             </div>
+
+            {/* Bottom Accent */}
+            <div className="h-1 w-full bg-slate-950/60 rounded-full shrink-0" />
           </div>
         ) : (
           /* ===================================================================== */
           /* 🌈 ĐÀN GÕ CẦU VỒNG: 8 THANH MÀU RỰC RỠ VỚI ĐINH TÁN BẠC */
           /* ===================================================================== */
-          <div className="w-full h-full grid grid-cols-8 gap-0.5 sm:gap-2 items-end p-1.5 sm:p-3 bg-gradient-to-b from-amber-50 to-orange-50/70 rounded-3xl border-4 border-amber-300 shadow-md">
-            {XYLOPHONE_KEYS.map((k, idx) => {
-              const isGuidedNext = playMode === 'guided' && idx === targetKeyIdx;
-              const isPressed = activeNoteIdx === idx;
+          <div className="w-full flex-1 min-h-0 bg-slate-100/90 rounded-2xl border-2 border-slate-200/90 shadow-sm p-2 sm:p-3 flex flex-col justify-center items-center relative overflow-hidden">
+            {/* 8 Rainbow bars: Chiều cao tối đa 55% khung đàn, giảm dần bậc thang, căn giữa dọc */}
+            <div className="w-full h-[55%] min-h-[170px] grid grid-cols-8 gap-1 sm:gap-2 items-end justify-items-center my-auto">
+              {XYLOPHONE_KEYS.map((k, idx) => {
+                const isGuidedNext = playMode === 'guided' && idx === targetKeyIdx;
+                const isPressed = activeNoteIdx === idx;
 
-              return (
-                <button
-                  key={k.note}
-                  type="button"
-                  onPointerDown={(e) => handleKeyPress(idx, e)}
-                  style={{
-                    backgroundColor: k.bgHex,
-                    borderColor: k.borderHex,
-                    height: `${k.heightPct}%`,
-                  }}
-                  className={`w-full rounded-2xl border-b-4 text-white flex flex-col items-center justify-between py-2 px-0.5 sm:px-1 transition-all cursor-pointer select-none shadow-sm relative touch-manipulation ${
-                    isPressed
-                      ? 'scale-95 brightness-125 shadow-inner'
-                      : 'hover:scale-[1.02] active:scale-95'
-                  } ${
-                    isGuidedNext
-                      ? 'ring-4 ring-amber-300 ring-offset-2 animate-pulse scale-[1.02]'
-                      : ''
-                  }`}
-                >
-                  {/* Top Silver Mallet Peg */}
-                  <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
+                return (
+                  <button
+                    key={k.note}
+                    type="button"
+                    onPointerDown={(e) => handleKeyPress(idx, e)}
+                    style={{
+                      backgroundColor: k.bgHex,
+                      borderColor: k.borderHex,
+                      height: `${k.heightPct}%`,
+                    }}
+                    className={`w-full rounded-xl border-b-4 text-white flex flex-col items-center justify-between py-1.5 px-0.5 sm:px-1 transition-all cursor-pointer select-none shadow-sm relative touch-manipulation active:scale-[0.97] ${
+                      isPressed
+                        ? 'brightness-125 shadow-inner'
+                        : 'hover:brightness-105'
+                    } ${
+                      isGuidedNext
+                        ? 'ring-3 ring-[#F5CF55] ring-offset-2 animate-pulse'
+                        : ''
+                    }`}
+                  >
+                    {/* Top Silver Mallet Peg */}
+                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white/70 shadow-inner block" />
 
-                  {/* Guided Star or Note Solfege */}
-                  <div className="my-auto flex flex-col items-center justify-center pointer-events-none">
-                    {isGuidedNext ? (
-                      <span className="text-xl sm:text-2xl animate-bounce filter drop-shadow">
-                        ⭐
-                      </span>
-                    ) : (
-                      <span className="text-xs sm:text-sm opacity-50">⚪</span>
-                    )}
+                    {/* Guided Star or Note Solfege (no emoji) */}
+                    <div className="my-auto flex flex-col items-center justify-center pointer-events-none">
+                      {isGuidedNext ? (
+                        <Star className="w-4 h-4 fill-white text-white animate-bounce drop-shadow" />
+                      ) : (
+                        <span className="w-1.5 h-1.5 rounded-full bg-white/40 block" />
+                      )}
 
-                    <div className="text-center mt-1">
-                      <div className="text-sm sm:text-lg font-black leading-none drop-shadow-sm">
-                        {k.solfegeVi}
-                      </div>
-                      <div className="text-[10px] sm:text-xs font-extrabold opacity-90 mt-0.5">
-                        {k.note.replace('4', '').replace('5', '')}
+                      <div className="text-center mt-1">
+                        <div className="text-xs sm:text-sm font-black leading-none drop-shadow-sm">
+                          {k.solfegeVi}
+                        </div>
+                        <div className="text-[9px] sm:text-[10px] font-extrabold opacity-90 mt-0.5">
+                          {k.note.replace('4', '').replace('5', '')}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Bottom Silver Mallet Peg */}
-                  <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-white/70 shadow-inner block" />
-                </button>
-              );
-            })}
+                    {/* Bottom Silver Mallet Peg */}
+                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-white/70 shadow-inner block" />
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
@@ -936,16 +1027,16 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
       {/* ========================================================================= */}
       {showSongPickerModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl border-2 border-amber-300 shadow-2xl max-w-xl w-full max-h-[85vh] flex flex-col overflow-hidden">
+          <div className="bg-white rounded-3xl border border-slate-200 shadow-2xl max-w-xl w-full max-h-[85vh] flex flex-col overflow-hidden">
             {/* Modal Header */}
-            <div className="px-4 py-3 border-b border-amber-100 bg-gradient-to-r from-amber-50 via-rose-50 to-indigo-50 flex items-center justify-between">
+            <div className="px-4 py-3 border-b border-slate-100 bg-slate-50 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Music className="w-6 h-6 text-amber-600" />
+                <Music className="w-5 h-5 text-amber-500" />
                 <div>
-                  <h3 className="text-base sm:text-lg font-black text-slate-900 font-display">
+                  <h3 className="text-sm sm:text-base font-black text-slate-900">
                     Kho 16 Bài Hát Thiếu Nhi
                   </h3>
-                  <p className="text-xs font-semibold text-slate-600">
+                  <p className="text-[11px] font-semibold text-slate-500">
                     Chọn bài hát bé yêu thích để gõ phím hoặc nghe mẫu nhé!
                   </p>
                 </div>
@@ -953,21 +1044,22 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
               <button
                 type="button"
                 onClick={() => setShowSongPickerModal(false)}
-                className="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer shadow-2xs"
+                className="w-8 h-8 rounded-full bg-white hover:bg-slate-100 border border-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer shadow-2xs active:scale-[0.97]"
+                aria-label="Đóng"
               >
-                ✕
+                <X className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
 
             {/* Category Filter Tabs */}
-            <div className="px-4 py-2 bg-slate-50 border-b border-slate-200/80 flex flex-wrap gap-1.5 shrink-0">
+            <div className="px-4 py-2 bg-slate-50/50 border-b border-slate-200/80 flex flex-wrap gap-1.5 shrink-0">
               <button
                 type="button"
                 onClick={() => setSongCategoryFilter('all')}
-                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition active:scale-[0.97] ${
                   songCategoryFilter === 'all'
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    ? 'bg-slate-900 text-white shadow-2xs border-2 border-[#F5CF55]'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                 }`}
               >
                 Tất Cả ({RAINBOW_SONGS.length})
@@ -975,40 +1067,40 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
               <button
                 type="button"
                 onClick={() => setSongCategoryFilter('vietnam')}
-                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition active:scale-[0.97] ${
                   songCategoryFilter === 'vietnam'
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    ? 'bg-slate-900 text-white shadow-2xs border-2 border-[#F5CF55]'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                 }`}
               >
-                Việt Nam 🇻🇳
+                Việt Nam
               </button>
               <button
                 type="button"
                 onClick={() => setSongCategoryFilter('international')}
-                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition active:scale-[0.97] ${
                   songCategoryFilter === 'international'
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    ? 'bg-slate-900 text-white shadow-2xs border-2 border-[#F5CF55]'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                 }`}
               >
-                Quốc Tế 🌍
+                Quốc Tế
               </button>
               <button
                 type="button"
                 onClick={() => setSongCategoryFilter('folk_animals')}
-                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition ${
+                className={`px-3 py-1 rounded-xl text-xs font-black cursor-pointer transition active:scale-[0.97] ${
                   songCategoryFilter === 'folk_animals'
-                    ? 'bg-indigo-600 text-white shadow-2xs'
-                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-indigo-50'
+                    ? 'bg-slate-900 text-white shadow-2xs border-2 border-[#F5CF55]'
+                    : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'
                 }`}
               >
-                Đồng Dao 🐥
+                Đồng Dao
               </button>
             </div>
 
             {/* Song Grid List */}
-            <div className="p-4 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-h-[58vh]">
+            <div className="p-3 sm:p-4 overflow-y-auto grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[58vh]">
               {filteredSongs.map((song) => {
                 const isSelected = song.id === selectedSongId;
                 return (
@@ -1021,32 +1113,32 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                       setSongStepIdx(0);
                       setShowSongPickerModal(false);
                     }}
-                    className={`p-3 rounded-2xl border-2 text-left cursor-pointer transition flex items-center justify-between gap-2 ${
+                    className={`p-2.5 sm:p-3 rounded-2xl border text-left cursor-pointer transition active:scale-[0.97] flex items-center justify-between gap-2 ${
                       isSelected
-                        ? 'bg-amber-50 border-amber-400 ring-2 ring-amber-300 shadow-sm'
-                        : 'bg-white border-slate-200 hover:border-amber-200 hover:bg-amber-50/40'
+                        ? 'bg-amber-50/80 border-[#F5CF55] ring-2 ring-[#F5CF55]/50 shadow-xs'
+                        : 'bg-white border-slate-200 hover:border-slate-300'
                     }`}
                   >
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <span className="text-2xl shrink-0">{song.emoji}</span>
+                      <Music className="w-5 h-5 text-amber-500 shrink-0" />
                       <div className="min-w-0">
                         <div className="text-xs sm:text-sm font-black text-slate-900 truncate">
                           {song.titleVi}
                         </div>
-                        <div className="text-[10px] text-slate-500 font-semibold truncate">
+                        <div className="text-[10px] text-slate-500 font-medium truncate">
                           {song.titleEn}
                         </div>
-                        <div className="flex items-center gap-1.5 mt-1">
-                          <span className="text-[9px] font-black px-1.5 py-0.5 rounded bg-amber-100 text-amber-900">
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-700">
                             {song.badgeVi}
                           </span>
-                          <span className="text-[9px] font-bold text-slate-400">
+                          <span className="text-[9px] font-medium text-slate-400">
                             {song.notes.length} nốt · {song.bpm} BPM
                           </span>
                         </div>
                       </div>
                     </div>
-                    {isSelected && <Check className="w-5 h-5 text-amber-600 stroke-[3] shrink-0" />}
+                    {isSelected && <Check className="w-4 h-4 text-amber-600 stroke-[3] shrink-0" />}
                   </button>
                 );
               })}
@@ -1056,29 +1148,31 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
       )}
 
       {/* ========================================================================= */}
-      {/* POPUP MODAL CHỌN ÂM SẮC 3D CHIBI (POPUP NỔI BẬT TO RÕ, KHÔNG BỊ TRÀN KẸT) */}
+      {/* POPUP MODAL CHỌN ÂM SẮC (POPUP NỔI BẬT TO RÕ, ĐỒNG BỘ NÉT) */}
       {/* ========================================================================= */}
       {showTimbreModal && (
         <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-sm bg-white rounded-3xl border-3 border-amber-300 shadow-2xl p-5 flex flex-col gap-4 relative animate-in zoom-in-95 duration-150">
+          <div className="w-full max-w-sm bg-white rounded-3xl border border-slate-200 shadow-2xl p-4 sm:p-5 flex flex-col gap-3 relative animate-in zoom-in-95 duration-150">
             {/* Header */}
-            <div className="flex items-center justify-between pb-2 border-b border-amber-100">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🎵</span>
-                <h3 className="text-base font-black text-slate-800">Bé chọn tiếng đàn nhé!</h3>
+                <Music className="w-5 h-5 text-amber-500" />
+                <h3 className="text-sm sm:text-base font-black text-slate-900">
+                  Bé chọn tiếng đàn nhé!
+                </h3>
               </div>
               <button
                 type="button"
                 onClick={() => setShowTimbreModal(false)}
-                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer transition"
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-black flex items-center justify-center cursor-pointer transition active:scale-[0.97]"
                 aria-label="Đóng bảng chọn âm sắc"
               >
-                ✕
+                <X className="w-4 h-4 stroke-[2.5]" />
               </button>
             </div>
 
             {/* Grid 4 Instrument Options */}
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2.5">
               {INSTRUMENT_OPTIONS.map((item) => {
                 const isSelected = musicalInstrument === item.id;
                 return (
@@ -1090,16 +1184,16 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
                       playMusicalInstrumentNote(440, item.id, settings.volume * 0.85);
                       setShowTimbreModal(false);
                     }}
-                    className={`min-h-[80px] p-3 rounded-2xl border-2 flex flex-col items-center justify-center gap-1.5 transition cursor-pointer active:scale-95 ${
+                    className={`min-h-[76px] p-2.5 rounded-2xl border-2 flex flex-col items-center justify-center gap-1.5 transition cursor-pointer active:scale-[0.97] ${
                       isSelected
-                        ? 'bg-amber-50 border-amber-500 shadow-md ring-2 ring-amber-300 text-amber-950 font-black'
-                        : 'bg-slate-50 border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 text-slate-700 font-bold'
+                        ? 'bg-amber-50/80 border-[#F5CF55] shadow-xs ring-2 ring-[#F5CF55]/50 text-slate-900 font-black'
+                        : 'bg-slate-50 border-slate-200 hover:border-slate-300 text-slate-700 font-bold'
                     }`}
                   >
                     <div className="relative">
                       {item.renderIcon()}
                       {isSelected && (
-                        <div className="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px]">
+                        <div className="absolute -top-1 -right-2 w-4 h-4 rounded-full bg-[#F5CF55] text-slate-950 flex items-center justify-center text-[10px] font-black">
                           ✓
                         </div>
                       )}
@@ -1110,7 +1204,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
               })}
             </div>
 
-            <p className="text-[11px] text-center text-slate-400 font-medium">
+            <p className="text-[11px] text-center text-slate-500 font-medium">
               Chạm vào nhạc cụ bé thích để đổi âm thanh
             </p>
           </div>
