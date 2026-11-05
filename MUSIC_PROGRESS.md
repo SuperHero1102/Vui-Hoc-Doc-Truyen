@@ -69,3 +69,28 @@
 - [x] `compile_applet` (`npm run build`): Thành công 100%.
 - [x] Dev server ổn định trên cổng 3000.
 
+---
+
+## Giai đoạn Khóa Phạm Vi (kx-v1): Chuẩn Hóa Nhạc, Karaoke & Đàn Cầu Vồng
+
+### Bước 1: Sao lưu toàn diện mã nguồn trước khi sửa đổi (.before-kx-v1)
+- [x] Đã tạo `src/components/KidsMusicPlayer.tsx.before-kx-v1`
+- [x] Đã tạo `src/data/kidsMusicData.ts.before-kx-v1`
+- [x] Đã tạo `src/components/RainbowXylophoneGame.tsx.before-kx-v1`
+- [x] Đã tạo `src/data/brainGamesData.ts.before-kx-v1`
+
+### Bước 2: Kế hoạch thực hiện Mục 1 (Nhạc & Karaoke)
+- [ ] Xóa 2 nút "Đánh dấu lời", "Nhập LRC", các modal và cột giờ 00:00 trên từng dòng.
+- [ ] Thêm 1 nút icon nhỏ chuyển đổi "1 dòng" (chỉ dòng đang hát + phụ đề, khi dạo đầu hiện dòng 1 mờ nhẹ) và "Toàn bộ", lưu `localStorage`.
+- [ ] Đo đạc mốc thời gian thực tế sớm ~0.15s cho từng bài có bản thu audio, giữ nguyên chữ lời cũ, câu không rõ ghi [?], bài không có mốc chuyển lời tĩnh không tích giả.
+- [ ] Đồng bộ theo `audio.currentTime`: tích chỉ dòng đã qua, tua nhảy đúng dòng, pause/loop không lệch.
+
+### Bước 3: Kế hoạch thực hiện Mục 2 (Đàn Cầu Vồng)
+- [ ] Chuẩn hóa dữ liệu 16 bài C4-C5 (Đô trưởng), 1 nốt / 1 âm tiết, đúng phách và nốt nghỉ. Khớp 4 bài mẫu chuẩn (Kìa con bướm vàng, Twinkle, Old MacDonald, Mary Had a Little Lamb).
+- [ ] Logic "Nghe mẫu" phát theo Web AudioContext Precision Scheduler (không dùng setTimeout đơn lẻ), sáng phím và từ karaoke đồng bộ, bấm lại thì dừng.
+
+### Bước 4: Tự kiểm tra bằng code & Đối chiếu bản sao lưu
+- [ ] Tự kiểm tra sai lệch Karaoke tại đầu/giữa/cuối $\le 0.3s$.
+- [ ] Tự kiểm tra Đàn qua OfflineAudioContext (cao độ lệch $< 3\%$, thời điểm lệch $< 30ms$).
+- [ ] Đối chiếu với các file `.before-kx-v1`, đảm bảo tuyệt đối không đổi gì ngoài phạm vi.
+

@@ -88,7 +88,8 @@ export interface NormalizedLyricsResult {
 export function normalizeSongLyricLines(song: KidsSong): NormalizedLyricsResult {
   if (song.lyricsData && song.lyricsData.length > 0) {
     const hasReal = song.lyricsData.some((l) => l.start > 0 || l.end > 0);
-    if (hasReal) {
+    const distinctStarts = new Set(song.lyricsData.map((l) => l.start));
+    if (hasReal && distinctStarts.size > 1) {
       const mapped = song.lyricsData.map((item, idx) => {
         const next = song.lyricsData![idx + 1];
         const end = next && next.start > item.start ? next.start : item.end;
@@ -105,7 +106,8 @@ export function normalizeSongLyricLines(song: KidsSong): NormalizedLyricsResult 
 
   if (song.timedLyrics && song.timedLyrics.length > 0) {
     const hasReal = song.timedLyrics.some((l) => l.startTimeSec > 0);
-    if (hasReal) {
+    const distinctStarts = new Set(song.timedLyrics.map((l) => l.startTimeSec));
+    if (hasReal && distinctStarts.size > 1) {
       const mapped = song.timedLyrics.map((item, idx) => {
         const next = song.timedLyrics![idx + 1];
         const start = item.startTimeSec;
@@ -121,7 +123,7 @@ export function normalizeSongLyricLines(song: KidsSong): NormalizedLyricsResult 
     }
   }
 
-  // Bài chưa có mốc thật: trả về lời nguyên gốc, hasRealTimestamps = false (không tự bịa số)
+  // Bài chưa có mốc thật hoặc các mốc trùng nhau / đều bằng 0: hiển thị lời tĩnh, hasRealTimestamps = false
   if (song.lyrics && song.lyrics.length > 0) {
     return {
       lines: song.lyrics.map((line, idx) => ({

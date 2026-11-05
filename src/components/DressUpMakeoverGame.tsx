@@ -108,6 +108,16 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
     return ACCESSORIES_DATA.filter((item) => item.category === selectedCategory);
   }, [selectedCategory]);
 
+  // Tải trước (preloading) các món phụ kiện thuộc danh mục đang mở để bé lướt mượt mà
+  useEffect(() => {
+    currentCategoryItems.forEach((item) => {
+      if (item.imageUrl && !item.imageUrl.startsWith('data:')) {
+        const img = new Image();
+        img.src = item.imageUrl;
+      }
+    });
+  }, [currentCategoryItems]);
+
   const activePlacedItem = placedItems.find((p) => p.instanceId === selectedInstanceId) || null;
 
   const showToast = (msg: string) => {
@@ -479,11 +489,22 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
         // Draw each placed accessory
         for (const item of placedItems) {
           const accImg = new Image();
-          accImg.crossOrigin = 'anonymous';
+          const targetUrl = item.item.imageUrl;
+          if (!targetUrl.startsWith('data:')) {
+            accImg.crossOrigin = 'anonymous';
+          }
           await new Promise<void>((resolve) => {
             accImg.onload = () => resolve();
-            accImg.onerror = () => resolve();
-            accImg.src = item.item.imageUrl;
+            accImg.onerror = () => {
+              if (item.item.fallbackUrl && item.item.fallbackUrl !== targetUrl) {
+                accImg.onload = () => resolve();
+                accImg.onerror = () => resolve();
+                accImg.src = item.item.fallbackUrl;
+              } else {
+                resolve();
+              }
+            };
+            accImg.src = targetUrl;
           });
 
           ctx.save();
@@ -752,6 +773,11 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
               <img
                 src={item.item.imageUrl}
                 alt={item.item.nameVi}
+                onError={(e) => {
+                  if (item.item.fallbackUrl && e.currentTarget.src !== item.item.fallbackUrl) {
+                    e.currentTarget.src = item.item.fallbackUrl;
+                  }
+                }}
                 className="w-24 h-24 sm:w-28 sm:h-28 object-contain pointer-events-none select-none filter drop-shadow-sm"
               />
             </div>
@@ -896,6 +922,12 @@ export const DressUpMakeoverGame: React.FC<DressUpMakeoverGameProps> = ({
                   <img
                     src={item.imageUrl}
                     alt={item.nameVi}
+                    loading="lazy"
+                    onError={(e) => {
+                      if (item.fallbackUrl && e.currentTarget.src !== item.fallbackUrl) {
+                        e.currentTarget.src = item.fallbackUrl;
+                      }
+                    }}
                     className="w-12 h-12 object-contain pointer-events-none filter drop-shadow-xs"
                   />
                   <span className="text-[9px] font-bold text-slate-700 line-clamp-1 mt-0.5">

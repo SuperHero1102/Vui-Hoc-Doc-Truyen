@@ -443,8 +443,10 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     if (activeSong && customSongLyricsMap[activeSong.id]) {
       return customSongLyricsMap[activeSong.id];
     }
-    return activeSong ? normalizeSongLyricLines(activeSong, durationSec) : [];
-  }, [activeSong, customSongLyricsMap, durationSec]);
+    if (!activeSong) return [];
+    const normalized = normalizeSongLyricLines(activeSong);
+    return Array.isArray(normalized) ? normalized : (normalized?.lines ?? []);
+  }, [activeSong, customSongLyricsMap]);
 
   // Hàm cập nhật đồng bộ karaoke theo đúng frame hiển thị dựa trên audio.currentTime
   const updateKaraokeFrame = useCallback(() => {
