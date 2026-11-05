@@ -27,12 +27,29 @@ import {
   AlertCircle,
   RefreshCw,
   ListMusic,
+  Check,
+  Copy,
+  FileText,
+  BookmarkCheck,
 } from 'lucide-react';
-import { KIDS_SONGS_DATA, type KidsSong, type TimedLyricLine } from '../data/kidsMusicData';
+import {
+  KIDS_SONGS_DATA,
+  type KidsSong,
+  type TimedLyricLine,
+  type LyricLine,
+  normalizeSongLyricLines,
+  parseLRC,
+} from '../data/kidsMusicData';
 import type { ParentSettings } from '../types/learning';
 import { stopAllAudio } from '../utils/audioEngine';
 import { logActivity } from '../utils/activityTracker';
 import { fireStarExplosion } from '../utils/confetti';
+
+/**
+ * Hằng số bù trễ (milliseconds) nếu lời sớm hoặc muộn hơn so với nhạc.
+ * Mặc định: 0ms.
+ */
+export const LYRIC_OFFSET_MS = 0;
 
 interface KidsMusicPlayerProps {
   settings: ParentSettings;
@@ -107,6 +124,18 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const [isStageScrolledOut, setIsStageScrolledOut] = useState<boolean>(false);
   const [mobileTab, setMobileTab] = useState<'player' | 'list'>('player');
 
+  // Quản lý dữ liệu lời đã chỉnh sửa / đánh dấu / nhập từ LRC cho từng bài hát
+  const [customSongLyricsMap, setCustomSongLyricsMap] = useState<Record<string, LyricLine[]>>({});
+  const [lineProgressPct, setLineProgressPct] = useState<number>(0);
+
+  // Trạng thái công cụ "Đánh dấu lời" & "Nhập LRC"
+  const [isMarkingLyricsOpen, setIsMarkingLyricsOpen] = useState<boolean>(false);
+  const [markingLines, setMarkingLines] = useState<LyricLine[]>([]);
+  const [currentMarkIndex, setCurrentMarkIndex] = useState<number>(0);
+  const [copySuccessMsg, setCopySuccessMsg] = useState<string | null>(null);
+  const [isLrcModalOpen, setIsLrcModalOpen] = useState<boolean>(false);
+  const [lrcInputText, setLrcInputText] = useState<string>('');
+
   const [favoritedSongIds, setFavoritedSongIds] = useState<Record<string, boolean>>(() => {
     try {
       const saved = localStorage.getItem(FAVORITES_STORAGE_KEY);
@@ -122,6 +151,9 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const melodyTimeoutIdsRef = useRef<number[]>([]);
   const songStartTimeRef = useRef<number>(Date.now());
   const activeLineRef = useRef<HTMLDivElement | null>(null);
+  const activeProgressBarRef = useRef<HTMLDivElement | null>(null);
+  const currentLineIndexRef = useRef<number>(-1);
+  const rafRef = useRef<number | null>(null);
   const karaokeListRef = useRef<HTMLDivElement | null>(null);
   const playerStageRef = useRef<HTMLDivElement | null>(null);
   const songsListSectionRef = useRef<HTMLElement | null>(null);
@@ -406,6 +438,123 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     melodyTimeoutIdsRef.current.push(endId);
   };
 
+  // Danh sách dòng lời chuẩn hóa [{start, end, vi, en}] cho bài hát hiện tại
+  const currentLines: LyricLine[] = useMemo(() => {
+    if (activeSong && customSongLyricsMap[activeSong.id]) {
+      return customSongLyricsMap[activeSong.id];
+    }
+    return activeSong ? normalizeSongLyricLines(activeSong, durationSec) : [];
+  }, [activeSong, customSongLyricsMap, durationSec]);
+
+  // Hàm cập nhật đồng bộ karaoke theo đúng frame hiển thị dựa trên audio.currentTime
+  const updateKaraokeFrame = useCallback(() => {
+    const audio = audioElementRef.current;
+    if (!audio) return;
+
+    // 1. Dùng audio.currentTime làm nguồn thời gian duy nhất cho dòng đang hát và thanh tiến độ đỏ
+    const rawTime = audio.currentTime;
+    setCurrentTimeSec(rawTime);
+
+    // 6. Thêm hằng số LYRIC_OFFSET_MS (mặc định 0) để bù trễ nếu lời sớm/muộn so với nhạc
+    const effectiveTime = Math.max(0, rawTime + LYRIC_OFFSET_MS / 1000);
+    const lines = currentLines;
+    if (lines.length === 0) return;
+
+    // 3. Dòng đang hát = dòng có start <= currentTime < end
+    let activeIdx = -1;
+    for (let i = 0; i < lines.length; i++) {
+      if (effectiveTime >= lines[i].start && effectiveTime < lines[i].end) {
+        activeIdx = i;
+        break;
+      }
+    }
+
+    if (activeIdx === -1) {
+      if (effectiveTime < lines[0].start) {
+        activeIdx = -1; // Đang dạo nhạc đầu bài
+      } else if (effectiveTime >= lines[lines.length - 1].end) {
+        activeIdx = lines.length; // Đã hát hết toàn bài
+      }
+    }
+
+    // 4. Khi sang dòng mới: tự đổi dòng đang hát, thanh đỏ dòng mới bắt đầu từ 0%, dòng cũ chuyển sang trạng thái đã hát
+    if (activeIdx !== currentLineIndexRef.current) {
+      currentLineIndexRef.current = activeIdx;
+      setCurrentLineIndex(activeIdx);
+    }
+
+    // Phần trăm thanh đỏ = (currentTime - start) / (end - start), giới hạn 0-100%
+    let pct = 0;
+    if (activeIdx >= 0 && activeIdx < lines.length) {
+      const curLine = lines[activeIdx];
+      const dur = curLine.end - curLine.start;
+      if (dur > 0) {
+        pct = Math.min(100, Math.max(0, ((effectiveTime - curLine.start) / dur) * 100));
+      } else {
+        pct = 100;
+      }
+    } else if (activeIdx >= lines.length) {
+      pct = 100;
+    }
+
+    // Cập nhật trực tiếp style DOM để đạt tần số quét mượt mà 60fps/120fps không giật lag
+    if (activeProgressBarRef.current) {
+      activeProgressBarRef.current.style.width = `${pct}%`;
+    }
+    setLineProgressPct(pct);
+  }, [currentLines]);
+
+  // Vòng lặp requestAnimationFrame liên tục khi audio đang phát
+  useEffect(() => {
+    let animId: number | null = null;
+    let isCancelled = false;
+
+    const tick = () => {
+      if (isCancelled) return;
+      const audio = audioElementRef.current;
+      // Nhạc đang tải/đệm hoặc tạm dừng: thanh dừng theo nhạc
+      if (audio && !audio.paused && !audio.ended && audio.readyState >= 2) {
+        updateKaraokeFrame();
+      }
+      animId = requestAnimationFrame(tick);
+    };
+
+    if (isPlaying) {
+      animId = requestAnimationFrame(tick);
+    } else {
+      // Khi tạm dừng: dừng tick và giữ nguyên vị trí (thanh đứng yên)
+      updateKaraokeFrame();
+    }
+
+    return () => {
+      isCancelled = true;
+      if (animId !== null) {
+        cancelAnimationFrame(animId);
+      }
+    };
+  }, [isPlaying, updateKaraokeFrame]);
+
+  // Xử lý tab bị ẩn rồi quay lại: đọc lại currentTime ngay lập tức
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (!document.hidden && audioElementRef.current) {
+        updateKaraokeFrame();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+    return () => document.removeEventListener('visibilitychange', handleVisibility);
+  }, [updateKaraokeFrame]);
+
+  // Tự động cuộn mượt để dòng đang hát luôn nằm trong vùng nhìn thấy
+  useEffect(() => {
+    if (activeLineRef.current && currentLineIndex >= 0 && !showFullLyricsOnly) {
+      activeLineRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
+  }, [currentLineIndex, showFullLyricsOnly]);
+
   // Authoritative song starter
   const startSongPlayback = (song: KidsSong, resumeFromSec = 0) => {
     stopPlayback(false);
@@ -416,7 +565,14 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     songStartTimeRef.current = Date.now();
     setIsPlaying(true);
     setAudioErrorMsg(null);
-    setCurrentLineIndex(0);
+
+    // Chuyển bài/lặp bài: đặt lại về 0
+    currentLineIndexRef.current = -1;
+    setCurrentLineIndex(-1);
+    setLineProgressPct(0);
+    if (activeProgressBarRef.current) {
+      activeProgressBarRef.current.style.width = '0%';
+    }
     setCurrentTimeSec(resumeFromSec);
     setIsMiniPlayerDismissed(false);
 
@@ -445,34 +601,39 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         if (resumeFromSec > 0) {
           audio.currentTime = resumeFromSec;
         }
+        updateKaraokeFrame();
+      };
+
+      // Sự kiện audio chuẩn: đồng bộ với nhạc đệm/tải
+      audio.onplay = () => {
+        setIsPlaying(true);
+        setIsLoadingAudio(false);
+        updateKaraokeFrame();
+      };
+
+      audio.onpause = () => {
+        setIsPlaying(false);
+        updateKaraokeFrame();
+      };
+
+      audio.onwaiting = () => {
+        // Nhạc đang tải/đệm: thanh dừng theo nhạc
+        setIsLoadingAudio(true);
+      };
+
+      audio.onplaying = () => {
+        setIsLoadingAudio(false);
+        setIsPlaying(true);
+        updateKaraokeFrame();
+      };
+
+      audio.onseeked = () => {
+        updateKaraokeFrame();
       };
 
       audio.ontimeupdate = () => {
-        if (playbackIdRef.current !== thisPlaybackId) return;
-        const cur = audio.currentTime;
-        setCurrentTimeSec(Math.round(cur));
-
-        // 1. If explicit timedLyrics exist
-        if (song.timedLyrics && song.timedLyrics.length > 0) {
-          if (cur < song.timedLyrics[0].startTimeSec) {
-            setCurrentLineIndex(-1);
-            return;
-          }
-          const matchIdx = song.timedLyrics.findIndex((line, i) => {
-            const end =
-              line.endTimeSec ??
-              (song.timedLyrics![i + 1]?.startTimeSec ?? line.startTimeSec + 4.5);
-            return cur >= line.startTimeSec && cur <= end;
-          });
-          setCurrentLineIndex(matchIdx);
-        } else if (song.lyrics && song.lyrics.length > 0 && audio.duration) {
-          // 2. Smart Pacing: Smooth auto-scroll for songs without per-second timestamps
-          const ratio = Math.min(1, Math.max(0, cur / audio.duration));
-          const pacedIdx = Math.floor(ratio * song.lyrics.length);
-          setCurrentLineIndex(Math.min(song.lyrics.length - 1, pacedIdx));
-        } else {
-          setCurrentLineIndex(-1);
-        }
+        // Mốc phụ trợ khi thời gian audio dịch chuyển
+        updateKaraokeFrame();
       };
 
       audio.onerror = () => {
@@ -486,6 +647,9 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         if (playbackIdRef.current !== thisPlaybackId) return;
         if (isLooping) {
           audio.currentTime = 0;
+          currentLineIndexRef.current = -1;
+          setCurrentLineIndex(-1);
+          setLineProgressPct(0);
           audio.play().catch(() => {});
         } else {
           handleNextSong();
@@ -515,16 +679,6 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     playSynthesizedAcousticMelody(song, thisPlaybackId);
   };
 
-  // Sync active line auto-scroll in karaoke viewport
-  useEffect(() => {
-    if (activeLineRef.current && isPlaying && !showFullLyricsOnly) {
-      activeLineRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-      });
-    }
-  }, [currentLineIndex, isPlaying, showFullLyricsOnly]);
-
   const handleTogglePlay = () => {
     if (!activeSong) return;
     if (isPlaying) {
@@ -552,24 +706,110 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         audioElementRef.current.currentTime = newTime;
       } catch {}
     }
-    if (activeSong?.timedLyrics && activeSong.timedLyrics.length > 0) {
-      if (newTime < activeSong.timedLyrics[0].startTimeSec) {
-        setCurrentLineIndex(-1);
-      } else {
-        const matchIdx = activeSong.timedLyrics.findIndex((line, i) => {
-          const end =
-            line.endTimeSec ??
-            (activeSong.timedLyrics![i + 1]?.startTimeSec ?? line.startTimeSec + 4.5);
-          return newTime >= line.startTimeSec && newTime <= end;
-        });
-        setCurrentLineIndex(matchIdx);
+    updateKaraokeFrame();
+  };
+
+  // Mở công cụ "Đánh dấu lời"
+  const openMarkingLyricsModal = () => {
+    const baseLines =
+      currentLines.length > 0
+        ? currentLines.map((l) => ({ ...l }))
+        : activeSong.lyrics.map((t, i) => ({
+            start: 0,
+            end: 0,
+            vi: t,
+            en: activeSong.englishTranslation?.[i] || '',
+          }));
+    setMarkingLines(baseLines);
+    setCurrentMarkIndex(0);
+    setCopySuccessMsg(null);
+    setIsMarkingLyricsOpen(true);
+  };
+
+  // Ghi mốc start khi chạm nút hoặc bấm Space
+  const handleMarkCurrentLine = () => {
+    if (markingLines.length === 0) return;
+    const audio = audioElementRef.current;
+    const markTime = Number((audio ? audio.currentTime : currentTimeSec).toFixed(2));
+
+    setMarkingLines((prev) => {
+      const next = [...prev];
+      if (currentMarkIndex < next.length) {
+        next[currentMarkIndex] = {
+          ...next[currentMarkIndex],
+          start: markTime,
+        };
+        // Tự động gán end của dòng trước đó = start của dòng hiện tại
+        if (currentMarkIndex > 0) {
+          next[currentMarkIndex - 1] = {
+            ...next[currentMarkIndex - 1],
+            end: markTime,
+          };
+        }
       }
-    } else if (activeSong?.lyrics && activeSong.lyrics.length > 0 && durationSec > 0) {
-      const ratio = Math.min(1, Math.max(0, newTime / durationSec));
-      const pacedIdx = Math.floor(ratio * activeSong.lyrics.length);
-      setCurrentLineIndex(Math.min(activeSong.lyrics.length - 1, pacedIdx));
+      return next;
+    });
+
+    if (currentMarkIndex < markingLines.length - 1) {
+      setCurrentMarkIndex((i) => i + 1);
     } else {
-      setCurrentLineIndex(-1);
+      // Đã đánh dấu xong dòng cuối cùng
+      const audio = audioElementRef.current;
+      const finalEnd = audio?.duration ? Number(audio.duration.toFixed(2)) : markTime + 4.0;
+      setMarkingLines((prev) => {
+        const next = [...prev];
+        const lastIdx = next.length - 1;
+        if (lastIdx >= 0) {
+          next[lastIdx] = { ...next[lastIdx], end: finalEnd };
+        }
+        return next;
+      });
+    }
+  };
+
+  // Áp dụng mảng lời vừa đánh dấu vào bài hát
+  const handleApplyMarkedLyrics = () => {
+    if (!activeSong) return;
+    setCustomSongLyricsMap((prev) => ({
+      ...prev,
+      [activeSong.id]: markingLines,
+    }));
+    setIsMarkingLyricsOpen(false);
+    updateKaraokeFrame();
+  };
+
+  // Nhập từ định dạng LRC hoặc JSON
+  const handleApplyLrcText = () => {
+    if (!activeSong || !lrcInputText.trim()) return;
+    try {
+      const trimmed = lrcInputText.trim();
+      let parsed: LyricLine[] = [];
+      if (trimmed.startsWith('[')) {
+        try {
+          const jsonArr = JSON.parse(trimmed);
+          if (Array.isArray(jsonArr) && jsonArr.length > 0 && typeof jsonArr[0].start === 'number') {
+            parsed = jsonArr;
+          }
+        } catch {
+          // không phải JSON, chuyển tiếp parseLRC
+        }
+      }
+      if (parsed.length === 0) {
+        parsed = parseLRC(trimmed, activeSong.englishTranslation);
+      }
+      if (parsed.length > 0) {
+        setCustomSongLyricsMap((prev) => ({
+          ...prev,
+          [activeSong.id]: parsed,
+        }));
+        setIsLrcModalOpen(false);
+        setLrcInputText('');
+        updateKaraokeFrame();
+      } else {
+        alert('Không tìm thấy mốc thời gian hợp lệ trong định dạng LRC hoặc JSON.');
+      }
+    } catch {
+      alert('Định dạng chưa đúng, vui lòng kiểm tra lại.');
     }
   };
 
@@ -1052,7 +1292,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 </button>
               </div>
 
-              {/* 4. SMART KARAOKE & LYRICS BOX (Large kid-friendly text, progressive color sweep, auto-scroll) */}
+              {/* 4. SMART KARAOKE & LYRICS BOX */}
               <div
                 ref={karaokeListRef}
                 className="bg-slate-50/90 border border-slate-200/90 rounded-2xl p-3 sm:p-3.5 max-h-56 sm:max-h-64 overflow-y-auto space-y-2 select-none scrollbar-thin"
@@ -1068,23 +1308,39 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                     ) : (
                       <>
                         <Mic className="w-3.5 h-3.5 text-rose-600" />
-                        <span className="text-rose-700 font-black">
-                          {hasTimedLyrics ? 'Karaoke Chữ Chạy:' : 'Lời Hát Theo Nhịp:'}
-                        </span>
+                        <span className="text-rose-700 font-black">Karaoke Đồng Bộ:</span>
                       </>
                     )}
                   </span>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5 flex-wrap">
                     <button
                       type="button"
                       onClick={() => setShowFullLyricsOnly((v) => !v)}
-                      className="text-[10px] font-bold text-rose-600 hover:underline cursor-pointer min-h-[30px] flex items-center"
+                      className="text-[10px] font-bold text-rose-600 hover:underline cursor-pointer min-h-[30px] flex items-center px-1"
                     >
-                      {showFullLyricsOnly ? '🎤 Bật chữ chạy' : '📖 Xem toàn bài'}
+                      {showFullLyricsOnly ? '🎤 Bật karaoke' : '📖 Xem toàn bài'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={openMarkingLyricsModal}
+                      className="px-2 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-[10px] font-black cursor-pointer flex items-center gap-1 transition"
+                      title="Chế độ đánh dấu mốc thời gian lời bài hát"
+                    >
+                      <BookmarkCheck className="w-3 h-3" />
+                      <span>Đánh dấu lời</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setIsLrcModalOpen(true)}
+                      className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold cursor-pointer flex items-center gap-1 transition"
+                      title="Nhập lời từ định dạng LRC hoặc JSON"
+                    >
+                      <FileText className="w-3 h-3" />
+                      <span>Nhập LRC</span>
                     </button>
                     {isPlaying && (
-                      <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold">
+                      <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold pl-1">
                         <Radio className="w-3 h-3 animate-pulse" /> Đang hát
                       </span>
                     )}
@@ -1095,10 +1351,9 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 {showFullLyricsOnly ? (
                   <div className="py-1 space-y-2">
                     <div className="space-y-1.5 text-xs sm:text-sm text-slate-700 font-semibold px-0.5">
-                      {activeSong.lyrics.map((l, i) => {
-                        const translation = activeSong.englishTranslation?.[i];
+                      {currentLines.map((l, i) => {
                         const showSubtitle =
-                          Boolean(translation) &&
+                          Boolean(l.en) &&
                           (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
                         return (
                           <div
@@ -1107,11 +1362,11 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                           >
                             <p className="flex items-start gap-1.5 text-slate-800 leading-relaxed font-bold">
                               <span className="text-rose-400 font-black">•</span>
-                              <span>{l}</span>
+                              <span>{l.vi}</span>
                             </p>
                             {showSubtitle && (
                               <p className="text-[11px] font-medium text-slate-500 pl-4 italic">
-                                {translation}
+                                {l.en}
                               </p>
                             )}
                           </div>
@@ -1120,7 +1375,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                     </div>
                   </div>
                 ) : (
-                  /* View B: Karaoke View (Either precise timedLyrics or smooth smart-paced auto-scroll) */
+                  /* View B: Karaoke Synchronized View */
                   <div className="space-y-2 pt-1">
                     {/* Intro Music prompt */}
                     {isPlaying && currentLineIndex === -1 && (
@@ -1130,121 +1385,68 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                       </div>
                     )}
 
-                    {/* If timedLyrics exist */}
-                    {hasTimedLyrics
-                      ? activeSong.timedLyrics?.map((line, idx) => {
-                          const isCurrent = isPlaying && currentLineIndex === idx;
-                          const isPast = isPlaying && currentLineIndex > idx;
-                          const showSubtitle =
-                            Boolean(line.translation) &&
-                            (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
+                    {currentLines.map((line, idx) => {
+                      const isCurrent = isPlaying && currentLineIndex === idx;
+                      const isPast = isPlaying && currentLineIndex > idx;
+                      const showSubtitle =
+                        Boolean(line.en) &&
+                        (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
 
-                          const lineDur = Math.max(
-                            0.5,
-                            (line.endTimeSec ?? (line.startTimeSec + 3.5)) - line.startTimeSec
-                          );
-                          const lineProgress = Math.min(
-                            100,
-                            Math.max(0, ((currentTimeSec - line.startTimeSec) / lineDur) * 100)
-                          );
+                      return (
+                        <div
+                          key={idx}
+                          ref={isCurrent ? activeLineRef : null}
+                          className={`transition-colors duration-150 px-3 py-2 rounded-2xl flex flex-col gap-1 border ${
+                            isCurrent
+                              ? 'bg-rose-50/90 border-rose-300 ring-2 ring-rose-200/70 shadow-xs text-rose-950 font-black scale-[1.01]'
+                              : isPast
+                              ? 'text-slate-400 bg-white/40 border-slate-100 opacity-60'
+                              : 'text-slate-700 bg-white/80 border-slate-200/70'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
+                              {isCurrent ? (
+                                <Star className="w-4 h-4 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
+                              ) : isPast ? (
+                                <span className="w-4 h-4 text-emerald-500 text-xs font-black shrink-0 flex items-center justify-center">
+                                  ✓
+                                </span>
+                              ) : (
+                                <span className="w-4 h-4 text-slate-300 text-[10px] font-bold shrink-0 flex items-center justify-center">
+                                  {idx + 1}
+                                </span>
+                              )}
+                              <span className="leading-snug">{line.vi}</span>
+                            </div>
+                            <span className="text-[10px] font-mono text-slate-400 shrink-0 tabular-nums">
+                              {formatTime(line.start)}
+                            </span>
+                          </div>
 
-                          return (
+                          {/* Thanh tiến độ đỏ chuẩn hóa: Cập nhật 100% bằng audio.currentTime qua RAF */}
+                          {isCurrent && (
+                            <div className="w-full h-2 bg-slate-200/90 rounded-full overflow-hidden mt-1 relative">
+                              <div
+                                ref={activeProgressBarRef}
+                                className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full will-change-[width]"
+                                style={{ width: `${lineProgressPct}%` }}
+                              />
+                            </div>
+                          )}
+
+                          {showSubtitle && (
                             <div
-                              key={idx}
-                              ref={isCurrent ? activeLineRef : null}
-                              className={`transition-all duration-200 px-3 py-2 rounded-2xl flex flex-col gap-0.5 ${
-                                isCurrent
-                                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white font-black shadow-md scale-[1.01]'
-                                  : isPast
-                                  ? 'text-slate-400 bg-white/40 opacity-60'
-                                  : 'text-slate-700 bg-white/80'
+                              className={`text-[11px] font-medium pl-5 italic ${
+                                isCurrent ? 'text-rose-700 font-semibold' : 'text-slate-400'
                               }`}
                             >
-                              <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
-                                {isCurrent && (
-                                  <Star className="w-4 h-4 fill-amber-300 text-amber-300 animate-bounce shrink-0" />
-                                )}
-                                <span className="leading-snug">{line.text}</span>
-                              </div>
-
-                              {/* Progressive sweep bar */}
-                              {isCurrent && (
-                                <div className="w-full h-1.5 bg-white/30 rounded-full overflow-hidden mt-1">
-                                  <div
-                                    className="h-full bg-amber-300 rounded-full transition-all duration-150 ease-linear"
-                                    style={{ width: `${lineProgress}%` }}
-                                  />
-                                </div>
-                              )}
-
-                              {showSubtitle && (
-                                <div
-                                  className={`text-[11px] font-medium pl-5 italic ${
-                                    isCurrent ? 'text-rose-100' : 'text-slate-400'
-                                  }`}
-                                >
-                                  {line.translation}
-                                </div>
-                              )}
+                              {line.en}
                             </div>
-                          );
-                        })
-                      : /* Smart-Paced Karaoke for all other songs */
-                        activeSong.lyrics.map((lyricText, idx) => {
-                          const isCurrent = isPlaying && currentLineIndex === idx;
-                          const isPast = isPlaying && currentLineIndex > idx;
-                          const translation = activeSong.englishTranslation?.[idx];
-                          const showSubtitle =
-                            Boolean(translation) &&
-                            (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
-
-                          // Progress within this line chunk
-                          const totalLines = activeSong.lyrics.length;
-                          const currentFraction = (currentTimeSec / Math.max(1, durationSec)) * totalLines;
-                          const lineProgress = isCurrent
-                            ? Math.min(100, Math.max(0, (currentFraction - idx) * 100))
-                            : 0;
-
-                          return (
-                            <div
-                              key={idx}
-                              ref={isCurrent ? activeLineRef : null}
-                              className={`transition-all duration-200 px-3 py-2 rounded-2xl flex flex-col gap-0.5 ${
-                                isCurrent
-                                  ? 'bg-gradient-to-r from-rose-500 to-pink-500 text-white font-black shadow-md scale-[1.01]'
-                                  : isPast
-                                  ? 'text-slate-400 bg-white/40 opacity-60'
-                                  : 'text-slate-700 bg-white/80'
-                              }`}
-                            >
-                              <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
-                                {isCurrent && (
-                                  <Star className="w-4 h-4 fill-amber-300 text-amber-300 animate-bounce shrink-0" />
-                                )}
-                                <span className="leading-snug">{lyricText}</span>
-                              </div>
-
-                              {isCurrent && (
-                                <div className="w-full h-1.5 bg-white/30 rounded-full overflow-hidden mt-1">
-                                  <div
-                                    className="h-full bg-amber-300 rounded-full transition-all duration-150 ease-linear"
-                                    style={{ width: `${lineProgress}%` }}
-                                  />
-                                </div>
-                              )}
-
-                              {showSubtitle && (
-                                <div
-                                  className={`text-[11px] font-medium pl-5 italic ${
-                                    isCurrent ? 'text-rose-100' : 'text-slate-400'
-                                  }`}
-                                >
-                                  {translation}
-                                </div>
-                              )}
-                            </div>
-                          );
-                        })}
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -1513,6 +1715,233 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
             >
               <X className="w-3.5 h-3.5" />
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 1: CHẾ ĐỘ ĐÁNH DẤU LỜI BÀI HÁT */}
+      {isMarkingLyricsOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-xs"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="w-full max-w-2xl bg-white rounded-3xl p-4 sm:p-5 shadow-2xl border-2 border-rose-200 max-h-[92vh] flex flex-col space-y-3.5">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                  <BookmarkCheck className="w-5 h-5 text-rose-500" />
+                  <span>Đánh dấu lời: {activeSong.title}</span>
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Vừa nghe vừa chạm nút mỗi khi một dòng bắt đầu để ghi mốc start chính xác
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMarkingLyricsOpen(false)}
+                className="w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Live Audio Control & Time Bar */}
+            <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleTogglePlay}
+                  className="min-h-[40px] px-3.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+                >
+                  {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
+                  <span>{isPlaying ? 'Tạm dừng' : 'Phát nhạc'}</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSeek(0)}
+                  className="min-h-[40px] px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold cursor-pointer"
+                  title="Về đầu bài (00:00)"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              <div className="text-right">
+                <div className="text-base font-black font-mono text-rose-600 tabular-nums">
+                  {currentTimeSec.toFixed(2)}s
+                </div>
+                <div className="text-[10px] text-slate-400 font-mono">
+                  {formatTime(currentTimeSec)} / {formatTime(durationSec)}
+                </div>
+              </div>
+            </div>
+
+            {/* Big Tap-to-Mark Button */}
+            <button
+              type="button"
+              onClick={handleMarkCurrentLine}
+              className="w-full min-h-[52px] rounded-2xl bg-gradient-to-r from-red-500 via-rose-500 to-pink-500 hover:brightness-105 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition cursor-pointer select-none"
+            >
+              <Star className="w-4 h-4 fill-amber-300 text-amber-300 animate-bounce" />
+              <span>
+                Chạm để đánh dấu Bắt Đầu Dòng {Math.min(currentMarkIndex + 1, markingLines.length)}/
+                {markingLines.length} ({currentTimeSec.toFixed(2)}s)
+              </span>
+            </button>
+
+            {/* Lines List */}
+            <div className="flex-1 overflow-y-auto space-y-1.5 border border-slate-200 rounded-2xl p-2.5 bg-slate-50/60 max-h-48 scrollbar-thin">
+              {markingLines.map((line, idx) => {
+                const isTarget = idx === currentMarkIndex;
+                const isMarked = line.start > 0 || line.end > 0;
+                return (
+                  <div
+                    key={idx}
+                    onClick={() => setCurrentMarkIndex(idx)}
+                    className={`p-2 rounded-xl border text-xs flex items-center justify-between gap-2 cursor-pointer transition ${
+                      isTarget
+                        ? 'bg-rose-50 border-rose-400 font-black text-rose-950 ring-2 ring-rose-200'
+                        : isMarked
+                        ? 'bg-white border-slate-200 text-slate-800 font-medium'
+                        : 'bg-white/60 border-slate-200/60 text-slate-400'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2 min-w-0">
+                      <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold shrink-0">
+                        {idx + 1}
+                      </span>
+                      <span className="truncate">{line.vi}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 shrink-0 text-[11px] font-mono tabular-nums">
+                      <span>{line.start.toFixed(2)}s</span>
+                      <span className="text-slate-300">→</span>
+                      <span>{line.end.toFixed(2)}s</span>
+                      {isMarked && <Check className="w-3.5 h-3.5 text-emerald-600" />}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* JSON Output View */}
+            <div className="space-y-1">
+              <div className="flex items-center justify-between text-[11px] font-bold text-slate-600">
+                <span>Mảng JSON kết quả [{`{start, end, vi, en}`}]</span>
+                {copySuccessMsg && <span className="text-emerald-600 font-extrabold">{copySuccessMsg}</span>}
+              </div>
+              <textarea
+                readOnly
+                value={JSON.stringify(markingLines, null, 2)}
+                className="w-full h-24 p-2 rounded-xl bg-slate-900 text-emerald-400 font-mono text-[11px] border border-slate-800 select-all"
+              />
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(JSON.stringify(markingLines, null, 2));
+                    setCopySuccessMsg('✓ Đã sao chép vào bộ nhớ tạm!');
+                    setTimeout(() => setCopySuccessMsg(null), 2500);
+                  }}
+                  className="min-h-[40px] px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
+                >
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Sao chép JSON</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMarkingLines(
+                      activeSong.lyrics.map((t, i) => ({
+                        start: 0,
+                        end: 0,
+                        vi: t,
+                        en: activeSong.englishTranslation?.[i] || '',
+                      }))
+                    );
+                    setCurrentMarkIndex(0);
+                  }}
+                  className="min-h-[40px] px-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-semibold cursor-pointer"
+                >
+                  Đặt lại
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleApplyMarkedLyrics}
+                  className="min-h-[40px] px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
+                >
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Áp dụng ngay cho bài này</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsMarkingLyricsOpen(false)}
+                  className="min-h-[40px] px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer"
+                >
+                  Đóng
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL 2: NHẬP ĐỊNH DẠNG LRC HOẶC JSON */}
+      {isLrcModalOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-xs"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="w-full max-w-xl bg-white rounded-3xl p-4 sm:p-5 shadow-2xl border-2 border-slate-200 space-y-3.5">
+            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div>
+                <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
+                  <FileText className="w-5 h-5 text-indigo-500" />
+                  <span>Nhập lời từ file LRC hoặc JSON</span>
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Dán nội dung LRC chuẩn [mm:ss.xx] hoặc mảng JSON [{`{start, end, vi, en}`}]
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsLrcModalOpen(false)}
+                className="w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <textarea
+              value={lrcInputText}
+              onChange={(e) => setLrcInputText(e.target.value)}
+              placeholder="Ví dụ định dạng LRC:&#10;[00:14.80]Cháu lên ba cháu đi mẫu giáo&#10;[00:18.80]Cô thương cháu vì cháu không khóc nhè&#10;&#10;Hoặc JSON:&#10;[{ &quot;start&quot;: 14.8, &quot;end&quot;: 18.8, &quot;vi&quot;: &quot;Cháu lên ba...&quot; }]"
+              className="w-full h-44 p-3 rounded-2xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 focus:outline-rose-500 resize-none"
+            />
+
+            <div className="flex items-center justify-end gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => setIsLrcModalOpen(false)}
+                className="min-h-[40px] px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer"
+              >
+                Hủy
+              </button>
+              <button
+                type="button"
+                onClick={handleApplyLrcText}
+                className="min-h-[40px] px-4 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-black shadow-xs cursor-pointer active:scale-95"
+              >
+                Chuyển đổi & Áp dụng
+              </button>
+            </div>
           </div>
         </div>
       )}

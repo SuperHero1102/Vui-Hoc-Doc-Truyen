@@ -370,9 +370,9 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
           <button
             type="button"
             onClick={() => {
-              const current = settings.storyNarratorVoice || 'teacher';
+              const current = settings.storyNarratorVoice || 'mother';
               const next: 'teacher' | 'mother' | 'grandmother' =
-                current === 'teacher' ? 'mother' : current === 'mother' ? 'grandmother' : 'teacher';
+                current === 'mother' ? 'grandmother' : current === 'grandmother' ? 'teacher' : 'mother';
               onUpdateSettings?.({ ...settings, storyNarratorVoice: next });
               stopAllAudio();
               setIsPlaying(false);
@@ -383,10 +383,10 @@ export const StoryReaderModal: React.FC<StoryReaderModalProps> = ({
                 ? 'bg-slate-800 border-slate-700 text-sky-300 hover:bg-slate-700'
                 : 'bg-sky-50 hover:bg-sky-100 border-sky-300 text-sky-900'
             }`}
-            title="Đổi giọng người kể chuyện: Giọng Cô giáo / Giọng Mẹ / Giọng Bà"
+            title="Đổi giọng người kể chuyện: Giọng Mẹ / Giọng Bà / Giọng Cô giáo"
           >
             <span>
-              {settings.storyNarratorVoice === 'mother'
+              {(settings.storyNarratorVoice || 'mother') === 'mother'
                 ? '👩‍👧 Giọng Mẹ'
                 : settings.storyNarratorVoice === 'grandmother'
                 ? '👵 Giọng Bà'

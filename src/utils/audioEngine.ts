@@ -120,35 +120,40 @@ function speakSegmentWithBrowserFallback(
       pitchMod = 1.25;
       rateMod = 1.08;
     } else if (voiceStyle === 'narrator') {
-      if (settings.storyNarratorVoice === 'mother') {
+      const narratorId = getValidatedStoryVoice(settings.storyNarratorVoice);
+      if (narratorId === 'mother') {
         pitchMod = 1.15;
         rateMod = 0.94;
-      } else if (settings.storyNarratorVoice === 'grandmother') {
+      } else if (narratorId === 'grandmother') {
         pitchMod = 0.78;
         rateMod = 0.82;
       } else {
-        if (settings.voicePersona === 'Zephyr') {
+        // 'teacher'
+        const personaId = getValidatedVoicePersona(settings.voicePersona);
+        if (personaId === 'Zephyr') {
           pitchMod = 1.22;
           rateMod = 1.05;
-        } else if (settings.voicePersona === 'Puck') {
-          pitchMod = 0.86;
-          rateMod = 0.86;
-        } else {
+        } else if (personaId === 'Kore') {
           pitchMod = 1.0;
           rateMod = 0.92;
+        } else {
+          pitchMod = 0.86;
+          rateMod = 0.86;
         }
       }
     } else {
-      // Teacher persona in games & learning lessons
-      if (settings.voicePersona === 'Zephyr') {
+      // General voice persona in games, music & learning lessons (default: Puck = Cô Hương)
+      const personaId = getValidatedVoicePersona(settings.voicePersona);
+      if (personaId === 'Zephyr') {
         pitchMod = 1.22;
         rateMod = 1.05;
-      } else if (settings.voicePersona === 'Puck') {
-        pitchMod = 0.86;
-        rateMod = 0.86;
-      } else {
+      } else if (personaId === 'Kore') {
         pitchMod = 1.0;
         rateMod = 0.92;
+      } else {
+        // Puck - Cô Hương (default)
+        pitchMod = 0.86;
+        rateMod = 0.86;
       }
     }
 
@@ -213,6 +218,26 @@ function speakSegmentWithBrowserFallback(
   });
 }
 
+export const DEFAULT_APP_VOICE_ID = 'Puck' as const; // Cô Hương (Kể chuyện / Giọng đọc chung)
+export const DEFAULT_STORY_VOICE_ID = 'mother' as const; // Giọng Mẹ (Mục Truyện)
+
+export const VALID_TEACHER_VOICE_IDS: readonly ('Kore' | 'Zephyr' | 'Puck')[] = ['Kore', 'Zephyr', 'Puck'];
+export const VALID_STORY_VOICE_IDS: readonly ('teacher' | 'mother' | 'grandmother')[] = ['teacher', 'mother', 'grandmother'];
+
+export function getValidatedVoicePersona(storedVal?: any): 'Kore' | 'Zephyr' | 'Puck' {
+  if (storedVal && VALID_TEACHER_VOICE_IDS.includes(storedVal)) {
+    return storedVal;
+  }
+  return DEFAULT_APP_VOICE_ID;
+}
+
+export function getValidatedStoryVoice(storedVal?: any): 'teacher' | 'mother' | 'grandmother' {
+  if (storedVal && VALID_STORY_VOICE_IDS.includes(storedVal)) {
+    return storedVal;
+  }
+  return DEFAULT_STORY_VOICE_ID;
+}
+
 export async function fetchOrGetCachedSegmentUrl(
   segment: SpeechSegment,
   settings: ParentSettings,
@@ -220,8 +245,8 @@ export async function fetchOrGetCachedSegmentUrl(
 ): Promise<{ url: string | null; fromCache: boolean }> {
   const accentKey = settings.englishAccent || 'en-US';
   const cleanText = sanitizeSegmentText(segment.text, segment.lang);
-  const persona = settings.voicePersona || 'Kore';
-  const narratorVoice = settings.storyNarratorVoice || 'teacher';
+  const persona = getValidatedVoicePersona(settings.voicePersona);
+  const narratorVoice = getValidatedStoryVoice(settings.storyNarratorVoice);
   const cacheKey = `v5:${segment.lang}:${accentKey}:${persona}:${narratorVoice}:${voiceStyle || 'none'}:${settings.voiceSpeed}:${cleanText}`;
   const cached = clientAudioUrlCache.get(cacheKey);
   if (cached) {
@@ -241,10 +266,10 @@ export async function fetchOrGetCachedSegmentUrl(
       body: JSON.stringify({
         text: cleanText,
         lang: segment.lang,
-        voiceName: settings.voicePersona,
+        voiceName: persona,
         speed: settings.voiceSpeed,
         englishAccent: settings.englishAccent || 'en-US',
-        storyNarratorVoice: settings.storyNarratorVoice || 'teacher',
+        storyNarratorVoice: narratorVoice,
         voiceStyle: voiceStyle || 'none',
       }),
       signal: controller.signal,
@@ -329,34 +354,37 @@ function playAudioUrl(
       baseRate *= 1.18;
       shouldPreservePitch = false;
     } else if (voiceStyle === 'narrator') {
-      if (settings?.storyNarratorVoice === 'mother') {
+      const narratorId = getValidatedStoryVoice(settings?.storyNarratorVoice);
+      if (narratorId === 'mother') {
         baseRate *= 1.12;
         shouldPreservePitch = false;
-      } else if (settings?.storyNarratorVoice === 'grandmother') {
+      } else if (narratorId === 'grandmother') {
         baseRate *= 0.80;
         shouldPreservePitch = false;
       } else {
-        if (settings?.voicePersona === 'Zephyr') {
+        const personaId = getValidatedVoicePersona(settings?.voicePersona);
+        if (personaId === 'Zephyr') {
           baseRate *= 1.18;
           shouldPreservePitch = false;
-        } else if (settings?.voicePersona === 'Puck') {
-          baseRate *= 0.86;
+        } else if (personaId === 'Kore') {
+          baseRate *= 0.95;
           shouldPreservePitch = false;
         } else {
-          baseRate *= 0.95;
+          baseRate *= 0.86;
           shouldPreservePitch = false;
         }
       }
     } else {
-      // General teacher voice in games and lessons
-      if (settings?.voicePersona === 'Zephyr') {
+      // General teacher/instruction voice in games and lessons (default: Puck = Cô Hương)
+      const personaId = getValidatedVoicePersona(settings?.voicePersona);
+      if (personaId === 'Zephyr') {
         baseRate *= 1.18;
         shouldPreservePitch = false;
-      } else if (settings?.voicePersona === 'Puck') {
-        baseRate *= 0.86;
+      } else if (personaId === 'Kore') {
+        baseRate *= 0.95;
         shouldPreservePitch = false;
       } else {
-        baseRate *= 0.95;
+        baseRate *= 0.86;
         shouldPreservePitch = false;
       }
     }

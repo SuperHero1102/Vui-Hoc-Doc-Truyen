@@ -1,3 +1,10 @@
+export interface LyricLine {
+  start: number; // Thời gian bắt đầu (giây)
+  end: number;   // Thời gian kết thúc (giây)
+  vi: string;    // Lời bài hát tiếng Việt
+  en?: string;   // Dịch tiếng Anh (tùy chọn)
+}
+
 export interface TimedLyricLine {
   startTimeSec: number;
   endTimeSec?: number;
@@ -21,11 +28,113 @@ export interface KidsSong {
   melodyStyle: 'cheerful' | 'gentle' | 'playful' | 'lullaby';
   lyrics: string[];
   timedLyrics?: TimedLyricLine[];
+  lyricsData?: LyricLine[]; // Dữ liệu lời mỗi bài là mảng [{start, end, vi, en}] (giây)
   englishTranslation?: string[];
   funFactVi: string;
   audioUrl?: string; // Bản thu âm thật có lời (nén mono 64kbps MP3)
   melodyNotes?: { note: string; dur: number }[]; // Note frequency representation for Web Audio player
   isVocalTrack?: boolean; // true: Ca sĩ hát, false: Nghe giai điệu
+}
+
+/**
+ * Phân tích chuỗi định dạng LRC chuẩn [mm:ss.xx] thành mảng [{start, end, vi, en}]
+ */
+export function parseLRC(lrcContent: string, defaultTranslations: string[] = []): LyricLine[] {
+  const lines = lrcContent.split('\n');
+  const tempItems: { time: number; text: string }[] = [];
+  const timeRegex = /\[(\d{2}):(\d{2}(?:\.\d{1,3})?)\]/g;
+
+  for (const rawLine of lines) {
+    const trimmed = rawLine.trim();
+    if (!trimmed) continue;
+    let match;
+    const timestamps: number[] = [];
+    while ((match = timeRegex.exec(trimmed)) !== null) {
+      const minutes = parseInt(match[1], 10);
+      const seconds = parseFloat(match[2]);
+      timestamps.push(minutes * 60 + seconds);
+    }
+    const cleanText = trimmed.replace(timeRegex, '').trim();
+    if (cleanText && timestamps.length > 0) {
+      for (const t of timestamps) {
+        tempItems.push({ time: t, text: cleanText });
+      }
+    }
+  }
+
+  tempItems.sort((a, b) => a.time - b.time);
+
+  return tempItems.map((item, idx) => {
+    const nextItem = tempItems[idx + 1];
+    const end = nextItem ? nextItem.time : Number((item.time + 4.0).toFixed(2));
+    return {
+      start: Number(item.time.toFixed(2)),
+      end: Number(end.toFixed(2)),
+      vi: item.text,
+      en: defaultTranslations[idx] || '',
+    };
+  });
+}
+
+export interface NormalizedLyricsResult {
+  lines: LyricLine[];
+  hasRealTimestamps: boolean;
+}
+
+/**
+ * Chuẩn hóa lời bài hát thành mảng [{start, end, vi, en}] theo trình tự hát THẬT.
+ * Nếu bài chưa có mốc thật, tuyệt đối không chia đều hay tự tạo số giả.
+ */
+export function normalizeSongLyricLines(song: KidsSong): NormalizedLyricsResult {
+  if (song.lyricsData && song.lyricsData.length > 0) {
+    const hasReal = song.lyricsData.some((l) => l.start > 0 || l.end > 0);
+    if (hasReal) {
+      const mapped = song.lyricsData.map((item, idx) => {
+        const next = song.lyricsData![idx + 1];
+        const end = next && next.start > item.start ? next.start : item.end;
+        return {
+          start: Number(item.start.toFixed(2)),
+          end: Number(end.toFixed(2)),
+          vi: item.vi,
+          en: item.en || '',
+        };
+      });
+      return { lines: mapped, hasRealTimestamps: true };
+    }
+  }
+
+  if (song.timedLyrics && song.timedLyrics.length > 0) {
+    const hasReal = song.timedLyrics.some((l) => l.startTimeSec > 0);
+    if (hasReal) {
+      const mapped = song.timedLyrics.map((item, idx) => {
+        const next = song.timedLyrics![idx + 1];
+        const start = item.startTimeSec;
+        const end = next ? next.startTimeSec : (item.endTimeSec ?? start + 4.0);
+        return {
+          start: Number(start.toFixed(2)),
+          end: Number(end.toFixed(2)),
+          vi: item.text,
+          en: item.translation || '',
+        };
+      });
+      return { lines: mapped, hasRealTimestamps: true };
+    }
+  }
+
+  // Bài chưa có mốc thật: trả về lời nguyên gốc, hasRealTimestamps = false (không tự bịa số)
+  if (song.lyrics && song.lyrics.length > 0) {
+    return {
+      lines: song.lyrics.map((line, idx) => ({
+        start: 0,
+        end: 0,
+        vi: line,
+        en: song.englishTranslation?.[idx] || '',
+      })),
+      hasRealTimestamps: false,
+    };
+  }
+
+  return { lines: [], hasRealTimestamps: false };
 }
 
 export const KIDS_SONGS_DATA: KidsSong[] = [
@@ -210,6 +319,23 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "text": "La la la, là la la la!",
         "translation": "La la la, la la la la!"
       }
+    ],
+    "lyricsData": [
+      { "start": 14.8, "end": 19.0, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
+      { "start": 19.0, "end": 23.2, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
+      { "start": 23.2, "end": 27.5, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
+      { "start": 27.5, "end": 31.8, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
+      { "start": 31.8, "end": 36.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" },
+      { "start": 36.0, "end": 40.2, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
+      { "start": 40.2, "end": 44.5, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
+      { "start": 44.5, "end": 48.8, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
+      { "start": 48.8, "end": 53.0, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
+      { "start": 53.0, "end": 72.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" },
+      { "start": 72.0, "end": 76.2, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
+      { "start": 76.2, "end": 80.5, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
+      { "start": 80.5, "end": 84.8, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
+      { "start": 84.8, "end": 89.0, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
+      { "start": 89.0, "end": 93.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" }
     ],
     "englishTranslation": [
       "I'm three years old, I go to kindergarten",

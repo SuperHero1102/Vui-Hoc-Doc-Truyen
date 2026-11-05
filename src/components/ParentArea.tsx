@@ -730,7 +730,7 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               {TEACHER_PERSONAS.map((teacher) => {
-                const isSelected = (settings.voicePersona || 'Kore') === teacher.id;
+                const isSelected = (settings.voicePersona || 'Puck') === teacher.id;
                 const isTesting = previewingTeacher === teacher.id;
                 return (
                   <div
@@ -816,7 +816,7 @@ export const ParentDashboard: React.FC<ParentDashboardProps> = ({
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 {STORY_NARRATOR_VOICES.map((narrator) => {
-                  const isSelected = (settings.storyNarratorVoice || 'teacher') === narrator.id;
+                  const isSelected = (settings.storyNarratorVoice || 'mother') === narrator.id;
                   const isTesting = previewingNarrator === narrator.id;
                   return (
                     <div

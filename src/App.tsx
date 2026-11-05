@@ -70,6 +70,12 @@ import { KidsMusicPlayer } from './components/KidsMusicPlayer';
 import { DailyCommunicationStage } from './components/DailyCommunicationStage';
 import { AppErrorBoundary } from './components/AppErrorBoundary';
 import { startTrackingActivity } from './utils/activityTracker';
+import {
+  DEFAULT_APP_VOICE_ID,
+  DEFAULT_STORY_VOICE_ID,
+  getValidatedVoicePersona,
+  getValidatedStoryVoice,
+} from './utils/audioEngine';
 
 const SETTINGS_STORAGE_KEY = 'bevuihoc_parent_settings_v3';
 const PROFILES_STORAGE_KEY = 'bevuihoc_child_profiles_v3';
@@ -84,7 +90,7 @@ function getTodayDateString(): string {
 
 const DEFAULT_SETTINGS: ParentSettings = {
   selectedAge: '1-2y',
-  voicePersona: 'Kore',
+  voicePersona: DEFAULT_APP_VOICE_ID, // Mặc định: "Cô Hương" (Puck)
   voiceSpeed: 'slow',
   volume: 0.85,
   autoOffEnabled: true,
@@ -94,6 +100,7 @@ const DEFAULT_SETTINGS: ParentSettings = {
   autoFullscreen: true,
   storyLanguage: 'bilingual',
   characterVoices: true,
+  storyNarratorVoice: DEFAULT_STORY_VOICE_ID, // Mặc định mục Truyện: "Giọng Mẹ" (mother)
 };
 
 const INITIAL_PROFILES: ChildProfile[] = [
@@ -208,7 +215,15 @@ export default function App() {
   const [settings, setSettings] = useState<ParentSettings>(() => {
     try {
       const saved = localStorage.getItem(SETTINGS_STORAGE_KEY);
-      if (saved) return { ...DEFAULT_SETTINGS, ...JSON.parse(saved) };
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...DEFAULT_SETTINGS,
+          ...parsed,
+          voicePersona: getValidatedVoicePersona(parsed?.voicePersona),
+          storyNarratorVoice: getValidatedStoryVoice(parsed?.storyNarratorVoice),
+        };
+      }
     } catch {
       // ignore
     }
