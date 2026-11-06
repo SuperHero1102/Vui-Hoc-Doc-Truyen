@@ -32,6 +32,7 @@ export interface KidsSong {
   englishTranslation?: string[];
   funFactVi: string;
   audioUrl?: string; // Bản thu âm thật có lời (nén mono 64kbps MP3)
+  durationSec?: number; // Thời lượng bài hát tính bằng giây
   melodyNotes?: { note: string; dur: number }[]; // Note frequency representation for Web Audio player
   isVocalTrack?: boolean; // true: Ca sĩ hát, false: Nghe giai điệu
 }
@@ -152,6 +153,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#3B82F6",
     "bgGradient": "from-blue-500 to-indigo-600",
     "tempo": 108,
+    "durationSec": 120,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Cháu lên ba cháu đi mẫu giáo",
@@ -159,6 +161,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Không khóc nhè để mẹ trồng cây trái",
       "Ba vào nhà máy ông bà vui cấy cày",
       "La la la, là la la la!"
+    ],
+    "lyricsData": [
+      {
+        "start": 10.9,
+        "end": 15.3,
+        "vi": "Cháu lên ba cháu đi mẫu giáo",
+        "en": "I'm three years old, I go to kindergarten"
+      },
+      {
+        "start": 15.5,
+        "end": 20.9,
+        "vi": "Cô thương cháu vì cháu không khóc nhè",
+        "en": "Teacher loves me because I don't cry"
+      },
+      {
+        "start": 21.0,
+        "end": 28.0,
+        "vi": "Không khóc nhè để mẹ trồng cây trái",
+        "en": "I don't cry so mother can grow fruit trees"
+      },
+      {
+        "start": 28.1,
+        "end": 31.9,
+        "vi": "Ba vào nhà máy ông bà vui cấy cày",
+        "en": "Father works in the factory, grandparents happily farm"
+      },
+      {
+        "start": 32.0,
+        "end": 52.8,
+        "vi": "La la la, là la la la!",
+        "en": "La la la, la la la la!"
+      }
     ],
     "funFactVi": "Bé ba tuổi tự tin, vui tươi đi mẫu giáo ngoan không khóc nhè.",
     "audioUrl": "/assets/music/chau-len-ba.mp3",
@@ -322,23 +356,6 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "translation": "La la la, la la la la!"
       }
     ],
-    "lyricsData": [
-      { "start": 14.8, "end": 19.0, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
-      { "start": 19.0, "end": 23.2, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
-      { "start": 23.2, "end": 27.5, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
-      { "start": 27.5, "end": 31.8, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
-      { "start": 31.8, "end": 36.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" },
-      { "start": 36.0, "end": 40.2, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
-      { "start": 40.2, "end": 44.5, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
-      { "start": 44.5, "end": 48.8, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
-      { "start": 48.8, "end": 53.0, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
-      { "start": 53.0, "end": 72.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" },
-      { "start": 72.0, "end": 76.2, "vi": "Cháu lên ba cháu đi mẫu giáo", "en": "I am three years old, I go to kindergarten" },
-      { "start": 76.2, "end": 80.5, "vi": "Cô thương cháu vì cháu không khóc nhè", "en": "Teacher loves me because I don't cry" },
-      { "start": 80.5, "end": 84.8, "vi": "Không khóc nhè để mẹ trồng cây trái", "en": "I don't cry so mother can grow fruit trees" },
-      { "start": 84.8, "end": 89.0, "vi": "Ba vào nhà máy ông bà vui cấy cày", "en": "Father works in the factory, grandparents happily farm" },
-      { "start": 89.0, "end": 93.0, "vi": "La la la, là la la la!", "en": "La la la, la la la la!" }
-    ],
     "englishTranslation": [
       "I'm three years old, I go to kindergarten",
       "Teacher loves me because I don't cry",
@@ -359,12 +376,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EC4899",
     "bgGradient": "from-pink-500 to-rose-600",
     "tempo": 112,
+    "durationSec": 206,
     "melodyStyle": "playful",
     "lyrics": [
       "Meo meo meo, rửa mặt như mèo",
       "Sâu sâu lắm chẳng được mẹ yêu",
       "Khăn mặt đâu mà ngồi liếm mép",
       "Đau mắt rồi lại khóc meo meo!"
+    ],
+    "lyricsData": [
+      {
+        "start": 36.17,
+        "end": 40.1,
+        "vi": "Meo meo meo, rửa mặt như mèo",
+        "en": "Meow meow meow, washing face like a kitten"
+      },
+      {
+        "start": 40.85,
+        "end": 44.97,
+        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
+        "en": "Not very clean, mother will not praise"
+      },
+      {
+        "start": 45.42,
+        "end": 49.2,
+        "vi": "Khăn mặt đâu mà ngồi liếm mép",
+        "en": "Where is your clean towel instead of licking paws"
+      },
+      {
+        "start": 49.52,
+        "end": 53.68,
+        "vi": "Đau mắt rồi lại khóc meo meo!",
+        "en": "Sore eyes will make kitten cry meow meow!"
+      }
     ],
     "funFactVi": "Rửa mặt bằng khăn sạch mỗi sớm giúp bé tươi vui, mắt sáng.",
     "audioUrl": "/assets/music/rua-mat-nhu-meo.mp3",
@@ -447,6 +491,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#10B981",
     "bgGradient": "from-emerald-500 to-teal-600",
     "tempo": 92,
+    "durationSec": 150,
     "melodyStyle": "gentle",
     "lyrics": [
       "Hôm qua em tới trường",
@@ -538,6 +583,32 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Bé mà ngoan lại múa hát thật hay!",
       "Cô là mẹ và các cháu là con",
       "Trường của cháu đây là trường mầm non!"
+    ],
+    "lyricsData": [
+      {
+        "start": 15.65,
+        "end": 20.35,
+        "vi": "Ai hỏi cháu cháu học trường nào đây?",
+        "en": "Who is asking where is my preschool?"
+      },
+      {
+        "start": 20.55,
+        "end": 24.25,
+        "vi": "Bé mà ngoan lại múa hát thật hay!",
+        "en": "Come here and visit, our school is so lovely"
+      },
+      {
+        "start": 24.65,
+        "end": 28.95,
+        "vi": "Cô là mẹ và các cháu là con",
+        "en": "Lots of pretty toys and kind teacher"
+      },
+      {
+        "start": 29.25,
+        "end": 33.35,
+        "vi": "Trường của cháu đây là trường mầm non!",
+        "en": "Our school is a cheerful kindergarten!"
+      }
     ],
     "funFactVi": "Trường mầm non rực rỡ tiếng cười của bạn bè và cô giáo hiền.",
     "audioUrl": "/assets/music/truong-chung-chau-la-truong-mam-non.mp3",
@@ -636,6 +707,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#8B5CF6",
     "bgGradient": "from-purple-500 to-indigo-600",
     "tempo": 104,
+    "durationSec": 167,
     "melodyStyle": "playful",
     "lyrics": [
       "Con cò bé bé",
@@ -646,6 +718,56 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Khi về em chào",
       "Miệng em chúm chím",
       "Mẹ có yêu không nào!"
+    ],
+    "lyricsData": [
+      {
+        "start": 26.55,
+        "end": 28.86,
+        "vi": "Con cò bé bé",
+        "en": "Little white egret perched on the bamboo branch"
+      },
+      {
+        "start": 28.86,
+        "end": 31.95,
+        "vi": "Nó đậu cành tre",
+        "en": "Where are you going without asking your mother?"
+      },
+      {
+        "start": 31.95,
+        "end": 36.44,
+        "vi": "Đi không hỏi mẹ",
+        "en": "Now that I ask, mother loves me so much"
+      },
+      {
+        "start": 36.44,
+        "end": 38.66,
+        "vi": "Biết đi đường nào?",
+        "en": "Going out I say hello, coming back I say hello!"
+      },
+      {
+        "start": 38.66,
+        "end": 41.74,
+        "vi": "Khi đi em hỏi",
+        "en": "Little white egret perched on the bamboo branch"
+      },
+      {
+        "start": 41.74,
+        "end": 44.52,
+        "vi": "Khi về em chào",
+        "en": "Where are you going without asking your mother?"
+      },
+      {
+        "start": 44.52,
+        "end": 46.23,
+        "vi": "Miệng em chúm chím",
+        "en": "Now that I ask, mother loves me so much"
+      },
+      {
+        "start": 46.23,
+        "end": 48.98,
+        "vi": "Mẹ có yêu không nào!",
+        "en": "Going out I say hello, coming back I say hello!"
+      }
     ],
     "funFactVi": "Bé ngoan luôn lễ phép chào hỏi người lớn khi đi và về.",
     "audioUrl": "/assets/music/con-co-be-be.mp3",
@@ -732,12 +854,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EF4444",
     "bgGradient": "from-red-500 to-rose-600",
     "tempo": 100,
+    "durationSec": 190,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Ba thương con vì con giống mẹ",
       "Mẹ thương con vì con giống ba",
       "Cả nhà ta cùng thương yêu nhau",
       "Xa là nhớ, gần nhau là cười!"
+    ],
+    "lyricsData": [
+      {
+        "start": 33.63,
+        "end": 38.33,
+        "vi": "Ba thương con vì con giống mẹ",
+        "en": "Daddy loves baby because baby looks like mommy"
+      },
+      {
+        "start": 38.33,
+        "end": 42.13,
+        "vi": "Mẹ thương con vì con giống ba",
+        "en": "Mommy loves baby because baby looks like daddy"
+      },
+      {
+        "start": 42.13,
+        "end": 46.13,
+        "vi": "Cả nhà ta cùng thương yêu nhau",
+        "en": "Our whole happy family loves one another"
+      },
+      {
+        "start": 46.13,
+        "end": 50.13,
+        "vi": "Xa là nhớ, gần nhau là cười!",
+        "en": "When apart we miss, when together we smile!"
+      }
     ],
     "funFactVi": "Tình cảm gia đình ấm áp, cả nhà luôn sẻ chia yêu thương.",
     "audioUrl": "/assets/music/ca-nha-thuong-nhau.mp3",
@@ -844,12 +993,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#6366F1",
     "bgGradient": "from-indigo-500 to-purple-600",
     "tempo": 96,
+    "durationSec": 168,
     "melodyStyle": "gentle",
     "lyrics": [
       "Bà ơi bà, cháu yêu bà lắm",
       "Tóc bà trắng, màu trắng như mây",
       "Cháu yêu bà, cháu nắm bàn tay",
       "Khi cháu vâng lời, cháu biết bà vui!"
+    ],
+    "lyricsData": [
+      {
+        "start": 29.35,
+        "end": 33.72,
+        "vi": "Bà ơi bà, cháu yêu bà lắm",
+        "en": "Dear grandma, I love you so much"
+      },
+      {
+        "start": 33.72,
+        "end": 37.96,
+        "vi": "Tóc bà trắng, màu trắng như mây",
+        "en": "Your hair is pure white like fluffy clouds"
+      },
+      {
+        "start": 37.96,
+        "end": 42.66,
+        "vi": "Cháu yêu bà, cháu nắm bàn tay",
+        "en": "I love you and gently hold your hand"
+      },
+      {
+        "start": 42.66,
+        "end": 47.01,
+        "vi": "Khi cháu vâng lời, cháu biết bà vui!",
+        "en": "When I listen obediently, I know you are joyful!"
+      }
     ],
     "funFactVi": "Lòng hiếu thảo, cử chỉ âu yếm bé dành cho người bà tóc bạc.",
     "audioUrl": "/assets/music/chau-yeu-ba.mp3",
@@ -932,12 +1108,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EAB308",
     "bgGradient": "from-yellow-500 to-amber-600",
     "tempo": 118,
+    "durationSec": 171,
     "melodyStyle": "playful",
     "lyrics": [
       "Một con vịt xòe ra hai cái cánh",
       "Nó kêu rằng: Cáp cáp cáp, cạp cạp cạp!",
       "Gặp hồ nước nó bì bõm bì bõm",
       "Lên bờ vẫy cái cánh cho khô!"
+    ],
+    "lyricsData": [
+      {
+        "start": 16.27,
+        "end": 19.47,
+        "vi": "Một con vịt xòe ra hai cái cánh",
+        "en": "One little duckling spreads out two wings"
+      },
+      {
+        "start": 19.77,
+        "end": 23.47,
+        "vi": "Nó kêu rằng: Cáp cáp cáp, cạp cạp cạp!",
+        "en": "Quacking loudly: Quack quack quack!"
+      },
+      {
+        "start": 23.57,
+        "end": 27.27,
+        "vi": "Gặp hồ nước nó bì bõm bì bõm",
+        "en": "Seeing the blue pond, it splashes playfully"
+      },
+      {
+        "start": 27.37,
+        "end": 31.07,
+        "vi": "Lên bờ vẫy cái cánh cho khô!",
+        "en": "Stepping ashore, it flaps wings dry in the sun!"
+      }
     ],
     "funFactVi": "Chú vịt vàng tinh nghịch xòe cánh bơi lội trong làn nước trong.",
     "audioUrl": "/assets/music/mot-con-vit.mp3",
@@ -1028,6 +1231,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#06B6D4",
     "bgGradient": "from-cyan-500 to-blue-600",
     "tempo": 110,
+    "durationSec": 221,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Hai vây xinh xinh",
@@ -1038,6 +1242,248 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Sao mà bơi nhanh thế?",
       "Cá vàng thấy bọ gậy nên đuổi theo rất nhanh",
       "Cá vàng bắt bọ gậy cho nước thêm sạch trong!"
+    ],
+    "lyricsData": [
+      {
+        "start": 23.97,
+        "end": 26.57,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 26.57,
+        "end": 30.17,
+        "vi": "Cá vàng bơi trong bể nước",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 30.17,
+        "end": 32.17,
+        "vi": "Ngoi lên, lặn xuống",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 32.17,
+        "end": 34.37,
+        "vi": "Cá vàng múa tung tăng",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 34.37,
+        "end": 36.87,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 36.87,
+        "end": 39.47,
+        "vi": "Sao mà bơi nhanh thế?",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 39.47,
+        "end": 44.27,
+        "vi": "Cá vàng thấy bọ gậy nên đuổi theo rất nhanh",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 44.27,
+        "end": 50.17,
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 50.87,
+        "end": 53.47,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 53.47,
+        "end": 57.07,
+        "vi": "Cá vàng bơi trong bể nước",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 57.07,
+        "end": 59.07,
+        "vi": "Ngoi lên, lặn xuống",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 59.07,
+        "end": 61.17,
+        "vi": "Cá vàng múa tung tăng",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 61.17,
+        "end": 63.67,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 63.67,
+        "end": 66.27,
+        "vi": "Sao mà bơi nhanh thế?",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 66.27,
+        "end": 70.97,
+        "vi": "Cá vàng bắt bọ gậy nên đuổi theo rất nhanh",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 70.97,
+        "end": 75.0,
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 206.57,
+        "end": 208.57,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 208.57,
+        "end": 212.17,
+        "vi": "Cá vàng bơi trong bể nước",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 212.17,
+        "end": 214.17,
+        "vi": "Ngoi lên, lặn xuống",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 214.17,
+        "end": 216.37,
+        "vi": "Cá vàng múa tung tăng",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 216.37,
+        "end": 218.87,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 218.87,
+        "end": 221.47,
+        "vi": "Sao mà bơi nhanh thế?",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 221.47,
+        "end": 226.27,
+        "vi": "Cá vàng bắt bọ gậy nên đuổi theo rất nhanh",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 226.27,
+        "end": 231.0,
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 232.87,
+        "end": 235.47,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 235.47,
+        "end": 239.07,
+        "vi": "Cá vàng bơi trong bể nước",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 239.07,
+        "end": 241.07,
+        "vi": "Ngoi lên, lặn xuống",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 241.07,
+        "end": 243.27,
+        "vi": "Cá vàng múa tung tăng",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 243.27,
+        "end": 245.77,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 245.77,
+        "end": 248.37,
+        "vi": "Sao mà bơi nhanh thế?",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 248.37,
+        "end": 253.17,
+        "vi": "Cá vàng bắt bọ gậy nên đuổi theo rất nhanh",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 253.17,
+        "end": 258.0,
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 299.87,
+        "end": 302.47,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 302.47,
+        "end": 306.07,
+        "vi": "Cá vàng bơi trong bể nước",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 306.07,
+        "end": 308.07,
+        "vi": "Ngoi lên, lặn xuống",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 308.07,
+        "end": 310.27,
+        "vi": "Cá vàng múa tung tăng",
+        "en": "Catching pesky bugs to keep the water clean!"
+      },
+      {
+        "start": 310.27,
+        "end": 312.77,
+        "vi": "Hai vây xinh xinh",
+        "en": "Two little goldfish swim in a crystal tank"
+      },
+      {
+        "start": 312.77,
+        "end": 315.37,
+        "vi": "Sao mà bơi nhanh thế?",
+        "en": "Dancing up and down so graceful and quick"
+      },
+      {
+        "start": 315.37,
+        "end": 320.17,
+        "vi": "Cá vàng bắt bọ gậy nên đuổi theo rất nhanh",
+        "en": "Two goldfish swim so swiftly"
+      },
+      {
+        "start": 320.17,
+        "end": 329.0,
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong!",
+        "en": "Catching pesky bugs to keep the water clean!"
+      }
     ],
     "funFactVi": "Đàn cá vàng tung tăng bơi lội bắt bọ gậy giữ sạch nước.",
     "audioUrl": "/assets/music/ca-vang-boi.mp3",
@@ -1108,12 +1554,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#14B8A6",
     "bgGradient": "from-teal-500 to-emerald-600",
     "tempo": 108,
+    "durationSec": 124,
     "melodyStyle": "playful",
     "lyrics": [
       "Kìa con bướm vàng, kìa con bướm vàng",
       "Xòe đôi cánh, xòe đôi cánh",
       "Bươm bướm bay đôi ba vòng, bươm bướm bay đôi ba vòng",
       "Tung cánh bay, tung cánh bay!"
+    ],
+    "lyricsData": [
+      {
+        "start": 11.01,
+        "end": 14.77,
+        "vi": "Kìa con bướm vàng, kìa con bướm vàng",
+        "en": "Look at the lovely yellow butterfly"
+      },
+      {
+        "start": 14.97,
+        "end": 17.87,
+        "vi": "Xòe đôi cánh, xòe đôi cánh",
+        "en": "Spreading out two bright colorful wings"
+      },
+      {
+        "start": 18.07,
+        "end": 21.67,
+        "vi": "Bươm bướm bay đôi ba vòng, bươm bướm bay đôi ba vòng",
+        "en": "Flying round and round in the fresh air"
+      },
+      {
+        "start": 21.87,
+        "end": 25.67,
+        "vi": "Tung cánh bay, tung cánh bay!",
+        "en": "Flapping wings, flapping wings in the breeze!"
+      }
     ],
     "funFactVi": "Đôi bướm vàng rực rỡ chao liệng đón gió xuân rộn ràng.",
     "audioUrl": "/assets/music/kia-con-buom-vang.mp3",
@@ -1196,6 +1669,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#F97316",
     "bgGradient": "from-orange-500 to-amber-600",
     "tempo": 98,
+    "durationSec": 283,
     "melodyStyle": "gentle",
     "lyrics": [
       "Ba là cây nến vàng",
@@ -1205,6 +1679,50 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Thắp sáng một gia đình!",
       "Gia đình gia đình, ôm ấp những ngày thơ",
       "Cho ta bao tình thương đi suốt cả cuộc đời!"
+    ],
+    "lyricsData": [
+      {
+        "start": 27.85,
+        "end": 30.85,
+        "vi": "Ba là cây nến vàng",
+        "en": "Yellow candle represents strong father"
+      },
+      {
+        "start": 30.95,
+        "end": 33.85,
+        "vi": "Mẹ là cây nến xanh",
+        "en": "Pink candle represents gentle mother"
+      },
+      {
+        "start": 33.95,
+        "end": 37.05,
+        "vi": "Con là cây nến hồng",
+        "en": "Blue candle represents cheerful baby"
+      },
+      {
+        "start": 37.15,
+        "end": 40.55,
+        "vi": "Ba ngọn nến lung linh",
+        "en": "Three bright candles light up a happy home!"
+      },
+      {
+        "start": 43.15,
+        "end": 46.55,
+        "vi": "Thắp sáng một gia đình!",
+        "en": "Yellow candle represents strong father"
+      },
+      {
+        "start": 121.75,
+        "end": 139.05,
+        "vi": "Gia đình gia đình, ôm ấp những ngày thơ",
+        "en": "Pink candle represents gentle mother"
+      },
+      {
+        "start": 139.15,
+        "end": 156.45,
+        "vi": "Cho ta bao tình thương đi suốt cả cuộc đời!",
+        "en": "Blue candle represents cheerful baby"
+      }
     ],
     "funFactVi": "Ba ngọn nến tượng trưng cho ngọn lửa yêu thương gia đình.",
     "audioUrl": "/assets/music/ba-ngon-nen-lung-linh.mp3",
@@ -1295,6 +1813,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#3B82F6",
     "bgGradient": "from-blue-600 to-indigo-700",
     "tempo": 104,
+    "durationSec": 186,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Bố là tàu lửa, bố là xe hơi",
@@ -1303,6 +1822,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Bố là sông rộng cho thuyền em bơi",
       "Bố là bờ đê cho em nằm ngủ",
       "Bố là phi thuyền đưa em lên trời!"
+    ],
+    "lyricsData": [
+      {
+        "start": 21.82,
+        "end": 26.26,
+        "vi": "Bố là tàu lửa, bố là xe hơi",
+        "en": "Daddy is a train engine chugging ahead"
+      },
+      {
+        "start": 26.26,
+        "end": 30.3,
+        "vi": "Bố là con ngựa em cưỡi em chơi",
+        "en": "Daddy is a sturdy horse giving me rides"
+      },
+      {
+        "start": 30.3,
+        "end": 34.02,
+        "vi": "Bố là thuyền lớn cho em vượt sóng",
+        "en": "Daddy is a ship sailing across oceans"
+      },
+      {
+        "start": 34.02,
+        "end": 38.65,
+        "vi": "Bố là sông rộng cho thuyền em bơi",
+        "en": "Daddy is the whole world of wonder for me!"
+      },
+      {
+        "start": 38.65,
+        "end": 44.59,
+        "vi": "Bố là bờ đê cho em nằm ngủ",
+        "en": "Daddy is a train engine chugging ahead"
+      },
+      {
+        "start": 44.59,
+        "end": 50.95,
+        "vi": "Bố là phi thuyền đưa em lên trời!",
+        "en": "Daddy is a sturdy horse giving me rides"
+      }
     ],
     "funFactVi": "Người cha luôn là điểm tựa chở che vững chãi cho con.",
     "audioUrl": "/assets/music/bo-la-tat-ca.mp3",
@@ -1373,12 +1930,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EC4899",
     "bgGradient": "from-pink-500 to-purple-600",
     "tempo": 96,
+    "durationSec": 107,
     "melodyStyle": "gentle",
     "lyrics": [
       "Lúc ở nhà mẹ cũng là cô giáo",
       "Khi đến trường cô giáo như mẹ hiền",
       "Cô và mẹ là hai cô giáo",
       "Mẹ và cô ấy hai mẹ hiền!"
+    ],
+    "lyricsData": [
+      {
+        "start": 14.78,
+        "end": 19.34,
+        "vi": "Lúc ở nhà mẹ cũng là cô giáo",
+        "en": "At home, mommy is also like a teacher"
+      },
+      {
+        "start": 19.34,
+        "end": 23.94,
+        "vi": "Khi đến trường cô giáo như mẹ hiền",
+        "en": "At school, teacher is just like a sweet mommy"
+      },
+      {
+        "start": 23.94,
+        "end": 28.54,
+        "vi": "Cô và mẹ là hai cô giáo",
+        "en": "Teacher and mommy are two gentle mothers"
+      },
+      {
+        "start": 28.54,
+        "end": 32.54,
+        "vi": "Mẹ và cô ấy hai mẹ hiền!",
+        "en": "Mommy and teacher are two radiant smiles!"
+      }
     ],
     "funFactVi": "Cô giáo và người mẹ là hai vầng sáng dịu hiền bên con.",
     "audioUrl": "/assets/music/co-va-me.mp3",
@@ -1457,6 +2041,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#F43F5E",
     "bgGradient": "from-rose-500 to-pink-600",
     "tempo": 114,
+    "durationSec": 158,
     "melodyStyle": "playful",
     "lyrics": [
       "Mẹ mua cho con heo đất",
@@ -1465,6 +2050,116 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Cầm đồng tiền nhỏ em nhét vào bụng heo!",
       "Em không thèm ăn kem, em không thèm mua kẹo",
       "Em để dành tiền nuôi heo đất lớn nhanh!"
+    ],
+    "lyricsData": [
+      {
+        "start": 0.0,
+        "end": 21.05,
+        "vi": "Mẹ mua cho con heo đất",
+        "en": "Mother bought me a cute ceramic piggy bank"
+      },
+      {
+        "start": 21.05,
+        "end": 25.43,
+        "vi": "Mẹ mua cho con heo đất, í o i ò!",
+        "en": "Feeding it small coins each happy day"
+      },
+      {
+        "start": 25.43,
+        "end": 27.65,
+        "vi": "Ngày hôm nay em vui lắm",
+        "en": "Today I am very happy"
+      },
+      {
+        "start": 27.65,
+        "end": 31.81,
+        "vi": "Cầm đồng tiền nhỏ em nhét vào bụng heo!",
+        "en": "Holding the little coin, I put it into the pig's belly!"
+      },
+      {
+        "start": 31.81,
+        "end": 34.05,
+        "vi": "Mẹ mua cho con heo đất",
+        "en": "Mother bought me a piggy bank"
+      },
+      {
+        "start": 34.05,
+        "end": 38.31,
+        "vi": "Mẹ mua cho con heo đất, í o i ò!",
+        "en": "Mother bought me a piggy bank, oink oink!"
+      },
+      {
+        "start": 41.5,
+        "end": 46.59,
+        "vi": "Em không thèm ăn kem, em không thèm mua kẹo",
+        "en": "I don't care to eat ice cream, I don't care to buy candy"
+      },
+      {
+        "start": 46.59,
+        "end": 50.85,
+        "vi": "Em để dành tiền nuôi heo đất lớn nhanh!",
+        "en": "I save money to raise the piggy bank to grow fast!"
+      },
+      {
+        "start": 50.85,
+        "end": 55.05,
+        "vi": "Mẹ mua cho con heo đất",
+        "en": "Mother bought me a piggy bank"
+      },
+      {
+        "start": 55.05,
+        "end": 60.91,
+        "vi": "Mẹ mua cho con heo đất, í o i ò!",
+        "en": "Mother bought me a piggy bank, oink oink!"
+      },
+      {
+        "start": 86.0,
+        "end": 88.01,
+        "vi": "Mẹ mua cho con heo đất",
+        "en": "Mother bought me a piggy bank"
+      },
+      {
+        "start": 88.01,
+        "end": 92.39,
+        "vi": "Mẹ mua cho con heo đất, í o i ò!",
+        "en": "Mother bought me a piggy bank, oink oink!"
+      },
+      {
+        "start": 92.39,
+        "end": 94.63,
+        "vi": "Ngày hôm nay em vui lắm",
+        "en": "Today I am very happy"
+      },
+      {
+        "start": 94.63,
+        "end": 98.83,
+        "vi": "Cầm đồng tiền nhỏ em nhét vào bụng heo!",
+        "en": "Holding the little coin, I put it into the pig's belly!"
+      },
+      {
+        "start": 98.83,
+        "end": 101.13,
+        "vi": "Mẹ mua cho con heo đất",
+        "en": "Mother bought me a piggy bank"
+      },
+      {
+        "start": 101.13,
+        "end": 105.45,
+        "vi": "Mẹ mua cho con heo đất, í o i ò!",
+        "en": "Mother bought me a piggy bank, oink oink!"
+      },
+      {
+        "start": 105.45,
+        "end": 110.0,
+        "vi": "Em không thèm ăn kem, em không thèm mua kẹo",
+        "en": "I don't care to eat ice cream, I don't care to buy candy"
+      },
+      {
+        "start": 110.0,
+        "end": 157.5,
+        "vi": "Em để dành tiền nuôi heo đất lớn nhanh!",
+        "en": "I save money to raise the piggy bank to grow fast!"
+      }
     ],
     "funFactVi": "Thói quen tiết kiệm tiền lẻ nuôi heo đất giúp bé tự lập.",
     "audioUrl": "/assets/music/con-heo-dat.mp3",
@@ -1539,12 +2234,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#22C55E",
     "bgGradient": "from-green-500 to-emerald-600",
     "tempo": 118,
+    "durationSec": 208,
     "melodyStyle": "playful",
     "lyrics": [
       "Kìa chú là chú ếch con, có hai là hai mắt tròn",
       "Chú ngồi học bài một mình bên hố bom kề vườn xoan",
       "Bao cô cá trê non cùng bao chú cá rô ron",
       "Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!"
+    ],
+    "lyricsData": [
+      {
+        "start": 16.59,
+        "end": 20.39,
+        "vi": "Kìa chú là chú ếch con, có hai là hai mắt tròn",
+        "en": "Little frog sitting on a green lotus leaf"
+      },
+      {
+        "start": 20.39,
+        "end": 25.49,
+        "vi": "Chú ngồi học bài một mình bên hố bom kề vườn xoan",
+        "en": "Big round eyes reading his morning lesson"
+      },
+      {
+        "start": 25.49,
+        "end": 30.19,
+        "vi": "Bao cô cá trê non cùng bao chú cá rô ron",
+        "en": "Two little birds singing on the tree branch"
+      },
+      {
+        "start": 30.19,
+        "end": 34.39,
+        "vi": "Tung tăng chiếc vây son cùng nghe ếch vang lừng câu ca!",
+        "en": "Praising the diligent little froggy scholar!"
+      }
     ],
     "funFactVi": "Chú ếch con chăm ngoan ngồi học bài bên bờ ao xanh.",
     "audioUrl": "/assets/music/chu-ech-con.mp3",
@@ -1619,6 +2341,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#FBBF24",
     "bgGradient": "from-amber-400 to-yellow-600",
     "tempo": 112,
+    "durationSec": 197,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Trông kìa đàn gà con lông vàng",
@@ -1627,6 +2350,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Đàn gà con đi lon ton!",
       "Thóc vãi rồi nhặt ăn cho nhiều",
       "Uống nước vào là no căng diều!"
+    ],
+    "lyricsData": [
+      {
+        "start": 44.8,
+        "end": 50.1,
+        "vi": "Trông kìa đàn gà con lông vàng",
+        "en": "Look at the yellow chicks in the sunny garden"
+      },
+      {
+        "start": 50.1,
+        "end": 56.6,
+        "vi": "Đi theo mẹ tìm ăn trong vườn",
+        "en": "Feathers fluffy like warm golden balls"
+      },
+      {
+        "start": 59.8,
+        "end": 65.5,
+        "vi": "Cùng tìm mồi ăn ngon ngon",
+        "en": "Pecking tiny seeds with mother hen"
+      },
+      {
+        "start": 65.5,
+        "end": 71.3,
+        "vi": "Đàn gà con đi lon ton!",
+        "en": "Chirping happily: Cheep cheep cheep!"
+      },
+      {
+        "start": 219.0,
+        "end": 224.7,
+        "vi": "Thóc vãi rồi nhặt ăn cho nhiều",
+        "en": "Look at the yellow chicks in the sunny garden"
+      },
+      {
+        "start": 224.7,
+        "end": 231.1,
+        "vi": "Uống nước vào là no căng diều!",
+        "en": "Feathers fluffy like warm golden balls"
+      }
     ],
     "funFactVi": "Đàn gà con lông vàng óng ả theo mẹ kiếm mồi vui vẻ.",
     "audioUrl": "/assets/music/dan-ga-con.mp3",
@@ -1705,6 +2466,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#8B5CF6",
     "bgGradient": "from-violet-500 to-purple-700",
     "tempo": 116,
+    "durationSec": 192,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Chú voi con ở Bản Đôn",
@@ -1715,6 +2477,56 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mau lớn nhanh có đôi ngà to",
       "Có sức đi khắp miền rừng xa",
       "Kéo gỗ cho buôn làng của ta!"
+    ],
+    "lyricsData": [
+      {
+        "start": 36.68,
+        "end": 39.12,
+        "vi": "Chú voi con ở Bản Đôn",
+        "en": "Baby elephant living in Ban Don village"
+      },
+      {
+        "start": 39.12,
+        "end": 42.12,
+        "vi": "Chưa có ngà nên còn trẻ con",
+        "en": "Still so little without any ivory yet"
+      },
+      {
+        "start": 42.12,
+        "end": 44.42,
+        "vi": "Từ rừng già chú đến với người",
+        "en": "Eating sweet bananas and splashing by the stream"
+      },
+      {
+        "start": 44.42,
+        "end": 47.78,
+        "vi": "Rất ham ăn với lại ham chơi!",
+        "en": "Growing big and strong to help our village!"
+      },
+      {
+        "start": 49.38,
+        "end": 52.88,
+        "vi": "Voi con ơi, voi con ơi!",
+        "en": "Baby elephant living in Ban Don village"
+      },
+      {
+        "start": 52.88,
+        "end": 55.48,
+        "vi": "Mau lớn nhanh có đôi ngà to",
+        "en": "Still so little without any ivory yet"
+      },
+      {
+        "start": 55.48,
+        "end": 57.98,
+        "vi": "Có sức đi khắp miền rừng xa",
+        "en": "Eating sweet bananas and splashing by the stream"
+      },
+      {
+        "start": 57.98,
+        "end": 60.02,
+        "vi": "Kéo gỗ cho buôn làng của ta!",
+        "en": "Growing big and strong to help our village!"
+      }
     ],
     "funFactVi": "Chú voi con Tây Nguyên ngộ nghĩnh, hiền lành được buôn làng yêu quý.",
     "audioUrl": "/assets/music/chu-voi-con-o-ban-don.mp3",
@@ -1801,6 +2613,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#10B981",
     "bgGradient": "from-emerald-500 to-green-700",
     "tempo": 120,
+    "durationSec": 141,
     "melodyStyle": "playful",
     "lyrics": [
       "Bắc kim thang cà lang bí rợ",
@@ -1809,6 +2622,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Chú bán ếch ở lại làm chi",
       "Con chim le le bổ trống thổi kèn",
       "Con bìm bịp thổi tò tí te tò te!"
+    ],
+    "lyricsData": [
+      {
+        "start": 10.85,
+        "end": 14.75,
+        "vi": "Bắc kim thang cà lang bí rợ",
+        "en": "Bac kim thang balancing on the wooden stile"
+      },
+      {
+        "start": 14.75,
+        "end": 18.75,
+        "vi": "Cột qua kèo là kèo qua cột",
+        "en": "Spur-of-the-moment folk rhyme game"
+      },
+      {
+        "start": 18.75,
+        "end": 24.55,
+        "vi": "Chú bán dầu qua cầu mà té",
+        "en": "Singing together in rhythm and clapping"
+      },
+      {
+        "start": 24.55,
+        "end": 30.25,
+        "vi": "Chú bán ếch ở lại làm chi",
+        "en": "Joyful laughter across the playground!"
+      },
+      {
+        "start": 30.25,
+        "end": 36.65,
+        "vi": "Con chim le le bổ trống thổi kèn",
+        "en": "Bac kim thang balancing on the wooden stile"
+      },
+      {
+        "start": 36.65,
+        "end": 42.15,
+        "vi": "Con bìm bịp thổi tò tí te tò te!",
+        "en": "Spur-of-the-moment folk rhyme game"
+      }
     ],
     "funFactVi": "Giai điệu dân ca đồng dao Nam Bộ rộn ràng tiếng vỗ tay.",
     "audioUrl": "/assets/music/bac-kim-thang.mp3",
@@ -1887,6 +2738,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#6366F1",
     "bgGradient": "from-indigo-600 to-blue-700",
     "tempo": 88,
+    "durationSec": 282,
     "melodyStyle": "gentle",
     "lyrics": [
       "Ngày đầu tiên đi học, mẹ dắt tay đến trường",
@@ -1895,6 +2747,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Cô vỗ về an ủi, chao ôi sao thiết tha!",
       "Ngày đầu như thế đó, cô giáo như mẹ hiền",
       "Em bây giờ cứ ngỡ, cô giáo là cô tiên!"
+    ],
+    "lyricsData": [
+      {
+        "start": 30.69,
+        "end": 37.04,
+        "vi": "Ngày đầu tiên đi học, mẹ dắt tay đến trường",
+        "en": "The very first day going to school"
+      },
+      {
+        "start": 37.04,
+        "end": 43.2,
+        "vi": "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương",
+        "en": "Mother held my hand, I cried softly"
+      },
+      {
+        "start": 43.2,
+        "end": 49.63,
+        "vi": "Ngày đầu tiên đi học, em mắt ướt nhạt nhòa",
+        "en": "Teacher caressed my head comforting me"
+      },
+      {
+        "start": 49.63,
+        "end": 56.41,
+        "vi": "Cô vỗ về an ủi, chao ôi sao thiết tha!",
+        "en": "Now grown up, I fondly remember that gentle day!"
+      },
+      {
+        "start": 56.41,
+        "end": 63.49,
+        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền",
+        "en": "The very first day going to school"
+      },
+      {
+        "start": 63.49,
+        "end": 71.5,
+        "vi": "Em bây giờ cứ ngỡ, cô giáo là cô tiên!",
+        "en": "Mother held my hand, I cried softly"
+      }
     ],
     "funFactVi": "Kỷ niệm ngày đầu vào lớp bỡ ngỡ nhưng đầy ắp tình thương.",
     "melodyNotes": [
@@ -1969,6 +2859,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#F59E0B",
     "bgGradient": "from-amber-500 to-yellow-600",
     "tempo": 110,
+    "durationSec": 195,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Nắng vừa lên em đi mẫu giáo",
@@ -2047,6 +2938,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#10B981",
     "bgGradient": "from-emerald-600 to-teal-700",
     "tempo": 112,
+    "durationSec": 277,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Em yêu trường em, với bao bạn thân",
@@ -2145,6 +3037,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Nhớ lắm quên sao được",
       "Trường mầm non thân yêu!"
     ],
+    "lyricsData": [
+      {
+        "start": 35.0,
+        "end": 37.5,
+        "vi": "Tạm biệt búp bê thân yêu",
+        "en": "Goodbye lovely doll, goodbye cute teddy bear"
+      },
+      {
+        "start": 37.8,
+        "end": 40.8,
+        "vi": "Tạm biệt gấu mi-sa nhé",
+        "en": "Goodbye yellow birdie, now I enter grade one"
+      },
+      {
+        "start": 41.0,
+        "end": 44.2,
+        "vi": "Tạm biệt thỏ trắng mắt tròn",
+        "en": "I will remember my dear kindergarten school"
+      },
+      {
+        "start": 44.3,
+        "end": 47.0,
+        "vi": "Mai tôi vào lớp một rồi!",
+        "en": "Carrying sweet memories into grade one!"
+      },
+      {
+        "start": 47.2,
+        "end": 49.5,
+        "vi": "Nhớ lắm quên sao được",
+        "en": "Goodbye lovely doll, goodbye cute teddy bear"
+      },
+      {
+        "start": 49.6,
+        "end": 52.8,
+        "vi": "Trường mầm non thân yêu!",
+        "en": "Goodbye yellow birdie, now I enter grade one"
+      }
+    ],
     "funFactVi": "Lời tạm biệt trường mầm non bước vào lớp một tự tin, chững chạc.",
     "melodyNotes": [
       {
@@ -2242,6 +3172,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#3B82F6",
     "bgGradient": "from-sky-500 to-blue-600",
     "tempo": 124,
+    "durationSec": 139,
     "melodyStyle": "playful",
     "lyrics": [
       "Một hai ba, hít thở thật sâu",
@@ -2249,6 +3180,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Nghiêng sang trái, nghiêng sang phải",
       "Bé tập thể dục cho người khỏe dai!",
       "Chạy nhảy tung tăng đón ánh bình minh!"
+    ],
+    "lyricsData": [
+      {
+        "start": 16.5,
+        "end": 21.0,
+        "vi": "Một hai ba, hít thở thật sâu",
+        "en": "One two three, breathe in fresh morning air"
+      },
+      {
+        "start": 21.5,
+        "end": 23.8,
+        "vi": "Hai tay giơ lên cao qua đầu",
+        "en": "Hands up high, stretch wide to both sides"
+      },
+      {
+        "start": 23.8,
+        "end": 26.2,
+        "vi": "Nghiêng sang trái, nghiêng sang phải",
+        "en": "Hands on waist, jump merrily in place"
+      },
+      {
+        "start": 26.2,
+        "end": 30.0,
+        "vi": "Bé tập thể dục cho người khỏe dai!",
+        "en": "Healthy exercise makes body strong and alert!"
+      },
+      {
+        "start": 30.0,
+        "end": 34.5,
+        "vi": "Chạy nhảy tung tăng đón ánh bình minh!",
+        "en": "One two three, breathe in fresh morning air"
+      }
     ],
     "funFactVi": "Thể dục buổi sáng rèn luyện thể chất dẻo dai cho bé khỏe mạnh.",
     "audioUrl": "/assets/music/tap-the-duc-buoi-sang.mp3",
@@ -2323,6 +3286,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EAB308",
     "bgGradient": "from-amber-400 to-yellow-600",
     "tempo": 120,
+    "durationSec": 214,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Chiếc đèn ông sao sao năm cánh tươi màu",
@@ -2331,6 +3295,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Đèn sao tươi màu của đềm rằm liên hoan!",
       "Tùng rinh rinh, tùng tùng tùng rinh rinh!",
       "Đây ánh sao vui chiếu xa non ngàn!"
+    ],
+    "lyricsData": [
+      {
+        "start": 27.65,
+        "end": 31.95,
+        "vi": "Chiếc đèn ông sao sao năm cánh tươi màu",
+        "en": "Star lantern with five colorful glowing points"
+      },
+      {
+        "start": 32.15,
+        "end": 35.55,
+        "vi": "Cán đây rất dài, cán cao quá đầu",
+        "en": "Holding lantern high on Mid-Autumn night"
+      },
+      {
+        "start": 35.55,
+        "end": 38.85,
+        "vi": "Em cầm đèn sao em hát vang vang",
+        "en": "Tung rinh rinh, drums beat under full moon"
+      },
+      {
+        "start": 38.85,
+        "end": 42.05,
+        "vi": "Đèn sao tươi màu của đềm rằm liên hoan!",
+        "en": "Children singing and dancing under bright moonlight!"
+      },
+      {
+        "start": 42.05,
+        "end": 47.45,
+        "vi": "Tùng rinh rinh, tùng tùng tùng rinh rinh!",
+        "en": "Star lantern with five colorful glowing points"
+      },
+      {
+        "start": 47.45,
+        "end": 50.85,
+        "vi": "Đây ánh sao vui chiếu xa non ngàn!",
+        "en": "Holding lantern high on Mid-Autumn night"
+      }
     ],
     "funFactVi": "Đêm rằm Trung thu lung linh ánh sao cùng bạn bè rước đèn.",
     "melodyNotes": [
@@ -2405,6 +3407,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#0284C7",
     "bgGradient": "from-sky-600 to-indigo-700",
     "tempo": 114,
+    "durationSec": 421,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Trái đất này là của chúng mình",
@@ -2413,6 +3416,32 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Hải âu ơi cánh chim vờn sóng biển",
       "Cùng bay nào cho trái đất quay!",
       "Cùng bay nào cho trái đất quay!"
+    ],
+    "lyricsData": [
+      {
+        "start": 18.05,
+        "end": 26.65,
+        "vi": "Trái đất này là của chúng mình Quả bóng xanh bay giữa trời xanh",
+        "en": "This earth belongs to all of us children"
+      },
+      {
+        "start": 26.65,
+        "end": 37.05,
+        "vi": "Bồ câu ơi tiếng chim gù thương mến Hải âu ơi cánh chim vờn sóng biển",
+        "en": "Golden fruit of peace, shining sun of hope"
+      },
+      {
+        "start": 38.65,
+        "end": 44.05,
+        "vi": "Cùng bay nào cho trái đất quay!",
+        "en": "White doves flying across the blue sky"
+      },
+      {
+        "start": 44.25,
+        "end": 47.95,
+        "vi": "Cùng bay nào cho trái đất quay!",
+        "en": "Singing for a peaceful and loving world!"
+      }
     ],
     "funFactVi": "Khát vọng hòa bình, tình hữu nghị giữa trẻ em trên toàn thế giới.",
     "melodyNotes": [
@@ -2491,6 +3520,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#8B5CF6",
     "bgGradient": "from-purple-600 to-pink-600",
     "tempo": 118,
+    "durationSec": 188,
     "melodyStyle": "playful",
     "lyrics": [
       "Trên cành cao chim hót líu lo",
@@ -2498,6 +3528,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Hổng dám đâu, em còn phải học bài!",
       "Học bài xong rồi em mới đi chơi",
       "Cô giáo khen em bé ngoan chăm chỉ!"
+    ],
+    "lyricsData": [
+      {
+        "start": 14.28,
+        "end": 17.15,
+        "vi": "Trên cành cao chim hót líu lo",
+        "en": "Friends call me out to play and skip study"
+      },
+      {
+        "start": 17.58,
+        "end": 21.05,
+        "vi": "Mời em ra ngoài kia cùng chơi đá bóng",
+        "en": "I say no way, learning comes first today"
+      },
+      {
+        "start": 21.32,
+        "end": 28.32,
+        "vi": "Hổng dám đâu, em còn phải học bài!",
+        "en": "Doing all my homework before going out to play"
+      },
+      {
+        "start": 28.52,
+        "end": 32.12,
+        "vi": "Học bài xong rồi em mới đi chơi",
+        "en": "Diligent child earns high marks and praise!"
+      },
+      {
+        "start": 32.42,
+        "end": 43.52,
+        "vi": "Cô giáo khen em bé ngoan chăm chỉ!",
+        "en": "Friends call me out to play and skip study"
+      }
     ],
     "funFactVi": "Bé chăm chỉ học bài đầy đủ trước khi cùng bạn ra chơi.",
     "audioUrl": "/assets/music/hong-dam-dau.mp3",
@@ -2572,6 +3634,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EF4444",
     "bgGradient": "from-rose-500 to-red-600",
     "tempo": 104,
+    "durationSec": 64,
     "melodyStyle": "cheerful",
     "lyrics": [
       "A B C D E F G",
@@ -2580,6 +3643,80 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "W X, Y and Z",
       "Now I know my ABCs",
       "Next time won't you sing with me!"
+    ],
+    "lyricsData": [
+      {
+        "start": 1.76,
+        "end": 5.48,
+        "vi": "A B C D E F G",
+        "en": "A B C D E F G"
+      },
+      {
+        "start": 5.92,
+        "end": 9.58,
+        "vi": "H I J K L M N O P",
+        "en": "H I J K L M N O P"
+      },
+      {
+        "start": 9.94,
+        "end": 13.9,
+        "vi": "Q R S, T U V",
+        "en": "Q R S, T U V"
+      },
+      {
+        "start": 14.04,
+        "end": 17.84,
+        "vi": "W X, Y and Z",
+        "en": "W X, Y and Z"
+      },
+      {
+        "start": 18.24,
+        "end": 22.3,
+        "vi": "Now I know my ABCs",
+        "en": "Bây giờ bé đã thuộc bài ca bảng chữ cái"
+      },
+      {
+        "start": 22.56,
+        "end": 26.68,
+        "vi": "Next time won't you sing with me!",
+        "en": "Lần tới bạn có muốn cùng hát với bé không?"
+      },
+      {
+        "start": 35.12,
+        "end": 39.02,
+        "vi": "A B C D E F G",
+        "en": "A B C D E F G"
+      },
+      {
+        "start": 39.46,
+        "end": 43.12,
+        "vi": "H I J K L M N O P",
+        "en": "H I J K L M N O P"
+      },
+      {
+        "start": 43.48,
+        "end": 47.44,
+        "vi": "Q R S, T U V",
+        "en": "Q R S, T U V"
+      },
+      {
+        "start": 47.58,
+        "end": 51.38,
+        "vi": "W X, Y and Z",
+        "en": "W X, Y and Z"
+      },
+      {
+        "start": 51.78,
+        "end": 55.84,
+        "vi": "Now I know my ABCs",
+        "en": "Bây giờ bé đã thuộc bài ca bảng chữ cái"
+      },
+      {
+        "start": 56.1,
+        "end": 60.16,
+        "vi": "Next time won't you sing with me!",
+        "en": "Lần tới bạn có muốn cùng hát với bé không?"
+      }
     ],
     "englishTranslation": [
       "A B C D E F G",
@@ -2726,6 +3863,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#F59E0B",
     "bgGradient": "from-amber-400 to-yellow-600",
     "tempo": 86,
+    "durationSec": 146,
     "melodyStyle": "gentle",
     "lyrics": [
       "Twinkle, twinkle, little star,",
@@ -2734,6 +3872,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Like a diamond in the sky.",
       "Twinkle, twinkle, little star,",
       "How I wonder what you are!"
+    ],
+    "lyricsData": [
+      {
+        "start": 44.91,
+        "end": 50.11,
+        "vi": "Twinkle, twinkle, little star,",
+        "en": "Ngôi sao nhỏ lấp lánh trên bầu trời đêm"
+      },
+      {
+        "start": 50.11,
+        "end": 56.11,
+        "vi": "How I wonder what you are!",
+        "en": "Bé tự hỏi bạn là điều kỳ diệu phương nào"
+      },
+      {
+        "start": 56.11,
+        "end": 60.91,
+        "vi": "Up above the world so high,",
+        "en": "Tít trên cao vút trên thế gian này"
+      },
+      {
+        "start": 60.91,
+        "end": 66.51,
+        "vi": "Like a diamond in the sky.",
+        "en": "Giống như viên kim cương sáng rực trên bầu trời!"
+      },
+      {
+        "start": 142.12,
+        "end": 146.92,
+        "vi": "Twinkle, twinkle, little star,",
+        "en": "Ngôi sao nhỏ lấp lánh trên bầu trời đêm"
+      },
+      {
+        "start": 146.92,
+        "end": 152.92,
+        "vi": "How I wonder what you are!",
+        "en": "Bé tự hỏi bạn là điều kỳ diệu phương nào"
+      }
     ],
     "funFactVi": "Ngôi sao nhỏ soi sáng màn đêm khơi gợi trí tò mò của bé.",
     "audioUrl": "/assets/music/twinkle-twinkle-little-star.mp3",
@@ -2816,6 +3992,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#10B981",
     "bgGradient": "from-emerald-500 to-green-600",
     "tempo": 114,
+    "durationSec": 207,
     "melodyStyle": "playful",
     "lyrics": [
       "Old MacDonald had a farm, E-I-E-I-O!",
@@ -2823,6 +4000,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "With a moo moo here, and a moo moo there,",
       "Here a moo, there a moo, everywhere a moo moo!",
       "Old MacDonald had a farm, E-I-E-I-O!"
+    ],
+    "lyricsData": [
+      {
+        "start": 34.2,
+        "end": 39.5,
+        "vi": "Old MacDonald had a farm, E-I-E-I-O!",
+        "en": "Bác MacDonald có một trang trại vui vẻ, E-I-E-I-O"
+      },
+      {
+        "start": 40.0,
+        "end": 44.8,
+        "vi": "And on that farm he had a cow, E-I-E-I-O!",
+        "en": "Và trên nông trại bác nuôi những chú bò sữa, E-I-E-I-O"
+      },
+      {
+        "start": 45.0,
+        "end": 48.0,
+        "vi": "With a moo moo here, and a moo moo there,",
+        "en": "Với tiếng kêu: Ùm bò nơi đây, ùm bò nơi đó"
+      },
+      {
+        "start": 48.0,
+        "end": 50.8,
+        "vi": "Here a moo, there a moo, everywhere a moo moo!",
+        "en": "Nông trại của bác MacDonald thật rộn ràng!"
+      },
+      {
+        "start": 50.8,
+        "end": 55.4,
+        "vi": "Old MacDonald had a farm, E-I-E-I-O!",
+        "en": "Bác MacDonald có một trang trại vui vẻ, E-I-E-I-O"
+      }
     ],
     "funFactVi": "Làm quen tên gọi và tiếng kêu các loài động vật nông trại.",
     "audioUrl": "/assets/music/old-macdonald-had-a-farm.mp3",
@@ -2897,6 +4106,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#3B82F6",
     "bgGradient": "from-blue-500 to-indigo-600",
     "tempo": 120,
+    "durationSec": 233,
     "melodyStyle": "cheerful",
     "lyrics": [
       "The wheels on the bus go round and round,",
@@ -2905,6 +4115,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "All through the town!",
       "The horn on the bus goes beep beep beep,",
       "The wipers on the bus go swish swish swish!"
+    ],
+    "lyricsData": [
+      {
+        "start": 18.94,
+        "end": 23.32,
+        "vi": "The wheels on the bus go round and round,",
+        "en": "Những bánh xe buýt cứ xoay tròn xoay tròn"
+      },
+      {
+        "start": 23.32,
+        "end": 27.27,
+        "vi": "Round and round, round and round.",
+        "en": "Xoay tròn suốt cả ngày trên khắp nẻo đường"
+      },
+      {
+        "start": 27.27,
+        "end": 31.81,
+        "vi": "The wheels on the bus go round and round,",
+        "en": "Cần gạt nước kêu vun vút, vun vút, vun vút"
+      },
+      {
+        "start": 31.81,
+        "end": 33.34,
+        "vi": "All through the town!",
+        "en": "Tiếng còi xe kêu: Bim bim bim cho bé tới trường!"
+      },
+      {
+        "start": 101.9,
+        "end": 112.51,
+        "vi": "The horn on the bus goes beep beep beep,",
+        "en": "Những bánh xe buýt cứ xoay tròn xoay tròn"
+      },
+      {
+        "start": 116.59,
+        "end": 126.54,
+        "vi": "The wipers on the bus go swish swish swish!",
+        "en": "Xoay tròn suốt cả ngày trên khắp nẻo đường"
+      }
     ],
     "funFactVi": "Nhịp điệu sôi động mô phỏng chuyến xe buýt vui vẻ đến trường.",
     "audioUrl": "/assets/music/the-wheels-on-the-bus.mp3",
@@ -2979,12 +4227,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#64748B",
     "bgGradient": "from-slate-600 to-slate-800",
     "tempo": 100,
+    "durationSec": 105,
     "melodyStyle": "gentle",
     "lyrics": [
       "Baa, baa, black sheep, have you any wool?",
       "Yes, sir, yes, sir, three bags full!",
       "One for the master, and one for the dame,",
       "And one for the little boy who lives down the lane."
+    ],
+    "lyricsData": [
+      {
+        "start": 21.82,
+        "end": 26.6,
+        "vi": "Baa, baa, black sheep, have you any wool?",
+        "en": "Cừu đen ơi cừu có cuộn len nào không?"
+      },
+      {
+        "start": 26.6,
+        "end": 31.42,
+        "vi": "Yes, sir, yes, sir, three bags full!",
+        "en": "Dạ có chứ, cháu có tận ba túi len đầy"
+      },
+      {
+        "start": 31.42,
+        "end": 36.33,
+        "vi": "One for the master, and one for the dame,",
+        "en": "Một túi cho ông chủ, một túi cho bà chủ"
+      },
+      {
+        "start": 36.33,
+        "end": 41.34,
+        "vi": "And one for the little boy who lives down the lane.",
+        "en": "Và một túi cho em bé ngoan sống ở cuối đường!"
+      }
     ],
     "funFactVi": "Bài học chia sẻ len ấm áp cho mọi người xung quanh.",
     "audioUrl": "/assets/music/baa-baa-black-sheep.mp3",
@@ -3047,6 +4322,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EC4899",
     "bgGradient": "from-pink-500 to-rose-600",
     "tempo": 116,
+    "durationSec": 94,
     "melodyStyle": "playful",
     "lyrics": [
       "If you're happy and you know it, clap your hands! (Clap, clap!)",
@@ -3055,6 +4331,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "If you're happy and you know it, clap your hands! (Clap, clap!)",
       "If you're happy and you know it, stomp your feet! (Stomp, stomp!)",
       "If you're happy and you know it, shout hurray! (Hurray!)"
+    ],
+    "lyricsData": [
+      {
+        "start": 1.85,
+        "end": 8.02,
+        "vi": "If you're happy and you know it, clap your hands!",
+        "en": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
+      },
+      {
+        "start": 8.02,
+        "end": 14.74,
+        "vi": "If you're happy and you know it, clap your hands!",
+        "en": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
+      },
+      {
+        "start": 14.74,
+        "end": 28.1,
+        "vi": "If you're happy and you know it, and you really want to show it,",
+        "en": "Nếu bạn vui vẻ và muốn lan tỏa điều đó"
+      },
+      {
+        "start": 28.1,
+        "end": 30.16,
+        "vi": "If you're happy and you know it, clap your hands!",
+        "en": "Hãy cùng vỗ tay thật to nào bạn ơi!"
+      },
+      {
+        "start": 30.16,
+        "end": 44.09,
+        "vi": "If you're happy and you know it, stomp your feet!",
+        "en": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
+      },
+      {
+        "start": 44.09,
+        "end": 60.11,
+        "vi": "If you're happy and you know it, shout hurray!",
+        "en": "Nếu bạn thấy vui vẻ và hạnh phúc, hãy vỗ tay nhé!"
+      }
     ],
     "funFactVi": "Khích lệ bé bộc lộ cảm xúc vui tươi bằng cử chỉ tay chân.",
     "audioUrl": "/assets/music/if-youre-happy-and-you-know-it.mp3",
@@ -3117,12 +4431,63 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#0284C7",
     "bgGradient": "from-sky-500 to-blue-600",
     "tempo": 96,
+    "durationSec": 33,
     "melodyStyle": "gentle",
     "lyrics": [
       "Row, row, row your boat",
       "Gently down the stream,",
       "Merrily, merrily, merrily, merrily,",
       "Life is but a dream!"
+    ],
+    "lyricsData": [
+      {
+        "start": 5.4,
+        "end": 7.9,
+        "vi": "Row, row, row your boat",
+        "en": "Chèo chèo chèo con thuyền nhỏ xuôi dòng êm ả"
+      },
+      {
+        "start": 8.1,
+        "end": 9.9,
+        "vi": "Gently down the stream,",
+        "en": "Thật nhẹ nhàng, thật dịu dàng, cuộc đời tựa giấc mơ"
+      },
+      {
+        "start": 10.0,
+        "end": 12.0,
+        "vi": "Merrily, merrily, merrily, merrily,",
+        "en": "Chèo chèo chèo con thuyền nhỏ ngắm nhìn dòng suối"
+      },
+      {
+        "start": 12.1,
+        "end": 13.9,
+        "vi": "Life is but a dream!",
+        "en": "Nếu gặp chú cá sấu, đừng quên mỉm cười chào bạn nhé!"
+      },
+      {
+        "start": 17.3,
+        "end": 19.8,
+        "vi": "Row, row, row your boat",
+        "en": "Chèo chèo chèo con thuyền nhỏ xuôi dòng êm ả"
+      },
+      {
+        "start": 19.9,
+        "end": 21.8,
+        "vi": "Gently down the stream,",
+        "en": "Thật nhẹ nhàng, thật dịu dàng, cuộc đời tựa giấc mơ"
+      },
+      {
+        "start": 21.9,
+        "end": 23.9,
+        "vi": "Merrily, merrily, merrily, merrily,",
+        "en": "Chèo chèo chèo con thuyền nhỏ ngắm nhìn dòng suối"
+      },
+      {
+        "start": 24.0,
+        "end": 26.0,
+        "vi": "Life is but a dream!",
+        "en": "Nếu gặp chú cá sấu, đừng quên mỉm cười chào bạn nhé!"
+      }
     ],
     "funFactVi": "Giai điệu êm đềm dạy bé vượt qua dòng nước nhẹ nhàng.",
     "audioUrl": "/assets/music/row-row-row-your-boat.mp3",
@@ -3215,12 +4580,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#8B5CF6",
     "bgGradient": "from-purple-500 to-indigo-600",
     "tempo": 112,
+    "durationSec": 135,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Head, shoulders, knees and toes, knees and toes!",
       "Head, shoulders, knees and toes, knees and toes!",
       "And eyes, and ears, and mouth, and nose,",
       "Head, shoulders, knees and toes, knees and toes!"
+    ],
+    "lyricsData": [
+      {
+        "start": 0.0,
+        "end": 5.0,
+        "vi": "Head, shoulders, knees and toes, knees and toes!",
+        "en": "Đầu, vai, đầu gối và ngón chân"
+      },
+      {
+        "start": 6.0,
+        "end": 12.0,
+        "vi": "Head, shoulders, knees and toes, knees and toes!",
+        "en": "Đầu gối và ngón chân!"
+      },
+      {
+        "start": 12.0,
+        "end": 18.5,
+        "vi": "And eyes, and ears, and mouth, and nose,",
+        "en": "Mắt, tai, miệng và mũi nhỏ xinh"
+      },
+      {
+        "start": 19.0,
+        "end": 23.9,
+        "vi": "Head, shoulders, knees and toes, knees and toes!",
+        "en": "Đầu, vai, đầu gối và ngón chân xinh xắn!"
+      }
     ],
     "funFactVi": "Vừa hát vừa chạm đúng bộ phận cơ thể để tăng phản xạ.",
     "audioUrl": "/assets/music/head-shoulders-knees-and-toes.mp3",
@@ -3287,6 +4679,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#D97706",
     "bgGradient": "from-amber-600 to-orange-700",
     "tempo": 118,
+    "durationSec": 116,
     "melodyStyle": "playful",
     "lyrics": [
       "Five little monkeys jumping on the bed,",
@@ -3294,6 +4687,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mama called the doctor and the doctor said:",
       "\"No more monkeys jumping on the bed!\"",
       "Four little monkeys jumping on the bed..."
+    ],
+    "lyricsData": [
+      {
+        "start": 4.15,
+        "end": 7.02,
+        "vi": "Five little monkeys jumping on the bed,",
+        "en": "Năm chú khỉ con nhảy nhót tung tăng trên giường"
+      },
+      {
+        "start": 7.37,
+        "end": 10.51,
+        "vi": "One fell off and bumped his head!",
+        "en": "Một chú bị trượt chân ngã u đầu xuống sàn"
+      },
+      {
+        "start": 14.77,
+        "end": 17.7,
+        "vi": "Mama called the doctor and the doctor said:",
+        "en": "Mẹ liền gọi bác sĩ, bác sĩ dặn ngay:"
+      },
+      {
+        "start": 18.59,
+        "end": 22.06,
+        "vi": "\"No more monkeys jumping on the bed!\"",
+        "en": "Không được nhảy nhót trên giường nữa nhé khỉ con!"
+      },
+      {
+        "start": 26.23,
+        "end": 29.33,
+        "vi": "Four little monkeys jumping on the bed...",
+        "en": "Năm chú khỉ con nhảy nhót tung tăng trên giường"
+      }
     ],
     "funFactVi": "Dạy bé đếm lùi số lượng và nhắc nhở an toàn khi chơi.",
     "audioUrl": "/assets/music/five-little-monkeys.mp3",
@@ -3352,6 +4777,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#0284C7",
     "bgGradient": "from-sky-400 to-blue-600",
     "tempo": 115,
+    "durationSec": 138,
     "melodyStyle": "playful",
     "lyrics": [
       "Baby shark, doo doo doo doo doo doo!",
@@ -3369,6 +4795,98 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Run away, doo doo doo doo doo doo, Run away!",
       "Safe at last, doo doo doo doo doo doo, Safe at last!",
       "It's the end, doo doo doo doo doo doo!"
+    ],
+    "lyricsData": [
+      {
+        "start": 28.16,
+        "end": 29.62,
+        "vi": "Baby shark, doo doo doo doo doo doo!",
+        "en": "Cá mập con, đu đu đu đu đu"
+      },
+      {
+        "start": 29.62,
+        "end": 32.32,
+        "vi": "Baby shark, doo doo doo doo doo doo!",
+        "en": "Cá mập mẹ, đu đu đu đu đu"
+      },
+      {
+        "start": 32.32,
+        "end": 35.86,
+        "vi": "Baby shark, doo doo doo doo doo doo, Baby shark!",
+        "en": "Cá mập bố, đu đu đu đu đu"
+      },
+      {
+        "start": 36.19,
+        "end": 38.74,
+        "vi": "Mommy shark, doo doo doo doo doo doo!",
+        "en": "Cùng bơi lội dưới đại dương xanh bao la!"
+      },
+      {
+        "start": 38.74,
+        "end": 41.38,
+        "vi": "Mommy shark, doo doo doo doo doo doo!",
+        "en": "Cá mập con, đu đu đu đu đu"
+      },
+      {
+        "start": 41.38,
+        "end": 44.52,
+        "vi": "Mommy shark, doo doo doo doo doo doo, Mommy shark!",
+        "en": "Cá mập mẹ, đu đu đu đu đu"
+      },
+      {
+        "start": 44.52,
+        "end": 47.16,
+        "vi": "Daddy shark, doo doo doo doo doo doo!",
+        "en": "Cá mập bố, đu đu đu đu đu"
+      },
+      {
+        "start": 47.16,
+        "end": 49.7,
+        "vi": "Daddy shark, doo doo doo doo doo doo!",
+        "en": "Cùng bơi lội dưới đại dương xanh bao la!"
+      },
+      {
+        "start": 49.7,
+        "end": 52.89,
+        "vi": "Daddy shark, doo doo doo doo doo doo, Daddy shark!",
+        "en": "Cá mập con, đu đu đu đu đu"
+      },
+      {
+        "start": 52.89,
+        "end": 60.12,
+        "vi": "Grandma shark, doo doo doo doo doo doo!",
+        "en": "Cá mập mẹ, đu đu đu đu đu"
+      },
+      {
+        "start": 60.12,
+        "end": 109.91,
+        "vi": "Grandpa shark, doo doo doo doo doo doo!",
+        "en": "Cá mập bố, đu đu đu đu đu"
+      },
+      {
+        "start": 109.91,
+        "end": 117.65,
+        "vi": "Let's go hunt, doo doo doo doo doo doo!",
+        "en": "Cùng bơi lội dưới đại dương xanh bao la!"
+      },
+      {
+        "start": 117.65,
+        "end": 126.35,
+        "vi": "Run away, doo doo doo doo doo doo, Run away!",
+        "en": "Cá mập con, đu đu đu đu đu"
+      },
+      {
+        "start": 126.35,
+        "end": 135.53,
+        "vi": "Safe at last, doo doo doo doo doo doo, Safe at last!",
+        "en": "Cá mập mẹ, đu đu đu đu đu"
+      },
+      {
+        "start": 135.53,
+        "end": 144.13,
+        "vi": "It's the end, doo doo doo doo doo doo!",
+        "en": "Cá mập bố, đu đu đu đu đu"
+      }
     ],
     "funFactVi": "Vũ điệu cá mập sôi động cả nhà cùng nhún nhảy theo nhịp.",
     "audioUrl": "/assets/music/baby-shark.mp3",
@@ -3443,12 +4961,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EA580C",
     "bgGradient": "from-orange-500 to-amber-600",
     "tempo": 112,
+    "durationSec": 122,
     "melodyStyle": "cheerful",
     "lyrics": [
       "There was a farmer had a dog,",
       "And Bingo was his name-o.",
       "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O,",
       "And Bingo was his name-o!"
+    ],
+    "lyricsData": [
+      {
+        "start": 8.02,
+        "end": 9.94,
+        "vi": "There was a farmer had a dog,",
+        "en": "Có một bác nông dân nuôi một chú cún đáng yêu"
+      },
+      {
+        "start": 9.94,
+        "end": 12.14,
+        "vi": "And Bingo was his name-o.",
+        "en": "Và Bingo là tên của chú cún ấy"
+      },
+      {
+        "start": 12.14,
+        "end": 18.78,
+        "vi": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O,",
+        "en": "B-I-N-G-O! B-I-N-G-O! B-I-N-G-O!"
+      },
+      {
+        "start": 18.78,
+        "end": 20.36,
+        "vi": "And Bingo was his name-o!",
+        "en": "Và Bingo là tên của chú cún con!"
+      }
     ],
     "funFactVi": "Học đánh vần từng chữ cái vui nhộn cùng chú cún Bingo.",
     "audioUrl": "/assets/music/bingo-dog-song.mp3",
@@ -3527,6 +5072,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#059669",
     "bgGradient": "from-emerald-600 to-teal-700",
     "tempo": 106,
+    "durationSec": 165,
     "melodyStyle": "cheerful",
     "lyrics": [
       "Mary had a little lamb,",
@@ -3535,6 +5081,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Its fleece was white as snow.",
       "And everywhere that Mary went,",
       "The lamb was sure to go!"
+    ],
+    "lyricsData": [
+      {
+        "start": 27.27,
+        "end": 30.67,
+        "vi": "Mary had a little lamb,",
+        "en": "Mary có một chú cừu nhỏ lông trắng như tuyết"
+      },
+      {
+        "start": 30.67,
+        "end": 34.37,
+        "vi": "Little lamb, little lamb,",
+        "en": "Lông của chú cừu trắng muốt như những đám mây"
+      },
+      {
+        "start": 34.37,
+        "end": 38.07,
+        "vi": "Mary had a little lamb,",
+        "en": "Và bất cứ nơi đâu cô bé Mary đi tới"
+      },
+      {
+        "start": 38.07,
+        "end": 41.27,
+        "vi": "Its fleece was white as snow.",
+        "en": "Chú cừu nhỏ cũng lon ton bước theo sau!"
+      },
+      {
+        "start": 43.97,
+        "end": 53.07,
+        "vi": "And everywhere that Mary went,",
+        "en": "Mary có một chú cừu nhỏ lông trắng như tuyết"
+      },
+      {
+        "start": 53.07,
+        "end": 57.07,
+        "vi": "The lamb was sure to go!",
+        "en": "Lông của chú cừu trắng muốt như những đám mây"
+      }
     ],
     "funFactVi": "Tình bạn gắn bó thân thiết giữa cô bé Mary và chú cừu.",
     "audioUrl": "/assets/music/mary-had-a-little-lamb.mp3",
@@ -3613,6 +5197,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#0EA5E9",
     "bgGradient": "from-sky-500 to-blue-600",
     "tempo": 104,
+    "durationSec": 46,
     "melodyStyle": "playful",
     "lyrics": [
       "Rain, rain, go away,",
@@ -3623,6 +5208,44 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mommy wants to play, rain, rain, go away!",
       "Brother wants to play, sister wants to play,",
       "All the family wants to play, rain, rain, go away!"
+    ],
+    "lyricsData": [
+      {
+        "start": 4.88,
+        "end": 6.88,
+        "vi": "Rain, rain, go away,",
+        "en": "Mưa ơi mưa ơi hãy bay đi nơi khác nhé"
+      },
+      {
+        "start": 6.88,
+        "end": 9.68,
+        "vi": "Come again another day!",
+        "en": "Hãy quay lại vào một ngày khác nha mưa"
+      },
+      {
+        "start": 9.68,
+        "end": 12.28,
+        "vi": "Little Johnny wants to play,",
+        "en": "Em bé nhỏ muốn chạy ra ngoài sân vui chơi"
+      },
+      {
+        "start": 12.28,
+        "end": 14.48,
+        "vi": "Rain, rain, go away!",
+        "en": "Mưa ơi hãy tạnh đi để trời trong xanh nào!"
+      },
+      {
+        "start": 16.88,
+        "end": 26.38,
+        "vi": "Daddy wants to play, rain, rain, go away!",
+        "en": "Mưa ơi mưa ơi hãy bay đi nơi khác nhé"
+      },
+      {
+        "start": 31.38,
+        "end": 40.28,
+        "vi": "Mommy wants to play, rain, rain, go away!",
+        "en": "Hãy quay lại vào một ngày khác nha mưa"
+      }
     ],
     "funFactVi": "Lời ước ngày nắng ấm để bé được ra sân chơi đùa.",
     "audioUrl": "/assets/music/rain-rain-go-away.mp3",
@@ -3735,6 +5358,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#7C3AED",
     "bgGradient": "from-violet-600 to-purple-700",
     "tempo": 110,
+    "durationSec": 76,
     "melodyStyle": "playful",
     "lyrics": [
       "Hickory dickory dock,",
@@ -3866,12 +5490,39 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#F59E0B",
     "bgGradient": "from-amber-400 to-orange-500",
     "tempo": 92,
+    "durationSec": 163,
     "melodyStyle": "gentle",
     "lyrics": [
       "You are my sunshine, my only sunshine,",
       "You make me happy when skies are gray.",
       "You'll never know, dear, how much I love you,",
       "Please don't take my sunshine away!"
+    ],
+    "lyricsData": [
+      {
+        "start": 22.54,
+        "end": 28.14,
+        "vi": "You are my sunshine, my only sunshine,",
+        "en": "Bé là ánh mặt trời rực rỡ duy nhất của mẹ"
+      },
+      {
+        "start": 28.14,
+        "end": 33.74,
+        "vi": "You make me happy when skies are gray.",
+        "en": "Bé làm cho mẹ hạnh phúc cả khi trời u ám"
+      },
+      {
+        "start": 33.74,
+        "end": 39.54,
+        "vi": "You'll never know, dear, how much I love you,",
+        "en": "Bé yêu sẽ không bao giờ biết mẹ yêu bé chừng nào đâu"
+      },
+      {
+        "start": 39.54,
+        "end": 44.54,
+        "vi": "Please don't take my sunshine away!",
+        "en": "Xin đừng mang ánh mặt trời ấm áp của mẹ đi nhé!"
+      }
     ],
     "funFactVi": "Bày tỏ tình thương yêu vô bờ bến cha mẹ dành cho con.",
     "audioUrl": "/assets/music/you-are-my-sunshine.mp3",
@@ -3954,6 +5605,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#EC4899",
     "bgGradient": "from-pink-500 to-rose-600",
     "tempo": 104,
+    "durationSec": 0,
     "melodyStyle": "playful",
     "lyrics": [
       "Three little kittens, they lost their mittens,",
@@ -4065,6 +5717,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#8B5CF6",
     "bgGradient": "from-purple-500 to-indigo-600",
     "tempo": 120,
+    "durationSec": 16,
     "melodyStyle": "cheerful",
     "lyrics": [
       "All around the mulberry bush,",
@@ -4155,6 +5808,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "colorHex": "#D97706",
     "bgGradient": "from-amber-500 to-orange-600",
     "tempo": 96,
+    "durationSec": 193,
     "melodyStyle": "gentle",
     "lyrics": [
       "Hot cross buns! Hot cross buns!",
@@ -4162,6 +5816,38 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Hot cross buns!",
       "If you have no daughters, give them to your sons,",
       "One a penny, two a penny, hot cross buns!"
+    ],
+    "lyricsData": [
+      {
+        "start": 9.77,
+        "end": 13.79,
+        "vi": "Hot cross buns! Hot cross buns!",
+        "en": "Bánh nướng chữ thập thơm lừng, bánh nướng thơm lừng!"
+      },
+      {
+        "start": 13.91,
+        "end": 18.06,
+        "vi": "One a penny, two a penny,",
+        "en": "Một đồng một chiếc, hai đồng một chiếc"
+      },
+      {
+        "start": 18.23,
+        "end": 22.3,
+        "vi": "Hot cross buns!",
+        "en": "Nếu bạn không có con gái thì hãy mua cho con trai"
+      },
+      {
+        "start": 22.42,
+        "end": 44.22,
+        "vi": "If you have no daughters, give them to your sons,",
+        "en": "Bánh nướng chữ thập thơm ngon nóng hổi vừa ra lò!"
+      },
+      {
+        "start": 44.34,
+        "end": 51.56,
+        "vi": "One a penny, two a penny, hot cross buns!",
+        "en": "Bánh nướng chữ thập thơm lừng, bánh nướng thơm lừng!"
+      }
     ],
     "funFactVi": "Giai điệu đồng dao về món bánh nướng thơm lừng truyền thống.",
     "audioUrl": "/assets/music/hot-cross-buns.mp3",

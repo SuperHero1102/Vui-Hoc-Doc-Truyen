@@ -27,18 +27,12 @@ import {
   AlertCircle,
   RefreshCw,
   ListMusic,
-  Check,
-  Copy,
-  FileText,
-  BookmarkCheck,
 } from 'lucide-react';
 import {
   KIDS_SONGS_DATA,
   type KidsSong,
-  type TimedLyricLine,
   type LyricLine,
   normalizeSongLyricLines,
-  parseLRC,
 } from '../data/kidsMusicData';
 import type { ParentSettings } from '../types/learning';
 import { stopAllAudio } from '../utils/audioEngine';
@@ -60,6 +54,7 @@ interface KidsMusicPlayerProps {
 
 const FAVORITES_STORAGE_KEY = 'bevuihoc_favorited_songs_v4';
 const RECENT_SONG_KEY = 'bevuihoc_recent_song_id_v4';
+const LYRICS_VIEW_MODE_KEY = 'kids_lyrics_view_mode_v2';
 
 // Acoustic music box note frequencies for instrumental fallback songs (e.g. Đi học, Em yêu trường em)
 const NOTE_FREQS: Record<string, number> = {
@@ -119,22 +114,17 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const [durationSec, setDurationSec] = useState<number>(30);
   const [tappedBeatsCount, setTappedBeatsCount] = useState<number>(0);
   const [isStageCollapsed, setIsStageCollapsed] = useState<boolean>(false);
-  const [showFullLyricsOnly, setShowFullLyricsOnly] = useState<boolean>(false);
+  const [lyricsViewMode, setLyricsViewMode] = useState<'compact' | 'full'>(() => {
+    try {
+      const saved = localStorage.getItem(LYRICS_VIEW_MODE_KEY);
+      if (saved === 'compact' || saved === 'full') return saved;
+    } catch {}
+    return 'compact';
+  });
   const [isMiniPlayerDismissed, setIsMiniPlayerDismissed] = useState<boolean>(false);
   const [isStageScrolledOut, setIsStageScrolledOut] = useState<boolean>(false);
   const [mobileTab, setMobileTab] = useState<'player' | 'list'>('player');
-
-  // Quản lý dữ liệu lời đã chỉnh sửa / đánh dấu / nhập từ LRC cho từng bài hát
-  const [customSongLyricsMap, setCustomSongLyricsMap] = useState<Record<string, LyricLine[]>>({});
   const [lineProgressPct, setLineProgressPct] = useState<number>(0);
-
-  // Trạng thái công cụ "Đánh dấu lời" & "Nhập LRC"
-  const [isMarkingLyricsOpen, setIsMarkingLyricsOpen] = useState<boolean>(false);
-  const [markingLines, setMarkingLines] = useState<LyricLine[]>([]);
-  const [currentMarkIndex, setCurrentMarkIndex] = useState<number>(0);
-  const [copySuccessMsg, setCopySuccessMsg] = useState<string | null>(null);
-  const [isLrcModalOpen, setIsLrcModalOpen] = useState<boolean>(false);
-  const [lrcInputText, setLrcInputText] = useState<string>('');
 
   const [favoritedSongIds, setFavoritedSongIds] = useState<Record<string, boolean>>(() => {
     try {
@@ -438,15 +428,15 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     melodyTimeoutIdsRef.current.push(endId);
   };
 
-  // Danh sách dòng lời chuẩn hóa [{start, end, vi, en}] cho bài hát hiện tại
-  const currentLines: LyricLine[] = useMemo(() => {
-    if (activeSong && customSongLyricsMap[activeSong.id]) {
-      return customSongLyricsMap[activeSong.id];
-    }
-    if (!activeSong) return [];
-    const normalized = normalizeSongLyricLines(activeSong);
-    return Array.isArray(normalized) ? normalized : (normalized?.lines ?? []);
-  }, [activeSong, customSongLyricsMap]);
+  // Danh sách dòng lời chuẩn hóa [{start, end, vi, en}] và trạng thái mốc thật
+  const { lines: currentLines, hasRealTimestamps } = useMemo(() => {
+    if (!activeSong) return { lines: [], hasRealTimestamps: false };
+    const res = normalizeSongLyricLines(activeSong);
+    return {
+      lines: Array.isArray(res) ? res : (res?.lines ?? []),
+      hasRealTimestamps: Boolean(res?.hasRealTimestamps),
+    };
+  }, [activeSong]);
 
   // Hàm cập nhật đồng bộ karaoke theo đúng frame hiển thị dựa trên audio.currentTime
   const updateKaraokeFrame = useCallback(() => {
@@ -462,10 +452,22 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     const lines = currentLines;
     if (lines.length === 0) return;
 
-    // 3. Dòng đang hát = dòng có start <= currentTime < end
+    // Nếu bài có mốc thiếu/0/không tăng dần (!hasRealTimestamps), không chạy hiệu ứng
+    if (!hasRealTimestamps) {
+      if (currentLineIndexRef.current !== -1) {
+        currentLineIndexRef.current = -1;
+        setCurrentLineIndex(-1);
+      }
+      return;
+    }
+
+    // 3. Dòng đang hát = dòng có mốc bắt đầu <= audio.currentTime < mốc dòng kế
     let activeIdx = -1;
     for (let i = 0; i < lines.length; i++) {
-      if (effectiveTime >= lines[i].start && effectiveTime < lines[i].end) {
+      const cur = lines[i];
+      const next = lines[i + 1];
+      const nextStart = next ? next.start : cur.end;
+      if (effectiveTime >= cur.start && effectiveTime < nextStart) {
         activeIdx = i;
         break;
       }
@@ -504,7 +506,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       activeProgressBarRef.current.style.width = `${pct}%`;
     }
     setLineProgressPct(pct);
-  }, [currentLines]);
+  }, [currentLines, hasRealTimestamps]);
 
   // Vòng lặp requestAnimationFrame liên tục khi audio đang phát
   useEffect(() => {
@@ -547,15 +549,22 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     return () => document.removeEventListener('visibilitychange', handleVisibility);
   }, [updateKaraokeFrame]);
 
-  // Tự động cuộn mượt để dòng đang hát luôn nằm trong vùng nhìn thấy
+  // Tự động cuộn mượt để dòng đang hát luôn nằm ở giữa vùng nhìn thấy khi ở chế độ 'full'
   useEffect(() => {
-    if (activeLineRef.current && currentLineIndex >= 0 && !showFullLyricsOnly) {
+    if (activeLineRef.current && currentLineIndex >= 0 && lyricsViewMode === 'full' && hasRealTimestamps) {
       activeLineRef.current.scrollIntoView({
         behavior: 'smooth',
-        block: 'nearest',
+        block: 'center',
       });
     }
-  }, [currentLineIndex, showFullLyricsOnly]);
+  }, [currentLineIndex, lyricsViewMode, hasRealTimestamps]);
+
+  const handleToggleViewMode = (mode: 'compact' | 'full') => {
+    setLyricsViewMode(mode);
+    try {
+      localStorage.setItem(LYRICS_VIEW_MODE_KEY, mode);
+    } catch {}
+  };
 
   // Authoritative song starter
   const startSongPlayback = (song: KidsSong, resumeFromSec = 0) => {
@@ -711,109 +720,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     updateKaraokeFrame();
   };
 
-  // Mở công cụ "Đánh dấu lời"
-  const openMarkingLyricsModal = () => {
-    const baseLines =
-      currentLines.length > 0
-        ? currentLines.map((l) => ({ ...l }))
-        : activeSong.lyrics.map((t, i) => ({
-            start: 0,
-            end: 0,
-            vi: t,
-            en: activeSong.englishTranslation?.[i] || '',
-          }));
-    setMarkingLines(baseLines);
-    setCurrentMarkIndex(0);
-    setCopySuccessMsg(null);
-    setIsMarkingLyricsOpen(true);
-  };
 
-  // Ghi mốc start khi chạm nút hoặc bấm Space
-  const handleMarkCurrentLine = () => {
-    if (markingLines.length === 0) return;
-    const audio = audioElementRef.current;
-    const markTime = Number((audio ? audio.currentTime : currentTimeSec).toFixed(2));
-
-    setMarkingLines((prev) => {
-      const next = [...prev];
-      if (currentMarkIndex < next.length) {
-        next[currentMarkIndex] = {
-          ...next[currentMarkIndex],
-          start: markTime,
-        };
-        // Tự động gán end của dòng trước đó = start của dòng hiện tại
-        if (currentMarkIndex > 0) {
-          next[currentMarkIndex - 1] = {
-            ...next[currentMarkIndex - 1],
-            end: markTime,
-          };
-        }
-      }
-      return next;
-    });
-
-    if (currentMarkIndex < markingLines.length - 1) {
-      setCurrentMarkIndex((i) => i + 1);
-    } else {
-      // Đã đánh dấu xong dòng cuối cùng
-      const audio = audioElementRef.current;
-      const finalEnd = audio?.duration ? Number(audio.duration.toFixed(2)) : markTime + 4.0;
-      setMarkingLines((prev) => {
-        const next = [...prev];
-        const lastIdx = next.length - 1;
-        if (lastIdx >= 0) {
-          next[lastIdx] = { ...next[lastIdx], end: finalEnd };
-        }
-        return next;
-      });
-    }
-  };
-
-  // Áp dụng mảng lời vừa đánh dấu vào bài hát
-  const handleApplyMarkedLyrics = () => {
-    if (!activeSong) return;
-    setCustomSongLyricsMap((prev) => ({
-      ...prev,
-      [activeSong.id]: markingLines,
-    }));
-    setIsMarkingLyricsOpen(false);
-    updateKaraokeFrame();
-  };
-
-  // Nhập từ định dạng LRC hoặc JSON
-  const handleApplyLrcText = () => {
-    if (!activeSong || !lrcInputText.trim()) return;
-    try {
-      const trimmed = lrcInputText.trim();
-      let parsed: LyricLine[] = [];
-      if (trimmed.startsWith('[')) {
-        try {
-          const jsonArr = JSON.parse(trimmed);
-          if (Array.isArray(jsonArr) && jsonArr.length > 0 && typeof jsonArr[0].start === 'number') {
-            parsed = jsonArr;
-          }
-        } catch {
-          // không phải JSON, chuyển tiếp parseLRC
-        }
-      }
-      if (parsed.length === 0) {
-        parsed = parseLRC(trimmed, activeSong.englishTranslation);
-      }
-      if (parsed.length > 0) {
-        setCustomSongLyricsMap((prev) => ({
-          ...prev,
-          [activeSong.id]: parsed,
-        }));
-        setIsLrcModalOpen(false);
-        setLrcInputText('');
-        updateKaraokeFrame();
-      } else {
-        alert('Không tìm thấy mốc thời gian hợp lệ trong định dạng LRC hoặc JSON.');
-      }
-    } catch {
-      alert('Định dạng chưa đúng, vui lòng kiểm tra lại.');
-    }
-  };
 
   const toggleFavorite = (songId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1302,46 +1209,36 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                 {/* Mode toggle bar */}
                 <div className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider flex items-center justify-between gap-1 flex-wrap pb-1 border-b border-slate-200/60">
                   <span className="flex items-center gap-1.5">
-                    {showFullLyricsOnly ? (
-                      <>
-                        <BookOpen className="w-3.5 h-3.5 text-slate-600" />
-                        <span className="text-slate-700 font-black">Lời Bài Hát:</span>
-                      </>
-                    ) : (
-                      <>
-                        <Mic className="w-3.5 h-3.5 text-rose-600" />
-                        <span className="text-rose-700 font-black">Karaoke Đồng Bộ:</span>
-                      </>
-                    )}
+                    <Mic className="w-3.5 h-3.5 text-rose-600" />
+                    <span className="text-rose-700 font-black">Karaoke Đồng Bộ:</span>
                   </span>
 
                   <div className="flex items-center gap-1.5 flex-wrap">
                     <button
                       type="button"
-                      onClick={() => setShowFullLyricsOnly((v) => !v)}
-                      className="text-[10px] font-bold text-rose-600 hover:underline cursor-pointer min-h-[30px] flex items-center px-1"
+                      onClick={() => handleToggleViewMode('compact')}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer flex items-center gap-1 transition ${
+                        lyricsViewMode === 'compact'
+                          ? 'bg-rose-500 text-white shadow-xs'
+                          : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                      }`}
+                      title="Chế độ thu gọn: chỉ hiện một dòng đang hát"
                     >
-                      {showFullLyricsOnly ? '🎤 Bật karaoke' : '📖 Xem toàn bài'}
+                      <span>Thu gọn</span>
                     </button>
                     <button
                       type="button"
-                      onClick={openMarkingLyricsModal}
-                      className="px-2 py-1 rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-700 text-[10px] font-black cursor-pointer flex items-center gap-1 transition"
-                      title="Chế độ đánh dấu mốc thời gian lời bài hát"
+                      onClick={() => handleToggleViewMode('full')}
+                      className={`px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer flex items-center gap-1 transition ${
+                        lyricsViewMode === 'full'
+                          ? 'bg-rose-500 text-white shadow-xs'
+                          : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                      }`}
+                      title="Chế độ xem toàn bài"
                     >
-                      <BookmarkCheck className="w-3 h-3" />
-                      <span>Đánh dấu lời</span>
+                      <span>Xem toàn bài</span>
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => setIsLrcModalOpen(true)}
-                      className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold cursor-pointer flex items-center gap-1 transition"
-                      title="Nhập lời từ định dạng LRC hoặc JSON"
-                    >
-                      <FileText className="w-3 h-3" />
-                      <span>Nhập LRC</span>
-                    </button>
-                    {isPlaying && (
+                    {hasRealTimestamps && isPlaying && currentLineIndex >= 0 && (
                       <span className="text-rose-600 flex items-center gap-1 text-[10px] font-bold pl-1">
                         <Radio className="w-3 h-3 animate-pulse" /> Đang hát
                       </span>
@@ -1349,38 +1246,83 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                   </div>
                 </div>
 
-                {/* View A: Full Lyrics Mode */}
-                {showFullLyricsOnly ? (
-                  <div className="py-1 space-y-2">
-                    <div className="space-y-1.5 text-xs sm:text-sm text-slate-700 font-semibold px-0.5">
-                      {currentLines.map((l, i) => {
-                        const showSubtitle =
-                          Boolean(l.en) &&
-                          (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
-                        return (
-                          <div
-                            key={i}
-                            className="p-2 rounded-xl bg-white/80 border border-slate-100 flex flex-col gap-0.5"
-                          >
+                {lyricsViewMode === 'compact' ? (
+                  /* Chế độ Thu gọn: chỉ hiện MỘT dòng đang hát (kèm dòng phụ), chữ lớn */
+                  <div className="py-2 px-1">
+                    {!hasRealTimestamps ? (
+                      /* Bài có lời tĩnh: hiển thị lời tĩnh, không tích, không hiệu ứng */
+                      <div className="space-y-1.5 text-xs sm:text-sm text-slate-700 font-semibold">
+                        {currentLines.map((l, i) => (
+                          <div key={i} className="p-2 rounded-xl bg-white/80 border border-slate-100 flex flex-col gap-0.5">
                             <p className="flex items-start gap-1.5 text-slate-800 leading-relaxed font-bold">
-                              <span className="text-rose-400 font-black">•</span>
+                              <span className="text-slate-400 font-black">•</span>
                               <span>{l.vi}</span>
                             </p>
-                            {showSubtitle && (
-                              <p className="text-[11px] font-medium text-slate-500 pl-4 italic">
-                                {l.en}
+                            {Boolean(l.en) && (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes') && (
+                              <p className="text-[11px] font-medium text-slate-500 pl-4 italic">{l.en}</p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : isPlaying && currentLineIndex === -1 ? (
+                      /* Đang dạo nhạc đầu bài */
+                      <div className="py-6 px-4 rounded-2xl bg-purple-50/80 border border-purple-200 text-purple-700 flex flex-col items-center justify-center text-center gap-1.5 animate-pulse">
+                        <Sparkles className="w-5 h-5 text-purple-500" />
+                        <span className="text-xs sm:text-sm font-black">Nhạc dạo... Bé cùng lắng nghe giai điệu nhé! ✨</span>
+                      </div>
+                    ) : isPlaying && currentLineIndex >= currentLines.length ? (
+                      /* Đã hát xong */
+                      <div className="py-6 px-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-800 flex flex-col items-center justify-center text-center gap-1.5">
+                        <span className="text-xs sm:text-sm font-black">🎉 Hoan hô bé đã hoàn thành bài hát!</span>
+                      </div>
+                    ) : (
+                      /* Dòng đang hát */
+                      (() => {
+                        const activeIdx = Math.max(0, Math.min(currentLineIndex, currentLines.length - 1));
+                        const line = currentLines[activeIdx];
+                        if (!line) return null;
+                        const showSubtitle =
+                          Boolean(line.en) &&
+                          (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
+
+                        return (
+                          <div className="p-4 rounded-2xl bg-rose-50/90 border border-rose-300 ring-2 ring-rose-200/70 shadow-xs flex flex-col gap-2 transition-all">
+                            <div className="flex items-center gap-2">
+                              {isPlaying ? (
+                                <Star className="w-5 h-5 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
+                              ) : (
+                                <span className="w-5 h-5 rounded-full bg-rose-200 text-rose-700 text-xs font-black flex items-center justify-center shrink-0">
+                                  {activeIdx + 1}
+                                </span>
+                              )}
+                              <p className="text-base sm:text-lg font-black text-rose-950 leading-snug">
+                                {line.vi}
                               </p>
+                            </div>
+                            {showSubtitle && (
+                              <p className="text-xs sm:text-sm font-semibold text-rose-700 pl-7 italic">
+                                {line.en}
+                              </p>
+                            )}
+                            {/* Thanh tiến độ đỏ cho dòng đang hát */}
+                            {isPlaying && (
+                              <div className="w-full h-2 bg-slate-200/90 rounded-full overflow-hidden mt-1 relative">
+                                <div
+                                  ref={activeProgressBarRef}
+                                  className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full will-change-[width]"
+                                  style={{ width: `${lineProgressPct}%` }}
+                                />
+                              </div>
                             )}
                           </div>
                         );
-                      })}
-                    </div>
+                      })()
+                    )}
                   </div>
                 ) : (
-                  /* View B: Karaoke Synchronized View */
+                  /* Chế độ Xem toàn bài: hiện cả bài; dòng nào đang được hát tới thì bật hiệu ứng karaoke; dòng đã hát mờ nhạt, dòng chưa tới mờ vừa */
                   <div className="space-y-2 pt-1">
-                    {/* Intro Music prompt */}
-                    {isPlaying && currentLineIndex === -1 && (
+                    {hasRealTimestamps && isPlaying && currentLineIndex === -1 && (
                       <div className="px-3 py-1.5 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 text-xs font-black flex items-center gap-1.5 animate-pulse">
                         <Sparkles className="w-3.5 h-3.5 text-purple-500" />
                         <span>Nhạc dạo... Bé cùng lắng nghe giai điệu nhé! ✨</span>
@@ -1388,8 +1330,8 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                     )}
 
                     {currentLines.map((line, idx) => {
-                      const isCurrent = isPlaying && currentLineIndex === idx;
-                      const isPast = isPlaying && currentLineIndex > idx;
+                      const isCurrent = hasRealTimestamps && currentLineIndex === idx;
+                      const isPast = hasRealTimestamps && currentLineIndex > idx;
                       const showSubtitle =
                         Boolean(line.en) &&
                         (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
@@ -1398,8 +1340,10 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                         <div
                           key={idx}
                           ref={isCurrent ? activeLineRef : null}
-                          className={`transition-colors duration-150 px-3 py-2 rounded-2xl flex flex-col gap-1 border ${
-                            isCurrent
+                          className={`transition-all duration-150 px-3 py-2 rounded-2xl flex flex-col gap-1 border ${
+                            !hasRealTimestamps
+                              ? 'text-slate-800 bg-white/80 border-slate-200/70'
+                              : isCurrent
                               ? 'bg-rose-50/90 border-rose-300 ring-2 ring-rose-200/70 shadow-xs text-rose-950 font-black scale-[1.01]'
                               : isPast
                               ? 'text-slate-400 bg-white/40 border-slate-100 opacity-60'
@@ -1407,23 +1351,26 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                           }`}
                         >
                           <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-1.5 text-xs sm:text-sm font-bold">
-                              {isCurrent ? (
-                                <Star className="w-4 h-4 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
-                              ) : isPast ? (
-                                <span className="w-4 h-4 text-emerald-500 text-xs font-black shrink-0 flex items-center justify-center">
-                                  ✓
-                                </span>
+                            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold">
+                              {hasRealTimestamps ? (
+                                isCurrent ? (
+                                  <Star className="w-4 h-4 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
+                                ) : isPast ? (
+                                  <span className="w-4 h-4 text-emerald-500 text-xs font-black shrink-0 flex items-center justify-center">
+                                    ✓
+                                  </span>
+                                ) : (
+                                  <span className="w-4 h-4 text-slate-300 text-[10px] font-bold shrink-0 flex items-center justify-center">
+                                    {idx + 1}
+                                  </span>
+                                )
                               ) : (
-                                <span className="w-4 h-4 text-slate-300 text-[10px] font-bold shrink-0 flex items-center justify-center">
-                                  {idx + 1}
-                                </span>
+                                <span className="text-slate-400 font-black">•</span>
                               )}
-                              <span className="leading-snug">{line.vi}</span>
+                              <span className={`leading-snug ${isCurrent ? 'text-sm sm:text-base font-black' : ''}`}>
+                                {line.vi}
+                              </span>
                             </div>
-                            <span className="text-[10px] font-mono text-slate-400 shrink-0 tabular-nums">
-                              {formatTime(line.start)}
-                            </span>
                           </div>
 
                           {/* Thanh tiến độ đỏ chuẩn hóa: Cập nhật 100% bằng audio.currentTime qua RAF */}
@@ -1439,7 +1386,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
 
                           {showSubtitle && (
                             <div
-                              className={`text-[11px] font-medium pl-5 italic ${
+                              className={`text-[11px] font-medium pl-6 italic ${
                                 isCurrent ? 'text-rose-700 font-semibold' : 'text-slate-400'
                               }`}
                             >
@@ -1722,231 +1669,6 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       )}
 
       {/* MODAL 1: CHẾ ĐỘ ĐÁNH DẤU LỜI BÀI HÁT */}
-      {isMarkingLyricsOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="w-full max-w-2xl bg-white rounded-3xl p-4 sm:p-5 shadow-2xl border-2 border-rose-200 max-h-[92vh] flex flex-col space-y-3.5">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <div>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-                  <BookmarkCheck className="w-5 h-5 text-rose-500" />
-                  <span>Đánh dấu lời: {activeSong.title}</span>
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Vừa nghe vừa chạm nút mỗi khi một dòng bắt đầu để ghi mốc start chính xác
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsMarkingLyricsOpen(false)}
-                className="w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Live Audio Control & Time Bar */}
-            <div className="flex items-center justify-between gap-2 p-2.5 rounded-2xl bg-slate-50 border border-slate-200">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleTogglePlay}
-                  className="min-h-[40px] px-3.5 rounded-xl bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
-                >
-                  {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
-                  <span>{isPlaying ? 'Tạm dừng' : 'Phát nhạc'}</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSeek(0)}
-                  className="min-h-[40px] px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-bold cursor-pointer"
-                  title="Về đầu bài (00:00)"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                </button>
-              </div>
-              <div className="text-right">
-                <div className="text-base font-black font-mono text-rose-600 tabular-nums">
-                  {currentTimeSec.toFixed(2)}s
-                </div>
-                <div className="text-[10px] text-slate-400 font-mono">
-                  {formatTime(currentTimeSec)} / {formatTime(durationSec)}
-                </div>
-              </div>
-            </div>
-
-            {/* Big Tap-to-Mark Button */}
-            <button
-              type="button"
-              onClick={handleMarkCurrentLine}
-              className="w-full min-h-[52px] rounded-2xl bg-gradient-to-r from-red-500 via-rose-500 to-pink-500 hover:brightness-105 text-white font-black text-sm flex items-center justify-center gap-2 shadow-md active:scale-[0.99] transition cursor-pointer select-none"
-            >
-              <Star className="w-4 h-4 fill-amber-300 text-amber-300 animate-bounce" />
-              <span>
-                Chạm để đánh dấu Bắt Đầu Dòng {Math.min(currentMarkIndex + 1, markingLines.length)}/
-                {markingLines.length} ({currentTimeSec.toFixed(2)}s)
-              </span>
-            </button>
-
-            {/* Lines List */}
-            <div className="flex-1 overflow-y-auto space-y-1.5 border border-slate-200 rounded-2xl p-2.5 bg-slate-50/60 max-h-48 scrollbar-thin">
-              {markingLines.map((line, idx) => {
-                const isTarget = idx === currentMarkIndex;
-                const isMarked = line.start > 0 || line.end > 0;
-                return (
-                  <div
-                    key={idx}
-                    onClick={() => setCurrentMarkIndex(idx)}
-                    className={`p-2 rounded-xl border text-xs flex items-center justify-between gap-2 cursor-pointer transition ${
-                      isTarget
-                        ? 'bg-rose-50 border-rose-400 font-black text-rose-950 ring-2 ring-rose-200'
-                        : isMarked
-                        ? 'bg-white border-slate-200 text-slate-800 font-medium'
-                        : 'bg-white/60 border-slate-200/60 text-slate-400'
-                    }`}
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-bold shrink-0">
-                        {idx + 1}
-                      </span>
-                      <span className="truncate">{line.vi}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5 shrink-0 text-[11px] font-mono tabular-nums">
-                      <span>{line.start.toFixed(2)}s</span>
-                      <span className="text-slate-300">→</span>
-                      <span>{line.end.toFixed(2)}s</span>
-                      {isMarked && <Check className="w-3.5 h-3.5 text-emerald-600" />}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* JSON Output View */}
-            <div className="space-y-1">
-              <div className="flex items-center justify-between text-[11px] font-bold text-slate-600">
-                <span>Mảng JSON kết quả [{`{start, end, vi, en}`}]</span>
-                {copySuccessMsg && <span className="text-emerald-600 font-extrabold">{copySuccessMsg}</span>}
-              </div>
-              <textarea
-                readOnly
-                value={JSON.stringify(markingLines, null, 2)}
-                className="w-full h-24 p-2 rounded-xl bg-slate-900 text-emerald-400 font-mono text-[11px] border border-slate-800 select-all"
-              />
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex items-center justify-between gap-2 pt-1 flex-wrap">
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    navigator.clipboard.writeText(JSON.stringify(markingLines, null, 2));
-                    setCopySuccessMsg('✓ Đã sao chép vào bộ nhớ tạm!');
-                    setTimeout(() => setCopySuccessMsg(null), 2500);
-                  }}
-                  className="min-h-[40px] px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold flex items-center gap-1.5 cursor-pointer"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                  <span>Sao chép JSON</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMarkingLines(
-                      activeSong.lyrics.map((t, i) => ({
-                        start: 0,
-                        end: 0,
-                        vi: t,
-                        en: activeSong.englishTranslation?.[i] || '',
-                      }))
-                    );
-                    setCurrentMarkIndex(0);
-                  }}
-                  className="min-h-[40px] px-2.5 rounded-xl border border-slate-200 text-slate-600 hover:bg-slate-50 text-xs font-semibold cursor-pointer"
-                >
-                  Đặt lại
-                </button>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleApplyMarkedLyrics}
-                  className="min-h-[40px] px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-black flex items-center gap-1.5 shadow-xs cursor-pointer active:scale-95"
-                >
-                  <Check className="w-3.5 h-3.5" />
-                  <span>Áp dụng ngay cho bài này</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setIsMarkingLyricsOpen(false)}
-                  className="min-h-[40px] px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer"
-                >
-                  Đóng
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* MODAL 2: NHẬP ĐỊNH DẠNG LRC HOẶC JSON */}
-      {isLrcModalOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 p-3 sm:p-4 backdrop-blur-xs"
-          role="dialog"
-          aria-modal="true"
-        >
-          <div className="w-full max-w-xl bg-white rounded-3xl p-4 sm:p-5 shadow-2xl border-2 border-slate-200 space-y-3.5">
-            <div className="flex items-center justify-between pb-2 border-b border-slate-100">
-              <div>
-                <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-                  <FileText className="w-5 h-5 text-indigo-500" />
-                  <span>Nhập lời từ file LRC hoặc JSON</span>
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Dán nội dung LRC chuẩn [mm:ss.xx] hoặc mảng JSON [{`{start, end, vi, en}`}]
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setIsLrcModalOpen(false)}
-                className="w-9 h-9 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-600 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <textarea
-              value={lrcInputText}
-              onChange={(e) => setLrcInputText(e.target.value)}
-              placeholder="Ví dụ định dạng LRC:&#10;[00:14.80]Cháu lên ba cháu đi mẫu giáo&#10;[00:18.80]Cô thương cháu vì cháu không khóc nhè&#10;&#10;Hoặc JSON:&#10;[{ &quot;start&quot;: 14.8, &quot;end&quot;: 18.8, &quot;vi&quot;: &quot;Cháu lên ba...&quot; }]"
-              className="w-full h-44 p-3 rounded-2xl bg-slate-50 border border-slate-200 font-mono text-xs text-slate-800 focus:outline-rose-500 resize-none"
-            />
-
-            <div className="flex items-center justify-end gap-2 pt-1">
-              <button
-                type="button"
-                onClick={() => setIsLrcModalOpen(false)}
-                className="min-h-[40px] px-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold cursor-pointer"
-              >
-                Hủy
-              </button>
-              <button
-                type="button"
-                onClick={handleApplyLrcText}
-                className="min-h-[40px] px-4 rounded-xl bg-rose-500 hover:bg-rose-600 text-white text-xs font-black shadow-xs cursor-pointer active:scale-95"
-              >
-                Chuyển đổi & Áp dụng
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+      </div>
   );
 };
