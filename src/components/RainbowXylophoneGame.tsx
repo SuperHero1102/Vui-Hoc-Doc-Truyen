@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   ArrowLeft,
   Volume2,
+  VolumeX,
   ChevronLeft,
   ChevronRight,
   Play,
@@ -359,6 +360,12 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
   const [isRhythmPlaying, setIsRhythmPlaying] = useState(false);
   // Song selection
   const [selectedSongId, setSelectedSongId] = useState<string>('butterfly');
+  const [gameVolume, setGameVolume] = useState<number>(() =>
+    settings.volume !== undefined ? settings.volume : 0.8
+  );
+  const [isGameMuted, setIsGameMuted] = useState<boolean>(false);
+  const [showVolumeSlider, setShowVolumeSlider] = useState<boolean>(false);
+  const currentVol = isGameMuted ? 0 : gameVolume;
   const [songStepIdx, setSongStepIdx] = useState<number>(0);
   // Auto demo play
   const [isDemoPlaying, setIsDemoPlaying] = useState<boolean>(false);
@@ -418,10 +425,10 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
 
     drumIntervalRef.current = window.setInterval(() => {
       const step = beat % 4;
-      if (step === 0) playRhythmDrumHit('kick', settings.volume * 0.45);
-      else if (step === 1) playRhythmDrumHit('hihat', settings.volume * 0.22);
-      else if (step === 2) playRhythmDrumHit('snare', settings.volume * 0.38);
-      else if (step === 3) playRhythmDrumHit('woodblock', settings.volume * 0.3);
+      if (step === 0) playRhythmDrumHit('kick', currentVol * 0.45);
+      else if (step === 1) playRhythmDrumHit('hihat', currentVol * 0.22);
+      else if (step === 2) playRhythmDrumHit('snare', currentVol * 0.38);
+      else if (step === 3) playRhythmDrumHit('woodblock', currentVol * 0.3);
       beat += 1;
     }, beatMs);
 
@@ -460,7 +467,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
         setLastPlayedNoteName(targetK.solfegeVi);
         setSongStepIdx(step);
 
-        playMusicalInstrumentNote(targetK.freq, musicalInstrument, settings.volume);
+        playMusicalInstrumentNote(targetK.freq, musicalInstrument, currentVol);
 
         // Turn off key highlight slightly before next note
         window.setTimeout(() => {
@@ -483,7 +490,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
     }
 
     const k = XYLOPHONE_KEYS[idx];
-    playMusicalInstrumentNote(k.freq, musicalInstrument, settings.volume);
+    playMusicalInstrumentNote(k.freq, musicalInstrument, currentVol);
     setActiveNoteIdx(idx);
     setLastPlayedNoteName(k.solfegeVi);
     window.setTimeout(() => setActiveNoteIdx(null), 240);
@@ -500,7 +507,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
         setSongStepIdx(0);
         fireStarExplosion(0.5, 0.5);
         fireFireworksCelebration();
-        playCelebrationChime(settings.volume);
+        playCelebrationChime(currentVol);
         onWin(activeSong.titleVi, activeSong.titleEn);
       } else {
         setSongStepIdx(nextStep);
@@ -515,7 +522,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
       stopDemo();
     }
 
-    playMusicalInstrumentNote(blackKey.freq, musicalInstrument, settings.volume);
+    playMusicalInstrumentNote(blackKey.freq, musicalInstrument, currentVol);
     setActiveBlackKeyId(blackKey.id);
     setLastPlayedNoteName(blackKey.nameVi);
     window.setTimeout(() => setActiveBlackKeyId(null), 240);
@@ -560,7 +567,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
               : 'Free musical play!',
         },
       ],
-      settings
+      { ...settings, volume: currentVol }
     );
   };
 
@@ -617,16 +624,73 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
           </h2>
         </div>
 
-        {/* Nút loa: nền #FFF8E6, viền #FBE3A1, cao 44px */}
-        <button
-          type="button"
-          onClick={handleTeacherVoiceGuide}
-          className="w-[44px] h-[44px] rounded-[12px] bg-[#FFF8E6] hover:bg-amber-100/70 text-amber-800 border border-[#FBE3A1] flex items-center justify-center cursor-pointer transition active:scale-[0.97] shrink-0"
-          title="Cô giáo hướng dẫn âm thanh"
-          aria-label="Hướng dẫn âm thanh"
-        >
-          <Volume2 className="w-5 h-5 stroke-[2.2]" />
-        </button>
+        {/* Nút loa & Thanh tăng giảm âm lượng đàn */}
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setShowVolumeSlider((prev) => !prev)}
+            className={`w-[44px] h-[44px] rounded-[12px] border flex items-center justify-center cursor-pointer transition active:scale-[0.97] shrink-0 ${
+              isGameMuted || gameVolume === 0
+                ? 'bg-amber-100 border-amber-300 text-amber-700 font-bold shadow-2xs'
+                : 'bg-[#FFF8E6] hover:bg-amber-100/70 text-amber-800 border-[#FBE3A1]'
+            }`}
+            title={isGameMuted || gameVolume === 0 ? 'Bật âm thanh đàn' : 'Tùy chỉnh âm lượng đàn'}
+            aria-label="Tùy chỉnh âm lượng đàn"
+          >
+            {isGameMuted || gameVolume === 0 ? (
+              <VolumeX className="w-5 h-5 stroke-[2.2]" />
+            ) : (
+              <Volume2 className="w-5 h-5 stroke-[2.2]" />
+            )}
+          </button>
+
+          {/* Thanh kéo tăng giảm âm lượng khi bấm vào loa */}
+          {showVolumeSlider && (
+            <div className="absolute top-full mt-2 right-0 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-slate-200/90 flex flex-col items-center gap-2 z-50 min-w-[155px] animate-in fade-in zoom-in-95 duration-150">
+              <div className="flex items-center justify-between w-full text-xs font-bold text-slate-700">
+                <span>Âm lượng đàn</span>
+                <span className="text-amber-600 font-black">
+                  {isGameMuted ? '0%' : `${Math.round(gameVolume * 100)}%`}
+                </span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={isGameMuted ? 0 : gameVolume}
+                onChange={(e) => {
+                  const val = parseFloat(e.target.value);
+                  setGameVolume(val);
+                  if (val === 0) {
+                    setIsGameMuted(true);
+                  } else {
+                    if (isGameMuted) setIsGameMuted(false);
+                  }
+                }}
+                className="w-full accent-amber-500 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none"
+                aria-label="Thanh trượt âm lượng đàn"
+              />
+              <div className="flex items-center gap-1.5 w-full">
+                <button
+                  type="button"
+                  onClick={() => setIsGameMuted((prev) => !prev)}
+                  className="flex-1 text-center text-[10px] font-extrabold py-1 px-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition cursor-pointer"
+                >
+                  {isGameMuted ? 'Bật loa' : 'Tắt tiếng'}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleTeacherVoiceGuide}
+                  className="flex-1 text-center text-[10px] font-extrabold py-1 px-1.5 rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-800 transition cursor-pointer"
+                  title="Cô hướng dẫn"
+                >
+                  Hướng dẫn
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* ========================================================================= */}
@@ -642,7 +706,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
               const nextView = instrumentView === 'piano' ? 'xylophone' : 'piano';
               setInstrumentView(nextView);
               setMusicalInstrument(nextView);
-              playMusicalInstrumentNote(440, nextView, settings.volume * 0.8);
+              playMusicalInstrumentNote(440, nextView, currentVol * 0.8);
             }}
             className={`h-[44px] rounded-[12px] flex flex-col items-center justify-center transition active:scale-[0.97] cursor-pointer select-none px-1 ${
               activeControlSegment === 'instrument'

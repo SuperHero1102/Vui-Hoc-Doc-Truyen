@@ -109,6 +109,10 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const [isLooping, setIsLooping] = useState<boolean>(false);
   const [isShuffle, setIsShuffle] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+  const [volumeLevel, setVolumeLevel] = useState<number>(() =>
+    settings.volume !== undefined ? settings.volume : 0.8
+  );
+  const [showVolumeSlider, setShowVolumeSlider] = useState<boolean>(false);
   const [currentLineIndex, setCurrentLineIndex] = useState<number>(0);
   const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
   const [durationSec, setDurationSec] = useState<number>(30);
@@ -222,7 +226,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       const ctx = getAudioContext();
       if (!ctx) return;
       const now = ctx.currentTime;
-      const masterVol = isMuted ? 0 : Math.max(0.05, Math.min(0.8, settings.volume * 0.45));
+      const masterVol = isMuted ? 0 : Math.max(0.05, Math.min(0.8, volumeLevel * 0.45));
 
       const osc1 = ctx.createOscillator();
       const gain1 = ctx.createGain();
@@ -259,7 +263,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       const ctx = getAudioContext();
       if (!ctx) return;
       const now = ctx.currentTime;
-      const vol = isMuted ? 0 : settings.volume;
+      const vol = isMuted ? 0 : volumeLevel;
       setTappedBeatsCount((c) => c + 1);
       fireStarExplosion(0.5, 0.5);
 
@@ -600,7 +604,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       const audio = audioElementRef.current;
       audio.preload = 'auto';
       audio.src = song.audioUrl;
-      audio.volume = isMuted ? 0 : settings.volume;
+      audio.volume = isMuted ? 0 : volumeLevel;
       audio.loop = isLooping;
 
       audio.onloadedmetadata = () => {
@@ -698,7 +702,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       if (activeSong.audioUrl && activeSong.isVocalTrack !== false && audioElementRef.current) {
         const audio = audioElementRef.current;
         if (audio.src && audio.src.includes(activeSong.audioUrl)) {
-          audio.volume = isMuted ? 0 : settings.volume;
+          audio.volume = isMuted ? 0 : volumeLevel;
           audio.play().catch(() => {
             startSongPlayback(activeSong, currentTimeSec);
           });
@@ -771,7 +775,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     setIsMuted(nextMuted);
     if (audioElementRef.current) {
       audioElementRef.current.muted = nextMuted;
-      audioElementRef.current.volume = nextMuted ? 0 : settings.volume;
+      audioElementRef.current.volume = nextMuted ? 0 : volumeLevel;
     }
   };
 
@@ -1185,20 +1189,66 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                   <Repeat className="w-4 h-4" />
                 </button>
 
-                {/* Mute */}
-                <button
-                  type="button"
-                  onClick={handleToggleMute}
-                  className={`min-h-[44px] min-w-[44px] rounded-2xl border flex items-center justify-center cursor-pointer transition active:scale-95 ${
-                    isMuted
-                      ? 'bg-amber-100 border-amber-300 text-amber-700 font-bold shadow-2xs'
-                      : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
-                  }`}
-                  title={isMuted ? 'Bật âm thanh' : 'Tắt tiếng'}
-                  aria-label="Tắt hoặc bật tiếng"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </button>
+                {/* Âm lượng & Tắt/Bật tiếng */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    onClick={() => setShowVolumeSlider((prev) => !prev)}
+                    className={`min-h-[44px] min-w-[44px] rounded-2xl border flex items-center justify-center cursor-pointer transition active:scale-95 ${
+                      isMuted || volumeLevel === 0
+                        ? 'bg-amber-100 border-amber-300 text-amber-700 font-bold shadow-2xs'
+                        : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
+                    }`}
+                    title={isMuted || volumeLevel === 0 ? 'Bật âm thanh' : 'Tùy chỉnh âm lượng'}
+                    aria-label="Tùy chỉnh âm lượng"
+                  >
+                    {isMuted || volumeLevel === 0 ? (
+                      <VolumeX className="w-4 h-4" />
+                    ) : (
+                      <Volume2 className="w-4 h-4" />
+                    )}
+                  </button>
+
+                  {/* Thanh kéo tăng giảm âm lượng khi bấm vào loa */}
+                  {showVolumeSlider && (
+                    <div className="absolute bottom-full mb-2 right-0 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-xl border border-slate-200/90 flex flex-col items-center gap-2 z-50 min-w-[155px] animate-in fade-in zoom-in-95 duration-150">
+                      <div className="flex items-center justify-between w-full text-xs font-bold text-slate-700">
+                        <span>Âm lượng</span>
+                        <span className="text-rose-600 font-black">
+                          {isMuted ? '0%' : `${Math.round(volumeLevel * 100)}%`}
+                        </span>
+                      </div>
+                      <input
+                        type="range"
+                        min="0"
+                        max="1"
+                        step="0.05"
+                        value={isMuted ? 0 : volumeLevel}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value);
+                          setVolumeLevel(val);
+                          if (val === 0) {
+                            setIsMuted(true);
+                          } else {
+                            if (isMuted) setIsMuted(false);
+                          }
+                          if (audioElementRef.current) {
+                            audioElementRef.current.volume = val;
+                          }
+                        }}
+                        className="w-full accent-rose-500 cursor-pointer h-2 bg-slate-200 rounded-lg appearance-none"
+                        aria-label="Thanh trượt âm lượng"
+                      />
+                      <button
+                        type="button"
+                        onClick={handleToggleMute}
+                        className="w-full text-center text-[11px] font-extrabold py-1 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 transition cursor-pointer"
+                      >
+                        {isMuted ? 'Bật lại tiếng' : 'Tắt tiếng nhanh'}
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* 4. SMART KARAOKE & LYRICS BOX */}

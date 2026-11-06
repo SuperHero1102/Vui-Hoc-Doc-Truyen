@@ -111,51 +111,43 @@ export function buildSegmentedVocabularyScript(
   item: VocabularyItem,
   ageId: AgeGroupId
 ): SpeechSegment[] {
-  if (ageId === '0-3m' || ageId === '4-12m') {
-    return [
-      { lang: 'vi', text: `Bé ơi, đây là ${item.vi.toLowerCase()}.` },
-      { lang: 'en', text: item.en },
-    ];
-  }
+  // Đọc lần lượt các câu từ trong ảnh thẻ từ trên xuống dưới của ảnh thẻ:
+  // 1. Dòng trên cùng: Tiếng Anh (item.en)
+  // 2. Dòng thứ hai: Tiếng Việt (item.vi)
+  // 3. Dòng thứ ba: Cụm từ / Câu / Đánh vần theo độ tuổi
+  // 4. Dòng cuối cùng: Nhãn âm thanh ở đáy thẻ (item.soundLabelVi)
 
-  if (ageId === '1-2y') {
-    return [
-      { lang: 'vi', text: `Bé ơi, đây là ${item.vi.toLowerCase()}!` },
-      { lang: 'en', text: `${item.en}!` },
-    ];
-  }
+  const segments: SpeechSegment[] = [
+    { lang: 'en', text: item.en },
+    { lang: 'vi', text: item.vi },
+  ];
 
   if (ageId === '2-3y' && item.phrase2To3y) {
-    return [
-      { lang: 'vi', text: `${item.vi}! ${item.phrase2To3y.vi}.` },
-      { lang: 'en', text: `${item.en}! ${item.phrase2To3y.en}!` },
-    ];
+    segments.push({ lang: 'en', text: item.phrase2To3y.en });
+    if (item.phrase2To3y.vi) {
+      segments.push({ lang: 'vi', text: item.phrase2To3y.vi });
+    }
+  } else if (ageId === '3-4y' && item.sentence3To4y) {
+    segments.push({ lang: 'en', text: item.sentence3To4y.en });
+    if (item.sentence3To4y.vi) {
+      segments.push({ lang: 'vi', text: item.sentence3To4y.vi });
+    }
+  } else if (ageId === '4-5y' && item.phonics4To5y) {
+    segments.push({
+      lang: 'vi',
+      text: `Chữ ${item.phonics4To5y.letter}. Phát âm là ${item.phonics4To5y.sound}. Đánh vần:`,
+    });
+    segments.push({
+      lang: 'en',
+      text: item.phonics4To5y.spelling,
+    });
   }
 
-  if (ageId === '3-4y' && item.sentence3To4y) {
-    return [
-      { lang: 'vi', text: `${item.vi}! ${item.sentence3To4y.vi}.` },
-      { lang: 'en', text: `${item.sentence3To4y.en}!` },
-    ];
+  if (item.soundLabelVi) {
+    segments.push({ lang: 'vi', text: item.soundLabelVi });
   }
 
-  if (ageId === '4-5y' && item.phonics4To5y) {
-    return [
-      {
-        lang: 'vi',
-        text: `Chữ ${item.phonics4To5y.letter}. Phát âm là ${item.phonics4To5y.sound}. ${item.phonics4To5y.questionVi}`,
-      },
-      {
-        lang: 'en',
-        text: `${item.phonics4To5y.letter}! ${item.phonics4To5y.sound}! ${item.en}!`,
-      },
-    ];
-  }
-
-  return [
-    { lang: 'vi', text: `${item.vi}!` },
-    { lang: 'en', text: `${item.en}!` },
-  ];
+  return segments;
 }
 
 export function buildGentleTryAgainScript(
