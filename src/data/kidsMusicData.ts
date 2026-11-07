@@ -389,7 +389,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_chau-len-ba.webp",
+    "cover": "./assets/music/covers/music_cover_chau-len-ba.webp",
     "isVocalTrack": true
   },
   {
@@ -712,7 +712,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_rua-mat-nhu-meo.webp",
+    "cover": "./assets/music/covers/music_cover_rua-mat-nhu-meo.webp",
     "isVocalTrack": true
   },
   {
@@ -882,7 +882,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_di-hoc.webp",
+    "cover": "./assets/music/covers/music_cover_di-hoc.webp",
     "isVocalTrack": false
   },
   {
@@ -1006,7 +1006,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_truong-chung-chau-la-truong-mam-non.webp",
+    "cover": "./assets/music/covers/music_cover_truong-chung-chau-la-truong-mam-non.webp",
     "isVocalTrack": true,
     "englishTranslation": [
       "Who asks grandchild, which school do you attend?",
@@ -1235,7 +1235,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_con-co-be-be.webp",
+    "cover": "./assets/music/covers/music_cover_con-co-be-be.webp",
     "isVocalTrack": true
   },
   {
@@ -1550,7 +1550,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_ca-nha-thuong-nhau.webp",
+    "cover": "./assets/music/covers/music_cover_ca-nha-thuong-nhau.webp",
     "isVocalTrack": true
   },
   {
@@ -1729,7 +1729,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_chau-yeu-ba.webp",
+    "cover": "./assets/music/covers/music_cover_chau-yeu-ba.webp",
     "isVocalTrack": true
   },
   {
@@ -2012,7 +2012,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_mot-con-vit.webp",
+    "cover": "./assets/music/covers/music_cover_mot-con-vit.webp",
     "isVocalTrack": true
   },
   {
@@ -2227,7 +2227,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_ca-vang-boi.webp",
+    "cover": "./assets/music/covers/music_cover_ca-vang-boi.webp",
     "isVocalTrack": true
   },
   {
@@ -2502,7 +2502,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_kia-con-buom-vang.webp",
+    "cover": "./assets/music/covers/music_cover_kia-con-buom-vang.webp",
     "isVocalTrack": true
   },
   {
@@ -3081,7 +3081,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_ba-ngon-nen-lung-linh.webp",
+    "cover": "./assets/music/covers/music_cover_ba-ngon-nen-lung-linh.webp",
     "isVocalTrack": true
   },
   {
@@ -3320,7 +3320,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.6
       }
     ],
-    "cover": "/assets/music/covers/music_cover_bo-la-tat-ca.webp",
+    "cover": "./assets/music/covers/music_cover_bo-la-tat-ca.webp",
     "isVocalTrack": true
   },
   {
@@ -3463,7 +3463,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_co-va-me.webp",
+    "cover": "./assets/music/covers/music_cover_co-va-me.webp",
     "isVocalTrack": true
   },
   {
@@ -3650,7 +3650,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_con-heo-dat.webp",
+    "cover": "./assets/music/covers/music_cover_con-heo-dat.webp",
     "isVocalTrack": true
   },
   {
@@ -3989,7 +3989,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_chu-ech-con.webp",
+    "cover": "./assets/music/covers/music_cover_chu-ech-con.webp",
     "isVocalTrack": true
   },
   {
@@ -4276,7 +4276,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_dan-ga-con.webp",
+    "cover": "./assets/music/covers/music_cover_dan-ga-con.webp",
     "isVocalTrack": true
   },
   {
@@ -4563,7 +4563,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_chu-voi-con-o-ban-don.webp",
+    "cover": "./assets/music/covers/music_cover_chu-voi-con-o-ban-don.webp",
     "isVocalTrack": true
   },
   {
@@ -4834,7 +4834,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_bac-kim-thang.webp",
+    "cover": "./assets/music/covers/music_cover_bac-kim-thang.webp",
     "isVocalTrack": true
   },
   {
@@ -5020,7 +5020,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.9
       }
     ],
-    "cover": "/assets/music/covers/music_cover_ngay-dau-tien-di-hoc.webp",
+    "cover": "./assets/music/covers/music_cover_ngay-dau-tien-di-hoc.webp",
     "isVocalTrack": true,
     "audioUrl": "/assets/music/ngay-dau-tien-di-hoc.mp3"
   },
@@ -5219,7 +5219,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_em-di-mau-giao.webp",
+    "cover": "./assets/music/covers/music_cover_em-di-mau-giao.webp",
     "isVocalTrack": true,
     "audioUrl": "/assets/music/em-di-mau-giao.mp3"
   },
@@ -5542,7 +5542,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_em-yeu-truong-em.webp",
+    "cover": "./assets/music/covers/music_cover_em-yeu-truong-em.webp",
     "isVocalTrack": false
   },
   {
@@ -5679,7 +5679,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_tam-biet-bup-be.webp",
+    "cover": "./assets/music/covers/music_cover_tam-biet-bup-be.webp",
     "isVocalTrack": true,
     "englishTranslation": [
       "Goodbye beloved doll, goodbye cute Misa bear",
@@ -5961,7 +5961,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_tap-the-duc-buoi-sang.webp",
+    "cover": "./assets/music/covers/music_cover_tap-the-duc-buoi-sang.webp",
     "isVocalTrack": true
   },
   {
@@ -6171,7 +6171,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_chiec-den-ong-sao.webp",
+    "cover": "./assets/music/covers/music_cover_chiec-den-ong-sao.webp",
     "isVocalTrack": true,
     "audioUrl": "/assets/music/chiec-den-ong-sao.mp3"
   },
@@ -6730,7 +6730,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_trai-dat-nay-la-cua-chung-minh.webp",
+    "cover": "./assets/music/covers/music_cover_trai-dat-nay-la-cua-chung-minh.webp",
     "isVocalTrack": true,
     "audioUrl": "/assets/music/trai-dat-nay-la-cua-chung-minh.mp3"
   },
@@ -6966,7 +6966,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_hong-dam-dau.webp",
+    "cover": "./assets/music/covers/music_cover_hong-dam-dau.webp",
     "isVocalTrack": true
   },
   {
@@ -7081,7 +7081,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_abc-alphabet-song.webp",
+    "cover": "./assets/music/covers/music_cover_abc-alphabet-song.webp",
     "isVocalTrack": true
   },
   {
@@ -7228,7 +7228,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_twinkle-twinkle-little-star.webp",
+    "cover": "./assets/music/covers/music_cover_twinkle-twinkle-little-star.webp",
     "isVocalTrack": true
   },
   {
@@ -7375,7 +7375,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_old-macdonald-had-a-farm.webp",
+    "cover": "./assets/music/covers/music_cover_old-macdonald-had-a-farm.webp",
     "isVocalTrack": true
   },
   {
@@ -7674,7 +7674,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.6
       }
     ],
-    "cover": "/assets/music/covers/music_cover_the-wheels-on-the-bus.webp",
+    "cover": "./assets/music/covers/music_cover_the-wheels-on-the-bus.webp",
     "isVocalTrack": true
   },
   {
@@ -7865,7 +7865,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_baa-baa-black-sheep.webp",
+    "cover": "./assets/music/covers/music_cover_baa-baa-black-sheep.webp",
     "isVocalTrack": true
   },
   {
@@ -8136,7 +8136,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_if-youre-happy-and-you-know-it.webp",
+    "cover": "./assets/music/covers/music_cover_if-youre-happy-and-you-know-it.webp",
     "isVocalTrack": true
   },
   {
@@ -8211,7 +8211,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1.2
       }
     ],
-    "cover": "/assets/music/covers/music_cover_row-row-row-your-boat.webp",
+    "cover": "./assets/music/covers/music_cover_row-row-row-your-boat.webp",
     "isVocalTrack": true
   },
   {
@@ -8406,7 +8406,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.6
       }
     ],
-    "cover": "/assets/music/covers/music_cover_head-shoulders-knees-and-toes.webp",
+    "cover": "./assets/music/covers/music_cover_head-shoulders-knees-and-toes.webp",
     "isVocalTrack": true
   },
   {
@@ -8585,7 +8585,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_five-little-monkeys.webp",
+    "cover": "./assets/music/covers/music_cover_five-little-monkeys.webp",
     "isVocalTrack": true
   },
   {
@@ -8740,7 +8740,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.3
       }
     ],
-    "cover": "/assets/music/covers/music_cover_baby-shark.webp",
+    "cover": "./assets/music/covers/music_cover_baby-shark.webp",
     "isVocalTrack": true
   },
   {
@@ -8907,7 +8907,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_bingo-dog-song.webp",
+    "cover": "./assets/music/covers/music_cover_bingo-dog-song.webp",
     "isVocalTrack": true
   },
   {
@@ -9066,7 +9066,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_mary-had-a-little-lamb.webp",
+    "cover": "./assets/music/covers/music_cover_mary-had-a-little-lamb.webp",
     "isVocalTrack": true
   },
   {
@@ -9153,7 +9153,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_rain-rain-go-away.webp",
+    "cover": "./assets/music/covers/music_cover_rain-rain-go-away.webp",
     "isVocalTrack": true
   },
   {
@@ -9248,7 +9248,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_hickory-dickory-dock.webp",
+    "cover": "./assets/music/covers/music_cover_hickory-dickory-dock.webp",
     "isVocalTrack": true
   },
   {
@@ -9427,7 +9427,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_you-are-my-sunshine.webp",
+    "cover": "./assets/music/covers/music_cover_you-are-my-sunshine.webp",
     "isVocalTrack": true
   },
   {
@@ -9498,7 +9498,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_three-little-kittens.webp",
+    "cover": "./assets/music/covers/music_cover_three-little-kittens.webp",
     "isVocalTrack": true
   },
   {
@@ -9569,7 +9569,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 0.8
       }
     ],
-    "cover": "/assets/music/covers/music_cover_pop-goes-the-weasel.webp",
+    "cover": "./assets/music/covers/music_cover_pop-goes-the-weasel.webp",
     "isVocalTrack": true
   },
   {
@@ -9856,7 +9856,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "dur": 1
       }
     ],
-    "cover": "/assets/music/covers/music_cover_hot-cross-buns.webp",
+    "cover": "./assets/music/covers/music_cover_hot-cross-buns.webp",
     "isVocalTrack": true
   }
 ];

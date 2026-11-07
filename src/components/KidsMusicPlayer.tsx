@@ -1098,7 +1098,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
               <div className="flex items-center gap-3 bg-gradient-to-br from-rose-50/70 to-amber-50/50 p-2.5 rounded-2xl border border-rose-100">
                 <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl overflow-hidden shadow-2xs border border-white bg-slate-100 shrink-0">
                   <img
-                    src={activeSong.cover || `/assets/music/covers/music_cover_${activeSong.id}.webp`}
+                    src={activeSong.cover || `./assets/music/covers/music_cover_${activeSong.id}.webp`}
                     alt={activeSong.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
@@ -1577,7 +1577,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
               const isSelected = activeSong?.id === song.id;
               const isCurPlaying = isSelected && isPlaying;
               const isFav = Boolean(favoritedSongIds[song.id]);
-              const coverImg = song.cover || `/assets/music/covers/music_cover_${song.id}.webp`;
+              const coverImg = song.cover || `./assets/music/covers/music_cover_${song.id}.webp`;
 
               return (
                 <div
@@ -1714,7 +1714,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
             className="flex items-center gap-2 min-w-0 cursor-pointer pt-1"
           >
             <img
-              src={activeSong.cover || `/assets/music/covers/music_cover_${activeSong.id}.webp`}
+              src={activeSong.cover || `./assets/music/covers/music_cover_${activeSong.id}.webp`}
               alt={activeSong.title}
               className="w-10 h-10 rounded-xl object-cover shrink-0 shadow-2xs border border-slate-200"
             />
