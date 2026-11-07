@@ -111,10 +111,10 @@ export function buildSegmentedVocabularyScript(
   item: VocabularyItem,
   ageId: AgeGroupId
 ): SpeechSegment[] {
-  // Đọc lần lượt các câu từ trong ảnh thẻ từ trên xuống dưới của ảnh thẻ:
+  // Đọc đúng và CHỈ các từ/câu đang in trên ảnh thẻ từ trên xuống dưới:
   // 1. Dòng trên cùng: Tiếng Anh (item.en)
   // 2. Dòng thứ hai: Tiếng Việt (item.vi)
-  // 3. Dòng thứ ba: Cụm từ / Câu / Đánh vần theo độ tuổi
+  // 3. Dòng thứ ba: Cụm từ / Câu / Đánh vần theo độ tuổi (nếu có in trên thẻ)
   // 4. Dòng cuối cùng: Nhãn âm thanh ở đáy thẻ (item.soundLabelVi)
 
   const segments: SpeechSegment[] = [
@@ -122,32 +122,133 @@ export function buildSegmentedVocabularyScript(
     { lang: 'vi', text: item.vi },
   ];
 
-  if (ageId === '2-3y' && item.phrase2To3y) {
+  if (ageId === '2-3y' && item.phrase2To3y?.en) {
     segments.push({ lang: 'en', text: item.phrase2To3y.en });
-    if (item.phrase2To3y.vi) {
-      segments.push({ lang: 'vi', text: item.phrase2To3y.vi });
-    }
-  } else if (ageId === '3-4y' && item.sentence3To4y) {
+  } else if (ageId === '3-4y' && item.sentence3To4y?.en) {
     segments.push({ lang: 'en', text: item.sentence3To4y.en });
-    if (item.sentence3To4y.vi) {
-      segments.push({ lang: 'vi', text: item.sentence3To4y.vi });
-    }
-  } else if (ageId === '4-5y' && item.phonics4To5y) {
-    segments.push({
-      lang: 'vi',
-      text: `Chữ ${item.phonics4To5y.letter}. Phát âm là ${item.phonics4To5y.sound}. Đánh vần:`,
-    });
-    segments.push({
-      lang: 'en',
-      text: item.phonics4To5y.spelling,
-    });
+  } else if (ageId === '4-5y' && item.phonics4To5y?.spelling) {
+    segments.push({ lang: 'en', text: item.phonics4To5y.spelling });
   }
 
-  if (item.soundLabelVi) {
-    segments.push({ lang: 'vi', text: item.soundLabelVi });
+  if (item.soundLabelVi && item.soundLabelVi.trim()) {
+    segments.push({ lang: 'vi', text: item.soundLabelVi.trim() });
   }
 
   return segments;
+}
+
+export interface PronunciationResult {
+  isCorrect: boolean;
+  heard: string;
+  expected: string;
+  isSilent: boolean;
+  isNoise: boolean;
+}
+
+export function normalizeSpeechText(text: string): string {
+  if (!text) return '';
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?"'’]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function evaluatePronunciation(
+  expectedWord: string,
+  heardText: string,
+  options?: { isSilent?: boolean; isNoise?: boolean }
+): PronunciationResult {
+  const isSilent = Boolean(options?.isSilent || !heardText || !heardText.trim());
+  const isNoise = Boolean(options?.isNoise);
+
+  if (isSilent || isNoise) {
+    return {
+      isCorrect: false,
+      heard: heardText || (isSilent ? '[Im lặng]' : '[Tiếng ồn]'),
+      expected: expectedWord,
+      isSilent,
+      isNoise,
+    };
+  }
+
+  const normExpected = normalizeSpeechText(expectedWord);
+  const normHeard = normalizeSpeechText(heardText);
+
+  if (!normHeard) {
+    return { isCorrect: false, heard: heardText, expected: expectedWord, isSilent: true, isNoise: false };
+  }
+
+  // Exact match
+  if (normHeard === normExpected) {
+    return { isCorrect: true, heard: heardText, expected: expectedWord, isSilent: false, isNoise: false };
+  }
+
+  // Token match (e.g. child says 'a cow', 'the dog', 'big duck')
+  const heardTokens = normHeard.split(' ').filter(Boolean);
+  if (heardTokens.includes(normExpected)) {
+    return { isCorrect: true, heard: heardText, expected: expectedWord, isSilent: false, isNoise: false };
+  }
+
+  // Acceptable toddler variations of the same word (KHÔNG chấp nhận từ khác)
+  const TODDLER_VARIANTS: Record<string, string[]> = {
+    dog: ['doggie', 'doggy', 'pup', 'puppy'],
+    cat: ['kitty', 'kitten'],
+    duck: ['ducky', 'duckie'],
+    pig: ['piggy', 'piglet'],
+    horse: ['horsey', 'horsie', 'pony'],
+    rabbit: ['bunny', 'bunny rabbit'],
+    bird: ['birdie', 'birdy'],
+    frog: ['froggy', 'froggie'],
+    cow: ['moo cow'],
+    sheep: ['lamb', 'lambie'],
+    bear: ['teddy', 'teddy bear'],
+    car: ['auto'],
+    mom: ['mommy', 'mama', 'mother'],
+    dad: ['daddy', 'papa', 'father'],
+    baby: ['babe'],
+  };
+
+  const variants = TODDLER_VARIANTS[normExpected] || [];
+  for (const v of variants) {
+    const normV = normalizeSpeechText(v);
+    if (normHeard === normV || heardTokens.includes(normV)) {
+      return { isCorrect: true, heard: heardText, expected: expectedWord, isSilent: false, isNoise: false };
+    }
+  }
+
+  // Minor phonetic slips for longer words (Levenshtein distance <= 1 for word length >= 5)
+  if (normExpected.length >= 5) {
+    for (const token of heardTokens) {
+      if (Math.abs(token.length - normExpected.length) <= 1) {
+        let diff = 0;
+        for (let i = 0, j = 0; i < token.length && j < normExpected.length; ) {
+          if (token[i] !== normExpected[j]) {
+            diff++;
+            if (token.length > normExpected.length) i++;
+            else if (token.length < normExpected.length) j++;
+            else { i++; j++; }
+          } else {
+            i++; j++;
+          }
+        }
+        if (diff <= 1) {
+          return { isCorrect: true, heard: heardText, expected: expectedWord, isSilent: false, isNoise: false };
+        }
+      }
+    }
+  }
+
+  // Từ khác, không khớp = SAI (tuyệt đối không mặc định đúng)
+  return {
+    isCorrect: false,
+    heard: heardText,
+    expected: expectedWord,
+    isSilent: false,
+    isNoise: false,
+  };
 }
 
 export function buildGentleTryAgainScript(

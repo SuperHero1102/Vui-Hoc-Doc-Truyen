@@ -182,8 +182,18 @@ function speakSegmentWithBrowserFallback(
         settings.voiceSpeed === 'slow' ? 0.85 : settings.voiceSpeed === 'fast' ? 1.15 : 0.96;
       utterance.rate = baseRate * rateMod;
       utterance.pitch = pitchMod;
-      utterance.onend = () => resolve();
-      utterance.onerror = () => resolve();
+      const timeoutMs = Math.min(6000, Math.max(1200, segment.text.length * 90));
+      const safetyTimer = setTimeout(() => {
+        resolve();
+      }, timeoutMs);
+      utterance.onend = () => {
+        clearTimeout(safetyTimer);
+        resolve();
+      };
+      utterance.onerror = () => {
+        clearTimeout(safetyTimer);
+        resolve();
+      };
       window.speechSynthesis.speak(utterance);
     } else {
       const isBritish = settings.englishAccent === 'en-GB';
@@ -211,8 +221,18 @@ function speakSegmentWithBrowserFallback(
         settings.voiceSpeed === 'slow' ? 0.88 : settings.voiceSpeed === 'fast' ? 1.02 : 0.95;
       utterance.rate = baseRate * rateMod;
       utterance.pitch = pitchMod;
-      utterance.onend = () => resolve();
-      utterance.onerror = () => resolve();
+      const enTimeoutMs = Math.min(6000, Math.max(1200, segment.text.length * 90));
+      const enSafetyTimer = setTimeout(() => {
+        resolve();
+      }, enTimeoutMs);
+      utterance.onend = () => {
+        clearTimeout(enSafetyTimer);
+        resolve();
+      };
+      utterance.onerror = () => {
+        clearTimeout(enSafetyTimer);
+        resolve();
+      };
       window.speechSynthesis.speak(utterance);
     }
   });
@@ -238,16 +258,43 @@ export function getValidatedStoryVoice(storedVal?: any): 'teacher' | 'mother' | 
   return DEFAULT_STORY_VOICE_ID;
 }
 
+export function getActiveParentSettings(customSettings?: Partial<ParentSettings>): ParentSettings {
+  let stored: Partial<ParentSettings> = {};
+  if (typeof window !== 'undefined') {
+    try {
+      const raw =
+        window.localStorage.getItem('bevuihoc_parent_settings_v3') ||
+        window.localStorage.getItem('parent_settings');
+      if (raw) stored = JSON.parse(raw);
+    } catch {}
+  }
+  return {
+    selectedAge: customSettings?.selectedAge || stored.selectedAge || '1-2y',
+    voicePersona: getValidatedVoicePersona(customSettings?.voicePersona ?? stored.voicePersona),
+    storyNarratorVoice: getValidatedStoryVoice(customSettings?.storyNarratorVoice ?? stored.storyNarratorVoice),
+    voiceSpeed: customSettings?.voiceSpeed || stored.voiceSpeed || 'slow',
+    volume: typeof customSettings?.volume === 'number' ? customSettings.volume : (typeof stored.volume === 'number' ? stored.volume : 0.85),
+    autoOffEnabled: customSettings?.autoOffEnabled ?? stored.autoOffEnabled ?? true,
+    dailyLimitMinutes: customSettings?.dailyLimitMinutes ?? stored.dailyLimitMinutes ?? 15,
+    useGeminiTTS: customSettings?.useGeminiTTS ?? stored.useGeminiTTS ?? true,
+    allowMicrophone: customSettings?.allowMicrophone ?? stored.allowMicrophone ?? false,
+    autoFullscreen: customSettings?.autoFullscreen ?? stored.autoFullscreen ?? true,
+    storyLanguage: customSettings?.storyLanguage || stored.storyLanguage || 'bilingual',
+    characterVoices: customSettings?.characterVoices ?? stored.characterVoices ?? true,
+  };
+}
+
 export async function fetchOrGetCachedSegmentUrl(
   segment: SpeechSegment,
-  settings: ParentSettings,
+  settings?: ParentSettings,
   voiceStyle?: string
 ): Promise<{ url: string | null; fromCache: boolean }> {
-  const accentKey = settings.englishAccent || 'en-US';
+  const activeSettings = getActiveParentSettings(settings);
+  const accentKey = activeSettings.englishAccent || 'en-US';
   const cleanText = sanitizeSegmentText(segment.text, segment.lang);
-  const persona = getValidatedVoicePersona(settings.voicePersona);
-  const narratorVoice = getValidatedStoryVoice(settings.storyNarratorVoice);
-  const cacheKey = `v5:${segment.lang}:${accentKey}:${persona}:${narratorVoice}:${voiceStyle || 'none'}:${settings.voiceSpeed}:${cleanText}`;
+  const persona = getValidatedVoicePersona(activeSettings.voicePersona);
+  const narratorVoice = getValidatedStoryVoice(activeSettings.storyNarratorVoice);
+  const cacheKey = `v5:${segment.lang}:${accentKey}:${persona}:${narratorVoice}:${voiceStyle || 'none'}:${activeSettings.voiceSpeed}:${cleanText}`;
   const cached = clientAudioUrlCache.get(cacheKey);
   if (cached) {
     return { url: cached, fromCache: true };
@@ -267,8 +314,8 @@ export async function fetchOrGetCachedSegmentUrl(
         text: cleanText,
         lang: segment.lang,
         voiceName: persona,
-        speed: settings.voiceSpeed,
-        englishAccent: settings.englishAccent || 'en-US',
+        speed: activeSettings.voiceSpeed,
+        englishAccent: activeSettings.englishAccent || 'en-US',
         storyNarratorVoice: narratorVoice,
         voiceStyle: voiceStyle || 'none',
       }),
@@ -438,10 +485,11 @@ export type CharacterVoiceRole =
 
 export async function speakSegments(
   rawSegments: SpeechSegment[],
-  settings: ParentSettings,
+  settings?: ParentSettings,
   onEnd?: () => void,
   voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<{ usedServerTts: boolean; fromCache: boolean }> {
+  const activeSettings = getActiveParentSettings(settings);
   stopAllAudio();
   const currentGen = playbackGeneration;
 
@@ -454,7 +502,7 @@ export async function speakSegments(
 
   // Prefetch all segments in parallel for gapless playback with voice style
   const fetched = await Promise.all(
-    segments.map((seg) => fetchOrGetCachedSegmentUrl(seg, settings, voiceStyle))
+    segments.map((seg) => fetchOrGetCachedSegmentUrl(seg, activeSettings, voiceStyle))
   );
 
   let usedServerTts = false;
@@ -470,17 +518,17 @@ export async function speakSegments(
       usedServerTts = true;
       const ok = await playAudioUrl(
         url,
-        settings.volume,
-        settings.voiceSpeed,
+        activeSettings.volume,
+        activeSettings.voiceSpeed,
         currentGen,
         voiceStyle,
-        settings
+        activeSettings
       );
       if (!ok && currentGen === playbackGeneration) {
-        await speakSegmentWithBrowserFallback(seg, settings, voiceStyle);
+        await speakSegmentWithBrowserFallback(seg, activeSettings, voiceStyle);
       }
     } else {
-      await speakSegmentWithBrowserFallback(seg, settings, voiceStyle);
+      await speakSegmentWithBrowserFallback(seg, activeSettings, voiceStyle);
     }
   }
 
@@ -492,15 +540,16 @@ export async function speakSegments(
 
 export async function speakTeacherVoice(
   textOrSegments: string | SpeechSegment[],
-  settings: ParentSettings,
+  settings?: ParentSettings,
   onEnd?: () => void,
   voiceStyle?: 'narrator' | 'elder' | 'hero' | 'child' | 'gentle' | 'wolf' | 'fox' | 'bird'
 ): Promise<{ usedGemini: boolean; fromCache: boolean }> {
+  const activeSettings = getActiveParentSettings(settings);
   const segments =
     typeof textOrSegments === 'string'
       ? parseTextToSpeechSegments(textOrSegments)
       : textOrSegments;
-  const res = await speakSegments(segments, settings, onEnd, voiceStyle);
+  const res = await speakSegments(segments, activeSettings, onEnd, voiceStyle);
   return { usedGemini: res.usedServerTts, fromCache: res.fromCache };
 }
 
@@ -714,11 +763,11 @@ export const STORY_NARRATOR_VOICES = [
 
 export function previewTeacherVoice(
   teacherId: 'Kore' | 'Zephyr' | 'Puck',
-  baseSettings: ParentSettings
+  baseSettings?: ParentSettings
 ): Promise<any> {
-  const item = TEACHER_PERSONAS.find((t) => t.id === teacherId) || TEACHER_PERSONAS[0];
+  const item = TEACHER_PERSONAS.find((t) => t.id === teacherId) || TEACHER_PERSONAS[2];
   const customSettings: ParentSettings = {
-    ...baseSettings,
+    ...getActiveParentSettings(baseSettings),
     voicePersona: teacherId,
   };
   return speakTeacherVoice([{ lang: 'vi', text: item.previewText }], customSettings);
@@ -726,11 +775,11 @@ export function previewTeacherVoice(
 
 export function previewStoryNarratorVoice(
   narratorId: 'teacher' | 'mother' | 'grandmother',
-  baseSettings: ParentSettings
+  baseSettings?: ParentSettings
 ): Promise<any> {
-  const item = STORY_NARRATOR_VOICES.find((n) => n.id === narratorId) || STORY_NARRATOR_VOICES[0];
+  const item = STORY_NARRATOR_VOICES.find((n) => n.id === narratorId) || STORY_NARRATOR_VOICES[1];
   const customSettings: ParentSettings = {
-    ...baseSettings,
+    ...getActiveParentSettings(baseSettings),
     storyNarratorVoice: narratorId,
   };
   return speakStoryNarration(

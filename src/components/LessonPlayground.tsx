@@ -24,6 +24,7 @@ import {
   buildGentleTryAgainScript,
   buildSegmentedGentleTryAgain,
   buildSegmentedVocabularyScript,
+  evaluatePronunciation,
   getAgeGroupConfig,
   getRotatedGamesForAge,
 } from '../utils/learningLogic';
@@ -41,6 +42,7 @@ import { fireFireworksCelebration, fireStarExplosion } from '../utils/confetti';
 interface LessonPlaygroundProps {
   topic: TopicLesson;
   ageId: AgeGroupId;
+  childName?: string;
   settings: ParentSettings;
   rotationSeed: number;
   onBack: () => void;
@@ -103,12 +105,19 @@ const ZONE_REQUIREMENTS: Record<
 export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   topic,
   ageId,
+  childName,
   settings,
   rotationSeed,
   onBack,
   onWordPracticed,
   onTopicCompleted,
 }) => {
+  const childDisplayName = childName && childName.trim() ? childName.trim() : 'Bé';
+  const playCardsGenerationRef = React.useRef<number>(0);
+  const echoSessionIdRef = React.useRef<number>(0);
+  const wrongAttemptsMap = React.useRef<Record<string, number>>({});
+  const activeStreamRef = React.useRef<MediaStream | null>(null);
+  const activeRecognitionRef = React.useRef<any>(null);
   const ageConfig = getAgeGroupConfig(ageId);
   const rotatedGames = useMemo(
     () => getRotatedGamesForAge(ageId, rotationSeed),
@@ -176,8 +185,29 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
 
   // Dedicated Echo/Imitate modal state for vocabulary items (When settings.allowMicrophone === true)
   const [echoVocabItem, setEchoVocabItem] = useState<VocabularyItem | null>(null);
-  const [echoStep, setEchoStep] = useState<'intro' | 'listening' | 'praise'>('intro');
+  const [echoStep, setEchoStep] = useState<'intro' | 'listening' | 'praise' | 'retry' | 'encourage' | 'error'>('intro');
   const [echoWaveLevel, setEchoWaveLevel] = useState<number>(0);
+  const [echoErrorMessage, setEchoErrorMessage] = useState<string>('');
+
+  const closeEchoModal = () => {
+    echoSessionIdRef.current++;
+    if (activeStreamRef.current) {
+      activeStreamRef.current.getTracks().forEach((track) => track.stop());
+      activeStreamRef.current = null;
+    }
+    if (activeRecognitionRef.current) {
+      try {
+        activeRecognitionRef.current.abort();
+      } catch {}
+      activeRecognitionRef.current = null;
+    }
+    if (typeof window !== 'undefined') {
+      delete (window as any).__simulateSpeechInput;
+    }
+    stopAllAudio();
+    wrongAttemptsMap.current = {};
+    setEchoVocabItem(null);
+  };
   const isAdvancingGameRef = React.useRef<boolean>(false);
 
   const triggerTopicCompletion = (starsEarned = 3) => {
@@ -202,7 +232,39 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   }, [rotatedGames]);
 
   useEffect(() => {
+    if (activeTab !== 'learn') return;
+    const currentGen = ++playCardsGenerationRef.current;
+    let isCancelled = false;
+
+    const runSequentialReading = async () => {
+      // Đọc lần lượt các câu từ trong ảnh thẻ từ trên xuống dưới của ảnh thẻ
+      for (const item of topic.vocabulary) {
+        if (isCancelled || currentGen !== playCardsGenerationRef.current) break;
+        setActiveVocabId(item.id);
+        const segments = buildSegmentedVocabularyScript(item, ageId);
+        await speakTeacherVoice(segments, settings);
+        if (isCancelled || currentGen !== playCardsGenerationRef.current) break;
+        await new Promise((r) => setTimeout(r, 400));
+      }
+      if (!isCancelled && currentGen === playCardsGenerationRef.current) {
+        setActiveVocabId(null);
+      }
+    };
+
+    runSequentialReading();
+
     return () => {
+      isCancelled = true;
+      playCardsGenerationRef.current++;
+      stopAllAudio();
+      setActiveVocabId(null);
+    };
+  }, [ageId, activeTab, topic.id]);
+
+  useEffect(() => {
+    return () => {
+      playCardsGenerationRef.current++;
+      closeEchoModal();
       stopAllAudio();
     };
   }, []);
@@ -225,65 +287,259 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
   };
 
   const handleVocabCardTap = (item: VocabularyItem) => {
+    playCardsGenerationRef.current++;
+    if (activeVocabId === item.id) {
+      stopAllAudio();
+      setActiveVocabId(null);
+      return;
+    }
+    stopAllAudio();
     setActiveVocabId(item.id);
     playSoundEffect(item.soundEffect, settings.volume);
     const segments = buildSegmentedVocabularyScript(item, ageId);
     speakTeacherVoice(segments, settings);
     onWordPracticed(item, topic.id);
-    setTimeout(() => setActiveVocabId(null), 900);
+    setTimeout(() => {
+      setActiveVocabId((prev) => (prev === item.id ? null : prev));
+    }, 1500);
   };
 
   const handleStartEchoMicrophone = async (item: VocabularyItem) => {
+    playCardsGenerationRef.current++;
     stopAllAudio();
+    if (activeStreamRef.current) {
+      activeStreamRef.current.getTracks().forEach((t) => t.stop());
+      activeStreamRef.current = null;
+    }
+    if (activeRecognitionRef.current) {
+      try {
+        activeRecognitionRef.current.abort();
+      } catch {}
+      activeRecognitionRef.current = null;
+    }
+    if (echoVocabItem?.id !== item.id) {
+      wrongAttemptsMap.current = {};
+    }
     setEchoVocabItem(item);
     setEchoStep('intro');
     setEchoWaveLevel(0);
+    setEchoErrorMessage('');
 
-    // 1. Teacher introduces the word
+    const currentSessionId = ++echoSessionIdRef.current;
+
+    let simulatedResult: { text: string; isSilent?: boolean; isNoise?: boolean } | null = null;
+    if (typeof window !== 'undefined') {
+      (window as any).__simulateSpeechInput = (text: string, isSilent = false, isNoise = false) => {
+        simulatedResult = { text, isSilent, isNoise };
+      };
+    }
+
+    // 1. Cô đọc mẫu từ
     await speakTeacherVoice(
       [
-        { lang: 'vi', text: `Bé ơi, nói theo cô nhé:` },
+        { lang: 'vi', text: 'Bé ơi, nói theo cô nhé:' },
         { lang: 'en', text: `${item.en}!` },
       ],
       settings
     );
+    if (echoSessionIdRef.current !== currentSessionId) return;
 
-    // 2. Start listening mode (no audio is saved anywhere)
+    // 2. Chế độ lắng nghe
     setEchoStep('listening');
     let stream: MediaStream | null = null;
+    let audioContext: AudioContext | null = null;
+    let analyser: AnalyserNode | null = null;
+    let microphoneNode: MediaStreamAudioSourceNode | null = null;
+
     try {
       if (typeof navigator !== 'undefined' && navigator.mediaDevices?.getUserMedia) {
-        stream = await navigator.mediaDevices.getUserMedia({ audio: true }).catch(() => null);
+        const micPromise = navigator.mediaDevices.getUserMedia({ audio: true }).catch(() => null);
+        const timeoutPromise = new Promise<null>((r) => setTimeout(() => r(null), 1200));
+        stream = await Promise.race([micPromise, timeoutPromise]);
+        activeStreamRef.current = stream;
+        if (
+          stream &&
+          typeof window !== 'undefined' &&
+          (window.AudioContext || (window as any).webkitAudioContext)
+        ) {
+          const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+          audioContext = new AudioContextClass();
+          analyser = audioContext.createAnalyser();
+          analyser.fftSize = 256;
+          microphoneNode = audioContext.createMediaStreamSource(stream);
+          microphoneNode.connect(analyser);
+        }
       }
     } catch {
-      // browser declined or no mic
+      // Thiết bị từ chối hoặc không có mic
     }
 
-    // Dynamic wave visualizer for 2.6 seconds
+    if (echoSessionIdRef.current !== currentSessionId) {
+      if (stream) stream.getTracks().forEach((t) => t.stop());
+      if (audioContext) audioContext.close().catch(() => {});
+      return;
+    }
+
+    const SpeechRecognitionClass =
+      (typeof window !== 'undefined' &&
+        ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition)) ||
+      null;
+
+    let recognition: any = null;
+    let recognizedTranscript = '';
+
+    if (SpeechRecognitionClass) {
+      try {
+        recognition = new SpeechRecognitionClass();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 3;
+        activeRecognitionRef.current = recognition;
+
+        recognition.onresult = (event: any) => {
+          if (echoSessionIdRef.current !== currentSessionId) return;
+          const transcript = event.results?.[0]?.[0]?.transcript || '';
+          recognizedTranscript = transcript;
+        };
+
+        recognition.onerror = () => {
+          // Bỏ qua lỗi nhận dạng nhẹ nhàng
+        };
+
+        recognition.start();
+      } catch {
+        // Recognition không khởi động được
+      }
+    }
+
+// Đã khởi tạo __simulateSpeechInput từ đầu phiên
+
+    // Lắng nghe và đo sóng âm trong ~2.6 giây
     const startMs = Date.now();
-    const interval = window.setInterval(() => {
-      const elapsed = Date.now() - startMs;
-      const progress = elapsed / 2600;
-      setEchoWaveLevel(Math.min(100, Math.floor(Math.sin(elapsed / 100) * 35 + 55)));
-      if (progress >= 1) {
-        window.clearInterval(interval);
-        if (stream) {
-          stream.getTracks().forEach((track) => track.stop());
+    const dataArray = analyser ? new Uint8Array(analyser.frequencyBinCount) : null;
+    let peakVolume = 0;
+
+    await new Promise<void>((resolve) => {
+      const interval = window.setInterval(() => {
+        if (echoSessionIdRef.current !== currentSessionId) {
+          window.clearInterval(interval);
+          resolve();
+          return;
         }
-        // 3. Praise baby
-        setEchoStep('praise');
-        fireStarExplosion(0.5, 0.45);
-        playCelebrationChime(settings.volume);
-        onWordPracticed(item, topic.id);
-        speakTeacherVoice(
+
+        const elapsed = Date.now() - startMs;
+        if (analyser && dataArray) {
+          analyser.getByteFrequencyData(dataArray);
+          let sum = 0;
+          for (let i = 0; i < dataArray.length; i++) {
+            sum += dataArray[i];
+          }
+          const avg = sum / dataArray.length;
+          if (avg > peakVolume) peakVolume = avg;
+          setEchoWaveLevel(Math.min(100, Math.round((avg / 128) * 100)));
+        } else {
+          setEchoWaveLevel(Math.min(100, Math.floor(Math.sin(elapsed / 100) * 35 + 55)));
+        }
+
+        if (simulatedResult || elapsed >= 2600) {
+          window.clearInterval(interval);
+          resolve();
+        }
+      }, 100);
+    });
+
+    if (echoSessionIdRef.current !== currentSessionId) {
+      if (stream) stream.getTracks().forEach((t) => t.stop());
+      if (audioContext) audioContext.close().catch(() => {});
+      return;
+    }
+
+    if (stream) {
+      stream.getTracks().forEach((t) => t.stop());
+      activeStreamRef.current = null;
+    }
+    if (audioContext) {
+      audioContext.close().catch(() => {});
+    }
+    if (recognition) {
+      try {
+        recognition.stop();
+      } catch {}
+      activeRecognitionRef.current = null;
+    }
+
+    const hasMicOrRecognition = Boolean(stream || SpeechRecognitionClass || simulatedResult);
+    if (!hasMicOrRecognition && !simulatedResult) {
+      setEchoStep('error');
+      setEchoErrorMessage('Không thể truy cập micro. Bé có thể thử lại sau nhé!');
+      return;
+    }
+
+    const heard = simulatedResult ? simulatedResult.text : recognizedTranscript;
+    const isSilent = simulatedResult
+      ? Boolean(simulatedResult.isSilent)
+      : (!heard || !heard.trim() || (analyser ? peakVolume < 8 : false));
+    const isNoise = simulatedResult ? Boolean(simulatedResult.isNoise) : false;
+
+    const evalResult = evaluatePronunciation(item.en, heard, { isSilent, isNoise });
+
+    if (evalResult.isCorrect) {
+      // Đúng: khen ngắn bằng giọng đang chọn, tự đóng khung nói sau ~1.5 giây
+      wrongAttemptsMap.current[item.id] = 0;
+      setEchoStep('praise');
+      fireStarExplosion(0.5, 0.45);
+      playCelebrationChime(settings.volume);
+      onWordPracticed(item, topic.id);
+      await speakTeacherVoice(
+        [
+          { lang: 'vi', text: `Bé nhại giọng siêu quá! Đúng là ${item.vi.toLowerCase()} rồi!` },
+          { lang: 'en', text: `${item.en}! Giỏi lắm!` },
+        ],
+        settings
+      );
+      if (echoSessionIdRef.current === currentSessionId) {
+        setTimeout(() => {
+          if (echoSessionIdRef.current === currentSessionId) {
+            closeEchoModal();
+          }
+        }, 1500);
+      }
+    } else {
+      // Sai: yêu cầu nói lại; đếm số lần sai riêng cho từng từ; nếu sai quá 3 lần (lần 4) đọc "[Tên bé] ơi cố gắng lên nhé"
+      const currentWrong = (wrongAttemptsMap.current[item.id] || 0) + 1;
+      wrongAttemptsMap.current[item.id] = currentWrong;
+
+      if (currentWrong >= 4) {
+        // Lần 4: đọc câu "[Tên bé] ơi cố gắng lên nhé"
+        setEchoStep('encourage');
+        playGentleEncourageTone(settings.volume);
+        await speakTeacherVoice(
           [
-            { lang: 'vi', text: `Bé nhại giọng siêu quá! Đúng là ${item.vi.toLowerCase()} rồi!` },
-            { lang: 'en', text: `${item.en}! Excellent!` },
+            { lang: 'vi', text: `${childDisplayName} ơi cố gắng lên nhé!` },
+          ],
+          settings
+        );
+        wrongAttemptsMap.current[item.id] = 0;
+        if (echoSessionIdRef.current === currentSessionId) {
+          setTimeout(() => {
+            if (echoSessionIdRef.current === currentSessionId) {
+              closeEchoModal();
+            }
+          }, 1500);
+        }
+      } else {
+        // Lần 1, 2, 3: yêu cầu nói lại
+        setEchoStep('retry');
+        playGentleEncourageTone(settings.volume);
+        await speakTeacherVoice(
+          [
+            { lang: 'vi', text: 'Bé ơi, mình thử nói lại nhé:' },
+            { lang: 'en', text: `${item.en}!` },
           ],
           settings
         );
       }
-    }, 100);
+    }
   };
 
   const promptCurrentTapQuestion = (item: VocabularyItem) => {
@@ -836,6 +1092,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
             <button
               type="button"
               onClick={() => {
+                playCardsGenerationRef.current++;
                 stopAllAudio();
                 onBack();
               }}
@@ -1667,7 +1924,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
               </span>
               <button
                 type="button"
-                onClick={() => setEchoVocabItem(null)}
+                onClick={closeEchoModal}
                 className="text-slate-400 hover:text-slate-700 min-h-[36px] min-w-[36px] flex items-center justify-center rounded-full hover:bg-slate-100 cursor-pointer"
                 aria-label="Đóng"
               >
@@ -1730,6 +1987,34 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
                   </p>
                 </div>
               )}
+
+              {echoStep === 'retry' && (
+                <div className="space-y-1">
+                  <div className="text-sm font-black text-amber-700 flex items-center justify-center gap-1">
+                    <span>Bé thử nói lại một lần nữa nhé!</span>
+                  </div>
+                  <p className="text-xs font-bold text-slate-600">
+                    Cô chưa nghe rõ từ "{echoVocabItem.en}"
+                  </p>
+                </div>
+              )}
+
+              {echoStep === 'encourage' && (
+                <div className="space-y-1">
+                  <div className="text-sm font-black text-purple-700 flex items-center justify-center gap-1">
+                    <Heart className="w-4 h-4 text-pink-500" />
+                    <span>{childDisplayName} ơi cố gắng lên nhé!</span>
+                  </div>
+                </div>
+              )}
+
+              {echoStep === 'error' && (
+                <div className="space-y-1">
+                  <div className="text-xs font-bold text-rose-600">
+                    {echoErrorMessage || 'Không thể truy cập micro. Bé có thể thử lại sau nhé!'}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Action buttons */}
@@ -1745,7 +2030,7 @@ export const LessonPlayground: React.FC<LessonPlaygroundProps> = ({
 
               <button
                 type="button"
-                onClick={() => setEchoVocabItem(null)}
+                onClick={closeEchoModal}
                 className="min-h-[44px] rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-xs shadow-xs flex items-center justify-center cursor-pointer"
               >
                 <span>Xong rồi ✓</span>

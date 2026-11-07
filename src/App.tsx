@@ -545,13 +545,15 @@ export default function App() {
     if (ageId === '0-3m' || ageId === '4-12m') {
       setActiveDockTab('today');
     }
-    speakTeacherVoice(
-      [{ lang: 'vi', text: `Chế độ ${cfg.label}: ${cfg.stageTitle} cho ${activeProfile.name}!` }],
-      {
-        ...effectiveSettings,
-        selectedAge: ageId,
-      }
-    );
+    if (!activeTopic) {
+      speakTeacherVoice(
+        [{ lang: 'vi', text: `Chế độ ${cfg.label}: ${cfg.stageTitle} cho ${activeProfile.name}!` }],
+        {
+          ...effectiveSettings,
+          selectedAge: ageId,
+        }
+      );
+    }
   };
 
   const handleSelectProfile = (profileId: string) => {
@@ -1249,6 +1251,7 @@ export default function App() {
               <LessonPlayground
                 topic={activeTopic}
                 ageId={currentAgeId}
+                childName={activeProfile?.name || 'Bé'}
                 settings={effectiveSettings}
                 rotationSeed={progress.sessionRotationSeed}
                 onBack={() => setActiveTopic(null)}

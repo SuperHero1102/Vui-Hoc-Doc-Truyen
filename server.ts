@@ -420,7 +420,7 @@ async function startServer() {
       const {
         text,
         lang = 'vi',
-        voiceName = 'Kore',
+        voiceName = 'Puck',
         speed = 'slow',
         stylePrompt,
         englishAccent = 'en-US',
@@ -445,8 +445,8 @@ async function startServer() {
       const targetLang: 'vi' | 'en' = lang === 'en' ? 'en' : 'vi';
       const trimmedText = normalizeVietnameseTtsText(text, targetLang).slice(0, 2000);
       const allowedVoices = ['Kore', 'Zephyr', 'Puck', 'Charon', 'Fenrir'];
-      const selectedVoice = allowedVoices.includes(voiceName) ? voiceName : 'Kore';
-      const cacheKey = `v5:${targetLang}:${englishAccent}:${selectedVoice}:${storyNarratorVoice || 'teacher'}:${voiceStyle || 'none'}:${speed}:${trimmedText}`;
+      const selectedVoice = allowedVoices.includes(voiceName) ? voiceName : 'Puck';
+      const cacheKey = `v5:${targetLang}:${englishAccent}:${selectedVoice}:${storyNarratorVoice || 'mother'}:${voiceStyle || 'none'}:${speed}:${trimmedText}`;
 
       const cached = ttsAudioCache.get(cacheKey);
       if (cached) {
