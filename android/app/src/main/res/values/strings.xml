@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Vui Hoc - Doc Truyen</string>
+    <string name="title_activity_main">Vui Hoc - Doc Truyen</string>
+    <string name="package_name">com.haian.vuihoc</string>
+    <string name="custom_url_scheme">com.haian.vuihoc</string>
+</resources>
