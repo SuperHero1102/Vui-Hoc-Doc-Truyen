@@ -1,7 +1,7 @@
 {
-  "version": "0.0.0-8df3464328a2424d",
-  "buildTime": "2026-11-07T02:12:11.139Z",
-  "coreHash": "8df3464328a2424d",
+  "version": "0.0.0-1107bc3752e5ea63",
+  "buildTime": "2026-11-07T02:31:32.593Z",
+  "coreHash": "1107bc3752e5ea63",
   "killSwitch": false,
   "totalFiles": 785,
   "priorities": {
@@ -1579,7 +1579,7 @@
     "/assets/toon3d_yogurt_baby-meals-DTx-hlez.jpg": "b02e410a9fe38373e365d52fd80bfcd0cc349c4571649c5bab6f5a702655904e",
     "/icon.svg": "693b2c46db72c200f80c9db6133f6b071a3f20fecb338e64a2c0a0fb13f824e1",
     "/index.html": "9f486b5aafb7c0d9f6064a01fb13ef5557cf01410eb95ad1a831bcc4fd74c20f",
-    "/manifest.webmanifest": "8308e6eb8d340652034ed3724b2560deaae160bf3f2ae282c9960e22b5dcfe99",
+    "/manifest.webmanifest": "7f0747cbdbe8c1b834bd2bf4ea5c0c2a1501a612b3d0076fc620c388ba127e60",
     "/pwa-192x192.png": "44780f50524f714138bddf5569e3adeffa76f1469e267c32a8cba594d129177a",
     "/pwa-512x512.png": "ccdc93c143e7de88e1334a27dfa604f61818e2fb603149588395536ea0c21f35",
     "/pwa-maskable-512x512.png": "5c982df94ac148b898c339c34d51f3806958f82697c80239a38ac5e6d14d9707"

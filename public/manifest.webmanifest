@@ -1,13 +1,16 @@
 {
   "id": "/",
   "name": "Vui Học - Đọc Truyện",
-  "short_name": "Vui Học - Đọc Truyện",
+  "short_name": "Vui Học",
   "description": "Sân chơi học tiếng Anh và phát triển tư duy qua trò chơi cho trẻ từ 1 tháng đến 5 tuổi. Hoạt động 100% cả Online & Offline, không cần đăng nhập.",
   "theme_color": "#1E88E5",
   "background_color": "#F5F9FC",
   "display": "standalone",
+  "orientation": "any",
   "start_url": "/",
   "scope": "/",
+  "categories": ["education", "kids", "games"],
+  "lang": "vi",
   "icons": [
     {
       "src": "/pwa-192x192.png",
