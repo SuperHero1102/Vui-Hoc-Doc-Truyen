@@ -322,7 +322,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Dad goes to the factory, grandparents are happy farming. La la la la la la la la la."
     ],
     "funFactVi": "Bé ba tuổi tự tin, vui tươi đi mẫu giáo ngoan không khóc nhè.",
-    "audioUrl": "/assets/music/chau-len-ba.mp3",
+    "audioUrl": "./assets/music/chau-len-ba.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -653,7 +653,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "With sore eyes, crying meow meow again."
     ],
     "funFactVi": "Rửa mặt bằng khăn sạch mỗi sớm giúp bé tươi vui, mắt sáng.",
-    "audioUrl": "/assets/music/rua-mat-nhu-meo.mp3",
+    "audioUrl": "./assets/music/rua-mat-nhu-meo.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -931,7 +931,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       { "start": 133.25, "end": 138.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." }
     ],
     "funFactVi": "Trường mầm non rực rỡ tiếng cười của bạn bè và cô giáo hiền.",
-    "audioUrl": "/assets/music/truong-chung-chau-la-truong-mam-non.mp3",
+    "audioUrl": "./assets/music/truong-chung-chau-la-truong-mam-non.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -1172,7 +1172,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "(Outro)"
     ],
     "funFactVi": "Bé ngoan luôn lễ phép chào hỏi người lớn khi đi và về.",
-    "audioUrl": "/assets/music/con-co-be-be.mp3",
+    "audioUrl": "./assets/music/con-co-be-be.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -1467,7 +1467,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Far apart we miss each other, close together we smile"
     ],
     "funFactVi": "Tình cảm gia đình ấm áp, cả nhà luôn sẻ chia yêu thương.",
-    "audioUrl": "/assets/music/ca-nha-thuong-nhau.mp3",
+    "audioUrl": "./assets/music/ca-nha-thuong-nhau.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -1670,7 +1670,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "When I obey, I know Grandma is happy."
     ],
     "funFactVi": "Lòng hiếu thảo, cử chỉ âu yếm bé dành cho người bà tóc bạc.",
-    "audioUrl": "/assets/music/chau-yeu-ba.mp3",
+    "audioUrl": "./assets/music/chau-yeu-ba.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -1945,7 +1945,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "When coming ashore, it flaps its wings to dry"
     ],
     "funFactVi": "Chú vịt vàng tinh nghịch xòe cánh bơi lội trong làn nước trong.",
-    "audioUrl": "/assets/music/mot-con-vit.mp3",
+    "audioUrl": "./assets/music/mot-con-vit.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -2180,7 +2180,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "(Outro)"
     ],
     "funFactVi": "Đàn cá vàng tung tăng bơi lội bắt bọ gậy giữ sạch nước.",
-    "audioUrl": "/assets/music/ca-vang-boi.mp3",
+    "audioUrl": "./assets/music/ca-vang-boi.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -2443,7 +2443,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Tạm biệt, tạm biệt cô nhé!"
     ],
     "funFactVi": "Đôi bướm vàng rực rỡ chao liệng đón gió xuân rộn ràng.",
-    "audioUrl": "/assets/music/kia-con-buom-vang.mp3",
+    "audioUrl": "./assets/music/kia-con-buom-vang.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -3014,7 +3014,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Illuminate a family"
     ],
     "funFactVi": "Ba ngọn nến tượng trưng cho ngọn lửa yêu thương gia đình.",
-    "audioUrl": "/assets/music/ba-ngon-nen-lung-linh.mp3",
+    "audioUrl": "./assets/music/ba-ngon-nen-lung-linh.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -3273,7 +3273,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Dad is everything, but when dad is tired, dad is just dad"
     ],
     "funFactVi": "Người cha luôn là điểm tựa chở che vững chãi cho con.",
-    "audioUrl": "/assets/music/bo-la-tat-ca.mp3",
+    "audioUrl": "./assets/music/bo-la-tat-ca.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -3408,7 +3408,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mother and teacher are two gentle mothers."
     ],
     "funFactVi": "Cô giáo và người mẹ là hai vầng sáng dịu hiền bên con.",
-    "audioUrl": "/assets/music/co-va-me.mp3",
+    "audioUrl": "./assets/music/co-va-me.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -3599,7 +3599,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "I gift the piggy bank two hundred every day. Ee-ah ee-ah!"
     ],
     "funFactVi": "Thói quen tiết kiệm tiền lẻ nuôi heo đất giúp bé tự lập.",
-    "audioUrl": "/assets/music/con-heo-dat.mp3",
+    "audioUrl": "./assets/music/con-heo-dat.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -3938,7 +3938,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Listening to the enchanting singing, joyfully laughing together."
     ],
     "funFactVi": "Chú ếch con chăm ngoan ngồi học bài bên bờ ao xanh.",
-    "audioUrl": "/assets/music/chu-ech-con.mp3",
+    "audioUrl": "./assets/music/chu-ech-con.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -4221,7 +4221,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "(Outro)"
     ],
     "funFactVi": "Đàn gà con lông vàng óng ả theo mẹ kiếm mồi vui vẻ.",
-    "audioUrl": "/assets/music/dan-ga-con.mp3",
+    "audioUrl": "./assets/music/dan-ga-con.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -4500,7 +4500,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Oh elephant! Oh elephant!"
     ],
     "funFactVi": "Chú voi con Tây Nguyên ngộ nghĩnh, hiền lành được buôn làng yêu quý.",
-    "audioUrl": "/assets/music/chu-voi-con-o-ban-don.mp3",
+    "audioUrl": "./assets/music/chu-voi-con-o-ban-don.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -4779,7 +4779,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "The whistling duck beats drums and blows trumpets."
     ],
     "funFactVi": "Giai điệu dân ca đồng dao Nam Bộ rộn ràng tiếng vỗ tay.",
-    "audioUrl": "/assets/music/bac-kim-thang.mp3",
+    "audioUrl": "./assets/music/bac-kim-thang.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -5022,7 +5022,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "./assets/music/covers/music_cover_ngay-dau-tien-di-hoc.webp",
     "isVocalTrack": true,
-    "audioUrl": "/assets/music/ngay-dau-tien-di-hoc.mp3"
+    "audioUrl": "./assets/music/ngay-dau-tien-di-hoc.mp3"
   },
   {
     "id": "em-di-mau-giao",
@@ -5221,7 +5221,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "./assets/music/covers/music_cover_em-di-mau-giao.webp",
     "isVocalTrack": true,
-    "audioUrl": "/assets/music/em-di-mau-giao.mp3"
+    "audioUrl": "./assets/music/em-di-mau-giao.mp3"
   },
   {
     "id": "em-yeu-truong-em",
@@ -5687,7 +5687,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "I will miss it so much, how could I forget",
       "My beloved kindergarten school!"
     ],
-    "audioUrl": "/assets/music/tam-biet-bup-be.mp3"
+    "audioUrl": "./assets/music/tam-biet-bup-be.mp3"
   },
   {
     "id": "tap-the-duc-buoi-sang",
@@ -5910,7 +5910,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Two! Stretch hands across the shoulders."
     ],
     "funFactVi": "Thể dục buổi sáng rèn luyện thể chất dẻo dai cho bé khỏe mạnh.",
-    "audioUrl": "/assets/music/tap-the-duc-buoi-sang.mp3",
+    "audioUrl": "./assets/music/tap-the-duc-buoi-sang.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -6173,7 +6173,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "./assets/music/covers/music_cover_chiec-den-ong-sao.webp",
     "isVocalTrack": true,
-    "audioUrl": "/assets/music/chiec-den-ong-sao.mp3"
+    "audioUrl": "./assets/music/chiec-den-ong-sao.mp3"
   },
   {
     "id": "trai-dat-nay-la-cua-chung-minh",
@@ -6732,7 +6732,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     ],
     "cover": "./assets/music/covers/music_cover_trai-dat-nay-la-cua-chung-minh.webp",
     "isVocalTrack": true,
-    "audioUrl": "/assets/music/trai-dat-nay-la-cua-chung-minh.mp3"
+    "audioUrl": "./assets/music/trai-dat-nay-la-cua-chung-minh.mp3"
   },
   {
     "id": "hong-dam-dau",
@@ -6915,7 +6915,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Oh so wonderfully enticing, but I don't dare."
     ],
     "funFactVi": "Bé chăm chỉ học bài đầy đủ trước khi cùng bạn ra chơi.",
-    "audioUrl": "/assets/music/hong-dam-dau.mp3",
+    "audioUrl": "./assets/music/hong-dam-dau.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -7022,7 +7022,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Bây giờ bạn đã biết bảng chữ cái ABC rồi, lần tới hãy cùng hát với tôi nhé!"
     ],
     "funFactVi": "Bài ca kinh điển giúp bé ghi nhớ trọn vẹn 26 chữ cái.",
-    "audioUrl": "/assets/music/abc-alphabet-song.mp3",
+    "audioUrl": "./assets/music/abc-alphabet-song.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -7169,7 +7169,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Lấp lánh ngôi sao nhỏ trên bầu trời cao như viên kim cương, lấp lánh ngôi sao nhỏ ôi bạn thật tuyệt vời biết bao"
     ],
     "funFactVi": "Ngôi sao nhỏ soi sáng màn đêm khơi gợi trí tò mò của bé.",
-    "audioUrl": "/assets/music/twinkle-twinkle-little-star.mp3",
+    "audioUrl": "./assets/music/twinkle-twinkle-little-star.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -7324,7 +7324,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Và trong trang trại bác có cả một chú voi to lớn, E-I-E-I-O"
     ],
     "funFactVi": "Làm quen tên gọi và tiếng kêu các loài động vật nông trại.",
-    "audioUrl": "/assets/music/old-macdonald-had-a-farm.mp3",
+    "audioUrl": "./assets/music/old-macdonald-had-a-farm.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -7623,7 +7623,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "đi khắp phố phường, đi khắp phố phường."
     ],
     "funFactVi": "Nhịp điệu sôi động mô phỏng chuyến xe buýt vui vẻ đến trường.",
-    "audioUrl": "/assets/music/the-wheels-on-the-bus.mp3",
+    "audioUrl": "./assets/music/the-wheels-on-the-bus.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -7826,7 +7826,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Cừu đen ơi có lông cừu không? Vâng ạ, vâng ạ, đầy ba túi lớn."
     ],
     "funFactVi": "Bài học chia sẻ len ấm áp cho mọi người xung quanh.",
-    "audioUrl": "/assets/music/baa-baa-black-sheep.mp3",
+    "audioUrl": "./assets/music/baa-baa-black-sheep.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -8097,7 +8097,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "hô vang hoan hô!"
     ],
     "funFactVi": "Khích lệ bé bộc lộ cảm xúc vui tươi bằng cử chỉ tay chân.",
-    "audioUrl": "/assets/music/if-youre-happy-and-you-know-it.mp3",
+    "audioUrl": "./assets/music/if-youre-happy-and-you-know-it.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -8168,7 +8168,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Chèo, chèo, chèo thuyền nhẹ trôi theo dòng suối. Vui tươi, vui tươi, vui tươi, vui tươi, cuộc đời tựa giấc mơ."
     ],
     "funFactVi": "Giai điệu êm đềm dạy bé vượt qua dòng nước nhẹ nhàng.",
-    "audioUrl": "/assets/music/row-row-row-your-boat.mp3",
+    "audioUrl": "./assets/music/row-row-row-your-boat.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -8363,7 +8363,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Đầu, vai, đầu gối và ngón chân"
     ],
     "funFactVi": "Vừa hát vừa chạm đúng bộ phận cơ thể để tăng phản xạ.",
-    "audioUrl": "/assets/music/head-shoulders-knees-and-toes.mp3",
+    "audioUrl": "./assets/music/head-shoulders-knees-and-toes.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -8550,7 +8550,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
     ],
     "funFactVi": "Dạy bé đếm lùi số lượng và nhắc nhở an toàn khi chơi.",
-    "audioUrl": "/assets/music/five-little-monkeys.mp3",
+    "audioUrl": "./assets/music/five-little-monkeys.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -8689,7 +8689,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là ai"
     ],
     "funFactVi": "Vũ điệu cá mập sôi động cả nhà cùng nhún nhảy theo nhịp.",
-    "audioUrl": "/assets/music/baby-shark.mp3",
+    "audioUrl": "./assets/music/baby-shark.mp3",
     "melodyNotes": [
       {
         "note": "D4",
@@ -8852,7 +8852,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Có một bác nông dân nuôi chú chó tên là Bingo."
     ],
     "funFactVi": "Học đánh vần từng chữ cái vui nhộn cùng chú cún Bingo.",
-    "audioUrl": "/assets/music/bingo-dog-song.mp3",
+    "audioUrl": "./assets/music/bingo-dog-song.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -9011,7 +9011,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mary có một chú cừu non với bộ lông trắng như tuyết."
     ],
     "funFactVi": "Tình bạn gắn bó thân thiết giữa cô bé Mary và chú cừu.",
-    "audioUrl": "/assets/music/mary-had-a-little-lamb.mp3",
+    "audioUrl": "./assets/music/mary-had-a-little-lamb.mp3",
     "melodyNotes": [
       {
         "note": "E4",
@@ -9114,7 +9114,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi."
     ],
     "funFactVi": "Lời ước ngày nắng ấm để bé được ra sân chơi đùa.",
-    "audioUrl": "/assets/music/rain-rain-go-away.mp3",
+    "audioUrl": "./assets/music/rain-rain-go-away.mp3",
     "melodyNotes": [
       {
         "note": "G4",
@@ -9209,7 +9209,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú liền chạy xuống."
     ],
     "funFactVi": "Làm quen với mặt đồng hồ và nhịp tích tắc thời gian.",
-    "audioUrl": "/assets/music/hickory-dickory-dock.mp3",
+    "audioUrl": "./assets/music/hickory-dickory-dock.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -9368,7 +9368,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Xin đừng mang ánh nắng của anh đi mất."
     ],
     "funFactVi": "Bày tỏ tình thương yêu vô bờ bến cha mẹ dành cho con.",
-    "audioUrl": "/assets/music/you-are-my-sunshine.mp3",
+    "audioUrl": "./assets/music/you-are-my-sunshine.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -9467,7 +9467,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "(Instrumental)"
     ],
     "funFactVi": "Ba chú mèo con biết nhận lỗi và tìm lại găng tay.",
-    "audioUrl": "/assets/music/three-little-kittens.ogg",
+    "audioUrl": "./assets/music/three-little-kittens.ogg",
     "melodyNotes": [
       {
         "note": "E4",
@@ -9534,7 +9534,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Bụp! Chồn cầy nhảy ra."
     ],
     "funFactVi": "Trò chơi hộp nhạc bất ngờ mang lại tiếng cười sảng khoái.",
-    "audioUrl": "/assets/music/pop-goes-the-weasel.mp3",
+    "audioUrl": "./assets/music/pop-goes-the-weasel.mp3",
     "melodyNotes": [
       {
         "note": "C4",
@@ -9785,7 +9785,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Điệp khúc đồng dao vui nhộn rộn rã"
     ],
     "funFactVi": "Giai điệu đồng dao về món bánh nướng thơm lừng truyền thống.",
-    "audioUrl": "/assets/music/hot-cross-buns.mp3",
+    "audioUrl": "./assets/music/hot-cross-buns.mp3",
     "melodyNotes": [
       {
         "note": "B4",

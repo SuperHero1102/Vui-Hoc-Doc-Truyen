@@ -698,7 +698,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
       }
       const audio = audioElementRef.current;
       audio.preload = 'auto';
-      audio.src = song.audioUrl;
+      audio.src = new URL(song.audioUrl, window.location.href).href;
       audio.volume = isMuted ? 0 : volumeLevel;
       audio.loop = isLooping;
 

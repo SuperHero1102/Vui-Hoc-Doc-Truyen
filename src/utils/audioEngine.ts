@@ -22,6 +22,18 @@ function getAudioContext(): AudioContext | null {
   return sharedAudioContext;
 }
 
+if (typeof window !== 'undefined') {
+  const unlockAudioContext = () => {
+    const ctx = getAudioContext();
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume().catch(() => {});
+    }
+  };
+  ['touchstart', 'touchend', 'click', 'keydown'].forEach((evt) => {
+    window.addEventListener(evt, unlockAudioContext, { once: true, passive: true });
+  });
+}
+
 export function getClientAudioCacheSize(): number {
   return clientAudioUrlCache.size;
 }
@@ -306,7 +318,7 @@ export async function fetchOrGetCachedSegmentUrl(
 
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const timeoutId = setTimeout(() => controller.abort(), 1200);
     const response = await fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

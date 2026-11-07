@@ -10,7 +10,7 @@
  * 5. Tuyệt đối không xóa hay ảnh hưởng đến tiến độ học tập, hồ sơ và cài đặt của bé (lưu trong LocalStorage).
  */
 
-const CACHE_PREFIX = 'vui-hoc-pwa-v6';
+const CACHE_PREFIX = 'vui-hoc-pwa-v7';
 const STATIC_CACHE = `${CACHE_PREFIX}-static`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media`;
 
@@ -215,7 +215,7 @@ async function runBackgroundCaching() {
           const res = await stagingCache.match(req);
           if (res) {
             const u = req.url;
-            const targetCache = u.includes('/assets/music/') || u.includes('.jpg') || u.includes('.png') || u.includes('.webp') || u.includes('.mp3')
+            const targetCache = u.includes('/assets/music/') || u.includes('.jpg') || u.includes('.png') || u.includes('.webp') || u.includes('.mp3') || u.includes('.ogg') || u.includes('.wav') || u.includes('.m4a')
               ? mediaCache
               : staticCache;
             await targetCache.put(req, res);
@@ -348,7 +348,133 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // D. Xử lý toàn bộ tài nguyên tĩnh, media, nhạc, font (Cache-First siêu tốc)
+  // D. Xử lý chuyên biệt cho ÂM THANH (Range Requests cho iOS Safari & Hoạt động 100% Offline)
+  const isAudioRequest =
+    url.pathname.includes('/assets/music/') ||
+    url.pathname.endsWith('.mp3') ||
+    url.pathname.endsWith('.ogg') ||
+    url.pathname.endsWith('.wav') ||
+    url.pathname.endsWith('.m4a') ||
+    req.destination === 'audio';
+
+  if (isAudioRequest) {
+    event.respondWith(
+      (async () => {
+        const rangeHeader = req.headers.get('range');
+        const mediaCache = await caches.open(MEDIA_CACHE);
+
+        // Tìm kiếm phản hồi đầy đủ (status 200) trong cache
+        async function findFullCachedResponse() {
+          const candidates = [
+            req,
+            req.url,
+            url.pathname,
+            getScopedUrl(url.pathname),
+            url.pathname.replace(/^\/assets\/music\//, getScopedUrl('assets/music/'))
+          ];
+          for (const key of candidates) {
+            try {
+              const res = await mediaCache.match(key);
+              if (res && res.status === 200) return res;
+            } catch {}
+          }
+          return null;
+        }
+
+        let fullRes = await findFullCachedResponse();
+
+        // Nếu chưa có trong cache và đang online: tải bản FULL 200 OK (không gửi Range lên server)
+        if (!fullRes && navigator.onLine) {
+          try {
+            const fetchTarget = getScopedUrl(url.pathname);
+            const netRes = await fetch(fetchTarget, {
+              headers: { Accept: 'audio/*,*/*' }
+            });
+            if (netRes && netRes.status === 200) {
+              await mediaCache.put(fetchTarget, netRes.clone());
+              await mediaCache.put(req.url, netRes.clone());
+              fullRes = netRes;
+            }
+          } catch {}
+        }
+
+        // Nếu vẫn không có: thử fetch trực tiếp với request gốc
+        if (!fullRes) {
+          try {
+            return await fetch(req);
+          } catch {
+            return new Response('Audio file unavailable offline', {
+              status: 503,
+              headers: { 'Content-Type': 'text/plain; charset=utf-8' }
+            });
+          }
+        }
+
+        // Đã có bản đầy đủ: chuyển thành Blob để cắt Range
+        const fullBlob = await fullRes.blob();
+        const totalSize = fullBlob.size;
+        const mimeType =
+          fullRes.headers.get('content-type') ||
+          (url.pathname.endsWith('.ogg') ? 'audio/ogg' : 'audio/mp3');
+
+        // Phục vụ Range Request (iOS Safari yêu cầu 206 Partial Content)
+        if (rangeHeader && rangeHeader.startsWith('bytes=')) {
+          const rangeSpec = rangeHeader.replace('bytes=', '').trim();
+          const parts = rangeSpec.split('-');
+          let start = parseInt(parts[0], 10);
+          let end = parts[1] ? parseInt(parts[1], 10) : totalSize - 1;
+
+          if (isNaN(start)) {
+            start = totalSize - end;
+            end = totalSize - 1;
+          }
+
+          if (start >= totalSize || end < start) {
+            return new Response(null, {
+              status: 416,
+              statusText: 'Range Not Satisfiable',
+              headers: {
+                'Content-Range': `bytes */${totalSize}`,
+                'Accept-Ranges': 'bytes'
+              }
+            });
+          }
+
+          start = Math.max(0, start);
+          end = Math.min(totalSize - 1, end);
+          const chunkSize = end - start + 1;
+          const chunkBlob = fullBlob.slice(start, end + 1, mimeType);
+
+          return new Response(chunkBlob, {
+            status: 206,
+            statusText: 'Partial Content',
+            headers: {
+              'Content-Type': mimeType,
+              'Content-Range': `bytes ${start}-${end}/${totalSize}`,
+              'Content-Length': String(chunkSize),
+              'Accept-Ranges': 'bytes',
+              'Cache-Control': 'public, max-age=31536000, immutable'
+            }
+          });
+        }
+
+        // Yêu cầu đầy đủ (không Range): trả về 200 OK kèm Accept-Ranges
+        return new Response(fullBlob, {
+          status: 200,
+          statusText: 'OK',
+          headers: {
+            'Content-Type': mimeType,
+            'Content-Length': String(totalSize),
+            'Accept-Ranges': 'bytes',
+            'Cache-Control': 'public, max-age=31536000, immutable'
+          }
+        });
+      })()
+    );
+    return;
+  }
+
+  // E. Xử lý toàn bộ tài nguyên tĩnh, media, font (Cache-First siêu tốc)
   event.respondWith(
     (async () => {
       // 1. Tìm trong cache trước (đối sánh cả Request, URL đầy đủ, và relative pathname)
