@@ -87,6 +87,22 @@ export interface NormalizedLyricsResult {
  * Nếu bài chưa có mốc thật, tuyệt đối không chia đều hay tự tạo số giả.
  */
 export function normalizeSongLyricLines(song: KidsSong): NormalizedLyricsResult {
+  // Bài không có bản thu audioUrl hoặc bản thu chỉ có nhạc cụ không lời: hiển thị lời tĩnh, không tích, không hiệu ứng
+  if (!song.audioUrl || song.id === 'three-little-kittens') {
+    if (song.lyrics && song.lyrics.length > 0) {
+      return {
+        lines: song.lyrics.map((line, idx) => ({
+          start: 0,
+          end: 0,
+          vi: line,
+          en: song.englishTranslation?.[idx] || '',
+        })),
+        hasRealTimestamps: false,
+      };
+    }
+    return { lines: [], hasRealTimestamps: false };
+  }
+
   if (song.lyricsData && song.lyricsData.length > 0) {
     const hasReal = song.lyricsData.some((l) => l.start > 0 || l.end > 0);
     const distinctStarts = new Set(song.lyricsData.map((l) => l.start));
@@ -889,30 +905,30 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Trường của cháu đây là trường mầm non!"
     ],
     "lyricsData": [
-      {
-        "start": 15.65,
-        "end": 20.35,
-        "vi": "Ai hỏi cháu cháu học trường nào đây?",
-        "en": "Who is asking where is my preschool?"
-      },
-      {
-        "start": 20.55,
-        "end": 24.25,
-        "vi": "Bé mà ngoan lại múa hát thật hay!",
-        "en": "Come here and visit, our school is so lovely"
-      },
-      {
-        "start": 24.65,
-        "end": 28.95,
-        "vi": "Cô là mẹ và các cháu là con",
-        "en": "Lots of pretty toys and kind teacher"
-      },
-      {
-        "start": 29.25,
-        "end": 33.35,
-        "vi": "Trường của cháu đây là trường mầm non!",
-        "en": "Our school is a cheerful kindergarten!"
-      }
+      { "start": 16.35, "end": 20.5, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 20.35, "end": 24.7, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 24.55, "end": 29.0, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 28.85, "end": 34.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
+      { "start": 33.85, "end": 37.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 37.65, "end": 42.2, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 42.05, "end": 46.5, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 46.35, "end": 51.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
+      { "start": 59.85, "end": 64.0, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 63.85, "end": 68.2, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 68.05, "end": 72.7, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 72.55, "end": 77.3, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
+      { "start": 77.15, "end": 81.3, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 81.15, "end": 85.6, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 85.45, "end": 89.9, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 89.75, "end": 95.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
+      { "start": 103.45, "end": 107.4, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 107.25, "end": 111.6, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 111.45, "end": 116.0, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 115.85, "end": 120.8, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
+      { "start": 120.65, "end": 124.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
+      { "start": 124.65, "end": 129.1, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
+      { "start": 128.95, "end": 133.4, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
+      { "start": 133.25, "end": 138.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." }
     ],
     "funFactVi": "Trường mầm non rực rỡ tiếng cười của bạn bè và cô giáo hiền.",
     "audioUrl": "/assets/music/truong-chung-chau-la-truong-mam-non.mp3",
@@ -8142,18 +8158,10 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream."
     ],
     "lyricsData": [
-      {
-        "start": 4.95,
-        "end": 13.2,
-        "vi": "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.",
-        "en": "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream."
-      },
-      {
-        "start": 17.15,
-        "end": 25.5,
-        "vi": "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.",
-        "en": "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream."
-      }
+      { "start": 4.95, "end": 8.8, "vi": "Chèo thuyền chèo thuyền nhẹ trôi theo dòng nước", "en": "Row, row, row your boat gently down the stream" },
+      { "start": 8.95, "end": 13.0, "vi": "Vui tươi vui tươi vui tươi vui tươi, cuộc đời tựa giấc mơ", "en": "Merrily, merrily, merrily, merrily, life is but a dream" },
+      { "start": 17.25, "end": 21.0, "vi": "Chèo thuyền chèo thuyền nhẹ trôi theo dòng nước", "en": "Row, row, row your boat gently down the stream" },
+      { "start": 21.25, "end": 25.5, "vi": "Vui tươi vui tươi vui tươi vui tươi, cuộc đời tựa giấc mơ", "en": "Merrily, merrily, merrily, merrily, life is but a dream" }
     ],
     "englishTranslation": [
       "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.",
@@ -9508,18 +9516,22 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 16,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Half a pound of tuppenny rice, half a pound of treacle. That's the way the money goes,"
+      "Half a pound of tuppenny rice,",
+      "Half a pound of treacle,",
+      "That's the way the money goes,",
+      "Pop! Goes the weasel."
     ],
     "lyricsData": [
-      {
-        "start": 0.0,
-        "end": 10.5,
-        "vi": "Half a pound of tuppenny rice, half a pound of treacle. That's the way the money goes,",
-        "en": "Half a pound of tuppenny rice, half a pound of treacle. That's the way the money goes,"
-      }
+      { "start": 0.65, "end": 3.45, "en": "Half a pound of tuppenny rice,", "vi": "Nửa pound gạo hai xu," },
+      { "start": 3.41, "end": 6.35, "en": "Half a pound of treacle,", "vi": "Nửa pound mật mía," },
+      { "start": 6.30, "end": 9.90, "en": "That's the way the money goes,", "vi": "Tiền cứ thế mà bay đi," },
+      { "start": 10.45, "end": 13.20, "en": "Pop! Goes the weasel.", "vi": "Bụp! Chồn cầy nhảy ra." }
     ],
     "englishTranslation": [
-      "Half a pound of tuppenny rice, half a pound of treacle. That's the way the money goes,"
+      "Half a pound of tuppenny rice,",
+      "Half a pound of treacle,",
+      "That's the way the money goes,",
+      "Pop! Goes the weasel."
     ],
     "funFactVi": "Trò chơi hộp nhạc bất ngờ mang lại tiếng cười sảng khoái.",
     "audioUrl": "/assets/music/pop-goes-the-weasel.mp3",

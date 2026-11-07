@@ -1017,7 +1017,7 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Một Con Vịt",
     "titleEn": "One Little Duck",
     "emoji": "🦆",
-    "badgeVi": "Quen thuộc & Đáng yêu",
+    "badgeVi": "Dễ & Rất vui",
     "category": "vietnam",
     "bpm": 108,
     "notes": [
@@ -1028,91 +1028,91 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "con",
         "syllableEn": "lit-",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "vịt",
         "syllableEn": "tle",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 0,
         "syllableVi": "xòe",
         "syllableEn": "duck",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "ra",
-        "syllableEn": "flaps",
+        "syllableEn": "spreads",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "hai",
+        "syllableEn": "out",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "hai",
-        "syllableEn": "two",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
         "syllableVi": "cái",
-        "syllableEn": "wide",
+        "syllableEn": "both",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "cánh,",
         "syllableEn": "wings,",
         "beats": 2
       },
       {
-        "keyIdx": 3,
+        "keyIdx": 5,
         "syllableVi": "Nó",
         "syllableEn": "It",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "kêu",
         "syllableEn": "cries",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 0,
         "syllableVi": "rằng:",
         "syllableEn": "out:",
         "beats": 1
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "Cạp",
+        "keyIdx": 5,
+        "syllableVi": "Cáp",
         "syllableEn": "Quack",
         "beats": 0.5
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "cạp",
+        "keyIdx": 5,
+        "syllableVi": "cáp",
         "syllableEn": "quack",
         "beats": 0.5
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "cạp,",
+        "keyIdx": 5,
+        "syllableVi": "cáp,",
         "syllableEn": "quack,",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 0,
         "syllableVi": "cạp",
         "syllableEn": "quack",
         "beats": 0.5
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 0,
         "syllableVi": "cạp",
         "syllableEn": "quack",
         "beats": 0.5
@@ -1126,97 +1126,97 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 0,
         "syllableVi": "Gặp",
-        "syllableEn": "See-",
+        "syllableEn": "In",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "hồ",
-        "syllableEn": "ing",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "nước",
         "syllableEn": "the",
         "beats": 1
       },
       {
-        "keyIdx": 5,
-        "syllableVi": "nó",
-        "syllableEn": "pond,",
+        "keyIdx": 0,
+        "syllableVi": "nước",
+        "syllableEn": "pond",
         "beats": 1
       },
       {
-        "keyIdx": 5,
-        "syllableVi": "bì",
+        "keyIdx": 0,
+        "syllableVi": "nó",
         "syllableEn": "it",
         "beats": 1
       },
       {
-        "keyIdx": 4,
-        "syllableVi": "bà",
+        "keyIdx": 3,
+        "syllableVi": "bì",
         "syllableEn": "splish-",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "bì",
+        "syllableVi": "bà",
         "syllableEn": "es",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
+        "syllableVi": "bì",
+        "syllableEn": "and",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
         "syllableVi": "bõm,",
-        "syllableEn": "in,",
+        "syllableEn": "splashes,",
         "beats": 2
       },
       {
-        "keyIdx": 3,
+        "keyIdx": 5,
         "syllableVi": "Lúc",
-        "syllableEn": "When",
+        "syllableEn": "Up",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "lên",
-        "syllableEn": "it",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "bờ",
-        "syllableEn": "walks",
+        "syllableEn": "on",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "vẫy",
-        "syllableEn": "a-",
+        "syllableVi": "bờ",
+        "syllableEn": "shore",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 5,
+        "syllableVi": "vẫy",
+        "syllableEn": "shakes",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "cái",
+        "syllableEn": "its",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
         "syllableVi": "cánh",
-        "syllableEn": "shore",
+        "syllableEn": "wings",
         "beats": 1
       },
       {
         "keyIdx": 2,
         "syllableVi": "cho",
-        "syllableEn": "it",
+        "syllableEn": "un-",
         "beats": 1
       },
       {
-        "keyIdx": 1,
-        "syllableVi": "thật",
-        "syllableEn": "shakes",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "khô!",
-        "syllableEn": "dry!",
+        "syllableEn": "til dry!",
         "beats": 2
       }
     ]
@@ -1226,7 +1226,7 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Ngôi Sao Lấp Lánh",
     "titleEn": "Twinkle Twinkle Little Star",
     "emoji": "⭐",
-    "badgeVi": "Giai điệu êm dịu",
+    "badgeVi": "Quốc tế",
     "category": "international",
     "bpm": 100,
     "notes": [
@@ -1268,133 +1268,133 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       },
       {
         "keyIdx": 4,
-        "syllableVi": "trên trời,",
+        "syllableVi": "trời,",
         "syllableEn": "star,",
         "beats": 2
       },
       {
         "keyIdx": 3,
-        "syllableVi": "Soi",
+        "syllableVi": "Như",
         "syllableEn": "How",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "đêm",
+        "syllableVi": "kim",
         "syllableEn": "I",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "thâu",
+        "syllableVi": "cương",
         "syllableEn": "won-",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "như",
+        "syllableVi": "sáng",
         "syllableEn": "der",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "kim",
+        "syllableVi": "giữa",
         "syllableEn": "what",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "cương",
+        "syllableVi": "bầu",
         "syllableEn": "you",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "sáng,",
-        "syllableEn": "are!",
+        "syllableVi": "trời,",
+        "syllableEn": "are,",
         "beats": 2
       },
       {
         "keyIdx": 4,
-        "syllableVi": "Sao",
+        "syllableVi": "Chiếu",
         "syllableEn": "Up",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "lung",
+        "syllableVi": "muôn",
         "syllableEn": "a-",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "linh",
+        "syllableVi": "nơi",
         "syllableEn": "bove",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "chiếu",
+        "syllableVi": "ánh",
         "syllableEn": "the",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "khắp",
+        "syllableVi": "sáng",
         "syllableEn": "world",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "gian",
+        "syllableVi": "lung",
         "syllableEn": "so",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "trần,",
+        "syllableVi": "linh,",
         "syllableEn": "high,",
         "beats": 2
       },
       {
         "keyIdx": 4,
-        "syllableVi": "Đưa",
+        "syllableVi": "Sáng",
         "syllableEn": "Like",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "em",
+        "syllableVi": "đêm",
         "syllableEn": "a",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "vào",
+        "syllableVi": "thâu",
         "syllableEn": "dia-",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "giấc",
+        "syllableVi": "lấp",
         "syllableEn": "mond",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "ngủ",
+        "syllableVi": "lánh",
         "syllableEn": "in",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "êm",
+        "syllableVi": "reo",
         "syllableEn": "the",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "đềm,",
+        "syllableVi": "vui,",
         "syllableEn": "sky,",
         "beats": 2
       },
@@ -1436,8 +1436,50 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       },
       {
         "keyIdx": 4,
-        "syllableVi": "trên trời!",
-        "syllableEn": "star!",
+        "syllableVi": "trời,",
+        "syllableEn": "star,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "Như",
+        "syllableEn": "How",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "kim",
+        "syllableEn": "I",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "cương",
+        "syllableEn": "won-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "sáng",
+        "syllableEn": "der",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "giữa",
+        "syllableEn": "what",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "bầu",
+        "syllableEn": "you",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "trời!",
+        "syllableEn": "are!",
         "beats": 2
       }
     ]
@@ -1447,7 +1489,7 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Tập Tầm Vông",
     "titleEn": "Tap Tam Vong Folk Game",
     "emoji": "✊",
-    "badgeVi": "Trò chơi đoán tay",
+    "badgeVi": "Đồng dao",
     "category": "vietnam",
     "bpm": 104,
     "notes": [
@@ -1472,29 +1514,29 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 4,
         "syllableVi": "tay",
-        "syllableEn": "hand",
+        "syllableEn": "which",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 2,
         "syllableVi": "không",
-        "syllableEn": "emp-",
+        "syllableEn": "hand",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "tay",
-        "syllableEn": "ty,",
+        "syllableEn": "has",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 5,
         "syllableVi": "có,",
-        "syllableEn": "full,",
+        "syllableEn": "it,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "Tập",
         "syllableEn": "Tap",
         "beats": 1
@@ -1506,51 +1548,9 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 4,
         "syllableVi": "vó,",
         "syllableEn": "vo,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "tay",
-        "syllableEn": "hand",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "có",
-        "syllableEn": "full,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "tay",
-        "syllableEn": "emp-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "không,",
-        "syllableEn": "ty,",
-        "beats": 2
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "Tay",
-        "syllableEn": "Which",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "nào",
-        "syllableEn": "hand",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "có,",
-        "syllableEn": "has,",
         "beats": 1
       },
       {
@@ -1561,12 +1561,114 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       },
       {
         "keyIdx": 5,
+        "syllableVi": "có",
+        "syllableEn": "hand",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "tay",
+        "syllableEn": "is",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "không,",
+        "syllableEn": "free,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "Mời",
+        "syllableEn": "Come",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "các",
+        "syllableEn": "on",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "bạn,",
+        "syllableEn": "friends,",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "đoán",
+        "syllableEn": "guess",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "sao",
+        "syllableEn": "which",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "cho",
+        "syllableEn": "hand",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "trúng,",
+        "syllableEn": "now,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "Tập",
+        "syllableEn": "Tap",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "tầm",
+        "syllableEn": "tam",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "vông",
+        "syllableEn": "vong",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "tay",
+        "syllableEn": "which",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
         "syllableVi": "nào",
         "syllableEn": "hand",
         "beats": 1
       },
       {
-        "keyIdx": 7,
+        "keyIdx": 3,
+        "syllableVi": "có",
+        "syllableEn": "has",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "đố",
+        "syllableEn": "and",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "tay",
+        "syllableEn": "which",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
         "syllableVi": "không?",
         "syllableEn": "none?",
         "beats": 2
@@ -1574,25 +1676,25 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 4,
         "syllableVi": "Có",
-        "syllableEn": "Has",
+        "syllableEn": "Yes",
         "beats": 1
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "có",
-        "syllableEn": "has",
-        "beats": 1
+        "keyIdx": 4,
+        "syllableVi": "có,",
+        "syllableEn": "yes,",
+        "beats": 2
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 0,
         "syllableVi": "không",
-        "syllableEn": "none",
+        "syllableEn": "no",
         "beats": 1
       },
       {
         "keyIdx": 0,
         "syllableVi": "không!",
-        "syllableEn": "none!",
+        "syllableEn": "no!",
         "beats": 2
       }
     ]
@@ -1763,153 +1865,315 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Chuông Reo Vang",
     "titleEn": "Jingle Bells",
     "emoji": "🔔",
-    "badgeVi": "Giáng sinh rộn ràng",
+    "badgeVi": "Giáng sinh",
     "category": "international",
     "bpm": 112,
     "notes": [
       {
         "keyIdx": 2,
-        "syllableVi": "Jin-",
+        "syllableVi": "Chuông",
         "syllableEn": "Jin-",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "gle",
+        "syllableVi": "reo",
         "syllableEn": "gle",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "bells,",
+        "syllableVi": "vang,",
         "syllableEn": "bells,",
         "beats": 2
       },
       {
         "keyIdx": 2,
-        "syllableVi": "jin-",
+        "syllableVi": "chuông",
         "syllableEn": "jin-",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "gle",
+        "syllableVi": "reo",
         "syllableEn": "gle",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "bells,",
+        "syllableVi": "vang,",
         "syllableEn": "bells,",
         "beats": 2
       },
       {
         "keyIdx": 2,
-        "syllableVi": "jin-",
+        "syllableVi": "chuông",
         "syllableEn": "jin-",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "gle",
+        "syllableVi": "reo",
         "syllableEn": "gle",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "all",
+        "syllableVi": "khắp",
         "syllableEn": "all",
         "beats": 1.5
       },
       {
         "keyIdx": 1,
-        "syllableVi": "the",
+        "syllableVi": "nơi",
         "syllableEn": "the",
         "beats": 0.5
       },
       {
         "keyIdx": 2,
-        "syllableVi": "way,",
-        "syllableEn": "way,",
-        "beats": 3
+        "syllableVi": "nơi!",
+        "syllableEn": "way!",
+        "beats": 4
       },
       {
         "keyIdx": 3,
-        "syllableVi": "Oh",
+        "syllableVi": "Nghe",
         "syllableEn": "Oh",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "what",
+        "syllableVi": "rộn",
         "syllableEn": "what",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "fun",
+        "syllableVi": "rã",
         "syllableEn": "fun",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "it",
+        "syllableVi": "tiếng",
         "syllableEn": "it",
         "beats": 1
       },
       {
         "keyIdx": 3,
-        "syllableVi": "is",
+        "syllableVi": "ca",
         "syllableEn": "is",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "to",
+        "syllableVi": "vang",
         "syllableEn": "to",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "ride",
+        "syllableVi": "lừng",
         "syllableEn": "ride",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "in",
+        "syllableVi": "bốn",
+        "syllableEn": "in",
+        "beats": 0.5
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "phương",
         "syllableEn": "a",
+        "beats": 0.5
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "xa",
+        "syllableEn": "one",
         "beats": 1
       },
       {
-        "keyIdx": 4,
-        "syllableVi": "one",
+        "keyIdx": 1,
+        "syllableVi": "xôi",
         "syllableEn": "horse",
         "beats": 1
       },
       {
-        "keyIdx": 4,
-        "syllableVi": "horse",
+        "keyIdx": 1,
+        "syllableVi": "kìa",
         "syllableEn": "o-",
         "beats": 1
       },
       {
-        "keyIdx": 3,
-        "syllableVi": "o-",
+        "keyIdx": 2,
+        "syllableVi": "hỡi",
         "syllableEn": "pen",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "pen",
-        "syllableEn": "sleigh!",
+        "syllableVi": "bé",
+        "syllableEn": "sleigh,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "ơi!",
+        "syllableEn": "hey!",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "Chuông",
+        "syllableEn": "Jin-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "reo",
+        "syllableEn": "gle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "vang,",
+        "syllableEn": "bells,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "chuông",
+        "syllableEn": "jin-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "reo",
+        "syllableEn": "gle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "vang,",
+        "syllableEn": "bells,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "chuông",
+        "syllableEn": "jin-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "reo",
+        "syllableEn": "gle",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "sleigh!",
+        "syllableVi": "khắp",
+        "syllableEn": "all",
+        "beats": 1.5
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "nơi",
+        "syllableEn": "the",
+        "beats": 0.5
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "nơi!",
+        "syllableEn": "way!",
+        "beats": 4
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "Đêm",
+        "syllableEn": "Oh",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "giáng",
+        "syllableEn": "what",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "sinh",
+        "syllableEn": "fun",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "an",
+        "syllableEn": "it",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "lành",
+        "syllableEn": "is",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "cùng",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "ngân",
+        "syllableEn": "ride",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "vang",
+        "syllableEn": "in",
+        "beats": 0.5
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "tiếng",
+        "syllableEn": "a",
+        "beats": 0.5
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "ca",
+        "syllableEn": "one",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "mừng",
+        "syllableEn": "horse",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "vui",
+        "syllableEn": "o-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chan",
+        "syllableEn": "pen",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "hòa!",
         "syllableEn": "sleigh!",
-        "beats": 2
+        "beats": 4
       }
     ]
   },
@@ -1918,38 +2182,38 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Cả Nhà Thương Nhau",
     "titleEn": "We Love Each Other",
     "emoji": "👨‍👩‍👧",
-    "badgeVi": "Gia đình yêu thương",
+    "badgeVi": "Gia đình",
     "category": "vietnam",
     "bpm": 96,
     "notes": [
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "Ba",
         "syllableEn": "Dad",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "thương",
         "syllableEn": "loves",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "con",
-        "syllableEn": "child",
+        "syllableEn": "me",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 1,
         "syllableVi": "vì",
-        "syllableEn": "cause",
+        "syllableEn": "for",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "con",
-        "syllableEn": "you",
+        "syllableEn": "I",
         "beats": 1
       },
       {
@@ -1959,9 +2223,9 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "mẹ,",
-        "syllableEn": "like mom,",
+        "syllableEn": "mom,",
         "beats": 2
       },
       {
@@ -1971,51 +2235,51 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "thương",
         "syllableEn": "loves",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 3,
         "syllableVi": "con",
-        "syllableEn": "child",
+        "syllableEn": "me",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 4,
         "syllableVi": "vì",
-        "syllableEn": "cause",
+        "syllableEn": "for",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 7,
         "syllableVi": "con",
-        "syllableEn": "you",
+        "syllableEn": "I",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 5,
         "syllableVi": "giống",
         "syllableEn": "look",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "ba,",
-        "syllableEn": "like dad,",
+        "syllableEn": "dad,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "Cả",
-        "syllableEn": "All",
+        "syllableEn": "Our",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "nhà",
-        "syllableEn": "our",
+        "syllableEn": "whole",
         "beats": 1
       },
       {
@@ -2027,73 +2291,67 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 4,
         "syllableVi": "cùng",
-        "syllableEn": "we",
+        "syllableEn": "loves",
         "beats": 1
       },
       {
         "keyIdx": 5,
         "syllableVi": "thương",
-        "syllableEn": "love",
+        "syllableEn": "each",
         "beats": 1
       },
       {
         "keyIdx": 7,
         "syllableVi": "yêu",
-        "syllableEn": "each",
+        "syllableEn": "o-",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 7,
         "syllableVi": "nhau,",
-        "syllableEn": "oth-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "nhau,",
-        "syllableEn": "er,",
+        "syllableEn": "ther,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 5,
         "syllableVi": "Xa",
         "syllableEn": "Far",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "là",
-        "syllableEn": "a-",
+        "syllableEn": "we",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 5,
         "syllableVi": "nhớ,",
-        "syllableEn": "way",
+        "syllableEn": "miss,",
         "beats": 1.5
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 7,
         "syllableVi": "gần",
         "syllableEn": "near",
-        "beats": 1
+        "beats": 0.5
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 0,
         "syllableVi": "nhau",
         "syllableEn": "we",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "là",
-        "syllableEn": "laugh",
+        "syllableEn": "all",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "cười!",
-        "syllableEn": "cheer!",
+        "syllableEn": "smile!",
         "beats": 2
       }
     ]
@@ -2102,39 +2360,39 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "id": "chau_len_ba",
     "titleVi": "Cháu Lên Ba",
     "titleEn": "I Am Three Years Old",
-    "emoji": "👧",
-    "badgeVi": "Bé ngoan đi học",
+    "emoji": "🎒",
+    "badgeVi": "Mầm non",
     "category": "vietnam",
     "bpm": 104,
     "notes": [
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "Cháu",
-        "syllableEn": "I'm",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "lên",
-        "syllableEn": "three",
+        "syllableEn": "I",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "ba",
-        "syllableEn": "years",
+        "syllableVi": "lên",
+        "syllableEn": "am",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "ba,",
+        "syllableEn": "three,",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "cháu",
-        "syllableEn": "old,",
+        "syllableEn": "I",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "đi",
-        "syllableEn": "off",
+        "syllableEn": "go",
         "beats": 1
       },
       {
@@ -2144,7 +2402,7 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 5,
         "syllableVi": "giáo,",
         "syllableEn": "school,",
         "beats": 2
@@ -2156,43 +2414,49 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "thương",
         "syllableEn": "er",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 5,
         "syllableVi": "cháu",
         "syllableEn": "loves",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "vì",
         "syllableEn": "me",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 5,
+        "syllableVi": "cháu",
+        "syllableEn": "'cause",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
         "syllableVi": "không",
-        "syllableEn": "cause",
+        "syllableEn": "I",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 7,
         "syllableVi": "khóc",
-        "syllableEn": "no",
+        "syllableEn": "don't",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "nhè,",
-        "syllableEn": "tears,",
+        "syllableEn": "cry,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "Không",
         "syllableEn": "No",
         "beats": 1
@@ -2200,19 +2464,19 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 4,
         "syllableVi": "khóc",
-        "syllableEn": "cry-",
+        "syllableEn": "more",
         "beats": 1
       },
       {
         "keyIdx": 5,
         "syllableVi": "nhè",
-        "syllableEn": "ing",
+        "syllableEn": "tears",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "để",
-        "syllableEn": "so",
+        "syllableEn": "for",
         "beats": 1
       },
       {
@@ -2222,266 +2486,290 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 7,
-        "syllableVi": "trồng",
-        "syllableEn": "plants",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "cây",
-        "syllableEn": "green",
-        "beats": 1
-      },
-      {
         "keyIdx": 4,
+        "syllableVi": "trồng",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "cây",
+        "syllableEn": "farm",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
         "syllableVi": "trái,",
-        "syllableEn": "trees,",
+        "syllableEn": "fruits,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "Ba",
         "syllableEn": "Dad",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "vào",
         "syllableEn": "works",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 5,
         "syllableVi": "nhà",
-        "syllableEn": "hard,",
+        "syllableEn": "at",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 4,
         "syllableVi": "máy,",
+        "syllableEn": "plant,",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "ông",
         "syllableEn": "grand-",
         "beats": 1
       },
       {
-        "keyIdx": 1,
-        "syllableVi": "ông",
-        "syllableEn": "ma",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "bà",
-        "syllableEn": "farms",
+        "syllableEn": "pa",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 3,
         "syllableVi": "vui",
-        "syllableEn": "so",
+        "syllableEn": "plows",
         "beats": 1
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "cấy cày!",
-        "syllableEn": "free!",
+        "keyIdx": 4,
+        "syllableVi": "cấy",
+        "syllableEn": "the",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "cày!",
+        "syllableEn": "field!",
+        "beats": 2
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "Là",
+        "syllableEn": "La",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "lá",
+        "syllableEn": "la",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "la,",
+        "syllableEn": "la,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "la",
+        "syllableEn": "la",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "là",
+        "syllableEn": "la",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "là",
+        "syllableEn": "la",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "lá",
+        "syllableEn": "la",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "la!",
+        "syllableEn": "la!",
         "beats": 2
       }
     ]
   },
   {
-    "id": "con_co_be_be",
-    "titleVi": "Con Cò Bé Bé",
-    "titleEn": "Little White Stork",
-    "emoji": "🦩",
-    "badgeVi": "Giai điệu thân thương",
-    "category": "vietnam",
-    "bpm": 100,
+    "id": "mary_lamb",
+    "titleVi": "Bé Và Chú Cừu Nhỏ",
+    "titleEn": "Mary Had a Little Lamb",
+    "emoji": "🐑",
+    "badgeVi": "Quốc tế",
+    "category": "international",
+    "bpm": 104,
     "notes": [
       {
-        "keyIdx": 0,
-        "syllableVi": "Con",
-        "syllableEn": "Lit-",
+        "keyIdx": 2,
+        "syllableVi": "Bé",
+        "syllableEn": "Ma-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chăn",
+        "syllableEn": "ry",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "cò",
+        "syllableVi": "ngoan",
+        "syllableEn": "had",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chú",
+        "syllableEn": "a",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "cừu",
+        "syllableEn": "lit-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "nhỏ",
         "syllableEn": "tle",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "bé",
+        "syllableVi": "xinh,",
+        "syllableEn": "lamb,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chú",
+        "syllableEn": "lit-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "cừu",
+        "syllableEn": "tle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "xinh,",
+        "syllableEn": "lamb,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "chú",
+        "syllableEn": "lit-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "cừu",
+        "syllableEn": "tle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "xinh,",
+        "syllableEn": "lamb,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "Bé",
+        "syllableEn": "Ma-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chăn",
+        "syllableEn": "ry",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "ngoan",
+        "syllableEn": "had",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "chú",
+        "syllableEn": "a",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "cừu",
+        "syllableEn": "lit-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "nhỏ",
+        "syllableEn": "tle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "xinh",
+        "syllableEn": "lamb",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "ngoan,",
+        "syllableEn": "good,",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "Lông",
+        "syllableEn": "its",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "trắng",
+        "syllableEn": "fleece",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "như",
+        "syllableEn": "was",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "là",
         "syllableEn": "white",
         "beats": 1
       },
       {
-        "keyIdx": 4,
-        "syllableVi": "bé,",
-        "syllableEn": "stork,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "nó",
-        "syllableEn": "sits",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "đậu",
-        "syllableEn": "on",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "cành",
-        "syllableEn": "bam-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "tre,",
-        "syllableEn": "boo,",
-        "beats": 2
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "Đi",
-        "syllableEn": "Leav-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "không",
-        "syllableEn": "ing",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "hỏi",
-        "syllableEn": "with-",
-        "beats": 1
-      },
-      {
         "keyIdx": 0,
-        "syllableVi": "mẹ,",
-        "syllableEn": "out,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "biết",
-        "syllableEn": "know-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "đi",
-        "syllableEn": "ing",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "đường nào?",
-        "syllableEn": "the way?",
-        "beats": 2
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "Khi",
-        "syllableEn": "When",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "đi",
-        "syllableEn": "I",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "em",
-        "syllableEn": "go,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "hỏi,",
-        "syllableEn": "ask,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "khi",
-        "syllableEn": "when",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "về",
-        "syllableEn": "I",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "em",
-        "syllableEn": "come,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "chào,",
-        "syllableEn": "bow,",
-        "beats": 2
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "Miệng",
-        "syllableEn": "Smil-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "em",
-        "syllableEn": "ing",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "chúm",
-        "syllableEn": "bright-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "chím,",
-        "syllableEn": "ly,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "mẹ",
-        "syllableEn": "mom",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "yêu",
-        "syllableEn": "loves",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "không",
-        "syllableEn": "me",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
-        "syllableVi": "nào!",
-        "syllableEn": "so!",
+        "syllableVi": "tuyết!",
+        "syllableEn": "as snow!",
         "beats": 2
       }
     ]
@@ -2490,127 +2778,127 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "id": "bac_kim_thang",
     "titleVi": "Bắc Kim Thang",
     "titleEn": "Bac Kim Thang Folk Song",
-    "emoji": "🎋",
-    "badgeVi": "Đồng dao dân gian",
+    "emoji": "🪵",
+    "badgeVi": "Dân ca",
     "category": "vietnam",
     "bpm": 110,
     "notes": [
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "Bắc",
         "syllableEn": "Bac",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "kim",
-        "syllableEn": "Kim",
+        "syllableEn": "kim",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "thang,",
-        "syllableEn": "Thang,",
+        "syllableEn": "thang,",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "cà",
-        "syllableEn": "sweet",
+        "syllableEn": "ca",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "lang",
-        "syllableEn": "pump-",
+        "syllableEn": "lang",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "bí",
-        "syllableEn": "kin",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "rợ,",
-        "syllableEn": "vine,",
-        "beats": 2
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "Cột",
-        "syllableEn": "Tie",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "qua",
-        "syllableEn": "the",
+        "syllableEn": "bi",
         "beats": 1
       },
       {
         "keyIdx": 1,
+        "syllableVi": "rợ,",
+        "syllableEn": "ro,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "Cột",
+        "syllableEn": "Cot",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "qua",
+        "syllableEn": "qua",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
         "syllableVi": "kèo,",
-        "syllableEn": "beam,",
+        "syllableEn": "keo,",
         "beats": 1
       },
       {
         "keyIdx": 0,
         "syllableVi": "là",
-        "syllableEn": "and",
+        "syllableEn": "la",
         "beats": 1
       },
       {
         "keyIdx": 1,
         "syllableVi": "kèo",
-        "syllableEn": "cross",
+        "syllableEn": "keo",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "qua",
-        "syllableEn": "the",
+        "syllableEn": "qua",
         "beats": 1
       },
       {
         "keyIdx": 0,
         "syllableVi": "cột,",
-        "syllableEn": "pole,",
+        "syllableEn": "cot,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 5,
         "syllableVi": "Chú",
-        "syllableEn": "Mis-",
+        "syllableEn": "Oil",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 5,
         "syllableVi": "bán",
-        "syllableEn": "ter",
+        "syllableEn": "man",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 0,
         "syllableVi": "dầu,",
-        "syllableEn": "oil,",
+        "syllableEn": "falls,",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 1,
         "syllableVi": "qua",
-        "syllableEn": "falls",
+        "syllableEn": "cross-",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 0,
         "syllableVi": "cầu",
-        "syllableEn": "on",
+        "syllableEn": "ing",
         "beats": 1
       },
       {
-        "keyIdx": 7,
+        "keyIdx": 0,
         "syllableVi": "mà",
         "syllableEn": "the",
         "beats": 1
@@ -2622,45 +2910,153 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 5,
         "syllableVi": "Chú",
-        "syllableEn": "Mis-",
+        "syllableEn": "Frog",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 5,
         "syllableVi": "bán",
-        "syllableEn": "ter",
+        "syllableEn": "man",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "ếch,",
+        "syllableEn": "stays,",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "ếch,",
-        "syllableEn": "frog,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 0,
         "syllableVi": "ở",
-        "syllableEn": "stays",
+        "syllableEn": "won-",
         "beats": 1
       },
       {
         "keyIdx": 1,
         "syllableVi": "lại",
-        "syllableEn": "right",
+        "syllableEn": "der-",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "làm",
-        "syllableEn": "by",
+        "syllableEn": "ing",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "chi",
+        "syllableEn": "why",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "nào,",
+        "syllableEn": "now,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "Con",
+        "syllableEn": "Lit-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "le",
+        "syllableEn": "tle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "le",
+        "syllableEn": "teal",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "đánh",
+        "syllableEn": "beats",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "trống",
+        "syllableEn": "the",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "thổi",
+        "syllableEn": "joy-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "kèn",
+        "syllableEn": "ful",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "chi!",
-        "syllableEn": "here!",
+        "syllableVi": "vang,",
+        "syllableEn": "drum,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "Con",
+        "syllableEn": "Cuc-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "bìm",
+        "syllableEn": "koo",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "bịp",
+        "syllableEn": "bird",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "thổi",
+        "syllableEn": "plays",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "tò",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "tí",
+        "syllableEn": "ti",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "te",
+        "syllableEn": "te",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "tò",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "te!",
+        "syllableEn": "te!",
         "beats": 2
       }
     ]
@@ -2670,7 +3066,7 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Đàn Gà Con",
     "titleEn": "Little Yellow Chicks",
     "emoji": "🐥",
-    "badgeVi": "Vui tươi nhí nhảnh",
+    "badgeVi": "Vui nhộn",
     "category": "vietnam",
     "bpm": 104,
     "notes": [
@@ -2681,43 +3077,49 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "kìa",
         "syllableEn": "at",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "đàn",
         "syllableEn": "the",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "gà",
-        "syllableEn": "lit-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "con",
-        "syllableEn": "tle",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "lông",
         "syllableEn": "yel-",
         "beats": 1
       },
       {
+        "keyIdx": 0,
+        "syllableVi": "con",
+        "syllableEn": "low",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "lông",
+        "syllableEn": "lit-",
+        "beats": 1
+      },
+      {
         "keyIdx": 2,
-        "syllableVi": "vàng,",
-        "syllableEn": "low chicks,",
+        "syllableVi": "vàng",
+        "syllableEn": "tle",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "tươi,",
+        "syllableEn": "chicks,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "Đi",
         "syllableEn": "Fol-",
         "beats": 1
@@ -2725,43 +3127,49 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 2,
         "syllableVi": "theo",
-        "syllableEn": "low-",
+        "syllableEn": "low",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 3,
         "syllableVi": "mẹ",
-        "syllableEn": "ing",
+        "syllableEn": "mo-",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 4,
         "syllableVi": "tìm",
-        "syllableEn": "their",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "ăn",
-        "syllableEn": "mom",
+        "syllableEn": "ther",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "trong",
+        "syllableVi": "ăn",
         "syllableEn": "in",
         "beats": 1
       },
       {
+        "keyIdx": 3,
+        "syllableVi": "trong",
+        "syllableEn": "the",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "vườn",
+        "syllableEn": "green",
+        "beats": 1
+      },
+      {
         "keyIdx": 0,
-        "syllableVi": "vườn,",
-        "syllableEn": "the yard,",
+        "syllableVi": "xanh,",
+        "syllableEn": "yard,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "Cùng",
-        "syllableEn": "Eat-",
+        "syllableEn": "Seek-",
         "beats": 1
       },
       {
@@ -2771,224 +3179,242 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 4,
         "syllableVi": "mồi",
-        "syllableEn": "good",
+        "syllableEn": "food",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "ăn",
-        "syllableEn": "grain",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
         "syllableVi": "ngon",
         "syllableEn": "so",
         "beats": 1
       },
       {
-        "keyIdx": 7,
+        "keyIdx": 2,
         "syllableVi": "ngon",
-        "syllableEn": "yum-",
+        "syllableEn": "good",
         "beats": 1
       },
       {
-        "keyIdx": 5,
-        "syllableVi": "ghê,",
-        "syllableEn": "my,",
-        "beats": 2
+        "keyIdx": 3,
+        "syllableVi": "thơm",
+        "syllableEn": "and",
+        "beats": 1
       },
       {
         "keyIdx": 4,
+        "syllableVi": "lành,",
+        "syllableEn": "sweet,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
         "syllableVi": "Đàn",
-        "syllableEn": "The",
+        "syllableEn": "Chicks",
         "beats": 1
       },
       {
         "keyIdx": 2,
         "syllableVi": "gà",
-        "syllableEn": "chicks",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "con",
         "syllableEn": "run",
         "beats": 1
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "lon",
-        "syllableEn": "hap-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "ton",
-        "syllableEn": "pi-",
+        "keyIdx": 2,
+        "syllableVi": "con",
+        "syllableEn": "a-",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "vui",
-        "syllableEn": "ly",
+        "syllableVi": "đi",
+        "syllableEn": "round",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "lon",
+        "syllableEn": "on",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "ton",
+        "syllableEn": "hap-",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "ghê!",
-        "syllableEn": "along!",
+        "syllableVi": "vui!",
+        "syllableEn": "py feet!",
         "beats": 2
       }
     ]
   },
   {
-    "id": "chu_ech_con",
-    "titleVi": "Chú Ếch Con",
-    "titleEn": "Little Green Frog",
-    "emoji": "🐸",
-    "badgeVi": "Vui nhộn & Đáng yêu",
-    "category": "vietnam",
-    "bpm": 110,
+    "id": "old_macdonald",
+    "titleVi": "Trang Trại Bác MacDonald",
+    "titleEn": "Old MacDonald Had a Farm",
+    "emoji": "🚜",
+    "badgeVi": "Quốc tế",
+    "category": "international",
+    "bpm": 104,
     "notes": [
       {
         "keyIdx": 0,
-        "syllableVi": "Kìa",
-        "syllableEn": "See",
+        "syllableVi": "Bác",
+        "syllableEn": "Old",
         "beats": 1
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "chú",
-        "syllableEn": "the",
+        "keyIdx": 0,
+        "syllableVi": "Mác",
+        "syllableEn": "Mac-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "Đô-",
+        "syllableEn": "Don-",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "là",
-        "syllableEn": "lit-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "chú",
-        "syllableEn": "tle",
+        "syllableVi": "nan",
+        "syllableEn": "ald",
         "beats": 1
       },
       {
         "keyIdx": 5,
-        "syllableVi": "ếch",
-        "syllableEn": "green",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "con,",
-        "syllableEn": "frog,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 2,
-        "syllableVi": "Có",
-        "syllableEn": "Two",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "hai",
-        "syllableEn": "big",
+        "syllableVi": "có",
+        "syllableEn": "had",
         "beats": 1
       },
       {
         "keyIdx": 5,
-        "syllableVi": "là",
-        "syllableEn": "eyes",
+        "syllableVi": "nông",
+        "syllableEn": "a",
         "beats": 1
       },
       {
         "keyIdx": 4,
-        "syllableVi": "hai",
-        "syllableEn": "so",
+        "syllableVi": "trại,",
+        "syllableEn": "farm,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "E",
+        "syllableEn": "E",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "mắt",
-        "syllableEn": "shin-",
+        "syllableVi": "I",
+        "syllableEn": "I",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "E",
+        "syllableEn": "E",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "I",
+        "syllableEn": "I",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "tròn,",
-        "syllableEn": "ing,",
+        "syllableVi": "O!",
+        "syllableEn": "O!",
         "beats": 2
       },
       {
         "keyIdx": 4,
-        "syllableVi": "Chú",
-        "syllableEn": "Sit-",
+        "syllableVi": "Nơi",
+        "syllableEn": "And",
         "beats": 1
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "ngồi",
-        "syllableEn": "ting",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "học",
-        "syllableEn": "study-",
+        "keyIdx": 4,
+        "syllableVi": "nông",
+        "syllableEn": "on",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "bài",
-        "syllableEn": "ing",
+        "syllableVi": "trại",
+        "syllableEn": "his",
         "beats": 1
       },
       {
-        "keyIdx": 1,
-        "syllableVi": "một",
-        "syllableEn": "by",
+        "keyIdx": 0,
+        "syllableVi": "bác",
+        "syllableEn": "farm",
         "beats": 1
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "mình,",
-        "syllableEn": "himself,",
+        "keyIdx": 0,
+        "syllableVi": "nuôi",
+        "syllableEn": "he",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "đàn",
+        "syllableEn": "had",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "vịt",
+        "syllableEn": "some",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "ngoan",
+        "syllableEn": "ducks",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "hiền,",
+        "syllableEn": "here,",
         "beats": 2
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "Bên",
-        "syllableEn": "Near",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "khóm",
-        "syllableEn": "the",
+        "keyIdx": 2,
+        "syllableVi": "E",
+        "syllableEn": "E",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "hoa",
-        "syllableEn": "lil-",
+        "syllableVi": "I",
+        "syllableEn": "I",
         "beats": 1
       },
       {
         "keyIdx": 1,
-        "syllableVi": "kề",
-        "syllableEn": "y",
+        "syllableVi": "E",
+        "syllableEn": "E",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "I",
+        "syllableEn": "I",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "bờ ao!",
-        "syllableEn": "pond!",
+        "syllableVi": "O!",
+        "syllableEn": "O!",
         "beats": 2
       }
     ]
@@ -2998,48 +3424,54 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Rửa Mặt Như Mèo",
     "titleEn": "Washing Face Like a Cat",
     "emoji": "🐱",
-    "badgeVi": "Vệ sinh cá nhân ngoan",
+    "badgeVi": "Hóm hỉnh",
     "category": "vietnam",
     "bpm": 104,
     "notes": [
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "Meo",
         "syllableEn": "Meow",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "meo",
         "syllableEn": "meow",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "meo,",
         "syllableEn": "meow,",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 0,
         "syllableVi": "rửa",
         "syllableEn": "wash",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 1,
         "syllableVi": "mặt",
-        "syllableEn": "your",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "như",
         "syllableEn": "face",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
+        "syllableVi": "như",
+        "syllableEn": "like",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "chú",
+        "syllableEn": "a",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
         "syllableVi": "mèo,",
         "syllableEn": "cat,",
         "beats": 2
@@ -3047,114 +3479,132 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 2,
         "syllableVi": "Xấu",
-        "syllableEn": "So",
+        "syllableEn": "Naugh-",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "xấu",
-        "syllableEn": "dirt-",
+        "syllableEn": "ty",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "lắm",
-        "syllableEn": "y",
+        "syllableEn": "kit-",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "chẳng",
-        "syllableEn": "mom",
+        "syllableEn": "ty",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 2,
         "syllableVi": "được",
-        "syllableEn": "won't",
+        "syllableEn": "not",
         "beats": 1
       },
       {
-        "keyIdx": 7,
+        "keyIdx": 1,
         "syllableVi": "mẹ",
-        "syllableEn": "love",
+        "syllableEn": "loved",
         "beats": 1
       },
       {
-        "keyIdx": 5,
-        "syllableVi": "yêu,",
-        "syllableEn": "you,",
+        "keyIdx": 0,
+        "syllableVi": "yêu",
+        "syllableEn": "by",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "nào,",
+        "syllableEn": "mom,",
         "beats": 2
       },
       {
         "keyIdx": 4,
         "syllableVi": "Khăn",
-        "syllableEn": "Where's",
+        "syllableEn": "Where",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "mặt",
-        "syllableEn": "the",
+        "syllableEn": "is",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 4,
         "syllableVi": "đâu",
-        "syllableEn": "tow-",
+        "syllableEn": "towl",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "mà",
-        "syllableEn": "el,",
-        "beats": 1
-      },
-      {
-        "keyIdx": 1,
-        "syllableVi": "ngồi",
-        "syllableEn": "lick-",
+        "syllableEn": "why",
         "beats": 1
       },
       {
         "keyIdx": 2,
-        "syllableVi": "liếm",
-        "syllableEn": "ing",
+        "syllableVi": "ngồi",
+        "syllableEn": "sit",
         "beats": 1
       },
       {
-        "keyIdx": 0,
-        "syllableVi": "mép,",
+        "keyIdx": 1,
+        "syllableVi": "liếm",
+        "syllableEn": "and",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "mép",
+        "syllableEn": "lick",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "thế,",
         "syllableEn": "lips,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "Đau",
         "syllableEn": "Sore",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "mắt",
         "syllableEn": "eyes",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "rồi",
-        "syllableEn": "now,",
+        "syllableEn": "then",
         "beats": 1
       },
       {
         "keyIdx": 4,
         "syllableVi": "lại",
-        "syllableEn": "crying",
+        "syllableEn": "cry",
         "beats": 1
       },
       {
         "keyIdx": 2,
         "syllableVi": "khóc",
+        "syllableEn": "out",
+        "beats": 1
+      },
+      {
+        "keyIdx": 0,
+        "syllableVi": "meo",
         "syllableEn": "meow",
         "beats": 1
       },
@@ -3176,177 +3626,183 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "id": "di_hoc_ve",
     "titleVi": "Đi Học Về",
     "titleEn": "Coming Home from School",
-    "emoji": "🎒",
-    "badgeVi": "Chào hỏi lễ phép",
+    "emoji": "🏠",
+    "badgeVi": "Ngoan ngoãn",
     "category": "vietnam",
     "bpm": 100,
     "notes": [
       {
         "keyIdx": 0,
         "syllableVi": "Đi",
-        "syllableEn": "Com-",
+        "syllableEn": "Go",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "học",
+        "syllableEn": "home",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "về",
+        "syllableEn": "from",
+        "beats": 1
+      },
+      {
+        "keyIdx": 2,
+        "syllableVi": "là",
+        "syllableEn": "school,",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "đi",
+        "syllableEn": "hap-",
         "beats": 1
       },
       {
         "keyIdx": 2,
         "syllableVi": "học",
-        "syllableEn": "ing",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "về",
-        "syllableEn": "home",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "là",
-        "syllableEn": "from",
-        "beats": 1
-      },
-      {
-        "keyIdx": 5,
-        "syllableVi": "đi",
-        "syllableEn": "kin-",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "học",
-        "syllableEn": "der-",
+        "syllableEn": "py",
         "beats": 1
       },
       {
         "keyIdx": 2,
         "syllableVi": "về,",
-        "syllableEn": "garten,",
+        "syllableEn": "way,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "Em",
         "syllableEn": "I",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "vào",
-        "syllableEn": "come",
+        "syllableEn": "step",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 4,
         "syllableVi": "nhà",
         "syllableEn": "in",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 4,
         "syllableVi": "em",
         "syllableEn": "and",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 2,
         "syllableVi": "chào",
         "syllableEn": "greet",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "cha",
-        "syllableEn": "my",
+        "syllableEn": "mom",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "mẹ,",
-        "syllableEn": "parents,",
+        "syllableVi": "mẹ",
+        "syllableEn": "and",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "hiền,",
+        "syllableEn": "dad,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "Cha",
         "syllableEn": "Fa-",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "em",
         "syllableEn": "ther",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 3,
         "syllableVi": "khen",
         "syllableEn": "praises",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 2,
         "syllableVi": "rằng",
-        "syllableEn": "good",
+        "syllableEn": "that",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 1,
         "syllableVi": "con",
-        "syllableEn": "lit-",
+        "syllableEn": "I",
         "beats": 1
       },
       {
-        "keyIdx": 7,
+        "keyIdx": 0,
         "syllableVi": "rất",
-        "syllableEn": "tle",
+        "syllableEn": "am",
         "beats": 1
       },
       {
         "keyIdx": 5,
         "syllableVi": "ngoan,",
-        "syllableEn": "child,",
+        "syllableEn": "good,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "Mẹ",
         "syllableEn": "Mo-",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "âu",
         "syllableEn": "ther",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 4,
         "syllableVi": "yếm",
-        "syllableEn": "kisses",
+        "syllableEn": "kis-",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "hôn",
-        "syllableEn": "soft",
+        "syllableEn": "ses",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 4,
         "syllableVi": "đôi",
-        "syllableEn": "rosy",
+        "syllableEn": "both",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 3,
         "syllableVi": "má",
-        "syllableEn": "lit-",
+        "syllableEn": "my",
         "beats": 1
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 3,
         "syllableVi": "em!",
-        "syllableEn": "tle cheeks!",
+        "syllableEn": "cheeks!",
         "beats": 2
       }
     ]
@@ -3559,138 +4015,144 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
     "titleVi": "Chú Voi Con Ở Bản Đôn",
     "titleEn": "Little Elephant in Don Village",
     "emoji": "🐘",
-    "badgeVi": "Hào hùng Tây Nguyên",
+    "badgeVi": "Tây Nguyên",
     "category": "vietnam",
     "bpm": 112,
     "notes": [
       {
-        "keyIdx": 0,
+        "keyIdx": 5,
         "syllableVi": "Chú",
         "syllableEn": "Lit-",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 4,
         "syllableVi": "voi",
         "syllableEn": "tle",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "con",
         "syllableEn": "el-",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "ở",
         "syllableEn": "e-",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 0,
         "syllableVi": "Bản",
         "syllableEn": "phant",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 0,
         "syllableVi": "Đôn,",
-        "syllableEn": "at Don,",
+        "syllableEn": "in",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "kìa,",
+        "syllableEn": "town,",
         "beats": 2
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "Chưa",
-        "syllableEn": "Has",
-        "beats": 1
-      },
-      {
-        "keyIdx": 4,
-        "syllableVi": "có",
-        "syllableEn": "no",
-        "beats": 1
-      },
-      {
         "keyIdx": 5,
-        "syllableVi": "ngà",
+        "syllableVi": "Chưa",
+        "syllableEn": "No",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "có",
         "syllableEn": "tusks",
         "beats": 1
       },
       {
-        "keyIdx": 4,
-        "syllableVi": "nên",
-        "syllableEn": "so",
+        "keyIdx": 3,
+        "syllableVi": "ngà",
+        "syllableEn": "yet",
         "beats": 1
       },
       {
-        "keyIdx": 2,
-        "syllableVi": "còn",
+        "keyIdx": 3,
+        "syllableVi": "nên",
         "syllableEn": "still",
         "beats": 1
       },
       {
-        "keyIdx": 1,
-        "syllableVi": "trẻ",
+        "keyIdx": 0,
+        "syllableVi": "còn",
         "syllableEn": "a",
         "beats": 1
       },
       {
         "keyIdx": 0,
+        "syllableVi": "trẻ",
+        "syllableEn": "young",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
         "syllableVi": "con,",
         "syllableEn": "child,",
         "beats": 2
       },
       {
-        "keyIdx": 0,
+        "keyIdx": 1,
         "syllableVi": "Từ",
         "syllableEn": "From",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "rừng",
         "syllableEn": "deep",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 1,
         "syllableVi": "già",
         "syllableEn": "for-",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "chú",
         "syllableEn": "est",
         "beats": 1
       },
       {
-        "keyIdx": 5,
+        "keyIdx": 4,
         "syllableVi": "đến",
-        "syllableEn": "he",
+        "syllableEn": "it",
         "beats": 1
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "với",
         "syllableEn": "comes",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 0,
         "syllableVi": "người,",
         "syllableEn": "here,",
         "beats": 2
       },
       {
-        "keyIdx": 4,
+        "keyIdx": 3,
         "syllableVi": "Vẫn",
         "syllableEn": "Still",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 1,
         "syllableVi": "ham",
         "syllableEn": "loves",
         "beats": 1
@@ -3698,37 +4160,213 @@ export const RAINBOW_SONGS: RainbowSongItem[] = [
       {
         "keyIdx": 1,
         "syllableVi": "ăn",
-        "syllableEn": "to",
+        "syllableEn": "eat-",
         "beats": 1
       },
       {
         "keyIdx": 0,
         "syllableVi": "với",
-        "syllableEn": "eat",
+        "syllableEn": "ing",
         "beats": 1
       },
       {
-        "keyIdx": 1,
+        "keyIdx": 0,
         "syllableVi": "lại",
         "syllableEn": "and",
         "beats": 1
       },
       {
-        "keyIdx": 2,
+        "keyIdx": 0,
         "syllableVi": "ham",
-        "syllableEn": "run",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "chơi!",
+        "syllableEn": "play!",
+        "beats": 2
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "Voi",
+        "syllableEn": "El-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "con",
+        "syllableEn": "e-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "ơi,",
+        "syllableEn": "phant,",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "voi",
+        "syllableEn": "el-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "con",
+        "syllableEn": "e-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "ơi!",
+        "syllableEn": "phant!",
+        "beats": 2
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "Mau",
+        "syllableEn": "Grow",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "lớn",
+        "syllableEn": "up",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "nhanh",
+        "syllableEn": "fast",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "có",
+        "syllableEn": "with",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "đôi",
+        "syllableEn": "big",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "ngà",
+        "syllableEn": "white",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "thật",
+        "syllableEn": "strong",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "to!",
+        "syllableEn": "tusks!",
+        "beats": 2
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "Có",
+        "syllableEn": "Strong",
+        "beats": 1
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "sức",
+        "syllableEn": "to",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "đi",
+        "syllableEn": "roam",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "khắp",
+        "syllableEn": "a-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "miền",
+        "syllableEn": "cross",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "rừng",
+        "syllableEn": "the",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "rộng",
+        "syllableEn": "for-",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "xa,",
+        "syllableEn": "est,",
+        "beats": 2
+      },
+      {
+        "keyIdx": 5,
+        "syllableVi": "Kéo",
+        "syllableEn": "Pull",
+        "beats": 1
+      },
+      {
+        "keyIdx": 7,
+        "syllableVi": "gỗ",
+        "syllableEn": "wood",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "cho",
+        "syllableEn": "for",
+        "beats": 1
+      },
+      {
+        "keyIdx": 4,
+        "syllableVi": "buôn",
+        "syllableEn": "our",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "làng",
+        "syllableEn": "dear",
+        "beats": 1
+      },
+      {
+        "keyIdx": 1,
+        "syllableVi": "của",
+        "syllableEn": "peace-",
         "beats": 1
       },
       {
         "keyIdx": 0,
-        "syllableVi": "chơi!",
-        "syllableEn": "free!",
+        "syllableVi": "chúng",
+        "syllableEn": "ful",
+        "beats": 1
+      },
+      {
+        "keyIdx": 3,
+        "syllableVi": "ta!",
+        "syllableEn": "home!",
         "beats": 2
       }
     ]
   }
 ];
-
-
-
-

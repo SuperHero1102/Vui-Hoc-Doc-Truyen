@@ -84,6 +84,91 @@ function formatTime(seconds: number): string {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+
+interface LyricRowItemProps {
+  line: LyricLine;
+  idx: number;
+  isCurrent: boolean;
+  isPast: boolean;
+  hasRealTimestamps: boolean;
+  showSubtitle: boolean;
+  itemRef?: (el: HTMLDivElement | null) => void;
+  progressBarRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+const LyricRowItem = React.memo(function LyricRowItem({
+  line,
+  idx,
+  isCurrent,
+  isPast,
+  hasRealTimestamps,
+  showSubtitle,
+  itemRef,
+  progressBarRef,
+}: LyricRowItemProps) {
+  return (
+    <div
+      ref={itemRef}
+      style={{
+        transform: isCurrent ? 'scale(1.01)' : 'scale(1)',
+        willChange: 'transform, opacity',
+      }}
+      className={`transition-all duration-150 px-3 py-2 rounded-2xl flex flex-col gap-1 border ${
+        !hasRealTimestamps
+          ? 'text-slate-800 bg-white/80 border-slate-200/70'
+          : isCurrent
+          ? 'bg-rose-50/90 border-rose-300 ring-2 ring-rose-200/70 shadow-xs text-rose-950 font-black'
+          : isPast
+          ? 'text-slate-400 bg-white/40 border-slate-100 opacity-60'
+          : 'text-slate-700 bg-white/80 border-slate-200/70'
+      }`}
+    >
+      <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-xs sm:text-sm font-bold">
+          {hasRealTimestamps ? (
+            isCurrent ? (
+              <Star className="w-4 h-4 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
+            ) : isPast ? (
+              <span className="w-4 h-4 text-emerald-500 text-xs font-black shrink-0 flex items-center justify-center">
+                ✓
+              </span>
+            ) : (
+              <span className="w-4 h-4 text-slate-300 text-[10px] font-bold shrink-0 flex items-center justify-center">
+                {idx + 1}
+              </span>
+            )
+          ) : (
+            <span className="text-slate-400 font-black">•</span>
+          )}
+          <span className={`leading-snug ${isCurrent ? 'text-sm sm:text-base font-black' : ''}`}>
+            {line.vi}
+          </span>
+        </div>
+      </div>
+
+      {isCurrent && progressBarRef && (
+        <div className="w-full h-2 bg-slate-200/90 rounded-full overflow-hidden mt-1 relative">
+          <div
+            ref={progressBarRef}
+            className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full will-change-[width]"
+            style={{ width: '0%' }}
+          />
+        </div>
+      )}
+
+      {showSubtitle && (
+        <div
+          className={`text-[11px] font-medium pl-6 italic ${
+            isCurrent ? 'text-rose-700 font-semibold' : 'text-slate-400'
+          }`}
+        >
+          {line.en}
+        </div>
+      )}
+    </div>
+  );
+});
+
 export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   settings,
   childName = 'Bé',
@@ -147,6 +232,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   const activeLineRef = useRef<HTMLDivElement | null>(null);
   const activeProgressBarRef = useRef<HTMLDivElement | null>(null);
   const currentLineIndexRef = useRef<number>(-1);
+  const lastReportedSecRef = useRef<number>(-1);
   const rafRef = useRef<number | null>(null);
   const karaokeListRef = useRef<HTMLDivElement | null>(null);
   const playerStageRef = useRef<HTMLDivElement | null>(null);
@@ -449,7 +535,11 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
 
     // 1. Dùng audio.currentTime làm nguồn thời gian duy nhất cho dòng đang hát và thanh tiến độ đỏ
     const rawTime = audio.currentTime;
-    setCurrentTimeSec(rawTime);
+    const roundedSec = Math.floor(rawTime);
+    if (roundedSec !== lastReportedSecRef.current) {
+      lastReportedSecRef.current = roundedSec;
+      setCurrentTimeSec(roundedSec);
+    }
 
     // 6. Thêm hằng số LYRIC_OFFSET_MS (mặc định 0) để bù trễ nếu lời sớm/muộn so với nhạc
     const effectiveTime = Math.max(0, rawTime + LYRIC_OFFSET_MS / 1000);
@@ -509,7 +599,6 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
     if (activeProgressBarRef.current) {
       activeProgressBarRef.current.style.width = `${pct}%`;
     }
-    setLineProgressPct(pct);
   }, [currentLines, hasRealTimestamps]);
 
   // Vòng lặp requestAnimationFrame liên tục khi audio đang phát
@@ -556,10 +645,16 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
   // Tự động cuộn mượt để dòng đang hát luôn nằm ở giữa vùng nhìn thấy khi ở chế độ 'full'
   useEffect(() => {
     if (activeLineRef.current && currentLineIndex >= 0 && lyricsViewMode === 'full' && hasRealTimestamps) {
-      activeLineRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'center',
-      });
+      const container = karaokeListRef.current;
+      const activeEl = activeLineRef.current;
+      if (container && activeEl) {
+        const targetScrollTop =
+          activeEl.offsetTop - container.offsetTop - container.clientHeight / 2 + activeEl.clientHeight / 2;
+        container.scrollTo({
+          top: Math.max(0, targetScrollTop),
+          behavior: 'smooth',
+        });
+      }
     }
   }, [currentLineIndex, lyricsViewMode, hasRealTimestamps]);
 
@@ -1387,63 +1482,17 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
                         (settings.storyLanguage !== 'vi' || activeSong.category === 'en_rhymes');
 
                       return (
-                        <div
+                        <LyricRowItem
                           key={idx}
-                          ref={isCurrent ? activeLineRef : null}
-                          className={`transition-all duration-150 px-3 py-2 rounded-2xl flex flex-col gap-1 border ${
-                            !hasRealTimestamps
-                              ? 'text-slate-800 bg-white/80 border-slate-200/70'
-                              : isCurrent
-                              ? 'bg-rose-50/90 border-rose-300 ring-2 ring-rose-200/70 shadow-xs text-rose-950 font-black scale-[1.01]'
-                              : isPast
-                              ? 'text-slate-400 bg-white/40 border-slate-100 opacity-60'
-                              : 'text-slate-700 bg-white/80 border-slate-200/70'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between gap-2">
-                            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold">
-                              {hasRealTimestamps ? (
-                                isCurrent ? (
-                                  <Star className="w-4 h-4 fill-amber-400 text-amber-500 animate-bounce shrink-0" />
-                                ) : isPast ? (
-                                  <span className="w-4 h-4 text-emerald-500 text-xs font-black shrink-0 flex items-center justify-center">
-                                    ✓
-                                  </span>
-                                ) : (
-                                  <span className="w-4 h-4 text-slate-300 text-[10px] font-bold shrink-0 flex items-center justify-center">
-                                    {idx + 1}
-                                  </span>
-                                )
-                              ) : (
-                                <span className="text-slate-400 font-black">•</span>
-                              )}
-                              <span className={`leading-snug ${isCurrent ? 'text-sm sm:text-base font-black' : ''}`}>
-                                {line.vi}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Thanh tiến độ đỏ chuẩn hóa: Cập nhật 100% bằng audio.currentTime qua RAF */}
-                          {isCurrent && (
-                            <div className="w-full h-2 bg-slate-200/90 rounded-full overflow-hidden mt-1 relative">
-                              <div
-                                ref={activeProgressBarRef}
-                                className="h-full bg-gradient-to-r from-red-500 to-rose-500 rounded-full will-change-[width]"
-                                style={{ width: `${lineProgressPct}%` }}
-                              />
-                            </div>
-                          )}
-
-                          {showSubtitle && (
-                            <div
-                              className={`text-[11px] font-medium pl-6 italic ${
-                                isCurrent ? 'text-rose-700 font-semibold' : 'text-slate-400'
-                              }`}
-                            >
-                              {line.en}
-                            </div>
-                          )}
-                        </div>
+                          line={line}
+                          idx={idx}
+                          isCurrent={isCurrent}
+                          isPast={isPast}
+                          hasRealTimestamps={hasRealTimestamps}
+                          showSubtitle={showSubtitle}
+                          itemRef={isCurrent ? (el) => { activeLineRef.current = el; } : undefined}
+                          progressBarRef={isCurrent ? activeProgressBarRef : undefined}
+                        />
                       );
                     })}
                   </div>
@@ -1718,7 +1767,7 @@ export const KidsMusicPlayer: React.FC<KidsMusicPlayerProps> = ({
         </div>
       )}
 
-      {/* MODAL 1: CHẾ ĐỘ ĐÁNH DẤU LỜI BÀI HÁT */}
+      
       </div>
   );
 };

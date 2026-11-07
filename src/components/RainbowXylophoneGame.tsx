@@ -461,7 +461,7 @@ export const RainbowXylophoneGame: React.FC<RainbowXylophoneGameProps> = ({
         const noteItem = notesList[step];
         const targetK = XYLOPHONE_KEYS[noteItem.keyIdx];
         const beats = noteItem.beats ?? 1;
-        const noteDurationMs = Math.max(220, Math.round((beats * 60000) / bpm));
+        const noteDurationMs = Math.max(100, Math.round((beats * 60000) / bpm));
 
         setActiveNoteIdx(noteItem.keyIdx);
         setLastPlayedNoteName(targetK.solfegeVi);
