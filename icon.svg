@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="appBlueBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2798FF" />
+      <stop offset="100%" stop-color="#1574E2" />
+    </linearGradient>
+    <filter id="softShadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0B4F9F" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Rounded Squircle Blue Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="225" fill="url(#appBlueBg)" />
+
+  <!-- White Speech Bubble + Bottom-Left Tail -->
+  <g filter="url(#softShadow)">
+    <rect x="128" y="138" width="768" height="534" rx="185" fill="#FFFFFF" />
+    <polygon points="274,648 228,822 426,668" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round" />
+  </g>
+
+  <!-- Golden 5-Point Star at Top Right of Bubble -->
+  <polygon
+    points="824,48 842,96 893,98 852,130 867,179 824,150 781,179 796,130 755,98 806,96"
+    fill="#FFCA28"
+  />
+
+  <!-- Playful Rounded "ABC" -->
+  <g font-family="'Plus Jakarta Sans', 'Be Vietnam Pro', 'Arial Rounded MT Bold', sans-serif" font-weight="900" font-size="214" text-anchor="middle">
+    <!-- A (Coral Red) -->
+    <text x="352" y="420" fill="#FF585D" stroke="#FF585D" stroke-width="12" stroke-linejoin="round">A</text>
+    <!-- B (Warm Orange-Yellow) -->
+    <text x="518" y="420" fill="#FFA800" stroke="#FFA800" stroke-width="12" stroke-linejoin="round">B</text>
+    <!-- C (Vibrant Green) -->
+    <text x="678" y="420" fill="#18A957" stroke="#18A957" stroke-width="12" stroke-linejoin="round">C</text>
+  </g>
+
+  <!-- Playful Rounded "Vui Học" with explicit vector dot below 'o' for 100% cross-platform fidelity -->
+  <g fill="#1565D8" stroke="#1565D8" stroke-linejoin="round">
+    <text
+      x="512"
+      y="568"
+      text-anchor="middle"
+      font-family="'Be Vietnam Pro', 'Plus Jakarta Sans', 'Arial Rounded MT Bold', sans-serif"
+      font-weight="900"
+      font-size="144"
+      stroke-width="6"
+      letter-spacing="2"
+    >
+      Vui Hoc
+    </text>
+    <!-- Explicit Dot Below 'o' in "Học" matching reference logo -->
+    <rect x="641" y="586" width="24" height="22" rx="4" stroke-width="2" />
+  </g>
+</svg>
