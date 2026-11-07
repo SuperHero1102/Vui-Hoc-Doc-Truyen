@@ -11,8 +11,8 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
     }
 
     // 2. Đăng ký Service Worker
-    navigator.serviceWorker
-      .register('/sw-offline.js', { scope: '/' })
+    const swUrl = new URL('sw-offline.js', window.location.href).pathname;
+    navigator.serviceWorker.register(swUrl)
       .then((registration) => {
         // Kích hoạt tiến trình tải ngầm theo khối tài nguyên ngay khi SW sẵn sàng
         const triggerBackgroundSync = () => {
@@ -37,3 +37,4 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 }
 
 createRoot(document.getElementById('root')!).render(<App />);
+

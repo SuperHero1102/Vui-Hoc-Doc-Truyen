@@ -4,26 +4,34 @@
  * 
  * Tiêu chí:
  * 1. Hoạt động offline và online ổn định như nhau từ lần mở thứ 2.
- * 2. Tải ngầm lần lượt toàn bộ tài nguyên theo khối nhỏ (batch background cache), không chặn UI, không popup.
- * 3. Kiểm tra ngầm file version.json kèm hash; chỉ tải file thay đổi; tải đủ mới áp dụng; tải lỗi giữ bản cũ.
- * 4. Cache-First cho toàn bộ media, tranh, nhạc, mã nguồn đã tải; hỗ trợ cache font Google.
+ * 2. Tương thích đa nền tảng cả domain gốc (Vercel/Netlify/Localhost) lẫn subpath (GitHub Pages).
+ * 3. Tải ngầm lần lượt toàn bộ tài nguyên theo khối nhỏ (batch background cache), không chặn UI, không popup.
+ * 4. Kiểm tra ngầm file version.json kèm hash; chỉ tải file thay đổi; tải đủ mới áp dụng; tải lỗi giữ bản cũ.
+ * 5. Cache-First cho toàn bộ media, tranh, nhạc, mã nguồn đã tải; hỗ trợ cache font Google.
  */
 
-const CACHE_VERSION = 'vui-hoc-pwa-v3';
+const CACHE_VERSION = 'vui-hoc-pwa-v4';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const MEDIA_CACHE = `${CACHE_VERSION}-media`;
 
-const CORE_SHELL_URLS = [
-  '/',
-  '/index.html',
-  '/manifest.webmanifest',
-  '/version.json',
-  '/icon.svg',
-  '/apple-touch-icon.png',
-  '/pwa-192x192.png',
-  '/pwa-512x512.png',
-  '/pwa-maskable-512x512.png'
+const CORE_SHELL_FILES = [
+  '',
+  'index.html',
+  'manifest.webmanifest',
+  'version.json',
+  'icon.svg',
+  'apple-touch-icon.png',
+  'pwa-192x192.png',
+  'pwa-512x512.png',
+  'pwa-maskable-512x512.png'
 ];
+
+// Helper giải quyết đường dẫn tuyệt đối theo phạm vi đăng ký (registration scope)
+function getScopedUrl(rel) {
+  const cleanRel = String(rel || '').replace(/^\.?\//, '');
+  const scope = self.registration ? self.registration.scope : self.location.origin + '/';
+  return new URL(cleanRel, scope).pathname;
+}
 
 // 1. Cài đặt Service Worker: precache vỏ ứng dụng và toàn bộ Priority 1 (Core JS & CSS bundle)
 self.addEventListener('install', (event) => {
@@ -31,23 +39,27 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     (async () => {
       const staticCache = await caches.open(STATIC_CACHE);
+      const coreUrls = CORE_SHELL_FILES.map(getScopedUrl);
+      
       // Precache các file tĩnh cốt lõi
       await Promise.all(
-        CORE_SHELL_URLS.map((url) =>
+        coreUrls.map((url) =>
           staticCache.add(new Request(url, { cache: 'reload' })).catch(() => {})
         )
       );
 
       // Tải và precache ngay toàn bộ Priority 1 (Mã nguồn JS bundle, CSS) từ version.json
       try {
-        const vRes = await fetch('/version.json', { cache: 'reload' });
+        const vUrl = getScopedUrl('version.json');
+        const vRes = await fetch(vUrl, { cache: 'reload' });
         if (vRes.ok) {
           const vData = await vRes.json();
           if (vData.priorities && Array.isArray(vData.priorities.priority1)) {
             await Promise.all(
-              vData.priorities.priority1.map((p1Url) =>
-                staticCache.add(new Request(p1Url, { cache: 'reload' })).catch(() => {})
-              )
+              vData.priorities.priority1.map((p1) => {
+                const u = getScopedUrl(p1);
+                return staticCache.add(new Request(u, { cache: 'reload' })).catch(() => {});
+              })
             );
           }
         }
@@ -81,8 +93,8 @@ async function runBackgroundCaching() {
   isBackgroundCaching = true;
 
   try {
-    // 3.1 Lấy thông tin phiên bản mới nhất
-    const versionRes = await fetch('/version.json?t=' + Date.now(), { cache: 'no-cache' }).catch(() => null);
+    const vUrl = getScopedUrl('version.json');
+    const versionRes = await fetch(vUrl + '?t=' + Date.now(), { cache: 'no-cache' }).catch(() => null);
     if (!versionRes || !versionRes.ok) {
       isBackgroundCaching = false;
       return;
@@ -107,7 +119,7 @@ async function runBackgroundCaching() {
 
     // Lưu version.json vào cache static
     const staticCache = await caches.open(STATIC_CACHE);
-    await staticCache.put('/version.json', new Response(JSON.stringify(versionData), {
+    await staticCache.put(vUrl, new Response(JSON.stringify(versionData), {
       headers: { 'Content-Type': 'application/json' }
     }));
 
@@ -115,7 +127,7 @@ async function runBackgroundCaching() {
 
     // 3.2 Gom danh sách tài nguyên theo mức độ ưu tiên
     const { priority1 = [], priority2 = [], priority3 = [] } = versionData.priorities;
-    const downloadQueue = [...priority1, ...priority2, ...priority3];
+    const downloadQueue = [...priority1, ...priority2, ...priority3].map(getScopedUrl);
 
     // 3.3 Tải lần lượt từng khối nhỏ (Batch size: 4 tệp)
     const BATCH_SIZE = 4;
@@ -127,9 +139,8 @@ async function runBackgroundCaching() {
       await Promise.all(
         batch.map(async (url) => {
           try {
-            // Kiểm tra xem tệp đã có trong bất kỳ cache nào chưa (kiểm tra cả theo URL và pathname)
             const existing = (await caches.match(url)) || (await caches.match(new Request(url)));
-            if (existing) return; // Đã có, bỏ qua không tải lại
+            if (existing) return;
 
             const res = await fetch(url, { cache: 'no-cache' });
             if (res && res.status === 200) {
@@ -138,40 +149,44 @@ async function runBackgroundCaching() {
                 : staticCache;
               await targetCache.put(url, res.clone());
             }
-          } catch {
-            // Nếu mất mạng giữa chừng, bỏ qua để tải tiếp ở đợt sau
-          }
+          } catch {}
         })
       );
 
-      // Nghỉ nhẹ giữa các khối để nhường luồng xử lý và băng thông cho giao diện của bé
-      await new Promise((r) => setTimeout(r, DELAY_BETWEEN_BATCHES_MS));
+      // Nghỉ nhẹ 50ms giữa các khối để nhường luồng xử lý âm thanh/UI
+      await new Promise((resolve) => setTimeout(resolve, DELAY_BETWEEN_BATCHES_MS));
     }
-  } catch {
-    // Không làm gián đoạn ứng dụng
+  } catch (err) {
+    console.warn('[SW] Background cache partial cycle completed:', err);
   } finally {
     isBackgroundCaching = false;
   }
 }
 
-// Lắng nghe thông điệp từ trang chính
+// Lắng nghe tín hiệu kích hoạt tải ngầm từ giao diện chính
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'START_BACKGROUND_CACHE') {
     runBackgroundCaching();
   }
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
 
-// 4. Chiến lược phục vụ tài nguyên (Fetch Event)
+// 4. Bộ định tuyến Fetch: Đảm bảo phản hồi nhanh như ứng dụng native offline
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  if (req.method !== 'GET') return;
-
   const url = new URL(req.url);
+
+  // Chỉ can thiệp các yêu cầu GET http/https
+  if (req.method !== 'GET' || !url.protocol.startsWith('http')) {
+    return;
+  }
 
   // Không can thiệp vào các đường dẫn đặc biệt của WebSocket ping hoặc API backend
   if (
     url.search.includes('token=') ||
-    url.pathname.startsWith('/api/') // API cuộc gọi backend
+    url.pathname.includes('/api/')
   ) {
     return;
   }
@@ -199,7 +214,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // B. Xử lý tệp version.json: Network-First với thời gian chờ ngắn, fallback cache
-  if (url.pathname === '/version.json') {
+  if (url.pathname.endsWith('/version.json')) {
     event.respondWith(
       (async () => {
         try {
@@ -214,7 +229,7 @@ self.addEventListener('fetch', (event) => {
             return networkRes;
           }
         } catch {}
-        const cached = (await caches.match(req)) || (await caches.match('/version.json'));
+        const cached = (await caches.match(req)) || (await caches.match(getScopedUrl('version.json')));
         if (cached) return cached;
         return new Response('{"version":"offline"}', { headers: { 'Content-Type': 'application/json' } });
       })()
@@ -235,13 +250,18 @@ self.addEventListener('fetch', (event) => {
           if (networkRes && networkRes.ok) {
             const clone = networkRes.clone();
             const c = await caches.open(STATIC_CACHE);
-            c.put('/index.html', clone).catch(() => {});
+            c.put(getScopedUrl('index.html'), clone).catch(() => {});
             return networkRes;
           }
         } catch {}
 
         // Mất mạng hoặc mạng chậm: trả về index.html từ cache ngay lập tức
-        const cached = (await caches.match('/index.html')) || (await caches.match('/')) || (await caches.match(req));
+        const cached =
+          (await caches.match(getScopedUrl('index.html'))) ||
+          (await caches.match(getScopedUrl(''))) ||
+          (await caches.match('/index.html')) ||
+          (await caches.match('/')) ||
+          (await caches.match(req));
         if (cached) return cached;
         return new Response('Offline', { status: 503, statusText: 'Offline' });
       })()
@@ -257,7 +277,8 @@ self.addEventListener('fetch', (event) => {
       const cached =
         (await caches.match(req)) ||
         (await caches.match(req.url)) ||
-        (await caches.match(url.pathname));
+        (await caches.match(url.pathname)) ||
+        (await caches.match(getScopedUrl(url.pathname)));
 
       if (cached) return cached;
 
@@ -281,7 +302,10 @@ self.addEventListener('fetch', (event) => {
         return networkRes;
       } catch {
         // Khi mất mạng: thử tìm kiếm lại theo pathname lần cuối
-        const fallback = (await caches.match(url.pathname)) || (await caches.match(req.url));
+        const fallback =
+          (await caches.match(url.pathname)) ||
+          (await caches.match(getScopedUrl(url.pathname))) ||
+          (await caches.match(req.url));
         if (fallback) return fallback;
 
         // Fallback nhẹ nhàng cho ảnh nếu thiếu

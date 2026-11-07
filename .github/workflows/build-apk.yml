@@ -40,8 +40,8 @@ jobs:
       - name: Build Web PWA Assets
         run: npm run build:pwa
 
-      - name: Sync Capacitor Android
-        run: npx cap sync android
+      - name: Copy Assets to Capacitor Android
+        run: npx cap copy android
 
       - name: Grant Execute Permission to Gradlew
         run: chmod +x android/gradlew
