@@ -16,7 +16,6 @@ jobs:
     env:
       ANDROID_HOME: /usr/local/lib/android/sdk
       ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-      CAPACITOR_TELEMETRY: "false"
 
     steps:
       - name: Checkout Source Code
@@ -41,7 +40,10 @@ jobs:
         run: npm run build:pwa
 
       - name: Copy Assets to Capacitor Android
-        run: npx cap copy android
+        run: |
+          mkdir -p android/app/src/main/assets/public
+          cp -r dist/* android/app/src/main/assets/public/
+          echo '{"appId":"com.haian.vuihoc","appName":"Vui Hoc - Doc Truyen","webDir":"dist"}' > android/app/src/main/assets/capacitor.config.json
 
       - name: Grant Execute Permission to Gradlew
         run: chmod +x android/gradlew
