@@ -173,23 +173,23 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "melodyStyle": "cheerful",
     "lyrics": [
       "Cháu lên ba, cháu đi mẫu giáo.",
-      "Cô thương lắm, chứ không khóc nhè.",
-      "Không khóc nhè, để mẹ trong tay trái.",
-      "Ba vào nhà máy, ông bà vui cấy cây.",
+      "Cô thương cháu vì không khóc nhè.",
+      "Không khóc nhè để mẹ trồng cây trái.",
+      "Ba vào nhà máy, ông bà vui cấy cày.",
       "La la la la la la la la la.",
       "Cháu lên ba, cháu đi mẫu giáo.",
-      "Cô thương lắm, chứ không khóc nhè.",
-      "Không khóc nhè, để mẹ trong tay trái.",
-      "Ba vào nhà máy, ông bà vui cấy cây. La la la la la la la la la.",
+      "Cô thương cháu vì không khóc nhè.",
+      "Không khóc nhè để mẹ trồng cây trái.",
+      "Ba vào nhà máy, ông bà vui cấy cày. La la la la la la la la la.",
       "Cháu lên ba, cháu đi mẫu giáo.",
-      "Cô thương lắm, chứ không khóc nhè.",
-      "Không khóc nhè, để mẹ trong tay trái.",
-      "Ba vào nhà máy, ông bà vui cấy cây.",
+      "Cô thương cháu vì không khóc nhè.",
+      "Không khóc nhè để mẹ trồng cây trái.",
+      "Ba vào nhà máy, ông bà vui cấy cày.",
       "La la la la la la la la la.",
       "Cháu lên ba, cháu đi mẫu giáo.",
-      "Cô thương lắm, chứ không khóc nhè.",
-      "Không khóc nhè, để mẹ trong tay trái.",
-      "Ba vào nhà máy, ông bà vui cấy cây. La la la la la la la la la."
+      "Cô thương cháu vì không khóc nhè.",
+      "Không khóc nhè để mẹ trồng cây trái.",
+      "Ba vào nhà máy, ông bà vui cấy cày. La la la la la la la la la."
     ],
     "lyricsData": [
       {
@@ -201,19 +201,19 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 15.35,
         "end": 20.0,
-        "vi": "Cô thương lắm, chứ không khóc nhè.",
-        "en": "The teacher loves me so much, and I don't cry."
+        "vi": "Cô thương cháu vì không khóc nhè.",
+        "en": "The teacher loves me because I don't cry."
       },
       {
         "start": 19.85,
         "end": 24.2,
-        "vi": "Không khóc nhè, để mẹ trong tay trái.",
-        "en": "I don't cry, so my mom can hold my left hand."
+        "vi": "Không khóc nhè để mẹ trồng cây trái.",
+        "en": "I do not cry so mother can plant fruit trees."
       },
       {
         "start": 24.05,
         "end": 28.5,
-        "vi": "Ba vào nhà máy, ông bà vui cấy cây.",
+        "vi": "Ba vào nhà máy, ông bà vui cấy cày.",
         "en": "Dad goes to the factory, grandparents are happy farming."
       },
       {
@@ -231,19 +231,19 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 37.25,
         "end": 41.8,
-        "vi": "Cô thương lắm, chứ không khóc nhè.",
-        "en": "The teacher loves me so much, and I don't cry."
+        "vi": "Cô thương cháu vì không khóc nhè.",
+        "en": "The teacher loves me because I don't cry."
       },
       {
         "start": 41.65,
         "end": 46.0,
-        "vi": "Không khóc nhè, để mẹ trong tay trái.",
-        "en": "I don't cry, so my mom can hold my left hand."
+        "vi": "Không khóc nhè để mẹ trồng cây trái.",
+        "en": "I do not cry so mother can plant fruit trees."
       },
       {
         "start": 45.85,
         "end": 53.4,
-        "vi": "Ba vào nhà máy, ông bà vui cấy cây. La la la la la la la la la.",
+        "vi": "Ba vào nhà máy, ông bà vui cấy cày. La la la la la la la la la.",
         "en": "Dad goes to the factory, grandparents are happy farming. La la la la la la la la la."
       },
       {
@@ -255,19 +255,19 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 69.45,
         "end": 74.0,
-        "vi": "Cô thương lắm, chứ không khóc nhè.",
-        "en": "The teacher loves me so much, and I don't cry."
+        "vi": "Cô thương cháu vì không khóc nhè.",
+        "en": "The teacher loves me because I don't cry."
       },
       {
         "start": 73.85,
         "end": 78.2,
-        "vi": "Không khóc nhè, để mẹ trong tay trái.",
-        "en": "I don't cry, so my mom can hold my left hand."
+        "vi": "Không khóc nhè để mẹ trồng cây trái.",
+        "en": "I do not cry so mother can plant fruit trees."
       },
       {
         "start": 78.05,
         "end": 82.5,
-        "vi": "Ba vào nhà máy, ông bà vui cấy cây.",
+        "vi": "Ba vào nhà máy, ông bà vui cấy cày.",
         "en": "Dad goes to the factory, grandparents are happy farming."
       },
       {
@@ -285,40 +285,40 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 91.25,
         "end": 95.8,
-        "vi": "Cô thương lắm, chứ không khóc nhè.",
-        "en": "The teacher loves me so much, and I don't cry."
+        "vi": "Cô thương cháu vì không khóc nhè.",
+        "en": "The teacher loves me because I don't cry."
       },
       {
         "start": 95.65,
         "end": 100.0,
-        "vi": "Không khóc nhè, để mẹ trong tay trái.",
-        "en": "I don't cry, so my mom can hold my left hand."
+        "vi": "Không khóc nhè để mẹ trồng cây trái.",
+        "en": "I do not cry so mother can plant fruit trees."
       },
       {
         "start": 99.85,
         "end": 107.4,
-        "vi": "Ba vào nhà máy, ông bà vui cấy cây. La la la la la la la la la.",
+        "vi": "Ba vào nhà máy, ông bà vui cấy cày. La la la la la la la la la.",
         "en": "Dad goes to the factory, grandparents are happy farming. La la la la la la la la la."
       }
     ],
     "englishTranslation": [
       "I go to kindergarten when I am three years old.",
-      "The teacher loves me so much, and I don't cry.",
-      "I don't cry, so my mom can hold my left hand.",
+      "The teacher loves me because I don't cry.",
+      "I do not cry so mother can plant fruit trees.",
       "Dad goes to the factory, grandparents are happy farming.",
       "La la la la la la la la la.",
       "I go to kindergarten when I am three years old.",
-      "The teacher loves me so much, and I don't cry.",
-      "I don't cry, so my mom can hold my left hand.",
+      "The teacher loves me because I don't cry.",
+      "I do not cry so mother can plant fruit trees.",
       "Dad goes to the factory, grandparents are happy farming. La la la la la la la la la.",
       "I go to kindergarten when I am three years old.",
-      "The teacher loves me so much, and I don't cry.",
-      "I don't cry, so my mom can hold my left hand.",
+      "The teacher loves me because I don't cry.",
+      "I do not cry so mother can plant fruit trees.",
       "Dad goes to the factory, grandparents are happy farming.",
       "La la la la la la la la la.",
       "I go to kindergarten when I am three years old.",
-      "The teacher loves me so much, and I don't cry.",
-      "I don't cry, so my mom can hold my left hand.",
+      "The teacher loves me because I don't cry.",
+      "I do not cry so mother can plant fruit trees.",
       "Dad goes to the factory, grandparents are happy farming. La la la la la la la la la."
     ],
     "funFactVi": "Bé ba tuổi tự tin, vui tươi đi mẫu giáo ngoan không khóc nhè.",
@@ -407,250 +407,250 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 206,
     "melodyStyle": "playful",
     "lyrics": [
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo",
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo",
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo",
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo",
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo",
-      "nhạc",
-      "Leo trèo rồi mang nón mèo",
-      "Sâu sâu lắm chẳng được mẹ yêu",
-      "Thân măng đẩu mà ngồi liêm la",
-      "Đâu mang rồi lại không meo meo"
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo.",
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo.",
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo.",
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo.",
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo.",
+      "(Nhạc dạo)",
+      "Meo meo meo, rửa mặt như mèo.",
+      "Xấu xấu lắm chẳng được mẹ yêu.",
+      "Khăn mặt đâu mà ngồi liếm láp.",
+      "Đau mắt rồi lại khóc meo meo."
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 36.4,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 36.25,
         "end": 40.4,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 40.25,
         "end": 44.8,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 44.65,
         "end": 49.2,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 49.05,
         "end": 54.4,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       },
       {
         "start": 54.25,
         "end": 58.2,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 58.05,
         "end": 62.1,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 61.95,
         "end": 66.6,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 66.45,
         "end": 71.1,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 70.95,
         "end": 76.1,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       },
       {
         "start": 75.95,
         "end": 80.5,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 80.35,
         "end": 84.4,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 84.25,
         "end": 88.9,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 88.75,
         "end": 93.4,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 93.25,
         "end": 98.2,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       },
       {
         "start": 98.05,
         "end": 138.0,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 137.85,
         "end": 142.2,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 142.05,
         "end": 146.7,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 146.55,
         "end": 151.2,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 151.05,
         "end": 156.1,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       },
       {
         "start": 155.95,
         "end": 160.2,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 160.05,
         "end": 164.2,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 164.05,
         "end": 168.8,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 168.65,
         "end": 173.3,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 173.15,
         "end": 178.2,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       },
       {
         "start": 178.05,
         "end": 182.2,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 182.05,
         "end": 186.3,
-        "vi": "Leo trèo rồi mang nón mèo",
-        "en": "Climbing up, wearing cat hat"
+        "vi": "Meo meo meo, rửa mặt như mèo.",
+        "en": "Meow meow meow, washing your face like a cat."
       },
       {
         "start": 186.15,
         "end": 190.9,
-        "vi": "Sâu sâu lắm chẳng được mẹ yêu",
-        "en": "So very deep, mother doesn't love"
+        "vi": "Xấu xấu lắm chẳng được mẹ yêu.",
+        "en": "So very bad, mother doesn't love you."
       },
       {
         "start": 190.75,
         "end": 195.3,
-        "vi": "Thân măng đẩu mà ngồi liêm la",
-        "en": "Bamboo stem body sitting secretly"
+        "vi": "Khăn mặt đâu mà ngồi liếm láp.",
+        "en": "Where is the washcloth that you sit licking your face."
       },
       {
         "start": 195.15,
         "end": 205.0,
-        "vi": "Đâu mang rồi lại không meo meo",
-        "en": "Where did it go, then not meow meow"
+        "vi": "Đau mắt rồi lại khóc meo meo.",
+        "en": "With sore eyes, crying meow meow again."
       }
     ],
     "englishTranslation": [
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow",
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow",
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow",
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow",
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow",
-      "music",
-      "Climbing up, wearing cat hat",
-      "So very deep, mother doesn't love",
-      "Bamboo stem body sitting secretly",
-      "Where did it go, then not meow meow"
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again.",
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again.",
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again.",
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again.",
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again.",
+      "(Instrumental)",
+      "Meow meow meow, washing your face like a cat.",
+      "So very bad, mother doesn't love you.",
+      "Where is the washcloth that you sit licking your face.",
+      "With sore eyes, crying meow meow again."
     ],
     "funFactVi": "Rửa mặt bằng khăn sạch mỗi sớm giúp bé tươi vui, mắt sáng.",
     "audioUrl": "/assets/music/rua-mat-nhu-meo.mp3",
@@ -730,106 +730,106 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 150,
     "melodyStyle": "gentle",
     "lyrics": [
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-      "Ai hỏi cháu, cháu học trường nào đây?",
-      "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non."
+      "Hôm qua em tới trường, mẹ dắt tay từng bước.",
+      "Hôm nay mẹ lên nương, một mình em tới lớp.",
+      "Chim đùa theo trong lá, cá dưới khe thì thào.",
+      "Hương rừng chen hương cốm, em tới trường hương theo.",
+      "Trường của em be bé, nằm lặng giữa rừng cây.",
+      "Cô giáo em tre trẻ, dạy em hát rất hay.",
+      "Hương rừng thơm đồi vắng, nước suối trong thầm thì.",
+      "Cọ xòe ô che nắng, râm mát đường em đi.",
+      "Trường của em be bé, nằm lặng giữa rừng cây.",
+      "Cô giáo em tre trẻ, dạy em hát rất hay.",
+      "Hương rừng thơm đồi vắng, nước suối trong thầm thì.",
+      "Cọ xòe ô che nắng, râm mát đường em đi."
     ],
     "lyricsData": [
       {
         "start": 16.65,
         "end": 24.4,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Hôm qua em tới trường, mẹ dắt tay từng bước.",
+        "en": "Yesterday I went to school, mother held my hand step by step."
       },
       {
         "start": 24.25,
         "end": 33.7,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Hôm nay mẹ lên nương, một mình em tới lớp.",
+        "en": "Today mother goes to the fields, I go to class alone."
       },
       {
         "start": 33.55,
         "end": 41.9,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Chim đùa theo trong lá, cá dưới khe thì thào.",
+        "en": "Birds play in the leaves, fish whisper in the stream."
       },
       {
         "start": 41.75,
         "end": 50.9,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Hương rừng chen hương cốm, em tới trường hương theo.",
+        "en": "Forest scent mingles with green rice aroma, fragrance follows me to school."
       },
       {
         "start": 59.65,
         "end": 67.7,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Trường của em be bé, nằm lặng giữa rừng cây.",
+        "en": "My little school lies quietly amid the forest trees."
       },
       {
         "start": 67.55,
         "end": 77.1,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Cô giáo em tre trẻ, dạy em hát rất hay.",
+        "en": "My young teacher teaches me to sing very well."
       },
       {
         "start": 76.95,
         "end": 85.1,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Hương rừng thơm đồi vắng, nước suối trong thầm thì.",
+        "en": "Forest fragrance fills the quiet hills, stream water whispers softly."
       },
       {
         "start": 84.95,
         "end": 94.1,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Cọ xòe ô che nắng, râm mát đường em đi.",
+        "en": "Palm leaves spread like umbrellas to block the sun, shading the road I walk."
       },
       {
         "start": 103.45,
         "end": 111.6,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Trường của em be bé, nằm lặng giữa rừng cây.",
+        "en": "My little school lies quietly amid the forest trees."
       },
       {
         "start": 111.45,
         "end": 120.6,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Cô giáo em tre trẻ, dạy em hát rất hay.",
+        "en": "My young teacher teaches me to sing very well."
       },
       {
         "start": 120.45,
         "end": 128.5,
-        "vi": "Ai hỏi cháu, cháu học trường nào đây?",
-        "en": "Who asks grandchild, which school do you study at?"
+        "vi": "Hương rừng thơm đồi vắng, nước suối trong thầm thì.",
+        "en": "Forest fragrance fills the quiet hills, stream water whispers softly."
       },
       {
         "start": 128.35,
         "end": 149.6,
-        "vi": "Bé vừa ngoan lại múa hát thật hay. Cô là mẹ và các cháu là con, trường của cháu đây là trường mầm non.",
-        "en": "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+        "vi": "Cọ xòe ô che nắng, râm mát đường em đi.",
+        "en": "Palm leaves spread like umbrellas to block the sun, shading the road I walk."
       }
     ],
     "englishTranslation": [
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten.",
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten.",
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten.",
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten.",
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten.",
-      "Who asks grandchild, which school do you study at?",
-      "The baby is both good and dances and sings very well. The teacher is the mother and the grandchildren are the children, this school of mine is a kindergarten."
+      "Yesterday I went to school, mother held my hand step by step.",
+      "Today mother goes to the fields, I go to class alone.",
+      "Birds play in the leaves, fish whisper in the stream.",
+      "Forest scent mingles with green rice aroma, fragrance follows me to school.",
+      "My little school lies quietly amid the forest trees.",
+      "My young teacher teaches me to sing very well.",
+      "Forest fragrance fills the quiet hills, stream water whispers softly.",
+      "Palm leaves spread like umbrellas to block the sun, shading the road I walk.",
+      "My little school lies quietly amid the forest trees.",
+      "My young teacher teaches me to sing very well.",
+      "Forest fragrance fills the quiet hills, stream water whispers softly.",
+      "Palm leaves spread like umbrellas to block the sun, shading the road I walk."
     ],
     "funFactVi": "Đường tới lớp rợp bóng cọ nâng bước chân bé tự lập, yêu trường.",
     "melodyNotes": [
@@ -899,36 +899,36 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "tempo": 116,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Ai hỏi cháu cháu học trường nào đây?",
-      "Bé mà ngoan lại múa hát thật hay!",
-      "Cô là mẹ và các cháu là con",
-      "Trường của cháu đây là trường mầm non!"
+      "Ai hỏi cháu, cháu học trường nào đấy?",
+      "Bé mà ngoan lại múa hát thật hay.",
+      "Cô là mẹ và các cháu là con.",
+      "Trường của cháu đây là trường mầm non."
     ],
     "lyricsData": [
-      { "start": 16.35, "end": 20.5, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 20.35, "end": 24.7, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 24.55, "end": 29.0, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 28.85, "end": 34.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
-      { "start": 33.85, "end": 37.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 37.65, "end": 42.2, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 42.05, "end": 46.5, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 46.35, "end": 51.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
-      { "start": 59.85, "end": 64.0, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 63.85, "end": 68.2, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 68.05, "end": 72.7, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 72.55, "end": 77.3, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
-      { "start": 77.15, "end": 81.3, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 81.15, "end": 85.6, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 85.45, "end": 89.9, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 89.75, "end": 95.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
-      { "start": 103.45, "end": 107.4, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 107.25, "end": 111.6, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 111.45, "end": 116.0, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 115.85, "end": 120.8, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." },
-      { "start": 120.65, "end": 124.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks me which school I go to?" },
-      { "start": 124.65, "end": 129.1, "vi": "Bé vừa ngoan lại múa hát thật hay.", "en": "I'm well-behaved and sing and dance so well." },
-      { "start": 128.95, "end": 133.4, "vi": "Cô là mẹ và các cháu là con.", "en": "Teacher is like a mother and we are her children." },
-      { "start": 133.25, "end": 138.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "My school here is kindergarten." }
+      { "start": 16.35, "end": 20.5, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 20.35, "end": 24.7, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 24.55, "end": 29.0, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 28.85, "end": 34.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." },
+      { "start": 33.85, "end": 37.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 37.65, "end": 42.2, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 42.05, "end": 46.5, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 46.35, "end": 51.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." },
+      { "start": 59.85, "end": 64.0, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 63.85, "end": 68.2, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 68.05, "end": 72.7, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 72.55, "end": 77.3, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." },
+      { "start": 77.15, "end": 81.3, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 81.15, "end": 85.6, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 85.45, "end": 89.9, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 89.75, "end": 95.0, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." },
+      { "start": 103.45, "end": 107.4, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 107.25, "end": 111.6, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 111.45, "end": 116.0, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 115.85, "end": 120.8, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." },
+      { "start": 120.65, "end": 124.8, "vi": "Ai hỏi cháu, cháu học trường nào đấy?", "en": "Who asks grandchild, which school do you attend?" },
+      { "start": 124.65, "end": 129.1, "vi": "Bé mà ngoan lại múa hát thật hay.", "en": "A well-behaved child dances and sings so beautifully." },
+      { "start": 128.95, "end": 133.4, "vi": "Cô là mẹ và các cháu là con.", "en": "The teacher is the mother and we are the children." },
+      { "start": 133.25, "end": 138.5, "vi": "Trường của cháu đây là trường mầm non.", "en": "This school of ours is a kindergarten." }
     ],
     "funFactVi": "Trường mầm non rực rỡ tiếng cười của bạn bè và cô giáo hiền.",
     "audioUrl": "/assets/music/truong-chung-chau-la-truong-mam-non.mp3",
@@ -1009,10 +1009,10 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "cover": "/assets/music/covers/music_cover_truong-chung-chau-la-truong-mam-non.webp",
     "isVocalTrack": true,
     "englishTranslation": [
-      "Who is asking where is my preschool?",
-      "Come here and visit, our school is so lovely",
-      "Lots of pretty toys and kind teacher",
-      "Our school is a cheerful kindergarten!"
+      "Who asks grandchild, which school do you attend?",
+      "A well-behaved child dances and sings so beautifully.",
+      "The teacher is the mother and we are the children.",
+      "This school of ours is a kindergarten."
     ]
   },
   {
@@ -1030,146 +1030,146 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 167,
     "melodyStyle": "playful",
     "lyrics": [
+      "(Nhạc dạo)",
       "Con cò bé bé, nó đậu cành tre.",
-      "Đi thăm hỏi mẹ, biết đây đường nào?",
-      "Hết đây em hỏi, hết về em chào.",
-      "Miền em chim chíp, mẹ có yêu không nào?",
+      "Đi không hỏi mẹ, biết đi đường nào?",
+      "Khi đi em hỏi, khi về em chào.",
+      "Miệng em chúm chím, mẹ có yêu không nào?",
       "Con cò bé bé, nó đậu cành tre.",
-      "Đi thăm hỏi mẹ, biết đây đường nào?",
-      "Hết đây em hỏi, hết về em chào.",
-      "Miền em chim chíp, mẹ có yêu không nào?",
+      "Đi không hỏi mẹ, biết đi đường nào?",
+      "Khi đi em hỏi, khi về em chào.",
+      "Miệng em chúm chím, mẹ có yêu không nào?",
+      "(Nhạc dạo)",
       "Con cò bé bé, nó đậu cành tre.",
-      "Đi thăm hỏi mẹ, biết đây đường nào?",
-      "Hết đây em hỏi, hết về em chào.",
-      "Miền em chim chíp, mẹ có yêu không nào?",
+      "Đi không hỏi mẹ, biết đi đường nào?",
+      "Khi đi em hỏi, khi về em chào.",
+      "Miệng em chúm chím, mẹ có yêu không nào?",
       "Con cò bé bé, nó đậu cành tre.",
-      "Đi thăm hỏi mẹ, biết đây đường nào?",
-      "Hết đây em hỏi, hết về em chào.",
-      "Miền em chim chíp, mẹ có yêu không nào?",
-      "Miền em chim chíp, mẹ có yêu không nào?"
+      "Miệng em chúm chím, mẹ có yêu không nào?",
+      "(Nhạc kết)"
     ],
     "lyricsData": [
       {
         "start": 26.35,
         "end": 32.4,
-        "vi": "Con cò bé bé, nó đậu cành tre.",
-        "en": "Little stork, it lands on a bamboo branch."
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 32.25,
         "end": 37.3,
-        "vi": "Đi thăm hỏi mẹ, biết đây đường nào?",
-        "en": "Visiting and asking about mother, do you know the way here?"
+        "vi": "Con cò bé bé, nó đậu cành tre.",
+        "en": "The little stork sits on the bamboo branch."
       },
       {
         "start": 37.15,
         "end": 43.0,
-        "vi": "Hết đây em hỏi, hết về em chào.",
-        "en": "Done here I ask, done going I greet."
+        "vi": "Đi không hỏi mẹ, biết đi đường nào?",
+        "en": "Leaving without asking mother, which way to go?"
       },
       {
         "start": 42.85,
         "end": 48.3,
-        "vi": "Miền em chim chíp, mẹ có yêu không nào?",
-        "en": "My little birds chirp, does mother love them?"
+        "vi": "Khi đi em hỏi, khi về em chào.",
+        "en": "When leaving I ask, when returning I greet."
       },
       {
         "start": 53.25,
         "end": 58.7,
-        "vi": "Con cò bé bé, nó đậu cành tre.",
-        "en": "Little stork, it lands on a bamboo branch."
+        "vi": "Miệng em chúm chím, mẹ có yêu không nào?",
+        "en": "My mouth smiles sweetly, mother do you love me?"
       },
       {
         "start": 58.55,
         "end": 63.9,
-        "vi": "Đi thăm hỏi mẹ, biết đây đường nào?",
-        "en": "Visiting and asking about mother, do you know the way here?"
+        "vi": "Con cò bé bé, nó đậu cành tre.",
+        "en": "The little stork sits on the bamboo branch."
       },
       {
         "start": 63.75,
         "end": 69.3,
-        "vi": "Hết đây em hỏi, hết về em chào.",
-        "en": "Done here I ask, done going I greet."
+        "vi": "Đi không hỏi mẹ, biết đi đường nào?",
+        "en": "Leaving without asking mother, which way to go?"
       },
       {
         "start": 69.15,
         "end": 74.6,
-        "vi": "Miền em chim chíp, mẹ có yêu không nào?",
-        "en": "My little birds chirp, does mother love them?"
+        "vi": "Khi đi em hỏi, khi về em chào.",
+        "en": "When leaving I ask, when returning I greet."
       },
       {
         "start": 103.55,
         "end": 109.5,
-        "vi": "Con cò bé bé, nó đậu cành tre.",
-        "en": "Little stork, it lands on a bamboo branch."
+        "vi": "Miệng em chúm chím, mẹ có yêu không nào?",
+        "en": "My mouth smiles sweetly, mother do you love me?"
       },
       {
         "start": 109.35,
         "end": 114.6,
-        "vi": "Đi thăm hỏi mẹ, biết đây đường nào?",
-        "en": "Visiting and asking about mother, do you know the way here?"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 114.45,
         "end": 120.1,
-        "vi": "Hết đây em hỏi, hết về em chào.",
-        "en": "Done here I ask, done going I greet."
+        "vi": "Con cò bé bé, nó đậu cành tre.",
+        "en": "The little stork sits on the bamboo branch."
       },
       {
         "start": 119.95,
         "end": 124.9,
-        "vi": "Miền em chim chíp, mẹ có yêu không nào?",
-        "en": "My little birds chirp, does mother love them?"
+        "vi": "Đi không hỏi mẹ, biết đi đường nào?",
+        "en": "Leaving without asking mother, which way to go?"
       },
       {
         "start": 130.35,
         "end": 136.3,
-        "vi": "Con cò bé bé, nó đậu cành tre.",
-        "en": "Little stork, it lands on a bamboo branch."
+        "vi": "Khi đi em hỏi, khi về em chào.",
+        "en": "When leaving I ask, when returning I greet."
       },
       {
         "start": 136.15,
         "end": 141.0,
-        "vi": "Đi thăm hỏi mẹ, biết đây đường nào?",
-        "en": "Visiting and asking about mother, do you know the way here?"
+        "vi": "Miệng em chúm chím, mẹ có yêu không nào?",
+        "en": "My mouth smiles sweetly, mother do you love me?"
       },
       {
         "start": 140.85,
         "end": 146.5,
-        "vi": "Hết đây em hỏi, hết về em chào.",
-        "en": "Done here I ask, done going I greet."
+        "vi": "Con cò bé bé, nó đậu cành tre.",
+        "en": "The little stork sits on the bamboo branch."
       },
       {
         "start": 146.35,
         "end": 150.5,
-        "vi": "Miền em chim chíp, mẹ có yêu không nào?",
-        "en": "My little birds chirp, does mother love them?"
+        "vi": "Miệng em chúm chím, mẹ có yêu không nào?",
+        "en": "My mouth smiles sweetly, mother do you love me?"
       },
       {
         "start": 150.35,
         "end": 156.1,
-        "vi": "Miền em chim chíp, mẹ có yêu không nào?",
-        "en": "My little birds chirp, does mother love them?"
+        "vi": "(Nhạc kết)",
+        "en": "(Outro)"
       }
     ],
     "englishTranslation": [
-      "Little stork, it lands on a bamboo branch.",
-      "Visiting and asking about mother, do you know the way here?",
-      "Done here I ask, done going I greet.",
-      "My little birds chirp, does mother love them?",
-      "Little stork, it lands on a bamboo branch.",
-      "Visiting and asking about mother, do you know the way here?",
-      "Done here I ask, done going I greet.",
-      "My little birds chirp, does mother love them?",
-      "Little stork, it lands on a bamboo branch.",
-      "Visiting and asking about mother, do you know the way here?",
-      "Done here I ask, done going I greet.",
-      "My little birds chirp, does mother love them?",
-      "Little stork, it lands on a bamboo branch.",
-      "Visiting and asking about mother, do you know the way here?",
-      "Done here I ask, done going I greet.",
-      "My little birds chirp, does mother love them?",
-      "My little birds chirp, does mother love them?"
+      "(Instrumental)",
+      "The little stork sits on the bamboo branch.",
+      "Leaving without asking mother, which way to go?",
+      "When leaving I ask, when returning I greet.",
+      "My mouth smiles sweetly, mother do you love me?",
+      "The little stork sits on the bamboo branch.",
+      "Leaving without asking mother, which way to go?",
+      "When leaving I ask, when returning I greet.",
+      "My mouth smiles sweetly, mother do you love me?",
+      "(Instrumental)",
+      "The little stork sits on the bamboo branch.",
+      "Leaving without asking mother, which way to go?",
+      "When leaving I ask, when returning I greet.",
+      "My mouth smiles sweetly, mother do you love me?",
+      "The little stork sits on the bamboo branch.",
+      "My mouth smiles sweetly, mother do you love me?",
+      "(Outro)"
     ],
     "funFactVi": "Bé ngoan luôn lễ phép chào hỏi người lớn khi đi và về.",
     "audioUrl": "/assets/music/con-co-be-be.mp3",
@@ -1568,106 +1568,106 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 168,
     "melodyStyle": "gentle",
     "lyrics": [
-      "nhạc",
-      "Bà ơi bà, cháu yêu bà lắm",
-      "Tóc bà trắng, màu trắng như mây",
-      "Cháu yêu bà, chớ năm bàn tay",
-      "Bà ơi bà, cháu yêu bà lắm",
-      "Tóc bà trắng, màu trắng như mây",
-      "nhạc",
-      "Bà ơi bà, cháu yêu bà lắm",
-      "Tóc bà trắng, màu trắng như mây",
-      "Cháu yêu bà, chớ năm bàn tay",
-      "Bà ơi bà, cháu yêu bà lắm",
-      "Tóc bà trắng, màu trắng như mây"
+      "(Nhạc dạo)",
+      "Bà ơi bà, cháu yêu bà lắm.",
+      "Tóc bà trắng, màu trắng như mây.",
+      "Cháu yêu bà, cháu nắm bàn tay.",
+      "Khi cháu vâng lời, cháu biết bà vui.",
+      "Khi cháu vâng lời, cháu biết bà vui.",
+      "(Nhạc dạo)",
+      "Bà ơi bà, cháu yêu bà lắm.",
+      "Tóc bà trắng, màu trắng như mây.",
+      "Cháu yêu bà, cháu nắm bàn tay.",
+      "Khi cháu vâng lời, cháu biết bà vui.",
+      "Khi cháu vâng lời, cháu biết bà vui."
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 28.9,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 28.75,
         "end": 37.8,
-        "vi": "Bà ơi bà, cháu yêu bà lắm",
-        "en": "Grandma, oh Grandma, I love you so much"
+        "vi": "Bà ơi bà, cháu yêu bà lắm.",
+        "en": "Grandma, oh Grandma, I love you so much."
       },
       {
         "start": 37.65,
         "end": 46.8,
-        "vi": "Tóc bà trắng, màu trắng như mây",
-        "en": "Grandma's hair is white, white like clouds"
+        "vi": "Tóc bà trắng, màu trắng như mây.",
+        "en": "Grandma's hair is white, white like clouds."
       },
       {
         "start": 46.65,
         "end": 51.0,
-        "vi": "Cháu yêu bà, chớ năm bàn tay",
-        "en": "I love Grandma, hold my five fingers"
+        "vi": "Cháu yêu bà, cháu nắm bàn tay.",
+        "en": "I love Grandma, I hold your hands."
       },
       {
         "start": 50.85,
         "end": 60.0,
-        "vi": "Bà ơi bà, cháu yêu bà lắm",
-        "en": "Grandma, oh Grandma, I love you so much"
+        "vi": "Khi cháu vâng lời, cháu biết bà vui.",
+        "en": "When I obey, I know Grandma is happy."
       },
       {
         "start": 59.85,
         "end": 68.8,
-        "vi": "Tóc bà trắng, màu trắng như mây",
-        "en": "Grandma's hair is white, white like clouds"
+        "vi": "Khi cháu vâng lời, cháu biết bà vui.",
+        "en": "When I obey, I know Grandma is happy."
       },
       {
         "start": 68.65,
         "end": 118.3,
-        "vi": "nhạc",
-        "en": "music"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 118.15,
         "end": 126.9,
-        "vi": "Bà ơi bà, cháu yêu bà lắm",
-        "en": "Grandma, oh Grandma, I love you so much"
+        "vi": "Bà ơi bà, cháu yêu bà lắm.",
+        "en": "Grandma, oh Grandma, I love you so much."
       },
       {
         "start": 126.75,
         "end": 135.5,
-        "vi": "Tóc bà trắng, màu trắng như mây",
-        "en": "Grandma's hair is white, white like clouds"
+        "vi": "Tóc bà trắng, màu trắng như mây.",
+        "en": "Grandma's hair is white, white like clouds."
       },
       {
         "start": 135.35,
         "end": 140.1,
-        "vi": "Cháu yêu bà, chớ năm bàn tay",
-        "en": "I love Grandma, hold my five fingers"
+        "vi": "Cháu yêu bà, cháu nắm bàn tay.",
+        "en": "I love Grandma, I hold your hands."
       },
       {
         "start": 139.95,
         "end": 148.9,
-        "vi": "Bà ơi bà, cháu yêu bà lắm",
-        "en": "Grandma, oh Grandma, I love you so much"
+        "vi": "Khi cháu vâng lời, cháu biết bà vui.",
+        "en": "When I obey, I know Grandma is happy."
       },
       {
         "start": 148.75,
         "end": 166.9,
-        "vi": "Tóc bà trắng, màu trắng như mây",
-        "en": "Grandma's hair is white, white like clouds"
+        "vi": "Khi cháu vâng lời, cháu biết bà vui.",
+        "en": "When I obey, I know Grandma is happy."
       }
     ],
     "englishTranslation": [
-      "music",
-      "Grandma, oh Grandma, I love you so much",
-      "Grandma's hair is white, white like clouds",
-      "I love Grandma, hold my five fingers",
-      "Grandma, oh Grandma, I love you so much",
-      "Grandma's hair is white, white like clouds",
-      "music",
-      "Grandma, oh Grandma, I love you so much",
-      "Grandma's hair is white, white like clouds",
-      "I love Grandma, hold my five fingers",
-      "Grandma, oh Grandma, I love you so much",
-      "Grandma's hair is white, white like clouds"
+      "(Instrumental)",
+      "Grandma, oh Grandma, I love you so much.",
+      "Grandma's hair is white, white like clouds.",
+      "I love Grandma, I hold your hands.",
+      "When I obey, I know Grandma is happy.",
+      "When I obey, I know Grandma is happy.",
+      "(Instrumental)",
+      "Grandma, oh Grandma, I love you so much.",
+      "Grandma's hair is white, white like clouds.",
+      "I love Grandma, I hold your hands.",
+      "When I obey, I know Grandma is happy.",
+      "When I obey, I know Grandma is happy."
     ],
     "funFactVi": "Lòng hiếu thảo, cử chỉ âu yếm bé dành cho người bà tóc bạc.",
     "audioUrl": "/assets/music/chau-yeu-ba.mp3",
@@ -2030,154 +2030,154 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 221,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "(Music)",
-      "Hai vây xinh xinh cá vàng bơi trong bể nước",
-      "Ngồi lên lặn xuống cá vàng múa tung tăng",
-      "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
-      "Hai vây xinh xinh cá vàng bơi trong bể nước",
-      "Ngồi lên lặn xuống cá vàng múa tung tăng",
-      "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
-      "(Music)",
-      "Hai vây xinh xinh cá vàng bơi trong bể nước",
-      "Ngồi lên lặn xuống cá vàng múa tung tăng",
-      "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
-      "Hai vây xinh xinh cá vàng bơi trong bể nước",
-      "Ngồi lên lặn xuống cá vàng múa tung tăng",
-      "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
-      "Hai vây xinh xinh cá vàng bơi trong bể nước",
-      "Ngồi lên lặn xuống cá vàng múa tung tăng",
-      "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
-      "(Music)"
+      "(Nhạc dạo)",
+      "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+      "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
+      "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
+      "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+      "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
+      "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
+      "(Nhạc dạo)",
+      "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+      "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
+      "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
+      "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+      "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
+      "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
+      "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+      "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
+      "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
+      "(Nhạc kết)"
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 24.4,
-        "vi": "(Music)",
-        "en": "(Music)"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 24.25,
         "end": 34.0,
-        "vi": "Hai vây xinh xinh cá vàng bơi trong bể nước",
-        "en": "Two pretty fins, the little goldfish swims in the fish tank,"
+        "vi": "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+        "en": "Two pretty fins, the goldfish swims in the fish tank."
       },
       {
         "start": 33.85,
         "end": 43.7,
-        "vi": "Ngồi lên lặn xuống cá vàng múa tung tăng",
+        "vi": "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
         "en": "Floating up and diving down, the goldfish dances happily."
       },
       {
         "start": 43.55,
         "end": 50.5,
-        "vi": "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
         "en": "The goldfish catches mosquito larvae to keep the water clean and clear."
       },
       {
         "start": 50.35,
         "end": 60.3,
-        "vi": "Hai vây xinh xinh cá vàng bơi trong bể nước",
-        "en": "Two pretty fins, the little goldfish swims in the fish tank,"
+        "vi": "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+        "en": "Two pretty fins, the goldfish swims in the fish tank."
       },
       {
         "start": 60.15,
         "end": 70.0,
-        "vi": "Ngồi lên lặn xuống cá vàng múa tung tăng",
+        "vi": "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
         "en": "Floating up and diving down, the goldfish dances happily."
       },
       {
         "start": 69.85,
         "end": 76.8,
-        "vi": "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
         "en": "The goldfish catches mosquito larvae to keep the water clean and clear."
       },
       {
         "start": 76.65,
         "end": 126.0,
-        "vi": "(Music)",
-        "en": "(Music)"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 125.85,
         "end": 135.9,
-        "vi": "Hai vây xinh xinh cá vàng bơi trong bể nước",
-        "en": "Two pretty fins, the little goldfish swims in the fish tank,"
+        "vi": "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+        "en": "Two pretty fins, the goldfish swims in the fish tank."
       },
       {
         "start": 135.75,
         "end": 145.5,
-        "vi": "Ngồi lên lặn xuống cá vàng múa tung tăng",
+        "vi": "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
         "en": "Floating up and diving down, the goldfish dances happily."
       },
       {
         "start": 145.35,
         "end": 152.4,
-        "vi": "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
         "en": "The goldfish catches mosquito larvae to keep the water clean and clear."
       },
       {
         "start": 152.25,
         "end": 162.2,
-        "vi": "Hai vây xinh xinh cá vàng bơi trong bể nước",
-        "en": "Two pretty fins, the little goldfish swims in the fish tank,"
+        "vi": "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+        "en": "Two pretty fins, the goldfish swims in the fish tank."
       },
       {
         "start": 162.05,
         "end": 171.9,
-        "vi": "Ngồi lên lặn xuống cá vàng múa tung tăng",
+        "vi": "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
         "en": "Floating up and diving down, the goldfish dances happily."
       },
       {
         "start": 171.75,
         "end": 179.0,
-        "vi": "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
         "en": "The goldfish catches mosquito larvae to keep the water clean and clear."
       },
       {
         "start": 178.85,
         "end": 188.8,
-        "vi": "Hai vây xinh xinh cá vàng bơi trong bể nước",
-        "en": "Two pretty fins, the little goldfish swims in the fish tank,"
+        "vi": "Hai vây xinh xinh, cá vàng bơi trong bể nước.",
+        "en": "Two pretty fins, the goldfish swims in the fish tank."
       },
       {
         "start": 188.65,
         "end": 198.5,
-        "vi": "Ngồi lên lặn xuống cá vàng múa tung tăng",
+        "vi": "Ngoi lên lặn xuống, cá vàng múa tung tăng.",
         "en": "Floating up and diving down, the goldfish dances happily."
       },
       {
         "start": 198.35,
         "end": 209.8,
-        "vi": "Cá vàng bắt bồ gậy cho nước thêm sạch trong.",
+        "vi": "Cá vàng bắt bọ gậy cho nước thêm sạch trong.",
         "en": "The goldfish catches mosquito larvae to keep the water clean and clear."
       },
       {
         "start": 209.65,
         "end": 221.0,
-        "vi": "(Music)",
-        "en": "(Music)"
+        "vi": "(Nhạc kết)",
+        "en": "(Outro)"
       }
     ],
     "englishTranslation": [
-      "(Music)",
-      "Two pretty fins, the little goldfish swims in the fish tank,",
+      "(Instrumental)",
+      "Two pretty fins, the goldfish swims in the fish tank.",
       "Floating up and diving down, the goldfish dances happily.",
       "The goldfish catches mosquito larvae to keep the water clean and clear.",
-      "Two pretty fins, the little goldfish swims in the fish tank,",
+      "Two pretty fins, the goldfish swims in the fish tank.",
       "Floating up and diving down, the goldfish dances happily.",
       "The goldfish catches mosquito larvae to keep the water clean and clear.",
-      "(Music)",
-      "Two pretty fins, the little goldfish swims in the fish tank,",
+      "(Instrumental)",
+      "Two pretty fins, the goldfish swims in the fish tank.",
       "Floating up and diving down, the goldfish dances happily.",
       "The goldfish catches mosquito larvae to keep the water clean and clear.",
-      "Two pretty fins, the little goldfish swims in the fish tank,",
+      "Two pretty fins, the goldfish swims in the fish tank.",
       "Floating up and diving down, the goldfish dances happily.",
       "The goldfish catches mosquito larvae to keep the water clean and clear.",
-      "Two pretty fins, the little goldfish swims in the fish tank,",
+      "Two pretty fins, the goldfish swims in the fish tank.",
       "Floating up and diving down, the goldfish dances happily.",
       "The goldfish catches mosquito larvae to keep the water clean and clear.",
-      "(Music)"
+      "(Outro)"
     ],
     "funFactVi": "Đàn cá vàng tung tăng bơi lội bắt bọ gậy giữ sạch nước.",
     "audioUrl": "/assets/music/ca-vang-boi.mp3",
@@ -2245,202 +2245,202 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 124,
     "melodyStyle": "playful",
     "lyrics": [
-      "Kìa con bướm vàng, kìa con bướm vàng",
-      "Xòe đôi cánh, xòe đôi cánh",
-      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-      "Em ngồi xem, em ngồi xem",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-      "Bye goodbye, bye goodbye",
-      "Kìa con bướm vàng, kìa con bướm vàng",
-      "Xòe đôi cánh, xòe đôi cánh",
-      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-      "Em ngồi xem, em ngồi xem",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-      "Bye goodbye, bye goodbye",
-      "Kìa con bướm vàng, kìa con bướm vàng",
-      "Xòe đôi cánh, xòe đôi cánh",
-      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-      "Em ngồi xem, em ngồi xem",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-      "Bye goodbye, bye goodbye"
+      "Kìa con bướm vàng, kìa con bướm vàng.",
+      "Xòe đôi cánh, xòe đôi cánh.",
+      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+      "Em ngồi xem, em ngồi xem.",
+      "Good bye teacher, good bye teacher.",
+      "See you again, see you again.",
+      "And see you tomorrow, and see you tomorrow.",
+      "Bye, good bye! Bye, good bye!",
+      "Kìa con bướm vàng, kìa con bướm vàng.",
+      "Xòe đôi cánh, xòe đôi cánh.",
+      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+      "Em ngồi xem, em ngồi xem.",
+      "Good bye teacher, good bye teacher.",
+      "See you again, see you again.",
+      "And see you tomorrow, and see you tomorrow.",
+      "Bye, good bye! Bye, good bye!",
+      "Kìa con bướm vàng, kìa con bướm vàng.",
+      "Xòe đôi cánh, xòe đôi cánh.",
+      "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+      "Em ngồi xem, em ngồi xem.",
+      "Good bye teacher, good bye teacher.",
+      "See you again, see you again.",
+      "And see you tomorrow, and see you tomorrow.",
+      "Bye, good bye! Bye, good bye!"
     ],
     "lyricsData": [
       {
         "start": 10.95,
         "end": 15.1,
-        "vi": "Kìa con bướm vàng, kìa con bướm vàng",
-        "en": "Look at the yellow butterfly, look at the yellow butterfly"
+        "vi": "Kìa con bướm vàng, kìa con bướm vàng.",
+        "en": "Look at the yellow butterfly, look at the yellow butterfly."
       },
       {
         "start": 14.95,
         "end": 18.1,
-        "vi": "Xòe đôi cánh, xòe đôi cánh",
-        "en": "Spread your wings, spread your wings"
+        "vi": "Xòe đôi cánh, xòe đôi cánh.",
+        "en": "Spread your wings, spread your wings."
       },
       {
         "start": 17.95,
         "end": 21.9,
-        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-        "en": "Butterflies fly two or three rounds, butterflies fly two or three rounds"
+        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+        "en": "Butterfly flies two or three rounds, butterfly flies two or three rounds."
       },
       {
         "start": 21.75,
         "end": 25.9,
-        "vi": "Em ngồi xem, em ngồi xem",
-        "en": "I sit and watch, I sit and watch"
+        "vi": "Em ngồi xem, em ngồi xem.",
+        "en": "I sit and watch, I sit and watch."
       },
       {
         "start": 26.35,
         "end": 30.2,
-        "vi": "Good bye, kiss you. Good bye, kiss you.",
-        "en": "Good bye, kiss you. Good bye, kiss you."
+        "vi": "Good bye teacher, good bye teacher.",
+        "en": "Tạm biệt cô giáo, tạm biệt cô giáo."
       },
       {
         "start": 30.35,
         "end": 33.8,
-        "vi": "See you again. See you again.",
-        "en": "See you again. See you again."
+        "vi": "See you again, see you again.",
+        "en": "Hẹn gặp lại cô, hẹn gặp lại cô."
       },
       {
         "start": 33.65,
         "end": 37.4,
-        "vi": "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-        "en": "Shake hands before parting, shake hands before parting"
+        "vi": "And see you tomorrow, and see you tomorrow.",
+        "en": "Và hẹn gặp lại cô vào ngày mai."
       },
       {
         "start": 37.25,
         "end": 41.7,
-        "vi": "Bye goodbye, bye goodbye",
-        "en": "Bye goodbye, bye goodbye"
+        "vi": "Bye, good bye! Bye, good bye!",
+        "en": "Tạm biệt, tạm biệt cô nhé!"
       },
       {
         "start": 42.05,
         "end": 46.2,
-        "vi": "Kìa con bướm vàng, kìa con bướm vàng",
-        "en": "Look at the yellow butterfly, look at the yellow butterfly"
+        "vi": "Kìa con bướm vàng, kìa con bướm vàng.",
+        "en": "Look at the yellow butterfly, look at the yellow butterfly."
       },
       {
         "start": 46.05,
         "end": 49.1,
-        "vi": "Xòe đôi cánh, xòe đôi cánh",
-        "en": "Spread your wings, spread your wings"
+        "vi": "Xòe đôi cánh, xòe đôi cánh.",
+        "en": "Spread your wings, spread your wings."
       },
       {
         "start": 48.95,
         "end": 53.0,
-        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-        "en": "Butterflies fly two or three rounds, butterflies fly two or three rounds"
+        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+        "en": "Butterfly flies two or three rounds, butterfly flies two or three rounds."
       },
       {
         "start": 52.85,
         "end": 57.1,
-        "vi": "Em ngồi xem, em ngồi xem",
-        "en": "I sit and watch, I sit and watch"
+        "vi": "Em ngồi xem, em ngồi xem.",
+        "en": "I sit and watch, I sit and watch."
       },
       {
         "start": 65.85,
         "end": 69.9,
-        "vi": "Good bye, kiss you. Good bye, kiss you.",
-        "en": "Good bye, kiss you. Good bye, kiss you."
+        "vi": "Good bye teacher, good bye teacher.",
+        "en": "Tạm biệt cô giáo, tạm biệt cô giáo."
       },
       {
         "start": 69.85,
         "end": 73.3,
-        "vi": "See you again. See you again.",
-        "en": "See you again. See you again."
+        "vi": "See you again, see you again.",
+        "en": "Hẹn gặp lại cô, hẹn gặp lại cô."
       },
       {
         "start": 73.15,
         "end": 77.0,
-        "vi": "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-        "en": "Shake hands before parting, shake hands before parting"
+        "vi": "And see you tomorrow, and see you tomorrow.",
+        "en": "Và hẹn gặp lại cô vào ngày mai."
       },
       {
         "start": 76.85,
         "end": 81.1,
-        "vi": "Bye goodbye, bye goodbye",
-        "en": "Bye goodbye, bye goodbye"
+        "vi": "Bye, good bye! Bye, good bye!",
+        "en": "Tạm biệt, tạm biệt cô nhé!"
       },
       {
         "start": 81.25,
         "end": 85.6,
-        "vi": "Kìa con bướm vàng, kìa con bướm vàng",
-        "en": "Look at the yellow butterfly, look at the yellow butterfly"
+        "vi": "Kìa con bướm vàng, kìa con bướm vàng.",
+        "en": "Look at the yellow butterfly, look at the yellow butterfly."
       },
       {
         "start": 85.45,
         "end": 88.4,
-        "vi": "Xòe đôi cánh, xòe đôi cánh",
-        "en": "Spread your wings, spread your wings"
+        "vi": "Xòe đôi cánh, xòe đôi cánh.",
+        "en": "Spread your wings, spread your wings."
       },
       {
         "start": 88.25,
         "end": 92.4,
-        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng",
-        "en": "Butterflies fly two or three rounds, butterflies fly two or three rounds"
+        "vi": "Bướm bướm bay hai ba vòng, bướm bướm bay hai ba vòng.",
+        "en": "Butterfly flies two or three rounds, butterfly flies two or three rounds."
       },
       {
         "start": 92.25,
         "end": 96.5,
-        "vi": "Em ngồi xem, em ngồi xem",
-        "en": "I sit and watch, I sit and watch"
+        "vi": "Em ngồi xem, em ngồi xem.",
+        "en": "I sit and watch, I sit and watch."
       },
       {
         "start": 96.85,
         "end": 100.8,
-        "vi": "Good bye, kiss you. Good bye, kiss you.",
-        "en": "Good bye, kiss you. Good bye, kiss you."
+        "vi": "Good bye teacher, good bye teacher.",
+        "en": "Tạm biệt cô giáo, tạm biệt cô giáo."
       },
       {
         "start": 100.65,
         "end": 104.2,
-        "vi": "See you again. See you again.",
-        "en": "See you again. See you again."
+        "vi": "See you again, see you again.",
+        "en": "Hẹn gặp lại cô, hẹn gặp lại cô."
       },
       {
         "start": 104.05,
         "end": 107.9,
-        "vi": "Bắt tay nhau chưa mờ rơ, bắt tay nhau chưa mờ rơ",
-        "en": "Shake hands before parting, shake hands before parting"
+        "vi": "And see you tomorrow, and see you tomorrow.",
+        "en": "Và hẹn gặp lại cô vào ngày mai."
       },
       {
         "start": 107.75,
         "end": 112.4,
-        "vi": "Bye goodbye, bye goodbye",
-        "en": "Bye goodbye, bye goodbye"
+        "vi": "Bye, good bye! Bye, good bye!",
+        "en": "Tạm biệt, tạm biệt cô nhé!"
       }
     ],
     "englishTranslation": [
-      "Look at the yellow butterfly, look at the yellow butterfly",
-      "Spread your wings, spread your wings",
-      "Butterflies fly two or three rounds, butterflies fly two or three rounds",
-      "I sit and watch, I sit and watch",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Shake hands before parting, shake hands before parting",
-      "Bye goodbye, bye goodbye",
-      "Look at the yellow butterfly, look at the yellow butterfly",
-      "Spread your wings, spread your wings",
-      "Butterflies fly two or three rounds, butterflies fly two or three rounds",
-      "I sit and watch, I sit and watch",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Shake hands before parting, shake hands before parting",
-      "Bye goodbye, bye goodbye",
-      "Look at the yellow butterfly, look at the yellow butterfly",
-      "Spread your wings, spread your wings",
-      "Butterflies fly two or three rounds, butterflies fly two or three rounds",
-      "I sit and watch, I sit and watch",
-      "Good bye, kiss you. Good bye, kiss you.",
-      "See you again. See you again.",
-      "Shake hands before parting, shake hands before parting",
-      "Bye goodbye, bye goodbye"
+      "Look at the yellow butterfly, look at the yellow butterfly.",
+      "Spread your wings, spread your wings.",
+      "Butterfly flies two or three rounds, butterfly flies two or three rounds.",
+      "I sit and watch, I sit and watch.",
+      "Tạm biệt cô giáo, tạm biệt cô giáo.",
+      "Hẹn gặp lại cô, hẹn gặp lại cô.",
+      "Và hẹn gặp lại cô vào ngày mai.",
+      "Tạm biệt, tạm biệt cô nhé!",
+      "Look at the yellow butterfly, look at the yellow butterfly.",
+      "Spread your wings, spread your wings.",
+      "Butterfly flies two or three rounds, butterfly flies two or three rounds.",
+      "I sit and watch, I sit and watch.",
+      "Tạm biệt cô giáo, tạm biệt cô giáo.",
+      "Hẹn gặp lại cô, hẹn gặp lại cô.",
+      "Và hẹn gặp lại cô vào ngày mai.",
+      "Tạm biệt, tạm biệt cô nhé!",
+      "Look at the yellow butterfly, look at the yellow butterfly.",
+      "Spread your wings, spread your wings.",
+      "Butterfly flies two or three rounds, butterfly flies two or three rounds.",
+      "I sit and watch, I sit and watch.",
+      "Tạm biệt cô giáo, tạm biệt cô giáo.",
+      "Hẹn gặp lại cô, hẹn gặp lại cô.",
+      "Và hẹn gặp lại cô vào ngày mai.",
+      "Tạm biệt, tạm biệt cô nhé!"
     ],
     "funFactVi": "Đôi bướm vàng rực rỡ chao liệng đón gió xuân rộn ràng.",
     "audioUrl": "/assets/music/kia-con-buom-vang.mp3",
@@ -3101,176 +3101,176 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "lyrics": [
       "Bố là tàu lửa, bố là xe hơi",
       "Bố là con ngựa em cưỡi em chơi",
-      "Bố là thuyền nan cho em vươn khắp sóng",
+      "Bố là thuyền nan cho em vượt sóng",
       "Bố là sông rộng cho thuyền em bơi",
       "Bố! Bố là bờ đê cho em nằm ngủ",
       "Bố! Bố là phi thuyền cho em bay vào không gian",
       "Bố! Bố là bờ đê cho em nằm ngủ",
       "Bố! Bố là phi thuyền cho em bay vào không gian",
       "Bố! Bố là tất cả, bố ơi! Bố ơi!",
-      "Bố là tất cả, những lúc bố mệt, bố là bố thôi",
+      "Bố là tất cả, nhưng lúc bố mệt, bố là bố thôi",
       "Bố là tàu lửa, bố là xe hơi",
       "Bố là con ngựa em cưỡi em chơi",
-      "Bố là thuyền nan cho em vươn khắp sóng",
+      "Bố là thuyền nan cho em vượt sóng",
       "Bố là sông rộng cho thuyền em bơi",
       "Bố! Bố là bờ đê cho em nằm ngủ",
       "Bố! Bố là phi thuyền cho em bay vào không gian",
       "Bố! Bố là bờ đê cho em nằm ngủ",
       "Bố! Bố là phi thuyền cho em bay vào không gian",
       "Bố! Bố là tất cả, bố ơi! Bố ơi!",
-      "Bố là tất cả, những lúc bố mệt, bố là bố thôi",
-      "Bố! Bố là tất cả, bố ơi! Bố ơi! Bố là tất cả, những lúc bố mệt, bố là bố thôi"
+      "Bố! Bố là tất cả, bố ơi! Bố ơi!",
+      "Bố là tất cả, nhưng lúc bố mệt, bố là bố thôi"
     ],
     "lyricsData": [
       {
         "start": 22.55,
         "end": 26.5,
         "vi": "Bố là tàu lửa, bố là xe hơi",
-        "en": "Daddy is a train, daddy is a car"
+        "en": "Dad is a train, dad is a car"
       },
       {
         "start": 26.35,
         "end": 30.3,
         "vi": "Bố là con ngựa em cưỡi em chơi",
-        "en": "Daddy is a horse for me to ride and play"
+        "en": "Dad is a horse for me to ride and play"
       },
       {
         "start": 30.15,
         "end": 34.2,
-        "vi": "Bố là thuyền nan cho em vươn khắp sóng",
-        "en": "Daddy is a boat for me to sail the waves"
+        "vi": "Bố là thuyền nan cho em vượt sóng",
+        "en": "Dad is a wooden boat for me to ride the waves"
       },
       {
         "start": 34.05,
         "end": 38.8,
         "vi": "Bố là sông rộng cho thuyền em bơi",
-        "en": "Daddy is a wide river for my boat to swim"
+        "en": "Dad is a wide river for my boat to float"
       },
       {
         "start": 38.65,
         "end": 44.6,
         "vi": "Bố! Bố là bờ đê cho em nằm ngủ",
-        "en": "Daddy! Daddy is the dike for me to sleep on"
+        "en": "Dad! Dad is an embankment for me to lie and sleep"
       },
       {
         "start": 44.45,
         "end": 51.3,
         "vi": "Bố! Bố là phi thuyền cho em bay vào không gian",
-        "en": "Daddy! Daddy is a spaceship for me to fly into space"
+        "en": "Dad! Dad is a spaceship for me to fly into outer space"
       },
       {
         "start": 51.15,
         "end": 57.1,
         "vi": "Bố! Bố là bờ đê cho em nằm ngủ",
-        "en": "Daddy! Daddy is the dike for me to sleep on"
+        "en": "Dad! Dad is an embankment for me to lie and sleep"
       },
       {
         "start": 56.95,
         "end": 64.5,
         "vi": "Bố! Bố là phi thuyền cho em bay vào không gian",
-        "en": "Daddy! Daddy is a spaceship for me to fly into space"
+        "en": "Dad! Dad is a spaceship for me to fly into outer space"
       },
       {
         "start": 64.35,
         "end": 72.1,
         "vi": "Bố! Bố là tất cả, bố ơi! Bố ơi!",
-        "en": "Daddy! Daddy is everything, daddy! Daddy!"
+        "en": "Dad! Dad is everything, oh daddy! Oh daddy!"
       },
       {
         "start": 71.95,
         "end": 81.0,
-        "vi": "Bố là tất cả, những lúc bố mệt, bố là bố thôi",
-        "en": "Daddy is everything, whenever daddy is tired, daddy is just daddy"
+        "vi": "Bố là tất cả, nhưng lúc bố mệt, bố là bố thôi",
+        "en": "Dad is everything, but when dad is tired, dad is just dad"
       },
       {
         "start": 102.15,
         "end": 106.3,
         "vi": "Bố là tàu lửa, bố là xe hơi",
-        "en": "Daddy is a train, daddy is a car"
+        "en": "Dad is a train, dad is a car"
       },
       {
         "start": 106.15,
         "end": 109.8,
         "vi": "Bố là con ngựa em cưỡi em chơi",
-        "en": "Daddy is a horse for me to ride and play"
+        "en": "Dad is a horse for me to ride and play"
       },
       {
         "start": 109.65,
         "end": 113.7,
-        "vi": "Bố là thuyền nan cho em vươn khắp sóng",
-        "en": "Daddy is a boat for me to sail the waves"
+        "vi": "Bố là thuyền nan cho em vượt sóng",
+        "en": "Dad is a wooden boat for me to ride the waves"
       },
       {
         "start": 113.55,
         "end": 118.3,
         "vi": "Bố là sông rộng cho thuyền em bơi",
-        "en": "Daddy is a wide river for my boat to swim"
+        "en": "Dad is a wide river for my boat to float"
       },
       {
         "start": 118.15,
         "end": 124.3,
         "vi": "Bố! Bố là bờ đê cho em nằm ngủ",
-        "en": "Daddy! Daddy is the dike for me to sleep on"
+        "en": "Dad! Dad is an embankment for me to lie and sleep"
       },
       {
         "start": 124.15,
         "end": 131.0,
         "vi": "Bố! Bố là phi thuyền cho em bay vào không gian",
-        "en": "Daddy! Daddy is a spaceship for me to fly into space"
+        "en": "Dad! Dad is a spaceship for me to fly into outer space"
       },
       {
         "start": 130.85,
         "end": 136.8,
         "vi": "Bố! Bố là bờ đê cho em nằm ngủ",
-        "en": "Daddy! Daddy is the dike for me to sleep on"
+        "en": "Dad! Dad is an embankment for me to lie and sleep"
       },
       {
         "start": 136.65,
         "end": 144.3,
         "vi": "Bố! Bố là phi thuyền cho em bay vào không gian",
-        "en": "Daddy! Daddy is a spaceship for me to fly into space"
+        "en": "Dad! Dad is a spaceship for me to fly into outer space"
       },
       {
         "start": 144.15,
         "end": 151.9,
         "vi": "Bố! Bố là tất cả, bố ơi! Bố ơi!",
-        "en": "Daddy! Daddy is everything, daddy! Daddy!"
+        "en": "Dad! Dad is everything, oh daddy! Oh daddy!"
       },
       {
         "start": 151.75,
         "end": 160.8,
-        "vi": "Bố là tất cả, những lúc bố mệt, bố là bố thôi",
-        "en": "Daddy is everything, whenever daddy is tired, daddy is just daddy"
+        "vi": "Bố! Bố là tất cả, bố ơi! Bố ơi!",
+        "en": "Dad! Dad is everything, oh daddy! Oh daddy!"
       },
       {
         "start": 160.65,
         "end": 178.4,
-        "vi": "Bố! Bố là tất cả, bố ơi! Bố ơi! Bố là tất cả, những lúc bố mệt, bố là bố thôi",
-        "en": "Daddy! Daddy is everything, daddy! Daddy! Daddy is everything, whenever daddy is tired, daddy is just daddy"
+        "vi": "Bố là tất cả, nhưng lúc bố mệt, bố là bố thôi",
+        "en": "Dad is everything, but when dad is tired, dad is just dad"
       }
     ],
     "englishTranslation": [
-      "Daddy is a train, daddy is a car",
-      "Daddy is a horse for me to ride and play",
-      "Daddy is a boat for me to sail the waves",
-      "Daddy is a wide river for my boat to swim",
-      "Daddy! Daddy is the dike for me to sleep on",
-      "Daddy! Daddy is a spaceship for me to fly into space",
-      "Daddy! Daddy is the dike for me to sleep on",
-      "Daddy! Daddy is a spaceship for me to fly into space",
-      "Daddy! Daddy is everything, daddy! Daddy!",
-      "Daddy is everything, whenever daddy is tired, daddy is just daddy",
-      "Daddy is a train, daddy is a car",
-      "Daddy is a horse for me to ride and play",
-      "Daddy is a boat for me to sail the waves",
-      "Daddy is a wide river for my boat to swim",
-      "Daddy! Daddy is the dike for me to sleep on",
-      "Daddy! Daddy is a spaceship for me to fly into space",
-      "Daddy! Daddy is the dike for me to sleep on",
-      "Daddy! Daddy is a spaceship for me to fly into space",
-      "Daddy! Daddy is everything, daddy! Daddy!",
-      "Daddy is everything, whenever daddy is tired, daddy is just daddy",
-      "Daddy! Daddy is everything, daddy! Daddy! Daddy is everything, whenever daddy is tired, daddy is just daddy"
+      "Dad is a train, dad is a car",
+      "Dad is a horse for me to ride and play",
+      "Dad is a wooden boat for me to ride the waves",
+      "Dad is a wide river for my boat to float",
+      "Dad! Dad is an embankment for me to lie and sleep",
+      "Dad! Dad is a spaceship for me to fly into outer space",
+      "Dad! Dad is an embankment for me to lie and sleep",
+      "Dad! Dad is a spaceship for me to fly into outer space",
+      "Dad! Dad is everything, oh daddy! Oh daddy!",
+      "Dad is everything, but when dad is tired, dad is just dad",
+      "Dad is a train, dad is a car",
+      "Dad is a horse for me to ride and play",
+      "Dad is a wooden boat for me to ride the waves",
+      "Dad is a wide river for my boat to float",
+      "Dad! Dad is an embankment for me to lie and sleep",
+      "Dad! Dad is a spaceship for me to fly into outer space",
+      "Dad! Dad is an embankment for me to lie and sleep",
+      "Dad! Dad is a spaceship for me to fly into outer space",
+      "Dad! Dad is everything, oh daddy! Oh daddy!",
+      "Dad! Dad is everything, oh daddy! Oh daddy!",
+      "Dad is everything, but when dad is tired, dad is just dad"
     ],
     "funFactVi": "Người cha luôn là điểm tựa chở che vững chãi cho con.",
     "audioUrl": "/assets/music/bo-la-tat-ca.mp3",
@@ -3338,74 +3338,74 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 107,
     "melodyStyle": "gentle",
     "lyrics": [
-      "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-      "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-      "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-      "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-      "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-      "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-      "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-      "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền."
+      "Lúc ở nhà mẹ cũng là cô giáo.",
+      "Khi đến trường cô giáo như mẹ hiền.",
+      "Cô và mẹ là hai cô giáo.",
+      "Mẹ và cô là hai mẹ hiền.",
+      "Lúc ở nhà mẹ cũng là cô giáo.",
+      "Khi đến trường cô giáo như mẹ hiền.",
+      "Cô và mẹ là hai cô giáo.",
+      "Mẹ và cô là hai mẹ hiền."
     ],
     "lyricsData": [
       {
         "start": 14.15,
         "end": 23.5,
-        "vi": "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-        "en": "At home, I am also a teacher, going to school, the teacher is like a gentle mother."
+        "vi": "Lúc ở nhà mẹ cũng là cô giáo.",
+        "en": "When at home, mother is also a teacher."
       },
       {
         "start": 23.35,
         "end": 32.4,
-        "vi": "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-        "en": "Teacher and mother are two teachers, mother and she are two gentle mothers."
+        "vi": "Khi đến trường cô giáo như mẹ hiền.",
+        "en": "When going to school, the teacher is like a gentle mother."
       },
       {
         "start": 32.25,
         "end": 41.1,
-        "vi": "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-        "en": "At home, I am also a teacher, going to school, the teacher is like a gentle mother."
+        "vi": "Cô và mẹ là hai cô giáo.",
+        "en": "Teacher and mother are two teachers."
       },
       {
         "start": 40.95,
         "end": 50.0,
-        "vi": "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-        "en": "Teacher and mother are two teachers, mother and she are two gentle mothers."
+        "vi": "Mẹ và cô là hai mẹ hiền.",
+        "en": "Mother and teacher are two gentle mothers."
       },
       {
         "start": 59.95,
         "end": 68.9,
-        "vi": "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-        "en": "At home, I am also a teacher, going to school, the teacher is like a gentle mother."
+        "vi": "Lúc ở nhà mẹ cũng là cô giáo.",
+        "en": "When at home, mother is also a teacher."
       },
       {
         "start": 68.75,
         "end": 78.0,
-        "vi": "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-        "en": "Teacher and mother are two teachers, mother and she are two gentle mothers."
+        "vi": "Khi đến trường cô giáo như mẹ hiền.",
+        "en": "When going to school, the teacher is like a gentle mother."
       },
       {
         "start": 77.85,
         "end": 86.7,
-        "vi": "Lúc ở nhà, em cũng là cô giáo, hay đến trường, cô giáo như mẹ hiền.",
-        "en": "At home, I am also a teacher, going to school, the teacher is like a gentle mother."
+        "vi": "Cô và mẹ là hai cô giáo.",
+        "en": "Teacher and mother are two teachers."
       },
       {
         "start": 86.55,
         "end": 96.5,
-        "vi": "Cô và mẹ là hai cô giáo, mẹ và cô ấy hai mẹ hiền.",
-        "en": "Teacher and mother are two teachers, mother and she are two gentle mothers."
+        "vi": "Mẹ và cô là hai mẹ hiền.",
+        "en": "Mother and teacher are two gentle mothers."
       }
     ],
     "englishTranslation": [
-      "At home, I am also a teacher, going to school, the teacher is like a gentle mother.",
-      "Teacher and mother are two teachers, mother and she are two gentle mothers.",
-      "At home, I am also a teacher, going to school, the teacher is like a gentle mother.",
-      "Teacher and mother are two teachers, mother and she are two gentle mothers.",
-      "At home, I am also a teacher, going to school, the teacher is like a gentle mother.",
-      "Teacher and mother are two teachers, mother and she are two gentle mothers.",
-      "At home, I am also a teacher, going to school, the teacher is like a gentle mother.",
-      "Teacher and mother are two teachers, mother and she are two gentle mothers."
+      "When at home, mother is also a teacher.",
+      "When going to school, the teacher is like a gentle mother.",
+      "Teacher and mother are two teachers.",
+      "Mother and teacher are two gentle mothers.",
+      "When at home, mother is also a teacher.",
+      "When going to school, the teacher is like a gentle mother.",
+      "Teacher and mother are two teachers.",
+      "Mother and teacher are two gentle mothers."
     ],
     "funFactVi": "Cô giáo và người mẹ là hai vầng sáng dịu hiền bên con.",
     "audioUrl": "/assets/music/co-va-me.mp3",
@@ -3481,122 +3481,122 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 158,
     "melodyStyle": "playful",
     "lyrics": [
-      "Mẹ mua trăm con heo đất Mẹ mua trăm con heo đất E à e a",
-      "Này hôm nay em vui lắm Cầm heo trên tay em nhắm E à e a",
-      "Làm sao cho heo mau lớn Làm sao cho heo mau lớn E à e a",
-      "Heo không đòi ăn cơm Heo không đòi ăn cá Heo chỉ cần em bé trên tay ầu ơ",
-      "Em không thèm mua kem Em không thèm mua bánh Em để dành cho heo",
-      "Em lì xì heo đất hai trăm mỗi ngày",
-      "Này heo ơi mau lớn ê a",
-      "Này heo con ơi mau lớn ê a",
-      "Mẹ mua trăm con heo đất Mẹ mua trăm con heo đất E à e a",
-      "Này hôm nay em vui lắm Cầm heo trên tay em nhắm E à e a",
-      "Làm sao cho heo mau lớn Làm sao cho heo mau lớn E à e a",
-      "Heo không đòi ăn cơm Heo không đòi ăn cá Heo chỉ cần em bé trên tay ầu ơ",
-      "Em không thèm mua kem Em không thèm mua bánh Em để dành cho heo",
-      "Em lì xì heo đất hai trăm mỗi ngày"
+      "Mẹ mua cho em con heo đất, mẹ mua cho em con heo đất, í à í a.",
+      "Ngày hôm nay em vui lắm, cầm heo trên tay em ngắm, í à í a.",
+      "Làm sao cho heo mau lớn, làm sao cho heo mau lớn, í à í a.",
+      "Heo không đòi ăn cơm, heo không đòi ăn cá, heo chỉ cần em bế trên tay ầu ơ.",
+      "Em không thèm mua kem, em không thèm mua bánh, em để dành cho heo.",
+      "Em lì xì heo đất hai trăm mỗi ngày.",
+      "Này heo ơi, ngoan nhé, í à.",
+      "Này heo con ơi, mau lớn, í a í à, í a í à.",
+      "Mẹ mua cho em con heo đất, mẹ mua cho em con heo đất, í à í a.",
+      "Ngày hôm nay em vui lắm, cầm heo trên tay em ngắm, í à í a.",
+      "Làm sao cho heo mau lớn, làm sao cho heo mau lớn, í à í a.",
+      "Heo không đòi ăn cơm, heo không đòi ăn cá, heo chỉ cần em bế trên tay ầu ơ.",
+      "Em không thèm mua kem, em không thèm mua bánh, em để dành cho heo.",
+      "Em lì xì heo đất hai trăm mỗi ngày. Í à í a!"
     ],
     "lyricsData": [
       {
         "start": 18.75,
         "end": 25.4,
-        "vi": "Mẹ mua trăm con heo đất Mẹ mua trăm con heo đất E à e a",
-        "en": "Mom bought a hundred clay pigs, Mom bought a hundred clay pigs, E a e a"
+        "vi": "Mẹ mua cho em con heo đất, mẹ mua cho em con heo đất, í à í a.",
+        "en": "Mother buys me a piggy bank, mother buys me a piggy bank, ee-ah ee-ah."
       },
       {
         "start": 25.25,
         "end": 31.9,
-        "vi": "Này hôm nay em vui lắm Cầm heo trên tay em nhắm E à e a",
-        "en": "Today I am so happy, Holding the pig in my hand and aiming, E a e a"
+        "vi": "Ngày hôm nay em vui lắm, cầm heo trên tay em ngắm, í à í a.",
+        "en": "Today I am so happy, holding the piggy bank in my hands and admiring it, ee-ah ee-ah."
       },
       {
         "start": 31.75,
         "end": 38.2,
-        "vi": "Làm sao cho heo mau lớn Làm sao cho heo mau lớn E à e a",
-        "en": "How to make the pig grow up fast, How to make the pig grow up fast, E a e a"
+        "vi": "Làm sao cho heo mau lớn, làm sao cho heo mau lớn, í à í a.",
+        "en": "How can the pig grow up quickly, how can the pig grow up quickly, ee-ah ee-ah."
       },
       {
         "start": 42.35,
         "end": 50.5,
-        "vi": "Heo không đòi ăn cơm Heo không đòi ăn cá Heo chỉ cần em bé trên tay ầu ơ",
-        "en": "The pig doesn't ask for rice, The pig doesn't ask for fish, The pig just needs the baby in hand, a-oh"
+        "vi": "Heo không đòi ăn cơm, heo không đòi ăn cá, heo chỉ cần em bế trên tay ầu ơ.",
+        "en": "The pig does not ask for rice, does not ask for fish, it only needs me to cradle it in my arms."
       },
       {
         "start": 50.35,
         "end": 56.9,
-        "vi": "Em không thèm mua kem Em không thèm mua bánh Em để dành cho heo",
-        "en": "I don't crave ice cream, I don't crave sweets, I save them for the pig"
+        "vi": "Em không thèm mua kem, em không thèm mua bánh, em để dành cho heo.",
+        "en": "I do not crave ice cream, I do not crave cake, I save up for the pig."
       },
       {
         "start": 56.75,
         "end": 64.4,
-        "vi": "Em lì xì heo đất hai trăm mỗi ngày",
-        "en": "I give lucky money to the clay pig two hundred everyday"
+        "vi": "Em lì xì heo đất hai trăm mỗi ngày.",
+        "en": "I gift the piggy bank two hundred every day."
       },
       {
         "start": 64.25,
         "end": 70.9,
-        "vi": "Này heo ơi mau lớn ê a",
-        "en": "Hey pig, grow up fast, e a"
+        "vi": "Này heo ơi, ngoan nhé, í à.",
+        "en": "Hey little pig, be good, ee-ah."
       },
       {
         "start": 70.75,
         "end": 77.3,
-        "vi": "Này heo con ơi mau lớn ê a",
-        "en": "Hey little pig, grow up fast, e a"
+        "vi": "Này heo con ơi, mau lớn, í a í à, í a í à.",
+        "en": "Hey little piglet, grow up fast, ee-ah ee-ah."
       },
       {
         "start": 86.15,
         "end": 92.8,
-        "vi": "Mẹ mua trăm con heo đất Mẹ mua trăm con heo đất E à e a",
-        "en": "Mom bought a hundred clay pigs, Mom bought a hundred clay pigs, E a e a"
+        "vi": "Mẹ mua cho em con heo đất, mẹ mua cho em con heo đất, í à í a.",
+        "en": "Mother buys me a piggy bank, mother buys me a piggy bank, ee-ah ee-ah."
       },
       {
         "start": 92.65,
         "end": 98.9,
-        "vi": "Này hôm nay em vui lắm Cầm heo trên tay em nhắm E à e a",
-        "en": "Today I am so happy, Holding the pig in my hand and aiming, E a e a"
+        "vi": "Ngày hôm nay em vui lắm, cầm heo trên tay em ngắm, í à í a.",
+        "en": "Today I am so happy, holding the piggy bank in my hands and admiring it, ee-ah ee-ah."
       },
       {
         "start": 98.75,
         "end": 105.6,
-        "vi": "Làm sao cho heo mau lớn Làm sao cho heo mau lớn E à e a",
-        "en": "How to make the pig grow up fast, How to make the pig grow up fast, E a e a"
+        "vi": "Làm sao cho heo mau lớn, làm sao cho heo mau lớn, í à í a.",
+        "en": "How can the pig grow up quickly, how can the pig grow up quickly, ee-ah ee-ah."
       },
       {
         "start": 109.35,
         "end": 117.4,
-        "vi": "Heo không đòi ăn cơm Heo không đòi ăn cá Heo chỉ cần em bé trên tay ầu ơ",
-        "en": "The pig doesn't ask for rice, The pig doesn't ask for fish, The pig just needs the baby in hand, a-oh"
+        "vi": "Heo không đòi ăn cơm, heo không đòi ăn cá, heo chỉ cần em bế trên tay ầu ơ.",
+        "en": "The pig does not ask for rice, does not ask for fish, it only needs me to cradle it in my arms."
       },
       {
         "start": 117.25,
         "end": 124.1,
-        "vi": "Em không thèm mua kem Em không thèm mua bánh Em để dành cho heo",
-        "en": "I don't crave ice cream, I don't crave sweets, I save them for the pig"
+        "vi": "Em không thèm mua kem, em không thèm mua bánh, em để dành cho heo.",
+        "en": "I do not crave ice cream, I do not crave cake, I save up for the pig."
       },
       {
         "start": 123.95,
         "end": 131.7,
-        "vi": "Em lì xì heo đất hai trăm mỗi ngày",
-        "en": "I give lucky money to the clay pig two hundred everyday"
+        "vi": "Em lì xì heo đất hai trăm mỗi ngày. Í à í a!",
+        "en": "I gift the piggy bank two hundred every day. Ee-ah ee-ah!"
       }
     ],
     "englishTranslation": [
-      "Mom bought a hundred clay pigs, Mom bought a hundred clay pigs, E a e a",
-      "Today I am so happy, Holding the pig in my hand and aiming, E a e a",
-      "How to make the pig grow up fast, How to make the pig grow up fast, E a e a",
-      "The pig doesn't ask for rice, The pig doesn't ask for fish, The pig just needs the baby in hand, a-oh",
-      "I don't crave ice cream, I don't crave sweets, I save them for the pig",
-      "I give lucky money to the clay pig two hundred everyday",
-      "Hey pig, grow up fast, e a",
-      "Hey little pig, grow up fast, e a",
-      "Mom bought a hundred clay pigs, Mom bought a hundred clay pigs, E a e a",
-      "Today I am so happy, Holding the pig in my hand and aiming, E a e a",
-      "How to make the pig grow up fast, How to make the pig grow up fast, E a e a",
-      "The pig doesn't ask for rice, The pig doesn't ask for fish, The pig just needs the baby in hand, a-oh",
-      "I don't crave ice cream, I don't crave sweets, I save them for the pig",
-      "I give lucky money to the clay pig two hundred everyday"
+      "Mother buys me a piggy bank, mother buys me a piggy bank, ee-ah ee-ah.",
+      "Today I am so happy, holding the piggy bank in my hands and admiring it, ee-ah ee-ah.",
+      "How can the pig grow up quickly, how can the pig grow up quickly, ee-ah ee-ah.",
+      "The pig does not ask for rice, does not ask for fish, it only needs me to cradle it in my arms.",
+      "I do not crave ice cream, I do not crave cake, I save up for the pig.",
+      "I gift the piggy bank two hundred every day.",
+      "Hey little pig, be good, ee-ah.",
+      "Hey little piglet, grow up fast, ee-ah ee-ah.",
+      "Mother buys me a piggy bank, mother buys me a piggy bank, ee-ah ee-ah.",
+      "Today I am so happy, holding the piggy bank in my hands and admiring it, ee-ah ee-ah.",
+      "How can the pig grow up quickly, how can the pig grow up quickly, ee-ah ee-ah.",
+      "The pig does not ask for rice, does not ask for fish, it only needs me to cradle it in my arms.",
+      "I do not crave ice cream, I do not crave cake, I save up for the pig.",
+      "I gift the piggy bank two hundred every day. Ee-ah ee-ah!"
     ],
     "funFactVi": "Thói quen tiết kiệm tiền lẻ nuôi heo đất giúp bé tự lập.",
     "audioUrl": "/assets/music/con-heo-dat.mp3",
@@ -3668,274 +3668,274 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 208,
     "melodyStyle": "playful",
     "lyrics": [
-      "Kìa chú là chú ếch con có hai là hai mắt tròn",
-      "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-      "Bao cô cá trên non cùng bao chú cá rô nương",
-      "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-      "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-      "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-      "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-      "Kìa chú là chú ếch con có hai là hai mắt tròn",
-      "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-      "Bao cô cá trên non cùng bao chú cá rô nương",
-      "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-      "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-      "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-      "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-      "Kìa chú là chú ếch con có hai là hai mắt tròn",
-      "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-      "Bao cô cá trên non cùng bao chú cá rô nương",
-      "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-      "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-      "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-      "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-      "Kìa chú là chú ếch con có hai là hai mắt tròn",
-      "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-      "Bao cô cá trên non cùng bao chú cá rô nương",
-      "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-      "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-      "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-      "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-      "Nghe tiếng hát mê ly cùng bút thích chí cười khì"
+      "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+      "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+      "Bao cô cá trê non cùng bao chú cá rô ron.",
+      "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+      "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+      "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+      "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+      "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+      "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+      "Bao cô cá trê non cùng bao chú cá rô ron.",
+      "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+      "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+      "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+      "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+      "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+      "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+      "Bao cô cá trê non cùng bao chú cá rô ron.",
+      "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+      "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+      "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+      "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+      "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+      "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+      "Bao cô cá trê non cùng bao chú cá rô ron.",
+      "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+      "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+      "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+      "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+      "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+      "Nghe tiếng hát mê ly cùng vui thích chí cười khì."
     ],
     "lyricsData": [
       {
         "start": 16.65,
         "end": 20.9,
-        "vi": "Kìa chú là chú ếch con có hai là hai mắt tròn",
-        "en": "Here is a little frog, with two round eyes."
+        "vi": "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+        "en": "Look at the little frog, with two round eyes."
       },
       {
         "start": 20.75,
         "end": 25.5,
-        "vi": "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-        "en": "He sits alone studying by the shallow, soaring sinkhole."
+        "vi": "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+        "en": "He sits studying alone beside the bomb crater near the chinaberry garden."
       },
       {
         "start": 25.35,
         "end": 29.8,
-        "vi": "Bao cô cá trên non cùng bao chú cá rô nương",
-        "en": "All the fish up on the hill, and the climbing perch together."
+        "vi": "Bao cô cá trê non cùng bao chú cá rô ron.",
+        "en": "Young catfish and little climbing perch."
       },
       {
         "start": 29.65,
         "end": 34.4,
-        "vi": "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-        "en": "Flapping their fins cheerfully, keeping time with the bright beat."
+        "vi": "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+        "en": "Playfully flutter red fins, swaying to the frog's bright crisp rhythm."
       },
       {
         "start": 34.25,
         "end": 38.8,
-        "vi": "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-        "en": "Here is a little frog, the best-behaved boy in the house."
+        "vi": "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+        "en": "Look at the little frog, the best-behaved child in the family."
       },
       {
         "start": 38.65,
         "end": 43.3,
-        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-        "en": "After finishing his lessons, he sings a contest with the nightingale."
+        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+        "en": "After finishing his lessons, he sings in contest with the nightingale."
       },
       {
         "start": 43.15,
         "end": 47.7,
-        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-        "en": "So many little sparrows, along with the tilapia fish."
+        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+        "en": "Many little finches together with tilapia fish."
       },
       {
         "start": 47.55,
         "end": 52.4,
-        "vi": "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-        "en": "Listening to the mesmerizing song, and joyfully chuckling."
+        "vi": "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+        "en": "Listening to the enchanting singing, joyfully laughing together."
       },
       {
         "start": 56.05,
         "end": 60.3,
-        "vi": "Kìa chú là chú ếch con có hai là hai mắt tròn",
-        "en": "Here is a little frog, with two round eyes."
+        "vi": "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+        "en": "Look at the little frog, with two round eyes."
       },
       {
         "start": 60.15,
         "end": 64.7,
-        "vi": "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-        "en": "He sits alone studying by the shallow, soaring sinkhole."
+        "vi": "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+        "en": "He sits studying alone beside the bomb crater near the chinaberry garden."
       },
       {
         "start": 64.55,
         "end": 69.1,
-        "vi": "Bao cô cá trên non cùng bao chú cá rô nương",
-        "en": "All the fish up on the hill, and the climbing perch together."
+        "vi": "Bao cô cá trê non cùng bao chú cá rô ron.",
+        "en": "Young catfish and little climbing perch."
       },
       {
         "start": 68.95,
         "end": 73.6,
-        "vi": "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-        "en": "Flapping their fins cheerfully, keeping time with the bright beat."
+        "vi": "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+        "en": "Playfully flutter red fins, swaying to the frog's bright crisp rhythm."
       },
       {
         "start": 73.45,
         "end": 78.0,
-        "vi": "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-        "en": "Here is a little frog, the best-behaved boy in the house."
+        "vi": "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+        "en": "Look at the little frog, the best-behaved child in the family."
       },
       {
         "start": 77.85,
         "end": 82.5,
-        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-        "en": "After finishing his lessons, he sings a contest with the nightingale."
+        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+        "en": "After finishing his lessons, he sings in contest with the nightingale."
       },
       {
         "start": 82.35,
         "end": 86.9,
-        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-        "en": "So many little sparrows, along with the tilapia fish."
+        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+        "en": "Many little finches together with tilapia fish."
       },
       {
         "start": 86.75,
         "end": 91.5,
-        "vi": "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-        "en": "Listening to the mesmerizing song, and joyfully chuckling."
+        "vi": "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+        "en": "Listening to the enchanting singing, joyfully laughing together."
       },
       {
         "start": 110.55,
         "end": 114.8,
-        "vi": "Kìa chú là chú ếch con có hai là hai mắt tròn",
-        "en": "Here is a little frog, with two round eyes."
+        "vi": "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+        "en": "Look at the little frog, with two round eyes."
       },
       {
         "start": 114.65,
         "end": 119.3,
-        "vi": "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-        "en": "He sits alone studying by the shallow, soaring sinkhole."
+        "vi": "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+        "en": "He sits studying alone beside the bomb crater near the chinaberry garden."
       },
       {
         "start": 119.15,
         "end": 123.6,
-        "vi": "Bao cô cá trên non cùng bao chú cá rô nương",
-        "en": "All the fish up on the hill, and the climbing perch together."
+        "vi": "Bao cô cá trê non cùng bao chú cá rô ron.",
+        "en": "Young catfish and little climbing perch."
       },
       {
         "start": 123.45,
         "end": 128.2,
-        "vi": "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-        "en": "Flapping their fins cheerfully, keeping time with the bright beat."
+        "vi": "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+        "en": "Playfully flutter red fins, swaying to the frog's bright crisp rhythm."
       },
       {
         "start": 128.05,
         "end": 132.6,
-        "vi": "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-        "en": "Here is a little frog, the best-behaved boy in the house."
+        "vi": "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+        "en": "Look at the little frog, the best-behaved child in the family."
       },
       {
         "start": 132.45,
         "end": 137.0,
-        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-        "en": "After finishing his lessons, he sings a contest with the nightingale."
+        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+        "en": "After finishing his lessons, he sings in contest with the nightingale."
       },
       {
         "start": 136.85,
         "end": 141.5,
-        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-        "en": "So many little sparrows, along with the tilapia fish."
+        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+        "en": "Many little finches together with tilapia fish."
       },
       {
         "start": 141.35,
         "end": 146.0,
-        "vi": "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-        "en": "Listening to the mesmerizing song, and joyfully chuckling."
+        "vi": "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+        "en": "Listening to the enchanting singing, joyfully laughing together."
       },
       {
         "start": 149.95,
         "end": 154.2,
-        "vi": "Kìa chú là chú ếch con có hai là hai mắt tròn",
-        "en": "Here is a little frog, with two round eyes."
+        "vi": "Kìa chú là chú ếch con, có hai là hai mắt tròn.",
+        "en": "Look at the little frog, with two round eyes."
       },
       {
         "start": 154.05,
         "end": 158.7,
-        "vi": "Chú ngồi học bài một mình bên hố sâu cạn vươn xoang",
-        "en": "He sits alone studying by the shallow, soaring sinkhole."
+        "vi": "Chú ngồi học bài một mình bên hố bom kề vườn xoan.",
+        "en": "He sits studying alone beside the bomb crater near the chinaberry garden."
       },
       {
         "start": 158.55,
         "end": 163.0,
-        "vi": "Bao cô cá trên non cùng bao chú cá rô nương",
-        "en": "All the fish up on the hill, and the climbing perch together."
+        "vi": "Bao cô cá trê non cùng bao chú cá rô ron.",
+        "en": "Young catfish and little climbing perch."
       },
       {
         "start": 162.85,
         "end": 167.6,
-        "vi": "Tung tăng chiếc vây xong nhịp theo chấm anh vang ròn",
-        "en": "Flapping their fins cheerfully, keeping time with the bright beat."
+        "vi": "Tung tăng chiếc vây son, nhịp theo tiếng ếch vang giòn.",
+        "en": "Playfully flutter red fins, swaying to the frog's bright crisp rhythm."
       },
       {
         "start": 167.45,
         "end": 172.0,
-        "vi": "Kìa chú là chú ếch con bé ngoan là ngoan nhất nhà",
-        "en": "Here is a little frog, the best-behaved boy in the house."
+        "vi": "Kìa chú là chú ếch con, bé ngoan là ngoan nhất nhà.",
+        "en": "Look at the little frog, the best-behaved child in the family."
       },
       {
         "start": 171.85,
         "end": 176.5,
-        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi",
-        "en": "After finishing his lessons, he sings a contest with the nightingale."
+        "vi": "Chú học thuộc bài xong rồi chú hát thi cùng họa mi.",
+        "en": "After finishing his lessons, he sings in contest with the nightingale."
       },
       {
         "start": 176.35,
         "end": 180.9,
-        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi",
-        "en": "So many little sparrows, along with the tilapia fish."
+        "vi": "Bao nhiêu chú chim ri cùng bao cô cá rô phi.",
+        "en": "Many little finches together with tilapia fish."
       },
       {
         "start": 180.75,
         "end": 185.4,
-        "vi": "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-        "en": "Listening to the mesmerizing song, and joyfully chuckling."
+        "vi": "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+        "en": "Listening to the enchanting singing, joyfully laughing together."
       },
       {
         "start": 185.25,
         "end": 189.9,
-        "vi": "Nghe tiếng hát mê ly cùng bút thích chí cười khì",
-        "en": "Listening to the mesmerizing song, and joyfully chuckling."
+        "vi": "Nghe tiếng hát mê ly cùng vui thích chí cười khì.",
+        "en": "Listening to the enchanting singing, joyfully laughing together."
       }
     ],
     "englishTranslation": [
-      "Here is a little frog, with two round eyes.",
-      "He sits alone studying by the shallow, soaring sinkhole.",
-      "All the fish up on the hill, and the climbing perch together.",
-      "Flapping their fins cheerfully, keeping time with the bright beat.",
-      "Here is a little frog, the best-behaved boy in the house.",
-      "After finishing his lessons, he sings a contest with the nightingale.",
-      "So many little sparrows, along with the tilapia fish.",
-      "Listening to the mesmerizing song, and joyfully chuckling.",
-      "Here is a little frog, with two round eyes.",
-      "He sits alone studying by the shallow, soaring sinkhole.",
-      "All the fish up on the hill, and the climbing perch together.",
-      "Flapping their fins cheerfully, keeping time with the bright beat.",
-      "Here is a little frog, the best-behaved boy in the house.",
-      "After finishing his lessons, he sings a contest with the nightingale.",
-      "So many little sparrows, along with the tilapia fish.",
-      "Listening to the mesmerizing song, and joyfully chuckling.",
-      "Here is a little frog, with two round eyes.",
-      "He sits alone studying by the shallow, soaring sinkhole.",
-      "All the fish up on the hill, and the climbing perch together.",
-      "Flapping their fins cheerfully, keeping time with the bright beat.",
-      "Here is a little frog, the best-behaved boy in the house.",
-      "After finishing his lessons, he sings a contest with the nightingale.",
-      "So many little sparrows, along with the tilapia fish.",
-      "Listening to the mesmerizing song, and joyfully chuckling.",
-      "Here is a little frog, with two round eyes.",
-      "He sits alone studying by the shallow, soaring sinkhole.",
-      "All the fish up on the hill, and the climbing perch together.",
-      "Flapping their fins cheerfully, keeping time with the bright beat.",
-      "Here is a little frog, the best-behaved boy in the house.",
-      "After finishing his lessons, he sings a contest with the nightingale.",
-      "So many little sparrows, along with the tilapia fish.",
-      "Listening to the mesmerizing song, and joyfully chuckling.",
-      "Listening to the mesmerizing song, and joyfully chuckling."
+      "Look at the little frog, with two round eyes.",
+      "He sits studying alone beside the bomb crater near the chinaberry garden.",
+      "Young catfish and little climbing perch.",
+      "Playfully flutter red fins, swaying to the frog's bright crisp rhythm.",
+      "Look at the little frog, the best-behaved child in the family.",
+      "After finishing his lessons, he sings in contest with the nightingale.",
+      "Many little finches together with tilapia fish.",
+      "Listening to the enchanting singing, joyfully laughing together.",
+      "Look at the little frog, with two round eyes.",
+      "He sits studying alone beside the bomb crater near the chinaberry garden.",
+      "Young catfish and little climbing perch.",
+      "Playfully flutter red fins, swaying to the frog's bright crisp rhythm.",
+      "Look at the little frog, the best-behaved child in the family.",
+      "After finishing his lessons, he sings in contest with the nightingale.",
+      "Many little finches together with tilapia fish.",
+      "Listening to the enchanting singing, joyfully laughing together.",
+      "Look at the little frog, with two round eyes.",
+      "He sits studying alone beside the bomb crater near the chinaberry garden.",
+      "Young catfish and little climbing perch.",
+      "Playfully flutter red fins, swaying to the frog's bright crisp rhythm.",
+      "Look at the little frog, the best-behaved child in the family.",
+      "After finishing his lessons, he sings in contest with the nightingale.",
+      "Many little finches together with tilapia fish.",
+      "Listening to the enchanting singing, joyfully laughing together.",
+      "Look at the little frog, with two round eyes.",
+      "He sits studying alone beside the bomb crater near the chinaberry garden.",
+      "Young catfish and little climbing perch.",
+      "Playfully flutter red fins, swaying to the frog's bright crisp rhythm.",
+      "Look at the little frog, the best-behaved child in the family.",
+      "After finishing his lessons, he sings in contest with the nightingale.",
+      "Many little finches together with tilapia fish.",
+      "Listening to the enchanting singing, joyfully laughing together.",
+      "Listening to the enchanting singing, joyfully laughing together."
     ],
     "funFactVi": "Chú ếch con chăm ngoan ngồi học bài bên bờ ao xanh.",
     "audioUrl": "/assets/music/chu-ech-con.mp3",
@@ -4007,218 +4007,218 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 197,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Dạ không biết ki là con gà con",
-      "Dạ mào cây sắn là con gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Dạ nhắm mắt cục tặc là mẹ gà con",
-      "Dạ nhắm mắt cục tặc là bố gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Dạ không biết ki là con gà con",
-      "Dạ mào cây sắn là con gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Dạ không biết ki là con gà con",
-      "Dạ mào cây sắn là con gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Dạ nhắm mắt cục tặc là mẹ gà con",
-      "Dạ nhắm mắt cục tặc là bố gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Dạ không biết ki là con gà con",
-      "Dạ mào cây sắn là con gà cha",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà",
-      "Đi lên thang chong chóng, có con gà có con gà"
+      "(Nhạc dạo)",
+      "Trông kìa đàn gà con lông vàng.",
+      "Đi theo mẹ tìm ăn trong vườn.",
+      "Cùng tìm mồi ăn ngon ngon.",
+      "Đàn gà con đi lon ton.",
+      "Thóc vãi rồi nhặt ăn cho nhiều.",
+      "Uống nước vào là no căng diều.",
+      "Rồi cùng nhau ta đi chơi.",
+      "Đàn gà con xinh kia ơi!",
+      "(Nhạc dạo)",
+      "Trông kìa đàn gà con lông vàng.",
+      "Đi theo mẹ tìm ăn trong vườn.",
+      "Cùng tìm mồi ăn ngon ngon.",
+      "Đàn gà con đi lon ton.",
+      "Thóc vãi rồi nhặt ăn cho nhiều.",
+      "Uống nước vào là no căng diều.",
+      "Rồi cùng nhau ta đi chơi.",
+      "Đàn gà con xinh kia ơi!",
+      "(Nhạc dạo)",
+      "Trông kìa đàn gà con lông vàng.",
+      "Đi theo mẹ tìm ăn trong vườn.",
+      "Cùng tìm mồi ăn ngon ngon.",
+      "Đàn gà con đi lon ton.",
+      "Thóc vãi rồi nhặt ăn cho nhiều.",
+      "Uống nước vào là no căng diều.",
+      "(Nhạc kết)"
     ],
     "lyricsData": [
       {
         "start": 44.75,
         "end": 47.3,
-        "vi": "Dạ không biết ki là con gà con",
-        "en": "I don't know if it's a little chick"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 47.75,
         "end": 50.5,
-        "vi": "Dạ mào cây sắn là con gà cha",
-        "en": "Yes, the cassava-shaped comb is the father rooster"
+        "vi": "Trông kìa đàn gà con lông vàng.",
+        "en": "Look at the flock of golden-feathered chicks."
       },
       {
         "start": 50.95,
         "end": 54.0,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Đi theo mẹ tìm ăn trong vườn.",
+        "en": "Following mother hen to find food in the garden."
       },
       {
         "start": 53.95,
         "end": 57.0,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Cùng tìm mồi ăn ngon ngon.",
+        "en": "Searching together for tasty food."
       },
       {
         "start": 60.45,
         "end": 63.0,
-        "vi": "Dạ nhắm mắt cục tặc là mẹ gà con",
-        "en": "Yes, closing eyes and clucking is the mother hen"
+        "vi": "Đàn gà con đi lon ton.",
+        "en": "The little chicks toddle along."
       },
       {
         "start": 63.15,
         "end": 66.0,
-        "vi": "Dạ nhắm mắt cục tặc là bố gà cha",
-        "en": "Yes, closing eyes and clucking is the father rooster"
+        "vi": "Thóc vãi rồi nhặt ăn cho nhiều.",
+        "en": "Scattered grain, pick and eat plenty."
       },
       {
         "start": 66.45,
         "end": 69.1,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Uống nước vào là no căng diều.",
+        "en": "Drinking water until their crops are full."
       },
       {
         "start": 68.95,
         "end": 72.7,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Rồi cùng nhau ta đi chơi.",
+        "en": "Then together we go out to play."
       },
       {
         "start": 78.75,
         "end": 81.4,
-        "vi": "Dạ không biết ki là con gà con",
-        "en": "I don't know if it's a little chick"
+        "vi": "Đàn gà con xinh kia ơi!",
+        "en": "Oh pretty little chicks!"
       },
       {
         "start": 81.65,
         "end": 84.4,
-        "vi": "Dạ mào cây sắn là con gà cha",
-        "en": "Yes, the cassava-shaped comb is the father rooster"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 84.85,
         "end": 87.7,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Trông kìa đàn gà con lông vàng.",
+        "en": "Look at the flock of golden-feathered chicks."
       },
       {
         "start": 87.95,
         "end": 91.7,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Đi theo mẹ tìm ăn trong vườn.",
+        "en": "Following mother hen to find food in the garden."
       },
       {
         "start": 139.25,
         "end": 141.8,
-        "vi": "Dạ không biết ki là con gà con",
-        "en": "I don't know if it's a little chick"
+        "vi": "Cùng tìm mồi ăn ngon ngon.",
+        "en": "Searching together for tasty food."
       },
       {
         "start": 142.15,
         "end": 145.0,
-        "vi": "Dạ mào cây sắn là con gà cha",
-        "en": "Yes, the cassava-shaped comb is the father rooster"
+        "vi": "Đàn gà con đi lon ton.",
+        "en": "The little chicks toddle along."
       },
       {
         "start": 145.35,
         "end": 148.2,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Thóc vãi rồi nhặt ăn cho nhiều.",
+        "en": "Scattered grain, pick and eat plenty."
       },
       {
         "start": 148.35,
         "end": 151.5,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Uống nước vào là no căng diều.",
+        "en": "Drinking water until their crops are full."
       },
       {
         "start": 154.75,
         "end": 157.4,
-        "vi": "Dạ nhắm mắt cục tặc là mẹ gà con",
-        "en": "Yes, closing eyes and clucking is the mother hen"
+        "vi": "Rồi cùng nhau ta đi chơi.",
+        "en": "Then together we go out to play."
       },
       {
         "start": 157.65,
         "end": 160.4,
-        "vi": "Dạ nhắm mắt cục tặc là bố gà cha",
-        "en": "Yes, closing eyes and clucking is the father rooster"
+        "vi": "Đàn gà con xinh kia ơi!",
+        "en": "Oh pretty little chicks!"
       },
       {
         "start": 160.85,
         "end": 163.7,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 163.85,
         "end": 167.3,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Trông kìa đàn gà con lông vàng.",
+        "en": "Look at the flock of golden-feathered chicks."
       },
       {
         "start": 173.25,
         "end": 175.8,
-        "vi": "Dạ không biết ki là con gà con",
-        "en": "I don't know if it's a little chick"
+        "vi": "Đi theo mẹ tìm ăn trong vườn.",
+        "en": "Following mother hen to find food in the garden."
       },
       {
         "start": 176.05,
         "end": 179.0,
-        "vi": "Dạ mào cây sắn là con gà cha",
-        "en": "Yes, the cassava-shaped comb is the father rooster"
+        "vi": "Cùng tìm mồi ăn ngon ngon.",
+        "en": "Searching together for tasty food."
       },
       {
         "start": 179.45,
         "end": 182.4,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Đàn gà con đi lon ton.",
+        "en": "The little chicks toddle along."
       },
       {
         "start": 182.25,
         "end": 185.4,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Thóc vãi rồi nhặt ăn cho nhiều.",
+        "en": "Scattered grain, pick and eat plenty."
       },
       {
         "start": 185.35,
         "end": 188.3,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "Uống nước vào là no căng diều.",
+        "en": "Drinking water until their crops are full."
       },
       {
         "start": 188.35,
         "end": 195.5,
-        "vi": "Đi lên thang chong chóng, có con gà có con gà",
-        "en": "Going up the pinwheel ladder, there are chickens"
+        "vi": "(Nhạc kết)",
+        "en": "(Outro)"
       }
     ],
     "englishTranslation": [
-      "I don't know if it's a little chick",
-      "Yes, the cassava-shaped comb is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "Yes, closing eyes and clucking is the mother hen",
-      "Yes, closing eyes and clucking is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "I don't know if it's a little chick",
-      "Yes, the cassava-shaped comb is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "I don't know if it's a little chick",
-      "Yes, the cassava-shaped comb is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "Yes, closing eyes and clucking is the mother hen",
-      "Yes, closing eyes and clucking is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "I don't know if it's a little chick",
-      "Yes, the cassava-shaped comb is the father rooster",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens",
-      "Going up the pinwheel ladder, there are chickens"
+      "(Instrumental)",
+      "Look at the flock of golden-feathered chicks.",
+      "Following mother hen to find food in the garden.",
+      "Searching together for tasty food.",
+      "The little chicks toddle along.",
+      "Scattered grain, pick and eat plenty.",
+      "Drinking water until their crops are full.",
+      "Then together we go out to play.",
+      "Oh pretty little chicks!",
+      "(Instrumental)",
+      "Look at the flock of golden-feathered chicks.",
+      "Following mother hen to find food in the garden.",
+      "Searching together for tasty food.",
+      "The little chicks toddle along.",
+      "Scattered grain, pick and eat plenty.",
+      "Drinking water until their crops are full.",
+      "Then together we go out to play.",
+      "Oh pretty little chicks!",
+      "(Instrumental)",
+      "Look at the flock of golden-feathered chicks.",
+      "Following mother hen to find food in the garden.",
+      "Searching together for tasty food.",
+      "The little chicks toddle along.",
+      "Scattered grain, pick and eat plenty.",
+      "Drinking water until their crops are full.",
+      "(Outro)"
     ],
     "funFactVi": "Đàn gà con lông vàng óng ả theo mẹ kiếm mồi vui vẻ.",
     "audioUrl": "/assets/music/dan-ga-con.mp3",
@@ -4294,210 +4294,210 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 192,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Chú voi con ở Bản Đôn",
-      "Chưa có ngà nên còn trẻ con",
-      "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi",
-      "Voi con ơi, voi con ơi",
-      "Mau lớn nhanh có đôi ngà to",
-      "Có sức đi học miền gần xa, kéo gỗ cho buôn làng của ta",
-      "Chú vắt con thật là khôn",
-      "Quen chứ nhỉ học cùng bản đôn",
-      "Voi con ơi, voi con ơi, mau lớn nhanh có thân mình to",
-      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-      "Chú voi con ở Bản Đôn",
-      "Chưa có ngà nên còn trẻ con",
-      "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi",
-      "Voi con ơi, voi con ơi",
-      "Mau lớn nhanh có đôi ngà to",
-      "Có sức đi học miền gần xa, kéo gỗ cho buôn làng của ta",
-      "Chú vắt con thật là khôn",
-      "Quen chứ nhỉ học cùng bản đôn",
-      "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-      "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-      "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-      "Voi con ơi"
+      "(Nhạc dạo)",
+      "Chú voi con ở Bản Đôn, chưa có ngà nên còn trẻ con.",
+      "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi.",
+      "Voi con ơi! Voi con ơi! Mau lớn nhanh có đôi ngà to.",
+      "Có sức đi khắp miền rừng xa, kéo gỗ cho buôn làng của ta.",
+      "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+      "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+      "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+      "Voi ơi! Voi ơi!",
+      "(Nhạc dạo)",
+      "Chú voi con ở Bản Đôn, chưa có ngà nên còn trẻ con.",
+      "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi.",
+      "Voi con ơi! Voi con ơi! Mau lớn nhanh có đôi ngà to.",
+      "Có sức đi khắp miền rừng xa, kéo gỗ cho buôn làng của ta.",
+      "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+      "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+      "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+      "Voi ơi! Voi ơi!",
+      "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+      "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+      "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+      "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+      "Voi ơi! Voi ơi!"
     ],
     "lyricsData": [
       {
         "start": 37.15,
         "end": 41.5,
-        "vi": "Chú voi con ở Bản Đôn",
-        "en": "The little elephant in Ban Don"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 41.35,
         "end": 44.2,
-        "vi": "Chưa có ngà nên còn trẻ con",
-        "en": "Doesn't have tusks yet so it's still a baby"
+        "vi": "Chú voi con ở Bản Đôn, chưa có ngà nên còn trẻ con.",
+        "en": "The little elephant in Ban Don village has no tusks yet, so he is still a child."
       },
       {
         "start": 44.05,
         "end": 47.4,
-        "vi": "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi",
-        "en": "From the deep forest it comes to people, still loves eating and playing"
+        "vi": "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi.",
+        "en": "From the deep forest he comes to live with people, still eager to eat and play."
       },
       {
         "start": 49.65,
         "end": 54.0,
-        "vi": "Voi con ơi, voi con ơi",
-        "en": "Oh little elephant, oh little elephant"
+        "vi": "Voi con ơi! Voi con ơi! Mau lớn nhanh có đôi ngà to.",
+        "en": "Oh little elephant! Grow up fast to have big tusks."
       },
       {
         "start": 53.85,
         "end": 55.3,
-        "vi": "Mau lớn nhanh có đôi ngà to",
-        "en": "Grow up fast to have big tusks"
+        "vi": "Có sức đi khắp miền rừng xa, kéo gỗ cho buôn làng của ta.",
+        "en": "Have the strength to traverse far forests and haul timber for our village."
       },
       {
         "start": 55.15,
         "end": 60.0,
-        "vi": "Có sức đi học miền gần xa, kéo gỗ cho buôn làng của ta",
-        "en": "Have the strength to study far and near, pull wood for our village"
+        "vi": "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+        "en": "The little elephant is very clever, familiar with all children across Ban Don."
       },
       {
         "start": 61.65,
         "end": 66.3,
-        "vi": "Chú vắt con thật là khôn",
-        "en": "The little baby elephant is so smart"
+        "vi": "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+        "en": "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat."
       },
       {
         "start": 66.15,
         "end": 71.8,
-        "vi": "Quen chứ nhỉ học cùng bản đôn",
-        "en": "Getting used to studying with Ban Don"
+        "vi": "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+        "en": "Oh little elephant! Grow up fast to have a large body."
       },
       {
         "start": 74.15,
         "end": 78.9,
-        "vi": "Voi con ơi, voi con ơi, mau lớn nhanh có thân mình to",
-        "en": "Oh little elephant, oh little elephant, grow up fast to have a big body"
+        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+        "en": "All across the Central Highlands need many elephants to help build beautiful prosperous villages."
       },
       {
         "start": 78.75,
         "end": 84.4,
-        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-        "en": "All over the Central Highlands need many elephants, contributing to building a beautiful village"
+        "vi": "Voi ơi! Voi ơi!",
+        "en": "Oh elephant! Oh elephant!"
       },
       {
         "start": 118.15,
         "end": 122.5,
-        "vi": "Chú voi con ở Bản Đôn",
-        "en": "The little elephant in Ban Don"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 122.35,
         "end": 125.3,
-        "vi": "Chưa có ngà nên còn trẻ con",
-        "en": "Doesn't have tusks yet so it's still a baby"
+        "vi": "Chú voi con ở Bản Đôn, chưa có ngà nên còn trẻ con.",
+        "en": "The little elephant in Ban Don village has no tusks yet, so he is still a child."
       },
       {
         "start": 125.15,
         "end": 128.3,
-        "vi": "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi",
-        "en": "From the deep forest it comes to people, still loves eating and playing"
+        "vi": "Từ rừng già chú đến với người, vẫn ham ăn với lại ham chơi.",
+        "en": "From the deep forest he comes to live with people, still eager to eat and play."
       },
       {
         "start": 130.65,
         "end": 135.1,
-        "vi": "Voi con ơi, voi con ơi",
-        "en": "Oh little elephant, oh little elephant"
+        "vi": "Voi con ơi! Voi con ơi! Mau lớn nhanh có đôi ngà to.",
+        "en": "Oh little elephant! Grow up fast to have big tusks."
       },
       {
         "start": 134.95,
         "end": 136.3,
-        "vi": "Mau lớn nhanh có đôi ngà to",
-        "en": "Grow up fast to have big tusks"
+        "vi": "Có sức đi khắp miền rừng xa, kéo gỗ cho buôn làng của ta.",
+        "en": "Have the strength to traverse far forests and haul timber for our village."
       },
       {
         "start": 136.15,
         "end": 141.0,
-        "vi": "Có sức đi học miền gần xa, kéo gỗ cho buôn làng của ta",
-        "en": "Have the strength to study far and near, pull wood for our village"
+        "vi": "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+        "en": "The little elephant is very clever, familiar with all children across Ban Don."
       },
       {
         "start": 142.65,
         "end": 147.4,
-        "vi": "Chú vắt con thật là khôn",
-        "en": "The little baby elephant is so smart"
+        "vi": "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+        "en": "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat."
       },
       {
         "start": 147.25,
         "end": 152.8,
-        "vi": "Quen chứ nhỉ học cùng bản đôn",
-        "en": "Getting used to studying with Ban Don"
+        "vi": "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+        "en": "Oh little elephant! Grow up fast to have a large body."
       },
       {
         "start": 155.25,
         "end": 159.9,
-        "vi": "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-        "en": "Oh little elephant, oh little elephant, grow up fast to have a big body"
+        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+        "en": "All across the Central Highlands need many elephants to help build beautiful prosperous villages."
       },
       {
         "start": 159.75,
         "end": 165.5,
-        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-        "en": "All over the Central Highlands need many elephants, contributing to building a beautiful village"
+        "vi": "Voi ơi! Voi ơi!",
+        "en": "Oh elephant! Oh elephant!"
       },
       {
         "start": 166.65,
         "end": 171.3,
-        "vi": "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-        "en": "Oh little elephant, oh little elephant, grow up fast to have a big body"
+        "vi": "Chú voi con thật là khôn, quen thiếu nhi khắp vùng Bản Đôn.",
+        "en": "The little elephant is very clever, familiar with all children across Ban Don."
       },
       {
         "start": 171.15,
         "end": 177.1,
-        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-        "en": "All over the Central Highlands need many elephants, contributing to building a beautiful village"
+        "vi": "Đầu gật gù lúc lắc cái vòi, khéo đung đưa theo nhịp chiêng vui.",
+        "en": "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat."
       },
       {
         "start": 178.05,
         "end": 182.8,
-        "vi": "Voi con ơi, voi con ơi, mau lớn nhanh có thân hình to",
-        "en": "Oh little elephant, oh little elephant, grow up fast to have a big body"
+        "vi": "Voi con ơi! Voi con ơi! Mau lớn nhanh có thân mình to.",
+        "en": "Oh little elephant! Grow up fast to have a large body."
       },
       {
         "start": 182.65,
         "end": 188.5,
-        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi",
-        "en": "All over the Central Highlands need many elephants, contributing to building a beautiful village"
+        "vi": "Khắp chốn Tây Nguyên cần nhiều voi, góp sức xây buôn làng đẹp tươi.",
+        "en": "All across the Central Highlands need many elephants to help build beautiful prosperous villages."
       },
       {
         "start": 189.85,
         "end": 191.8,
-        "vi": "Voi con ơi",
-        "en": "Oh little elephant"
+        "vi": "Voi ơi! Voi ơi!",
+        "en": "Oh elephant! Oh elephant!"
       }
     ],
     "englishTranslation": [
-      "The little elephant in Ban Don",
-      "Doesn't have tusks yet so it's still a baby",
-      "From the deep forest it comes to people, still loves eating and playing",
-      "Oh little elephant, oh little elephant",
-      "Grow up fast to have big tusks",
-      "Have the strength to study far and near, pull wood for our village",
-      "The little baby elephant is so smart",
-      "Getting used to studying with Ban Don",
-      "Oh little elephant, oh little elephant, grow up fast to have a big body",
-      "All over the Central Highlands need many elephants, contributing to building a beautiful village",
-      "The little elephant in Ban Don",
-      "Doesn't have tusks yet so it's still a baby",
-      "From the deep forest it comes to people, still loves eating and playing",
-      "Oh little elephant, oh little elephant",
-      "Grow up fast to have big tusks",
-      "Have the strength to study far and near, pull wood for our village",
-      "The little baby elephant is so smart",
-      "Getting used to studying with Ban Don",
-      "Oh little elephant, oh little elephant, grow up fast to have a big body",
-      "All over the Central Highlands need many elephants, contributing to building a beautiful village",
-      "Oh little elephant, oh little elephant, grow up fast to have a big body",
-      "All over the Central Highlands need many elephants, contributing to building a beautiful village",
-      "Oh little elephant, oh little elephant, grow up fast to have a big body",
-      "All over the Central Highlands need many elephants, contributing to building a beautiful village",
-      "Oh little elephant"
+      "(Instrumental)",
+      "The little elephant in Ban Don village has no tusks yet, so he is still a child.",
+      "From the deep forest he comes to live with people, still eager to eat and play.",
+      "Oh little elephant! Grow up fast to have big tusks.",
+      "Have the strength to traverse far forests and haul timber for our village.",
+      "The little elephant is very clever, familiar with all children across Ban Don.",
+      "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat.",
+      "Oh little elephant! Grow up fast to have a large body.",
+      "All across the Central Highlands need many elephants to help build beautiful prosperous villages.",
+      "Oh elephant! Oh elephant!",
+      "(Instrumental)",
+      "The little elephant in Ban Don village has no tusks yet, so he is still a child.",
+      "From the deep forest he comes to live with people, still eager to eat and play.",
+      "Oh little elephant! Grow up fast to have big tusks.",
+      "Have the strength to traverse far forests and haul timber for our village.",
+      "The little elephant is very clever, familiar with all children across Ban Don.",
+      "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat.",
+      "Oh little elephant! Grow up fast to have a large body.",
+      "All across the Central Highlands need many elephants to help build beautiful prosperous villages.",
+      "Oh elephant! Oh elephant!",
+      "The little elephant is very clever, familiar with all children across Ban Don.",
+      "Nodding his head and swinging his trunk, gracefully swaying to the joyful gong beat.",
+      "Oh little elephant! Grow up fast to have a large body.",
+      "All across the Central Highlands need many elephants to help build beautiful prosperous villages.",
+      "Oh elephant! Oh elephant!"
     ],
     "funFactVi": "Chú voi con Tây Nguyên ngộ nghĩnh, hiền lành được buôn làng yêu quý.",
     "audioUrl": "/assets/music/chu-voi-con-o-ban-don.mp3",
@@ -4581,202 +4581,202 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 141,
     "melodyStyle": "playful",
     "lyrics": [
-      "Bắc Kim Thang, Cà Lang Bí Rợ",
-      "Cột qua kèo, là kèo qua cột",
-      "Chú ban dầu, qua cầu mà té",
-      "Chú bán ếch, ở lại làm chi?",
-      "Con le le đánh trống thổi kèn",
-      "Con bìm bịp thổi tót tì te tò te",
-      "Bắc Kim Thang, Cà Lang Bí Rợ",
-      "Cột qua kèo, là kèo qua cột",
-      "Chú ban dầu, qua cầu mà té",
-      "Chú bán ếch, ở lại làm chi?",
-      "Con le le đánh trống thổi kèn",
-      "Con bìm bịp thổi tót tì te tò te",
-      "Bắc Kim Thang, Cà Lang Bí Rợ",
-      "Cột qua kèo, là kèo qua cột",
-      "Chú ban dầu, qua cầu mà té",
-      "Chú bán ếch, ở lại làm chi?",
-      "Con le le đánh trống thổi kèn",
-      "Con bìm bịp thổi tót tì te tò te",
-      "Bắc Kim Thang, Cà Lang Bí Rợ",
-      "Cột qua kèo, là kèo qua cột",
-      "Chú ban dầu, qua cầu mà té",
-      "Chú bán ếch, ở lại làm chi?",
-      "Con le le đánh trống thổi kèn",
-      "Con bìm bịp thổi tót tì te tò te"
+      "(Nhạc dạo)",
+      "Bắc kim thang cà lang bí rợ.",
+      "Cột qua kèo là kèo qua cột.",
+      "Chú bán dầu qua cầu mà té.",
+      "Chú bán ếch ở lại làm chi.",
+      "Con le le đánh trống thổi kèn.",
+      "Con bìm bịp thổi tò tí te tò te.",
+      "Bắc kim thang cà lang bí rợ.",
+      "Cột qua kèo là kèo qua cột.",
+      "Chú bán dầu qua cầu mà té.",
+      "Chú bán ếch ở lại làm chi.",
+      "Con le le đánh trống thổi kèn.",
+      "Con bìm bịp thổi tò tí te tò te.",
+      "Bắc kim thang cà lang bí rợ.",
+      "Cột qua kèo là kèo qua cột.",
+      "Chú bán dầu qua cầu mà té.",
+      "Chú bán ếch ở lại làm chi.",
+      "Con le le đánh trống thổi kèn.",
+      "Con bìm bịp thổi tò tí te tò te.",
+      "Bắc kim thang cà lang bí rợ.",
+      "Cột qua kèo là kèo qua cột.",
+      "Chú bán dầu qua cầu mà té.",
+      "Chú bán ếch ở lại làm chi.",
+      "Con le le đánh trống thổi kèn."
     ],
     "lyricsData": [
       {
         "start": 10.35,
         "end": 14.3,
-        "vi": "Bắc Kim Thang, Cà Lang Bí Rợ",
-        "en": "Bac Kim Thang, Pumpkin and Gourd"
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 14.35,
         "end": 18.4,
-        "vi": "Cột qua kèo, là kèo qua cột",
-        "en": "Tie the beam to the pillar, the pillar to the beam"
+        "vi": "Bắc kim thang cà lang bí rợ.",
+        "en": "Bac kim thang, sweet potato and pumpkin."
       },
       {
         "start": 18.45,
         "end": 22.5,
-        "vi": "Chú ban dầu, qua cầu mà té",
-        "en": "Uncle oil vendor, crossing the bridge and falling"
+        "vi": "Cột qua kèo là kèo qua cột.",
+        "en": "The post crosses the rafter, rafter crosses the post."
       },
       {
         "start": 22.55,
         "end": 27.1,
-        "vi": "Chú bán ếch, ở lại làm chi?",
-        "en": "Uncle frog vendor, why stay behind?"
+        "vi": "Chú bán dầu qua cầu mà té.",
+        "en": "The oil vendor crosses the bridge and slips."
       },
       {
         "start": 27.05,
         "end": 31.7,
-        "vi": "Con le le đánh trống thổi kèn",
-        "en": "The whistling duck beats the drum and blows the horn"
+        "vi": "Chú bán ếch ở lại làm chi.",
+        "en": "Why should the frog vendor stay behind."
       },
       {
         "start": 31.65,
         "end": 37.3,
-        "vi": "Con bìm bịp thổi tót tì te tò te",
-        "en": "The greater coucal toots with a toot-ti-te-to-te"
+        "vi": "Con le le đánh trống thổi kèn.",
+        "en": "The whistling duck beats drums and blows trumpets."
       },
       {
         "start": 37.85,
         "end": 41.8,
-        "vi": "Bắc Kim Thang, Cà Lang Bí Rợ",
-        "en": "Bac Kim Thang, Pumpkin and Gourd"
+        "vi": "Con bìm bịp thổi tò tí te tò te.",
+        "en": "The coucal bird plays to-ti-te-to-te."
       },
       {
         "start": 41.75,
         "end": 46.0,
-        "vi": "Cột qua kèo, là kèo qua cột",
-        "en": "Tie the beam to the pillar, the pillar to the beam"
+        "vi": "Bắc kim thang cà lang bí rợ.",
+        "en": "Bac kim thang, sweet potato and pumpkin."
       },
       {
         "start": 46.05,
         "end": 50.0,
-        "vi": "Chú ban dầu, qua cầu mà té",
-        "en": "Uncle oil vendor, crossing the bridge and falling"
+        "vi": "Cột qua kèo là kèo qua cột.",
+        "en": "The post crosses the rafter, rafter crosses the post."
       },
       {
         "start": 50.05,
         "end": 54.6,
-        "vi": "Chú bán ếch, ở lại làm chi?",
-        "en": "Uncle frog vendor, why stay behind?"
+        "vi": "Chú bán dầu qua cầu mà té.",
+        "en": "The oil vendor crosses the bridge and slips."
       },
       {
         "start": 54.55,
         "end": 59.3,
-        "vi": "Con le le đánh trống thổi kèn",
-        "en": "The whistling duck beats the drum and blows the horn"
+        "vi": "Chú bán ếch ở lại làm chi.",
+        "en": "Why should the frog vendor stay behind."
       },
       {
         "start": 59.25,
         "end": 64.4,
-        "vi": "Con bìm bịp thổi tót tì te tò te",
-        "en": "The greater coucal toots with a toot-ti-te-to-te"
+        "vi": "Con le le đánh trống thổi kèn.",
+        "en": "The whistling duck beats drums and blows trumpets."
       },
       {
         "start": 75.35,
         "end": 79.4,
-        "vi": "Bắc Kim Thang, Cà Lang Bí Rợ",
-        "en": "Bac Kim Thang, Pumpkin and Gourd"
+        "vi": "Con bìm bịp thổi tò tí te tò te.",
+        "en": "The coucal bird plays to-ti-te-to-te."
       },
       {
         "start": 79.35,
         "end": 83.6,
-        "vi": "Cột qua kèo, là kèo qua cột",
-        "en": "Tie the beam to the pillar, the pillar to the beam"
+        "vi": "Bắc kim thang cà lang bí rợ.",
+        "en": "Bac kim thang, sweet potato and pumpkin."
       },
       {
         "start": 83.55,
         "end": 87.7,
-        "vi": "Chú ban dầu, qua cầu mà té",
-        "en": "Uncle oil vendor, crossing the bridge and falling"
+        "vi": "Cột qua kèo là kèo qua cột.",
+        "en": "The post crosses the rafter, rafter crosses the post."
       },
       {
         "start": 87.75,
         "end": 92.2,
-        "vi": "Chú bán ếch, ở lại làm chi?",
-        "en": "Uncle frog vendor, why stay behind?"
+        "vi": "Chú bán dầu qua cầu mà té.",
+        "en": "The oil vendor crosses the bridge and slips."
       },
       {
         "start": 92.15,
         "end": 96.9,
-        "vi": "Con le le đánh trống thổi kèn",
-        "en": "The whistling duck beats the drum and blows the horn"
+        "vi": "Chú bán ếch ở lại làm chi.",
+        "en": "Why should the frog vendor stay behind."
       },
       {
         "start": 96.85,
         "end": 102.1,
-        "vi": "Con bìm bịp thổi tót tì te tò te",
-        "en": "The greater coucal toots with a toot-ti-te-to-te"
+        "vi": "Con le le đánh trống thổi kèn.",
+        "en": "The whistling duck beats drums and blows trumpets."
       },
       {
         "start": 102.65,
         "end": 106.8,
-        "vi": "Bắc Kim Thang, Cà Lang Bí Rợ",
-        "en": "Bac Kim Thang, Pumpkin and Gourd"
+        "vi": "Con bìm bịp thổi tò tí te tò te.",
+        "en": "The coucal bird plays to-ti-te-to-te."
       },
       {
         "start": 106.75,
         "end": 111.0,
-        "vi": "Cột qua kèo, là kèo qua cột",
-        "en": "Tie the beam to the pillar, the pillar to the beam"
+        "vi": "Bắc kim thang cà lang bí rợ.",
+        "en": "Bac kim thang, sweet potato and pumpkin."
       },
       {
         "start": 110.95,
         "end": 115.2,
-        "vi": "Chú ban dầu, qua cầu mà té",
-        "en": "Uncle oil vendor, crossing the bridge and falling"
+        "vi": "Cột qua kèo là kèo qua cột.",
+        "en": "The post crosses the rafter, rafter crosses the post."
       },
       {
         "start": 115.15,
         "end": 119.7,
-        "vi": "Chú bán ếch, ở lại làm chi?",
-        "en": "Uncle frog vendor, why stay behind?"
+        "vi": "Chú bán dầu qua cầu mà té.",
+        "en": "The oil vendor crosses the bridge and slips."
       },
       {
         "start": 119.65,
         "end": 124.3,
-        "vi": "Con le le đánh trống thổi kèn",
-        "en": "The whistling duck beats the drum and blows the horn"
+        "vi": "Chú bán ếch ở lại làm chi.",
+        "en": "Why should the frog vendor stay behind."
       },
       {
         "start": 124.25,
         "end": 129.9,
-        "vi": "Con bìm bịp thổi tót tì te tò te",
-        "en": "The greater coucal toots with a toot-ti-te-to-te"
+        "vi": "Con le le đánh trống thổi kèn.",
+        "en": "The whistling duck beats drums and blows trumpets."
       }
     ],
     "englishTranslation": [
-      "Bac Kim Thang, Pumpkin and Gourd",
-      "Tie the beam to the pillar, the pillar to the beam",
-      "Uncle oil vendor, crossing the bridge and falling",
-      "Uncle frog vendor, why stay behind?",
-      "The whistling duck beats the drum and blows the horn",
-      "The greater coucal toots with a toot-ti-te-to-te",
-      "Bac Kim Thang, Pumpkin and Gourd",
-      "Tie the beam to the pillar, the pillar to the beam",
-      "Uncle oil vendor, crossing the bridge and falling",
-      "Uncle frog vendor, why stay behind?",
-      "The whistling duck beats the drum and blows the horn",
-      "The greater coucal toots with a toot-ti-te-to-te",
-      "Bac Kim Thang, Pumpkin and Gourd",
-      "Tie the beam to the pillar, the pillar to the beam",
-      "Uncle oil vendor, crossing the bridge and falling",
-      "Uncle frog vendor, why stay behind?",
-      "The whistling duck beats the drum and blows the horn",
-      "The greater coucal toots with a toot-ti-te-to-te",
-      "Bac Kim Thang, Pumpkin and Gourd",
-      "Tie the beam to the pillar, the pillar to the beam",
-      "Uncle oil vendor, crossing the bridge and falling",
-      "Uncle frog vendor, why stay behind?",
-      "The whistling duck beats the drum and blows the horn",
-      "The greater coucal toots with a toot-ti-te-to-te"
+      "(Instrumental)",
+      "Bac kim thang, sweet potato and pumpkin.",
+      "The post crosses the rafter, rafter crosses the post.",
+      "The oil vendor crosses the bridge and slips.",
+      "Why should the frog vendor stay behind.",
+      "The whistling duck beats drums and blows trumpets.",
+      "The coucal bird plays to-ti-te-to-te.",
+      "Bac kim thang, sweet potato and pumpkin.",
+      "The post crosses the rafter, rafter crosses the post.",
+      "The oil vendor crosses the bridge and slips.",
+      "Why should the frog vendor stay behind.",
+      "The whistling duck beats drums and blows trumpets.",
+      "The coucal bird plays to-ti-te-to-te.",
+      "Bac kim thang, sweet potato and pumpkin.",
+      "The post crosses the rafter, rafter crosses the post.",
+      "The oil vendor crosses the bridge and slips.",
+      "Why should the frog vendor stay behind.",
+      "The whistling duck beats drums and blows trumpets.",
+      "The coucal bird plays to-ti-te-to-te.",
+      "Bac kim thang, sweet potato and pumpkin.",
+      "The post crosses the rafter, rafter crosses the post.",
+      "The oil vendor crosses the bridge and slips.",
+      "Why should the frog vendor stay behind.",
+      "The whistling duck beats drums and blows trumpets."
     ],
     "funFactVi": "Giai điệu dân ca đồng dao Nam Bộ rộn ràng tiếng vỗ tay.",
     "audioUrl": "/assets/music/bac-kim-thang.mp3",
@@ -4852,122 +4852,122 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 282,
     "melodyStyle": "gentle",
     "lyrics": [
-      "Music Interlude",
       "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-      "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
+      "Em vừa đi vừa khóc, mẹ dỗ dành bên em.",
+      "Ngày đầu tiên đi học, em mắt ướt nhạt nhòa.",
+      "Cô vỗ về an ủi, chao ôi sao thiết tha!",
       "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
+      "Em bây giờ cứ ngỡ, cô giáo là cô tiên.",
       "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
-      "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-      "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
+      "Ngày đầu tiên đi học, mẹ cô cùng vỗ về.",
       "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
+      "Em bây giờ cứ ngỡ, cô giáo là cô tiên.",
       "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
-      "Music Interlude",
-      "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-      "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
-      "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
-      "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa."
+      "Ngày đầu tiên đi học, mẹ cô cùng vỗ về.",
+      "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
+      "Ngày đầu tiên đi học, mẹ cô cùng vỗ về."
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 31.9,
-        "vi": "Music Interlude",
-        "en": "Music Interlude"
+        "vi": "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
+        "en": "On the first day of school, mother led me by hand to school."
       },
       {
         "start": 31.75,
         "end": 43.7,
-        "vi": "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-        "en": "On the first day of school, Mom holds my hand to school."
+        "vi": "Em vừa đi vừa khóc, mẹ dỗ dành bên em.",
+        "en": "I cried as I walked, mother consoled me by my side."
       },
       {
         "start": 43.55,
         "end": 56.5,
-        "vi": "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
-        "en": "I walked while crying, Mom comforted me with love."
+        "vi": "Ngày đầu tiên đi học, em mắt ướt nhạt nhòa.",
+        "en": "On the first day of school, my eyes were teary."
       },
       {
         "start": 56.35,
         "end": 69.1,
-        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
-        "en": "That's how the first day was, the teacher is like a gentle mother."
+        "vi": "Cô vỗ về an ủi, chao ôi sao thiết tha!",
+        "en": "The teacher comforted me, oh so tenderly!"
       },
       {
         "start": 68.95,
         "end": 84.0,
-        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
-        "en": "Now that I've grown up, I still remember the old days."
+        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
+        "en": "The first day was like that, teacher was like a gentle mother."
       },
       {
         "start": 83.85,
         "end": 96.4,
-        "vi": "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-        "en": "On the first day of school, Mom holds my hand to school."
+        "vi": "Em bây giờ cứ ngỡ, cô giáo là cô tiên.",
+        "en": "Now I always feel as if teacher was a fairy."
       },
       {
         "start": 96.25,
         "end": 109.1,
-        "vi": "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
-        "en": "I walked while crying, Mom comforted me with love."
+        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
+        "en": "Now that I am grown, I still remember the days of old."
       },
       {
         "start": 108.95,
         "end": 121.8,
-        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
-        "en": "That's how the first day was, the teacher is like a gentle mother."
+        "vi": "Ngày đầu tiên đi học, mẹ cô cùng vỗ về.",
+        "en": "On the first day of school, mother and teacher comforted me together."
       },
       {
         "start": 121.65,
         "end": 135.0,
-        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
-        "en": "Now that I've grown up, I still remember the old days."
+        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
+        "en": "The first day was like that, teacher was like a gentle mother."
       },
       {
         "start": 134.85,
         "end": 166.4,
-        "vi": "Music Interlude",
-        "en": "Music Interlude"
+        "vi": "Em bây giờ cứ ngỡ, cô giáo là cô tiên.",
+        "en": "Now I always feel as if teacher was a fairy."
       },
       {
         "start": 166.25,
         "end": 178.8,
-        "vi": "Ngày đầu tiên đi học, mẹ dắt tay đến trường.",
-        "en": "On the first day of school, Mom holds my hand to school."
+        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
+        "en": "Now that I am grown, I still remember the days of old."
       },
       {
         "start": 178.65,
         "end": 191.7,
-        "vi": "Em vừa đi vừa khóc, mẹ dỗ dành yêu thương.",
-        "en": "I walked while crying, Mom comforted me with love."
+        "vi": "Ngày đầu tiên đi học, mẹ cô cùng vỗ về.",
+        "en": "On the first day of school, mother and teacher comforted me together."
       },
       {
         "start": 191.55,
         "end": 204.5,
-        "vi": "Ngày đầu như thế đó, cô giáo như mẹ hiền.",
-        "en": "That's how the first day was, the teacher is like a gentle mother."
+        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
+        "en": "Now that I am grown, I still remember the days of old."
       },
       {
         "start": 204.35,
         "end": 282.0,
-        "vi": "Em bây giờ khôn lớn, vẫn nhớ về ngày xưa.",
-        "en": "Now that I've grown up, I still remember the old days."
+        "vi": "Ngày đầu tiên đi học, mẹ cô cùng vỗ về.",
+        "en": "On the first day of school, mother and teacher comforted me together."
       }
     ],
     "englishTranslation": [
-      "Music Interlude",
-      "On the first day of school, Mom holds my hand to school.",
-      "I walked while crying, Mom comforted me with love.",
-      "That's how the first day was, the teacher is like a gentle mother.",
-      "Now that I've grown up, I still remember the old days.",
-      "On the first day of school, Mom holds my hand to school.",
-      "I walked while crying, Mom comforted me with love.",
-      "That's how the first day was, the teacher is like a gentle mother.",
-      "Now that I've grown up, I still remember the old days.",
-      "Music Interlude",
-      "On the first day of school, Mom holds my hand to school.",
-      "I walked while crying, Mom comforted me with love.",
-      "That's how the first day was, the teacher is like a gentle mother.",
-      "Now that I've grown up, I still remember the old days."
+      "On the first day of school, mother led me by hand to school.",
+      "I cried as I walked, mother consoled me by my side.",
+      "On the first day of school, my eyes were teary.",
+      "The teacher comforted me, oh so tenderly!",
+      "The first day was like that, teacher was like a gentle mother.",
+      "Now I always feel as if teacher was a fairy.",
+      "Now that I am grown, I still remember the days of old.",
+      "On the first day of school, mother and teacher comforted me together.",
+      "The first day was like that, teacher was like a gentle mother.",
+      "Now I always feel as if teacher was a fairy.",
+      "Now that I am grown, I still remember the days of old.",
+      "On the first day of school, mother and teacher comforted me together.",
+      "Now that I am grown, I still remember the days of old.",
+      "On the first day of school, mother and teacher comforted me together."
     ],
     "funFactVi": "Kỷ niệm ngày đầu vào lớp bỡ ngỡ nhưng đầy ắp tình thương.",
     "melodyNotes": [
@@ -5041,136 +5041,136 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "lyrics": [
       "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
       "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
+      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
       "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
       "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
       "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
+      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
       "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
       "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
       "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
+      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
       "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
       "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
       "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
-      "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui, trường mẫu giáo chúng em rất vui."
+      "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
+      "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui."
     ],
     "lyricsData": [
       {
         "start": 27.95,
         "end": 34.9,
         "vi": "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
-        "en": "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us."
+        "en": "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us."
       },
       {
         "start": 34.75,
         "end": 41.8,
         "vi": "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-        "en": "The teacher praises me for studying hard, happily welcoming me to school."
+        "en": "The teacher praises me for being studious, happily welcoming me to school."
       },
       {
         "start": 42.15,
         "end": 52.2,
-        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
-        "en": "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly."
+        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
+        "en": "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly."
       },
       {
         "start": 52.05,
         "end": 58.7,
         "vi": "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
-        "en": "Our kindergarten is beloved, our kindergarten makes us very happy."
+        "en": "Our beloved kindergarten, our kindergarten brings so much joy."
       },
       {
         "start": 61.15,
         "end": 67.4,
         "vi": "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
-        "en": "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us."
+        "en": "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us."
       },
       {
         "start": 67.25,
         "end": 74.3,
         "vi": "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-        "en": "The teacher praises me for studying hard, happily welcoming me to school."
+        "en": "The teacher praises me for being studious, happily welcoming me to school."
       },
       {
         "start": 74.75,
         "end": 84.4,
-        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
-        "en": "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly."
+        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
+        "en": "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly."
       },
       {
         "start": 84.25,
         "end": 90.9,
         "vi": "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
-        "en": "Our kindergarten is beloved, our kindergarten makes us very happy."
+        "en": "Our beloved kindergarten, our kindergarten brings so much joy."
       },
       {
         "start": 121.35,
         "end": 127.6,
         "vi": "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
-        "en": "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us."
+        "en": "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us."
       },
       {
         "start": 127.45,
         "end": 134.5,
         "vi": "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-        "en": "The teacher praises me for studying hard, happily welcoming me to school."
+        "en": "The teacher praises me for being studious, happily welcoming me to school."
       },
       {
         "start": 134.95,
         "end": 144.7,
-        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
-        "en": "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly."
+        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
+        "en": "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly."
       },
       {
         "start": 144.55,
         "end": 150.8,
         "vi": "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
-        "en": "Our kindergarten is beloved, our kindergarten makes us very happy."
+        "en": "Our beloved kindergarten, our kindergarten brings so much joy."
       },
       {
         "start": 153.75,
         "end": 160.0,
         "vi": "Nắng vừa lên em đi mẫu giáo, chim chuyền cành hót chào chúng em.",
-        "en": "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us."
+        "en": "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us."
       },
       {
         "start": 159.85,
         "end": 166.9,
         "vi": "Cô giáo khen em chăm học, mừng vui đón em vào trường.",
-        "en": "The teacher praises me for studying hard, happily welcoming me to school."
+        "en": "The teacher praises me for being studious, happily welcoming me to school."
       },
       {
         "start": 167.25,
         "end": 177.1,
-        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhé đi học đều.",
-        "en": "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly."
+        "vi": "Em được vui hát ca, cô giáo em dạy bao điều hay, bé chăm ngoan nhớ đi học đều.",
+        "en": "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly."
       },
       {
         "start": 176.95,
         "end": 191.7,
-        "vi": "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui, trường mẫu giáo chúng em rất vui.",
-        "en": "Our kindergarten is beloved, our kindergarten makes us very happy, our kindergarten makes us very happy."
+        "vi": "Trường mẫu giáo chúng em mến yêu, trường mẫu giáo chúng em rất vui.",
+        "en": "Our beloved kindergarten, our kindergarten brings so much joy."
       }
     ],
     "englishTranslation": [
-      "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us.",
-      "The teacher praises me for studying hard, happily welcoming me to school.",
-      "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly.",
-      "Our kindergarten is beloved, our kindergarten makes us very happy.",
-      "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us.",
-      "The teacher praises me for studying hard, happily welcoming me to school.",
-      "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly.",
-      "Our kindergarten is beloved, our kindergarten makes us very happy.",
-      "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us.",
-      "The teacher praises me for studying hard, happily welcoming me to school.",
-      "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly.",
-      "Our kindergarten is beloved, our kindergarten makes us very happy.",
-      "The sun is up, I go to kindergarten, birds chirp on the branches to welcome us.",
-      "The teacher praises me for studying hard, happily welcoming me to school.",
-      "I am happy to sing, my teacher teaches me many good things, be a good child and go to school regularly.",
-      "Our kindergarten is beloved, our kindergarten makes us very happy, our kindergarten makes us very happy."
+      "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us.",
+      "The teacher praises me for being studious, happily welcoming me to school.",
+      "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly.",
+      "Our beloved kindergarten, our kindergarten brings so much joy.",
+      "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us.",
+      "The teacher praises me for being studious, happily welcoming me to school.",
+      "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly.",
+      "Our beloved kindergarten, our kindergarten brings so much joy.",
+      "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us.",
+      "The teacher praises me for being studious, happily welcoming me to school.",
+      "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly.",
+      "Our beloved kindergarten, our kindergarten brings so much joy.",
+      "The morning sun rises as I go to kindergarten, birds flit across branches chirping to greet us.",
+      "The teacher praises me for being studious, happily welcoming me to school.",
+      "I enjoy singing happily, my teacher teaches so many good things, a good child remembers to attend school regularly.",
+      "Our beloved kindergarten, our kindergarten brings so much joy."
     ],
     "funFactVi": "Bước chân rộn rã tới lớp mầm non đón chào ngày học mới.",
     "melodyNotes": [
@@ -5238,250 +5238,250 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 277,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-      "Tạm biệt búp bê thân yêu,",
-      "tạm biệt gấu mi-sa nhé.",
-      "Tạm biệt thỏ trắng xinh xinh,",
-      "mai tôi vào lớp một rồi.",
-      "Nhớ lắm, quên sao được trường mầm non thân yêu."
+      "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+      "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+      "Nào bàn, nào ghế, nào sách, nào vở.",
+      "Nào mực, nào bút, nào phấn, nào bảng.",
+      "Cả tiếng chim vui trên cành cây cao.",
+      "Cả lá cờ sao trong nắng thu vàng.",
+      "Yêu sao yêu thế, trường của chúng em!",
+      "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+      "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+      "Mùa phượng phượng thắm, mùa cúc vàng nở.",
+      "Mùa huệ huệ trắng, đào thắm hồng đỏ.",
+      "Trường chúng em đây như vườn hoa tươi.",
+      "Người tốt việc hay là cháu Bác Hồ.",
+      "Yêu sao yêu thế, trường của chúng em!",
+      "Yêu sao yêu thế, trường của chúng em!",
+      "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+      "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+      "Nào bàn, nào ghế, nào sách, nào vở.",
+      "Nào mực, nào bút, nào phấn, nào bảng.",
+      "Cả tiếng chim vui trên cành cây cao.",
+      "Cả lá cờ sao trong nắng thu vàng.",
+      "Yêu sao yêu thế, trường của chúng em!",
+      "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+      "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+      "Mùa phượng phượng thắm, mùa cúc vàng nở.",
+      "Mùa huệ huệ trắng, đào thắm hồng đỏ.",
+      "Trường chúng em đây như vườn hoa tươi.",
+      "Người tốt việc hay là cháu Bác Hồ.",
+      "Yêu sao yêu thế, trường của chúng em!",
+      "Yêu sao yêu thế, trường của chúng em!"
     ],
     "lyricsData": [
       {
         "start": 35.25,
         "end": 38.0,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+        "en": "I love my school, with so many close friends and gentle teacher."
       },
       {
         "start": 37.95,
         "end": 41.2,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+        "en": "Like loving my homeland, carrying books to school in countless love."
       },
       {
         "start": 41.15,
         "end": 44.3,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Nào bàn, nào ghế, nào sách, nào vở.",
+        "en": "Here are desks, chairs, books, and notebooks."
       },
       {
         "start": 44.25,
         "end": 47.0,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Nào mực, nào bút, nào phấn, nào bảng.",
+        "en": "Here is ink, pen, chalk, and blackboard."
       },
       {
         "start": 46.95,
         "end": 52.7,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Cả tiếng chim vui trên cành cây cao.",
+        "en": "Even the cheerful birds singing on high tree branches."
       },
       {
         "start": 63.35,
         "end": 66.0,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Cả lá cờ sao trong nắng thu vàng.",
+        "en": "Even the starry flag in golden autumn sunlight."
       },
       {
         "start": 65.95,
         "end": 69.1,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       },
       {
         "start": 69.05,
         "end": 72.1,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+        "en": "I love my school, with so many close friends and gentle teacher."
       },
       {
         "start": 72.05,
         "end": 75.0,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+        "en": "Like loving my homeland, carrying books to school in countless love."
       },
       {
         "start": 74.95,
         "end": 81.3,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Mùa phượng phượng thắm, mùa cúc vàng nở.",
+        "en": "Season of red flamboyant flowers, season of yellow chrysanthemums blooming."
       },
       {
         "start": 125.35,
         "end": 128.1,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Mùa huệ huệ trắng, đào thắm hồng đỏ.",
+        "en": "Season of white lilies, radiant pink and red peach blossoms."
       },
       {
         "start": 128.05,
         "end": 131.1,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Trường chúng em đây như vườn hoa tươi.",
+        "en": "This school of ours is like a fresh flower garden."
       },
       {
         "start": 131.05,
         "end": 134.2,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Người tốt việc hay là cháu Bác Hồ.",
+        "en": "Good people, good deeds, children of Uncle Ho."
       },
       {
         "start": 134.15,
         "end": 137.0,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       },
       {
         "start": 136.95,
         "end": 142.9,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       },
       {
         "start": 153.55,
         "end": 156.4,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+        "en": "I love my school, with so many close friends and gentle teacher."
       },
       {
         "start": 156.35,
         "end": 159.4,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+        "en": "Like loving my homeland, carrying books to school in countless love."
       },
       {
         "start": 159.35,
         "end": 162.5,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Nào bàn, nào ghế, nào sách, nào vở.",
+        "en": "Here are desks, chairs, books, and notebooks."
       },
       {
         "start": 162.45,
         "end": 165.3,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Nào mực, nào bút, nào phấn, nào bảng.",
+        "en": "Here is ink, pen, chalk, and blackboard."
       },
       {
         "start": 165.25,
         "end": 171.3,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Cả tiếng chim vui trên cành cây cao.",
+        "en": "Even the cheerful birds singing on high tree branches."
       },
       {
         "start": 215.95,
         "end": 218.9,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Cả lá cờ sao trong nắng thu vàng.",
+        "en": "Even the starry flag in golden autumn sunlight."
       },
       {
         "start": 218.85,
         "end": 221.9,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       },
       {
         "start": 221.85,
         "end": 225.0,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Em yêu trường em, với bao bạn thân và cô giáo hiền.",
+        "en": "I love my school, with so many close friends and gentle teacher."
       },
       {
         "start": 224.95,
         "end": 227.8,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Như yêu quê hương, cắp sách đến trường trong muôn vàn yêu thương.",
+        "en": "Like loving my homeland, carrying books to school in countless love."
       },
       {
         "start": 227.75,
         "end": 233.6,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Mùa phượng phượng thắm, mùa cúc vàng nở.",
+        "en": "Season of red flamboyant flowers, season of yellow chrysanthemums blooming."
       },
       {
         "start": 244.05,
         "end": 246.9,
-        "vi": "Tạm biệt búp bê thân yêu,",
-        "en": "Goodbye beloved doll,"
+        "vi": "Mùa huệ huệ trắng, đào thắm hồng đỏ.",
+        "en": "Season of white lilies, radiant pink and red peach blossoms."
       },
       {
         "start": 246.85,
         "end": 249.9,
-        "vi": "tạm biệt gấu mi-sa nhé.",
-        "en": "goodbye Misha bear."
+        "vi": "Trường chúng em đây như vườn hoa tươi.",
+        "en": "This school of ours is like a fresh flower garden."
       },
       {
         "start": 249.85,
         "end": 253.0,
-        "vi": "Tạm biệt thỏ trắng xinh xinh,",
-        "en": "Goodbye cute little white rabbit,"
+        "vi": "Người tốt việc hay là cháu Bác Hồ.",
+        "en": "Good people, good deeds, children of Uncle Ho."
       },
       {
         "start": 252.95,
         "end": 255.8,
-        "vi": "mai tôi vào lớp một rồi.",
-        "en": "tomorrow I'm going to first grade."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       },
       {
         "start": 255.75,
         "end": 262.0,
-        "vi": "Nhớ lắm, quên sao được trường mầm non thân yêu.",
-        "en": "I'll miss it so much, how can I forget the dear kindergarten."
+        "vi": "Yêu sao yêu thế, trường của chúng em!",
+        "en": "How wonderful and beloved, this school of ours!"
       }
     ],
     "englishTranslation": [
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten.",
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten.",
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten.",
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten.",
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten.",
-      "Goodbye beloved doll,",
-      "goodbye Misha bear.",
-      "Goodbye cute little white rabbit,",
-      "tomorrow I'm going to first grade.",
-      "I'll miss it so much, how can I forget the dear kindergarten."
+      "I love my school, with so many close friends and gentle teacher.",
+      "Like loving my homeland, carrying books to school in countless love.",
+      "Here are desks, chairs, books, and notebooks.",
+      "Here is ink, pen, chalk, and blackboard.",
+      "Even the cheerful birds singing on high tree branches.",
+      "Even the starry flag in golden autumn sunlight.",
+      "How wonderful and beloved, this school of ours!",
+      "I love my school, with so many close friends and gentle teacher.",
+      "Like loving my homeland, carrying books to school in countless love.",
+      "Season of red flamboyant flowers, season of yellow chrysanthemums blooming.",
+      "Season of white lilies, radiant pink and red peach blossoms.",
+      "This school of ours is like a fresh flower garden.",
+      "Good people, good deeds, children of Uncle Ho.",
+      "How wonderful and beloved, this school of ours!",
+      "How wonderful and beloved, this school of ours!",
+      "I love my school, with so many close friends and gentle teacher.",
+      "Like loving my homeland, carrying books to school in countless love.",
+      "Here are desks, chairs, books, and notebooks.",
+      "Here is ink, pen, chalk, and blackboard.",
+      "Even the cheerful birds singing on high tree branches.",
+      "Even the starry flag in golden autumn sunlight.",
+      "How wonderful and beloved, this school of ours!",
+      "I love my school, with so many close friends and gentle teacher.",
+      "Like loving my homeland, carrying books to school in countless love.",
+      "Season of red flamboyant flowers, season of yellow chrysanthemums blooming.",
+      "Season of white lilies, radiant pink and red peach blossoms.",
+      "This school of ours is like a fresh flower garden.",
+      "Good people, good deeds, children of Uncle Ho.",
+      "How wonderful and beloved, this school of ours!",
+      "How wonderful and beloved, this school of ours!"
     ],
     "funFactVi": "Mái trường thân thương nơi lưu giữ bạn bè và ngàn bài học hay.",
     "melodyNotes": [
@@ -5559,49 +5559,49 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "tempo": 100,
     "melodyStyle": "gentle",
     "lyrics": [
-      "Tạm biệt búp bê thân yêu",
-      "Tạm biệt gấu mi-sa nhé",
-      "Tạm biệt thỏ trắng mắt tròn",
-      "Mai tôi vào lớp một rồi!",
-      "Nhớ lắm quên sao được",
-      "Trường mầm non thân yêu!"
+      "Tạm biệt búp bê thân yêu,",
+      "tạm biệt gấu Mi-sa nhé.",
+      "Tạm biệt thỏ trắng xinh xinh,",
+      "mai tôi vào lớp một rồi.",
+      "Nhớ lắm, quên sao được",
+      "trường mầm non thân yêu."
     ],
     "lyricsData": [
       {
         "start": 35.0,
         "end": 37.5,
-        "vi": "Tạm biệt búp bê thân yêu",
-        "en": "Goodbye lovely doll, goodbye cute teddy bear"
+        "vi": "Tạm biệt búp bê thân yêu,",
+        "en": "Farewell beloved doll,"
       },
       {
         "start": 37.8,
         "end": 40.8,
-        "vi": "Tạm biệt gấu mi-sa nhé",
-        "en": "Goodbye yellow birdie, now I enter grade one"
+        "vi": "tạm biệt gấu Mi-sa nhé.",
+        "en": "farewell Misa bear."
       },
       {
         "start": 41.0,
         "end": 44.2,
-        "vi": "Tạm biệt thỏ trắng mắt tròn",
-        "en": "I will remember my dear kindergarten school"
+        "vi": "Tạm biệt thỏ trắng xinh xinh,",
+        "en": "Farewell pretty white bunny,"
       },
       {
         "start": 44.3,
         "end": 47.0,
-        "vi": "Mai tôi vào lớp một rồi!",
-        "en": "Carrying sweet memories into grade one!"
+        "vi": "mai tôi vào lớp một rồi.",
+        "en": "tomorrow I enter first grade."
       },
       {
         "start": 47.2,
         "end": 49.5,
-        "vi": "Nhớ lắm quên sao được",
-        "en": "Goodbye lovely doll, goodbye cute teddy bear"
+        "vi": "Nhớ lắm, quên sao được",
+        "en": "I will miss you so much, how could I forget"
       },
       {
         "start": 49.6,
         "end": 52.8,
-        "vi": "Trường mầm non thân yêu!",
-        "en": "Goodbye yellow birdie, now I enter grade one"
+        "vi": "trường mầm non thân yêu.",
+        "en": "my beloved kindergarten."
       }
     ],
     "funFactVi": "Lời tạm biệt trường mầm non bước vào lớp một tự tin, chững chạc.",
@@ -5682,10 +5682,10 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "cover": "/assets/music/covers/music_cover_tam-biet-bup-be.webp",
     "isVocalTrack": true,
     "englishTranslation": [
-      "Goodbye lovely doll, goodbye cute teddy bear",
-      "Goodbye yellow birdie, now I enter grade one",
-      "I will remember my dear kindergarten school",
-      "Carrying sweet memories into grade one!"
+      "Goodbye beloved doll, goodbye cute Misa bear",
+      "Goodbye pretty white bunny, now I enter grade one",
+      "I will miss it so much, how could I forget",
+      "My beloved kindergarten school!"
     ],
     "audioUrl": "/assets/music/tam-biet-bup-be.mp3"
   },
@@ -5705,209 +5705,209 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "melodyStyle": "playful",
     "lyrics": [
       "Cô dạy em bài thể dục buổi sáng.",
-      "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-      "Một, tay đưa cao lên trời.",
-      "Hai, tay dang ngang bờ vai.",
-      "Ba, tay song song trước mặt.",
-      "Bốn, buông thả hai tay.",
+      "Một hai ba bốn, hít thở, hít thở, hít thở.",
+      "Một! Tay đưa cao lên trời.",
+      "Hai! Tay dang ngang bờ vai.",
+      "Ba! Tay song song trước mặt.",
+      "Bốn! Buông cả hai tay.",
+      "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
       "Cô dạy em bài thể dục buổi sáng.",
-      "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-      "Một, tay đưa cao lên trời.",
-      "Hai, tay dang ngang bờ vai.",
-      "Ba, tay song song trước mặt.",
-      "Bốn, buông thả hai tay.",
+      "Một hai ba bốn, hít thở, hít thở, hít thở.",
+      "Một! Tay đưa cao lên trời.",
+      "Hai! Tay dang ngang bờ vai.",
+      "Ba! Tay song song trước mặt.",
+      "Bốn! Buông cả hai tay.",
+      "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
       "Cô dạy em bài thể dục buổi sáng.",
-      "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-      "Một, tay đưa cao lên trời.",
-      "Hai, tay dang ngang bờ vai.",
-      "Ba, tay song song trước mặt.",
-      "Bốn, buông thả hai tay.",
+      "Một hai ba bốn, hít thở, hít thở, hít thở.",
+      "Một! Tay đưa cao lên trời.",
+      "Hai! Tay dang ngang bờ vai.",
+      "Ba! Tay song song trước mặt.",
+      "Bốn! Buông cả hai tay.",
+      "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
       "Cô dạy em bài thể dục buổi sáng.",
-      "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-      "Một, tay đưa cao lên trời.",
-      "Hai, tay dang ngang bờ vai.",
-      "Ba, tay song song trước mặt.",
-      "Bốn, buông thả hai tay.",
-      "1, 2, 3, 4 hít mạnh thở ra, hít mạnh thở ra."
+      "Một hai ba bốn, hít thở, hít thở, hít thở.",
+      "Một! Tay đưa cao lên trời.",
+      "Hai! Tay dang ngang bờ vai."
     ],
     "lyricsData": [
       {
         "start": 13.75,
         "end": 18.0,
         "vi": "Cô dạy em bài thể dục buổi sáng.",
-        "en": "Teacher teaches me morning exercises."
+        "en": "Teacher teaches me morning gymnastics."
       },
       {
         "start": 17.85,
         "end": 22.0,
-        "vi": "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-        "en": "1, 2, 3, 4 breathe in, breathe out, breathe in."
+        "vi": "Một hai ba bốn, hít thở, hít thở, hít thở.",
+        "en": "One two three four, inhale exhale, inhale exhale."
       },
       {
         "start": 21.85,
         "end": 24.4,
-        "vi": "Một, tay đưa cao lên trời.",
-        "en": "One, hands raised high to the sky."
+        "vi": "Một! Tay đưa cao lên trời.",
+        "en": "One! Raise hands high towards the sky."
       },
       {
         "start": 24.25,
         "end": 26.5,
-        "vi": "Hai, tay dang ngang bờ vai.",
-        "en": "Two, hands outstretched at shoulder level."
+        "vi": "Hai! Tay dang ngang bờ vai.",
+        "en": "Two! Stretch hands across the shoulders."
       },
       {
         "start": 26.35,
         "end": 28.9,
-        "vi": "Ba, tay song song trước mặt.",
-        "en": "Three, hands parallel in front."
+        "vi": "Ba! Tay song song trước mặt.",
+        "en": "Three! Hands parallel in front."
       },
       {
         "start": 28.75,
         "end": 31.0,
-        "vi": "Bốn, buông thả hai tay.",
-        "en": "Four, drop both arms down."
+        "vi": "Bốn! Buông cả hai tay.",
+        "en": "Four! Drop both hands down."
       },
       {
         "start": 30.85,
         "end": 35.1,
-        "vi": "Cô dạy em bài thể dục buổi sáng.",
-        "en": "Teacher teaches me morning exercises."
+        "vi": "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
+        "en": "One two three four, inhale deeply and exhale."
       },
       {
         "start": 34.95,
         "end": 39.1,
-        "vi": "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-        "en": "1, 2, 3, 4 breathe in, breathe out, breathe in."
+        "vi": "Cô dạy em bài thể dục buổi sáng.",
+        "en": "Teacher teaches me morning gymnastics."
       },
       {
         "start": 38.95,
         "end": 41.5,
-        "vi": "Một, tay đưa cao lên trời.",
-        "en": "One, hands raised high to the sky."
+        "vi": "Một hai ba bốn, hít thở, hít thở, hít thở.",
+        "en": "One two three four, inhale exhale, inhale exhale."
       },
       {
         "start": 41.35,
         "end": 43.5,
-        "vi": "Hai, tay dang ngang bờ vai.",
-        "en": "Two, hands outstretched at shoulder level."
+        "vi": "Một! Tay đưa cao lên trời.",
+        "en": "One! Raise hands high towards the sky."
       },
       {
         "start": 43.35,
         "end": 46.0,
-        "vi": "Ba, tay song song trước mặt.",
-        "en": "Three, hands parallel in front."
+        "vi": "Hai! Tay dang ngang bờ vai.",
+        "en": "Two! Stretch hands across the shoulders."
       },
       {
         "start": 45.85,
         "end": 48.0,
-        "vi": "Bốn, buông thả hai tay.",
-        "en": "Four, drop both arms down."
+        "vi": "Ba! Tay song song trước mặt.",
+        "en": "Three! Hands parallel in front."
       },
       {
         "start": 77.55,
         "end": 81.8,
-        "vi": "Cô dạy em bài thể dục buổi sáng.",
-        "en": "Teacher teaches me morning exercises."
+        "vi": "Bốn! Buông cả hai tay.",
+        "en": "Four! Drop both hands down."
       },
       {
         "start": 81.65,
         "end": 85.7,
-        "vi": "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-        "en": "1, 2, 3, 4 breathe in, breathe out, breathe in."
+        "vi": "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
+        "en": "One two three four, inhale deeply and exhale."
       },
       {
         "start": 85.55,
         "end": 88.1,
-        "vi": "Một, tay đưa cao lên trời.",
-        "en": "One, hands raised high to the sky."
+        "vi": "Cô dạy em bài thể dục buổi sáng.",
+        "en": "Teacher teaches me morning gymnastics."
       },
       {
         "start": 87.95,
         "end": 90.1,
-        "vi": "Hai, tay dang ngang bờ vai.",
-        "en": "Two, hands outstretched at shoulder level."
+        "vi": "Một hai ba bốn, hít thở, hít thở, hít thở.",
+        "en": "One two three four, inhale exhale, inhale exhale."
       },
       {
         "start": 89.95,
         "end": 92.4,
-        "vi": "Ba, tay song song trước mặt.",
-        "en": "Three, hands parallel in front."
+        "vi": "Một! Tay đưa cao lên trời.",
+        "en": "One! Raise hands high towards the sky."
       },
       {
         "start": 92.25,
         "end": 94.5,
-        "vi": "Bốn, buông thả hai tay.",
-        "en": "Four, drop both arms down."
+        "vi": "Hai! Tay dang ngang bờ vai.",
+        "en": "Two! Stretch hands across the shoulders."
       },
       {
         "start": 111.15,
         "end": 115.4,
-        "vi": "Cô dạy em bài thể dục buổi sáng.",
-        "en": "Teacher teaches me morning exercises."
+        "vi": "Ba! Tay song song trước mặt.",
+        "en": "Three! Hands parallel in front."
       },
       {
         "start": 115.25,
         "end": 119.5,
-        "vi": "1, 2, 3, 4 hít thở, hít thở, hít thở.",
-        "en": "1, 2, 3, 4 breathe in, breathe out, breathe in."
+        "vi": "Bốn! Buông cả hai tay.",
+        "en": "Four! Drop both hands down."
       },
       {
         "start": 119.35,
         "end": 121.8,
-        "vi": "Một, tay đưa cao lên trời.",
-        "en": "One, hands raised high to the sky."
+        "vi": "Một hai ba bốn, hít mạnh thở ra, hít mạnh thở ra.",
+        "en": "One two three four, inhale deeply and exhale."
       },
       {
         "start": 121.65,
         "end": 123.9,
-        "vi": "Hai, tay dang ngang bờ vai.",
-        "en": "Two, hands outstretched at shoulder level."
+        "vi": "Cô dạy em bài thể dục buổi sáng.",
+        "en": "Teacher teaches me morning gymnastics."
       },
       {
         "start": 123.75,
         "end": 126.2,
-        "vi": "Ba, tay song song trước mặt.",
-        "en": "Three, hands parallel in front."
+        "vi": "Một hai ba bốn, hít thở, hít thở, hít thở.",
+        "en": "One two three four, inhale exhale, inhale exhale."
       },
       {
         "start": 126.05,
         "end": 128.5,
-        "vi": "Bốn, buông thả hai tay.",
-        "en": "Four, drop both arms down."
+        "vi": "Một! Tay đưa cao lên trời.",
+        "en": "One! Raise hands high towards the sky."
       },
       {
         "start": 128.35,
         "end": 133.4,
-        "vi": "1, 2, 3, 4 hít mạnh thở ra, hít mạnh thở ra.",
-        "en": "1, 2, 3, 4 breathe in deeply and breathe out, breathe in deeply and breathe out."
+        "vi": "Hai! Tay dang ngang bờ vai.",
+        "en": "Two! Stretch hands across the shoulders."
       }
     ],
     "englishTranslation": [
-      "Teacher teaches me morning exercises.",
-      "1, 2, 3, 4 breathe in, breathe out, breathe in.",
-      "One, hands raised high to the sky.",
-      "Two, hands outstretched at shoulder level.",
-      "Three, hands parallel in front.",
-      "Four, drop both arms down.",
-      "Teacher teaches me morning exercises.",
-      "1, 2, 3, 4 breathe in, breathe out, breathe in.",
-      "One, hands raised high to the sky.",
-      "Two, hands outstretched at shoulder level.",
-      "Three, hands parallel in front.",
-      "Four, drop both arms down.",
-      "Teacher teaches me morning exercises.",
-      "1, 2, 3, 4 breathe in, breathe out, breathe in.",
-      "One, hands raised high to the sky.",
-      "Two, hands outstretched at shoulder level.",
-      "Three, hands parallel in front.",
-      "Four, drop both arms down.",
-      "Teacher teaches me morning exercises.",
-      "1, 2, 3, 4 breathe in, breathe out, breathe in.",
-      "One, hands raised high to the sky.",
-      "Two, hands outstretched at shoulder level.",
-      "Three, hands parallel in front.",
-      "Four, drop both arms down.",
-      "1, 2, 3, 4 breathe in deeply and breathe out, breathe in deeply and breathe out."
+      "Teacher teaches me morning gymnastics.",
+      "One two three four, inhale exhale, inhale exhale.",
+      "One! Raise hands high towards the sky.",
+      "Two! Stretch hands across the shoulders.",
+      "Three! Hands parallel in front.",
+      "Four! Drop both hands down.",
+      "One two three four, inhale deeply and exhale.",
+      "Teacher teaches me morning gymnastics.",
+      "One two three four, inhale exhale, inhale exhale.",
+      "One! Raise hands high towards the sky.",
+      "Two! Stretch hands across the shoulders.",
+      "Three! Hands parallel in front.",
+      "Four! Drop both hands down.",
+      "One two three four, inhale deeply and exhale.",
+      "Teacher teaches me morning gymnastics.",
+      "One two three four, inhale exhale, inhale exhale.",
+      "One! Raise hands high towards the sky.",
+      "Two! Stretch hands across the shoulders.",
+      "Three! Hands parallel in front.",
+      "Four! Drop both hands down.",
+      "One two three four, inhale deeply and exhale.",
+      "Teacher teaches me morning gymnastics.",
+      "One two three four, inhale exhale, inhale exhale.",
+      "One! Raise hands high towards the sky.",
+      "Two! Stretch hands across the shoulders."
     ],
     "funFactVi": "Thể dục buổi sáng rèn luyện thể chất dẻo dai cho bé khỏe mạnh.",
     "audioUrl": "/assets/music/tap-the-duc-buoi-sang.mp3",
@@ -5979,146 +5979,146 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 214,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "Chiếc đèn ông sao sao năm cánh tươi màu",
-      "Cân đây dâng dài can cào qua đầu, em cầm đèn sao em hát vang vang, để dâu tươi màu của đêm rằm liên hoan",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-      "Đây đèn ông sao sao năm cánh tươi vàng",
-      "Ánh sao sáng ngời chiêu miền non ngàn, em cầm đèn sao em hát vang vang",
-      "Để ánh hoa bình đuổi xuôn lại xâm lang",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-      "Chiếc đèn ông sao sao năm cánh tươi màu",
-      "Căn đây dâng dài can cào qua đầu, em cầm đèn sao em hát vang vang",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi"
+      "Chiếc đèn ông sao sao năm cánh tươi màu.",
+      "Cán đây rất dài cán cao quá đầu, em cầm đèn sao em hát vang vang, đèn sao tươi màu của đêm rằm liên hoan.",
+      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+      "Đây đèn ông sao sao năm cánh tươi vàng.",
+      "Ánh sao sáng ngời chiếu miền non ngàn, em cầm đèn sao em hát vang vang.",
+      "Đây ánh hòa bình đuổi xua loài xâm lăng.",
+      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+      "Chiếc đèn ông sao sao năm cánh tươi màu.",
+      "Cán đây rất dài cán cao quá đầu, em cầm đèn sao em hát vang vang.",
+      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+      "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+      "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi."
     ],
     "lyricsData": [
       {
         "start": 27.35,
         "end": 32.8,
-        "vi": "Chiếc đèn ông sao sao năm cánh tươi màu",
-        "en": "Star lantern with five bright petals"
+        "vi": "Chiếc đèn ông sao sao năm cánh tươi màu.",
+        "en": "The star lantern with five brightly colored points."
       },
       {
         "start": 32.65,
         "end": 38.9,
-        "vi": "Cân đây dâng dài can cào qua đầu, em cầm đèn sao em hát vang vang, để dâu tươi màu của đêm rằm liên hoan",
-        "en": "Balanced long pole high above head, I hold the star lantern singing loudly, to keep the bright color of the Mid-Autumn festival party"
+        "vi": "Cán đây rất dài cán cao quá đầu, em cầm đèn sao em hát vang vang, đèn sao tươi màu của đêm rằm liên hoan.",
+        "en": "The handle is very long reaching above head, holding my star lantern I sing out loud, bright star lantern of the festival night."
       },
       {
         "start": 39.75,
         "end": 45.3,
-        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-        "en": "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests"
+        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+        "en": "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright."
       },
       {
         "start": 45.15,
         "end": 50.8,
-        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-        "en": "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+        "en": "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
       },
       {
         "start": 50.65,
         "end": 56.2,
-        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-        "en": "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests"
+        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+        "en": "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright."
       },
       {
         "start": 56.05,
         "end": 61.8,
-        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-        "en": "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+        "en": "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
       },
       {
         "start": 62.15,
         "end": 67.7,
-        "vi": "Đây đèn ông sao sao năm cánh tươi vàng",
-        "en": "This is the star lantern with five golden petals"
+        "vi": "Đây đèn ông sao sao năm cánh tươi vàng.",
+        "en": "Here is the star lantern with five golden points."
       },
       {
         "start": 67.55,
         "end": 73.9,
-        "vi": "Ánh sao sáng ngời chiêu miền non ngàn, em cầm đèn sao em hát vang vang",
-        "en": "The brilliant star shines across mountains and forests, I hold the star lantern singing loudly"
+        "vi": "Ánh sao sáng ngời chiếu miền non ngàn, em cầm đèn sao em hát vang vang.",
+        "en": "Radiant starlight illuminates mountains, holding my star lantern I sing out loud."
       },
       {
         "start": 73.75,
         "end": 79.5,
-        "vi": "Để ánh hoa bình đuổi xuôn lại xâm lang",
-        "en": "To let the light of peace drive away invaders"
+        "vi": "Đây ánh hòa bình đuổi xua loài xâm lăng.",
+        "en": "Here the light of peace drives away invaders."
       },
       {
         "start": 79.35,
         "end": 85.2,
-        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-        "en": "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests"
+        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+        "en": "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright."
       },
       {
         "start": 85.05,
         "end": 96.7,
-        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-        "en": "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+        "en": "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
       },
       {
         "start": 154.75,
         "end": 160.4,
-        "vi": "Chiếc đèn ông sao sao năm cánh tươi màu",
-        "en": "Star lantern with five bright petals"
+        "vi": "Chiếc đèn ông sao sao năm cánh tươi màu.",
+        "en": "The star lantern with five brightly colored points."
       },
       {
         "start": 160.25,
         "end": 166.4,
-        "vi": "Căn đây dâng dài can cào qua đầu, em cầm đèn sao em hát vang vang",
-        "en": "Balanced long pole high above head, I hold the star lantern singing loudly"
+        "vi": "Cán đây rất dài cán cao quá đầu, em cầm đèn sao em hát vang vang.",
+        "en": "The handle is very long reaching above head, holding my star lantern I sing out loud."
       },
       {
         "start": 166.25,
         "end": 172.4,
-        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-        "en": "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests"
+        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+        "en": "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright."
       },
       {
         "start": 172.25,
         "end": 177.9,
-        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-        "en": "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+        "en": "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
       },
       {
         "start": 177.75,
         "end": 183.5,
-        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa non ngàn",
-        "en": "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests"
+        "vi": "Tùng rinh rinh tùng tùng tùng rinh rinh, đây ánh sao vui chiếu xa sáng ngời.",
+        "en": "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright."
       },
       {
         "start": 183.35,
         "end": 202.5,
-        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao bác hồ tỏa sáng nơi nơi",
-        "en": "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+        "vi": "Tùng rinh rinh rinh rinh tùng rinh rinh, ánh sao Bác Hồ tỏa sáng nơi nơi.",
+        "en": "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
       }
     ],
     "englishTranslation": [
-      "Star lantern with five bright petals",
-      "Balanced long pole high above head, I hold the star lantern singing loudly, to keep the bright color of the Mid-Autumn festival party",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere",
-      "This is the star lantern with five golden petals",
-      "The brilliant star shines across mountains and forests, I hold the star lantern singing loudly",
-      "To let the light of peace drive away invaders",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere",
-      "Star lantern with five bright petals",
-      "Balanced long pole high above head, I hold the star lantern singing loudly",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere",
-      "Tùng rinh rinh tùng tùng tùng rinh rinh, this happy star light shines far over mountains and forests",
-      "Tùng rinh rinh rinh rinh tùng rinh rinh, Uncle Ho's star shines everywhere"
+      "The star lantern with five brightly colored points.",
+      "The handle is very long reaching above head, holding my star lantern I sing out loud, bright star lantern of the festival night.",
+      "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright.",
+      "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere.",
+      "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright.",
+      "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere.",
+      "Here is the star lantern with five golden points.",
+      "Radiant starlight illuminates mountains, holding my star lantern I sing out loud.",
+      "Here the light of peace drives away invaders.",
+      "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright.",
+      "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere.",
+      "The star lantern with five brightly colored points.",
+      "The handle is very long reaching above head, holding my star lantern I sing out loud.",
+      "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright.",
+      "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere.",
+      "Tung rinh rinh, tung tung tung rinh rinh, here joyful starlight shines far and bright.",
+      "Tung rinh rinh rinh rinh tung rinh rinh, Uncle Ho's star shines everywhere."
     ],
     "funFactVi": "Đêm rằm Trung thu lung linh ánh sao cùng bạn bè rước đèn.",
     "melodyNotes": [
@@ -6196,13 +6196,13 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "cùng bay nào.",
       "Cho trái đất quay, cùng bay nào.",
       "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-      "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-      "Cùng vẫy vùng thơm, màu da nào.",
-      "Cùng vẫy vùng thơm.",
+      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+      "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+      "Cũng quý cũng thơm, màu da nào",
+      "Cũng quý cũng thơm.",
       "Trái đất này là của chúng mình, cùng siết tay,",
       "môi thắm cười xinh. Bình minh ơi,",
-      "phúc ca này êm ấm, học chăm ngoan,",
+      "khúc ca này êm ấm, học chăm ngoan,",
       "đắp xây đời tươi sáng, hành tinh này.",
       "Là ngôi nhà chung, hành tinh này.",
       "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
@@ -6211,13 +6211,13 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "cùng bay nào.",
       "Cho trái đất quay, cùng bay nào.",
       "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-      "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-      "Cùng vẫy vùng thơm, màu da nào.",
-      "Cùng vẫy vùng thơm.",
+      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+      "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+      "Cũng quý cũng thơm, màu da nào",
+      "Cũng quý cũng thơm.",
       "Trái đất này là của chúng mình, cùng siết tay,",
       "môi thắm cười xinh. Bình minh ơi,",
-      "phúc ca này êm ấm, học chăm ngoan,",
+      "khúc ca này êm ấm, học chăm ngoan,",
       "đắp xây đời tươi sáng, hành tinh này.",
       "Là ngôi nhà chung, hành tinh này.",
       "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
@@ -6226,13 +6226,13 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "cùng bay nào.",
       "Cho trái đất quay, cùng bay nào.",
       "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-      "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-      "Cùng vẫy vùng thơm, màu da nào.",
-      "Cùng vẫy vùng thơm.",
+      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+      "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+      "Cũng quý cũng thơm, màu da nào",
+      "Cũng quý cũng thơm.",
       "Trái đất này là của chúng mình, cùng siết tay,",
       "môi thắm cười xinh. Bình minh ơi,",
-      "phúc ca này êm ấm, học chăm ngoan,",
+      "khúc ca này êm ấm, học chăm ngoan,",
       "đắp xây đời tươi sáng, hành tinh này.",
       "Là ngôi nhà chung, hành tinh này.",
       "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
@@ -6241,13 +6241,13 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "cùng bay nào.",
       "Cho trái đất quay, cùng bay nào.",
       "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-      "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-      "Cùng vẫy vùng thơm, màu da nào.",
-      "Cùng vẫy vùng thơm.",
+      "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+      "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+      "Cũng quý cũng thơm, màu da nào",
+      "Cũng quý cũng thơm.",
       "Trái đất này là của chúng mình, cùng siết tay,",
       "môi thắm cười xinh. Bình minh ơi,",
-      "phúc ca này êm ấm, học chăm ngoan,",
+      "khúc ca này êm ấm, học chăm ngoan,",
       "đắp xây đời tươi sáng, hành tinh này.",
       "Là ngôi nhà chung, hành tinh này."
     ],
@@ -6256,424 +6256,424 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 18.55,
         "end": 26.5,
         "vi": "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
-        "en": "This Earth belongs to us, the green globe, flying in the blue sky."
+        "en": "This Earth belongs to us, a blue ball floating in the blue sky."
       },
       {
         "start": 26.35,
         "end": 30.4,
         "vi": "Bồ câu ơi, cánh chim gù thương mến.",
-        "en": "Oh dove, the cooing wings of love."
+        "en": "Oh sweet doves, dear cooing wings."
       },
       {
         "start": 30.25,
         "end": 34.9,
         "vi": "Hải âu ơi, cánh chim vờn trên sóng,",
-        "en": "Oh seagull, the wings hovering over the waves,"
+        "en": "Oh sea gulls, graceful wings riding the waves,"
       },
       {
         "start": 34.75,
         "end": 37.3,
         "vi": "cùng bay nào.",
-        "en": "let's fly together."
+        "en": "let us fly together."
       },
       {
         "start": 38.05,
         "end": 43.0,
         "vi": "Cho trái đất quay, cùng bay nào.",
-        "en": "Make the Earth spin, let's fly together."
+        "en": "Make the Earth spin, let us fly together."
       },
       {
         "start": 43.75,
         "end": 52.4,
         "vi": "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-        "en": "Make the Earth spin, This Earth belongs to us, yellow, white, black,"
+        "en": "Make the Earth spin! This Earth belongs to us, yellow, white, black,"
       },
       {
         "start": 52.25,
         "end": 58.3,
-        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-        "en": "despite different skin colors. Dear friends, we are flowers of the countryside,"
+        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+        "en": "though having different skin tones. Dear friends, we are precious flowers,"
       },
       {
         "start": 58.65,
         "end": 64.5,
-        "vi": "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-        "en": "fragrant love spreading fresh colors, whatever skin color."
+        "vi": "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+        "en": "spreading sweet fragrance and bright colors, whichever flower color"
       },
       {
         "start": 66.15,
         "end": 70.7,
-        "vi": "Cùng vẫy vùng thơm, màu da nào.",
-        "en": "Waving and spreading fragrance, whatever skin color."
+        "vi": "Cũng quý cũng thơm, màu da nào",
+        "en": "Is also precious and fragrant, whichever skin color"
       },
       {
         "start": 72.15,
         "end": 77.3,
-        "vi": "Cùng vẫy vùng thơm.",
-        "en": "Waving and spreading fragrance together."
+        "vi": "Cũng quý cũng thơm.",
+        "en": "Is also precious and fragrant."
       },
       {
         "start": 79.25,
         "end": 85.1,
         "vi": "Trái đất này là của chúng mình, cùng siết tay,",
-        "en": "This Earth belongs to us, holding hands together,"
+        "en": "This Earth belongs to us, holding hands tightly,"
       },
       {
         "start": 84.95,
         "end": 89.8,
         "vi": "môi thắm cười xinh. Bình minh ơi,",
-        "en": "smiling brightly. Oh dawn,"
+        "en": "with lovely smiling lips. Oh gentle dawn,"
       },
       {
         "start": 89.65,
         "end": 95.3,
-        "vi": "phúc ca này êm ấm, học chăm ngoan,",
-        "en": "this song of blessing is peaceful and warm, studying diligently,"
+        "vi": "khúc ca này êm ấm, học chăm ngoan,",
+        "en": "this song is so warm, studying hard and well,"
       },
       {
         "start": 95.15,
         "end": 100.8,
         "vi": "đắp xây đời tươi sáng, hành tinh này.",
-        "en": "building a bright life, this planet."
+        "en": "to build a bright future, this planet of ours."
       },
       {
         "start": 100.65,
         "end": 107.3,
         "vi": "Là ngôi nhà chung, hành tinh này.",
-        "en": "It's a common home, this planet."
+        "en": "Is our shared home, this planet."
       },
       {
         "start": 124.95,
         "end": 133.0,
         "vi": "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
-        "en": "This Earth belongs to us, the green globe, flying in the blue sky."
+        "en": "This Earth belongs to us, a blue ball floating in the blue sky."
       },
       {
         "start": 132.85,
         "end": 137.0,
         "vi": "Bồ câu ơi, cánh chim gù thương mến.",
-        "en": "Oh dove, the cooing wings of love."
+        "en": "Oh sweet doves, dear cooing wings."
       },
       {
         "start": 136.85,
         "end": 142.0,
         "vi": "Hải âu ơi, cánh chim vờn trên sóng,",
-        "en": "Oh seagull, the wings hovering over the waves,"
+        "en": "Oh sea gulls, graceful wings riding the waves,"
       },
       {
         "start": 141.85,
         "end": 144.4,
         "vi": "cùng bay nào.",
-        "en": "let's fly together."
+        "en": "let us fly together."
       },
       {
         "start": 144.85,
         "end": 149.0,
         "vi": "Cho trái đất quay, cùng bay nào.",
-        "en": "Make the Earth spin, let's fly together."
+        "en": "Make the Earth spin, let us fly together."
       },
       {
         "start": 150.75,
         "end": 159.1,
         "vi": "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-        "en": "Make the Earth spin, This Earth belongs to us, yellow, white, black,"
+        "en": "Make the Earth spin! This Earth belongs to us, yellow, white, black,"
       },
       {
         "start": 158.95,
         "end": 164.4,
-        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-        "en": "despite different skin colors. Dear friends, we are flowers of the countryside,"
+        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+        "en": "though having different skin tones. Dear friends, we are precious flowers,"
       },
       {
         "start": 165.15,
         "end": 171.0,
-        "vi": "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-        "en": "fragrant love spreading fresh colors, whatever skin color."
+        "vi": "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+        "en": "spreading sweet fragrance and bright colors, whichever flower color"
       },
       {
         "start": 172.55,
         "end": 177.1,
-        "vi": "Cùng vẫy vùng thơm, màu da nào.",
-        "en": "Waving and spreading fragrance, whatever skin color."
+        "vi": "Cũng quý cũng thơm, màu da nào",
+        "en": "Is also precious and fragrant, whichever skin color"
       },
       {
         "start": 178.55,
         "end": 183.6,
-        "vi": "Cùng vẫy vùng thơm.",
-        "en": "Waving and spreading fragrance together."
+        "vi": "Cũng quý cũng thơm.",
+        "en": "Is also precious and fragrant."
       },
       {
         "start": 185.55,
         "end": 191.4,
         "vi": "Trái đất này là của chúng mình, cùng siết tay,",
-        "en": "This Earth belongs to us, holding hands together,"
+        "en": "This Earth belongs to us, holding hands tightly,"
       },
       {
         "start": 191.25,
         "end": 196.1,
         "vi": "môi thắm cười xinh. Bình minh ơi,",
-        "en": "smiling brightly. Oh dawn,"
+        "en": "with lovely smiling lips. Oh gentle dawn,"
       },
       {
         "start": 195.95,
         "end": 201.6,
-        "vi": "phúc ca này êm ấm, học chăm ngoan,",
-        "en": "this song of blessing is peaceful and warm, studying diligently,"
+        "vi": "khúc ca này êm ấm, học chăm ngoan,",
+        "en": "this song is so warm, studying hard and well,"
       },
       {
         "start": 201.45,
         "end": 207.1,
         "vi": "đắp xây đời tươi sáng, hành tinh này.",
-        "en": "building a bright life, this planet."
+        "en": "to build a bright future, this planet of ours."
       },
       {
         "start": 206.95,
         "end": 213.6,
         "vi": "Là ngôi nhà chung, hành tinh này.",
-        "en": "It's a common home, this planet."
+        "en": "Is our shared home, this planet."
       },
       {
         "start": 218.85,
         "end": 226.8,
         "vi": "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
-        "en": "This Earth belongs to us, the green globe, flying in the blue sky."
+        "en": "This Earth belongs to us, a blue ball floating in the blue sky."
       },
       {
         "start": 226.65,
         "end": 230.8,
         "vi": "Bồ câu ơi, cánh chim gù thương mến.",
-        "en": "Oh dove, the cooing wings of love."
+        "en": "Oh sweet doves, dear cooing wings."
       },
       {
         "start": 230.65,
         "end": 235.3,
         "vi": "Hải âu ơi, cánh chim vờn trên sóng,",
-        "en": "Oh seagull, the wings hovering over the waves,"
+        "en": "Oh sea gulls, graceful wings riding the waves,"
       },
       {
         "start": 235.15,
         "end": 237.7,
         "vi": "cùng bay nào.",
-        "en": "let's fly together."
+        "en": "let us fly together."
       },
       {
         "start": 238.35,
         "end": 243.4,
         "vi": "Cho trái đất quay, cùng bay nào.",
-        "en": "Make the Earth spin, let's fly together."
+        "en": "Make the Earth spin, let us fly together."
       },
       {
         "start": 244.05,
         "end": 252.7,
         "vi": "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-        "en": "Make the Earth spin, This Earth belongs to us, yellow, white, black,"
+        "en": "Make the Earth spin! This Earth belongs to us, yellow, white, black,"
       },
       {
         "start": 252.55,
         "end": 258.6,
-        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-        "en": "despite different skin colors. Dear friends, we are flowers of the countryside,"
+        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+        "en": "though having different skin tones. Dear friends, we are precious flowers,"
       },
       {
         "start": 258.95,
         "end": 264.8,
-        "vi": "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-        "en": "fragrant love spreading fresh colors, whatever skin color."
+        "vi": "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+        "en": "spreading sweet fragrance and bright colors, whichever flower color"
       },
       {
         "start": 266.45,
         "end": 271.0,
-        "vi": "Cùng vẫy vùng thơm, màu da nào.",
-        "en": "Waving and spreading fragrance, whatever skin color."
+        "vi": "Cũng quý cũng thơm, màu da nào",
+        "en": "Is also precious and fragrant, whichever skin color"
       },
       {
         "start": 272.45,
         "end": 277.6,
-        "vi": "Cùng vẫy vùng thơm.",
-        "en": "Waving and spreading fragrance together."
+        "vi": "Cũng quý cũng thơm.",
+        "en": "Is also precious and fragrant."
       },
       {
         "start": 279.45,
         "end": 285.3,
         "vi": "Trái đất này là của chúng mình, cùng siết tay,",
-        "en": "This Earth belongs to us, holding hands together,"
+        "en": "This Earth belongs to us, holding hands tightly,"
       },
       {
         "start": 285.15,
         "end": 290.0,
         "vi": "môi thắm cười xinh. Bình minh ơi,",
-        "en": "smiling brightly. Oh dawn,"
+        "en": "with lovely smiling lips. Oh gentle dawn,"
       },
       {
         "start": 289.85,
         "end": 295.5,
-        "vi": "phúc ca này êm ấm, học chăm ngoan,",
-        "en": "this song of blessing is peaceful and warm, studying diligently,"
+        "vi": "khúc ca này êm ấm, học chăm ngoan,",
+        "en": "this song is so warm, studying hard and well,"
       },
       {
         "start": 295.35,
         "end": 301.0,
         "vi": "đắp xây đời tươi sáng, hành tinh này.",
-        "en": "building a bright life, this planet."
+        "en": "to build a bright future, this planet of ours."
       },
       {
         "start": 300.85,
         "end": 307.5,
         "vi": "Là ngôi nhà chung, hành tinh này.",
-        "en": "It's a common home, this planet."
+        "en": "Is our shared home, this planet."
       },
       {
         "start": 325.55,
         "end": 333.5,
         "vi": "Trái đất này là của chúng mình, quả bóng xanh, bay giữa trời xanh.",
-        "en": "This Earth belongs to us, the green globe, flying in the blue sky."
+        "en": "This Earth belongs to us, a blue ball floating in the blue sky."
       },
       {
         "start": 333.35,
         "end": 337.5,
         "vi": "Bồ câu ơi, cánh chim gù thương mến.",
-        "en": "Oh dove, the cooing wings of love."
+        "en": "Oh sweet doves, dear cooing wings."
       },
       {
         "start": 337.35,
         "end": 342.0,
         "vi": "Hải âu ơi, cánh chim vờn trên sóng,",
-        "en": "Oh seagull, the wings hovering over the waves,"
+        "en": "Oh sea gulls, graceful wings riding the waves,"
       },
       {
         "start": 341.85,
         "end": 344.4,
         "vi": "cùng bay nào.",
-        "en": "let's fly together."
+        "en": "let us fly together."
       },
       {
         "start": 345.05,
         "end": 350.1,
         "vi": "Cho trái đất quay, cùng bay nào.",
-        "en": "Make the Earth spin, let's fly together."
+        "en": "Make the Earth spin, let us fly together."
       },
       {
         "start": 350.75,
         "end": 359.4,
         "vi": "Cho trái đất quay, Trái đất này là của chúng mình, vàng, trắng, đen,",
-        "en": "Make the Earth spin, This Earth belongs to us, yellow, white, black,"
+        "en": "Make the Earth spin! This Earth belongs to us, yellow, white, black,"
       },
       {
         "start": 359.25,
         "end": 365.3,
-        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quê,",
-        "en": "despite different skin colors. Dear friends, we are flowers of the countryside,"
+        "vi": "tuy khác màu da. Bạn yêu ơi, chúng ta là hoa quý,",
+        "en": "though having different skin tones. Dear friends, we are precious flowers,"
       },
       {
         "start": 365.65,
         "end": 371.5,
-        "vi": "tình thương thơm, ngát toả màu tươi thắm, màu da nào.",
-        "en": "fragrant love spreading fresh colors, whatever skin color."
+        "vi": "ngát tỏa hương thơm, mang sắc màu tươi thắm, màu hoa nào",
+        "en": "spreading sweet fragrance and bright colors, whichever flower color"
       },
       {
         "start": 373.15,
         "end": 377.7,
-        "vi": "Cùng vẫy vùng thơm, màu da nào.",
-        "en": "Waving and spreading fragrance, whatever skin color."
+        "vi": "Cũng quý cũng thơm, màu da nào",
+        "en": "Is also precious and fragrant, whichever skin color"
       },
       {
         "start": 379.15,
         "end": 384.3,
-        "vi": "Cùng vẫy vùng thơm.",
-        "en": "Waving and spreading fragrance together."
+        "vi": "Cũng quý cũng thơm.",
+        "en": "Is also precious and fragrant."
       },
       {
         "start": 386.15,
         "end": 392.0,
         "vi": "Trái đất này là của chúng mình, cùng siết tay,",
-        "en": "This Earth belongs to us, holding hands together,"
+        "en": "This Earth belongs to us, holding hands tightly,"
       },
       {
         "start": 391.85,
         "end": 396.7,
         "vi": "môi thắm cười xinh. Bình minh ơi,",
-        "en": "smiling brightly. Oh dawn,"
+        "en": "with lovely smiling lips. Oh gentle dawn,"
       },
       {
         "start": 396.55,
         "end": 402.2,
-        "vi": "phúc ca này êm ấm, học chăm ngoan,",
-        "en": "this song of blessing is peaceful and warm, studying diligently,"
+        "vi": "khúc ca này êm ấm, học chăm ngoan,",
+        "en": "this song is so warm, studying hard and well,"
       },
       {
         "start": 402.05,
         "end": 407.7,
         "vi": "đắp xây đời tươi sáng, hành tinh này.",
-        "en": "building a bright life, this planet."
+        "en": "to build a bright future, this planet of ours."
       },
       {
         "start": 407.55,
         "end": 414.4,
         "vi": "Là ngôi nhà chung, hành tinh này.",
-        "en": "It's a common home, this planet."
+        "en": "Is our shared home, this planet."
       }
     ],
     "englishTranslation": [
-      "This Earth belongs to us, the green globe, flying in the blue sky.",
-      "Oh dove, the cooing wings of love.",
-      "Oh seagull, the wings hovering over the waves,",
-      "let's fly together.",
-      "Make the Earth spin, let's fly together.",
-      "Make the Earth spin, This Earth belongs to us, yellow, white, black,",
-      "despite different skin colors. Dear friends, we are flowers of the countryside,",
-      "fragrant love spreading fresh colors, whatever skin color.",
-      "Waving and spreading fragrance, whatever skin color.",
-      "Waving and spreading fragrance together.",
-      "This Earth belongs to us, holding hands together,",
-      "smiling brightly. Oh dawn,",
-      "this song of blessing is peaceful and warm, studying diligently,",
-      "building a bright life, this planet.",
-      "It's a common home, this planet.",
-      "This Earth belongs to us, the green globe, flying in the blue sky.",
-      "Oh dove, the cooing wings of love.",
-      "Oh seagull, the wings hovering over the waves,",
-      "let's fly together.",
-      "Make the Earth spin, let's fly together.",
-      "Make the Earth spin, This Earth belongs to us, yellow, white, black,",
-      "despite different skin colors. Dear friends, we are flowers of the countryside,",
-      "fragrant love spreading fresh colors, whatever skin color.",
-      "Waving and spreading fragrance, whatever skin color.",
-      "Waving and spreading fragrance together.",
-      "This Earth belongs to us, holding hands together,",
-      "smiling brightly. Oh dawn,",
-      "this song of blessing is peaceful and warm, studying diligently,",
-      "building a bright life, this planet.",
-      "It's a common home, this planet.",
-      "This Earth belongs to us, the green globe, flying in the blue sky.",
-      "Oh dove, the cooing wings of love.",
-      "Oh seagull, the wings hovering over the waves,",
-      "let's fly together.",
-      "Make the Earth spin, let's fly together.",
-      "Make the Earth spin, This Earth belongs to us, yellow, white, black,",
-      "despite different skin colors. Dear friends, we are flowers of the countryside,",
-      "fragrant love spreading fresh colors, whatever skin color.",
-      "Waving and spreading fragrance, whatever skin color.",
-      "Waving and spreading fragrance together.",
-      "This Earth belongs to us, holding hands together,",
-      "smiling brightly. Oh dawn,",
-      "this song of blessing is peaceful and warm, studying diligently,",
-      "building a bright life, this planet.",
-      "It's a common home, this planet.",
-      "This Earth belongs to us, the green globe, flying in the blue sky.",
-      "Oh dove, the cooing wings of love.",
-      "Oh seagull, the wings hovering over the waves,",
-      "let's fly together.",
-      "Make the Earth spin, let's fly together.",
-      "Make the Earth spin, This Earth belongs to us, yellow, white, black,",
-      "despite different skin colors. Dear friends, we are flowers of the countryside,",
-      "fragrant love spreading fresh colors, whatever skin color.",
-      "Waving and spreading fragrance, whatever skin color.",
-      "Waving and spreading fragrance together.",
-      "This Earth belongs to us, holding hands together,",
-      "smiling brightly. Oh dawn,",
-      "this song of blessing is peaceful and warm, studying diligently,",
-      "building a bright life, this planet.",
-      "It's a common home, this planet."
+      "This Earth belongs to us, a blue ball floating in the blue sky.",
+      "Oh sweet doves, dear cooing wings.",
+      "Oh sea gulls, graceful wings riding the waves,",
+      "let us fly together.",
+      "Make the Earth spin, let us fly together.",
+      "Make the Earth spin! This Earth belongs to us, yellow, white, black,",
+      "though having different skin tones. Dear friends, we are precious flowers,",
+      "spreading sweet fragrance and bright colors, whichever flower color",
+      "Is also precious and fragrant, whichever skin color",
+      "Is also precious and fragrant.",
+      "This Earth belongs to us, holding hands tightly,",
+      "with lovely smiling lips. Oh gentle dawn,",
+      "this song is so warm, studying hard and well,",
+      "to build a bright future, this planet of ours.",
+      "Is our shared home, this planet.",
+      "This Earth belongs to us, a blue ball floating in the blue sky.",
+      "Oh sweet doves, dear cooing wings.",
+      "Oh sea gulls, graceful wings riding the waves,",
+      "let us fly together.",
+      "Make the Earth spin, let us fly together.",
+      "Make the Earth spin! This Earth belongs to us, yellow, white, black,",
+      "though having different skin tones. Dear friends, we are precious flowers,",
+      "spreading sweet fragrance and bright colors, whichever flower color",
+      "Is also precious and fragrant, whichever skin color",
+      "Is also precious and fragrant.",
+      "This Earth belongs to us, holding hands tightly,",
+      "with lovely smiling lips. Oh gentle dawn,",
+      "this song is so warm, studying hard and well,",
+      "to build a bright future, this planet of ours.",
+      "Is our shared home, this planet.",
+      "This Earth belongs to us, a blue ball floating in the blue sky.",
+      "Oh sweet doves, dear cooing wings.",
+      "Oh sea gulls, graceful wings riding the waves,",
+      "let us fly together.",
+      "Make the Earth spin, let us fly together.",
+      "Make the Earth spin! This Earth belongs to us, yellow, white, black,",
+      "though having different skin tones. Dear friends, we are precious flowers,",
+      "spreading sweet fragrance and bright colors, whichever flower color",
+      "Is also precious and fragrant, whichever skin color",
+      "Is also precious and fragrant.",
+      "This Earth belongs to us, holding hands tightly,",
+      "with lovely smiling lips. Oh gentle dawn,",
+      "this song is so warm, studying hard and well,",
+      "to build a bright future, this planet of ours.",
+      "Is our shared home, this planet.",
+      "This Earth belongs to us, a blue ball floating in the blue sky.",
+      "Oh sweet doves, dear cooing wings.",
+      "Oh sea gulls, graceful wings riding the waves,",
+      "let us fly together.",
+      "Make the Earth spin, let us fly together.",
+      "Make the Earth spin! This Earth belongs to us, yellow, white, black,",
+      "though having different skin tones. Dear friends, we are precious flowers,",
+      "spreading sweet fragrance and bright colors, whichever flower color",
+      "Is also precious and fragrant, whichever skin color",
+      "Is also precious and fragrant.",
+      "This Earth belongs to us, holding hands tightly,",
+      "with lovely smiling lips. Oh gentle dawn,",
+      "this song is so warm, studying hard and well,",
+      "to build a bright future, this planet of ours.",
+      "Is our shared home, this planet."
     ],
     "funFactVi": "Khát vọng hòa bình, tình hữu nghị giữa trẻ em trên toàn thế giới.",
     "melodyNotes": [
@@ -6749,23 +6749,23 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 188,
     "melodyStyle": "playful",
     "lyrics": [
-      "nhạc không lời",
-      "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
+      "(Nhạc không lời)",
+      "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
       "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
       "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
       "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-      "nhạc không lời",
-      "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
+      "(Nhạc không lời)",
+      "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
       "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
       "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
       "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-      "nhạc không lời",
-      "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
+      "(Nhạc không lời)",
+      "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
       "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
       "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
       "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-      "nhạc không lời",
-      "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
+      "(Nhạc không lời)",
+      "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
       "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
       "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
       "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu."
@@ -6774,145 +6774,145 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 0.0,
         "end": 14.2,
-        "vi": "nhạc không lời",
-        "en": "Instrumental music"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       },
       {
         "start": 14.05,
         "end": 21.0,
-        "vi": "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
-        "en": "On the branches, singing birds invite me to play in the spring garden."
+        "vi": "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
+        "en": "High on tree branches birds sing inviting me to play in the spring garden."
       },
       {
         "start": 20.85,
         "end": 28.0,
         "vi": "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
-        "en": "Many close friends peek out, calling me to run around the yard."
+        "en": "Many close friends peek out calling me to romp around the yard."
       },
       {
         "start": 27.85,
         "end": 35.4,
         "vi": "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
-        "en": "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek."
+        "en": "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek."
       },
       {
         "start": 35.25,
         "end": 43.9,
         "vi": "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-        "en": "Oh, so wonderful, but I dare not."
+        "en": "Oh so wonderfully enticing, but I don't dare."
       },
       {
         "start": 43.75,
         "end": 49.8,
-        "vi": "nhạc không lời",
-        "en": "Instrumental music"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       },
       {
         "start": 49.65,
         "end": 56.8,
-        "vi": "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
-        "en": "On the branches, singing birds invite me to play in the spring garden."
+        "vi": "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
+        "en": "High on tree branches birds sing inviting me to play in the spring garden."
       },
       {
         "start": 56.65,
         "end": 64.2,
         "vi": "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
-        "en": "Many close friends peek out, calling me to run around the yard."
+        "en": "Many close friends peek out calling me to romp around the yard."
       },
       {
         "start": 64.05,
         "end": 71.8,
         "vi": "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
-        "en": "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek."
+        "en": "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek."
       },
       {
         "start": 71.65,
         "end": 79.4,
         "vi": "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-        "en": "Oh, so wonderful, but I dare not."
+        "en": "Oh so wonderfully enticing, but I don't dare."
       },
       {
         "start": 79.25,
         "end": 99.9,
-        "vi": "nhạc không lời",
-        "en": "Instrumental music"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       },
       {
         "start": 99.75,
         "end": 106.6,
-        "vi": "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
-        "en": "On the branches, singing birds invite me to play in the spring garden."
+        "vi": "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
+        "en": "High on tree branches birds sing inviting me to play in the spring garden."
       },
       {
         "start": 106.45,
         "end": 114.1,
         "vi": "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
-        "en": "Many close friends peek out, calling me to run around the yard."
+        "en": "Many close friends peek out calling me to romp around the yard."
       },
       {
         "start": 113.95,
         "end": 121.3,
         "vi": "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
-        "en": "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek."
+        "en": "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek."
       },
       {
         "start": 121.15,
         "end": 129.6,
         "vi": "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-        "en": "Oh, so wonderful, but I dare not."
+        "en": "Oh so wonderfully enticing, but I don't dare."
       },
       {
         "start": 129.45,
         "end": 135.5,
-        "vi": "nhạc không lời",
-        "en": "Instrumental music"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       },
       {
         "start": 135.35,
         "end": 142.7,
-        "vi": "Trang cành ca chim hót mời em chơi giữa vườn xuân.",
-        "en": "On the branches, singing birds invite me to play in the spring garden."
+        "vi": "Trên cành cao chim hót mời em chơi giữa vườn xuân.",
+        "en": "High on tree branches birds sing inviting me to play in the spring garden."
       },
       {
         "start": 142.55,
         "end": 150.1,
         "vi": "Bao bạn thân lấp ló gọi em tung tăng sân nhà.",
-        "en": "Many close friends peek out, calling me to run around the yard."
+        "en": "Many close friends peek out calling me to romp around the yard."
       },
       {
         "start": 149.95,
         "end": 156.9,
         "vi": "Đá bóng với đá cầu, nhảy dây bắn bi trốn tìm.",
-        "en": "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek."
+        "en": "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek."
       },
       {
         "start": 156.75,
         "end": 188.0,
         "vi": "Ôi hấp dẫn tuyệt vời nhưng mà em không dám đâu.",
-        "en": "Oh, so wonderful, but I dare not."
+        "en": "Oh so wonderfully enticing, but I don't dare."
       }
     ],
     "englishTranslation": [
-      "Instrumental music",
-      "On the branches, singing birds invite me to play in the spring garden.",
-      "Many close friends peek out, calling me to run around the yard.",
-      "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek.",
-      "Oh, so wonderful, but I dare not.",
-      "Instrumental music",
-      "On the branches, singing birds invite me to play in the spring garden.",
-      "Many close friends peek out, calling me to run around the yard.",
-      "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek.",
-      "Oh, so wonderful, but I dare not.",
-      "Instrumental music",
-      "On the branches, singing birds invite me to play in the spring garden.",
-      "Many close friends peek out, calling me to run around the yard.",
-      "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek.",
-      "Oh, so wonderful, but I dare not.",
-      "Instrumental music",
-      "On the branches, singing birds invite me to play in the spring garden.",
-      "Many close friends peek out, calling me to run around the yard.",
-      "Playing soccer and shuttlecock, jumping rope, shooting marbles, playing hide and seek.",
-      "Oh, so wonderful, but I dare not."
+      "(Instrumental)",
+      "High on tree branches birds sing inviting me to play in the spring garden.",
+      "Many close friends peek out calling me to romp around the yard.",
+      "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek.",
+      "Oh so wonderfully enticing, but I don't dare.",
+      "(Instrumental)",
+      "High on tree branches birds sing inviting me to play in the spring garden.",
+      "Many close friends peek out calling me to romp around the yard.",
+      "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek.",
+      "Oh so wonderfully enticing, but I don't dare.",
+      "(Instrumental)",
+      "High on tree branches birds sing inviting me to play in the spring garden.",
+      "Many close friends peek out calling me to romp around the yard.",
+      "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek.",
+      "Oh so wonderfully enticing, but I don't dare.",
+      "(Instrumental)",
+      "High on tree branches birds sing inviting me to play in the spring garden.",
+      "Many close friends peek out calling me to romp around the yard.",
+      "Playing soccer, shuttlecock, jumping rope, marbles, and hide-and-seek.",
+      "Oh so wonderfully enticing, but I don't dare."
     ],
     "funFactVi": "Bé chăm chỉ học bài đầy đủ trước khi cùng bạn ra chơi.",
     "audioUrl": "/assets/music/hong-dam-dau.mp3",
@@ -6994,32 +6994,32 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 1.15,
         "end": 17.8,
         "vi": "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z",
-        "en": "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z"
+        "en": "A B C D E F G H I J K L M N O P Q R S T U V W X Y và Z"
       },
       {
         "start": 17.85,
         "end": 26.5,
         "vi": "Now you know your ABCs, next time won't you sing with me?",
-        "en": "Now you know your ABCs, next time won't you sing with me?"
+        "en": "Bây giờ bạn đã biết bảng chữ cái ABC rồi, lần tới hãy cùng hát với tôi nhé!"
       },
       {
         "start": 35.25,
         "end": 51.6,
         "vi": "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z",
-        "en": "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z"
+        "en": "A B C D E F G H I J K L M N O P Q R S T U V W X Y và Z"
       },
       {
         "start": 51.85,
         "end": 60.6,
         "vi": "Now you know your ABCs, next time won't you sing with me?",
-        "en": "Now you know your ABCs, next time won't you sing with me?"
+        "en": "Bây giờ bạn đã biết bảng chữ cái ABC rồi, lần tới hãy cùng hát với tôi nhé!"
       }
     ],
     "englishTranslation": [
-      "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z",
-      "Now you know your ABCs, next time won't you sing with me?",
-      "A B C D E F G H I J K L M N O P Q R S T U V W X Y and Z",
-      "Now you know your ABCs, next time won't you sing with me?"
+      "A B C D E F G H I J K L M N O P Q R S T U V W X Y và Z",
+      "Bây giờ bạn đã biết bảng chữ cái ABC rồi, lần tới hãy cùng hát với tôi nhé!",
+      "A B C D E F G H I J K L M N O P Q R S T U V W X Y và Z",
+      "Bây giờ bạn đã biết bảng chữ cái ABC rồi, lần tới hãy cùng hát với tôi nhé!"
     ],
     "funFactVi": "Bài ca kinh điển giúp bé ghi nhớ trọn vẹn 26 chữ cái.",
     "audioUrl": "/assets/music/abc-alphabet-song.mp3",
@@ -7105,68 +7105,68 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Catch a falling star and put it in your pocket save it for a rainy day",
       "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky",
       "Twinkle twinkle little star how I wonder what you are",
-      "Catch a falling star and put it in your pocket and never let it fade away\nCatch a falling star and put it in your pocket save it for a rainy day\nCatch a falling star and put it in your pocket save it for a rainy day",
-      "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky\nTwinkle twinkle little star how I wonder what you are and oh how wonderful you are"
+      "Catch a falling star and put it in your pocket and never let it fade away. Catch a falling star and put it in your pocket save it for a rainy day.",
+      "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky. Twinkle twinkle little star how I wonder what you are and oh how wonderful you are"
     ],
     "lyricsData": [
       {
         "start": 8.35,
         "end": 12.7,
         "vi": "Reach way up into the sky",
-        "en": "Reach way up into the sky"
+        "en": "Vươn cao tay lên tận bầu trời"
       },
       {
         "start": 12.55,
         "end": 20.9,
         "vi": "Catch a falling star and put it in your pocket and never let it fade away",
-        "en": "Catch a falling star and put it in your pocket and never let it fade away"
+        "en": "Hãy đón lấy ngôi sao băng bỏ vào túi và đừng để nó phai nhạt đi"
       },
       {
         "start": 20.75,
         "end": 31.7,
         "vi": "Catch a falling star and put it in your pocket never let it fade away",
-        "en": "Catch a falling star and put it in your pocket never let it fade away"
+        "en": "Hãy đón lấy ngôi sao băng bỏ vào túi đừng để nó phai nhạt đi"
       },
       {
         "start": 31.55,
         "end": 44.8,
         "vi": "Catch a falling star and put it in your pocket save it for a rainy day",
-        "en": "Catch a falling star and put it in your pocket save it for a rainy day"
+        "en": "Hãy đón lấy ngôi sao băng bỏ vào túi để dành cho những ngày mưa"
       },
       {
         "start": 44.65,
         "end": 66.6,
         "vi": "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky",
-        "en": "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky"
+        "en": "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là gì, ở tít trên cao thế giới, như viên kim cương trên trời"
       },
       {
         "start": 66.45,
         "end": 77.4,
         "vi": "Twinkle twinkle little star how I wonder what you are",
-        "en": "Twinkle twinkle little star how I wonder what you are"
+        "en": "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là gì"
       },
       {
         "start": 77.25,
         "end": 102.5,
-        "vi": "Catch a falling star and put it in your pocket and never let it fade away\nCatch a falling star and put it in your pocket save it for a rainy day\nCatch a falling star and put it in your pocket save it for a rainy day",
-        "en": "Catch a falling star and put it in your pocket and never let it fade away\nCatch a falling star and put it in your pocket save it for a rainy day\nCatch a falling star and put it in your pocket save it for a rainy day"
+        "vi": "Catch a falling star and put it in your pocket and never let it fade away. Catch a falling star and put it in your pocket save it for a rainy day.",
+        "en": "Đón lấy ngôi sao băng bỏ vào túi đừng để phai tàn, đón lấy ngôi sao băng bỏ vào túi để dành cho ngày mưa."
       },
       {
         "start": 102.35,
         "end": 146.0,
-        "vi": "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky\nTwinkle twinkle little star how I wonder what you are and oh how wonderful you are",
-        "en": "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky\nTwinkle twinkle little star how I wonder what you are and oh how wonderful you are"
+        "vi": "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky. Twinkle twinkle little star how I wonder what you are and oh how wonderful you are",
+        "en": "Lấp lánh ngôi sao nhỏ trên bầu trời cao như viên kim cương, lấp lánh ngôi sao nhỏ ôi bạn thật tuyệt vời biết bao"
       }
     ],
     "englishTranslation": [
-      "Reach way up into the sky",
-      "Catch a falling star and put it in your pocket and never let it fade away",
-      "Catch a falling star and put it in your pocket never let it fade away",
-      "Catch a falling star and put it in your pocket save it for a rainy day",
-      "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky",
-      "Twinkle twinkle little star how I wonder what you are",
-      "Catch a falling star and put it in your pocket and never let it fade away\nCatch a falling star and put it in your pocket save it for a rainy day\nCatch a falling star and put it in your pocket save it for a rainy day",
-      "Twinkle twinkle little star how I wonder what you are up above the world so high like a diamond in the sky\nTwinkle twinkle little star how I wonder what you are and oh how wonderful you are"
+      "Vươn cao tay lên tận bầu trời",
+      "Hãy đón lấy ngôi sao băng bỏ vào túi và đừng để nó phai nhạt đi",
+      "Hãy đón lấy ngôi sao băng bỏ vào túi đừng để nó phai nhạt đi",
+      "Hãy đón lấy ngôi sao băng bỏ vào túi để dành cho những ngày mưa",
+      "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là gì, ở tít trên cao thế giới, như viên kim cương trên trời",
+      "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là gì",
+      "Đón lấy ngôi sao băng bỏ vào túi đừng để phai tàn, đón lấy ngôi sao băng bỏ vào túi để dành cho ngày mưa.",
+      "Lấp lánh ngôi sao nhỏ trên bầu trời cao như viên kim cương, lấp lánh ngôi sao nhỏ ôi bạn thật tuyệt vời biết bao"
     ],
     "funFactVi": "Ngôi sao nhỏ soi sáng màn đêm khơi gợi trí tò mò của bé.",
     "audioUrl": "/assets/music/twinkle-twinkle-little-star.mp3",
@@ -7246,82 +7246,82 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 207,
     "melodyStyle": "playful",
     "lyrics": [
-      "...",
-      "...",
-      "...",
+      "(Nhạc dạo)",
+      "(Nhạc dạo)",
+      "(Nhạc dạo)",
       "Old MacDonald had a farm, E-I-E-I-O",
       "And on his farm he had a cow, E-I-E-I-O, With a moo-moo here and a moo-moo there, Here a moo, there a moo, everywhere a moo-moo, Old MacDonald had a farm, E-I-E-I-O",
       "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a duck, E-I-E-I-O, With a quack-quack here and a quack-quack there, Here a quack, there a quack, everywhere a quack-quack, Old MacDonald had a farm, E-I-E-I-O",
       "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had some sheep, E-I-E-I-O, With a baa-baa here and a baa-baa there, Here a baa, there a baa, everywhere a baa-baa, Old MacDonald had a farm, E-I-E-I-O",
       "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a pig, E-I-E-I-O, With an oink-oink here and an oink-oink there, Here an oink, there an oink, everywhere an oink-oink, Old MacDonald had a farm, E-I-E-I-O",
-      "And on his farm he had an elephant. An elephant? Yeah, an elephant. It was a peanut farm! E-I-E-I-O"
+      "And on his farm he had an elephant. An elephant? Yes, an elephant! With an elephant sound here and there, Old MacDonald had a farm, E-I-E-I-O"
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 4.5,
-        "vi": "...",
-        "en": "..."
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 4.35,
         "end": 20.0,
-        "vi": "...",
-        "en": "..."
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 19.85,
         "end": 34.9,
-        "vi": "...",
-        "en": "..."
+        "vi": "(Nhạc dạo)",
+        "en": "(Instrumental)"
       },
       {
         "start": 34.75,
         "end": 55.7,
         "vi": "Old MacDonald had a farm, E-I-E-I-O",
-        "en": "Old MacDonald had a farm, E-I-E-I-O"
+        "en": "Bác MacDonald có một trang trại, E-I-E-I-O"
       },
       {
         "start": 55.55,
         "end": 77.6,
         "vi": "And on his farm he had a cow, E-I-E-I-O, With a moo-moo here and a moo-moo there, Here a moo, there a moo, everywhere a moo-moo, Old MacDonald had a farm, E-I-E-I-O",
-        "en": "And on his farm he had a cow, E-I-E-I-O, With a moo-moo here and a moo-moo there, Here a moo, there a moo, everywhere a moo-moo, Old MacDonald had a farm, E-I-E-I-O"
+        "en": "Và trong trang trại bác có một chú bò, tiếng kêu ùm bò nơi nơi"
       },
       {
         "start": 77.45,
         "end": 106.0,
         "vi": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a duck, E-I-E-I-O, With a quack-quack here and a quack-quack there, Here a quack, there a quack, everywhere a quack-quack, Old MacDonald had a farm, E-I-E-I-O",
-        "en": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a duck, E-I-E-I-O, With a quack-quack here and a quack-quack there, Here a quack, there a quack, everywhere a quack-quack, Old MacDonald had a farm, E-I-E-I-O"
+        "en": "Trong trang trại bác có một chú vịt, tiếng kêu cạp cạp rộn ràng"
       },
       {
         "start": 105.85,
         "end": 132.1,
         "vi": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had some sheep, E-I-E-I-O, With a baa-baa here and a baa-baa there, Here a baa, there a baa, everywhere a baa-baa, Old MacDonald had a farm, E-I-E-I-O",
-        "en": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had some sheep, E-I-E-I-O, With a baa-baa here and a baa-baa there, Here a baa, there a baa, everywhere a baa-baa, Old MacDonald had a farm, E-I-E-I-O"
+        "en": "Trong trang trại bác có những chú cừu, tiếng be be khắp chốn"
       },
       {
         "start": 131.95,
         "end": 162.1,
         "vi": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a pig, E-I-E-I-O, With an oink-oink here and an oink-oink there, Here an oink, there an oink, everywhere an oink-oink, Old MacDonald had a farm, E-I-E-I-O",
-        "en": "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a pig, E-I-E-I-O, With an oink-oink here and an oink-oink there, Here an oink, there an oink, everywhere an oink-oink, Old MacDonald had a farm, E-I-E-I-O"
+        "en": "Trong trang trại bác có một chú lợn, tiếng ủn ỉn vui tai"
       },
       {
         "start": 161.95,
         "end": 206.0,
-        "vi": "And on his farm he had an elephant. An elephant? Yeah, an elephant. It was a peanut farm! E-I-E-I-O",
-        "en": "And on his farm he had an elephant. An elephant? Yeah, an elephant. It was a peanut farm! E-I-E-I-O"
+        "vi": "And on his farm he had an elephant. An elephant? Yes, an elephant! With an elephant sound here and there, Old MacDonald had a farm, E-I-E-I-O",
+        "en": "Và trong trang trại bác có cả một chú voi to lớn, E-I-E-I-O"
       }
     ],
     "englishTranslation": [
-      "...",
-      "...",
-      "...",
-      "Old MacDonald had a farm, E-I-E-I-O",
-      "And on his farm he had a cow, E-I-E-I-O, With a moo-moo here and a moo-moo there, Here a moo, there a moo, everywhere a moo-moo, Old MacDonald had a farm, E-I-E-I-O",
-      "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a duck, E-I-E-I-O, With a quack-quack here and a quack-quack there, Here a quack, there a quack, everywhere a quack-quack, Old MacDonald had a farm, E-I-E-I-O",
-      "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had some sheep, E-I-E-I-O, With a baa-baa here and a baa-baa there, Here a baa, there a baa, everywhere a baa-baa, Old MacDonald had a farm, E-I-E-I-O",
-      "Old MacDonald had a farm, E-I-E-I-O, And on his farm he had a pig, E-I-E-I-O, With an oink-oink here and an oink-oink there, Here an oink, there an oink, everywhere an oink-oink, Old MacDonald had a farm, E-I-E-I-O",
-      "And on his farm he had an elephant. An elephant? Yeah, an elephant. It was a peanut farm! E-I-E-I-O"
+      "(Instrumental)",
+      "(Instrumental)",
+      "(Instrumental)",
+      "Bác MacDonald có một trang trại, E-I-E-I-O",
+      "Và trong trang trại bác có một chú bò, tiếng kêu ùm bò nơi nơi",
+      "Trong trang trại bác có một chú vịt, tiếng kêu cạp cạp rộn ràng",
+      "Trong trang trại bác có những chú cừu, tiếng be be khắp chốn",
+      "Trong trang trại bác có một chú lợn, tiếng ủn ỉn vui tai",
+      "Và trong trang trại bác có cả một chú voi to lớn, E-I-E-I-O"
     ],
     "funFactVi": "Làm quen tên gọi và tiếng kêu các loài động vật nông trại.",
     "audioUrl": "/assets/music/old-macdonald-had-a-farm.mp3",
@@ -7393,11 +7393,11 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 233,
     "melodyStyle": "cheerful",
     "lyrics": [
-      "the wheels on the bus go round and round, round and round, round and round",
-      "the wheels on the bus go round and round all through town",
-      "We've better wait for the music.",
+      "The wheels on the bus go round and round, round and round, round and round.",
+      "The wheels on the bus go round and round, all through the town.",
+      "We'd better wait for the music.",
       "Listen, everybody, here comes the bus.",
-      "The wheels on the bus go round and round, round and round, round and round",
+      "The wheels on the bus go round and round, round and round, round and round.",
       "The wheels on the bus go round and round, all through the town.",
       "The door on the bus goes open and shut, open and shut, open and shut, the door on the bus goes open and shut, all through the town.",
       "The money on the bus goes clink clink clink, clink clink clink, clink clink clink, the money on the bus goes clink clink clink, all through the town.",
@@ -7416,7 +7416,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "I see a puppy! Doggie's on the bus go woof woof woof, woof woof woof, doggie's on the bus go woof woof woof, all through the town.",
       "Is your favorite animal riding on this bus today?",
       "Good, let's sing about it.",
-      "Here we go. The [music] on the bus goes [music] the on the bus goes all through the town.",
+      "Here we go. The wheels on the bus go all through the town.",
       "Oh, oh, this bus is starting to go pretty fast.",
       "Hold on, here we go.",
       "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round,",
@@ -7426,201 +7426,201 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       {
         "start": 0.0,
         "end": 8.5,
-        "vi": "the wheels on the bus go round and round, round and round, round and round",
-        "en": "the wheels on the bus go round and round, round and round, round and round"
+        "vi": "The wheels on the bus go round and round, round and round, round and round.",
+        "en": "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn."
       },
       {
         "start": 8.5,
         "end": 9.6,
-        "vi": "the wheels on the bus go round and round all through town",
-        "en": "the wheels on the bus go round and round all through town"
+        "vi": "The wheels on the bus go round and round, all through the town.",
+        "en": "Bánh xe buýt quay tròn tròn đi khắp phố phường."
       },
       {
         "start": 9.85,
         "end": 11.8,
-        "vi": "We've better wait for the music.",
-        "en": "We've better wait for the music."
+        "vi": "We'd better wait for the music.",
+        "en": "Chúng ta hãy chờ nhạc một chút nào."
       },
       {
         "start": 12.15,
         "end": 14.6,
         "vi": "Listen, everybody, here comes the bus.",
-        "en": "Listen, everybody, here comes the bus."
+        "en": "Mọi người hãy lắng nghe xem, xe buýt đang tới rồi."
       },
       {
         "start": 19.25,
         "end": 24.0,
-        "vi": "The wheels on the bus go round and round, round and round, round and round",
-        "en": "The wheels on the bus go round and round, round and round, round and round"
+        "vi": "The wheels on the bus go round and round, round and round, round and round.",
+        "en": "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn."
       },
       {
         "start": 23.95,
         "end": 29.3,
         "vi": "The wheels on the bus go round and round, all through the town.",
-        "en": "The wheels on the bus go round and round, all through the town."
+        "en": "Bánh xe buýt quay tròn tròn đi khắp phố phường."
       },
       {
         "start": 33.25,
         "end": 43.9,
         "vi": "The door on the bus goes open and shut, open and shut, open and shut, the door on the bus goes open and shut, all through the town.",
-        "en": "The door on the bus goes open and shut, open and shut, open and shut, the door on the bus goes open and shut, all through the town."
+        "en": "Cửa xe buýt mở ra rồi đóng vào đi khắp phố phường."
       },
       {
         "start": 47.65,
         "end": 58.2,
         "vi": "The money on the bus goes clink clink clink, clink clink clink, clink clink clink, the money on the bus goes clink clink clink, all through the town.",
-        "en": "The money on the bus goes clink clink clink, clink clink clink, clink clink clink, the money on the bus goes clink clink clink, all through the town."
+        "en": "Tiền xu trên xe kêu leng keng keng đi khắp phố phường."
       },
       {
         "start": 61.95,
         "end": 72.3,
         "vi": "The horn on the bus goes beep beep beep, beep beep beep, beep beep beep, the horn on the bus goes beep beep beep, all through the town.",
-        "en": "The horn on the bus goes beep beep beep, beep beep beep, beep beep beep, the horn on the bus goes beep beep beep, all through the town."
+        "en": "Còi xe buýt kêu bíp bíp bíp vang khắp phố phường."
       },
       {
         "start": 76.65,
         "end": 86.9,
         "vi": "The wipers on the bus go whoosh, whoosh, whoosh, the wipers on the bus go whoosh, whoosh, whoosh, all through the town.",
-        "en": "The wipers on the bus go whoosh, whoosh, whoosh, the wipers on the bus go whoosh, whoosh, whoosh, all through the town."
+        "en": "Cần gạt nước trên xe kêu roẹt roẹt roẹt khắp phố phường."
       },
       {
         "start": 87.95,
         "end": 91.9,
         "vi": "I see that old driver.",
-        "en": "I see that old driver."
+        "en": "Tôi nhìn thấy bác tài xế kìa."
       },
       {
         "start": 91.85,
         "end": 101.3,
         "vi": "The driver on the bus says move on back, move on back, move on back, the driver on the bus says move on back, all through the town.",
-        "en": "The driver on the bus says move on back, move on back, move on back, the driver on the bus says move on back, all through the town."
+        "en": "Bác tài xế trên xe bảo xin mời lùi về sau đi khắp phố phường."
       },
       {
         "start": 105.15,
         "end": 115.7,
         "vi": "The windows on the bus go up and down, up and down, up and down, the windows on the bus go up and down, all through the town.",
-        "en": "The windows on the bus go up and down, up and down, up and down, the windows on the bus go up and down, all through the town."
+        "en": "Cửa sổ trên xe kéo lên kéo xuống đi khắp phố phường."
       },
       {
         "start": 116.85,
         "end": 119.8,
         "vi": "Who else is on this bus? Oh, I see some people.",
-        "en": "Who else is on this bus? Oh, I see some people."
+        "en": "Còn ai trên xe buýt nữa nhỉ? Ồ, tôi thấy hành khách kìa."
       },
       {
         "start": 119.75,
         "end": 130.0,
         "vi": "People on the bus go bumpety bump, bumpety bump, bumpety bump, the people on the bus go bumpety bump, all through the town.",
-        "en": "People on the bus go bumpety bump, bumpety bump, bumpety bump, the people on the bus go bumpety bump, all through the town."
+        "en": "Hành khách trên xe nhấp nhô nhấp nhô đi khắp phố phường."
       },
       {
         "start": 132.55,
         "end": 144.0,
         "vi": "There the babies are. The babies on the bus go wail, wail, wail, wail, wail, wail, the babies on the bus go wail, wail, wail, all through the town.",
-        "en": "There the babies are. The babies on the bus go wail, wail, wail, wail, wail, wail, the babies on the bus go wail, wail, wail, all through the town."
+        "en": "Các em bé trên xe khóc oa oa oa khắp phố phường."
       },
       {
         "start": 147.95,
         "end": 159.1,
         "vi": "So the grown-ups on the bus say I love you, I love you. Yes, I do. The grown-ups on the bus say I love you, all through the town.",
-        "en": "So the grown-ups on the bus say I love you, I love you. Yes, I do. The grown-ups on the bus say I love you, all through the town."
+        "en": "Người lớn trên xe dỗ dành yêu thương bé khắp phố phường."
       },
       {
         "start": 162.35,
         "end": 167.3,
         "vi": "Let's look around. Who else is on this bus today? Oh, I see some kitties.",
-        "en": "Let's look around. Who else is on this bus today? Oh, I see some kitties."
+        "en": "Hãy nhìn quanh xem hôm nay còn ai trên xe nữa? Ồ, những chú mèo con."
       },
       {
         "start": 167.55,
         "end": 178.5,
         "vi": "The kitties on the bus go meow meow meow, meow meow meow, the kitties on the bus go meow meow meow, all through the town.",
-        "en": "The kitties on the bus go meow meow meow, meow meow meow, the kitties on the bus go meow meow meow, all through the town."
+        "en": "Mèo con trên xe kêu meo meo meo đi khắp phố phường."
       },
       {
         "start": 179.65,
         "end": 182.1,
         "vi": "Who else is on this bus? A doggie!",
-        "en": "Who else is on this bus? A doggie!"
+        "en": "Còn ai trên xe nữa? Một chú cún con!"
       },
       {
         "start": 182.05,
         "end": 192.9,
         "vi": "I see a puppy! Doggie's on the bus go woof woof woof, woof woof woof, doggie's on the bus go woof woof woof, all through the town.",
-        "en": "I see a puppy! Doggie's on the bus go woof woof woof, woof woof woof, doggie's on the bus go woof woof woof, all through the town."
+        "en": "Cún con trên xe sủa gâu gâu gâu đi khắp phố phường."
       },
       {
         "start": 194.15,
         "end": 196.8,
         "vi": "Is your favorite animal riding on this bus today?",
-        "en": "Is your favorite animal riding on this bus today?"
+        "en": "Động vật yêu thích của bạn có đi xe buýt hôm nay không?"
       },
       {
         "start": 197.25,
         "end": 199.4,
         "vi": "Good, let's sing about it.",
-        "en": "Good, let's sing about it."
+        "en": "Tuyệt lắm, hãy cùng hát lên nào."
       },
       {
         "start": 199.65,
         "end": 211.9,
-        "vi": "Here we go. The [music] on the bus goes [music] the on the bus goes all through the town.",
-        "en": "Here we go. The [music] on the bus goes [music] the on the bus goes all through the town."
+        "vi": "Here we go. The wheels on the bus go all through the town.",
+        "en": "Bắt đầu nào, xe buýt chạy bon bon khắp phố phường."
       },
       {
         "start": 213.25,
         "end": 217.3,
         "vi": "Oh, oh, this bus is starting to go pretty fast.",
-        "en": "Oh, oh, this bus is starting to go pretty fast."
+        "en": "Ồ, xe buýt bắt đầu chạy khá nhanh rồi đấy."
       },
       {
         "start": 217.25,
         "end": 218.2,
         "vi": "Hold on, here we go.",
-        "en": "Hold on, here we go."
+        "en": "Bám chắc vào nhé, đi thôi."
       },
       {
         "start": 218.25,
         "end": 225.3,
         "vi": "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round,",
-        "en": "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round,"
+        "en": "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn, bánh xe buýt quay tròn,"
       },
       {
         "start": 225.25,
         "end": 230.1,
         "vi": "all through the town, all through the town.",
-        "en": "all through the town, all through the town."
+        "en": "đi khắp phố phường, đi khắp phố phường."
       }
     ],
     "englishTranslation": [
-      "the wheels on the bus go round and round, round and round, round and round",
-      "the wheels on the bus go round and round all through town",
-      "We've better wait for the music.",
-      "Listen, everybody, here comes the bus.",
-      "The wheels on the bus go round and round, round and round, round and round",
-      "The wheels on the bus go round and round, all through the town.",
-      "The door on the bus goes open and shut, open and shut, open and shut, the door on the bus goes open and shut, all through the town.",
-      "The money on the bus goes clink clink clink, clink clink clink, clink clink clink, the money on the bus goes clink clink clink, all through the town.",
-      "The horn on the bus goes beep beep beep, beep beep beep, beep beep beep, the horn on the bus goes beep beep beep, all through the town.",
-      "The wipers on the bus go whoosh, whoosh, whoosh, the wipers on the bus go whoosh, whoosh, whoosh, all through the town.",
-      "I see that old driver.",
-      "The driver on the bus says move on back, move on back, move on back, the driver on the bus says move on back, all through the town.",
-      "The windows on the bus go up and down, up and down, up and down, the windows on the bus go up and down, all through the town.",
-      "Who else is on this bus? Oh, I see some people.",
-      "People on the bus go bumpety bump, bumpety bump, bumpety bump, the people on the bus go bumpety bump, all through the town.",
-      "There the babies are. The babies on the bus go wail, wail, wail, wail, wail, wail, the babies on the bus go wail, wail, wail, all through the town.",
-      "So the grown-ups on the bus say I love you, I love you. Yes, I do. The grown-ups on the bus say I love you, all through the town.",
-      "Let's look around. Who else is on this bus today? Oh, I see some kitties.",
-      "The kitties on the bus go meow meow meow, meow meow meow, the kitties on the bus go meow meow meow, all through the town.",
-      "Who else is on this bus? A doggie!",
-      "I see a puppy! Doggie's on the bus go woof woof woof, woof woof woof, doggie's on the bus go woof woof woof, all through the town.",
-      "Is your favorite animal riding on this bus today?",
-      "Good, let's sing about it.",
-      "Here we go. The [music] on the bus goes [music] the on the bus goes all through the town.",
-      "Oh, oh, this bus is starting to go pretty fast.",
-      "Hold on, here we go.",
-      "The wheels on the bus go round and round, round and round, round and round, the wheels on the bus go round and round,",
-      "all through the town, all through the town."
+      "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn.",
+      "Bánh xe buýt quay tròn tròn đi khắp phố phường.",
+      "Chúng ta hãy chờ nhạc một chút nào.",
+      "Mọi người hãy lắng nghe xem, xe buýt đang tới rồi.",
+      "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn.",
+      "Bánh xe buýt quay tròn tròn đi khắp phố phường.",
+      "Cửa xe buýt mở ra rồi đóng vào đi khắp phố phường.",
+      "Tiền xu trên xe kêu leng keng keng đi khắp phố phường.",
+      "Còi xe buýt kêu bíp bíp bíp vang khắp phố phường.",
+      "Cần gạt nước trên xe kêu roẹt roẹt roẹt khắp phố phường.",
+      "Tôi nhìn thấy bác tài xế kìa.",
+      "Bác tài xế trên xe bảo xin mời lùi về sau đi khắp phố phường.",
+      "Cửa sổ trên xe kéo lên kéo xuống đi khắp phố phường.",
+      "Còn ai trên xe buýt nữa nhỉ? Ồ, tôi thấy hành khách kìa.",
+      "Hành khách trên xe nhấp nhô nhấp nhô đi khắp phố phường.",
+      "Các em bé trên xe khóc oa oa oa khắp phố phường.",
+      "Người lớn trên xe dỗ dành yêu thương bé khắp phố phường.",
+      "Hãy nhìn quanh xem hôm nay còn ai trên xe nữa? Ồ, những chú mèo con.",
+      "Mèo con trên xe kêu meo meo meo đi khắp phố phường.",
+      "Còn ai trên xe nữa? Một chú cún con!",
+      "Cún con trên xe sủa gâu gâu gâu đi khắp phố phường.",
+      "Động vật yêu thích của bạn có đi xe buýt hôm nay không?",
+      "Tuyệt lắm, hãy cùng hát lên nào.",
+      "Bắt đầu nào, xe buýt chạy bon bon khắp phố phường.",
+      "Ồ, xe buýt bắt đầu chạy khá nhanh rồi đấy.",
+      "Bám chắc vào nhé, đi thôi.",
+      "Bánh xe buýt quay tròn tròn, tròn tròn, tròn tròn, bánh xe buýt quay tròn,",
+      "đi khắp phố phường, đi khắp phố phường."
     ],
     "funFactVi": "Nhịp điệu sôi động mô phỏng chuyến xe buýt vui vẻ đến trường.",
     "audioUrl": "/assets/music/the-wheels-on-the-bus.mp3",
@@ -7714,116 +7714,116 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 0.0,
         "end": 3.9,
         "vi": "Baa, baa, pink sheep, have you any wool?",
-        "en": "Baa, baa, pink sheep, have you any wool?"
+        "en": "Be be, cừu hồng ơi, bạn có lông cừu không?"
       },
       {
         "start": 3.75,
         "end": 6.9,
         "vi": "No, it's not pink, sheep.",
-        "en": "No, it's not pink, sheep."
+        "en": "Không, không phải cừu hồng đâu."
       },
       {
         "start": 6.75,
         "end": 8.5,
         "vi": "It's not pink?",
-        "en": "It's not pink?"
+        "en": "Không phải màu hồng ư?"
       },
       {
         "start": 8.35,
         "end": 10.8,
         "vi": "No. Oh, okay.",
-        "en": "No. Oh, okay."
+        "en": "Không phải. Ồ, được rồi."
       },
       {
         "start": 10.65,
         "end": 15.1,
         "vi": "Baa, baa, yellow sheep, have you any wool?",
-        "en": "Baa, baa, yellow sheep, have you any wool?"
+        "en": "Be be, cừu vàng ơi, bạn có lông cừu không?"
       },
       {
         "start": 14.95,
         "end": 16.8,
         "vi": "Did I mess up again?",
-        "en": "Did I mess up again?"
+        "en": "Mình lại nhầm nữa rồi à?"
       },
       {
         "start": 16.65,
         "end": 20.9,
         "vi": "It's not yellow. It's black or white.",
-        "en": "It's not yellow. It's black or white."
+        "en": "Không phải màu vàng. Là cừu đen hoặc cừu trắng."
       },
       {
         "start": 20.75,
         "end": 22.0,
         "vi": "Oh.",
-        "en": "Oh."
+        "en": "Ồ."
       },
       {
         "start": 21.85,
         "end": 31.9,
         "vi": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-        "en": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full."
+        "en": "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn."
       },
       {
         "start": 31.75,
         "end": 36.5,
         "vi": "One for my master, one for my dame.",
-        "en": "One for my master, one for my dame."
+        "en": "Một túi cho ông chủ, một túi cho bà chủ."
       },
       {
         "start": 36.35,
         "end": 41.2,
         "vi": "One for the boy and girl that live down the lane.",
-        "en": "One for the boy and girl that live down the lane."
+        "en": "Một túi cho cậu bé và cô bé sống dưới con đường kia."
       },
       {
         "start": 41.05,
         "end": 50.1,
         "vi": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-        "en": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full."
+        "en": "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn."
       },
       {
         "start": 63.25,
         "end": 72.3,
         "vi": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-        "en": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full."
+        "en": "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn."
       },
       {
         "start": 72.15,
         "end": 77.0,
         "vi": "One for my master, one for my dame.",
-        "en": "One for my master, one for my dame."
+        "en": "Một túi cho ông chủ, một túi cho bà chủ."
       },
       {
         "start": 76.85,
         "end": 81.8,
         "vi": "One for the boy and girl that live down the lane.",
-        "en": "One for the boy and girl that live down the lane."
+        "en": "Một túi cho cậu bé và cô bé sống dưới con đường kia."
       },
       {
         "start": 81.65,
         "end": 96.9,
         "vi": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full. Yes, sir, yes, sir, three bags full.",
-        "en": "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full. Yes, sir, yes, sir, three bags full."
+        "en": "Cừu đen ơi có lông cừu không? Vâng ạ, vâng ạ, đầy ba túi lớn."
       }
     ],
     "englishTranslation": [
-      "Baa, baa, pink sheep, have you any wool?",
-      "No, it's not pink, sheep.",
-      "It's not pink?",
-      "No. Oh, okay.",
-      "Baa, baa, yellow sheep, have you any wool?",
-      "Did I mess up again?",
-      "It's not yellow. It's black or white.",
-      "Oh.",
-      "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-      "One for my master, one for my dame.",
-      "One for the boy and girl that live down the lane.",
-      "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-      "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full.",
-      "One for my master, one for my dame.",
-      "One for the boy and girl that live down the lane.",
-      "Baa, baa, black sheep, have you any wool? Yes, sir, yes, sir, three bags full. Yes, sir, yes, sir, three bags full."
+      "Be be, cừu hồng ơi, bạn có lông cừu không?",
+      "Không, không phải cừu hồng đâu.",
+      "Không phải màu hồng ư?",
+      "Không phải. Ồ, được rồi.",
+      "Be be, cừu vàng ơi, bạn có lông cừu không?",
+      "Mình lại nhầm nữa rồi à?",
+      "Không phải màu vàng. Là cừu đen hoặc cừu trắng.",
+      "Ồ.",
+      "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn.",
+      "Một túi cho ông chủ, một túi cho bà chủ.",
+      "Một túi cho cậu bé và cô bé sống dưới con đường kia.",
+      "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn.",
+      "Cừu đen ơi có lông cừu không? Có chứ, có chứ, đầy ba túi lớn.",
+      "Một túi cho ông chủ, một túi cho bà chủ.",
+      "Một túi cho cậu bé và cô bé sống dưới con đường kia.",
+      "Cừu đen ơi có lông cừu không? Vâng ạ, vâng ạ, đầy ba túi lớn."
     ],
     "funFactVi": "Bài học chia sẻ len ấm áp cho mọi người xung quanh.",
     "audioUrl": "/assets/music/baa-baa-black-sheep.mp3",
@@ -7915,186 +7915,186 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 1.55,
         "end": 4.5,
         "vi": "If you're happy and you know it, clap your hands",
-        "en": "If you're happy and you know it, clap your hands"
+        "en": "Nếu bạn vui và biết điều đó, hãy vỗ tay nào"
       },
       {
         "start": 4.95,
         "end": 7.7,
         "vi": "If you're happy and you know it, clap your hands",
-        "en": "If you're happy and you know it, clap your hands"
+        "en": "Nếu bạn vui và biết điều đó, hãy vỗ tay nào"
       },
       {
         "start": 8.15,
         "end": 14.3,
         "vi": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, clap your hands",
-        "en": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, clap your hands"
+        "en": "Nếu bạn vui khuôn mặt bạn sẽ rạng rỡ, hãy vỗ tay nào"
       },
       {
         "start": 15.15,
         "end": 17.9,
         "vi": "If you're happy and you know it, pat your knees",
-        "en": "If you're happy and you know it, pat your knees"
+        "en": "Nếu bạn vui và biết điều đó, hãy vỗ nhẹ đầu gối"
       },
       {
         "start": 18.35,
         "end": 21.3,
         "vi": "If you're happy and you know it, pat your knees",
-        "en": "If you're happy and you know it, pat your knees"
+        "en": "Nếu bạn vui và biết điều đó, hãy vỗ nhẹ đầu gối"
       },
       {
         "start": 21.65,
         "end": 28.1,
         "vi": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, pat your knees",
-        "en": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, pat your knees"
+        "en": "Nếu bạn vui khuôn mặt bạn sẽ rạng rỡ, hãy vỗ nhẹ đầu gối"
       },
       {
         "start": 28.65,
         "end": 29.8,
         "vi": "clap your hands",
-        "en": "clap your hands"
+        "en": "vỗ tay nào"
       },
       {
         "start": 29.75,
         "end": 32.7,
         "vi": "If you're mad and you know it, stomp your feet",
-        "en": "If you're mad and you know it, stomp your feet"
+        "en": "Nếu bạn bực bội và nhận ra điều đó, hãy giậm chân"
       },
       {
         "start": 33.15,
         "end": 36.1,
         "vi": "If you're mad and you know it, stomp your feet",
-        "en": "If you're mad and you know it, stomp your feet"
+        "en": "Nếu bạn bực bội và nhận ra điều đó, hãy giậm chân"
       },
       {
         "start": 36.45,
         "end": 43.3,
         "vi": "If you're mad and you know it, your face will surely show it. If you're mad and you know it, stomp your feet",
-        "en": "If you're mad and you know it, your face will surely show it. If you're mad and you know it, stomp your feet"
+        "en": "Khuôn mặt bạn sẽ thể hiện ra, hãy giậm chân"
       },
       {
         "start": 43.55,
         "end": 44.7,
         "vi": "pat your knees",
-        "en": "pat your knees"
+        "en": "vỗ nhẹ đầu gối"
       },
       {
         "start": 44.55,
         "end": 46.4,
         "vi": "clap your hands",
-        "en": "clap your hands"
+        "en": "vỗ tay nào"
       },
       {
         "start": 47.15,
         "end": 50.0,
         "vi": "If you're happy and you know it, beep your nose, beep beep",
-        "en": "If you're happy and you know it, beep your nose, beep beep"
+        "en": "Nếu bạn vui và biết điều đó, hãy bóp mũi kêu bíp bíp"
       },
       {
         "start": 50.35,
         "end": 53.4,
         "vi": "If you're happy and you know it, beep your nose, beep beep",
-        "en": "If you're happy and you know it, beep your nose, beep beep"
+        "en": "Nếu bạn vui và biết điều đó, hãy bóp mũi kêu bíp bíp"
       },
       {
         "start": 53.75,
         "end": 60.6,
         "vi": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, beep your nose, beep beep",
-        "en": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, beep your nose, beep beep"
+        "en": "Nếu bạn vui hãy bóp mũi kêu bíp bíp"
       },
       {
         "start": 60.55,
         "end": 62.5,
         "vi": "stomp your feet, stomp stomp",
-        "en": "stomp your feet, stomp stomp"
+        "en": "giậm chân nào, rầm rầm"
       },
       {
         "start": 62.35,
         "end": 63.9,
         "vi": "pat your knees, pat pat",
-        "en": "pat your knees, pat pat"
+        "en": "vỗ đầu gối, bộp bộp"
       },
       {
         "start": 63.75,
         "end": 65.5,
         "vi": "clap your hands",
-        "en": "clap your hands"
+        "en": "vỗ tay nào"
       },
       {
         "start": 65.85,
         "end": 72.3,
         "vi": "If you're happy and you know it, shout hooray, hooray!",
-        "en": "If you're happy and you know it, shout hooray, hooray!"
+        "en": "Nếu bạn vui và biết điều đó, hãy hô to hoan hô!"
       },
       {
         "start": 72.25,
         "end": 78.9,
         "vi": "If you're happy and you know it, shout hooray, hooray!",
-        "en": "If you're happy and you know it, shout hooray, hooray!"
+        "en": "Nếu bạn vui và biết điều đó, hãy hô to hoan hô!"
       },
       {
         "start": 78.9,
         "end": 79.0,
         "vi": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, shout hooray, hooray!",
-        "en": "If you're happy and you know it, your face will surely show it. If you're happy and you know it, shout hooray, hooray!"
+        "en": "Nếu bạn vui hãy hô to hoan hô, hoan hô!"
       },
       {
         "start": 79.25,
         "end": 81.0,
         "vi": "beep your nose, beep beep",
-        "en": "beep your nose, beep beep"
+        "en": "bóp mũi bíp bíp"
       },
       {
         "start": 80.85,
         "end": 82.5,
         "vi": "stomp your feet, stomp stomp",
-        "en": "stomp your feet, stomp stomp"
+        "en": "giậm chân rầm rầm"
       },
       {
         "start": 82.35,
         "end": 83.9,
         "vi": "pat your knees",
-        "en": "pat your knees"
+        "en": "vỗ nhẹ đầu gối"
       },
       {
         "start": 83.75,
         "end": 85.8,
         "vi": "clap your hands",
-        "en": "clap your hands"
+        "en": "vỗ tay nào"
       },
       {
         "start": 85.95,
         "end": 87.7,
         "vi": "shout hooray, hooray!",
-        "en": "shout hooray, hooray!"
+        "en": "hô vang hoan hô!"
       }
     ],
     "englishTranslation": [
-      "If you're happy and you know it, clap your hands",
-      "If you're happy and you know it, clap your hands",
-      "If you're happy and you know it, your face will surely show it. If you're happy and you know it, clap your hands",
-      "If you're happy and you know it, pat your knees",
-      "If you're happy and you know it, pat your knees",
-      "If you're happy and you know it, your face will surely show it. If you're happy and you know it, pat your knees",
-      "clap your hands",
-      "If you're mad and you know it, stomp your feet",
-      "If you're mad and you know it, stomp your feet",
-      "If you're mad and you know it, your face will surely show it. If you're mad and you know it, stomp your feet",
-      "pat your knees",
-      "clap your hands",
-      "If you're happy and you know it, beep your nose, beep beep",
-      "If you're happy and you know it, beep your nose, beep beep",
-      "If you're happy and you know it, your face will surely show it. If you're happy and you know it, beep your nose, beep beep",
-      "stomp your feet, stomp stomp",
-      "pat your knees, pat pat",
-      "clap your hands",
-      "If you're happy and you know it, shout hooray, hooray!",
-      "If you're happy and you know it, shout hooray, hooray!",
-      "If you're happy and you know it, your face will surely show it. If you're happy and you know it, shout hooray, hooray!",
-      "beep your nose, beep beep",
-      "stomp your feet, stomp stomp",
-      "pat your knees",
-      "clap your hands",
-      "shout hooray, hooray!"
+      "Nếu bạn vui và biết điều đó, hãy vỗ tay nào",
+      "Nếu bạn vui và biết điều đó, hãy vỗ tay nào",
+      "Nếu bạn vui khuôn mặt bạn sẽ rạng rỡ, hãy vỗ tay nào",
+      "Nếu bạn vui và biết điều đó, hãy vỗ nhẹ đầu gối",
+      "Nếu bạn vui và biết điều đó, hãy vỗ nhẹ đầu gối",
+      "Nếu bạn vui khuôn mặt bạn sẽ rạng rỡ, hãy vỗ nhẹ đầu gối",
+      "vỗ tay nào",
+      "Nếu bạn bực bội và nhận ra điều đó, hãy giậm chân",
+      "Nếu bạn bực bội và nhận ra điều đó, hãy giậm chân",
+      "Khuôn mặt bạn sẽ thể hiện ra, hãy giậm chân",
+      "vỗ nhẹ đầu gối",
+      "vỗ tay nào",
+      "Nếu bạn vui và biết điều đó, hãy bóp mũi kêu bíp bíp",
+      "Nếu bạn vui và biết điều đó, hãy bóp mũi kêu bíp bíp",
+      "Nếu bạn vui hãy bóp mũi kêu bíp bíp",
+      "giậm chân nào, rầm rầm",
+      "vỗ đầu gối, bộp bộp",
+      "vỗ tay nào",
+      "Nếu bạn vui và biết điều đó, hãy hô to hoan hô!",
+      "Nếu bạn vui và biết điều đó, hãy hô to hoan hô!",
+      "Nếu bạn vui hãy hô to hoan hô, hoan hô!",
+      "bóp mũi bíp bíp",
+      "giậm chân rầm rầm",
+      "vỗ nhẹ đầu gối",
+      "vỗ tay nào",
+      "hô vang hoan hô!"
     ],
     "funFactVi": "Khích lệ bé bộc lộ cảm xúc vui tươi bằng cử chỉ tay chân.",
     "audioUrl": "/assets/music/if-youre-happy-and-you-know-it.mp3",
@@ -8158,14 +8158,14 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream."
     ],
     "lyricsData": [
-      { "start": 4.95, "end": 8.8, "vi": "Chèo thuyền chèo thuyền nhẹ trôi theo dòng nước", "en": "Row, row, row your boat gently down the stream" },
-      { "start": 8.95, "end": 13.0, "vi": "Vui tươi vui tươi vui tươi vui tươi, cuộc đời tựa giấc mơ", "en": "Merrily, merrily, merrily, merrily, life is but a dream" },
-      { "start": 17.25, "end": 21.0, "vi": "Chèo thuyền chèo thuyền nhẹ trôi theo dòng nước", "en": "Row, row, row your boat gently down the stream" },
-      { "start": 21.25, "end": 25.5, "vi": "Vui tươi vui tươi vui tươi vui tươi, cuộc đời tựa giấc mơ", "en": "Merrily, merrily, merrily, merrily, life is but a dream" }
+      { "start": 4.95, "end": 8.8, "vi": "Row, row, row your boat gently down the stream", "en": "Chèo, chèo, chèo thuyền nhẹ trôi theo dòng suối" },
+      { "start": 8.95, "end": 13.0, "vi": "Merrily, merrily, merrily, merrily, life is but a dream", "en": "Vui tươi, vui tươi, vui tươi, vui tươi, cuộc đời tựa giấc mơ" },
+      { "start": 17.25, "end": 21.0, "vi": "Row, row, row your boat gently down the stream", "en": "Chèo, chèo, chèo thuyền nhẹ trôi theo dòng suối" },
+      { "start": 21.25, "end": 25.5, "vi": "Merrily, merrily, merrily, merrily, life is but a dream", "en": "Vui tươi, vui tươi, vui tươi, vui tươi, cuộc đời tựa giấc mơ" }
     ],
     "englishTranslation": [
-      "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream.",
-      "Row, row, row your boat gently down the stream. Merrily, merrily, merrily, merrily, life is but a dream."
+      "Chèo, chèo, chèo thuyền nhẹ trôi theo dòng suối. Vui tươi, vui tươi, vui tươi, vui tươi, cuộc đời tựa giấc mơ.",
+      "Chèo, chèo, chèo thuyền nhẹ trôi theo dòng suối. Vui tươi, vui tươi, vui tươi, vui tươi, cuộc đời tựa giấc mơ."
     ],
     "funFactVi": "Giai điệu êm đềm dạy bé vượt qua dòng nước nhẹ nhàng.",
     "audioUrl": "/assets/music/row-row-row-your-boat.mp3",
@@ -8251,116 +8251,116 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 0.0,
         "end": 4.9,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 6.45,
         "end": 11.3,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 12.85,
         "end": 18.9,
         "vi": "Eyes and ears and mouth and nose",
-        "en": "Eyes and ears and mouth and nose"
+        "en": "Mắt và tai và miệng và mũi"
       },
       {
         "start": 19.25,
         "end": 23.9,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 26.15,
         "end": 30.4,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 32.25,
         "end": 37.0,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 38.65,
         "end": 44.7,
         "vi": "Eyes and ears and mouth and nose",
-        "en": "Eyes and ears and mouth and nose"
+        "en": "Mắt và tai và miệng và mũi"
       },
       {
         "start": 45.15,
         "end": 49.8,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 81.75,
         "end": 87.7,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 90.35,
         "end": 95.8,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 97.85,
         "end": 103.7,
         "vi": "Eyes and ears and mouth and nose",
-        "en": "Eyes and ears and mouth and nose"
+        "en": "Mắt và tai và miệng và mũi"
       },
       {
         "start": 104.15,
         "end": 108.8,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 109.95,
         "end": 114.6,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 115.45,
         "end": 120.0,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       },
       {
         "start": 120.65,
         "end": 125.7,
         "vi": "Eyes and ears and mouth and nose",
-        "en": "Eyes and ears and mouth and nose"
+        "en": "Mắt và tai và miệng và mũi"
       },
       {
         "start": 126.35,
         "end": 131.8,
         "vi": "Head, shoulders, knees and toes",
-        "en": "Head, shoulders, knees and toes"
+        "en": "Đầu, vai, đầu gối và ngón chân"
       }
     ],
     "englishTranslation": [
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Eyes and ears and mouth and nose",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Eyes and ears and mouth and nose",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Eyes and ears and mouth and nose",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Head, shoulders, knees and toes",
-      "Eyes and ears and mouth and nose",
-      "Head, shoulders, knees and toes"
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Mắt và tai và miệng và mũi",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Mắt và tai và miệng và mũi",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Mắt và tai và miệng và mũi",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Đầu, vai, đầu gối và ngón chân",
+      "Mắt và tai và miệng và mũi",
+      "Đầu, vai, đầu gối và ngón chân"
     ],
     "funFactVi": "Vừa hát vừa chạm đúng bộ phận cơ thể để tăng phản xạ.",
     "audioUrl": "/assets/music/head-shoulders-knees-and-toes.mp3",
@@ -8445,109 +8445,109 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 3.75,
         "end": 7.4,
         "vi": "Five little monkeys jumping on the bed",
-        "en": "Five little monkeys jumping on the bed"
+        "en": "Năm chú khỉ con nhảy nhót trên giường"
       },
       {
         "start": 7.25,
         "end": 11.1,
         "vi": "One fell off and bumped his head",
-        "en": "One fell off and bumped his head"
+        "en": "Một chú ngã xuống và cộc đầu"
       },
       {
         "start": 14.65,
         "end": 22.5,
         "vi": "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-        "en": "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+        "en": "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
       },
       {
         "start": 25.65,
         "end": 29.4,
         "vi": "Four little monkeys jumping on the bed",
-        "en": "Four little monkeys jumping on the bed"
+        "en": "Bốn chú khỉ con nhảy nhót trên giường"
       },
       {
         "start": 29.25,
         "end": 32.8,
         "vi": "One fell off and bumped his head",
-        "en": "One fell off and bumped his head"
+        "en": "Một chú ngã xuống và cộc đầu"
       },
       {
         "start": 36.55,
         "end": 43.7,
         "vi": "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-        "en": "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+        "en": "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
       },
       {
         "start": 47.65,
         "end": 51.3,
         "vi": "Three little monkeys jumping on the bed",
-        "en": "Three little monkeys jumping on the bed"
+        "en": "Ba chú khỉ con nhảy nhót trên giường"
       },
       {
         "start": 51.15,
         "end": 55.1,
         "vi": "One fell off and bumped his head",
-        "en": "One fell off and bumped his head"
+        "en": "Một chú ngã xuống và cộc đầu"
       },
       {
         "start": 58.65,
         "end": 66.1,
         "vi": "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-        "en": "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+        "en": "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
       },
       {
         "start": 69.75,
         "end": 73.6,
         "vi": "Two little monkeys jumping on the bed",
-        "en": "Two little monkeys jumping on the bed"
+        "en": "Hai chú khỉ con nhảy nhót trên giường"
       },
       {
         "start": 73.45,
         "end": 77.4,
         "vi": "One fell off and bumped his head",
-        "en": "One fell off and bumped his head"
+        "en": "Một chú ngã xuống và cộc đầu"
       },
       {
         "start": 80.85,
         "end": 88.1,
         "vi": "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-        "en": "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+        "en": "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
       },
       {
         "start": 91.75,
         "end": 95.6,
         "vi": "One little monkey jumping on the bed",
-        "en": "One little monkey jumping on the bed"
+        "en": "Một chú khỉ con nhảy nhót trên giường"
       },
       {
         "start": 95.45,
         "end": 99.4,
         "vi": "He fell off and bumped his head",
-        "en": "He fell off and bumped his head"
+        "en": "Chú ngã xuống và cộc đầu"
       },
       {
         "start": 106.75,
         "end": 114.6,
         "vi": "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-        "en": "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+        "en": "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
       }
     ],
     "englishTranslation": [
-      "Five little monkeys jumping on the bed",
-      "One fell off and bumped his head",
-      "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-      "Four little monkeys jumping on the bed",
-      "One fell off and bumped his head",
-      "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-      "Three little monkeys jumping on the bed",
-      "One fell off and bumped his head",
-      "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-      "Two little monkeys jumping on the bed",
-      "One fell off and bumped his head",
-      "Mama called the doctor and the doctor said No more monkeys jumping on the bed",
-      "One little monkey jumping on the bed",
-      "He fell off and bumped his head",
-      "Mama called the doctor and the doctor said No more monkeys jumping on the bed"
+      "Năm chú khỉ con nhảy nhót trên giường",
+      "Một chú ngã xuống và cộc đầu",
+      "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa",
+      "Bốn chú khỉ con nhảy nhót trên giường",
+      "Một chú ngã xuống và cộc đầu",
+      "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa",
+      "Ba chú khỉ con nhảy nhót trên giường",
+      "Một chú ngã xuống và cộc đầu",
+      "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa",
+      "Hai chú khỉ con nhảy nhót trên giường",
+      "Một chú ngã xuống và cộc đầu",
+      "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa",
+      "Một chú khỉ con nhảy nhót trên giường",
+      "Chú ngã xuống và cộc đầu",
+      "Mẹ gọi bác sĩ và bác sĩ bảo: Không cho khỉ con nhảy trên giường nữa"
     ],
     "funFactVi": "Dạy bé đếm lùi số lượng và nhắc nhở an toàn khi chơi.",
     "audioUrl": "/assets/music/five-little-monkeys.mp3",
@@ -8619,74 +8619,74 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 27.55,
         "end": 35.8,
         "vi": "Baby shark, doo-doo, doo-doo-doo-doo",
-        "en": "Baby shark, doo-doo, doo-doo-doo-doo"
+        "en": "Cá mập con, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 35.95,
         "end": 44.3,
         "vi": "Mommy shark, doo-doo, doo-doo-doo-doo",
-        "en": "Mommy shark, doo-doo, doo-doo-doo-doo"
+        "en": "Cá mập mẹ, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 44.35,
         "end": 52.7,
         "vi": "Daddy shark, doo-doo, doo-doo-doo-doo",
-        "en": "Daddy shark, doo-doo, doo-doo-doo-doo"
+        "en": "Cá mập bố, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 52.75,
         "end": 60.9,
         "vi": "Grandma shark, doo-doo, doo-doo-doo-doo",
-        "en": "Grandma shark, doo-doo, doo-doo-doo-doo"
+        "en": "Cá mập bà, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 61.15,
         "end": 69.5,
         "vi": "Grandpa shark, doo-doo, doo-doo-doo-doo",
-        "en": "Grandpa shark, doo-doo, doo-doo-doo-doo"
+        "en": "Cá mập ông, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 69.75,
         "end": 77.9,
         "vi": "Let's go hunt, doo-doo, doo-doo-doo-doo",
-        "en": "Let's go hunt, doo-doo, doo-doo-doo-doo"
+        "en": "Đi săn mồi nào, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 78.05,
         "end": 86.5,
         "vi": "Run away, doo-doo, doo-doo-doo-doo",
-        "en": "Run away, doo-doo, doo-doo-doo-doo"
+        "en": "Chạy mau thôi, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 87.55,
         "end": 95.7,
         "vi": "Safe at last, doo-doo, doo-doo-doo-doo",
-        "en": "Safe at last, doo-doo, doo-doo-doo-doo"
+        "en": "An toàn rồi, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 95.85,
         "end": 104.4,
         "vi": "It's the end, doo-doo, doo-doo-doo-doo",
-        "en": "It's the end, doo-doo, doo-doo-doo-doo"
+        "en": "Hết bài rồi, đu-đu đu-đu-đu-đu"
       },
       {
         "start": 108.15,
         "end": 117.7,
         "vi": "Twinkle, twinkle little star, how I wonder what you are",
-        "en": "Twinkle, twinkle little star, how I wonder what you are"
+        "en": "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là ai"
       }
     ],
     "englishTranslation": [
-      "Baby shark, doo-doo, doo-doo-doo-doo",
-      "Mommy shark, doo-doo, doo-doo-doo-doo",
-      "Daddy shark, doo-doo, doo-doo-doo-doo",
-      "Grandma shark, doo-doo, doo-doo-doo-doo",
-      "Grandpa shark, doo-doo, doo-doo-doo-doo",
-      "Let's go hunt, doo-doo, doo-doo-doo-doo",
-      "Run away, doo-doo, doo-doo-doo-doo",
-      "Safe at last, doo-doo, doo-doo-doo-doo",
-      "It's the end, doo-doo, doo-doo-doo-doo",
-      "Twinkle, twinkle little star, how I wonder what you are"
+      "Cá mập con, đu-đu đu-đu-đu-đu",
+      "Cá mập mẹ, đu-đu đu-đu-đu-đu",
+      "Cá mập bố, đu-đu đu-đu-đu-đu",
+      "Cá mập bà, đu-đu đu-đu-đu-đu",
+      "Cá mập ông, đu-đu đu-đu-đu-đu",
+      "Đi săn mồi nào, đu-đu đu-đu-đu-đu",
+      "Chạy mau thôi, đu-đu đu-đu-đu-đu",
+      "An toàn rồi, đu-đu đu-đu-đu-đu",
+      "Hết bài rồi, đu-đu đu-đu-đu-đu",
+      "Lấp lánh lấp lánh ngôi sao nhỏ, em tự hỏi bạn là ai"
     ],
     "funFactVi": "Vũ điệu cá mập sôi động cả nhà cùng nhún nhảy theo nhịp.",
     "audioUrl": "/assets/music/baby-shark.mp3",
@@ -8775,81 +8775,81 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 8.05,
         "end": 12.8,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       },
       {
         "start": 12.65,
         "end": 19.8,
         "vi": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O and Bingo was his name o.",
-        "en": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O and Bingo was his name o."
+        "en": "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O và tên chú chó là Bingo."
       },
       {
         "start": 24.25,
         "end": 28.9,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       },
       {
         "start": 29.65,
         "end": 36.8,
         "vi": "(clap)-I-N-G-O, (clap)-I-N-G-O, (clap)-I-N-G-O and Bingo was his name o.",
-        "en": "(clap)-I-N-G-O, (clap)-I-N-G-O, (clap)-I-N-G-O and Bingo was his name o."
+        "en": "(vỗ tay)-I-N-G-O và tên chú chó là Bingo."
       },
       {
         "start": 41.05,
         "end": 45.9,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       },
       {
         "start": 46.65,
         "end": 53.6,
         "vi": "(clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O and Bingo was his name o.",
-        "en": "(clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O and Bingo was his name o."
+        "en": "(vỗ tay)-(vỗ tay)-N-G-O và tên chú chó là Bingo."
       },
       {
         "start": 57.55,
         "end": 62.1,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       },
       {
         "start": 62.95,
         "end": 70.0,
         "vi": "(clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O and Bingo was his name o.",
-        "en": "(clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O and Bingo was his name o."
+        "en": "(vỗ tay 3 lần)-G-O và tên chú chó là Bingo."
       },
       {
         "start": 74.15,
         "end": 78.7,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       },
       {
         "start": 79.65,
         "end": 86.6,
         "vi": "(clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O and Bingo was his name o.",
-        "en": "(clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O and Bingo was his name o."
+        "en": "(vỗ tay 4 lần)-O và tên chú chó là Bingo."
       },
       {
         "start": 90.65,
         "end": 95.3,
         "vi": "There was a farmer had a dog and Bingo was his name o.",
-        "en": "There was a farmer had a dog and Bingo was his name o."
+        "en": "Có một bác nông dân nuôi chú chó tên là Bingo."
       }
     ],
     "englishTranslation": [
-      "There was a farmer had a dog and Bingo was his name o.",
-      "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O and Bingo was his name o.",
-      "There was a farmer had a dog and Bingo was his name o.",
-      "(clap)-I-N-G-O, (clap)-I-N-G-O, (clap)-I-N-G-O and Bingo was his name o.",
-      "There was a farmer had a dog and Bingo was his name o.",
-      "(clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O, (clap)-(clap)-N-G-O and Bingo was his name o.",
-      "There was a farmer had a dog and Bingo was his name o.",
-      "(clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O, (clap)-(clap)-(clap)-G-O and Bingo was his name o.",
-      "There was a farmer had a dog and Bingo was his name o.",
-      "(clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O, (clap)-(clap)-(clap)-(clap)-O and Bingo was his name o.",
-      "There was a farmer had a dog and Bingo was his name o."
+      "Có một bác nông dân nuôi chú chó tên là Bingo.",
+      "B-I-N-G-O, B-I-N-G-O, B-I-N-G-O và tên chú chó là Bingo.",
+      "Có một bác nông dân nuôi chú chó tên là Bingo.",
+      "(vỗ tay)-I-N-G-O và tên chú chó là Bingo.",
+      "Có một bác nông dân nuôi chú chó tên là Bingo.",
+      "(vỗ tay)-(vỗ tay)-N-G-O và tên chú chó là Bingo.",
+      "Có một bác nông dân nuôi chú chó tên là Bingo.",
+      "(vỗ tay 3 lần)-G-O và tên chú chó là Bingo.",
+      "Có một bác nông dân nuôi chú chó tên là Bingo.",
+      "(vỗ tay 4 lần)-O và tên chú chó là Bingo.",
+      "Có một bác nông dân nuôi chú chó tên là Bingo."
     ],
     "funFactVi": "Học đánh vần từng chữ cái vui nhộn cùng chú cún Bingo.",
     "audioUrl": "/assets/music/bingo-dog-song.mp3",
@@ -8926,7 +8926,7 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "melodyStyle": "cheerful",
     "lyrics": [
       "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
-      "Music Interlude",
+      "(Music Interlude)",
       "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
       "Everywhere that Mary went, Mary went, Mary went. Everywhere that Mary went, that lamb was sure to go.",
       "Followed her to school one day, school one day, school one day. Followed her to school one day, which was against the rule.",
@@ -8941,74 +8941,74 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 0.0,
         "end": 13.0,
         "vi": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
-        "en": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow."
+        "en": "Mary có một chú cừu non, bộ lông cừu trắng như tuyết."
       },
       {
         "start": 12.85,
         "end": 27.9,
-        "vi": "Music Interlude",
-        "en": "Music Interlude"
+        "vi": "(Music Interlude)",
+        "en": "(Đoạn nhạc chuyển tiếp)"
       },
       {
         "start": 27.75,
         "end": 41.2,
         "vi": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
-        "en": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow."
+        "en": "Mary có một chú cừu non, bộ lông cừu trắng như tuyết."
       },
       {
         "start": 41.05,
         "end": 57.6,
         "vi": "Everywhere that Mary went, Mary went, Mary went. Everywhere that Mary went, that lamb was sure to go.",
-        "en": "Everywhere that Mary went, Mary went, Mary went. Everywhere that Mary went, that lamb was sure to go."
+        "en": "Bất cứ nơi nào Mary đi, chú cừu non đều đi theo sau."
       },
       {
         "start": 57.45,
         "end": 73.5,
         "vi": "Followed her to school one day, school one day, school one day. Followed her to school one day, which was against the rule.",
-        "en": "Followed her to school one day, school one day, school one day. Followed her to school one day, which was against the rule."
+        "en": "Một hôm cừu theo Mary tới trường, điều đó trái với nội quy."
       },
       {
         "start": 73.35,
         "end": 89.6,
         "vi": "Made the children laugh and play, laugh and play, laugh and play. Made the children laugh and play, to see a lamb at school.",
-        "en": "Made the children laugh and play, laugh and play, laugh and play. Made the children laugh and play, to see a lamb at school."
+        "en": "Khiến lũ trẻ cười đùa thích thú khi thấy cừu ở trường."
       },
       {
         "start": 89.45,
         "end": 106.5,
         "vi": "And so the teacher turned it out, turned it out, turned it out, and so the teacher turned it out, it was against the rule.",
-        "en": "And so the teacher turned it out, turned it out, turned it out, and so the teacher turned it out, it was against the rule."
+        "en": "Và cô giáo phải dắt cừu ra ngoài vì trái nội quy."
       },
       {
         "start": 106.35,
         "end": 121.3,
         "vi": "Why does a lamb love Mary so? Mary so, Mary so? Why does a lamb love Mary so? The eager children cry.",
-        "en": "Why does a lamb love Mary so? Mary so, Mary so? Why does a lamb love Mary so? The eager children cry."
+        "en": "Tại sao cừu lại yêu Mary đến thế? Lũ trẻ háo hức hỏi."
       },
       {
         "start": 121.15,
         "end": 138.8,
         "vi": "Because Mary loves a lamb you know, lamb you know, lamb you know, because Mary loves the lamb you know that teacher did reply.",
-        "en": "Because Mary loves a lamb you know, lamb you know, lamb you know, because Mary loves the lamb you know that teacher did reply."
+        "en": "Vì Mary rất yêu chú cừu non, cô giáo dịu dàng trả lời."
       },
       {
         "start": 138.65,
         "end": 162.0,
         "vi": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow. Its fleece was white as snow.",
-        "en": "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow. Its fleece was white as snow."
+        "en": "Mary có một chú cừu non với bộ lông trắng như tuyết."
       }
     ],
     "englishTranslation": [
-      "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
-      "Music Interlude",
-      "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow.",
-      "Everywhere that Mary went, Mary went, Mary went. Everywhere that Mary went, that lamb was sure to go.",
-      "Followed her to school one day, school one day, school one day. Followed her to school one day, which was against the rule.",
-      "Made the children laugh and play, laugh and play, laugh and play. Made the children laugh and play, to see a lamb at school.",
-      "And so the teacher turned it out, turned it out, turned it out, and so the teacher turned it out, it was against the rule.",
-      "Why does a lamb love Mary so? Mary so, Mary so? Why does a lamb love Mary so? The eager children cry.",
-      "Because Mary loves a lamb you know, lamb you know, lamb you know, because Mary loves the lamb you know that teacher did reply.",
-      "Mary had a little lamb, little lamb, little lamb. Mary had a little lamb, its fleece was white as snow. Its fleece was white as snow."
+      "Mary có một chú cừu non, bộ lông cừu trắng như tuyết.",
+      "(Đoạn nhạc chuyển tiếp)",
+      "Mary có một chú cừu non, bộ lông cừu trắng như tuyết.",
+      "Bất cứ nơi nào Mary đi, chú cừu non đều đi theo sau.",
+      "Một hôm cừu theo Mary tới trường, điều đó trái với nội quy.",
+      "Khiến lũ trẻ cười đùa thích thú khi thấy cừu ở trường.",
+      "Và cô giáo phải dắt cừu ra ngoài vì trái nội quy.",
+      "Tại sao cừu lại yêu Mary đến thế? Lũ trẻ háo hức hỏi.",
+      "Vì Mary rất yêu chú cừu non, cô giáo dịu dàng trả lời.",
+      "Mary có một chú cừu non với bộ lông trắng như tuyết."
     ],
     "funFactVi": "Tình bạn gắn bó thân thiết giữa cô bé Mary và chú cừu.",
     "audioUrl": "/assets/music/mary-had-a-little-lamb.mp3",
@@ -9093,25 +9093,25 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 4.25,
         "end": 14.3,
         "vi": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away.",
-        "en": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away."
+        "en": "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi."
       },
       {
         "start": 16.65,
         "end": 26.5,
         "vi": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away.",
-        "en": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away."
+        "en": "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi."
       },
       {
         "start": 31.25,
         "end": 40.9,
         "vi": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away.",
-        "en": "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away."
+        "en": "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi."
       }
     ],
     "englishTranslation": [
-      "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away.",
-      "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away.",
-      "Rain, rain, go away, come again another day, Barney's friends all want to play, rain, rain, go away."
+      "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi.",
+      "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi.",
+      "Mưa ơi hãy đi đi, hôm khác lại đến nhé, các bạn của Barney muốn vui chơi, mưa ơi hãy đi đi."
     ],
     "funFactVi": "Lời ước ngày nắng ấm để bé được ra sân chơi đùa.",
     "audioUrl": "/assets/music/rain-rain-go-away.mp3",
@@ -9181,32 +9181,32 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 5.65,
         "end": 13.4,
         "vi": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock.",
-        "en": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock."
+        "en": "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú chuột chạy tót xuống."
       },
       {
         "start": 28.25,
         "end": 37.3,
         "vi": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock.",
-        "en": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock."
+        "en": "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú liền chạy xuống."
       },
       {
         "start": 42.35,
         "end": 50.0,
         "vi": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock.",
-        "en": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock."
+        "en": "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú chuột chạy tót xuống."
       },
       {
         "start": 64.75,
         "end": 73.3,
         "vi": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock.",
-        "en": "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock."
+        "en": "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú liền chạy xuống."
       }
     ],
     "englishTranslation": [
-      "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock.",
-      "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock.",
-      "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, The mouse ran down, Hickory, dickory, dock.",
-      "Hickory, dickory, dock, The mouse ran up the clock, The clock struck one, And down he run, Hickory, dickory, dock."
+      "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú chuột chạy tót xuống.",
+      "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú liền chạy xuống.",
+      "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú chuột chạy tót xuống.",
+      "Hickory, dickory, dock, chú chuột chạy lên đồng hồ, đồng hồ điểm một tiếng, chú liền chạy xuống."
     ],
     "funFactVi": "Làm quen với mặt đồng hồ và nhịp tích tắc thời gian.",
     "audioUrl": "/assets/music/hickory-dickory-dock.mp3",
@@ -9284,88 +9284,88 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 22.35,
         "end": 28.1,
         "vi": "You are my sunshine, my only sunshine.",
-        "en": "You are my sunshine, my only sunshine."
+        "en": "Em là ánh nắng của anh, là ánh nắng duy nhất."
       },
       {
         "start": 27.95,
         "end": 33.7,
         "vi": "You make me happy, when skies are grey.",
-        "en": "You make me happy, when skies are grey."
+        "en": "Em khiến anh hạnh phúc khi bầu trời u xám."
       },
       {
         "start": 33.55,
         "end": 39.5,
         "vi": "You'll never know, dear, how much I love you.",
-        "en": "You'll never know, dear, how much I love you."
+        "en": "Em yêu ơi, em sẽ chẳng bao giờ biết anh yêu em nhiều thế nào."
       },
       {
         "start": 39.35,
         "end": 44.8,
         "vi": "Please don't take my sunshine away.",
-        "en": "Please don't take my sunshine away."
+        "en": "Xin đừng mang ánh nắng của anh đi mất."
       },
       {
         "start": 44.65,
         "end": 55.9,
         "vi": "The other night, dear, when I lay sleeping,",
-        "en": "The other night, dear, when I lay sleeping,"
+        "en": "Đêm nọ em yêu ơi, khi anh đang say ngủ,"
       },
       {
         "start": 55.75,
         "end": 67.1,
         "vi": "I dreamed I held you in my arms, when I awoke, dear, I was mistaken,",
-        "en": "I dreamed I held you in my arms, when I awoke, dear, I was mistaken,"
+        "en": "Anh mơ thấy mình ôm em trong tay, khi tỉnh giấc anh mới hay mình lầm,"
       },
       {
         "start": 66.95,
         "end": 72.7,
         "vi": "So I hung my head and cried.",
-        "en": "So I hung my head and cried."
+        "en": "Nên anh đã cúi đầu và bật khóc."
       },
       {
         "start": 72.55,
         "end": 78.2,
         "vi": "You are my sunshine, my only sunshine.",
-        "en": "You are my sunshine, my only sunshine."
+        "en": "Em là ánh nắng của anh, là ánh nắng duy nhất."
       },
       {
         "start": 78.05,
         "end": 83.9,
         "vi": "You make me happy, when skies are grey.",
-        "en": "You make me happy, when skies are grey."
+        "en": "Em khiến anh hạnh phúc khi bầu trời u xám."
       },
       {
         "start": 83.75,
         "end": 89.3,
         "vi": "You'll never know, dear, how much I love you.",
-        "en": "You'll never know, dear, how much I love you."
+        "en": "Em yêu ơi, em sẽ chẳng bao giờ biết anh yêu em nhiều thế nào."
       },
       {
         "start": 89.15,
         "end": 133.6,
         "vi": "Please don't take my sunshine away.",
-        "en": "Please don't take my sunshine away."
+        "en": "Xin đừng mang ánh nắng của anh đi mất."
       },
       {
         "start": 133.45,
         "end": 161.0,
         "vi": "Please don't take my sunshine away.",
-        "en": "Please don't take my sunshine away."
+        "en": "Xin đừng mang ánh nắng của anh đi mất."
       }
     ],
     "englishTranslation": [
-      "You are my sunshine, my only sunshine.",
-      "You make me happy, when skies are grey.",
-      "You'll never know, dear, how much I love you.",
-      "Please don't take my sunshine away.",
-      "The other night, dear, when I lay sleeping,",
-      "I dreamed I held you in my arms, when I awoke, dear, I was mistaken,",
-      "So I hung my head and cried.",
-      "You are my sunshine, my only sunshine.",
-      "You make me happy, when skies are grey.",
-      "You'll never know, dear, how much I love you.",
-      "Please don't take my sunshine away.",
-      "Please don't take my sunshine away."
+      "Em là ánh nắng của anh, là ánh nắng duy nhất.",
+      "Em khiến anh hạnh phúc khi bầu trời u xám.",
+      "Em yêu ơi, em sẽ chẳng bao giờ biết anh yêu em nhiều thế nào.",
+      "Xin đừng mang ánh nắng của anh đi mất.",
+      "Đêm nọ em yêu ơi, khi anh đang say ngủ,",
+      "Anh mơ thấy mình ôm em trong tay, khi tỉnh giấc anh mới hay mình lầm,",
+      "Nên anh đã cúi đầu và bật khóc.",
+      "Em là ánh nắng của anh, là ánh nắng duy nhất.",
+      "Em khiến anh hạnh phúc khi bầu trời u xám.",
+      "Em yêu ơi, em sẽ chẳng bao giờ biết anh yêu em nhiều thế nào.",
+      "Xin đừng mang ánh nắng của anh đi mất.",
+      "Xin đừng mang ánh nắng của anh đi mất."
     ],
     "funFactVi": "Bày tỏ tình thương yêu vô bờ bến cha mẹ dành cho con.",
     "audioUrl": "/assets/music/you-are-my-sunshine.mp3",
@@ -9445,26 +9445,26 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
     "durationSec": 0,
     "melodyStyle": "playful",
     "lyrics": [
-      "(nhạc cụ)",
-      "(nhạc cụ)"
+      "(Nhạc không lời)",
+      "(Nhạc không lời)"
     ],
     "lyricsData": [
       {
         "start": 0.0,
         "end": 17.3,
-        "vi": "(nhạc cụ)",
-        "en": "(instrumental)"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       },
       {
         "start": 17.15,
         "end": 30.0,
-        "vi": "(nhạc cụ)",
-        "en": "(instrumental)"
+        "vi": "(Nhạc không lời)",
+        "en": "(Instrumental)"
       }
     ],
     "englishTranslation": [
-      "(instrumental)",
-      "(instrumental)"
+      "(Instrumental)",
+      "(Instrumental)"
     ],
     "funFactVi": "Ba chú mèo con biết nhận lỗi và tìm lại găng tay.",
     "audioUrl": "/assets/music/three-little-kittens.ogg",
@@ -9522,16 +9522,16 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
       "Pop! Goes the weasel."
     ],
     "lyricsData": [
-      { "start": 0.65, "end": 3.45, "en": "Half a pound of tuppenny rice,", "vi": "Nửa pound gạo hai xu," },
-      { "start": 3.41, "end": 6.35, "en": "Half a pound of treacle,", "vi": "Nửa pound mật mía," },
-      { "start": 6.30, "end": 9.90, "en": "That's the way the money goes,", "vi": "Tiền cứ thế mà bay đi," },
-      { "start": 10.45, "end": 13.20, "en": "Pop! Goes the weasel.", "vi": "Bụp! Chồn cầy nhảy ra." }
+      { "start": 0.65, "end": 3.45, "en": "Nửa cân gạo hai xu,", "vi": "Half a pound of tuppenny rice," },
+      { "start": 3.41, "end": 6.35, "en": "Nửa cân mật mía,", "vi": "Half a pound of treacle," },
+      { "start": 6.30, "end": 9.90, "en": "Tiền cứ thế mà bay đi,", "vi": "That's the way the money goes," },
+      { "start": 10.45, "end": 13.20, "en": "Bụp! Chồn cầy nhảy ra.", "vi": "Pop! Goes the weasel." }
     ],
     "englishTranslation": [
-      "Half a pound of tuppenny rice,",
-      "Half a pound of treacle,",
-      "That's the way the money goes,",
-      "Pop! Goes the weasel."
+      "Nửa cân gạo hai xu,",
+      "Nửa cân mật mía,",
+      "Tiền cứ thế mà bay đi,",
+      "Bụp! Chồn cầy nhảy ra."
     ],
     "funFactVi": "Trò chơi hộp nhạc bất ngờ mang lại tiếng cười sảng khoái.",
     "audioUrl": "/assets/music/pop-goes-the-weasel.mp3",
@@ -9617,172 +9617,172 @@ export const KIDS_SONGS_DATA: KidsSong[] = [
         "start": 9.65,
         "end": 13.4,
         "vi": "Hot cross buns, hot cross buns",
-        "en": "Hot cross buns, hot cross buns"
+        "en": "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi"
       },
       {
         "start": 13.25,
         "end": 17.8,
         "vi": "One a penny, two a penny, hot cross buns",
-        "en": "One a penny, two a penny, hot cross buns"
+        "en": "Một xu một chiếc, một xu hai chiếc, bánh chữ thập"
       },
       {
         "start": 17.85,
         "end": 22.0,
         "vi": "Hot cross buns, hot cross buns",
-        "en": "Hot cross buns, hot cross buns"
+        "en": "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi"
       },
       {
         "start": 21.95,
         "end": 26.5,
         "vi": "One a penny, two a penny, hot cross buns",
-        "en": "One a penny, two a penny, hot cross buns"
+        "en": "Một xu một chiếc, một xu hai chiếc, bánh chữ thập"
       },
       {
         "start": 27.25,
         "end": 35.3,
         "vi": "If you have no daughter, if you have no son, then give them to your son",
-        "en": "If you have no daughter, if you have no son, then give them to your son"
+        "en": "Nếu bạn không có con gái, hãy chia cho con trai"
       },
       {
         "start": 35.25,
         "end": 43.7,
         "vi": "If you have no daughter, if you have no son, then give them to your son",
-        "en": "If you have no daughter, if you have no son, then give them to your son"
+        "en": "Nếu bạn không có con gái, hãy chia cho con trai"
       },
       {
         "start": 44.05,
         "end": 51.3,
         "vi": "But if you ain't got a sweet surprise, then you must eat them all at once",
-        "en": "But if you ain't got a sweet surprise, then you must eat them all at once"
+        "en": "Nhưng nếu không có bất ngờ ngọt ngào nào, bạn phải ăn hết một lượt"
       },
       {
         "start": 53.15,
         "end": 56.9,
         "vi": "Hot cross buns, hot cross buns",
-        "en": "Hot cross buns, hot cross buns"
+        "en": "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi"
       },
       {
         "start": 56.85,
         "end": 60.8,
         "vi": "One a penny, two a penny, hot cross buns",
-        "en": "One a penny, two a penny, hot cross buns"
+        "en": "Một xu một chiếc, một xu hai chiếc, bánh chữ thập"
       },
       {
         "start": 60.75,
         "end": 64.9,
         "vi": "Hot cross buns, hot cross buns",
-        "en": "Hot cross buns, hot cross buns"
+        "en": "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi"
       },
       {
         "start": 64.95,
         "end": 69.6,
         "vi": "One a penny, two a penny, hot cross buns",
-        "en": "One a penny, two a penny, hot cross buns"
+        "en": "Một xu một chiếc, một xu hai chiếc, bánh chữ thập"
       },
       {
         "start": 70.35,
         "end": 78.4,
         "vi": "If you have no daughter, if you have no son, then give them to your son",
-        "en": "If you have no daughter, if you have no son, then give them to your son"
+        "en": "Nếu bạn không có con gái, hãy chia cho con trai"
       },
       {
         "start": 78.35,
         "end": 86.9,
         "vi": "If you have no daughter, if you have no son, then give them to your son",
-        "en": "If you have no daughter, if you have no son, then give them to your son"
+        "en": "Nếu bạn không có con gái, hãy chia cho con trai"
       },
       {
         "start": 87.25,
         "end": 94.9,
         "vi": "But if you ain't got a sweet surprise, then you must eat them all at once",
-        "en": "But if you ain't got a sweet surprise, then you must eat them all at once"
+        "en": "Nhưng nếu không có bất ngờ ngọt ngào nào, bạn phải ăn hết một lượt"
       },
       {
         "start": 105.15,
         "end": 112.7,
         "vi": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-        "en": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow"
+        "en": "Bò, bò, bò, bò, lách cách, meo meo meo bò"
       },
       {
         "start": 112.65,
         "end": 120.4,
         "vi": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-        "en": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow"
+        "en": "Bò, bò, bò, bò, lách cách, meo meo meo bò"
       },
       {
         "start": 121.15,
         "end": 130.5,
         "vi": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-        "en": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       },
       {
         "start": 130.95,
         "end": 140.1,
         "vi": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-        "en": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       },
       {
         "start": 140.35,
         "end": 146.9,
         "vi": "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow",
-        "en": "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       },
       {
         "start": 148.25,
         "end": 155.8,
         "vi": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-        "en": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow"
+        "en": "Bò, bò, bò, bò, lách cách, meo meo meo bò"
       },
       {
         "start": 155.95,
         "end": 164.8,
         "vi": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-        "en": "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow"
+        "en": "Bò, bò, bò, bò, lách cách, meo meo meo bò"
       },
       {
         "start": 165.15,
         "end": 174.0,
         "vi": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-        "en": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       },
       {
         "start": 174.25,
         "end": 183.4,
         "vi": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-        "en": "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       },
       {
         "start": 183.75,
         "end": 190.0,
         "vi": "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow",
-        "en": "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow"
+        "en": "Điệp khúc đồng dao vui nhộn rộn rã"
       }
     ],
     "englishTranslation": [
-      "Hot cross buns, hot cross buns",
-      "One a penny, two a penny, hot cross buns",
-      "Hot cross buns, hot cross buns",
-      "One a penny, two a penny, hot cross buns",
-      "If you have no daughter, if you have no son, then give them to your son",
-      "If you have no daughter, if you have no son, then give them to your son",
-      "But if you ain't got a sweet surprise, then you must eat them all at once",
-      "Hot cross buns, hot cross buns",
-      "One a penny, two a penny, hot cross buns",
-      "Hot cross buns, hot cross buns",
-      "One a penny, two a penny, hot cross buns",
-      "If you have no daughter, if you have no son, then give them to your son",
-      "If you have no daughter, if you have no son, then give them to your son",
-      "But if you ain't got a sweet surprise, then you must eat them all at once",
-      "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-      "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-      "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-      "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-      "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow",
-      "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-      "Cow, cow, cow, cow, rattle-tattle, meow, meow, meow, cow",
-      "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-      "Jimmy-jump-a-jingles, happy-chappy-boney, Millie-Gilly-Barley, Chully-bowl-pot-cow",
-      "Ginny-gaga-gribbles, happy-china-bone, power-Pistol-buy-a-little-tow"
+      "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi",
+      "Một xu một chiếc, một xu hai chiếc, bánh chữ thập",
+      "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi",
+      "Một xu một chiếc, một xu hai chiếc, bánh chữ thập",
+      "Nếu bạn không có con gái, hãy chia cho con trai",
+      "Nếu bạn không có con gái, hãy chia cho con trai",
+      "Nhưng nếu không có bất ngờ ngọt ngào nào, bạn phải ăn hết một lượt",
+      "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi",
+      "Một xu một chiếc, một xu hai chiếc, bánh chữ thập",
+      "Bánh chữ thập nóng hổi, bánh chữ thập nóng hổi",
+      "Một xu một chiếc, một xu hai chiếc, bánh chữ thập",
+      "Nếu bạn không có con gái, hãy chia cho con trai",
+      "Nếu bạn không có con gái, hãy chia cho con trai",
+      "Nhưng nếu không có bất ngờ ngọt ngào nào, bạn phải ăn hết một lượt",
+      "Bò, bò, bò, bò, lách cách, meo meo meo bò",
+      "Bò, bò, bò, bò, lách cách, meo meo meo bò",
+      "Điệp khúc đồng dao vui nhộn rộn rã",
+      "Điệp khúc đồng dao vui nhộn rộn rã",
+      "Điệp khúc đồng dao vui nhộn rộn rã",
+      "Bò, bò, bò, bò, lách cách, meo meo meo bò",
+      "Bò, bò, bò, bò, lách cách, meo meo meo bò",
+      "Điệp khúc đồng dao vui nhộn rộn rã",
+      "Điệp khúc đồng dao vui nhộn rộn rã",
+      "Điệp khúc đồng dao vui nhộn rộn rã"
     ],
     "funFactVi": "Giai điệu đồng dao về món bánh nướng thơm lừng truyền thống.",
     "audioUrl": "/assets/music/hot-cross-buns.mp3",
