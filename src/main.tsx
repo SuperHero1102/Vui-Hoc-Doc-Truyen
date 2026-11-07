@@ -5,14 +5,30 @@ import './index.css';
 // Đăng ký Service Worker PWA thông minh với chế độ lưu trữ bền vững và tải ngầm không gián đoạn
 if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // 1. Xin quyền lưu trữ bền vững để tránh bị trình duyệt tự động dọn dẹp bộ nhớ đệm
-    if (navigator.storage && navigator.storage.persist) {
-      navigator.storage.persist().catch(() => {});
+    // 1. Xin quyền lưu trữ bền vững và kiểm tra dung lượng định mức
+    if (navigator.storage) {
+      if (navigator.storage.persist) {
+        navigator.storage.persist().then((isPersisted) => {
+          console.log('[PWA Storage] Persistent storage granted:', isPersisted);
+        }).catch(() => {});
+      }
+      if (navigator.storage.persisted) {
+        navigator.storage.persisted().then((isPersisted) => {
+          console.log('[PWA Storage] Currently persisted:', isPersisted);
+        }).catch(() => {});
+      }
+      if (navigator.storage.estimate) {
+        navigator.storage.estimate().then((estimate) => {
+          const usedMB = Math.round((estimate.usage || 0) / (1024 * 1024));
+          const quotaMB = Math.round((estimate.quota || 0) / (1024 * 1024));
+          console.log(`[PWA Storage] Quota estimate: ${usedMB} MB used of ${quotaMB} MB`);
+        }).catch(() => {});
+      }
     }
 
-    // 2. Đăng ký Service Worker
+    // 2. Đăng ký Service Worker với phạm vi tương đối './'
     const swUrl = new URL('sw-offline.js', window.location.href).pathname;
-    navigator.serviceWorker.register(swUrl)
+    navigator.serviceWorker.register(swUrl, { scope: './' })
       .then((registration) => {
         // Kích hoạt tiến trình tải ngầm theo khối tài nguyên ngay khi SW sẵn sàng
         const triggerBackgroundSync = () => {
@@ -37,4 +53,3 @@ if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
 }
 
 createRoot(document.getElementById('root')!).render(<App />);
-

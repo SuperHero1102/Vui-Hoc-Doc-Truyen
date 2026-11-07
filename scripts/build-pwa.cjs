@@ -43,8 +43,8 @@ console.log('Scanning dist/ files and computing SHA-256 hashes...');
 const allDistFiles = getAllFiles(DIST, DIST);
 
 const fileHashes = {};
-const priority1 = []; // Core app shell & critical assets
-const priority2 = []; // Core UI sounds, common graphics, first songs
+const priority1 = []; // Core app shell, fonts & critical assets
+const priority2 = []; // Music covers, high usage UI sounds, common graphics, first songs
 const priority3 = []; // Remaining music and high-res media
 
 for (const f of allDistFiles) {
@@ -62,10 +62,12 @@ for (const f of allDistFiles) {
     rel.includes('/apple-touch-icon') ||
     rel.includes('/pwa-') ||
     rel.endsWith('.css') ||
-    (rel.endsWith('.js') && rel.includes('index-'))
+    (rel.endsWith('.js') && rel.includes('index-')) ||
+    rel.includes('/fonts/')
   ) {
     priority1.push(rel);
   } else if (
+    rel.includes('music_cover_') ||
     rel.includes('/assets/music/chau-len-ba') ||
     rel.includes('/assets/music/rua-mat-nhu-meo') ||
     rel.includes('/assets/music/con-co-be-be') ||
@@ -113,7 +115,7 @@ fs.writeFileSync(versionJsonDist, JSON.stringify(versionData, null, 2));
 fs.writeFileSync(versionJsonPublic, JSON.stringify(versionData, null, 2));
 
 console.log(`Generated version.json: version ${versionData.version} with ${versionData.totalFiles} files.`);
-console.log(`- Priority 1 (Core shell): ${priority1.length} files`);
-console.log(`- Priority 2 (High usage): ${priority2.length} files`);
+console.log(`- Priority 1 (Core shell & fonts): ${priority1.length} files`);
+console.log(`- Priority 2 (Music covers & high usage): ${priority2.length} files`);
 console.log(`- Priority 3 (Remaining media): ${priority3.length} files`);
 console.log('=== PWA BUILD COMPLETED SUCCESSFULLY ===');
