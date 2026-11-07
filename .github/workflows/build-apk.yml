@@ -13,6 +13,11 @@ jobs:
     name: Build Android Debug APK
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_HOME: /usr/local/lib/android/sdk
+      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
+      CAPACITOR_TELEMETRY: "false"
+
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
