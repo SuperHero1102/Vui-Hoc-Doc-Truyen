@@ -1,9 +1,9 @@
 {
-  "version": "0.0.0-0e72eef3b4eb14d3",
-  "buildTime": "2026-11-07T11:52:49.059Z",
-  "coreHash": "0e72eef3b4eb14d3",
+  "version": "0.0.0-df1ea3b004143c87",
+  "buildTime": "2026-11-07T12:16:49.131Z",
+  "coreHash": "df1ea3b004143c87",
   "killSwitch": false,
-  "totalFiles": 807,
+  "totalFiles": 808,
   "priorities": {
     "priority1": [
       "/apple-touch-icon.png",
@@ -376,6 +376,7 @@
       "/assets/toon3d_yogurt_baby-meals-DTx-hlez.jpg"
     ],
     "priority3": [
+      "/404.html",
       "/assets/aistudio/IMG_2888_eeadfcbc.jpeg",
       "/assets/aistudio/IMG_2924_7e082615.png",
       "/assets/aistudio/IMG_2927_58d71523.png",
@@ -820,6 +821,7 @@
     ]
   },
   "files": {
+    "/404.html": "32a22d1233fd7bc12f912212e7dce5c78109c2e4b4fc11d7758c0b3540b681b0",
     "/apple-touch-icon.png": "52d994e6dc40461c33f10fcc6669af263ca16a1cd7fffafabb1edd707bd3bba9",
     "/assets/aistudio/image_6be366fd.png": "6be366fd1b85ef66072059c6c4045830b3d0626f704e43b75db9635564b0fe44",
     "/assets/aistudio/image_fa703731.png": "fa70373196af0f76a10792ef065c8b2d4ee3ef47e2eea95f3aea771dddeea18b",
@@ -1623,7 +1625,7 @@
     "/fonts/font_9_QdVMSTAyLFyeg_IDWvOJmVES_HSMIG81Rb0.woff2": "a193dd87699bd2e18ddf72dc271493ea82a23dad9f5c334d9f2a257b1e05fc30",
     "/icon.svg": "693b2c46db72c200f80c9db6133f6b071a3f20fecb338e64a2c0a0fb13f824e1",
     "/index.html": "0ce4629b1f8c34e6088e34192de4b66a23e06eb121b5392a1639d76d7605b4d4",
-    "/manifest.webmanifest": "8c631cab423df8a952cf88b006776f0991479bf8f090be04de0cca2cae67cf3a",
+    "/manifest.webmanifest": "fed49ac15f6443765aebd92a3dfbc5d186365d00f2d4046db2c3d677d57d3416",
     "/pwa-192x192.png": "44780f50524f714138bddf5569e3adeffa76f1469e267c32a8cba594d129177a",
     "/pwa-512x512.png": "ccdc93c143e7de88e1334a27dfa604f61818e2fb603149588395536ea0c21f35",
     "/pwa-maskable-512x512.png": "5c982df94ac148b898c339c34d51f3806958f82697c80239a38ac5e6d14d9707"

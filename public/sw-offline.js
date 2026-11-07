@@ -10,7 +10,7 @@
  * 5. Tuyệt đối không xóa hay ảnh hưởng đến tiến độ học tập, hồ sơ và cài đặt của bé (lưu trong LocalStorage).
  */
 
-const CACHE_PREFIX = 'vui-hoc-pwa-v5';
+const CACHE_PREFIX = 'vui-hoc-pwa-v6';
 const STATIC_CACHE = `${CACHE_PREFIX}-static`;
 const MEDIA_CACHE = `${CACHE_PREFIX}-media`;
 
@@ -287,7 +287,31 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // B. Xử lý điều hướng trang (Navigation / Mở app / Reload trang)
+  // B. Xử lý tệp manifest.webmanifest: Network-First nhanh (1.5s), fallback Cache khi mất mạng
+  if (url.pathname.endsWith('/manifest.webmanifest')) {
+    event.respondWith(
+      (async () => {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 1500);
+          const networkRes = await fetch(req, { signal: controller.signal, cache: 'no-cache' });
+          clearTimeout(timeoutId);
+          if (networkRes && networkRes.ok) {
+            const clone = networkRes.clone();
+            const c = await caches.open(STATIC_CACHE);
+            c.put(req, clone).catch(() => {});
+            return networkRes;
+          }
+        } catch {}
+        const cached = (await caches.match(req)) || (await caches.match(getScopedUrl('manifest.webmanifest')));
+        if (cached) return cached;
+        return new Response('{}', { headers: { 'Content-Type': 'application/manifest+json' } });
+      })()
+    );
+    return;
+  }
+
+  // C. Xử lý điều hướng trang (Navigation / Mở app / Reload trang)
   if (req.mode === 'navigate') {
     event.respondWith(
       (async () => {
@@ -324,7 +348,7 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // C. Xử lý toàn bộ tài nguyên tĩnh, media, nhạc, font (Cache-First siêu tốc)
+  // D. Xử lý toàn bộ tài nguyên tĩnh, media, nhạc, font (Cache-First siêu tốc)
   event.respondWith(
     (async () => {
       // 1. Tìm trong cache trước (đối sánh cả Request, URL đầy đủ, và relative pathname)
